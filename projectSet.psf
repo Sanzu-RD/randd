@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.egit.core.GitProvider">
+<project reference="1.0,https://github.com/Souchy/randd.git,master,Plugin Prototyping WS/Modules"/>
+<project reference="1.0,https://github.com/Souchy/randd.git,master,Plugin Prototyping WS/MyDummyPlugin"/>
+<project reference="1.0,https://github.com/Souchy/randd.git,master,Plugin Prototyping WS/Plugin"/>
+<project reference="1.0,https://github.com/Souchy/randd.git,master,Plugin Prototyping WS/PluginMonitor"/>
+</provider>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1511365073685_7" label="Plugin Prototyping" name="Plugin Prototyping">
+<item elementID="=MyDummyPlugin" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=Plugin" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=Modules" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=PluginMonitor" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+</psf>
