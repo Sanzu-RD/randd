@@ -3,10 +3,8 @@ package com.souchy.randd.modules.base;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
-import java.util.stream.Collectors;
 
 import com.souchy.randd.modules.api.ModuleInformation;
 

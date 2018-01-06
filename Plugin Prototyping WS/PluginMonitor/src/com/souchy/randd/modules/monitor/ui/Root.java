@@ -4,7 +4,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 import com.souchy.randd.modules.base.BaseModuleInformation;
 import com.souchy.randd.modules.monitor.main.Main;
@@ -87,14 +86,7 @@ public class Root extends VBox {
 
 		menuFileOpen.setOnAction(e -> {
             File in =  chooser.showDialog(Main.stage); //.showDialog(WorkScheduler.stage);
-            //open(selectedFile);
-    		if(in == null) return;
-    		Main.stage.titleProperty().set("Module Monitor - " + in.getPath());
-    		Main.manager.addDirectory(in);//.loadModuleList(in);
-    		Map<String, BaseModuleInformation> modulesList = Main.manager.getModulesInfoList();
-    		listModules.getItems().clear();
-    		//listModules.getItems().addAll((String[]) modulesList.keySet().stream().map(k -> k.getName()).toArray()); //.collect(Collectors.toList()));
-    		modulesList.values().forEach(k -> listModules.getItems().add(k.getName()));
+            open(in);
 		});
 		listModules.setOnMouseClicked(e -> {
 			int i = listModules.getSelectionModel().getSelectedIndex();
@@ -108,21 +100,15 @@ public class Root extends VBox {
 		});
 		
 		// C:\Users\Robyn\Documents\eclipse-mars\workspaces\r and d\MyDummyPlugin
-		/*listModules.selectionModelProperty().addListener(e -> {
-			//String fileName = listModules.getSelectionModel().getSelectedItem();
-			int i = listModules.getSelectionModel().getSelectedIndex();
-			BaseModuleInformation o = (BaseModuleInformation) Main.manager.getModulesInfoList().values().toArray()[i];
-			labelName.setText(o.getName());
-			listProps.getItems().clear();
-			listProps.getItems().addAll(o.getProps());
-		});*/
 	}
 
 	private void open(File in){
 		if(in == null) return;
-		Main.stage.titleProperty().set(in.getName());
-		//this.out = out;
-		//ExcelIO.open(in, data);
+		Main.stage.titleProperty().set("Module Monitor - " + in.getPath());
+		Main.manager.addDirectory(in);//.loadModuleList(in);
+		Map<String, BaseModuleInformation> modulesList = Main.manager.getModulesInfoList();
+		listModules.getItems().clear();
+		modulesList.values().forEach(k -> listModules.getItems().add(k.getName()));
 	}
 	
 	

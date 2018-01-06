@@ -1,19 +1,11 @@
 package com.souchy.randd.modules.base;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Properties;
-import java.util.jar.JarFile;
-import java.util.stream.Collectors;
-import java.util.zip.ZipEntry;
 
-import com.souchy.randd.modules.api.ModuleInformation;
 import com.souchy.randd.modules.api.ModuleInformationLoader;
 import com.souchy.randd.modules.api.ModuleLoader;
 import com.souchy.randd.modules.api.ModuleManager;
@@ -38,6 +30,7 @@ public class BaseModuleManager implements ModuleManager {
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	private Map<String, BaseModule> modules = new HashMap<>();
 	
 	
