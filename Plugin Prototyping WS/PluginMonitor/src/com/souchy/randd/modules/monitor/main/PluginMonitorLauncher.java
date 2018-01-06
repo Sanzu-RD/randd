@@ -1,45 +1,49 @@
 package com.souchy.randd.modules.monitor.main;
-	
-import com.souchy.randd.modules.base.BaseModuleInformationLoader;
-import com.souchy.randd.modules.base.BaseModuleLoader;
-import com.souchy.randd.modules.base.BaseModuleManager;
-import com.souchy.randd.modules.monitor.ui.Root;
+
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
+
+import com.hiddenpiranha.commons.tealwaters.io.files.FilesManager;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
+public class PluginMonitorLauncher {
 
-public class Main extends Application {
-
-	public static Stage stage;
-	public static Scene scene;
-	public static Root root;
 	
-	
-	public static BaseModuleManager manager = new BaseModuleManager(new BaseModuleInformationLoader(), new BaseModuleLoader());
-	
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-			root = new Root();
-			scene = new Scene(root);
-			stage = primaryStage;
-			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			stage.setScene(scene);
-	        stage.setTitle("Plugin Monitor");
-	        stage.initStyle(StageStyle.DECORATED);
-			stage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+	public static void main(String[] args) throws Exception {
+		/*File root = new File("res/config.properties");
+		System.out.println(root.getCanonicalPath() + " : main root path canonical");
+		System.out.println(root.getPath() + " : main root path normal");
+		System.out.println(root.getCanonicalPath() + " : main root path w/e");
+		
+		if(root.listFiles().length > 0) {
+			List<String> files = Arrays.stream(root.listFiles()).map(f -> f.getPath()).collect(Collectors.toList());
+			files.add("hey");
+			System.out.println("[" + String.join(", ", files) + "] : list files");
+		}*/
+		
+		FilesManager.init(PluginMonitorLauncher.class);
+		
+		Executors.newSingleThreadExecutor().execute(() -> Application.launch(App.class));
+		//Executors.newSingleThreadExecutor().execute(() -> App.launch(args));
+		
+		System.out.println("hello");
+		//System.exit(0);
 	}
 	
-	public static void main(String[] args) {
-		launch(args);
+	
+	public static URL getResource(String name) {
+		return PluginMonitorLauncher.class.getResource(name);
 	}
 	
+	public static InputStream getResourceStream(String name) {
+		return PluginMonitorLauncher.class.getResourceAsStream(name);
+	}
 	
 	
 }

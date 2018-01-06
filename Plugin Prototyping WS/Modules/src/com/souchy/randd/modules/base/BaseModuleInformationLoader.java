@@ -26,28 +26,33 @@ public class BaseModuleInformationLoader implements ModuleInformationLoader {
 		public Map<String, BaseModuleInformation> loadModuleList(File directory) {
 			Map<String, BaseModuleInformation> modulesList = Arrays.stream(directory.listFiles())
 			.filter(file -> file.getName().endsWith(".jar"))
-			.collect(Collectors.toMap(k -> k.getName(), this::getModuleInformation));
-			//.map(this::getModuleInformation)
-			//.collect(Collectors.toMap(k -> k.getFile().getName(), v -> v));
+			.map(this::getModuleInformation)
+			.filter(i -> i != null)
+			.collect(Collectors.toMap(k -> k.getFile().getName(), v -> v));
+			//.collect(Collectors.toMap(f -> f.getName(), f -> getModuleInformation(f)));
 			return modulesList;
 		}
 		public void loadModule(File file){
 			
 		}
-		private BaseModuleInformation getModuleInformation(File f){
+		private BaseModuleInformation getModuleInformation(File f) {
 			BaseModuleInformation info = null;
-			try {
-				JarFile jar = new JarFile(f);
+			
+			try(JarFile jar = new JarFile(f)) {
 				ZipEntry entry = jar.getEntry("info.properties");
+
+				if(entry == null)  return info;
+
 				InputStream in = jar.getInputStream(entry);
 				Properties props = new Properties();
 				props.load(in);
 				info = new BaseModuleInformation(f, props);
 				in.close();
-				jar.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} 
+				// jar.close(); // pu besoin, grâce au try-with-resource ça close automatiquement
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
 			return info;
 		}
 	}

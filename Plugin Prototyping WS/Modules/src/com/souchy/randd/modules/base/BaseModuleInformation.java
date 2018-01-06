@@ -10,7 +10,7 @@ import com.souchy.randd.modules.api.ModuleInformation;
 
 public class BaseModuleInformation implements ModuleInformation {
 
-	public static enum PropertiesNames {
+	private static enum PropertiesNames {
 		ModuleName, // Nom du module
 		ModuleReleaseDate, // Date de release 
 		ModuleDescription, // Description 

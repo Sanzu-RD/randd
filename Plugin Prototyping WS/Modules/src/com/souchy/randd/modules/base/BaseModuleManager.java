@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import com.souchy.randd.modules.api.ModuleInformationLoader;
 import com.souchy.randd.modules.api.ModuleLoader;
 import com.souchy.randd.modules.api.ModuleManager;
+import com.souchy.randd.modules.api.Module;
 
 public class BaseModuleManager implements ModuleManager {
 	
@@ -42,7 +43,11 @@ public class BaseModuleManager implements ModuleManager {
 	public Map<String, BaseModuleInformation> getModulesInfoList(){
 		return moduleJarList;
 	}
-	
+
+	public void setDirectory(File directory){
+		moduleJarList.clear();
+		moduleJarList.putAll(infoloader.loadModuleList(directory));
+	}
 	public void addDirectory(File directory){
 		moduleJarList.putAll(infoloader.loadModuleList(directory));
 	}
@@ -54,8 +59,10 @@ public class BaseModuleManager implements ModuleManager {
 		});
 	}
 	
-	public void load(BaseModuleInformation info){
-		moduleloader.load(info);
+	public BaseModule load(BaseModuleInformation info){
+		BaseModule mod = (BaseModule) moduleloader.load(info);
+		modules.put(info.getName(), mod);
+		return mod;
 	}
 	
 	

@@ -9,6 +9,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -16,7 +17,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
-
 
 <fx:root prefHeight="600.0" prefWidth="895.0" type="VBox" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
@@ -74,38 +74,47 @@
                   <ListView fx:id="listModules" layoutX="-23.0" layoutY="65.0" prefHeight="200.0" prefWidth="256.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
           </children>
         </AnchorPane>
-        <AnchorPane fx:id="detailsPane">
-          <children>
-            <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details :" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                  <Label fx:id="labelName" alignment="CENTER" layoutX="84.0" layoutY="14.0" style="&#10;" text="&lt;Module Name&gt;" textAlignment="CENTER" wrapText="false">
-                     <font>
-                        <Font size="18.0" fx:id="x11" />
-                     </font>
-                     <textFill>
-                        <Color blue="0.624" green="0.624" red="0.624" fx:id="x21" />
-                     </textFill>
-                  </Label>
-                  <ListView fx:id="listProps" layoutX="14.0" layoutY="150.0" prefHeight="388.0" prefWidth="425.0" style="-fx-border-color: gray; -fx-border-radius: 2; -fx-border-width: 1;" />
-                  <Label alignment="CENTER" layoutX="14.0" layoutY="119.0" style="&#10;" text="Propriétés : " textAlignment="CENTER" wrapText="false">
-                     <font>
-                        <Font size="18.0" fx:id="x12" />
-                     </font>
-                     <textFill>
-                        <Color blue="0.624" green="0.624" red="0.624" fx:id="x22" />
-                     </textFill>
-                  </Label>
-                  <VBox alignment="TOP_CENTER" layoutX="465.0" layoutY="150.0" prefHeight="182.0" prefWidth="122.0" spacing="15.0" style="-fx-border-color: gray; -fx-border-radius: 2; -fx-border-width: 1;">
+            <SplitPane dividerPositions="0.9" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+              <AnchorPane fx:id="detailsPane" prefHeight="415.0" prefWidth="666.0">
+                <children>
+                  <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details :" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+                        <Label fx:id="labelName" alignment="CENTER" layoutX="84.0" layoutY="14.0" style="&#10;" text="&lt;Module Name&gt;" textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" fx:id="x11" />
+                           </font>
+                           <textFill>
+                              <Color blue="0.624" green="0.624" red="0.624" fx:id="x21" />
+                           </textFill>
+                        </Label>
+                        <ListView fx:id="listProps" layoutX="14.0" layoutY="120.0" prefHeight="328.0" prefWidth="425.0" style="-fx-border-color: gray; -fx-border-radius: 2; -fx-border-width: 1;" />
+                        <Label alignment="CENTER" layoutX="14.0" layoutY="86.0" style="&#10;" text="Propriétés : " textAlignment="CENTER" wrapText="false">
+                           <font>
+                              <Font size="18.0" fx:id="x12" />
+                           </font>
+                           <textFill>
+                              <Color blue="0.624" green="0.624" red="0.624" fx:id="x22" />
+                           </textFill>
+                        </Label>
+                        <VBox alignment="TOP_CENTER" layoutX="465.0" layoutY="150.0" prefHeight="182.0" prefWidth="122.0" spacing="15.0" style="-fx-border-color: gray; -fx-border-radius: 2; -fx-border-width: 1;">
+                           <children>
+                              <Button fx:id="btn1" mnemonicParsing="false" prefHeight="25.0" prefWidth="370.0" text="Button 1" />
+                              <Button fx:id="btn2" mnemonicParsing="false" prefHeight="25.0" prefWidth="244.0" text="Button 2" />
+                              <ToggleButton fx:id="btnToggle" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" text="ToggleButton" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </VBox>
+                </children>
+              </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <Button fx:id="btn1" mnemonicParsing="false" prefHeight="25.0" prefWidth="370.0" text="Button 1" />
-                        <Button fx:id="btn2" mnemonicParsing="false" prefHeight="25.0" prefWidth="244.0" text="Button 2" />
-                        <ToggleButton fx:id="btnToggle" mnemonicParsing="false" prefHeight="25.0" prefWidth="154.0" text="ToggleButton" />
+                        <TextField fx:id="console" alignment="TOP_LEFT" editable="false" layoutY="71.0" prefHeight="131.0" prefWidth="666.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding>
-                  </VBox>
-          </children>
-        </AnchorPane>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
       </items>
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">

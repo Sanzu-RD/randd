@@ -2,11 +2,17 @@ package com.souchy.randd.modules.monitor.ui;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Date;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import com.hiddenpiranha.commons.tealwaters.io.files.FilesManager;
+import com.souchy.randd.modules.base.BaseModule;
 import com.souchy.randd.modules.base.BaseModuleInformation;
-import com.souchy.randd.modules.monitor.main.Main;
+import com.souchy.randd.modules.base.BaseModuleLoader;
+import com.souchy.randd.modules.monitor.io.PluginMonitorConfig;
+import com.souchy.randd.modules.monitor.main.App;
+import com.souchy.randd.modules.monitor.main.PluginMonitorLauncher;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -44,12 +51,13 @@ public class Root extends VBox {
 	@FXML private ListView<String> listProps;
 	@FXML private Label labelName;
     @FXML private AnchorPane detailsPane;
+    @FXML private TextField console;
 
 	private final DirectoryChooser chooser = new DirectoryChooser();
 	
 	public Root() {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("root.fxml"));
+			FXMLLoader loader = new FXMLLoader(FilesManager.get().getResource("root.fxml"));
 			loader.setController(this);
 			loader.setRoot(this);
 			loader.load();
@@ -80,37 +88,61 @@ public class Root extends VBox {
         assert x4 != null : "fx:id=\"x4\" was not injected: check your FXML file 'root.fxml'.";
         assert statusRight != null : "fx:id=\"statusRight\" was not injected: check your FXML file 'root.fxml'.";
         assert menuFileOpen != null : "fx:id=\"menuFileOpen\" was not injected: check your FXML file 'root.fxml'.";
+        assert console != null : "fx:id=\"console\" was not injected: check your FXML file 'root.fxml'.";
 
+        File lastDir = new File(App.config.lastDirectory.get()); // PluginMonitorConfig.lastDirectory.get()
+        
 		//chooser.getExtensionFilters().addAll(new ExtensionFilter("Excel Document", "*.xls"));
-		chooser.setInitialDirectory(new File(System.getProperty("user.home")));
-
+		chooser.setInitialDirectory(lastDir); //System.getProperty("user.home")));
+		
 		menuFileOpen.setOnAction(e -> {
-            File in =  chooser.showDialog(Main.stage); //.showDialog(WorkScheduler.stage);
+            File in =  chooser.showDialog(App.stage); //.showDialog(WorkScheduler.stage);
             open(in);
 		});
 		listModules.setOnMouseClicked(e -> {
 			int i = listModules.getSelectionModel().getSelectedIndex();
-			BaseModuleInformation o = (BaseModuleInformation) Main.manager.getModulesInfoList().values().toArray()[i];
-			labelName.setText(o.getName());
-			listProps.getItems().clear();
-			listProps.getItems().addAll(o.getProps());
+			if(i < 0 || i >= App.manager.getModulesInfoList().values().size()) return;
+			BaseModuleInformation info = (BaseModuleInformation) App.manager.getModulesInfoList().values().toArray()[i];
+			updateDetails(info);
 		});
 		btn1.setOnAction(e -> {
-			//Main.load
+			int i = listModules.getSelectionModel().getSelectedIndex();
+			if(i < 0 || i >= App.manager.getModulesInfoList().values().size()) return;
+			BaseModuleInformation info = (BaseModuleInformation) App.manager.getModulesInfoList().values().toArray()[i];
+			
+			module = App.manager.load(info);
+			//module = new BaseModuleLoader().load(info);
+			console.appendText("[" + new Date() + "] : " + module.doSomething());
+			
 		});
 		
 		// C:\Users\Robyn\Documents\eclipse-mars\workspaces\r and d\MyDummyPlugin
+		
+		open(lastDir);
 	}
+	private BaseModule module ;
 
 	private void open(File in){
 		if(in == null) return;
-		Main.stage.titleProperty().set("Module Monitor - " + in.getPath());
-		Main.manager.addDirectory(in);//.loadModuleList(in);
-		Map<String, BaseModuleInformation> modulesList = Main.manager.getModulesInfoList();
+		App.stage.titleProperty().set(App.config.windowTitle + in.toString());
+		/*System.out.println(in.toString());
+		System.out.println(in.getAbsolutePath());
+		System.out.println(in.getPath());*/
+		
+		App.config.lastDirectory.set(in.getAbsolutePath());
+		App.manager.setDirectory(in);//.loadModuleList(in);
 		listModules.getItems().clear();
-		modulesList.values().forEach(k -> listModules.getItems().add(k.getName()));
+		App.manager.getModulesInfoList().values().forEach(k -> listModules.getItems().add(k.getName()));
+		App.config.save();
+
+		updateDetails(null);
 	}
 	
+	public void updateDetails(BaseModuleInformation info) {
+		labelName.setText(info == null ? "<select a plugin>" : info.getName());
+		listProps.getItems().clear();
+		if(info != null) listProps.getItems().addAll(info.getProps());
+	}
 	
 	
 }
