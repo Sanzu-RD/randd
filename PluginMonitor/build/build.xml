@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<project name="PluginMonitor" default="do-deploy" basedir="."  xmlns:fx="javafx:com.sun.javafx.tools.ant">
+	<target name="init-fx-tasks">
+		<path id="fxant">
+			<filelist>
+				<file name="${java.home}\..\lib\ant-javafx.jar"/>
+				<file name="${java.home}\lib\jfxrt.jar"/>
+			</filelist>
+		</path>
+	
+		<taskdef resource="com/sun/javafx/tools/ant/antlib.xml"
+			uri="javafx:com.sun.javafx.tools.ant"
+			classpathref="fxant"/>
+	</target>
+	<target name="setup-staging-area">
+		<delete dir="externalLibs" />
+		<delete dir="project" />
+		<delete dir="projectRefs" />
+	
+		<mkdir dir="externalLibs" />
+	
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\hk2">
+				<filename name="javax.inject-2.5.0-b32.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other">
+				<filename name="slf4j-jdk14-1.6.4.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\jersey">
+				<filename name="jersey-container-servlet-core-2.25.1.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other">
+				<filename name="slf4j-api-1.7.12.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other">
+				<filename name="guava-18.0.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\eclipse">
+				<filename name="org.eclipse.persistence.core-2.6.0.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\jersey">
+				<filename name="jersey-container-netty-http-2.25.1.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other">
+				<filename name="jedis-2.9.0.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\hk2">
+				<filename name="aopalliance-repackaged-2.5.0-b32.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\javax">
+				<filename name="javax.annotation-api-1.2.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\jersey">
+				<filename name="jersey-entity-filtering-2.25.1.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\jersey">
+				<filename name="jersey-server-2.25.1.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\jersey">
+				<filename name="jersey-client-2.25.1.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\jersey">
+				<filename name="jersey-netty-connector-2.25.1.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\javax">
+				<filename name="validation-api-1.1.0.Final.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\javax">
+				<filename name="javax.json-1.0.4.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net">
+				<filename name="netty-all-4.1.10.Final.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\jersey">
+				<filename name="jersey-media-moxy-2.25.1.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\jersey">
+				<filename name="jersey-guava-2.25.1.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\jersey">
+				<filename name="jersey-common-2.25.1.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\javaassist">
+				<filename name="javassist-3.20.0-GA.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\jersey">
+				<filename name="jersey-media-jaxb-2.25.1.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\hk2">
+				<filename name="osgi-resource-locator-1.0.1.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other">
+				<filename name="commons-pool2-2.4.2.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\hk2">
+				<filename name="hk2-api-2.5.0-b32.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\javax">
+				<filename name="javax.ws.rs-api-2.0.1.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\hk2">
+				<filename name="hk2-utils-2.5.0-b32.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\eclipse">
+				<filename name="org.eclipse.persistence.moxy-2.6.0.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\hk2">
+				<filename name="hk2-locator-2.5.0-b32.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="F:\Users\Souchy\Desktop\Robyn\Git\res\libs other\net\eclipse">
+				<filename name="org.eclipse.persistence.asm-2.6.0.jar"/>
+			</fileset>
+		</copy>
+	
+		<mkdir dir="project" />
+		<copy todir="project">
+			<fileset dir="C:\Users\Robyn\Documents\eclipse-mars\workspaces\r and d\PluginMonitor">
+				<include name="res/**" />
+			</fileset>
+		</copy>
+		<copy todir="project">
+			<fileset dir="C:\Users\Robyn\Documents\eclipse-mars\workspaces\r and d\PluginMonitor">
+				<include name="src/**" />
+			</fileset>
+		</copy>
+	
+		<mkdir dir="projectRefs" />
+		<copy todir="projectRefs">
+			<fileset dir="C:\Users\Robyn\Documents\eclipse-mars\workspaces\r and d">
+				<include name="Modules\src/**" />
+			</fileset>
+		</copy>
+	</target>
+	<target name='do-compile'>
+		<delete dir="build" />
+		<mkdir dir="build/src" />
+		<mkdir dir="build/libs" />
+		<mkdir dir="build/classes" />
+	
+		<!-- Copy project-libs references -->
+		<copy todir="build/libs">
+			<fileset dir="externalLibs">
+				<include name="jersey-common-2.25.1.jar"/>
+				<include name="jersey-container-servlet-core-2.25.1.jar"/>
+				<include name="jersey-server-2.25.1.jar"/>
+				<include name="netty-all-4.1.10.Final.jar"/>
+				<include name="org.eclipse.persistence.core-2.6.0.jar"/>
+				<include name="guava-18.0.jar"/>
+				<include name="aopalliance-repackaged-2.5.0-b32.jar"/>
+				<include name="jedis-2.9.0.jar"/>
+				<include name="javassist-3.20.0-GA.jar"/>
+				<include name="hk2-utils-2.5.0-b32.jar"/>
+				<include name="jersey-media-jaxb-2.25.1.jar"/>
+				<include name="org.eclipse.persistence.moxy-2.6.0.jar"/>
+				<include name="javax.json-1.0.4.jar"/>
+				<include name="slf4j-api-1.7.12.jar"/>
+				<include name="osgi-resource-locator-1.0.1.jar"/>
+				<include name="javax.ws.rs-api-2.0.1.jar"/>
+				<include name="validation-api-1.1.0.Final.jar"/>
+				<include name="org.eclipse.persistence.asm-2.6.0.jar"/>
+				<include name="jersey-client-2.25.1.jar"/>
+				<include name="hk2-locator-2.5.0-b32.jar"/>
+				<include name="javax.annotation-api-1.2.jar"/>
+				<include name="slf4j-jdk14-1.6.4.jar"/>
+				<include name="jersey-guava-2.25.1.jar"/>
+				<include name="commons-pool2-2.4.2.jar"/>
+				<include name="jersey-netty-connector-2.25.1.jar"/>
+				<include name="jersey-entity-filtering-2.25.1.jar"/>
+				<include name="jersey-container-netty-http-2.25.1.jar"/>
+				<include name="jersey-media-moxy-2.25.1.jar"/>
+				<include name="hk2-api-2.5.0-b32.jar"/>
+				<include name="javax.inject-2.5.0-b32.jar"/>
+			</fileset>
+		</copy>
+	
+		<!-- Copy project references -->
+		<copy todir="build/src">
+			<fileset dir="projectRefs/Modules/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	
+		<!-- Copy project sources itself -->
+		<copy todir="build/src">
+			<fileset dir="project/res">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="build/src">
+			<fileset dir="project/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	
+		<javac includeantruntime="false" source="1.8" target="1.8" srcdir="build/src" destdir="build/classes" encoding="Cp1252">
+			<classpath>
+				<fileset dir="build/libs">
+					<include name="*"/>
+				</fileset>
+			</classpath>
+		</javac>
+	
+		<!-- Copy over none Java-Files -->
+		<copy todir="build/classes">
+		<fileset dir="project/res">
+			<exclude name="**/*.java"/>
+		</fileset>
+		<fileset dir="project/src">
+			<exclude name="**/*.java"/>
+		</fileset>
+		</copy>
+	
+		<copy todir="build/classes">
+			<fileset dir="projectRefs/Modules/src">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+	
+	</target>
+	<target name="do-deploy" depends="setup-staging-area, do-compile, init-fx-tasks">
+		<delete file="dist"/>
+		<delete file="deploy" />
+	
+		<mkdir dir="dist" />
+		<mkdir dir="dist/libs" />
+	
+		<copy todir="dist/libs">
+			<fileset dir="externalLibs">
+				<include name="*" />
+			</fileset>
+		</copy>
+	
+	
+		<fx:resources id="appRes">
+			<fx:fileset dir="dist" includes="PluginMonitor.jar"/>
+			<fx:fileset dir="dist" includes="libs/*"/>
+		</fx:resources>
+	
+		<fx:application id="fxApplication"
+			name=""
+			mainClass=""
+			toolkit="fx"
+		/>
+	
+		<mkdir dir="build/classes/META-INF" />
+	
+	
+	
+		<fx:jar destfile="dist/PluginMonitor.jar">
+			<fx:application refid="fxApplication"/>
+			<fileset dir="build/classes">
+			</fileset>
+			<fx:resources refid="appRes"/>
+	
+			<manifest>
+				<attribute name="Implementation-Vendor" value=""/>
+				<attribute name="Implementation-Title" value=""/>
+				<attribute name="Implementation-Version" value=""/>
+				<attribute name="JavaFX-Feature-Proxy" value="None"/>
+			</manifest>
+		</fx:jar>
+	
+	
+		<mkdir dir="deploy" />
+		<!-- Need to use ${basedir} because somehow the ant task is calculating the directory differently -->
+		<fx:deploy
+			embedJNLP="false"
+			extension="false"
+			includeDT="false"
+			offlineAllowed="true"
+			outdir="${basedir}/deploy"
+			outfile="PluginMonitor" nativeBundles="exe"
+			updatemode="background" >
+	
+			<fx:platform basedir="${java.home}"/>
+			<fx:info title="PluginMonitor" vendor=""/>
+	
+			<fx:application refId="fxApplication"/>
+			<fx:resources refid="appRes"/>
+		</fx:deploy>
+	
+	
+	</target>
+</project>
