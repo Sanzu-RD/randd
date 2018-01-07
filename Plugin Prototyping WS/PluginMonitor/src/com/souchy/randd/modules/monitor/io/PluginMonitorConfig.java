@@ -1,17 +1,17 @@
 package com.souchy.randd.modules.monitor.io;
 
 
+import java.io.File;
 import java.util.Properties;
 
 import com.hiddenpiranha.commons.tealwaters.properties.Property;
 import com.hiddenpiranha.commons.tealwaters.properties.PropertyConfig;
-import com.hiddenpiranha.commons.tealwaters.properties.PropertyFactory;
 
 public class PluginMonitorConfig implements PropertyConfig {
 
 
 	private final Properties props = new Properties();
-	private final String path = "res/config.properties";
+	private final File path = new File("res/config.properties");
 	//private final PropertyFactory factory = PropertyFactory.createFactory(this::get, this::set);
 	
 	public Property lastDirectory; //= factory.create("lastDirectory");
@@ -22,7 +22,7 @@ public class PluginMonitorConfig implements PropertyConfig {
 //	}
 
 	@Override
-	public String getPath() {
+	public File getFile() {
 		return path;
 	}
 	@Override

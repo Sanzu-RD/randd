@@ -9,6 +9,7 @@ module com.souchy.randd.pluginprototyping.PluginMonitor {
 	exports com.souchy.randd.modules.monitor.io;
 	exports com.souchy.randd.modules.monitor.ui;
 	exports com.souchy.randd.modules.monitor.main;
+	exports com.souchy.randd.modules.monitor.modules;
 	opens com.souchy.randd.modules.monitor.ui to javafx.fxml;
 	
 	requires transitive com.hiddenpiranha.commons.TealWaters;

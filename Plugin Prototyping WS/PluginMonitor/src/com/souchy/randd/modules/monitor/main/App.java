@@ -1,10 +1,8 @@
 package com.souchy.randd.modules.monitor.main;
 
-import com.hiddenpiranha.commons.tealwaters.io.files.FilesManager;
-import com.souchy.randd.modules.base.BaseModuleInformationLoader;
-import com.souchy.randd.modules.base.BaseModuleLoader;
 import com.souchy.randd.modules.base.BaseModuleManager;
 import com.souchy.randd.modules.monitor.io.PluginMonitorConfig;
+import com.souchy.randd.modules.monitor.modules.PluginMonitorEP;
 import com.souchy.randd.modules.monitor.ui.Root;
 
 import javafx.application.Application;
@@ -20,7 +18,7 @@ public class App extends Application {
 	public static Root root;
 	
 	public static PluginMonitorConfig config = new PluginMonitorConfig();
-	public static BaseModuleManager manager = new BaseModuleManager(new BaseModuleInformationLoader(), new BaseModuleLoader());
+	public static BaseModuleManager manager = new BaseModuleManager(new PluginMonitorEP());
 	
 	@Override
 	public void start(Stage primaryStage) {

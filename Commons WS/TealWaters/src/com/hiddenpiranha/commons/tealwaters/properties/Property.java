@@ -1,7 +1,6 @@
 package com.hiddenpiranha.commons.tealwaters.properties;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Property {

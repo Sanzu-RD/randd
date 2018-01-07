@@ -3,16 +3,14 @@ package com.souchy.randd.modules.monitor.ui;
 import java.io.File;
 import java.net.URL;
 import java.util.Date;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import com.hiddenpiranha.commons.tealwaters.io.files.FilesManager;
 import com.souchy.randd.modules.base.BaseModule;
 import com.souchy.randd.modules.base.BaseModuleInformation;
-import com.souchy.randd.modules.base.BaseModuleLoader;
-import com.souchy.randd.modules.monitor.io.PluginMonitorConfig;
 import com.souchy.randd.modules.monitor.main.App;
-import com.souchy.randd.modules.monitor.main.PluginMonitorLauncher;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -51,7 +49,7 @@ public class Root extends VBox {
 	@FXML private ListView<String> listProps;
 	@FXML private Label labelName;
     @FXML private AnchorPane detailsPane;
-    @FXML private TextField console;
+    @FXML private TextArea console;
 
 	private final DirectoryChooser chooser = new DirectoryChooser();
 	
@@ -66,7 +64,7 @@ public class Root extends VBox {
 		}
 	}
     
-	
+	private Set<BaseModule> persistanceTest = new HashSet<>();
 	
 	@FXML
 	void initialize() {
@@ -100,28 +98,85 @@ public class Root extends VBox {
             open(in);
 		});
 		listModules.setOnMouseClicked(e -> {
-			int i = listModules.getSelectionModel().getSelectedIndex();
-			if(i < 0 || i >= App.manager.getModulesInfoList().values().size()) return;
-			BaseModuleInformation info = (BaseModuleInformation) App.manager.getModulesInfoList().values().toArray()[i];
-			updateDetails(info);
+			BaseModuleInformation info = this.getSelectedInfo();
+			if(info != null) updateDetails(info);
 		});
+		//ToggleGroup group = new ToggleGroup();
+		//btnToggle.setToggleGroup(group);
+		String instantiate = "Load / Instantiate";
+		String dispose = "Unload / Dispose";
+		btnToggle.setText(instantiate);
+		btnToggle.setOnAction(e -> {
+			//System.out.println("kmjuiy : [" + btnToggle.getText()+"]");
+			if(btnToggle.getText().equals(instantiate)) {
+				BaseModuleInformation info = this.getSelectedInfo();
+				BaseModule module = null;
+				try {
+					module = App.manager.instanciate(info);
+				} catch (Exception e1) {
+					//e1.printStackTrace();
+					print(e1.getMessage());
+					return;
+				}
+				btnToggle.setText(dispose);
+				persistanceTest.add(module);
+				btn1.setDisable(module == null);
+				print("btn load, persist size : " + persistanceTest.size());
+			} else 
+			if(btnToggle.getText().equals(dispose)) {
+				btnToggle.setText(instantiate);
+				BaseModuleInformation info = this.getSelectedInfo();
+				boolean b = App.manager.dispose(info);
+				//btn1.setDisable(b);{
+				print("btn unload : " + b);
+			}
+		});
+		/*btnToggle.setText("Allo");
+		group.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle toggle, Toggle new_toggle) -> {
+			if(btnToggle.getText() == "Load") {
+				System.out.println("btn load");
+				btnToggle.setText("Unload");
+				int i = listModules.getSelectionModel().getSelectedIndex();
+				BaseModuleInformation info = App.manager.getInfo(i); 
+				BaseModule module = App.manager.load(info);
+				btn1.setDisable(module == null);
+			} else
+			if(btnToggle.getText() == "Unload") {
+				System.out.println("btn unload");
+				btnToggle.setText("Load");
+				int i = listModules.getSelectionModel().getSelectedIndex();
+				BaseModuleInformation info = App.manager.getInfo(i); 
+				boolean b = App.manager.remove(info);
+				//btn1.setDisable(b);
+			}
+		});*/
 		btn1.setOnAction(e -> {
-			int i = listModules.getSelectionModel().getSelectedIndex();
-			if(i < 0 || i >= App.manager.getModulesInfoList().values().size()) return;
-			BaseModuleInformation info = (BaseModuleInformation) App.manager.getModulesInfoList().values().toArray()[i];
-			
-			module = App.manager.load(info);
-			//module = new BaseModuleLoader().load(info);
-			console.appendText("[" + new Date() + "] : " + module.doSomething());
-			
+			BaseModule module = App.manager.get(getSelectedInfo());
+			if (module != null)
+				print(module.doSomething());
+			else
+				print("cant because module not loaded");
 		});
-		
+		btn2.setOnAction(e -> {
+			btnToggle.setText("Load");
+		});
 		// C:\Users\Robyn\Documents\eclipse-mars\workspaces\r and d\MyDummyPlugin
 		
 		open(lastDir);
 	}
-	private BaseModule module ;
-
+	
+	private BaseModuleInformation getSelectedInfo() {
+		//int i = listModules.getSelectionModel().getSelectedIndex();
+		String name = listModules.getSelectionModel().getSelectedItem();
+		BaseModuleInformation info = App.manager.getInfo(name); 
+		//System.out.println("click : name=["+name+"]");
+		return info;
+	}
+	
+	private void print(String str) {
+		console.appendText("[" + new Date() + "] : " + str + "\n");
+	}
+	
 	private void open(File in){
 		if(in == null) return;
 		App.stage.titleProperty().set(App.config.windowTitle + in.toString());
@@ -130,18 +185,30 @@ public class Root extends VBox {
 		System.out.println(in.getPath());*/
 		
 		App.config.lastDirectory.set(in.getAbsolutePath());
-		App.manager.setDirectory(in);//.loadModuleList(in);
+		App.manager.explore(in);//.loadModuleList(in);
 		listModules.getItems().clear();
-		App.manager.getModulesInfoList().values().forEach(k -> listModules.getItems().add(k.getName()));
+		App.manager.getInfos().forEach(k -> listModules.getItems().add(k.getName()));
 		App.config.save();
 
 		updateDetails(null);
 	}
 	
 	public void updateDetails(BaseModuleInformation info) {
-		labelName.setText(info == null ? "<select a plugin>" : info.getName());
-		listProps.getItems().clear();
-		if(info != null) listProps.getItems().addAll(info.getProps());
+		if(info == null) {
+			labelName.setText("<select a plugin>");
+			listProps.getItems().clear();
+			// addAll
+			detailsPane.setDisable(true);
+			//btn1.setDisable(true);
+		} else {
+			labelName.setText(info.getName());
+			listProps.getItems().clear();
+			listProps.getItems().addAll(info.getProps());
+			detailsPane.setDisable(false);
+			BaseModule module = App.manager.get(info);
+			btn1.setDisable(module == null);
+			//btn1.setDisable(false);
+		}
 	}
 	
 	

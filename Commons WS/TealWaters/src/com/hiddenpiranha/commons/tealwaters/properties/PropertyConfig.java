@@ -10,11 +10,8 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Properties;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-
-import com.hiddenpiranha.commons.tealwaters.io.files.FilesManager;
 
 
 /**
@@ -25,7 +22,7 @@ import com.hiddenpiranha.commons.tealwaters.io.files.FilesManager;
  */
 public interface PropertyConfig {
 
-	public String getPath();
+	public File getFile();
 	public Properties getProperties();
 	
 	default String getDefaultPath() {
@@ -36,7 +33,7 @@ public interface PropertyConfig {
 		try {
 			InputStream in;
 			//in = FilesManager.get().getResourceAsStream(getPath());s
-			File f = new File(getPath());
+			File f = getFile(); //new File(getPath());
 			System.out.println("load : " + f.getAbsolutePath());
 			
 			in = new FileInputStream(f);
@@ -55,7 +52,7 @@ public interface PropertyConfig {
 		try {
 			OutputStream out;
 
-			File f = new File(getPath());
+			File f = getFile(); //new File(getPath());
 			out = new FileOutputStream(f);
 			System.out.println("save : " + f.getAbsolutePath());
 			

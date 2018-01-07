@@ -8,7 +8,7 @@ import java.util.Properties;
 
 import com.souchy.randd.modules.api.ModuleInformation;
 
-public class BaseModuleInformation implements ModuleInformation {
+public class BaseModuleInformation implements ModuleInformation { //, PropertyConfig {
 
 	private static enum PropertiesNames {
 		ModuleName, // Nom du module
@@ -27,7 +27,8 @@ public class BaseModuleInformation implements ModuleInformation {
 		file = f;
 		this.props = props;
 	}
-	
+
+	//@Override
 	public File getFile(){
 		return file;
 	}
@@ -52,6 +53,7 @@ public class BaseModuleInformation implements ModuleInformation {
 	public String getMainClass(){
 		return props.getProperty(PropertiesNames.ModuleMainClass.name());
 	}
+	
 	public Collection<String> getProps(){
 		final List<String> list = new ArrayList<>();
 		props.forEach((k, v) -> {
@@ -61,6 +63,12 @@ public class BaseModuleInformation implements ModuleInformation {
 		return list;
 		//return props.values().stream().map(v -> (String) v).collect(Collectors.toList()); //.elements();
 	}
+	
+
+	/*@Override
+	public Properties getProperties() {
+		return props;
+	}*/
 	
 	
 	

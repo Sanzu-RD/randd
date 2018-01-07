@@ -1,12 +1,6 @@
 package com.souchy.randd.modules.monitor.main;
 
-import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
 import com.hiddenpiranha.commons.tealwaters.io.files.FilesManager;
 
@@ -36,14 +30,6 @@ public class PluginMonitorLauncher {
 		//System.exit(0);
 	}
 	
-	
-	public static URL getResource(String name) {
-		return PluginMonitorLauncher.class.getResource(name);
-	}
-	
-	public static InputStream getResourceStream(String name) {
-		return PluginMonitorLauncher.class.getResourceAsStream(name);
-	}
 	
 	
 }

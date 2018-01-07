@@ -1,17 +1,15 @@
 package com.souchy.randd.modules.node;
 
 import java.io.File;
-import java.util.Map;
 
-import com.souchy.randd.modules.api.ModuleInformation;
-import com.souchy.randd.modules.api.ModuleInformationLoader;
+import com.souchy.randd.modules.api.ModuleDiscoverer;
 
-public class NodeInformationLoader implements ModuleInformationLoader {
+public class NodeInformationLoader implements ModuleDiscoverer {
 
 	@Override
-	public <T extends ModuleInformation> Map<String, T> loadModuleList(File directory) {
+	public boolean identifyIsModule(File f) {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 }
