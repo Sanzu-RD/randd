@@ -1,4 +1,4 @@
-package com.hiddenpiranha.commons.tealwaters.commons;
+package com.randd.commons.tealwaters.commons;
 
 @FunctionalInterface
 public interface Disposable {

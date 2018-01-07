@@ -4,8 +4,8 @@ package com.souchy.randd.modules.monitor.io;
 import java.io.File;
 import java.util.Properties;
 
-import com.hiddenpiranha.commons.tealwaters.properties.Property;
-import com.hiddenpiranha.commons.tealwaters.properties.PropertyConfig;
+import com.randd.commons.tealwaters.properties.Property;
+import com.randd.commons.tealwaters.properties.PropertyConfig;
 
 public class PluginMonitorConfig implements PropertyConfig {
 

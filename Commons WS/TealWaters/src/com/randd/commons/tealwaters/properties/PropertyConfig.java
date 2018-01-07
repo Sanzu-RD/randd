@@ -1,4 +1,4 @@
-package com.hiddenpiranha.commons.tealwaters.properties;
+package com.randd.commons.tealwaters.properties;
 
 import java.io.File;
 import java.io.FileInputStream;

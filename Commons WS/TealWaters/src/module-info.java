@@ -6,7 +6,7 @@
  *
  */
 module com.hiddenpiranha.commons.TealWaters {
-	exports com.hiddenpiranha.commons.tealwaters.commons;
-	exports com.hiddenpiranha.commons.tealwaters.properties;
-	exports com.hiddenpiranha.commons.tealwaters.io.files;
+	exports com.randd.commons.tealwaters.commons;
+	exports com.randd.commons.tealwaters.properties;
+	exports com.randd.commons.tealwaters.io.files;
 }

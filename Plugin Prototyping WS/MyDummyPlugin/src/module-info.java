@@ -10,5 +10,6 @@ module com.souchy.randd.pluginprototyping.MyDummyPlugin {
 
 	requires com.hiddenpiranha.commons.TealWaters;
 	requires transitive com.souchy.randd.pluginprototyping.Modules;
+	
 	requires com.souchy.randd.pluginprototyping.PluginMonitor;
 }
