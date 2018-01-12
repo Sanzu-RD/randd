@@ -1,4 +1,4 @@
-package com.randd.commons.tealwaters.io.files;
+package com.souchy.randd.commons.tealwaters.io.files;
 
 import java.io.InputStream;
 import java.net.URL;

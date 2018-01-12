@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.randd.commons.tealwaters.commons.Discoverer;
+import com.souchy.randd.commons.tealwaters.commons.Discoverer;
 
 public interface ModuleDiscoverer extends Discoverer<File, File, File> {
 	

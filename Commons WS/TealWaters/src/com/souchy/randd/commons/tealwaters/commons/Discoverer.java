@@ -1,4 +1,4 @@
-package com.randd.commons.tealwaters.commons;
+package com.souchy.randd.commons.tealwaters.commons;
 
 import java.util.List;
 
