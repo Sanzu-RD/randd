@@ -19,11 +19,11 @@ public class BaseModuleDiscoverer implements ModuleDiscoverer {
 	 */
 	@Override
 	public List<File> explore(File directory) {
-		return Arrays.stream(directory.listFiles()).filter(this::identifyIsModule).collect(Collectors.toList());
+		return Arrays.stream(directory.listFiles()).filter(this::identify).collect(Collectors.toList());
 	}
 
 	@Override
-	public boolean identifyIsModule(File file) {
+	public boolean identify(File file) {
 		if (!file.getName().endsWith(".jar"))
 			return false;
 		try (JarFile jar = new JarFile(file)) {

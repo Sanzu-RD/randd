@@ -7,7 +7,7 @@ import com.souchy.randd.modules.api.ModuleDiscoverer;
 public class NodeInformationLoader implements ModuleDiscoverer {
 
 	@Override
-	public boolean identifyIsModule(File f) {
+	public boolean identify(File f) {
 		// TODO Auto-generated method stub
 		return false;
 	}
