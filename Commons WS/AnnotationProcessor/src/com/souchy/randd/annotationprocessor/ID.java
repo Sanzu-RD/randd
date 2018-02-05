@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * Annotation pour donner un numéro d'identification à un type / classe
+ * 
  * @author Souchy
  *
  */

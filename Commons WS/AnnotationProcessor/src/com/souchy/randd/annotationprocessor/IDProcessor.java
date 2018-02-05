@@ -1,6 +1,7 @@
 package com.souchy.randd.annotationprocessor;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,36 +20,47 @@ import javax.tools.Diagnostic.Kind;
 public class IDProcessor extends AbstractProcessor {
 
 	private Messager messager;
+	//private ProcessingEnvironment penv;
 
 	@Override
 	public void init(ProcessingEnvironment env) {
-		// penv = env;
+	//	penv = env;
 		messager = env.getMessager();
 	}
 
 	@Override
 	public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment env) {
+		messager.printMessage(Kind.NOTE, "ID process start 4 ============================================");
 		Map<Integer, Element> ids = new HashMap<>();
-		Set<? extends Element> elements = env.getElementsAnnotatedWith(ID.class);
+		Set<Element> elements = new HashSet<>();
+		//elements.addAll(findAllAnnotatedClasses(penv, ID.class));
+		elements.addAll(env.getElementsAnnotatedWith(ID.class));
+		//elements.addAll(env.getRootElements());
 		elements.forEach(e -> {
-			if (e.getKind() != ElementKind.CLASS) {
-				messager.printMessage(Kind.ERROR, "@ID using for class only ", e);
+			ID id = e.getAnnotation(ID.class);
+			if(id == null) {
+				// ignore
+			} else if(e.getAnnotation(ChildMustAnnotate.class) != null) {
+				messager.printMessage(Kind.NOTE, "ID process ChildMustAnnotate [" + e + "]");
+			} else if (e.getKind() != ElementKind.CLASS) {
+				messager.printMessage(Kind.ERROR, "@ID annotation is for classes only. [" + e + "] ", e);
 			} else {
 				try {
-					ID id = e.getAnnotation(ID.class);
 					if (ids.keySet().contains(id.id())) {
 						Element old = ids.get(id.id());
-						messager.printMessage(Kind.ERROR, "Duplicate ID [" + id.id() + "] with class [" + e.getSimpleName() + "]", old);
-						messager.printMessage(Kind.ERROR, "Duplicate ID [" + id.id() + "] with class [" + old.getSimpleName() + "]", e);
+						messager.printMessage(Kind.ERROR, "Duplicate ID [" + id.id() + "] with class [" + e + "]", old);
+						messager.printMessage(Kind.ERROR, "Duplicate ID [" + id.id() + "] with class [" + old + "]", e);
 					} else {
 						ids.put(id.id(), e);
 						// ok id accepté
+						messager.printMessage(Kind.NOTE, "ID accept [" + id.id() + "] on class [" + e + "]");
 					}
 				} catch (Exception e1) {
-					messager.printMessage(Kind.ERROR, "shit sucks", e);
+					messager.printMessage(Kind.ERROR, "shit sucks [" + e + "]", e);
 				}
 			}
 		});
+		messager.printMessage(Kind.NOTE, "ID process end 4 ==============================================");
 		return true;
 	}
 
