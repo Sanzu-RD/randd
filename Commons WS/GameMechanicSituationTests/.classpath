@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="com/souchy/randd/situationtest/events/movement/TPEvent.java|com/souchy/randd/situationtest/events/statschange/HpChangeEvent.java|com/souchy/randd/situationtest/eventshandlers/OnHpChange.java|com/souchy/randd/situationtest/models/Action.java|com/souchy/randd/situationtest/models/effects/|com/souchy/randd/situationtest/interfaces/ICombatEntity.java" kind="src" path="src"/>
+	<classpathentry kind="src" path="data"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/jruby-complete-9.2.0.0.jar" sourcepath="F:/Users/Souchy/Desktop/Robyn/Git/res/libs src/jruby-dist-9.2.0.0-src.zip"/>
+	<classpathentry kind="lib" path="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/guava-18.0.jar" sourcepath="F:/Users/Souchy/Desktop/Robyn/Git/res/libs src/guava-18.0-sources.jar"/>
+	<classpathentry kind="lib" path="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/guice-4.2.0.jar" sourcepath="F:/Users/Souchy/Desktop/Robyn/Git/res/libs src/guice-4.2.zip"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Cache"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

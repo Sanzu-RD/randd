@@ -1,0 +1,13 @@
+
+
+
+class: {
+  name: "Grim";
+
+  baseStats: {
+    resource1: 1000,
+    resource2: 6,
+    resource3: 3,
+  },
+
+}

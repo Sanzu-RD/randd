@@ -1,0 +1,24 @@
+
+
+
+"class": {
+  "name": "Grim",
+
+  "baseStats": {
+    "resource1": 1000,
+    "resource2": 6,
+    "resource3": 3,
+
+    "elementAffinities": {
+      "fire" : { "scl":  30, "flat":  10, "sclRes":  100, "flatRes":  100 }, "comment": "resistant and strong with fire",
+      "water": { "scl":   0, "flat":   0, "sclRes":  -50, "flatRes":  -50 }, "comment": "weak vs water",
+      "ice":   { "scl":   0, "flat":   0, "sclRes":   50, "flatRes":   50 }, "comment": "resistant vs ice",
+
+    },
+    "weaponAffinities": {
+      
+    }
+
+  },
+
+}

@@ -1,0 +1,9 @@
+
+baseStats: {
+							hp: 5,
+							sp: 6,
+							mvm: 3,
+							posX: 15,
+							posY: 15,
+							summon: {},
+						},
