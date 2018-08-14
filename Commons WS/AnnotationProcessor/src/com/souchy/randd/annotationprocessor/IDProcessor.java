@@ -50,6 +50,7 @@ public class IDProcessor extends AbstractProcessor {
 						Element old = ids.get(id.id());
 						messager.printMessage(Kind.ERROR, "Duplicate ID [" + id.id() + "] with class [" + e + "]", old);
 						messager.printMessage(Kind.ERROR, "Duplicate ID [" + id.id() + "] with class [" + old + "]", e);
+						messager.printMessage(Kind.NOTE,  "Duplicate ID [" + id.id() + "] on class ["+e+"] with class [" + old + "]");
 					} else {
 						ids.put(id.id(), e);
 						// ok id accepté
@@ -61,7 +62,7 @@ public class IDProcessor extends AbstractProcessor {
 			}
 		});
 		messager.printMessage(Kind.NOTE, "ID process end 4 ==============================================");
-		return true;
+		return false;
 	}
 
 }

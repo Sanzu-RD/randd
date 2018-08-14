@@ -21,8 +21,8 @@ public class AnnotationTests {
 	public void testMessageIDs() {
 		Ping ping = new Ping();
 		Pong pong = new Pong();
-		assertEquals(1, ping.getID());
-		assertEquals(2, pong.getID());
+		assertEquals(1, (int)ping.getID());
+		assertEquals(2, (int)pong.getID());
 	}
 	
 	@Test
@@ -30,8 +30,8 @@ public class AnnotationTests {
 	public void testMessageHandlerIDs() {
 		PingHandler ping = new PingHandler();
 		PongHandler pong = new PongHandler();
-		assertEquals(1, ping.getID());
-		assertEquals(2, pong.getID());
+		assertEquals(1, (int)ping.getID());
+		assertEquals(2, (int)pong.getID());
 	}
 
 	@Test
@@ -46,8 +46,8 @@ public class AnnotationTests {
 	void testMessageHandlerClass4(TestReporter reporter) {
 		PingHandler ping = new PingHandler();
 		PongHandler pong = new PongHandler();
-		assertEquals(1, ping.getID());
-		assertEquals(2, pong.getID());
+		assertEquals(1, (int)ping.getID());
+		assertEquals(2, (int)pong.getID());
 	}
 
 	@Test
@@ -88,14 +88,20 @@ public class AnnotationTests {
 	
 
 
-	public static interface Identifiable {
-		public int getID();
+	public static interface Identifiable<T> {
+		public T getID();
+	}
+	public static interface IdentifiableInt extends Identifiable<Integer> {
+		public Integer getID();
+		default int id() {
+			return getID();
+		}
 	}
 	
 	@ChildMustAnnotate(ID.class)
-	public static interface AnnotatedIdentifiable extends Identifiable {
+	public static interface AnnotatedIdentifiable extends Identifiable<Integer> {
 		@Override
-		default int getID() {
+		default Integer getID() {
 			return getID(this.getClass());
 		}
 		public static int getID(Class<?> c) {
@@ -125,7 +131,7 @@ public class AnnotationTests {
 		@Override public String serialize(String out) { return null; }
 		@Override public GayMessage deserialize(String in) { return null; } 
 	}
-	@ID(id = 2)
+	//@ID(id = 2)
 	public static class Pong implements GayMessage {
 		String data = "";
 		@Override public String serialize(String out) { return null; }
@@ -134,9 +140,9 @@ public class AnnotationTests {
 	
 	public static class notAnnotated { }
 	
-	public static interface MessageHandler<T extends Message<?>> extends Identifiable {
+	public static interface MessageHandler<T extends Message<?>> extends Identifiable<Integer> {
 		public void handle(T message);
-		@Override default int getID() {
+		@Override default Integer getID() {
 			return AnnotatedIdentifiable.getID(getMessageClass());
 		}
 		public Class<T> getMessageClass();

@@ -21,7 +21,7 @@ public class PluginMonitorLauncher {
 			System.out.println("[" + String.join(", ", files) + "] : list files");
 		}*/
 		
-		FilesManager.init(PluginMonitorLauncher.class);
+		//FilesManager.init(PluginMonitorLauncher.class);
 		
 		Executors.newSingleThreadExecutor().execute(() -> Application.launch(App.class));
 		//Executors.newSingleThreadExecutor().execute(() -> App.launch(args));

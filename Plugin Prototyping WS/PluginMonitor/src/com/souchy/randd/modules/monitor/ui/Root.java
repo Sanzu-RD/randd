@@ -107,14 +107,13 @@ public class Root extends VBox {
 		String dispose = "Unload / Dispose";
 		btnToggle.setText(instantiate);
 		btnToggle.setOnAction(e -> {
-			//System.out.println("kmjuiy : [" + btnToggle.getText()+"]");
-			if(btnToggle.getText().equals(instantiate)) {
+			print("toggle is selected = " + btnToggle.isSelected());
+			if(btnToggle.isSelected()) { 
 				BaseModuleInformation info = this.getSelectedInfo();
 				BaseModule module = null;
 				try {
 					module = App.manager.instanciate(info);
 				} catch (Exception e1) {
-					//e1.printStackTrace();
 					print(e1.getMessage());
 					return;
 				}
@@ -123,33 +122,13 @@ public class Root extends VBox {
 				btn1.setDisable(module == null);
 				print("btn load, persist size : " + persistanceTest.size());
 			} else 
-			if(btnToggle.getText().equals(dispose)) {
+			if(btnToggle.isSelected() == false) {
 				btnToggle.setText(instantiate);
 				BaseModuleInformation info = this.getSelectedInfo();
 				boolean b = App.manager.dispose(info);
-				//btn1.setDisable(b);{
 				print("btn unload : " + b);
 			}
 		});
-		/*btnToggle.setText("Allo");
-		group.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> ov, Toggle toggle, Toggle new_toggle) -> {
-			if(btnToggle.getText() == "Load") {
-				System.out.println("btn load");
-				btnToggle.setText("Unload");
-				int i = listModules.getSelectionModel().getSelectedIndex();
-				BaseModuleInformation info = App.manager.getInfo(i); 
-				BaseModule module = App.manager.load(info);
-				btn1.setDisable(module == null);
-			} else
-			if(btnToggle.getText() == "Unload") {
-				System.out.println("btn unload");
-				btnToggle.setText("Load");
-				int i = listModules.getSelectionModel().getSelectedIndex();
-				BaseModuleInformation info = App.manager.getInfo(i); 
-				boolean b = App.manager.remove(info);
-				//btn1.setDisable(b);
-			}
-		});*/
 		btn1.setOnAction(e -> {
 			BaseModule module = App.manager.get(getSelectedInfo());
 			if (module != null)

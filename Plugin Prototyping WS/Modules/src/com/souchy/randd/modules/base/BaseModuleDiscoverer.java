@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
@@ -17,10 +18,10 @@ public class BaseModuleDiscoverer implements ModuleDiscoverer {
 	 * @param directory
 	 * @return
 	 */
-	@Override
-	public List<File> explore(File directory) {
-		return Arrays.stream(directory.listFiles()).filter(this::identify).collect(Collectors.toList());
-	}
+//	@Override
+//	public List<File> explore(File directory) {
+//		return explore(directory, this::identify);
+//	}
 
 	@Override
 	public boolean identify(File file) {
@@ -34,6 +35,11 @@ public class BaseModuleDiscoverer implements ModuleDiscoverer {
 			return false;
 		}
 	}
+
+// 	@Override
+//	public List<File> explore(File directory, Predicate<File> filter) {
+//		return Arrays.stream(directory.listFiles()).filter(filter).collect(Collectors.toList());
+//	}
 	
 	
 

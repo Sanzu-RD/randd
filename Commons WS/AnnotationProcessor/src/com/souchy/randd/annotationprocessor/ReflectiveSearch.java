@@ -38,7 +38,7 @@ class ReflectiveSearch {
 			//children.addAll(elements);
 			elements.forEach(e -> {
 				if(filteradd.test(e)) children.add(e);
-				if(filtersearch.test(e)) getRecursiveEnclosedElementSearch(e, children);
+				if(filtersearch.test(e)) getRecursiveEnclosedElementSearch(e, children, filteradd, filtersearch);
 			});
 		}
 	}
@@ -62,7 +62,7 @@ class ReflectiveSearch {
 				getRecursiveEnclosedElementSearch(m, ele, e1 -> {
 					return e1.getKind() == ElementKind.CLASS && e1.getAnnotation(ID.class) != null;
 				}, e2 -> true);
-
+				
 				ele.stream().filter(e -> e.getAnnotation(ChildMustAnnotate.class) != null).forEach(e -> {
 					// messager.printMessage(Kind.NOTE, "Found childmustannotate ["+e.getSimpleName()+"] in module ["+m.getSimpleName()+"]");
 					elements.add(e);

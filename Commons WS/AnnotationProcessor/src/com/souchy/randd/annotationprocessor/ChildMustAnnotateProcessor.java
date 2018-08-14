@@ -25,7 +25,7 @@ import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.JavaFileObject;
 
-@SupportedAnnotationTypes({ "com.souchy.randd.annotationprocessor.ChildMustAnnotate" })
+@SupportedAnnotationTypes({  "com.souchy.randd.annotationprocessor.ID", "com.souchy.randd.annotationprocessor.ChildMustAnnotate" })
 // @SupportedSourceVersion(SourceVersion.RELEASE_6)
 public class ChildMustAnnotateProcessor extends AbstractProcessor {
 
@@ -55,7 +55,7 @@ public class ChildMustAnnotateProcessor extends AbstractProcessor {
 		Set<? extends ModuleElement> moduleElements = penv.getElementUtils().getAllModuleElements();
 		moduleElements.forEach(m -> {
 			if(m.getSimpleName().toString().toLowerCase().contains("com.souchy") || m.getSimpleName().toString().toLowerCase().contains("com.hiddenpiranha")) { //!m.getSimpleName().toString().toLowerCase().contains("java") && !m.getSimpleName().toString().toLowerCase().contains("jdk")) {// && !m.toString().startsWith("oracle")) {
-				//messager.printMessage(Kind.NOTE, "Module Element ["+m.getSimpleName()+"]");
+				messager.printMessage(Kind.NOTE, "Module Element ["+m+"]");
 				//if(m.getSimpleName().toString().toLowerCase().contains("com.souchy") || m.getSimpleName().toString().toLowerCase().contains("com.hiddenpiranha")) {
 					List<Element> ele = new ArrayList<>();
 					getRecursiveEnclosedElementSearch(m, ele);
@@ -88,8 +88,9 @@ public class ChildMustAnnotateProcessor extends AbstractProcessor {
 		});
 
 		
-		messager.printMessage(Kind.NOTE, "------------------------------------ Root elements");
-
+		messager.printMessage(Kind.NOTE, "------------------------------------ Root elements ("+env.getRootElements().size()+")");
+		
+		//env.getRootElements().forEach(e -> {messager.printMessage(Kind.NOTE, "e : "+e);});
 		
 		// get all root elements, including 1st tier enclosed classes
 		Set<Element> elements = new HashSet<>();

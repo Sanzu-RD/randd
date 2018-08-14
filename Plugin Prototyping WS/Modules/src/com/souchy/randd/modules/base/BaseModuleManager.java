@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import com.souchy.randd.modules.api.EntryPoint;
+import com.souchy.randd.modules.api.ModuleDiscoverer;
 import com.souchy.randd.modules.api.ModuleManager;
 
 public class BaseModuleManager implements ModuleManager<BaseModule, BaseModuleInformation> {
@@ -17,7 +18,7 @@ public class BaseModuleManager implements ModuleManager<BaseModule, BaseModuleIn
 	/**
 	 * Information loader, finds jars and reads their info.properties file.
 	 */
-	private BaseModuleDiscoverer discoverer;
+	private ModuleDiscoverer discoverer;
 	/**
 	 * Lists jars informations, indexed by file name
 	 */

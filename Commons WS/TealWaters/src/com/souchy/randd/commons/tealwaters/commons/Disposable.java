@@ -4,5 +4,5 @@ package com.souchy.randd.commons.tealwaters.commons;
 public interface Disposable {
 
 	public void dispose();
-		
+
 }

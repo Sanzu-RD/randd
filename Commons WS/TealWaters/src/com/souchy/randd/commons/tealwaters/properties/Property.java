@@ -13,11 +13,12 @@ public class Property {
 		this.setter = setter;
 	}
 
-	public String get(){
+	public String get() {
 		return getter.get();
 	}
-	public void set(String val){
+
+	public void set(String val) {
 		setter.accept(val);
 	}
-	
+
 }

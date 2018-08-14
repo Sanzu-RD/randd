@@ -37,8 +37,6 @@ public class BaseModuleInstanciator implements ModuleInstanciator<BaseModule, Ba
 	public static class BaseModClassLoader extends URLClassLoader {
 		public BaseModClassLoader(String name, URL url, ClassLoader loader) {
 			super(name, new URL[]{url}, loader);
-			//this.addURL(url);
-			// TODO Auto-generated constructor stub
 		}
 	}
 	

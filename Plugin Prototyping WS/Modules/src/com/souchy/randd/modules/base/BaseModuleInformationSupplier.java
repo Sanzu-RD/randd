@@ -36,7 +36,7 @@ public class BaseModuleInformationSupplier implements ModuleInformationSupplier<
 
 	@Override
 	public List<BaseModuleInformation> supply(List<File> files) {
-		return files.stream().map(e -> this.supply(e)).collect(Collectors.toList());
+		return files.stream().map(this::supply).collect(Collectors.toList());
 	}
 	
 	
