@@ -3,9 +3,10 @@ package com.souchy.randd.situationtest.models;
 import java.util.List;
 import java.util.function.Predicate;
 
-import com.souchy.randd.situationtest.interfaces.IEntity;
-import com.souchy.randd.situationtest.matrixes.ConditionMatrix;
-import com.souchy.randd.situationtest.matrixes.EffectMatrix;
+import com.souchy.randd.jade.api.ICell;
+import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.situationtest.math.matrixes.ConditionMatrix;
+import com.souchy.randd.situationtest.math.matrixes.EffectMatrix;
 import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.models.stage.Cell;
 import com.souchy.randd.situationtest.properties.types.Orientation;
@@ -29,15 +30,17 @@ public abstract class Effect {
 	
 	public List<Predicate<FightContext>> conditions;
 	public EffectMatrix aoe;
+	//public ConditionMatrix cm;
 	
 	
-	
-	public Effect(Character source, EffectMatrix em, ConditionMatrix cm) {
+	public Effect(FightContext c, Character source, EffectMatrix em, ConditionMatrix cm) {
+		context = c;
 		this.source = source;
 		this.aoe = em;
+		//this.cm = cm;
 	}
-	public Effect(Character source, EffectMatrix em, ConditionMatrix cm, String description) {
-		this(source, em, cm);
+	public Effect(FightContext c, Character source, EffectMatrix em, ConditionMatrix cm, String description) {
+		this(c, source, em, cm);
 		
 	}
 	
@@ -62,10 +65,15 @@ public abstract class Effect {
 	 * @param targetCell Cellule pointé par la souris, cellule sur laquelle on cast le sort ou action
 	 * @param filter Predicate pour filtrer les targets dans l'Aoe créée autour de la cellule pointée
 	 */
-	public void applyAoe(Cell targetCell, Orientation ori, Predicate<Cell> filter) {
-		List<Cell> cells = context.board.getTargets(targetCell, ori, aoe); //, targetFlags());
+	public void applyAoe(ICell targetCell, Orientation ori, Predicate<ICell> filter) {
+		List<ICell> cells = context.board.getTargets(targetCell, ori, aoe); //, targetFlags());
 		cells.stream()
 		.filter(c -> filter.test(c)) // filtre les bons targets
+		/*.filter(c -> {
+			int x = c.getPos().x;
+			int y = c.getPos().y;
+			cm.get(x, y);
+		})*/
 		.forEach(c -> apply(c)); 	 // applique l'effet à chaque cell
 	}
 	
@@ -74,7 +82,7 @@ public abstract class Effect {
 	 * 
 	 * @param cell
 	 */
-	protected abstract void apply(Cell cell);
+	protected abstract void apply(ICell cell);
 
 	
 	/**

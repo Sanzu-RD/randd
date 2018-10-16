@@ -1,6 +1,6 @@
 package com.souchy.randd.situationtest.scripts.actions;
 
-import com.souchy.randd.situationtest.interfaces.IEntity;
+import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.properties.ElementValue;
 import com.souchy.randd.situationtest.properties.types.Damages;
 import com.souchy.randd.situationtest.scripts.ScriptedAction;

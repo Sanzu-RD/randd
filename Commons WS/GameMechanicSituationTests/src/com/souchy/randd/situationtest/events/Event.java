@@ -1,6 +1,6 @@
 package com.souchy.randd.situationtest.events;
 
-import com.souchy.randd.situationtest.interfaces.IEntity;
+import com.souchy.randd.jade.api.IEntity;
 
 public abstract class Event {
 	

@@ -2,11 +2,26 @@ package com.souchy.randd.situationtest.scripts;
 
 import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.tealwaters.commons.Disposable;
+import com.souchy.randd.jade.api.EventProxy;
 import com.souchy.randd.situationtest.eventshandlers.turn.OnTurnEndHandler;
 import com.souchy.randd.situationtest.eventshandlers.turn.OnTurnStartHandler;
-import com.souchy.randd.situationtest.interfaces.EventProxy;
 import com.souchy.randd.situationtest.models.org.FightContext;
+import com.souchy.randd.situationtest.models.entities.Character;
+import com.souchy.randd.situationtest.properties.ElementBundle;
+import com.souchy.randd.situationtest.properties.StatProperty;
+import com.souchy.randd.situationtest.properties.Stats;
 
+
+/**
+ * Has to be implemented in ruby.
+ * 
+ * Then you can instiantiate one of the Ruby implementations (ex Cripple, Bleed, etc)
+ * 
+ * Just need to register a factory. Can use Discoverers to detect all the status files and create factories.
+ * 
+ * @author Souchy
+ *
+ */
 public abstract class Status implements EventProxy, Disposable {
 
 	private final EventBus bus = new EventBus();
@@ -16,10 +31,16 @@ public abstract class Status implements EventProxy, Disposable {
 	private OnTurnEndHandler onEndTurnRouter;
 
 	private final Character source;
+	/**
+	 * FIXME : Status.target can't only be Characters, it has to be able to be Cells too
+	 */
 	private final Character target;
 	
 	// private int duration; -> dans redis ?
 
+	
+	public final Stats stats;
+	
 	@Override
 	public EventBus bus() {
 		return bus;
@@ -51,7 +72,7 @@ public abstract class Status implements EventProxy, Disposable {
 
 	}
 
-	/* ===========================  Status variable accessors to use in script  ===========================*/
+	/* ===========================  Status properties accessors to use in script  ===========================*/
 	protected Character source() {
 		return source;
 	}
@@ -79,7 +100,8 @@ public abstract class Status implements EventProxy, Disposable {
 	public int duration() {
 		return 1;
 	}
-	
+
+	public abstract void registerHandlers();
 	
 	/*public void scriptImp() {
 		register((TurnStartEvent event) -> onTurnStart(event));
@@ -98,7 +120,6 @@ public abstract class Status implements EventProxy, Disposable {
 		});
 	}*/
 
-	public abstract void registerHandlers();
 	
 	
 }

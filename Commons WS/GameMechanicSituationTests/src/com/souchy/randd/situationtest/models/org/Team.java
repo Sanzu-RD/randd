@@ -2,7 +2,7 @@ package com.souchy.randd.situationtest.models.org;
 
 import java.util.List;
 
-import com.souchy.randd.situationtest.interfaces.IEntity;
+import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.models.Client;
 
 public class Team {

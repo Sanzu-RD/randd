@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.eventbus.EventBus;
-import com.souchy.randd.situationtest.interfaces.ICell;
-import com.souchy.randd.situationtest.interfaces.ICombatEntity;
-import com.souchy.randd.situationtest.interfaces.IEntity;
+import com.souchy.randd.jade.api.ICell;
+import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.math.Point3D;
 import com.souchy.randd.situationtest.models.org.FightContext;
+import com.souchy.randd.situationtest.models.entities.Character;
 import com.souchy.randd.situationtest.scripts.Status;
 
 public class Cell implements ICell {
@@ -22,7 +22,7 @@ public class Cell implements ICell {
 	public List<Status> statuss;
 	/** TODO Cell.List<Entity> ou character ?? pour les tours de persos portés genre et initialement les trap/glyphs, mais ptete quon les change en statuts eux .. */
 	public List<IEntity> entities;
-	
+	public Character character;
 	
 	public Cell(int x, int y, int z) {
 		pos = new Point3D(x, y, z);
@@ -57,21 +57,24 @@ public class Cell implements ICell {
 	@Override
 	public List<IEntity> getEntities() {
 		List<IEntity> entities = new ArrayList<>();
-		for(IEntity e : context.entities) {
+		/*for(IEntity e : context.entities) {	// commenté pour pouvoir compiler sans erreur en attendant
 			if(e.getOccupiedCells().contains(this)) {
 				entities.add(e);
 			}
-		}
+		}*/
 		return entities;
 	}
 
 	@Override
 	public Character getCharacter() {
-		return null;
+		return character;
 	}
 	@Override
 	public boolean hasCharacter() {
-		return false;
+		return character != null;
+	}
+	public void testSetCharacter(Character c) {
+		this.character = c;
 	}
 	
 	

@@ -1,6 +1,6 @@
 package com.souchy.randd.situationtest.events;
 
-import com.souchy.randd.situationtest.interfaces.IEntity;
+import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.models.Effect;
 
 public class ApplyEffectEvent extends Event {

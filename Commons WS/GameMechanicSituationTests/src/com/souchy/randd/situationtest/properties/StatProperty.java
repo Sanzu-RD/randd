@@ -9,4 +9,12 @@ public class StatProperty {
 		this.type = type;
 		this.value = value;
 	}
+	
+	public StatProperty copy() {
+		return new StatProperty(type, value);
+	}
+	
+	public String toString() {
+		return "[" + type + ", " + value + "]";
+	}
 }

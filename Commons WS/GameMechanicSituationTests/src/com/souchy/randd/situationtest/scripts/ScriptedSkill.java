@@ -3,9 +3,9 @@ package com.souchy.randd.situationtest.scripts;
 import java.util.List;
 import java.util.function.Predicate;
 
+import com.souchy.randd.jade.api.IEffect;
 import com.souchy.randd.situationtest.events.CastSpellEvent;
 import com.souchy.randd.situationtest.eventshandlers.OnCast;
-import com.souchy.randd.situationtest.interfaces.IEffect;
 import com.souchy.randd.situationtest.models.org.FightContext;
 
 public abstract class ScriptedSkill {
@@ -39,7 +39,7 @@ public abstract class ScriptedSkill {
 	}
 	public void setName(String str) {
 		name = str;
-	}
+	} 
 	
 	public ScriptedSkill(String str) {
 		name = str;
@@ -64,7 +64,7 @@ public abstract class ScriptedSkill {
 	 * TODO ScriptedSkill.canDiagonal() ?
 	 * @return
 	 */
-	public boolean canDiagonal() {
+	public boolean canOrientDiagonal() {
 		return false;
 	}
 	

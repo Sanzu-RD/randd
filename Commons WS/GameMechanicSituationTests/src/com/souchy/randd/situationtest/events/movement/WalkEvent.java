@@ -1,7 +1,7 @@
 package com.souchy.randd.situationtest.events.movement;
 
+import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.events.Event;
-import com.souchy.randd.situationtest.interfaces.IEntity;
 
 
 /**

@@ -1,5 +1,6 @@
 package com.souchy.randd.situationtest.eventshandlers;
 
+import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.situationtest.events.OnHitEvent;
 
 /**
@@ -9,7 +10,7 @@ import com.souchy.randd.situationtest.events.OnHitEvent;
  * 
  * ex : un joueur se soigne de 10 (eau, flat) lorsqu'il reçoit un hit
  * 
- * player.register(new OnHitReceived() -> (OnHitEvent e){
+ * OnHitReceived h = player.register((OnHitEvent e) -> {
  * 		e.source.post(new Heal2Action(e.source, e.source, new ElementValue(Elements.Water, 10)));
  * });
  * 
@@ -17,5 +18,9 @@ import com.souchy.randd.situationtest.events.OnHitEvent;
  */
 @FunctionalInterface
 public interface OnHitReceived extends EventHandler<OnHitEvent> {
+	
 
+	@Override
+	@Subscribe
+	public void handle(OnHitEvent event);
 }

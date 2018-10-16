@@ -10,30 +10,29 @@ public enum Elements {
 	
 	Physical, // bleeding included in phys ?
 	
-	Poison, // rename Toxic/acid ?
-	
 	
 	Fire,
-	Water,
 	Earth, // earth ou nature
+	Water,
 	Wind, // wind ou air
 	
 	Lightning, // Electricity, // thunder
-	Ice,
+	Ice, // ice skills could be based on water element
+	Poison, // rename Toxic/toxin/acid ?
 	
 	
 	Dark, // peut inclure du genre skills de vampire/blood magic
 	Light,
 	
 	
-	Void,
-	Chaos,
+	//Void,
+	//Chaos,
 	
 	// Creation  ? 
 	// Fairy ? 
 	// Magical ?
 	// Curse ?
-	// Psychic / Mind ?
+	// Psychic / Mind ? Mystic ? Cosmic ?
 	
 	// TODO éléments : https://powerlisting.wikia.com/wiki/Category:Form_of_magic
 	

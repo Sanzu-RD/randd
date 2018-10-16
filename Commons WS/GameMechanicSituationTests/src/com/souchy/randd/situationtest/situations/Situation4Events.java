@@ -9,8 +9,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.events.CastSpellEvent;
-import com.souchy.randd.situationtest.interfaces.IEntity;
 import com.souchy.randd.situationtest.models.entities.Character;
 import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.models.stage.Board;

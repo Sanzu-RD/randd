@@ -1,10 +1,11 @@
 package com.souchy.randd.situationtest.effects.resources;
 
+import com.souchy.randd.jade.api.ICell;
 import com.souchy.randd.situationtest.events.Event;
 import com.souchy.randd.situationtest.events.OnHitEvent;
-import com.souchy.randd.situationtest.interfaces.ICombatEntity;
-import com.souchy.randd.situationtest.matrixes.ConditionMatrix;
-import com.souchy.randd.situationtest.matrixes.EffectMatrix;
+import com.souchy.randd.situationtest.events.statschange.StatChangeEvent;
+import com.souchy.randd.situationtest.math.matrixes.ConditionMatrix;
+import com.souchy.randd.situationtest.math.matrixes.EffectMatrix;
 import com.souchy.randd.situationtest.models.Effect;
 import com.souchy.randd.situationtest.models.stage.Cell;
 import com.souchy.randd.situationtest.properties.ElementValue;
@@ -13,6 +14,7 @@ import com.souchy.randd.situationtest.properties.types.Damages;
 import com.souchy.randd.situationtest.properties.types.Elements;
 import com.souchy.randd.situationtest.properties.types.StatProperties;
 import com.souchy.randd.situationtest.models.entities.Character;
+import com.souchy.randd.situationtest.models.org.FightContext;
 
 public class DamageEffect extends Effect {
 
@@ -21,16 +23,16 @@ public class DamageEffect extends Effect {
 	public final ElementValue scl;
 	public final ElementValue flat;
 	
-	public DamageEffect(Character source, Damages type, Elements ele, ElementValue scl, ElementValue flat, EffectMatrix em, ConditionMatrix cm) {
-		super(source, em, cm);
+	public DamageEffect(FightContext c, Character source, Damages type, Elements ele, ElementValue scl, ElementValue flat, EffectMatrix em, ConditionMatrix cm) {
+		super(c, source, em, cm);
 		this.type = type;
 		this.ele = ele;
 		this.scl = scl;
 		this.flat = flat;
 	}
 	
-	public DamageEffect(Character source, Damages type, Elements ele, ElementValue scl, ElementValue flat, EffectMatrix em, ConditionMatrix cm, String descriptionOverride) {
-		this(source, type, ele, scl, flat, em, cm);
+	public DamageEffect(FightContext c, Character source, Damages type, Elements ele, ElementValue scl, ElementValue flat, EffectMatrix em, ConditionMatrix cm, String descriptionOverride) {
+		this(c, source, type, ele, scl, flat, em, cm);
 		
 	}
 
@@ -53,10 +55,11 @@ public class DamageEffect extends Effect {
 	}
 
 	@Override
-	protected void apply(Cell cell) {
+	protected void apply(ICell cell) {
 		// TODO Auto-generated method stub
-		ICombatEntity e = cell.getCombatEntity(context);
-		apply(e);
+		//ICombatEntity e = cell.getCombatEntity(context);
+		Character c = cell.getCharacter();
+		apply(c);
 	}
 	public void apply(Character target) {
 		
@@ -68,14 +71,22 @@ public class DamageEffect extends Effect {
 		target.post(inst);
 
 		// Proc "onDmg" event pour quand on frappe la vie
-		if(inst.shieldDmg.value > 0) {
-			source.post(new ShieldDmgEventEvent(inst)); // ex peut avoir un statut qui donne du vol de vie quand il fait du dmg
-			target.post(new ShieldLossEvent(inst)); 	// ex peut avoir un statut qui donne des stats selon les hp qu'il perd
+		if(inst.shieldL.value > 0) {
+			//source.post(new ShieldDmgEventEvent(inst)); // ex peut avoir un statut qui donne du vol de vie quand il fait du dmg
+			//target.post(new ShieldLossEvent(inst)); 	// ex peut avoir un statut qui donne des stats selon les hp qu'il perd
+
+			Event e = new StatChangeEvent(source, target, inst.shieldL);
+			target.post(e); //new RecvStatChangeEvent(source, inst.shieldL));
+			source.post(e); //new InflictStatChangeEvent(source, inst.shieldL));
 		}
 		// Proc "onDmg" event pour quand on frappe la vie
-		if(inst.hpDmg.value > 0) {
-			source.post(new HpDmgEventEvent(inst)); // ex peut avoir un statut qui donne du vol de vie quand il fait du dmg
-			target.post(new HpLossEvent(inst)); 	// ex peut avoir un statut qui donne des stats selon les hp qu'il perd
+		if(inst.hpL.value > 0) {
+			//source.post(new HpDmgEventEvent(inst)); // ex peut avoir un statut qui donne du vol de vie quand il fait du dmg
+			//target.post(new HpLossEvent(inst)); 	// ex peut avoir un statut qui donne des stats selon les hp qu'il perd
+			
+			Event e = new StatChangeEvent(source, target, inst.hpL);
+			target.post(e); //new RecvStatChangeEvent(source, inst.hpL));
+			source.post(e); //new InflictStatChangeEvent(source, inst.hpL));
 		}
 
 		// applique la dmg instance
@@ -86,9 +97,9 @@ public class DamageEffect extends Effect {
 		OnHitEvent onhit = new OnHitEvent(source, target);
 		// proc les onHit/onDot ..
 		// proc les onhit du target en premier vu qu'on a déjà fait le hit du sort lui-même
-		target.post(onHitRcv);
+		target.post(onhit);
 		// puis proc les onhit de la source ensuite pour que ceux-cis puissent proc les onhits du target une deuxième fois (s'il y a des dmg onhit)
-		source.post(onHitSomeone);
+		source.post(onhit);
 	    
 	    // post(OnHit());
 	    // post(OnDot());
@@ -148,11 +159,13 @@ public class DamageEffect extends Effect {
 		public final ElementValue scl;
 		public final ElementValue flat;
 		/** Normalement on tape la resource1 (HP), mais c'est possible d'avoir un modificateur qui redirige les dégâts vers une autre resource */
-		public StatProperties resourceDmg = StatProperties.Resource1;
-		
+		//public StatProperties resourceHit = StatProperties.Resource1;
+
+	    StatProperty hpL = new StatProperty(StatProperties.Resource1, 0);
+	    StatProperty shieldL = new StatProperty(StatProperties.Resource1Shield, 0);
 		
 		/** Résultats de dégâts précalculés sur le shield et l'hp */
-		public ElementValue shieldDmg, hpDmg;
+		//public ElementValue shieldDmg, hpDmg;
 		//public ElementValue dmg;
 		
 		public DmgInstance(DamageEffect e, Character source, Character target) { //, Damages type, ElementValue shieldDmg, ElementValue hpDmg) { //ElementValue dmg) {
@@ -174,7 +187,7 @@ public class DamageEffect extends Effect {
 		}
 		/** recalculate the resulting damage */
 		public void update() {
-		    ElementValue dmg = new ElementValue(ele, 0).
+		    /*ElementValue dmg = new ElementValue(ele, 0).
 		    // scl dmg
 		    addSet(scl.value * source().stats.scl(scl.element).value).
 		    // flat dmg
@@ -182,21 +195,29 @@ public class DamageEffect extends Effect {
 		    // res fix
 		    subSet(target.stats.resFlat(ele).value).
 		    // res scl
-		    multSet(1 - target.stats.resScl(ele).value / 100);
+		    multSet(1 - target.stats.resScl(ele).value / 100);*/
+		    
+		    int dmg = (scl.value * source().stats.scl(scl.element).value
+		    		+ flat.value + source().stats.flat(flat.element).value
+		    		- target.stats.resFlat(ele).value)
+		    		* (1 - target.stats.resScl(ele).value / 100);
 		    
 		    // pour pas se soigner avec des dégâts négatifs
-		    if(dmg.value < 0)
-				dmg.value = 0;
+		    if(dmg < 0)
+				dmg = 0;
 
-			StatProperty hp = source().stats.get(StatProperties.Resource1);
+			//StatProperty hp = source().stats.get(StatProperties.Resource1);
 		    StatProperty shield = source().stats.get(StatProperties.Resource1Shield);
-		    ElementValue shieldLoss = new ElementValue(ele, 0);
-		    ElementValue hpLoss = new ElementValue(ele, 0);
+		    //ElementValue shieldLoss = new ElementValue(ele, 0);
+		    //ElementValue hpLoss = new ElementValue(ele, 0);
+
+		    //StatProperty hpL = new StatProperty(StatProperties.Resource1, 0);
+		    //StatProperty shieldL = new StatProperty(StatProperties.Resource1Shield, 0);
 		    
 		    // ces types 
 		    if(type == Damages.Hit || type == Damages.Counter) {
-		    	shieldLoss.value = Math.min(shield.value, dmg.value);
-		    	hpLoss.value = dmg.value - shieldLoss.value;
+		    	shieldL.value = Math.min(shield.value, dmg);
+		    	hpL.value = dmg - shieldL.value;
 		    	
 		    	if(type == Damages.Counter) {
 			    	// less chance to counter a counter
@@ -212,7 +233,7 @@ public class DamageEffect extends Effect {
 		    }
 		    // Ces types se foutent des shields
 		    if(type == Damages.Dot || type == Damages.PenetrationHit) {
-		    	hpLoss.value = dmg.value;
+		    	hpL.value = dmg;
 		    }
 		}
 	}

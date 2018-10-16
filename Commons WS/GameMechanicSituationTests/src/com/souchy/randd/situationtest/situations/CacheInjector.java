@@ -15,13 +15,14 @@ import com.google.inject.Provider;
 import com.google.inject.Scope;
 import com.google.inject.TypeLiteral;
 import com.google.inject.spi.TypeConverterBinding;
+import com.souchy.randd.situationtest.modules.CacheModule;
 
 public class CacheInjector implements Injector {
 
 	/**
 	 * Static ? or not ? 
 	 */
-    private static final Injector injector = Guice.createInjector(new CacheModule());
+    private final Injector injector = Guice.createInjector(new CacheModule());
     
 	public CacheInjector() {
 		

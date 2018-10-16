@@ -1,7 +1,6 @@
 package com.souchy.randd.commons.tealwaters.commons;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public interface Discoverer<I, F, O> { // extends Predicate<O> {
 

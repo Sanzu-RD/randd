@@ -37,6 +37,7 @@ class KunaiPull < ScriptedSpell
 
     if event.targetCell.getCharacter() == event.source
       # pull tous les kunais en aoe autour du caster qui sont sur le terrain (tire pas ceux prits dans des character)
+      # -> aoePullEffect.applyAoe(targetCell)
     elsif #pointe un character qui possède le status kunai
       # check si le character possèdee vraiment un kunai, sinon on peut pas cast le spell
       # si oui fait du dommage

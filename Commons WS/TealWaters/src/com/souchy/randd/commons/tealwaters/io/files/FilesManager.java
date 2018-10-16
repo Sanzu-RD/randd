@@ -56,9 +56,6 @@ public class FilesManager {
 		return getClassLoader().getResources(name);
 	}
 
-
-	
-	
 	
 	private ClassLoader getClassLoader() {
 		//return Thread.currentThread().getContextClassLoader();
@@ -66,10 +63,8 @@ public class FilesManager {
 	}
 	
 	public void hey() {
-		
 		FileSystem sys;
 		Paths.get("");
-		
 	}
 	
 	/**
@@ -88,6 +83,14 @@ public class FilesManager {
 	 */
 	public File getFileOutside(String name) {
 		return new File(name);
+	}
+	
+
+	public boolean hasExtension(File fileName, String extension) {
+		return hasExtension(fileName.getName(), extension);
+	}
+	public boolean hasExtension(String fileName, String extension) {
+		return fileName.endsWith("." + extension);
 	}
 	
 	

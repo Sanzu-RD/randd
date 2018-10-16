@@ -1,5 +1,6 @@
 package com.souchy.randd.situationtest.eventshandlers;
 
+import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.situationtest.events.OnHitEvent;
 
 /**
@@ -16,6 +17,9 @@ import com.souchy.randd.situationtest.events.OnHitEvent;
  */
 @FunctionalInterface
 public interface OnHitSomeone extends EventHandler<OnHitEvent> {
-
+	
+	@Override
+	@Subscribe
+	public void handle(OnHitEvent event);
 
 }

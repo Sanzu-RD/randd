@@ -2,9 +2,9 @@ package com.souchy.randd.situationtest.models.entities;
 
 import java.util.function.Consumer;
 
+import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.events.cell.EnterCellEvent;
 import com.souchy.randd.situationtest.eventshandlers.EventHandler;
-import com.souchy.randd.situationtest.interfaces.IEntity;
 import com.souchy.randd.situationtest.models.org.FightContext;
 
 public class Glyph extends IEntity { //implements EventHandler<EnterCellEvent> {
@@ -22,7 +22,7 @@ public class Glyph extends IEntity { //implements EventHandler<EnterCellEvent> {
 		//bus().register(this);
 	}
 
-	@Override
+	//@Override
 	public void handle(EnterCellEvent event) {
 		// to be scripted actually,
 		// à moins que le script du spell passe une Function dans le constructeur de Trap et qu'on exécute ça ici :
