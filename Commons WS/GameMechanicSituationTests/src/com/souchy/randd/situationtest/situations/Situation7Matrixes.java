@@ -1,24 +1,16 @@
 package com.souchy.randd.situationtest.situations;
 
-import java.util.List;
-
 import com.souchy.randd.jade.api.ICell;
-import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.effects.resources.DamageEffect;
-import com.souchy.randd.situationtest.events.OnHitEvent;
-import com.souchy.randd.situationtest.events.statschange.StatChangeEvent;
-import com.souchy.randd.situationtest.eventshandlers.EventHandler;
 import com.souchy.randd.situationtest.eventshandlers.OnHitReceived;
 import com.souchy.randd.situationtest.eventshandlers.OnHitSomeone;
 import com.souchy.randd.situationtest.eventshandlers.OnStatChangeHandler;
 import com.souchy.randd.situationtest.eventshandlers.turn.OnTurnEndHandler;
-import com.souchy.randd.situationtest.math.Point2D;
 import com.souchy.randd.situationtest.math.Point3D;
 import com.souchy.randd.situationtest.math.matrixes.ConditionMatrix;
 import com.souchy.randd.situationtest.math.matrixes.EffectMatrix;
 import com.souchy.randd.situationtest.math.matrixes.Matrix;
 import com.souchy.randd.situationtest.math.matrixes.MatrixFlags;
-import com.souchy.randd.situationtest.math.matrixes.PositionMatrix;
 import com.souchy.randd.situationtest.models.entities.Character;
 import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.models.stage.Board;

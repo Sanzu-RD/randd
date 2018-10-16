@@ -1,8 +1,6 @@
 package com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.randd.ebishoal.commons.lapis.screens.ScreenAPI;
 

@@ -5,10 +5,8 @@ import com.souchy.randd.commons.tealwaters.commons.Disposable;
 import com.souchy.randd.jade.api.EventProxy;
 import com.souchy.randd.situationtest.eventshandlers.turn.OnTurnEndHandler;
 import com.souchy.randd.situationtest.eventshandlers.turn.OnTurnStartHandler;
-import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.models.entities.Character;
-import com.souchy.randd.situationtest.properties.ElementBundle;
-import com.souchy.randd.situationtest.properties.StatProperty;
+import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.properties.Stats;
 
 

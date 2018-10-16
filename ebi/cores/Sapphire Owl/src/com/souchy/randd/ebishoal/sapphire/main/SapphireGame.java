@@ -6,7 +6,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.sapphire.ui.GameScreenHud;
-import com.souchy.randd.ebishoal.sapphire.ui.ShitScreen;
 
 public class SapphireGame extends LapisGame {
 	

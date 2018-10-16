@@ -2,7 +2,7 @@ package com.souchy.randd.jade.api;
 
 import java.util.List;
 
-import com.souchy.randd.situationtest.models.Item;
+import com.souchy.randd.situationtest.models.items.Item;
 import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.properties.Stats;
 import com.souchy.randd.situationtest.scripts.ScriptedSkill;
@@ -63,25 +63,25 @@ public abstract class ICombatEntity extends IEntity {
 	 * 
 	 * @return This character's current buffs
 	 */
-	public List<Status> getBuffs();
+	public abstract List<Status> getBuffs();
 	
 	/**
 	 * 
 	 * @return - Get this character's current spells. Can change during fight or in preparation
 	 */
-	public List<ScriptedSkill> getSpells();
+	public abstract List<ScriptedSkill> getSpells();
 	
 	/**
 	 * 
 	 * @return This character's items
 	 */
-	public List<Item> getItems();
+	public abstract List<Item> getItems();
 	
 	/**
 	 * 
 	 * @return - Cellules sur lesquelles l'entité est. 
 	 */
-	public void occupiedCells(); // ou Cell[][] getArea(); qui renvoie une matrice montrant [1,1;1,1]
+	public abstract void occupiedCells(); // ou Cell[][] getArea(); qui renvoie une matrice montrant [1,1;1,1]
 	
 	//
 	// movement/action points ?  action points would be mana, aka Secondary Resource

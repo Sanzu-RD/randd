@@ -1,5 +1,4 @@
 require 'java'
-require 'F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/guava-18.0.jar'
 
 $CLASSPATH << "GameMechanicSituationTests";
 
@@ -12,22 +11,18 @@ java_import Java::com.souchy.randd.situationtest.events.CastSpellEvent;
 java_import Java::com.souchy.randd.situationtest.models.effects.DamageEffect;
 
 
-class KunaiPull < ScriptedSpell
+class KunaiThrow < ScriptedSpell
 
   def initialize ()
-    super("Kunai Pull");
+    super("Bubble");
   end
 
   def description()
-    puts "Pull yourself to a kunai on the ground or pull a kunai from an enemy. Can pull multiple kunais in a circle area by targeting yourself."
+    puts "Shoot a bubble to an ennemy."
   end
 
   def effectDescription()
-    puts "X damage (physical)"
-    puts "+1 Bleed status" # "bleed" or "bleeding" ...
-    puts "-1 Vital Point status"
-    puts "-1 Kunai status"
-    puts "+X Kunai resource"
+    puts "X damage (water)"
   end
 
   def onCast(event)
@@ -35,37 +30,16 @@ class KunaiPull < ScriptedSpell
     isOk = board.checkConditionMatrix(source, targetCell, conditionMatrix());
     if isOk == false return false;
 
-    if event.targetCell.getCharacter() == event.source
-      # pull tous les kunais en aoe autour du caster qui sont sur le terrain (tire pas ceux prits dans des character)
-      # -> aoePullEffect.applyAoe(targetCell)
-    elsif #pointe un character qui possède le status kunai
-      # check si le character possèdee vraiment un kunai, sinon on peut pas cast le spell
-      # si oui fait du dommage
-      # applique le status Bleed au target
-    elsif #pointe une cellule qui possède le terrain kunai
-      # check s'il y a un kunai sur la cellule pointée, sinon on peut pas cast le spell
-      # si oui, déplace le caster sur la cellule du kunai
-      # redonne le kunai dans les ressources de la source
-    end
-
-
     # Applying damage as 1st effect ==========================
     if event.targetCell.getEntity() != null
       # dommage + apply status
-      sclDmg = ElementValue.new(Elements.Physical, 40);
-      flatDmg = ElementValue.new(Elements.Physical, 100);
-      post(ApplyEffectEvent.new(DamageEffect3, Damage.Hit, event.source, characters, Dark, sclDmg, flatDmg)); # dmg vs persos
-
-      # post damage to target
-      # post -1 kunai status to target
-      # post -1 vital point status to target
+      sclDmg = ElementValue.new(Elements.Water, 40);
+      flatDmg = ElementValue.new(Elements.Water, 100);
+      post(ApplyEffectEvent.new(DamageEffect1, Damage.Hit, event.source, event.targetCell.getEntity(), Elements.Water, sclDmg, flatDmg)); # dmg vs persos
     else
-      # set status on the cell ???
-
-      # post movement action
-      # post remove status from the cell
+      return false;
     end
-      # post add resource action (+1 kunai)
+
 
     return true;
   end
@@ -114,4 +88,4 @@ class KunaiPull < ScriptedSpell
 
 end
 
-KunaiPull.new
+KunaiThrow.new

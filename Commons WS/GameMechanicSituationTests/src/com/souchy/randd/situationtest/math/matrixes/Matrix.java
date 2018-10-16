@@ -1,11 +1,8 @@
 package com.souchy.randd.situationtest.math.matrixes;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-import com.souchy.randd.jade.api.ICell;
 import com.souchy.randd.situationtest.math.Point2D;
 
 public class Matrix {

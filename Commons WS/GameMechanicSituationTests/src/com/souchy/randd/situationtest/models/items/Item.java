@@ -1,17 +1,12 @@
 package com.souchy.randd.situationtest.models.items;
 
-import com.google.inject.Inject;
-import com.souchy.randd.commons.cache.api.Cache;
-import com.souchy.randd.jade.api.IEntity;
-import com.souchy.randd.situationtest.properties.ElementBundle;
+import com.souchy.randd.situationtest.models.entities.Character;
 import com.souchy.randd.situationtest.properties.ElementValue;
 import com.souchy.randd.situationtest.properties.StatProperty;
 import com.souchy.randd.situationtest.properties.Stats;
 import com.souchy.randd.situationtest.properties.types.Elements;
 import com.souchy.randd.situationtest.properties.types.ItemType;
 import com.souchy.randd.situationtest.properties.types.StatProperties;
-import com.souchy.randd.situationtest.models.entities.*;
-import com.souchy.randd.situationtest.models.entities.Character;
 
 /**
  * 

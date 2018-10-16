@@ -1,6 +1,6 @@
 package com.souchy.randd.commons.tealwaters.commons;
 
-import static com.souchy.randd.commons.tealwaters.commons.RuntimeType.RuntimeTypes.*;
+import static com.souchy.randd.commons.tealwaters.commons.RuntimeType.RuntimeTypes.Development;
 
 public class RuntimeType {
 	

@@ -5,7 +5,6 @@ import java.util.function.Function;
 
 import com.google.common.eventbus.EventBus;
 import com.souchy.randd.situationtest.events.Event;
-import com.souchy.randd.situationtest.events.turn.TurnEndEvent;
 import com.souchy.randd.situationtest.eventshandlers.EventHandler;
 
 /**

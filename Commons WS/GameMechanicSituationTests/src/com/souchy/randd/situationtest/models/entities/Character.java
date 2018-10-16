@@ -3,7 +3,7 @@ package com.souchy.randd.situationtest.models.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.souchy.randd.jade.api.*;
+import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.eventshandlers.OnStatChangeHandler;
 import com.souchy.randd.situationtest.math.Point3D;
 import com.souchy.randd.situationtest.models.items.Item;
@@ -12,7 +12,6 @@ import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.properties.Stats;
 import com.souchy.randd.situationtest.properties.types.StatProperties;
 import com.souchy.randd.situationtest.scripts.ScriptedSkill;
-import com.souchy.randd.situationtest.scripts.Status;
 
 /**
  * 

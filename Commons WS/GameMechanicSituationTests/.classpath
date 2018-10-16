@@ -2,16 +2,16 @@
 <classpath>
 	<classpathentry excluding="com/souchy/randd/situationtest/events/movement/TPEvent.java|com/souchy/randd/situationtest/events/statschange/HpChangeEvent.java|com/souchy/randd/situationtest/eventshandlers/OnHpChange.java|com/souchy/randd/situationtest/models/Action.java|com/souchy/randd/situationtest/models/effects/|com/souchy/randd/situationtest/interfaces/ICombatEntity.java|com/souchy/randd/situationtest/events/statschange/RecvStatChangeEvent.java|com/souchy/randd/situationtest/events/statschange/InflictStatChangeEvent.java|com/souchy/randd/jade/interfaces/ICombatEntity.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="data"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Cache"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/jruby-complete-9.2.0.0.jar" sourcepath="F:/Users/Souchy/Desktop/Robyn/Git/res/libs src/jruby-dist-9.2.0.0-src.zip"/>
-	<classpathentry kind="lib" path="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/javax.inject-1.jar"/>
-	<classpathentry kind="lib" path="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/guice-4.2.0-no_aop.jar"/>
-	<classpathentry kind="lib" path="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/guava-26.0-jre.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Cache"/>
+	<classpathentry kind="var" path="gitres/libs other/javax.inject-1.jar"/>
+	<classpathentry kind="var" path="gitres/libs other/jruby-complete-9.2.0.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
+	<classpathentry kind="var" path="gitres/libs other/aopalliance-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

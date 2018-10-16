@@ -3,8 +3,6 @@ package com.souchy.randd.situationtest.models.org;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.stream.events.Characters;
-
 import com.souchy.randd.situationtest.models.entities.Character;
 import com.souchy.randd.situationtest.models.entities.Summon;
 

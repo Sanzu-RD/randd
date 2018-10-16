@@ -1,7 +1,5 @@
 package com.souchy.randd.commons.net.netty.server;
 
-import com.souchy.randd.commons.net.Message;
-
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
