@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="res"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EbiCore"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

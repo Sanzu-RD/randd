@@ -1,0 +1,13 @@
+
+
+
+
+Lapis Lazuli is the 2d and 3d engine for libgdx
+
+It handles models, scenes/stages, some UI components, fonts, etc
+
+It is to be used by the main client graphic module (SapphireOwl) and tools (map editor..)
+
+
+
+Not to be used for JavaFX projects
