@@ -29,6 +29,11 @@ public class Board implements IBoard {
 		return map;
 	}
 	
+	/**
+	 * Fonction très couteuse. Appeler le moins souvent. Garder le résultat 
+	 * @param e
+	 * @return
+	 */
 	public List<ICell> getPosition(IEntity e){
 		List<ICell> pos = new ArrayList<>();
 		map.values().forEach(c -> {

@@ -5,6 +5,7 @@ import java.util.List;
 import com.souchy.randd.jade.api.ICell;
 import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.effects.resources.DamageEffect;
+import com.souchy.randd.situationtest.events.CastSpellEvent;
 import com.souchy.randd.situationtest.events.OnHitEvent;
 import com.souchy.randd.situationtest.events.statschange.StatChangeEvent;
 import com.souchy.randd.situationtest.eventshandlers.EventHandler;
@@ -28,7 +29,9 @@ import com.souchy.randd.situationtest.properties.types.Damages;
 import com.souchy.randd.situationtest.properties.types.Elements;
 import com.souchy.randd.situationtest.properties.types.Orientation;
 import com.souchy.randd.situationtest.properties.types.StatProperties;
+import com.souchy.randd.situationtest.scripts.ScriptedSkill;
 import com.souchy.randd.situationtest.scripts.Status;
+import com.souchy.randd.situationtest.situations.Situation4Events.ScriptedEngine;
 
 public class Situation7Matrixes {
 	
@@ -89,29 +92,32 @@ public class Situation7Matrixes {
 		});
 		// Créé deux perso
 		// need to optimize this so we write the pos only once etc, make everything linked in 1
-		Character source = new Character(context, 1, new Point3D(1, 1, 0));
-		Character target = new Character(context, 2, new Point3D(1, 2, 0));
-		board.getCell(1, 1).testSetCharacter(source);
-		board.getCell(1, 2).testSetCharacter(target);
-		target.baseStats.get(StatProperties.Resource1).value = 80;
+		Character source = new Character(context, 1, new Point3D(1, 2, 0));
+		Character target = new Character(context, 2, new Point3D(2, 2, 0));
+		board.getCell(1, 2).testSetCharacter(source);
+		board.getCell(2, 2).testSetCharacter(target);
+		source.baseStats.get(StatProperties.Resource1).value = 30;
+		target.baseStats.get(StatProperties.Resource1).value = 100;
 
 		// Créé des EventHandlers
 		// target.register((OnHitEvent e)  -> { // marche pas :(
 		OnHitReceived h = target.register(e -> {
-			if(e.target == target) System.out.println("target has been hit by (sourceID:"+e.source.getID()+") !");
+			System.out.println("target has been hit by (sourceID:"+e.source.getID()+") !");
+		});
+		OnHitReceived h1 = source.register(e -> {
+			System.out.println("source has been hit by (sourceID:"+e.source.getID()+") !");
 		});
 		OnHitSomeone h2 = source.register(e -> {
-			if(e.source == source) System.out.println("source has hit (targetID:"+e.target.getID()+") !");
+			System.out.println("source has hit (targetID:"+e.target.getID()+") !");
 		});
-		source.register(new OnStatChangeHandler(source, true, p -> {
-			System.out.println("source has changed a property by : " + p 
-					+ ",\n\t result :"  + target.stats.get(p.type));
+		source.register(new OnStatChangeHandler(source, true, e -> {
+			System.out.println("source("+e.source.getID()+") has changed target(" + e.target.getID() + ") property by : " + e.changedProp + ",\n\t result :"  + ((Character)e.target).stats.get(e.changedProp.type));
 		}));
-		target.register(new OnStatChangeHandler(target, false, p -> {
-			System.out.println("target has had a property changed by : " + p 
-					+ ",\n\t result :"  + target.stats.get(p.type));
+		target.register(new OnStatChangeHandler(target, false, e -> {
+			System.out.println("target has had a property changed by : " + e.changedProp + ",\n\t result :"  + ((Character)e.target).stats.get(e.changedProp.type));
 		}));
 		
+		/* this comment block code works. commented just to try it from a scriptedskill
 		// Spell effects creation :
 		ElementValue scl = new ElementValue(Elements.Dark, 50);
 		ElementValue flat = new ElementValue(Elements.Dark, 50);
@@ -120,8 +126,12 @@ public class Situation7Matrixes {
 		// Spell application :
 		ICell targetCell = board.getCell(1, 2);
 		effect1.applyAoe(targetCell, Orientation.North, c -> c.hasCharacter());
-
+		 */
 		// List<ICell> targets = board.getTargets(targetCell, Orientation.North, aoe1);
+		
+		ScriptedSkill spell = ScriptedEngine.eval("data/test/spells/Bubble.rb");
+		ICell targetCell = board.getCell(1, 1);
+		spell.getOnCastHandler().handle(new CastSpellEvent(context, source, (Cell)targetCell, spell));
 	}
 	
 	

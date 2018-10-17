@@ -11,7 +11,7 @@ public class OnStatChangeHandler implements EventHandler<StatChangeEvent> {
 	
 	private final boolean inflict;
 	private final IEntity handlerEntity;
-	private final Consumer<StatProperty> method;
+	private final Consumer<StatChangeEvent> method;
 	
 	/**
 	 * 
@@ -19,7 +19,7 @@ public class OnStatChangeHandler implements EventHandler<StatChangeEvent> {
 	 * @param inflict - If we're trying handle inflicting dmg or receiving dmg
 	 * @param method - What to do when the event occurs
 	 */
-	public OnStatChangeHandler(IEntity handlerEntity, boolean inflict, Consumer<StatProperty> method) {
+	public OnStatChangeHandler(IEntity handlerEntity, boolean inflict, Consumer<StatChangeEvent> method) {
 		this.handlerEntity = handlerEntity;
 		this.inflict = inflict;
 		this.method = method;
@@ -29,10 +29,10 @@ public class OnStatChangeHandler implements EventHandler<StatChangeEvent> {
 	@Subscribe
 	public void handle(StatChangeEvent event) {
 		if(handlerEntity == event.source && inflict) {
-			method.accept(event.changedProp);
+			method.accept(event);
 		} 
 		if(handlerEntity == event.target && !inflict){
-			method.accept(event.changedProp);
+			method.accept(event);
 		}
 	}
 	

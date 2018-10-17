@@ -3,19 +3,25 @@ require 'F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/guava-18.0.jar'
 
 $CLASSPATH << "GameMechanicSituationTests";
 
-java_import Java::com.souchy.randd.situationtest.scripts.ScriptedSpell;
-java_import Java::com.souchy.randd.situationtest.interfaces.IEffect;
-java_import Java::com.souchy.randd.situationtest.interfaces.IEntity;
+java_import Java::com.souchy.randd.situationtest.scripts.ScriptedSkill;
+java_import Java::com.souchy.randd.jade.api.IEffect;
+java_import Java::com.souchy.randd.jade.api.IEntity;
 java_import Java::com.souchy.randd.situationtest.models.Effect;
-java_import Java::com.souchy.randd.situationtest.eventshandlers.OnCastHandler;
+java_import Java::com.souchy.randd.situationtest.eventshandlers.OnCast;
 java_import Java::com.souchy.randd.situationtest.events.CastSpellEvent;
-java_import Java::com.souchy.randd.situationtest.models.effects.DamageEffect;
+java_import Java::com.souchy.randd.situationtest.effects.resources.DamageEffect;
+java_import Java::com.souchy.randd.situationtest.math.matrixes.MatrixFlags;
+java_import Java::com.souchy.randd.situationtest.properties.ElementValue;
+java_import Java::com.souchy.randd.situationtest.properties.types.Elements;
+
 
 # Premier sort complètement écrit le 22 juillet 2018 ! =)
-class DarkHarvest < ScriptedSpell
+class DarkHarvest < ScriptedSkill
 
   def initialize ()
     super("Dark Harvest");
+    handler = -> (event) { onCast(event) }
+	  setOnCast(handler);
   end
 
   def description()
@@ -23,14 +29,15 @@ class DarkHarvest < ScriptedSpell
   end
 
   def onCast(event)
+    board = event.context.board;
     # ou ptete qu'on check toutes les conditions avant de post l'event pour cast ? w/e
-    isOk = board.checkConditionMatrix(source, targetCell, conditionMatrix());
-    if isOk == false return false;
+  #  isOk = board.checkConditionMatrix(event.source, event.target, conditionMatrix());
+  #  if isOk == false return false;
     # Applying damage as 1st effect ==========================
     #targets1 = getTargets(event.targetCell, effectMatrix(Effect1))
     #characters = getTargets(event.target, effectMatrix(Effect1), EntityType.Fighter).filterOut(EntityType.Summon);
-    characters = board.getTargets(event.targetCell, effectMatrix(Effect1), EntityType.Character);
-    summons = getTargets(event.targetCell, effectMatrix(Effect1), EntityType.Summon);
+    characters = board.getTargets(event.target, effectMatrix(EffectFlags.Effect1), EntityType.Character);
+    summons = getTargets(event.target, effectMatrix(MatrixFlags.EffectFlags.Effect1), EntityType.Summon);
     sclDmg = ElementValue.new(Elements.Dark, 40); # will multiply with scaling Dark stats from source
     flatDmg = ElementValue.new(Elements.Dark, 100); # will go get flat Dark dmg from source too
     # formula = (source.dark.scl * sclDmg) + (source.dark.flat + flatDmg)
@@ -40,7 +47,7 @@ class DarkHarvest < ScriptedSpell
                                   # Will have Damage.Dot to differentiate hits and dots
                                   # so we can proc things OnHitEvent in the DamageEffect1
     # Applying cripple status as 2nd effect ==================
-    targets2 = getTargets(event.target, effectMatrix(Effect2))
+    targets2 = getTargets(event.target, effectMatrix(MatrixFlags.EffectFlags.Effect2))
     stacks = StatusProperty.new(StatusProperties.Stacks, 1);
     duration = StatusProperty.new(StatusProperties.Duration, 1);
     # the status will use default values unless specified here
@@ -78,7 +85,7 @@ class DarkHarvest < ScriptedSpell
   end
 
   # Defines where to get targets from to apply effects
-  def effectMatrix(EffectEnum effect)
+  def effectMatrix(effectArg)
     return
       [
         #First orientation, only one in this case
@@ -86,8 +93,7 @@ class DarkHarvest < ScriptedSpell
           [Effect1 | Effect2, TargetCell | Effect1 | Effect2, Effect1 | Effect2],
           [Effect1 | Effect2, Source,                         Effect1 | Effect2]
         ]
-      ]
-      & effect;
+      ]& effectArg;
   end
 
 

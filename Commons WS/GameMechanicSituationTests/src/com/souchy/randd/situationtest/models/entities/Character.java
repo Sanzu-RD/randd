@@ -52,7 +52,7 @@ public class Character extends IEntity {
 		}));
 		// on receiving dmg
 		bus().register(new OnStatChangeHandler(this, false, (e) -> {
-			baseStats.get(StatProperties.Resource1).value -= e.value;
+			baseStats.get(StatProperties.Resource1).value -= e.changedProp.value;
 			if(stats.get(StatProperties.Resource1).value <= 0){
 				// die
 			}

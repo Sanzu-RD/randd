@@ -77,7 +77,7 @@ public class DamageEffect extends Effect {
 
 			Event e = new StatChangeEvent(source, target, inst.shieldL);
 			target.post(e); //new RecvStatChangeEvent(source, inst.shieldL));
-			source.post(e); //new InflictStatChangeEvent(source, inst.shieldL));
+			if(source != target) source.post(e); //new InflictStatChangeEvent(source, inst.shieldL));
 		}
 		// Proc "onDmg" event pour quand on frappe la vie
 		if(inst.hpL.value > 0) {
@@ -86,7 +86,7 @@ public class DamageEffect extends Effect {
 			
 			Event e = new StatChangeEvent(source, target, inst.hpL);
 			target.post(e); //new RecvStatChangeEvent(source, inst.hpL));
-			source.post(e); //new InflictStatChangeEvent(source, inst.hpL));
+			if(source != target) source.post(e); //new InflictStatChangeEvent(source, inst.hpL));
 		}
 
 		// applique la dmg instance
@@ -99,7 +99,8 @@ public class DamageEffect extends Effect {
 		// proc les onhit du target en premier vu qu'on a déjà fait le hit du sort lui-même
 		target.post(onhit);
 		// puis proc les onhit de la source ensuite pour que ceux-cis puissent proc les onhits du target une deuxième fois (s'il y a des dmg onhit)
-		source.post(onhit);
+		// post l'event juste une fois si la source == le target
+		if(source != target) source.post(onhit);
 	    
 	    // post(OnHit());
 	    // post(OnDot());

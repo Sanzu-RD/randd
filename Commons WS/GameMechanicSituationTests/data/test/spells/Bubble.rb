@@ -14,28 +14,35 @@ java_import Java::com.souchy.randd.situationtest.models.Effect;
 java_import Java::com.souchy.randd.situationtest.eventshandlers.OnCast;
 java_import Java::com.souchy.randd.situationtest.events.CastSpellEvent;
 java_import Java::com.souchy.randd.situationtest.effects.resources.DamageEffect;
+java_import Java::com.souchy.randd.situationtest.math.matrixes.EffectMatrix;
+java_import Java::com.souchy.randd.situationtest.math.matrixes.ConditionMatrix;
+java_import Java::com.souchy.randd.situationtest.math.matrixes.MatrixFlags;
+java_import Java::com.souchy.randd.situationtest.properties.ElementValue;
+java_import Java::com.souchy.randd.situationtest.properties.types.Elements;
+java_import Java::com.souchy.randd.situationtest.properties.types.Damages;
+java_import Java::com.souchy.randd.situationtest.properties.types.Orientation;
 
 BEGIN {
-  puts("PoisonTrap imp")
+  puts("Bubble imp")
 }
 
-class PoisonTrap < ScriptedSkill
+class Bubble < ScriptedSkill
 
   #attr_accessor :onCast
   def initialize ()
-    super("Poison Trap");
-    # Cant access java vars directly from ruby
-    #    effects = java.util.ArrayList.new;
-    #    effect1 = DamageEffect.new
-    #    def effect1.apply(entity) #works !
-    #        puts("applying damage to entity [#{entity}]")
-    #    end
+    super("Bubble");
+# Cant access java vars directly from ruby
+#    effects = java.util.ArrayList.new;
+#    effect1 = DamageEffect.new
+#    def effect1.apply(entity) #works !
+#        puts("applying damage to entity [#{entity}]")
+#    end
     #effect1.apply = -> {
     #  puts("applying damage")
     #}
-    #    effects.add(effect1);
-    #    puts("ruby number of effects : #{effects.size().to_s}" );
-    #    puts
+#    effects.add(effect1);
+#    puts("ruby number of effects : #{effects.size().to_s}" );
+#    puts
 
     handler = -> (event) {
       puts("ruby on cast handling : " + event.to_s)
@@ -44,19 +51,19 @@ class PoisonTrap < ScriptedSkill
         puts("handling caster id : " + event.source.id.to_s)
         puts("handling target cell : [#{event.target.getPos().x.to_s}, #{event.target.getPos().y.to_s}, #{event.target.getPos().z.to_s}]")
         puts("handling spell : " + event.spell.name)
-        
-        #targetEntity = nil;
-        entities = event.target.getEntities(event.context);
-        puts "entities = ", entities
-        entities.each do |e|
-          #targetEntity
-          puts "for entity ", e
-        end
 
-        #puts("handling character spells : " + event.source.spells.get(0).to_s)
-        effects.each do |e|
-          e.apply(targetEntity); #works !
-        end
+        predicate = -> (c) {
+          c.hasCharacter();
+        }
+
+        aoe1 = EffectMatrix.new([[4,4], [4,4]]);
+        cond1 = ConditionMatrix.new([[0,0], [0,0]]);
+        # Spell effects creation :
+        scl = ElementValue.new(Elements::Water, 50);
+        flat = ElementValue.new(Elements::Water, 1);
+        effect1 = DamageEffect.new(event.context, event.source, Damages::Hit, Elements::Water, scl, flat, aoe1, cond1);
+        # Spell application :
+        effect1.applyAoe(event.target, Orientation::North, predicate);
 
       rescue => exception
         puts "parameter is not an event"
@@ -70,7 +77,7 @@ class PoisonTrap < ScriptedSkill
     resource1DamageHandler = -> (guy, dmg) {
       guy.Resource1 -= dmg;
     }
-    #    guy.register(resource1DamageHandler);
+#    guy.register(resource1DamageHandler);
 
     # special damage handler that guy can have with a class passive, or buff etc
     #guy.bus.onDamageHandler =
@@ -79,7 +86,7 @@ class PoisonTrap < ScriptedSkill
       guy.Resource1 -= dmg * 2/3;  # 2/3 sur les hp
       guy.Resource2 -= dmg * 1/3;  # 1/3 sur la mana
     }
-    #  guy.register(specialOnDamageHandler);
+  #  guy.register(specialOnDamageHandler);
     # DAMAGE EVENTS/HANDLERS/APPLICATION EXAMPLES ------ END
 
 
@@ -105,4 +112,4 @@ class PoisonTrap < ScriptedSkill
 
 end
 
-PoisonTrap.new
+Bubble.new

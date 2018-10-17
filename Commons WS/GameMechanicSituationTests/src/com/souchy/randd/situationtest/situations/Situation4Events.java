@@ -11,6 +11,7 @@ import javax.script.ScriptException;
 
 import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.events.CastSpellEvent;
+import com.souchy.randd.situationtest.math.Point3D;
 import com.souchy.randd.situationtest.models.entities.Character;
 import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.models.stage.Board;
@@ -68,21 +69,23 @@ public class Situation4Events {
 
 		FightContext context = new FightContext();
 		Board board = new Board();
-		context.board = board;
+		//context.board = board;
 		
-		Character source = new Character(context, 1, null, new ArrayList<>());
-		Character target = new Character(context, 2, null, null);
+		Character source = new Character(context, 1, null); //, new ArrayList<>());
+		Character target = new Character(context, 2, new Point3D(2, 3, 4)); //, null);
 		Cell targetCell = new Cell(2, 3, 4);
 		board.getCells().put(targetCell.getPos().x, targetCell.getPos().y, targetCell);
 
-		InputLoop.loop(() -> {
+		/*InputLoop.loop(() -> {
 		    ScriptedSkill spell = ScriptedEngine.eval("res/spells/PoisonTrap.rb");
 			spell.getOnCastHandler().handle(new CastSpellEvent(context, source, targetCell, spell));
-		});
+		});*/
 
 		InputLoop.loop(() -> {
-		    ScriptedSkill spell = ScriptedEngine.eval("res/classes/Grim/DarkHarvest.rb");
+		    ScriptedSkill spell = ScriptedEngine.eval("data/classes/Assassin/spells/PoisonTrap.rb");
+		    System.out.println("skill = " + spell);
 			spell.getOnCastHandler().handle(new CastSpellEvent(context, source, targetCell, spell));
+		    System.out.println("casted\n");
 		});
 
 	}

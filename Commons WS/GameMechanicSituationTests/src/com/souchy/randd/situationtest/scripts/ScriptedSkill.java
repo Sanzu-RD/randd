@@ -12,6 +12,11 @@ public abstract class ScriptedSkill {
 
 	public String name = "java name";
 	
+
+	public ScriptedSkill(String str) {
+		name = str;
+	}
+	
 	//public abstract void hiRuby();
 	
 	/*public void test() {
@@ -41,9 +46,6 @@ public abstract class ScriptedSkill {
 		name = str;
 	} 
 	
-	public ScriptedSkill(String str) {
-		name = str;
-	}
 	public void setOnCast(OnCast handler) {
 		this.onCast = handler;
 	}
