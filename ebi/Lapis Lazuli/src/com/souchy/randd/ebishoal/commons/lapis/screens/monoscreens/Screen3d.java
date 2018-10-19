@@ -20,9 +20,10 @@ public class Screen3d extends BaseScreen {
      */
     private World world;
 	private ModelBatch batch;
-	private Environment env;
+    private Environment env;
     //private Box2DDebugRenderer debug; // hmmmmm dont really use box2d
-	
+
+
     public Screen3d() {
     	
     }
@@ -39,6 +40,7 @@ public class Screen3d extends BaseScreen {
      */
 	@Override
 	protected void createHook() {
+		world = new World();
     	batch = new ModelBatch();
     	env = new Environment();
 		env.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
@@ -48,8 +50,8 @@ public class Screen3d extends BaseScreen {
 	@Override
 	protected Camera createCam() {
 		Vector3 camPos = new Vector3(-3, -3, 5);
-		float fieldOfView = 2/3f; // à mettre dans les settings
-		float near = 1f; 		  // à mettre dans les settings
+		float fieldOfView = 67; // à mettre dans les settings
+		float near = 0.1f; 		  // à mettre dans les settings
 		float far = 200f; 		  // à mettre dans les settings
 		Camera cam = Cameras.perspective(camPos, Vector3.Zero, fieldOfView, near, far);
 		cam.update();
@@ -80,6 +82,17 @@ public class Screen3d extends BaseScreen {
 		batch.dispose();
 	}
 	
-	
-	
+
+    public World getWorld() {
+		return world;
+	}
+
+    public ModelBatch getBatch() {
+		return batch;
+	}
+
+    public Environment getEnvironment() {
+		return env;
+	}
+    
 }

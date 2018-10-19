@@ -1,5 +1,6 @@
 package com.souchy.randd.ebishoal.commons.lapis.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
@@ -29,8 +30,8 @@ public class Cameras {
 	 * @return
 	 */
 	public static Camera perspective(Vector3 pos, Vector3 target, float fov, float near, float far) {
-		//PerspectiveCamera cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		PerspectiveCamera cam = new PerspectiveCamera();
+		PerspectiveCamera cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		//PerspectiveCamera cam = new PerspectiveCamera();
 		set(cam, pos, target, near, far);
 		cam.fieldOfView = fov;
 		return cam;

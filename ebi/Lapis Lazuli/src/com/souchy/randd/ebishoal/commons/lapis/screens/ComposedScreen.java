@@ -19,11 +19,16 @@ public class ComposedScreen extends Screen3d {
 		super.createHook();
 	}
 
-
 	@Override
+	public void render(float delta) {
+		super.render(delta);
+		a.renderHook(delta);
+	}
+
+	/*@Override
 	protected void renderHook(float delta) {
 		super.renderHook(delta);
 		a.renderHook(delta);
-	}
+	}*/
 	
 }

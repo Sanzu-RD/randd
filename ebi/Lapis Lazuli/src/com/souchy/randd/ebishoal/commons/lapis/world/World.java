@@ -7,5 +7,8 @@ public class World {
 	
 	public ModelCache cache;
 	
+	public World() {
+		cache = new ModelCache();
+	}
 	
 }
