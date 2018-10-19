@@ -1,10 +1,7 @@
 package com.souchy.randd.situationtest.models.org;
 
 import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 import com.google.common.eventbus.EventBus;
 import com.souchy.randd.jade.api.EventProxy;

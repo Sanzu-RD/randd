@@ -1,9 +1,10 @@
 package com.souchy.randd.situationtest.scripts.actions;
 
-import com.souchy.randd.situationtest.properties.types.*;
-import com.souchy.randd.situationtest.scripts.ScriptedAction;
 import com.souchy.randd.jade.api.IEntity;
-import com.souchy.randd.situationtest.properties.*;
+import com.souchy.randd.situationtest.properties.ElementValue;
+import com.souchy.randd.situationtest.properties.types.Damages;
+import com.souchy.randd.situationtest.properties.types.Elements;
+import com.souchy.randd.situationtest.scripts.ScriptedAction;
 
 /**
  * TODO delete les actions ????

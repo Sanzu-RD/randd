@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens.Screen2d;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;

@@ -1,6 +1,5 @@
 package com.souchy.randd.ebishoal.commons.lapis.main;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.math.Vector2;

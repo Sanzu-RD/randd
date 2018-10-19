@@ -1,12 +1,10 @@
 package com.souchy.randd.jade.api;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
-import com.souchy.randd.situationtest.math.Point3D;
 import com.souchy.randd.situationtest.math.matrixes.PositionMatrix;
 import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.scripts.Status;

@@ -1,8 +1,5 @@
 package com.souchy.randd.situationtest.situations;
 
-import java.util.function.BiConsumer;
-import java.util.function.Function;
-
 import com.souchy.randd.situationtest.math.Point2D;
 import com.souchy.randd.situationtest.math.matrixes.EffectMatrix;
 import com.souchy.randd.situationtest.math.matrixes.Matrix;

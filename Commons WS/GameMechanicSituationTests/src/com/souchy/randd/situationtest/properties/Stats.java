@@ -4,7 +4,6 @@ package com.souchy.randd.situationtest.properties;
 import com.google.inject.Inject;
 import com.souchy.randd.commons.cache.api.Cache;
 import com.souchy.randd.commons.cache.impl.HashCache;
-import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.properties.types.Elements;
 import com.souchy.randd.situationtest.properties.types.StatProperties;
 import com.souchy.randd.situationtest.situations.CacheInjector;

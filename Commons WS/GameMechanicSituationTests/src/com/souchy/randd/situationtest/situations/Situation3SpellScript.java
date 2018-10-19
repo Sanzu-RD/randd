@@ -4,20 +4,16 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
 import org.jruby.Ruby;
 import org.jruby.RubyRuntimeAdapter;
-import org.jruby.embed.ScriptingContainer;
 import org.jruby.javasupport.JavaEmbedUtils;
-import org.jruby.util.JRubyFile;
 
-import com.google.common.eventbus.EventBus;
+import com.souchy.randd.commons.tealwaters.commons.Namespace;
 import com.souchy.randd.situationtest.events.CastSpellEvent;
 import com.souchy.randd.situationtest.scripts.ScriptedSkill;
-import com.souchy.randd.commons.tealwaters.commons.*;
 
 public class Situation3SpellScript {
 	
@@ -39,7 +35,7 @@ public class Situation3SpellScript {
 		System.out.println("z= " + z);
 
 		//String spellFile = "res/spells/fireball.rb";
-		String spellFile = "res/spells/PoisonTrap.rb";
+		String spellFile = "data\\classes\\Assassin\\spells\\PoisonTrap.rb"; //"res/spells/PoisonTrap.rb";
 		
 		while(true) {
 			try {

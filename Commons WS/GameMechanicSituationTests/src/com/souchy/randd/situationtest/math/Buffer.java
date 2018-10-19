@@ -1,11 +1,8 @@
 package com.souchy.randd.situationtest.math;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 public class Buffer<T> {

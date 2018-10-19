@@ -1,7 +1,5 @@
 package com.souchy.randd.situationtest.situations;
 
-import org.jruby.Ruby;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -27,7 +25,7 @@ public class Situation5GuiceScripts {
 		//r.defineClass(name, superClass, allocator)
 		
 		InputLoop.run(() -> {
-			Object o =  ScriptedEngine.eval("res/action_effects/Damage1Script.rb");
+			Object o =  ScriptedEngine.eval("data/action_effects/Damage1Script.rb");
 			System.out.println("o = " + o);
 			rubyDamageEffect1 = (Damage1ActionHandler) o;
 			System.out.println("rubyDamageEffect1 = " + rubyDamageEffect1 + ", class : " + rubyDamageEffect1.getClass());
@@ -55,10 +53,10 @@ public class Situation5GuiceScripts {
 	    IEntity source = new Character(context, 1, null);
 	    IEntity	target = new Character(context, 2, null);
 	    
-	    ElementValue scl = new ElementValue(Elements.Chaos, 10);
-	    ElementValue flat = new ElementValue(Elements.Chaos, 5);
+	    ElementValue scl = new ElementValue(Elements.Dark, 10);
+	    ElementValue flat = new ElementValue(Elements.Dark, 5);
 	    
-	    Damage1Action action = new Damage1Action(source, target, Damages.Hit, Elements.Chaos, scl, flat);
+	    Damage1Action action = new Damage1Action(source, target, Damages.Hit, Elements.Dark, scl, flat);
 	    damage1script.handle(action);
 	}
 	

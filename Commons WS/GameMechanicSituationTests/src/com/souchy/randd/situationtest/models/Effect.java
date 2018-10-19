@@ -4,14 +4,12 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import com.souchy.randd.jade.api.ICell;
-import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.math.matrixes.ConditionMatrix;
 import com.souchy.randd.situationtest.math.matrixes.EffectMatrix;
+import com.souchy.randd.situationtest.models.entities.Character;
 import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.models.stage.Cell;
 import com.souchy.randd.situationtest.properties.types.Orientation;
-import com.souchy.randd.situationtest.scripts.ScriptedAction;
-import com.souchy.randd.situationtest.models.entities.Character;
 
 /**
  * 

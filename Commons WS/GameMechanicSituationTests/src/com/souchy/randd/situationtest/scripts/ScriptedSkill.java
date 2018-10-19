@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import com.souchy.randd.jade.api.IEffect;
-import com.souchy.randd.situationtest.events.CastSpellEvent;
 import com.souchy.randd.situationtest.eventshandlers.OnCast;
 import com.souchy.randd.situationtest.models.org.FightContext;
 

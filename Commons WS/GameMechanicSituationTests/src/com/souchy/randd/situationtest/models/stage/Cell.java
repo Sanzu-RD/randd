@@ -7,7 +7,6 @@ import com.google.common.eventbus.EventBus;
 import com.souchy.randd.jade.api.ICell;
 import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.math.Point3D;
-import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.models.entities.Character;
 import com.souchy.randd.situationtest.scripts.Status;
 

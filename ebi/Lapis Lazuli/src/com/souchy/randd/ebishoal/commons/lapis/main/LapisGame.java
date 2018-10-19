@@ -4,10 +4,9 @@ import java.util.List;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.souchy.randd.ebishoal.commons.lapis.discoverers.FontDiscoverer;
 import com.souchy.randd.ebishoal.commons.lapis.discoverers.ModelDiscoverer;
-
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
 
 public abstract class LapisGame extends Game {

@@ -5,8 +5,6 @@ import com.souchy.randd.situationtest.math.matrixes.EffectMatrix;
 import com.souchy.randd.situationtest.math.matrixes.Matrix;
 import com.souchy.randd.situationtest.models.stage.Board;
 
-import javafx.scene.control.Cell;
-
 public class Situation2 {
 	
 	

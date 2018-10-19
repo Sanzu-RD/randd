@@ -11,7 +11,7 @@ java_import Java::com.souchy.randd.situationtest.eventshandlers.OnCastHandler;
 java_import Java::com.souchy.randd.situationtest.events.CastSpellEvent;
 java_import Java::com.souchy.randd.situationtest.models.effects.DamageEffect;
 
-# Premier sort complètement écrit le 22 juillet 2018 ! =)
+
 class KunaiPull < ScriptedSpell
 
   def initialize ()

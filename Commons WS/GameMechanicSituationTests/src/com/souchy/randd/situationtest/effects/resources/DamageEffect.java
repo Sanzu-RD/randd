@@ -7,14 +7,14 @@ import com.souchy.randd.situationtest.events.statschange.StatChangeEvent;
 import com.souchy.randd.situationtest.math.matrixes.ConditionMatrix;
 import com.souchy.randd.situationtest.math.matrixes.EffectMatrix;
 import com.souchy.randd.situationtest.models.Effect;
+import com.souchy.randd.situationtest.models.entities.Character;
+import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.models.stage.Cell;
 import com.souchy.randd.situationtest.properties.ElementValue;
 import com.souchy.randd.situationtest.properties.StatProperty;
 import com.souchy.randd.situationtest.properties.types.Damages;
 import com.souchy.randd.situationtest.properties.types.Elements;
 import com.souchy.randd.situationtest.properties.types.StatProperties;
-import com.souchy.randd.situationtest.models.entities.Character;
-import com.souchy.randd.situationtest.models.org.FightContext;
 
 public class DamageEffect extends Effect {
 

@@ -4,7 +4,6 @@ import java.util.function.Consumer;
 
 import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.events.cell.EnterCellEvent;
-import com.souchy.randd.situationtest.eventshandlers.EventHandler;
 import com.souchy.randd.situationtest.models.org.FightContext;
 
 public class Glyph extends IEntity { //implements EventHandler<EnterCellEvent> {

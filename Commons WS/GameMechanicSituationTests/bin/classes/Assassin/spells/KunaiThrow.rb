@@ -11,7 +11,7 @@ java_import Java::com.souchy.randd.situationtest.eventshandlers.OnCastHandler;
 java_import Java::com.souchy.randd.situationtest.events.CastSpellEvent;
 java_import Java::com.souchy.randd.situationtest.models.effects.DamageEffect;
 
-# Premier sort complètement écrit le 22 juillet 2018 ! =)
+
 class KunaiThrow < ScriptedSpell
 
   def initialize ()
@@ -32,16 +32,17 @@ class KunaiThrow < ScriptedSpell
 
   def onCast(event)
     # ou ptete qu'on check toutes les conditions avant de post l'event pour cast ? w/e
-    isOk = board.checkConditionMatrix(source, targetCell, conditionMatrix());
+    isOk = board.checkConditionMatrix(event.source, event.targetCell, conditionMatrix());
     if isOk == false return false;
     # Applying damage as 1st effect ==========================
     if event.targetCell.getEntity() != null
       # dommage + apply status
       sclDmg = ElementValue.new(Elements.Physical, 40);
       flatDmg = ElementValue.new(Elements.Physical, 100);
+      post(ApplyEffectEvent.new(DamageEffect3, Damage.Hit, event.source, event.targetCell.getEntity(), Elements.Physical, sclDmg, flatDmg)); # dmg vs persos
       sclDmg = ElementValue.new(Elements.Poison, 40);
       flatDmg = ElementValue.new(Elements.Poison, 100);
-      post(ApplyEffectEvent.new(DamageEffect3, Damage.Hit, event.source, characters, Dark, sclDmg, flatDmg)); # dmg vs persos
+      post(ApplyEffectEvent.new(DamageEffect3, Damage.Hit, event.source, event.targetCell.getEntity(), Elements.Poison, sclDmg, flatDmg)); # dmg vs persos
     else
       # set status on the cell ???
 

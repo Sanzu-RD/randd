@@ -2,14 +2,10 @@ package com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.souchy.randd.ebishoal.commons.lapis.screens.Cameras;
-import com.souchy.randd.ebishoal.commons.lapis.screens.Viewports;
 
 /**
  * Screen 

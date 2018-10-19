@@ -10,7 +10,6 @@ import com.souchy.randd.jade.api.ICell;
 import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.math.Point2D;
 import com.souchy.randd.situationtest.math.matrixes.EffectMatrix;
-import com.souchy.randd.situationtest.math.matrixes.Matrix;
 import com.souchy.randd.situationtest.math.matrixes.MatrixFlags;
 import com.souchy.randd.situationtest.math.matrixes.PositionMatrix;
 import com.souchy.randd.situationtest.properties.types.Orientation;
