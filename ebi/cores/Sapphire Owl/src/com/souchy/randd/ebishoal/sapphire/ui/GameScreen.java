@@ -148,13 +148,13 @@ public class GameScreen extends ComposedScreen {
 		float minWorldX = minWorldY * aspectRatio;
 		// width et height sont en world units pour contrôller how much du monde qu'on voit
 		// cela est ensuite scalé pour s'adapter à la grandeur de la fenêtre
-		Viewport view = Viewports.extend(minWorldX, minWorldY,  cam);
+		Viewport view = Viewports.extend(minWorldX, minWorldY, minWorldX, minWorldY, cam);
 		//Viewport view = Viewports.scaling(Scaling.fit, minWorldX, minWorldY, cam);
 		//view.setScreenPosition(0,0); //Gdx.graphics.getWidth(), Gdx.graphics.getHeight() );
 		view.apply(true);
-		HdpiUtils.glViewport((int)-minWorldX/2, (int)-minWorldY/2, (int)minWorldX, (int)minWorldY);
+		/*HdpiUtils.glViewport((int)-minWorldX/2, (int)-minWorldY/2, (int)minWorldX, (int)minWorldY);
 		getCam().viewportWidth = minWorldX;
-		getCam().viewportHeight = minWorldY;
+		getCam().viewportHeight = minWorldY;*/
 		//if (centerCamera) camera.position.set(worldWidth / 2, worldHeight / 2, 0);
 		getCam().update();
 		return view;
@@ -163,7 +163,7 @@ public class GameScreen extends ComposedScreen {
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		//super.resize(width, height);
+asdf		super.resize(width, height);
 		a.resize(width, height);
 		//getViewport().update(width, height, true);
 		//getViewport().update(-1, 0, true);
