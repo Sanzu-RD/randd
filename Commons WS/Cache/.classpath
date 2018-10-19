@@ -16,7 +16,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="var" path="gitres/libs other/guice-4.1.0.jar"/>
 	<classpathentry kind="var" path="gitspace/annotationprocessor.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
