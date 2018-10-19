@@ -42,8 +42,8 @@ class DarkHarvest < ScriptedSkill
     flatDmg = ElementValue.new(Elements.Dark, 100); # will go get flat Dark dmg from source too
     # formula = (source.dark.scl * sclDmg) + (source.dark.flat + flatDmg)
     # params : type of dmg output + type of scaling + type of flat scaling
-    post(ApplyEffectEvent.new(DamageEffect1, Damage.Hit, event.source, characters, Elements.Dark, sclDmg, flatDmg)); # dmg vs persos
-    post(ApplyEffectEvent.new(StealEffect1, Damage.Hit, event.source, summons, Elements.Dark, sclDmg, flatDmg));     # vdv vs invocs
+    post(ApplyEffectEvent.new(DamageEffect1, Damage.Hit, event.source, characters, Dark, sclDmg, flatDmg)); # dmg vs persos
+    post(ApplyEffectEvent.new(StealEffect1, Damage.Hit, event.source, summons, Dark, sclDmg, flatDmg));     # vdv vs invocs
                                   # Will have Damage.Dot to differentiate hits and dots
                                   # so we can proc things OnHitEvent in the DamageEffect1
     # Applying cripple status as 2nd effect ==================
