@@ -1,0 +1,239 @@
+package com.souchy.randd.ebishoal.commons.lapis.drawing;
+
+
+import java.awt.Rectangle;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Vector3;
+
+import static com.badlogic.gdx.graphics.Color.DARK_GRAY;
+import static com.badlogic.gdx.graphics.Color.PURPLE;
+import static com.badlogic.gdx.graphics.Color.RED;
+import static com.badlogic.gdx.graphics.Color.GREEN;
+
+
+public class LineDrawing {
+
+	public boolean flag = false;
+	public Vector3 v;
+	public Vector3 v2;
+	public final Camera cam;
+	
+	public ShapeRenderer srender;
+	public HashMap<Color, Array<Line>> lineMap;
+
+	// seulement si veut créer des body Box2d
+	public World world;
+	
+	/*
+	 * trucs de linerider
+	public String tool = "line";
+	public Color color = Color.BLUE;
+	public Rectangle eraser;
+	*/
+	
+	public void addLine(Vector3 start, Vector3 end, Color color) {
+		addLine(new Line(color, start, end, world));
+	}
+	public void addLine(Line line) {
+		if(!lineMap.containsKey(line.color)) 
+			lineMap.put(line.color, new Array<>());
+		lineMap.get(line.color).add(line);
+	}
+	
+	public void createCross(Color crossXColor, Color crossYColor, Color crossZColor){
+		int fromX = 0, toX = 3000;
+		int fromY = 0, toY = 3000;
+		int fromZ = 0, toZ = 3000;
+		// (0,0) crosss
+		addLine(new Vector3(fromX, 0, 0), new Vector3(toX, 0, 0), crossXColor);
+		addLine(new Vector3(0, fromY, 0), new Vector3(0, toY, 0), crossYColor);
+		addLine(new Vector3(0, 0, fromZ), new Vector3(0, 0, toZ), crossZColor);
+	}
+	
+	public void createGrid(){
+		// Draw a grid
+		{
+			int gap = 1, width = 20, height = 20;
+			Color gridColor = Color.GREEN;
+			Color crossColor = Color.PURPLE;
+			lineMap.put(gridColor, new Array<>());
+			lineMap.put(crossColor, new Array<>());
+
+			int fromX = 0; //= -width;
+			int toX = width;
+			int fromY = 0; //= -height
+			int toY = height;
+			
+			// vertical
+			for (int x = fromX; x <= toX; x += gap) {
+				lineMap.get(gridColor).add(new Line(gridColor, new Vector3(x, fromY, 0), new Vector3(x, toY, 0), null));
+			}
+			// horizontal
+			for (int y = fromY; y <= toY; y += gap) {
+				lineMap.get(gridColor).add(new Line(gridColor, new Vector3(fromX, y, 0), new Vector3(toX, y, 0), null));
+			}
+			//lineMap.get(DARK_GRAY).add(new Line(RED, new Vector3(fromX, 0, 0), new Vector3(toX, 0, 0), null));
+			//lineMap.get(DARK_GRAY).add(new Line(RED, new Vector3(0, fromY, 0), new Vector3(0, toY, 0), null));
+			
+			// (0,0) cross
+			lineMap.get(crossColor).add(new Line(crossColor, new Vector3(fromX, 0, 0), new Vector3(toX, 0, 0), null));
+			lineMap.get(crossColor).add(new Line(crossColor, new Vector3(0, fromY, 0), new Vector3(0, toY, 0), null));
+		}
+	}
+	
+
+	public LineDrawing(final Camera cam, final World world) {
+		this.cam = cam;
+		this.world = world;
+		//eraser = new Rectangle();
+		srender = new ShapeRenderer();
+		lineMap = new HashMap<Color, Array<Line>>();
+		lineMap.put(Color.BLUE, new Array<Line>());
+		lineMap.put(Color.RED, new Array<Line>());
+		lineMap.put(Color.GREEN, new Array<Line>());
+	}
+	public void renderLines(){
+		srender.begin(ShapeType.Line);
+		for(Array<Line> lines : lineMap.values()){
+			Iterator<Line> lini = lines.iterator();
+			while (lini.hasNext()) {
+				Line line = lini.next();
+				//System.out.println("picked 1 line");
+				if(cam == null || cam.frustum.boundsInFrustum(line.start, line.end)){
+					srender.setColor(line.color);
+					srender.line(line.start, line.end); // draw all the finished lines
+					//System.out.println("rendered 1 line");
+				}
+			}
+		}
+		srender.end();
+	}
+	
+	public void renderLinesOfColor(Color color){
+		srender.begin(ShapeType.Line);
+		for(Line line : lineMap.get(color)){
+			if(cam == null || cam.frustum.boundsInFrustum(line.start, line.end)){
+				srender.setColor(line.color);
+				srender.line(line.start, line.end); // draw all the finished lines
+			}
+		}
+		srender.end();
+	}
+
+
+	/*public void draw() {
+		if(tool == "line") line();
+		if(tool == "pencil") pencil();
+		if(tool == "fill") fill();
+		if(tool == "eraser") erase();
+	}
+	
+	private void line(){
+		//	While pressed
+		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+			if(!flag){
+				flag = true;
+				v = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+			}
+			v2 = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+			
+			srender.begin(ShapeType.Line);
+			srender.line(v, v2); // draw temporary line
+			srender.end();
+		}
+		//  On release
+		if(!Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+			if(flag){
+				flag = false;
+				v2 = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+				lineMap.get(color).add(new Line(color, v, v2,  color == GREEN ? null : world));
+			}
+		}
+	}
+	
+	private void pencil(){
+		//	While pressed
+		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+			if(!flag){
+				flag = true;
+				v = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+			}
+			v2 = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+			
+			if(v.dst(v2) >= 1f){
+				for(int i = 1; i > 0; i--) {
+					lineMap.get(color).add(new Line(color, v, v2,  color == GREEN ? null : world));
+				}
+				v = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+			}
+			srender.begin(ShapeType.Line);
+			srender.line(v, v2); // draw temporary line
+			srender.end();
+		}
+		//  On release
+		if(!Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+			if(flag) flag = false;
+		}
+	}
+	
+	private void erase(){
+		// While pressed
+		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+			if (!flag) {
+				flag = true;
+				v = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+			}
+			v2 = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+
+			if (v.dst(v2) >= 2) {
+				v = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+			}
+			
+			eraser.height = 5;
+			eraser.width = 5;
+			eraser.setLocation((int)v2.x - eraser.width/2, (int)v2.y - eraser.height/2);
+			
+			srender.begin(ShapeType.Filled);
+			srender.setColor(Color.CORAL);
+			srender.rect(v2.x - eraser.width/2, v2.y - eraser.height/2, 5, 5);
+			srender.end();
+
+			
+			for(Array<Line> lines : lineMap.values()){
+				Iterator<Line> iter = lines.iterator();
+				while (iter.hasNext()) {
+					Line line = iter.next();
+					if(eraser.intersectsLine(line.start.x, line.start.y, line.end.x, line.end.y)){ 
+						lines.removeValue(line, true);
+						//if(color == Color.GREEN) glines.removeValue(line, true); if(color == Color.BLUE) blines.removeValue(line, true); if(color == Color.RED) rlines.removeValue(line, true);
+						if(line.body != null) world.destroyBody(line.body);
+						//System.out.println("removed line, count : " + lines.size);
+					}
+				}
+			}
+			
+		}
+		// On release
+		if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+			if (flag) flag = false;
+		}
+	}
+
+	private void fill(){
+		
+	}*/
+	
+	public Array<Line> get(Color color){
+		return lineMap.get(color);
+	}
+}
