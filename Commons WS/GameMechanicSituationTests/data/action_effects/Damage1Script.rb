@@ -6,7 +6,7 @@ $CLASSPATH << "GameMechanicSituationTests";
 java_package 'com.souchy.randd.situationtest.scripts.actionhandlers'
 java_import Java::com.souchy.randd.situationtest.scripts.actionhandlers.Damage1ActionHandler;
 
-
+@Inject
 class Damage1Script
   include Damage1ActionHandler
   java_implements Damage1ActionHandler
