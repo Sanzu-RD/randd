@@ -1,4 +1,4 @@
-package com.souchy.randd.situationtest.models.stage;
+package com.souchy.randd.situationtest.models.map;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,13 +64,13 @@ public class Board implements IBoard {
 	 */
 	public List<ICell> getTargets(ICell targetCell, Orientation ori, EffectMatrix aoe){ // , int targetFlags){ // -> au lieu de targetFlags, on utilise un predicate dans Effect.applyAoe(target, pred<cell>)
 		// TODO board.getTargets en se basant sur les situations 1-2
-
+		
 		List<ICell> cells = new ArrayList<>();
 		if(targetCell == null) return cells;
 		aoe.foreach((i, j) -> {
 			if(aoe.get(i, j) >= MatrixFlags.EffectFlags.Effect1.getID()) { // si *any* effect flag
-				int x = targetCell.getPos().x + i;
-				int y = targetCell.getPos().y + j;
+				int x = targetCell.getPos().x - aoe.insideSource.x + i;
+				int y = targetCell.getPos().y - aoe.insideSource.y + j;
 				if(map.contains(x, y)) {
 					cells.add(map.get(x, y));
 				}

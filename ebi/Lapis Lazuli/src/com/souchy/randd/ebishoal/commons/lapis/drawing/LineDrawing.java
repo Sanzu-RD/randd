@@ -102,6 +102,7 @@ public class LineDrawing {
 		lineMap.put(Color.RED, new Array<Line>());
 		lineMap.put(Color.GREEN, new Array<Line>());
 	}
+	
 	public void renderLines(){
 		srender.begin(ShapeType.Line);
 		for(Array<Line> lines : lineMap.values()){
@@ -115,6 +116,28 @@ public class LineDrawing {
 					//System.out.println("rendered 1 line");
 				}
 			}
+		}
+		srender.end();
+	}
+
+	public void renderLinesExceptColor(Color colorIgnore){
+		srender.begin(ShapeType.Line);
+		for(Array<Line> lines : lineMap.values()){
+			if(lines.get(0).color == colorIgnore) {
+				continue;
+			}
+			for(Line line : lines) {
+				//System.out.println("picked 1 line");
+				if(cam == null || cam.frustum.boundsInFrustum(line.start, line.end)){
+					srender.setColor(line.color);
+					srender.line(line.start, line.end); // draw all the finished lines
+					//System.out.println("rendered 1 line");
+				}
+			}
+			/*Iterator<Line> lini = lines.iterator();
+			while (lini.hasNext()) {
+				Line line = lini.next();
+			}*/
 		}
 		srender.end();
 	}

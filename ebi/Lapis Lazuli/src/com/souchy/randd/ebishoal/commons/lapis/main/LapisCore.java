@@ -36,20 +36,12 @@ public abstract class LapisCore extends EbiCore {
 	    config.width = (int) getSize().x;
 	    config.height = (int) getSize().y;
 	    config.samples = getSamples();
+	    config.foregroundFPS = 0;
+	    config.vSyncEnabled = false;
 	    
 	    game = createGame();
 	}
 	
-	/**
-	 * Application window size at creation
-	 * @return
-	 */
-	public abstract Vector2 getSize();
-	/**
-	 * Antialiasing samples
-	 * @return
-	 */
-	public abstract int getSamples();
 	
 	/**
 	 * @inheritDoc
@@ -69,9 +61,12 @@ public abstract class LapisCore extends EbiCore {
 	 * @return Instance of LapisGame
 	 */
 	protected abstract LapisGame createGame();
-	
 	/**  @return The title for the application's title bar */
 	public abstract String getAppTitle();
+	/** Application window size at creation */
+	public abstract Vector2 getSize();
+	/** Antialiasing samples */
+	public abstract int getSamples();
 	
 	
 	/* 

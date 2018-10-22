@@ -13,9 +13,9 @@ import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.events.CastSpellEvent;
 import com.souchy.randd.situationtest.math.Point3D;
 import com.souchy.randd.situationtest.models.entities.Character;
+import com.souchy.randd.situationtest.models.map.Board;
+import com.souchy.randd.situationtest.models.map.Cell;
 import com.souchy.randd.situationtest.models.org.FightContext;
-import com.souchy.randd.situationtest.models.stage.Board;
-import com.souchy.randd.situationtest.models.stage.Cell;
 import com.souchy.randd.situationtest.scripts.ScriptedSkill;
 
 public class Situation4Events {

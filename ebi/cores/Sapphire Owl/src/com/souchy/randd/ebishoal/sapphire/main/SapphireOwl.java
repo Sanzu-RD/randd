@@ -12,27 +12,6 @@ public class SapphireOwl extends LapisCore {
 		launch(core);
 	}
 	
-
-	/*public static void main (String[] arg) {
-		Cat cat = new Cat(5);
-		truc(() -> {});
-		System.out.println("blue1 = ["+Color.BLUE.toIntBits()+"]"); // blue1 = [-65536]
-		System.out.println("blue2 = ["+new Color(Color.BLUE.toIntBits()).toIntBits()+"]"); // blue2 = [65536]
-		System.out.println("blue3 = ["+new Color(new Color(Color.BLUE.toIntBits()).toIntBits()).toIntBits()+"]"); // blue3 = [-65536] 
-		//int ma = Color.rgba8888(Color.BLUE);
-		//Color.rgba8888ToColor(new Color(), ma);
-		//new Color(ma);
-		
-		//System.exit(0);
-		
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-	    config.title = "Sapphire Owl T";
-	    
-		new LwjglApplication(new SapphireGame(), config);
-		System.out.println("hello");
-	}*/
-
-	
 	@Override
 	protected LapisGame createGame() {
 		return new SapphireGame();

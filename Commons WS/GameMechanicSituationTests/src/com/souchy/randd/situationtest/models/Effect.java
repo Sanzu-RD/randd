@@ -7,8 +7,8 @@ import com.souchy.randd.jade.api.ICell;
 import com.souchy.randd.situationtest.math.matrixes.ConditionMatrix;
 import com.souchy.randd.situationtest.math.matrixes.EffectMatrix;
 import com.souchy.randd.situationtest.models.entities.Character;
+import com.souchy.randd.situationtest.models.map.Cell;
 import com.souchy.randd.situationtest.models.org.FightContext;
-import com.souchy.randd.situationtest.models.stage.Cell;
 import com.souchy.randd.situationtest.properties.types.Orientation;
 
 /**

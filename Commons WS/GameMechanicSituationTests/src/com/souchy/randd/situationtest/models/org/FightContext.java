@@ -7,8 +7,8 @@ import com.google.common.eventbus.EventBus;
 import com.souchy.randd.jade.api.EventProxy;
 import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.math.Buffer;
-import com.souchy.randd.situationtest.models.stage.Board;
-import com.souchy.randd.situationtest.models.stage.Cell;
+import com.souchy.randd.situationtest.models.map.Board;
+import com.souchy.randd.situationtest.models.map.Cell;
 import com.souchy.randd.situationtest.situations.CacheInjector;
 
 

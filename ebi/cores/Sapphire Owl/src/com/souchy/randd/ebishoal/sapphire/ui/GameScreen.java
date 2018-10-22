@@ -1,32 +1,38 @@
 package com.souchy.randd.ebishoal.sapphire.ui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.DepthTestAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.IntAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.graphics.glutils.HdpiUtils;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.widget.VisLabel;
+import com.souchy.randd.ebishoal.commons.lapis.drawing.Line;
 import com.souchy.randd.ebishoal.commons.lapis.drawing.LineDrawing;
-import com.souchy.randd.ebishoal.commons.lapis.screens.Cameras;
 import com.souchy.randd.ebishoal.commons.lapis.screens.ComposedScreen;
 import com.souchy.randd.ebishoal.commons.lapis.screens.Viewports;
 
@@ -34,25 +40,43 @@ public class GameScreen extends ComposedScreen {
 	
 	LineDrawing lines;
 	ModelInstance instance;
+	Line viewLine;
 	
+	
+	float aspectRatio = 16/9f;	// ratio à mettre dans les settings public
+	float minWorldY = 50; 		// hauteur min à mettre ds settings privés
+	float minWorldX = minWorldY * aspectRatio;
 	
 	@Override
 	protected void createHook() {
 		super.createHook();
 		
-		Material mat = new Material(ColorAttribute.createDiffuse(Color.GREEN));
+		a = new GameScreenHud();
+		a.create();
+		
+		Material mat = new Material(IntAttribute.createCullFace(GL20.GL_FRONT),//For some reason, libgdx ModelBuilder makes boxes with faces wound in reverse, so cull FRONT
+			    new BlendingAttribute(1f), //opaque since multiplied by vertex color
+			    new DepthTestAttribute(false), //don't want depth mask or rear cubes might not show through
+			    ColorAttribute.createDiffuse(Color.GREEN));
+		Material mat2 = new Material(IntAttribute.createCullFace(GL20.GL_FRONT),//For some reason, libgdx ModelBuilder makes boxes with faces wound in reverse, so cull FRONT
+			    new BlendingAttribute(1f), //opaque since multiplied by vertex color
+			    new DepthTestAttribute(false), //don't want depth mask or rear cubes might not show through
+			    ColorAttribute.createDiffuse(Color.BLUE));
 		long attributes = Usage.Position | Usage.Normal;
 		
 		ModelBuilder builder = new ModelBuilder();
 		//builder.begin();
-		Model model = builder.createBox(5f, 5f, 5f, mat, attributes);
-		
-		instance = new ModelInstance(model);
-		//instance.transform.set(new Vector3(0,0,0), new Quaternion(0,0,0,0));
 
-		/*getWorld().cache.begin();
-		getWorld().cache.add(instance);
-		getWorld().cache.end();*/
+		getWorld().cache.begin();
+		for(int i = 0; i < 15; i++) {
+			for(int j = 0; j < 15; j++) {
+				Model model = builder.createBox(5f, 5f, 5f, (i+j)%2==0?mat:mat2, attributes);
+				instance = new ModelInstance(model);
+				instance.transform.set(new Vector3(5 * i + 1f, 5 * j + 1f, 0), new Quaternion(0, 0, 0, 0));
+				getWorld().cache.add(instance);
+			}
+		}
+		getWorld().cache.end();
 		
 		//getCam().position.set(1, 1, 1);
 		//getCam().lookAt(0, 0, 0);
@@ -70,30 +94,27 @@ public class GameScreen extends ComposedScreen {
 		lines.addLine(new Vector3(-2.5f,2.5f,5), new Vector3(-2.5f,-2.5f,5), Color.CYAN);
 		lines.addLine(new Vector3(2.5f,-2.5f,5), new Vector3(-2.5f,-2.5f,5), Color.CYAN);
 		
+		viewLine = new Line(Color.DARK_GRAY,
+				new Vector3(a.getViewport().getScreenX(), a.getViewport().getScreenY(),0), 
+				new Vector3(a.getViewport().getWorldWidth(), a.getViewport().getWorldHeight(), 0), 
+				null);
+		lines.addLine(viewLine);
+		
 		CameraInputController camController = new CameraInputController(getCam());
         Gdx.input.setInputProcessor(camController);
-
-
-    	LabelStyle hongkong = new LabelStyle();
-		Texture honkongTex = new Texture(Gdx.files.internal("res/hongkonghustle-hiero-100_00.png"), true); // true enables mipmaps
-		honkongTex.setFilter(TextureFilter.MipMapLinearNearest, TextureFilter.Linear); // linear filtering in nearest mipmap image
-		BitmapFont hongkongFont = new BitmapFont(Gdx.files.internal("res/hongkonghustle-hiero-100.fnt"), new TextureRegion(honkongTex), false);
-		hongkong.font = hongkongFont;
-		VisLabel lbl = new VisLabel("HELLO T", hongkong);
-		lbl.setFontScale(30 / 100f);
-		lbl.setPosition(0, 0);
-		a.getStage().addActor(lbl);
+		
 	}
 
 
 	@Override
 	protected Camera createCam() {
-		
-		OrthographicCamera cam = new OrthographicCamera(Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
-		cam.position.set(10, 10, 10);
+
+		PerspectiveCamera cam = new PerspectiveCamera(67, Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
+		//OrthographicCamera cam = new OrthographicCamera(); //Gdx.graphics.getHeight(), Gdx.graphics.getWidth());
+		cam.position.set(0, 0, 100);
 		//cam.fieldOfView = 67;
 		cam.lookAt(0, 0, 0);
-		cam.near = 1f;
+		cam.near = 0f;
 		cam.far = 1000f;
 		cam.update();
 		return cam;
@@ -143,14 +164,10 @@ public class GameScreen extends ComposedScreen {
 
 	@Override
 	protected Viewport createView(Camera cam) {
-		float aspectRatio = 16/9f;	// ratio à mettre dans les settings public
-		float minWorldY = 50; 		// hauteur min à mettre ds settings privés
-		float minWorldX = minWorldY * aspectRatio;
 		// width et height sont en world units pour contrôller how much du monde qu'on voit
 		// cela est ensuite scalé pour s'adapter à la grandeur de la fenêtre
-		Viewport view = Viewports.extend(minWorldX, minWorldY, minWorldX, minWorldY, cam);
-		//Viewport view = Viewports.scaling(Scaling.fit, minWorldX, minWorldY, cam);
-		//view.setScreenPosition(0,0); //Gdx.graphics.getWidth(), Gdx.graphics.getHeight() );
+		Viewport view = Viewports.extend(minWorldX, minWorldY, cam);
+		//Viewport view = Viewports.scaling(Scaling.fill, minWorldX, minWorldY, getCam());
 		view.apply(true);
 		/*HdpiUtils.glViewport((int)-minWorldX/2, (int)-minWorldY/2, (int)minWorldX, (int)minWorldY);
 		getCam().viewportWidth = minWorldX;
@@ -163,24 +180,56 @@ public class GameScreen extends ComposedScreen {
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-asdf		super.resize(width, height);
+		super.resize(width, height);
 		a.resize(width, height);
+
+		centerCam();
+		viewLine.start = new Vector3(a.getViewport().getScreenX(), a.getViewport().getScreenY(), 0);
+		viewLine.end = new Vector3(a.getViewport().getScreenWidth(), a.getViewport().getWorldHeight(), 0);
 		//getViewport().update(width, height, true);
 		//getViewport().update(-1, 0, true);
 	}
 	
 	@Override
 	protected void renderHook(float delta) {
-        getBatch().begin(getCam());
-        getBatch().render(instance, getEnvironment());
-        getBatch().end();
 
-		lines.srender.setProjectionMatrix(getCam().combined);
-        lines.renderLines();
-        
+        if(Gdx.input.isKeyPressed(Keys.DOWN)) {
+        	getCam().position.z += 10 * delta;
+        }
+        if(Gdx.input.isKeyPressed(Keys.UP)) {
+        	getCam().position.z -= 10 * delta;
+        }
+
+		if(Gdx.input.isKeyPressed(Keys.SPACE)){
+			//GameScreen.get().playCam.position.set(p.x, p.y, 20);
+			//GameScreen.get().playCam.position.set((float)GridMap.width/2, (float)GridMap.height/2, 20);
+			centerCam();
+		}
         getCam().update();
+
+       /* getBatch().begin(getCam());
+        getBatch().render(getWorld().cache, getEnvironment());
+        getBatch().end();*/
+        
+		lines.srender.setProjectionMatrix(getCam().combined);
+        lines.renderLinesExceptColor(Color.DARK_GRAY);
+
+		lines.srender.setProjectionMatrix(a.getCam().combined);
+        lines.renderLinesOfColor(Color.DARK_GRAY);
 	}
 
+	private void centerCam() {
+		System.out.println(
+				"w = " + "[" +getViewport().getWorldWidth() + ", h = " + getViewport().getWorldHeight()  + "]"
+				+ " / " + "s = " + "[" + getViewport().getScreenWidth() + ", h = " + getViewport().getScreenHeight() + "]"
+				+ " /// " + "aw = " +"[" + a.getViewport().getWorldWidth() + "," + a.getViewport().getWorldHeight() + "]"
+				+ " / " + "as = " + "[" + a.getViewport().getScreenWidth() + ", " + a.getViewport().getScreenHeight() + "]");
+		getCam().position.set(getViewport().getWorldWidth()/2, getViewport().getWorldHeight()/2, 60);
+		getCam().direction.set(0, 0, -1);
+		getCam().up.set(0, 1, 0);
+        getCam().update();
+	}
+	
 	@Override
 	public void dispose() {
 		getBatch().dispose();

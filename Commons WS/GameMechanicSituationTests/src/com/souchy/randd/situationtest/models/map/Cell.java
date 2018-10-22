@@ -1,4 +1,4 @@
-package com.souchy.randd.situationtest.models.stage;
+package com.souchy.randd.situationtest.models.map;
 
 import java.util.ArrayList;
 import java.util.List;
