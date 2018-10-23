@@ -29,7 +29,7 @@ public class Board implements IBoard {
 	}
 	
 	/**
-	 * Fonction très couteuse. Appeler le moins souvent. Garder le résultat 
+	 * Fonction coûteuse. Appeler le moins souvent. Garder le résultat en mémoire locale
 	 * @param e
 	 * @return
 	 */
