@@ -15,17 +15,15 @@ import com.souchy.randd.ebishoal.commons.lapis.world.World;
 public class Screen3d extends BaseScreen {
 
 
-    /**
-     * 3D world of objects
-     */
-    private World world;
 	private ModelBatch batch;
     private Environment env;
     //private Box2DDebugRenderer debug; // hmmmmm dont really use box2d
 
+    /** 3D world of objects */
+	private final World world;
 
     public Screen3d() {
-    	
+    	world = new World();
     }
 
     /**
@@ -40,7 +38,6 @@ public class Screen3d extends BaseScreen {
      */
 	@Override
 	protected void createHook() {
-		world = new World();
     	batch = new ModelBatch();
     	env = new Environment();
 		env.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
@@ -81,6 +78,7 @@ public class Screen3d extends BaseScreen {
 	@Override public void dispose(){ 
 		batch.dispose();
 	}
+	
 	
 
     public World getWorld() {

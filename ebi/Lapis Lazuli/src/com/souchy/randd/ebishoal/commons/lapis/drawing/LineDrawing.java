@@ -121,14 +121,18 @@ public class LineDrawing {
 	}
 
 	public void renderLinesExceptColor(Color colorIgnore){
+		renderLinesExceptColor(colorIgnore, false);
+	}
+
+	public void renderLinesExceptColor(Color colorIgnore, boolean occlusion){
 		srender.begin(ShapeType.Line);
 		for(Array<Line> lines : lineMap.values()){
-			if(lines.get(0).color == colorIgnore) {
+			if(lines.size == 0 || lines.get(0).color == colorIgnore) {
 				continue;
 			}
 			for(Line line : lines) {
 				//System.out.println("picked 1 line");
-				if(cam == null || cam.frustum.boundsInFrustum(line.start, line.end)){
+				if(cam == null || !occlusion || cam.frustum.boundsInFrustum(line.start, line.end)){
 					srender.setColor(line.color);
 					srender.line(line.start, line.end); // draw all the finished lines
 					//System.out.println("rendered 1 line");
@@ -141,13 +145,21 @@ public class LineDrawing {
 		}
 		srender.end();
 	}
-	
+
 	public void renderLinesOfColor(Color color){
+		renderLinesOfColor(color, false);
+	}
+
+	
+	public void renderLinesOfColor(Color color, boolean occlusion){
 		srender.begin(ShapeType.Line);
-		for(Line line : lineMap.get(color)){
-			if(cam == null || cam.frustum.boundsInFrustum(line.start, line.end)){
-				srender.setColor(line.color);
-				srender.line(line.start, line.end); // draw all the finished lines
+		Array<Line> lines = lineMap.get(color);
+		if(lines != null) {
+			for(Line line : lines){
+				if(cam == null || !occlusion || cam.frustum.boundsInFrustum(line.start, line.end)){
+					srender.setColor(line.color);
+					srender.line(line.start, line.end); // draw all the finished lines
+				}
 			}
 		}
 		srender.end();

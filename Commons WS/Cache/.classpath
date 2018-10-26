@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="com/souchy/randd/commons/cache/redisDao/" kind="src" path="src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-9">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -13,5 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="var" path="gitspace/annotationprocessor.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -5,7 +5,7 @@ import com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens.Screen3d;
 
 public class ComposedScreen extends Screen3d {
 
-	public Screen2d a;
+	public Screen2d overlay1;
 
 	
 	//public ComposedScreen() {
@@ -14,14 +14,14 @@ public class ComposedScreen extends Screen3d {
 	@Override
 	protected void createHook() {
 		super.createHook();
-		a = new Screen2d();
-		a.create();
+		overlay1 = new Screen2d();
+		overlay1.create();
 	}
 
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-		a.renderHook(delta);
+		overlay1.renderHook(delta);
 	}
 
 	/*@Override

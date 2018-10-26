@@ -9,9 +9,9 @@ import com.souchy.randd.jade.api.IBoard;
 import com.souchy.randd.jade.api.ICell;
 import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.math.Point2D;
-import com.souchy.randd.situationtest.math.matrixes.EffectMatrix;
-import com.souchy.randd.situationtest.math.matrixes.MatrixFlags;
-import com.souchy.randd.situationtest.math.matrixes.PositionMatrix;
+import com.souchy.randd.situationtest.matrixes.EffectMatrix;
+import com.souchy.randd.situationtest.matrixes.MatrixFlags;
+import com.souchy.randd.situationtest.matrixes.PositionMatrix;
 import com.souchy.randd.situationtest.properties.types.Orientation;
 
 public class Board implements IBoard {
@@ -42,6 +42,7 @@ public class Board implements IBoard {
 		return pos;
 	}
 
+	@Override
 	public ICell getCell(int x, int y) {
 		if(map.contains(x, y)) {
 			return map.get(x, y);

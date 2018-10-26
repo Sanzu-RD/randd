@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
-import com.souchy.randd.situationtest.math.matrixes.PositionMatrix;
+import com.souchy.randd.situationtest.matrixes.PositionMatrix;
 import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.scripts.Status;
 

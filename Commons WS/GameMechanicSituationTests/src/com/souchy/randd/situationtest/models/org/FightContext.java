@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.eventbus.EventBus;
+import com.google.inject.Guice;
 import com.souchy.randd.jade.api.EventProxy;
+import com.souchy.randd.jade.api.IBoard;
 import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.math.Buffer;
 import com.souchy.randd.situationtest.models.map.Board;
@@ -21,7 +23,7 @@ public class FightContext implements EventProxy {
 	public /*final*/ CacheInjector injector;
 	
 	/* Map */
-	public final Board board;
+	public final IBoard board;
 	
 	/* queue line of playing entities (player characters and summons) */
 	public final Buffer<IEntity> playerQueue; //Queue<IEntity> playerQueue;

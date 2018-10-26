@@ -43,8 +43,8 @@ public class Stats {
 	 */
 	public Stats(CacheInjector injector) {
         // TODO injector.injectMembers(this);
-		properties = new HashCache<>();
-		elementAffinities = new HashCache<>();
+		properties = injector.getInstance(Cache.class); //new HashCache<>();
+		elementAffinities = injector.getInstance(Cache.class); //new HashCache<>();
 		for(StatProperties type : StatProperties.values()){
 			properties.set(type, new StatProperty(type, 0));
 		}

@@ -1,4 +1,4 @@
-package com.souchy.randd.situationtest.math.matrixes;
+package com.souchy.randd.situationtest.matrixes;
 
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 
@@ -79,6 +79,21 @@ public interface MatrixFlags extends Identifiable<Byte>{
 		;
 		private final byte id;
 		private EffectFlags(int i) {
+			id = (byte) i;
+		}
+		@Override
+		public Byte getID() {
+			return id;
+		}
+	}
+
+	/** Walkable & LineOfSight to use in MapData json */
+	public static enum CellPropsFlags implements IEffectFlags {
+		Walkable(0b00000001),
+		LineOfSight(0b00000010),
+		;
+		private final byte id;
+		private CellPropsFlags(int i) {
 			id = (byte) i;
 		}
 		@Override

@@ -1,4 +1,4 @@
-package com.souchy.randd.situationtest.math.matrixes;
+package com.souchy.randd.situationtest.matrixes;
 
 public class ValueMatrix extends Matrix {
 	

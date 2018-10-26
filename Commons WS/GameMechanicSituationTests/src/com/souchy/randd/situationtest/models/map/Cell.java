@@ -3,7 +3,9 @@ package com.souchy.randd.situationtest.models.map;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.google.common.eventbus.EventBus;
+import com.google.inject.Inject;
 import com.souchy.randd.jade.api.ICell;
 import com.souchy.randd.jade.api.IEntity;
 import com.souchy.randd.situationtest.math.Point3D;
@@ -16,6 +18,8 @@ public class Cell implements ICell {
 	private final EventBus bus = new EventBus();
 	
 	private Point3D pos;
+	private boolean walkable;
+	private boolean los;
 	
 	/** TODO Cell.List<Status> , du coup on pourrait tourner les cell en entities ? */
 	public List<Status> statuss;
@@ -27,19 +31,25 @@ public class Cell implements ICell {
 		pos = new Point3D(x, y, z);
 	}
 
+	public Cell(int x, int y, int z, boolean walkable, boolean los) {
+		this(x, y, z);
+		this.walkable = walkable;
+		this.los = los;
+	}
+	
 	@Override
 	public EventBus bus() {
 		return bus;
 	}
 
 	@Override
-	public boolean blocksLineOfSight() {
-		return false;
+	public boolean walkable() {
+		return walkable;
 	}
 
 	@Override
-	public boolean walkable() {
-		return false;
+	public boolean blocksLineOfSight() {
+		return los;
 	}
 
 	@Override

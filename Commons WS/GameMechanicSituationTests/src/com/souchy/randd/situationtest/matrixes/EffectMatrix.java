@@ -1,4 +1,4 @@
-package com.souchy.randd.situationtest.math.matrixes;
+package com.souchy.randd.situationtest.matrixes;
 
 import com.souchy.randd.situationtest.math.Point2D;
 

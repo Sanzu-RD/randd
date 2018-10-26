@@ -1,8 +1,8 @@
 package com.souchy.randd.situationtest.situations;
 
 import com.souchy.randd.situationtest.math.Point2D;
-import com.souchy.randd.situationtest.math.matrixes.EffectMatrix;
-import com.souchy.randd.situationtest.math.matrixes.Matrix;
+import com.souchy.randd.situationtest.matrixes.EffectMatrix;
+import com.souchy.randd.situationtest.matrixes.Matrix;
 
 public class Situation1 {
 	

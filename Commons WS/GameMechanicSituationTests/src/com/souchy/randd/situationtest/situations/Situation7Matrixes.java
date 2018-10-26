@@ -1,5 +1,6 @@
 package com.souchy.randd.situationtest.situations;
 
+import com.souchy.randd.jade.api.IBoard;
 import com.souchy.randd.jade.api.ICell;
 import com.souchy.randd.situationtest.effects.resources.DamageEffect;
 import com.souchy.randd.situationtest.events.CastSpellEvent;
@@ -11,10 +12,10 @@ import com.souchy.randd.situationtest.eventshandlers.OnHitSomeone;
 import com.souchy.randd.situationtest.eventshandlers.OnStatChangeHandler;
 import com.souchy.randd.situationtest.eventshandlers.turn.OnTurnEndHandler;
 import com.souchy.randd.situationtest.math.Point3D;
-import com.souchy.randd.situationtest.math.matrixes.ConditionMatrix;
-import com.souchy.randd.situationtest.math.matrixes.EffectMatrix;
-import com.souchy.randd.situationtest.math.matrixes.Matrix;
-import com.souchy.randd.situationtest.math.matrixes.MatrixFlags;
+import com.souchy.randd.situationtest.matrixes.ConditionMatrix;
+import com.souchy.randd.situationtest.matrixes.EffectMatrix;
+import com.souchy.randd.situationtest.matrixes.Matrix;
+import com.souchy.randd.situationtest.matrixes.MatrixFlags;
 import com.souchy.randd.situationtest.models.entities.Character;
 import com.souchy.randd.situationtest.models.map.Board;
 import com.souchy.randd.situationtest.models.map.Cell;
@@ -80,10 +81,10 @@ public class Situation7Matrixes {
 		
 		// Créé le contexte et la map
 		FightContext context = new FightContext();
-		Board board = context.board;
+		IBoard board = context.board;
 		heightMap.foreach((i, j) -> {
 			Cell c = new Cell(i, j, heightMap.get(i, j));
-			board.map.put(i, j, c);
+			board.getCells().put(i, j, c);
 		});
 		// Créé deux perso
 		// need to optimize this so we write the pos only once etc, make everything linked in 1

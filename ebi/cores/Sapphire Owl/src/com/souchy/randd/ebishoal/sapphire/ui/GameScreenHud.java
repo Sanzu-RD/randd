@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.DistanceFieldFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -81,10 +82,15 @@ public class GameScreenHud extends Screen2d {
 		a.setPosition(30, 165);
 		getStage().addActor(a);*/
 
+		/*//Font font = new Font("Arial", 100);
+		BitmapFont font = new BitmapFont();
+		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		LabelStyle s = new LabelStyle();
+		s.font = font;*/
 
 		fpslbl = new VisLabel("FPS : " + Gdx.graphics.getFramesPerSecond(), hongkong);
-		fpslbl.setFontScale(10 / 100f);
-		fpslbl.setPosition(10, 10);
+		fpslbl.setFontScale(40 / 100f);
+		fpslbl.setPosition(30, 0);
 		getStage().addActor(fpslbl);
 		
         spriteBatch = new SpriteBatch();
@@ -100,8 +106,8 @@ public class GameScreenHud extends Screen2d {
 	@Override
 	protected Viewport createView(Camera cam) {
 		// TODO Auto-generated method stub
-		//return super.createView(cam);
-		float aspectRatio = 16/9f;	// ratio à mettre dans les settings public
+		return super.createView(cam);
+		/*float aspectRatio = 16/9f;	// ratio à mettre dans les settings public
 		float minWorldY = 50; 		// hauteur min à mettre ds settings privés
 		float minWorldX = minWorldY * aspectRatio;
 		// width et height sont en world units pour contrôller how much du monde qu'on voit
@@ -109,20 +115,20 @@ public class GameScreenHud extends Screen2d {
 		//Viewport view = Viewports.extend(minWorldX, minWorldY,  cam);
 		Viewport view = Viewports.scaling(Scaling.none, minWorldX, minWorldY,  cam);
 		view.apply();
-		return view;
+		return view;*/
 	}
 	
 	@Override
 	public void renderHook(float delta) {
 
-        spriteBatch.setProjectionMatrix(getCam().combined);
+        /*spriteBatch.setProjectionMatrix(getCam().combined);
         spriteBatch.begin();
        // s.draw(spriteBatch);
         spriteBatch.draw(texture,0,0);
-        spriteBatch.end();
+        spriteBatch.end();*/
 
 		fpslbl.setText("FPS : " + Gdx.graphics.getFramesPerSecond());
-		// TODO Auto-generated method stub
+
 		super.renderHook(delta);
 	}
 	
@@ -130,7 +136,7 @@ public class GameScreenHud extends Screen2d {
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
 		super.resize(width, height);
-
+/*
 
         pixmap = new Pixmap((int)getViewport().getWorldWidth(), (int)getViewport().getWorldHeight(), Format.RGBA8888);
 		pixmap.setColor(Color.GOLD);
@@ -140,7 +146,7 @@ public class GameScreenHud extends Screen2d {
 		getCam().position.set(getViewport().getWorldWidth()/2, getViewport().getWorldHeight()/2, 60);
 		getCam().direction.set(0, 0, -1);
 		getCam().up.set(0, 1, 0);
-        getCam().update();
+        getCam().update();*/
 	}
 	
 }
