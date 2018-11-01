@@ -1,5 +1,7 @@
 package com.souchy.randd.ebishoal.sapphire.ui;
 
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Camera;
@@ -19,33 +21,36 @@ import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.randd.ebishoal.commons.lapis.drawing.Line;
 import com.souchy.randd.ebishoal.commons.lapis.drawing.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.screens.Cameras;
 import com.souchy.randd.ebishoal.commons.lapis.screens.ComposedScreen;
 import com.souchy.randd.ebishoal.commons.lapis.screens.Viewports;
+import com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens.Screen2d;
 
 public class GameScreen extends ComposedScreen {
 	
-	LineDrawing lines;
-	ModelInstance instance;
+	
+	private GameScreenHud hud = new GameScreenHud();
+	
+	
+	private LineDrawing lines;
+	private ModelInstance instance;
 	//Line viewLine;
 	
 	
-	float aspectRatio = 16/9f;	// ratio à mettre dans les settings public
-	float minWorldY = 50; 		// hauteur min à mettre ds settings privés
-	float minWorldX = minWorldY * aspectRatio;
+	private float aspectRatio = 16/9f;	// ratio à mettre dans les settings public
+	private float minWorldY = 50; 		// hauteur min à mettre ds settings privés
+	private float minWorldX = minWorldY * aspectRatio;
 	
 
 	@Override
 	protected void createHook() {
 		super.createHook();
 		
-		super.overlay1 = new GameScreenHud();
-		overlay1.create();
-		
-		Material mat = new Material(IntAttribute.createCullFace(GL20.GL_FRONT),//For some reason, libgdx ModelBuilder makes boxes with faces wound in reverse, so cull FRONT
+		/*Material mat = new Material(IntAttribute.createCullFace(GL20.GL_FRONT),//For some reason, libgdx ModelBuilder makes boxes with faces wound in reverse, so cull FRONT
 			    new BlendingAttribute(1f), //opaque since multiplied by vertex color
 			    new DepthTestAttribute(false), //don't want depth mask or rear cubes might not show through
 			    ColorAttribute.createDiffuse(Color.GREEN));
@@ -66,7 +71,7 @@ public class GameScreen extends ComposedScreen {
 				getWorld().cache.add(instance);
 			}
 		}
-		getWorld().cache.end();
+		getWorld().cache.end();*/
 		
 		//getCam().position.set(1, 1, 1);
 		//getCam().lookAt(0, 0, 0);
@@ -179,7 +184,7 @@ public class GameScreen extends ComposedScreen {
 		// TODO Auto-generated method stub
 		//super.resize(width, height);
 		getViewport().update(width, height, false);
-		overlay1.resize(width, height);
+		hud.resize(width, height);
 
 		//centerCam();
 		
@@ -192,6 +197,7 @@ public class GameScreen extends ComposedScreen {
 	
 	@Override
 	protected void renderHook(float delta) {
+        super.renderHook(delta);
         if(Gdx.input.isKeyPressed(Keys.DOWN)) {
         	getCam().position.z += 10 * delta;
         }
@@ -213,19 +219,18 @@ public class GameScreen extends ComposedScreen {
         
 		lines.srender.setProjectionMatrix(getCam().combined);
         lines.renderLinesExceptColor(Color.DARK_GRAY);
+        
+		//lines.srender.setProjectionMatrix(overlay1.getCam().combined);
+        //lines.renderLinesOfColor(Color.DARK_GRAY);
 
-		lines.srender.setProjectionMatrix(overlay1.getCam().combined);
-        lines.renderLinesOfColor(Color.DARK_GRAY);
-
-        super.renderHook(delta);
 	}
 
 	private void centerCam() {
 		System.out.println(
 				"w = " + "[" +getViewport().getWorldWidth() + ", h = " + getViewport().getWorldHeight()  + "]"
 				+ " / " + "s = " + "[" + getViewport().getScreenWidth() + ", h = " + getViewport().getScreenHeight() + "]"
-				+ " /// " + "aw = " +"[" + overlay1.getViewport().getWorldWidth() + "," + overlay1.getViewport().getWorldHeight() + "]"
-				+ " / " + "as = " + "[" + overlay1.getViewport().getScreenWidth() + ", " + overlay1.getViewport().getScreenHeight() + "]");
+				+ " /// " + "aw = " +"[" + hud.getViewport().getWorldWidth() + "," + hud.getViewport().getWorldHeight() + "]"
+				+ " / " + "as = " + "[" + hud.getViewport().getScreenWidth() + ", " + hud.getViewport().getScreenHeight() + "]");
 		//getCam().position.set(getViewport().getWorldWidth()/2, getViewport().getWorldHeight()/2, 60);
 		getCam().position.set(45, -50, 20);
 		getCam().lookAt(45, 0, 0);
@@ -240,6 +245,13 @@ public class GameScreen extends ComposedScreen {
 		getBatch().dispose();
 		instance.model.dispose();
 	}
-	
+
+
+	@Override
+	public Screen2d getHud() {
+		return hud;
+	}
+
+
 	
 }

@@ -9,7 +9,7 @@ import com.souchy.randd.commons.ebishoal.EbiCore;
  * 
  * To write in LapisCore implementation : 
  * <pre>
- * public static void main(String[] args) {  
+ * public static void main(String[] args) throws Exception {  
  *     launch(new LapisCoreImp()); 
  * }
  * </pre>
@@ -21,6 +21,7 @@ public abstract class LapisCore extends EbiCore {
 	
 	private LwjglApplicationConfiguration config;
 	private LapisGame game;
+	private LapisProperties properties;
 
 	/**
 	 * @inheritDoc
@@ -28,17 +29,8 @@ public abstract class LapisCore extends EbiCore {
 	@Override
 	public void init() throws Exception {
 		config = new LwjglApplicationConfiguration();
-	    config.title = getAppTitle();
-	    //config.samples = AConstants.ANTI_ALIASING;
-		//config.width = AConstants.WINDOW_WIDTH;
-	    //config.height = AConstants.WINDOW_HEIGHT;
-	    
-	    config.width = (int) getSize().x;
-	    config.height = (int) getSize().y;
-	    config.samples = getSamples();
-	    config.foregroundFPS = 0;
-	    config.vSyncEnabled = false;
-	    
+		properties = new LapisProperties(config);
+		properties.load();
 	    game = createGame();
 	}
 	
@@ -62,12 +54,17 @@ public abstract class LapisCore extends EbiCore {
 	 */
 	protected abstract LapisGame createGame();
 	/**  @return The title for the application's title bar */
-	public abstract String getAppTitle();
+	//public abstract String getAppTitle();
 	/** Application window size at creation */
-	public abstract Vector2 getSize();
+	//public abstract Vector2 getSize();
 	/** Antialiasing samples */
-	public abstract int getSamples();
+	//public abstract int getSamples();
+	/** Maximum foreground fps (aka when the application is focused). 0 for unlimited. */
+	//public abstract int getMaxFps();
 	
+	public LapisProperties getProperties() {
+		return properties;
+	}
 	
 	/* 
 	 * might add these functions here and make the game variable completely private

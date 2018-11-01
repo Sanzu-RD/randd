@@ -20,7 +20,7 @@ public abstract class LapisGame extends Game {
 	public List<LabelStyle> labelStyles;
 	
 	
-	public final FightContext context;
+	//public final FightContext context;
 	
 	
 	/**
@@ -30,7 +30,7 @@ public abstract class LapisGame extends Game {
 		fonts = new FontDiscoverer();
 		modelDiscoverer = new ModelDiscoverer();
 
-		context = new FightContext();
+		//context = new FightContext();
 	}
 	
 	

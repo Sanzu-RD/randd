@@ -23,8 +23,8 @@ public abstract class ScreenAPI implements Screen {
 	 */
 	public void clearScreen() {
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		Gdx.gl.glClearColor(getBGColor().r, getBGColor().g, getBGColor().b, getBGColor().a);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		/*Gdx.gl.glClear(
 				  GL20.GL_COLOR_BUFFER_BIT 
 				| GL20.GL_DEPTH_BUFFER_BIT 

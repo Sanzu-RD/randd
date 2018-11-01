@@ -8,24 +8,22 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.DistanceFieldFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.widget.VisLabel;
-import com.souchy.randd.ebishoal.commons.lapis.screens.Viewports;
 import com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens.Screen2d;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 
 public class GameScreenHud extends Screen2d {
 
 	LabelStyle hongkong = new LabelStyle();
+	LabelStyle defaultStyle = new LabelStyle();
 	VisLabel fpslbl;
 
     private SpriteBatch spriteBatch;
@@ -40,16 +38,20 @@ public class GameScreenHud extends Screen2d {
 		honkongTex.setFilter(TextureFilter.MipMapLinearNearest, TextureFilter.Linear); // linear filtering in nearest mipmap image
 		BitmapFont hongkongFont = new BitmapFont(Gdx.files.internal("res/hongkonghustle-hiero-100.fnt"), new TextureRegion(honkongTex), false);
 		hongkong.font = hongkongFont;
+
+		Texture defaultTex = new Texture(Gdx.files.internal("res/default.png"), true); // true enables mipmaps
+		defaultTex.setFilter(TextureFilter.MipMapLinearNearest, TextureFilter.Linear); // linear filtering in nearest mipmap image
+		BitmapFont defaultFont = new BitmapFont(Gdx.files.internal("res/default.fnt"), new TextureRegion(defaultTex), false);
+		defaultStyle.font = defaultFont;
 	}
 	
 
 	@Override
 	protected void createHook() {
 		super.createHook();
-		
 		// add actors
-		/*
-		var game = SapphireOwl.core.getGame();
+		
+		/*var game = SapphireOwl.core.getGame();
 		
 		Skin skin = new Skin();
 		// Generate a 1x1 white texture and store it in the skin named "white".
@@ -61,6 +63,11 @@ public class GameScreenHud extends Screen2d {
 		Color charcoal = new Color(47/255f, 47/255f, 47/255f, 1);;
 		Color bgcolor = charcoal;
 		Color fontcolor = Color.WHITE;
+
+		var area = new TextArea("l;koaisjdnfjinds", game.skin);
+		area.setPosition(100, 100);
+		area.setSize(1000, 1000);
+		getStage().addActor(area);
 		
 		LabelStyle style = new LabelStyle();
 		style.background = skin.newDrawable("white", fontcolor);
@@ -68,28 +75,24 @@ public class GameScreenHud extends Screen2d {
 		style.fontColor = fontcolor;
 		
 		Label l = new Label("kjashdbfkjhasdbjhfbdsa test", game.skin);
-		l.setFontScale(40 / 100f);
+		l.setFontScale(400 / 100f);
 		l.setPosition(300, 300);
 		getStage().addActor(l);
 		
-		var area = new TextArea("l;koaisjdnfjinds", game.skin);
-		area.setPosition(100, 100);
-		area.setSize(1000, 1000);
-		getStage().addActor(area);
 		
 		VisLabel a = new VisLabel("HELLO T", hongkong);
 		a.setFontScale(50 / 100f);
 		a.setPosition(30, 165);
-		getStage().addActor(a);*/
+		getStage().addActor(a); // * /
 
-		/*//Font font = new Font("Arial", 100);
+		//Font font = new Font("Arial", 100);
 		BitmapFont font = new BitmapFont();
 		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		LabelStyle s = new LabelStyle();
 		s.font = font;*/
 
-		fpslbl = new VisLabel("FPS : " + Gdx.graphics.getFramesPerSecond(), hongkong);
-		fpslbl.setFontScale(40 / 100f);
+		fpslbl = new VisLabel("FPS : " + Gdx.graphics.getFramesPerSecond(), defaultStyle);
+		fpslbl.setFontScale(300 / 100f);
 		fpslbl.setPosition(30, 0);
 		getStage().addActor(fpslbl);
 		

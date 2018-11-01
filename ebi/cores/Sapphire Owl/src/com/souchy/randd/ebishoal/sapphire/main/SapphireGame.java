@@ -26,10 +26,10 @@ import com.google.gson.Gson;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.kotcrab.vis.ui.VisUI;
+import com.souchy.randd.commons.cache.map.MapCache;
 import com.souchy.randd.ebishoal.commons.lapis.discoverers.ModelDiscoverer;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
-import com.souchy.randd.ebishoal.sapphire.cache.MapCache;
 import com.souchy.randd.ebishoal.sapphire.models.EbiCell;
 import com.souchy.randd.ebishoal.sapphire.ui.GameScreen;
 import com.souchy.randd.ebishoal.sapphire.ui.GameScreenHud;
@@ -41,10 +41,10 @@ import com.souchy.randd.situationtest.models.org.FightContext;
 
 public class SapphireGame extends LapisGame {
 	
-
 	public Skin skin;
 	
 	public GameScreen gfx;
+	public FightContext context;
 	
 	
 	@Override

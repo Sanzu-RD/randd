@@ -33,64 +33,13 @@ public class LineDrawing {
 
 	// seulement si veut créer des body Box2d
 	public World world;
-	
+
 	/*
 	 * trucs de linerider
 	public String tool = "line";
 	public Color color = Color.BLUE;
 	public Rectangle eraser;
 	*/
-	
-	public void addLine(Vector3 start, Vector3 end, Color color) {
-		addLine(new Line(color, start, end, world));
-	}
-	public void addLine(Line line) {
-		if(!lineMap.containsKey(line.color)) 
-			lineMap.put(line.color, new Array<>());
-		lineMap.get(line.color).add(line);
-	}
-	
-	public void createCross(Color crossXColor, Color crossYColor, Color crossZColor){
-		int fromX = 0, toX = 3000;
-		int fromY = 0, toY = 3000;
-		int fromZ = 0, toZ = 3000;
-		// (0,0) crosss
-		addLine(new Vector3(fromX, 0, 0), new Vector3(toX, 0, 0), crossXColor);
-		addLine(new Vector3(0, fromY, 0), new Vector3(0, toY, 0), crossYColor);
-		addLine(new Vector3(0, 0, fromZ), new Vector3(0, 0, toZ), crossZColor);
-	}
-	
-	public void createGrid(){
-		// Draw a grid
-		{
-			int gap = 1, width = 20, height = 20;
-			Color gridColor = Color.GREEN;
-			Color crossColor = Color.PURPLE;
-			lineMap.put(gridColor, new Array<>());
-			lineMap.put(crossColor, new Array<>());
-
-			int fromX = 0; //= -width;
-			int toX = width;
-			int fromY = 0; //= -height
-			int toY = height;
-			
-			// vertical
-			for (int x = fromX; x <= toX; x += gap) {
-				lineMap.get(gridColor).add(new Line(gridColor, new Vector3(x, fromY, 0), new Vector3(x, toY, 0), null));
-			}
-			// horizontal
-			for (int y = fromY; y <= toY; y += gap) {
-				lineMap.get(gridColor).add(new Line(gridColor, new Vector3(fromX, y, 0), new Vector3(toX, y, 0), null));
-			}
-			//lineMap.get(DARK_GRAY).add(new Line(RED, new Vector3(fromX, 0, 0), new Vector3(toX, 0, 0), null));
-			//lineMap.get(DARK_GRAY).add(new Line(RED, new Vector3(0, fromY, 0), new Vector3(0, toY, 0), null));
-			
-			// (0,0) cross
-			lineMap.get(crossColor).add(new Line(crossColor, new Vector3(fromX, 0, 0), new Vector3(toX, 0, 0), null));
-			lineMap.get(crossColor).add(new Line(crossColor, new Vector3(0, fromY, 0), new Vector3(0, toY, 0), null));
-		}
-	}
-	
 
 	public LineDrawing(final Camera cam, final World world) {
 		this.cam = cam;
@@ -103,7 +52,67 @@ public class LineDrawing {
 		lineMap.put(Color.GREEN, new Array<Line>());
 	}
 	
+
+	public void addLine(Color color, Vector3 start, Vector3 end) {
+		addLine(new Line(color, start, end, world));
+	}
+	public void addLine(Vector3 start, Vector3 end, Color color) {
+		addLine(new Line(color, start, end, world));
+	}
+	public void addLine(Line line) {
+		if(!lineMap.containsKey(line.color)) 
+			lineMap.put(line.color, new Array<>());
+		lineMap.get(line.color).add(line);
+	}
+
+	public void createCross(){
+		createCross(Color.RED, Color.GREEN, Color.BLUE);
+	}
+	public void createCross(Color crossXColor, Color crossYColor, Color crossZColor){
+		int fromX = 0, toX = 3000;
+		int fromY = 0, toY = 3000;
+		int fromZ = 0, toZ = 3000;
+		// (0,0) crosss
+		addLine(new Vector3(fromX, 0, 0), new Vector3(toX, 0, 0), crossXColor);
+		addLine(new Vector3(0, fromY, 0), new Vector3(0, toY, 0), crossYColor);
+		addLine(new Vector3(0, 0, fromZ), new Vector3(0, 0, toZ), crossZColor);
+	}
+
+	public void createGrid(){
+		createGrid(1, 20, 20);
+	}
+	
+	public void createGrid(int gap, int width, int height) {
+		createGrid(gap, width, height, Color.PURPLE);
+	}
+	public void createGrid(int gap, int width, int height, Color color) {
+		// Draw a grid
+		lineMap.put(color, new Array<>());
+		//Color crossColor = Color.PURPLE;
+		//lineMap.put(crossColor, new Array<>());
+		
+		int fromX = 0; // = -width;
+		int toX = width;
+		int fromY = 0; // = -height
+		int toY = height;
+		
+		// vertical
+		for (int x = fromX; x <= toX; x += gap) {
+			addLine(color, new Vector3(x, fromY, 0), new Vector3(x, toY, 0));
+		}
+		// horizontal
+		for (int y = fromY; y <= toY; y += gap) {
+			addLine(color, new Vector3(fromX, y, 0), new Vector3(toX, y, 0));
+		}
+		
+		// (0,0) cross
+		//lineMap.get(crossColor).add(new Line(crossColor, new Vector3(fromX, 0, 0), new Vector3(toX, 0, 0), null));
+		//lineMap.get(crossColor).add(new Line(crossColor, new Vector3(0, fromY, 0), new Vector3(0, toY, 0), null));
+	}
+	
+
 	public void renderLines(){
+		if(cam != null) srender.setProjectionMatrix(cam.combined);
 		srender.begin(ShapeType.Line);
 		for(Array<Line> lines : lineMap.values()){
 			Iterator<Line> lini = lines.iterator();
@@ -125,6 +134,7 @@ public class LineDrawing {
 	}
 
 	public void renderLinesExceptColor(Color colorIgnore, boolean occlusion){
+		if(cam != null) srender.setProjectionMatrix(cam.combined);
 		srender.begin(ShapeType.Line);
 		for(Array<Line> lines : lineMap.values()){
 			if(lines.size == 0 || lines.get(0).color == colorIgnore) {
@@ -152,6 +162,7 @@ public class LineDrawing {
 
 	
 	public void renderLinesOfColor(Color color, boolean occlusion){
+		if(cam != null) srender.setProjectionMatrix(cam.combined);
 		srender.begin(ShapeType.Line);
 		Array<Line> lines = lineMap.get(color);
 		if(lines != null) {

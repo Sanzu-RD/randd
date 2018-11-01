@@ -42,5 +42,10 @@ public class SapphireOwl extends LapisCore {
 	public SapphireGame getGame() {
 		return (SapphireGame) super.getGame();
 	}
+
+	@Override
+	public int getMaxFps() {
+		return 0;
+	}
 	
 }

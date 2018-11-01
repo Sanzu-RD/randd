@@ -6,7 +6,7 @@ import com.google.common.collect.Table;
 
 public class World {
 	
-	public Table<Integer, Integer, ModelInstance> models;
+	//public Table<Integer, Integer, ModelInstance> models;
 	public ModelCache cache;
 	
 	private boolean dirty;
@@ -16,6 +16,10 @@ public class World {
 	}
 	
 	
+	
+	public void addCell() {
+		
+	}
 	
 	
 }

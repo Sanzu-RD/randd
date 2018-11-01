@@ -1,33 +1,37 @@
 package com.souchy.randd.ebishoal.commons.lapis.screens;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens.Screen2d;
 import com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens.Screen3d;
 
-public class ComposedScreen extends Screen3d {
-
-	public Screen2d overlay1;
-
+public abstract class ComposedScreen extends Screen3d {
 	
-	//public ComposedScreen() {
-	//}
-
+	
 	@Override
 	protected void createHook() {
 		super.createHook();
-		overlay1 = new Screen2d();
-		overlay1.create();
+		
+		getHud().create();
+        Gdx.input.setInputProcessor(getHud().getStage());
 	}
-
+	
 	@Override
 	public void render(float delta) {
 		super.render(delta);
-		overlay1.renderHook(delta);
+		getHud().renderHook(delta);
+	}
+	
+	@Override
+	public void resize(int width, int height) {
+		super.resize(width, height);
+		getHud().resize(width, height);
 	}
 
-	/*@Override
-	protected void renderHook(float delta) {
-		super.renderHook(delta);
-		a.renderHook(delta);
-	}*/
+	
+	public abstract Screen2d getHud();
 	
 }

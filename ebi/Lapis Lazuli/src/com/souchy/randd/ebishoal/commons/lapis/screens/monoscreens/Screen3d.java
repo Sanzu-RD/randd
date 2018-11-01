@@ -1,22 +1,29 @@
 package com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.environment.DirectionalShadowLight;
+import com.badlogic.gdx.graphics.g3d.utils.DepthShaderProvider;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.randd.ebishoal.commons.lapis.screens.Cameras;
 import com.souchy.randd.ebishoal.commons.lapis.screens.Viewports;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 
-public class Screen3d extends BaseScreen {
+@SuppressWarnings("deprecation")
+public abstract class Screen3d extends BaseScreen {
 
 
 	private ModelBatch batch;
     private Environment env;
+    private DirectionalShadowLight shadowLight;
+    private ModelBatch shadowBatch;
     //private Box2DDebugRenderer debug; // hmmmmm dont really use box2d
 
     /** 3D world of objects */
@@ -26,22 +33,28 @@ public class Screen3d extends BaseScreen {
     	world = new World();
     }
 
-    /**
-     * Creates the :
-     * <ul>
-     * <li> Camera
-     * <li> Viewport 
-     * <li> Model Batch
-     * <li> Environment
-     * <li> Basic lightning
-     * <ul>
-     */
 	@Override
 	protected void createHook() {
+		//super.createHook();
     	batch = new ModelBatch();
+    	createEnvironment();
+		shadowBatch = new ModelBatch(new DepthShaderProvider());
+	}
+	
+	protected void createEnvironment() {
     	env = new Environment();
-		env.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
-		env.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+    	//float diffuseIntensity = 0.8f;
+    	//float directionalIntensity = 1f;
+		env.set(new ColorAttribute(ColorAttribute.AmbientLight, getAmbiantBrightness(), getAmbiantBrightness(), getAmbiantBrightness() * 0.75f, 1f));
+		//env.set(new ColorAttribute(ColorAttribute.Diffuse, diffuseIntensity, diffuseIntensity, diffuseIntensity, 1f));
+		//env.add(new DirectionalLight().set(directionalIntensity, directionalIntensity, directionalIntensity, -1f, -0.8f, -0.2f));
+		//env.add((shadowLight = new DirectionalShadowLight(1024, 1024, 30f, 30f, 1f, 100f)).set(0.8f, 0.8f, 0.8f, -1f, -.8f, -.2f));
+		env.add((shadowLight = new DirectionalShadowLight(1024, 1024, 60f, 60f, .1f, 50f)).set(1f, 1f, 1f, 40.0f, -35f, -35f));   
+		env.shadowMap = shadowLight;
+	}
+	
+	protected float getAmbiantBrightness() {
+		return 0.8f;
 	}
 
 	@Override
@@ -68,6 +81,16 @@ public class Screen3d extends BaseScreen {
 	}
 	
 	@Override
+	public void render(float delta) {
+		shadowLight.begin(Vector3.Zero, getCam().direction);
+		shadowBatch.begin(shadowLight.getCamera());
+		shadowBatch.render(world.cache, env);
+		shadowBatch.end();
+		shadowLight.end();
+		super.render(delta);
+	}
+	
+	@Override
 	protected void renderHook(float delta) {
 		batch.begin(getCam());
 		batch.render(world.cache, env);
@@ -77,9 +100,8 @@ public class Screen3d extends BaseScreen {
 	
 	@Override public void dispose(){ 
 		batch.dispose();
+		world.cache.dispose();
 	}
-	
-	
 
     public World getWorld() {
 		return world;
@@ -92,5 +114,14 @@ public class Screen3d extends BaseScreen {
     public Environment getEnvironment() {
 		return env;
 	}
+    
+    /**
+     * Dont recenter the screen for 3D as we keep the custom camera position.
+     * Maybe the bad result on recentering is a result of a bad viewport setting, but keep the custom position seems more efficient
+     */
+    @Override
+    public void resize(int width, int height) {
+		getViewport().update(width, height, false);
+    }
     
 }

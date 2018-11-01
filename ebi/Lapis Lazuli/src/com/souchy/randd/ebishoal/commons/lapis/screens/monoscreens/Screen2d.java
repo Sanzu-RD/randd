@@ -13,16 +13,21 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  * @author Souchy
  *
  */
-public class Screen2d extends BaseScreen {
+public abstract class Screen2d extends BaseScreen {
 
 	/**
 	 * Where we put all the hud actors, labels, etc
 	 */
 	private Stage stage;
+
+	@Override
+	protected void createHook() {
+		stage = new Stage(getViewport());
+	}
 	
 	@Override
 	protected Camera createCam() {
-		OrthographicCamera camera = new OrthographicCamera(1600, 900); // space dimensions
+		OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // space dimensions
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f); // camera view position (x,y) on the space (center of the space dimension)
         camera.update();
         return camera;
@@ -51,11 +56,6 @@ public class Screen2d extends BaseScreen {
 		return view;*/
 	}
 
-	@Override
-	protected void createHook() {
-		stage = new Stage(getViewport());
-	}
-	
 	/**
 	 * Lie les inputs au stage
 	 */
@@ -83,5 +83,9 @@ public class Screen2d extends BaseScreen {
 		stage.dispose();
 	}
 	
+	@Override
+	public void resize(int width, int height) {
+		getViewport().update(width, height, true);
+	}
 	
 }

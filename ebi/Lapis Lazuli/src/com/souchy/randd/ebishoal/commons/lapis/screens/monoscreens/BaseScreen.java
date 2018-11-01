@@ -11,7 +11,7 @@ public abstract class BaseScreen extends ScreenAPI {
 	private Viewport view;
 	
 	@Override
-	public final void create() {
+	public void create() {
 		cam = createCam();
 		view = createView(cam);
 		createHook();
@@ -33,12 +33,10 @@ public abstract class BaseScreen extends ScreenAPI {
 	/**
 	 * Called when the window changes size. <br>
 	 * Aka this screen changes size. <br>
-	 * So we update the viewport size here.
+	 * So we update the viewport size here. <br>
+	 * <b>Screen2d</b> uses update with <b>true</b> to center screen and <b>Screend3d</b> uses <b>false</b> to keep the current camera position
 	 */
-	@Override
-	public void resize(int width, int height) { 
-		view.update(width, height, true);
-	}
+	@Override public abstract void resize(int width, int height); 
 	@Override public void pause() { }
 	@Override public void resume() { }
 	@Override public void hide() { }

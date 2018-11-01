@@ -31,9 +31,4 @@ public class PluginMonitorConfig implements PropertyConfig {
 	}
 
 	
-	public void asdf() {
-		lastDirectory.set("");
-	}
-
-	
 }
