@@ -83,7 +83,7 @@ public class LineDrawing {
 	}
 	
 	public void createGrid(int gap, int width, int height) {
-		createGrid(gap, width, height, Color.PURPLE);
+		createGrid(gap, width, height, Color.GRAY);
 	}
 	public void createGrid(int gap, int width, int height, Color color) {
 		// Draw a grid
