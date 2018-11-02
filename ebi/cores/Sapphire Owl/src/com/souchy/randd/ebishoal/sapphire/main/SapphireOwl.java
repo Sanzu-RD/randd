@@ -18,24 +18,8 @@ public class SapphireOwl extends LapisCore {
 	}
 	
 	@Override
-	public String getAppTitle() {
-		return "Sapphire Owl";
-	}
-	
-	@Override
 	protected String[] getRootPackages() {
 		return new String[] { "com.souchy.randd.ebishoal.sapphire" };
-	}
-	
-	@Override
-	public Vector2 getSize() {
-		// TODO Auto-generated method stub
-		return new Vector2(1600, 900);
-	}
-	
-	@Override
-	public int getSamples() {
-		return 2;
 	}
 	
 	@Override
@@ -43,9 +27,5 @@ public class SapphireOwl extends LapisCore {
 		return (SapphireGame) super.getGame();
 	}
 
-	@Override
-	public int getMaxFps() {
-		return 0;
-	}
 	
 }

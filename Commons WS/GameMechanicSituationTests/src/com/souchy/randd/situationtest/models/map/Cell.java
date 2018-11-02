@@ -3,7 +3,6 @@ package com.souchy.randd.situationtest.models.map;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.google.common.eventbus.EventBus;
 import com.google.inject.Inject;
 import com.souchy.randd.jade.api.ICell;

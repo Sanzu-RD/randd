@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="com/souchy/randd/commons/tealwaters/responsibilities/" kind="src" path="src"/>
+	<classpathentry excluding="com/souchy/randd/commons/tealwaters/responsibilities/|com/souchy/randd/commons/tealwaters/io/files/JsonConfig.java" kind="src" path="src"/>
 	<classpathentry kind="src" path=".apt_generated">
 		<attributes>
 			<attribute name="optional" value="true"/>

@@ -16,4 +16,14 @@ public class EbiCell extends Cell {
 		
 	}
 	
+	
+	/**
+	 * 
+	 * @param dz - delta z, distance de translation en z
+	 */
+	public void translateZ(int dz) {
+		model.transform.translate(0, 0, dz);
+	}
+	
+	
 }
