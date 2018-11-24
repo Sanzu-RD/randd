@@ -2,11 +2,10 @@ package com.souchy.randd.tools.mapeditor.configs;
 
 import java.io.File;
 import java.util.Properties;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 import com.badlogic.gdx.Gdx;
-import com.souchy.randd.commons.tealwaters.properties.*;
+import com.souchy.randd.commons.tealwaters.properties.Property;
+import com.souchy.randd.commons.tealwaters.properties.PropertyConfig;
 
 public class EditorProperties implements PropertyConfig {
 
@@ -15,6 +14,9 @@ public class EditorProperties implements PropertyConfig {
 	
 	
 	public Property<Float> ambiantBrightness;
+	public Property<Float> directionalBrightness;
+	public Property<Boolean> showGrid;
+	public Property<Integer> directionalLightCount;
 	
 	
 	public EditorProperties() {

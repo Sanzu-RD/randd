@@ -17,14 +17,20 @@ public abstract class LibGdxFileDiscoverer<O> implements Discoverer<String, File
 		FileHandle directory = Gdx.files.internal(path);
 		if(directory == null) return files;
 		if(!directory.exists()) return files;
-		if(!directory.isDirectory()) return files;
+		//if(!directory.isDirectory()) return files;
 
-		loop(files, directory);
+		var f = directory.file();
+		var s = f.getAbsolutePath();
+		FileHandle absDir = Gdx.files.absolute(f.getAbsolutePath());
+		
+
+		loop(files, absDir);
 		
 		return files;
 	}
 	
 	private void loop(List<O> files, FileHandle directory) {
+		var a = directory.list();
 	    for(FileHandle file : directory.list()){
 	    	if(file.isDirectory()){
 	    		loop(files, file);

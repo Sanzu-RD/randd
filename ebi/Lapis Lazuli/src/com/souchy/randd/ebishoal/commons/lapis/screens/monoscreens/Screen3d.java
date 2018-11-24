@@ -1,13 +1,10 @@
 package com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens;
 
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
-import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalShadowLight;
 import com.badlogic.gdx.graphics.g3d.utils.DepthShaderProvider;
 import com.badlogic.gdx.math.Vector3;
@@ -22,9 +19,8 @@ public abstract class Screen3d extends BaseScreen {
 
 	private ModelBatch batch;
     private Environment env;
-    private DirectionalShadowLight shadowLight;
+    protected DirectionalShadowLight shadowLight;
     private ModelBatch shadowBatch;
-    //private Box2DDebugRenderer debug; // hmmmmm dont really use box2d
 
     /** 3D world of objects */
 	private final World world;
@@ -37,20 +33,37 @@ public abstract class Screen3d extends BaseScreen {
 	protected void createHook() {
 		//super.createHook();
     	batch = new ModelBatch();
+    	env = new Environment();
     	createEnvironment();
 		shadowBatch = new ModelBatch(new DepthShaderProvider());
 	}
 	
 	protected void createEnvironment() {
-    	env = new Environment();
+		/*
     	//float diffuseIntensity = 0.8f;
     	//float directionalIntensity = 1f;
 		env.set(new ColorAttribute(ColorAttribute.AmbientLight, getAmbiantBrightness(), getAmbiantBrightness(), getAmbiantBrightness() * 0.75f, 1f));
 		//env.set(new ColorAttribute(ColorAttribute.Diffuse, diffuseIntensity, diffuseIntensity, diffuseIntensity, 1f));
-		//env.add(new DirectionalLight().set(directionalIntensity, directionalIntensity, directionalIntensity, -1f, -0.8f, -0.2f));
+	//	env.add(new DirectionalLight().set(getAmbiantBrightness(), getAmbiantBrightness(), getAmbiantBrightness(), 0.2f, 0.2f, -1f));
 		//env.add((shadowLight = new DirectionalShadowLight(1024, 1024, 30f, 30f, 1f, 100f)).set(0.8f, 0.8f, 0.8f, -1f, -.8f, -.2f));
-		env.add((shadowLight = new DirectionalShadowLight(1024, 1024, 60f, 60f, .1f, 50f)).set(1f, 1f, 1f, 40.0f, -35f, -35f));   
-		env.shadowMap = shadowLight;
+	//	env.add((shadowLight = new DirectionalShadowLight(1024, 1024, 60f, 60f, .1f, 50f)).set(1f, 1f, 1f, 0.2f, 0.2f, -1f));   
+	//	env.shadowMap = shadowLight;
+		
+	//	com.badlogic.gdx.graphics.g3d.environment.BaseLight<BaseLight<T>>
+		
+		/*PointLight pl = new PointLight().setPosition(-10, -10, 1000)
+				.setColor(Color.WHITE)
+				.setIntensity(1000000);
+		env.add(pl);
+		//new SpotLight().setPosition(50, 50, 50);
+		 * /
+		env.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, .6f, 1f));
+		env.add((shadowLight = new DirectionalShadowLight(1024, 1024, 60f, 60f, .1f, 50f))                  
+	                .set(1f, 1f, 1f, 40.0f, -35f, -35f));   
+		env.shadowMap = shadowLight; 
+		
+		//new SpotLightsAttribute().lights.add();
+		*/
 	}
 	
 	protected float getAmbiantBrightness() {
@@ -60,9 +73,9 @@ public abstract class Screen3d extends BaseScreen {
 	@Override
 	protected Camera createCam() {
 		Vector3 camPos = new Vector3(-3, -3, 5);
-		float fieldOfView = 67; // à mettre dans les settings
-		float near = 0.1f; 		  // à mettre dans les settings
-		float far = 200f; 		  // à mettre dans les settings
+		float fieldOfView = 67; // ï¿½+ mettre dans les settings
+		float near = 0.1f; 		  // + mettre dans les settings
+		float far = 200f; 		  // + mettre dans les settings
 		Camera cam = Cameras.perspective(camPos, Vector3.Zero, fieldOfView, near, far);
 		cam.update();
 		return cam;
@@ -70,37 +83,53 @@ public abstract class Screen3d extends BaseScreen {
 
 	@Override
 	protected Viewport createView(Camera cam) {
-		float aspectRatio = 16/9f;	// ratio à mettre dans les settings public
-		float minWorldY = 50; 		// hauteur min à mettre ds settings privés
+		float aspectRatio = 16/9f;	// ratio Ã  mettre dans les settings public
+		float minWorldY = 50; 		// hauteur min Ã  mettre ds settings privï¿½s
 		float minWorldX = minWorldY * aspectRatio;
-		// width et height sont en world units pour contrôller how much du monde qu'on voit
-		// cela est ensuite scalé pour s'adapter à la grandeur de la fenêtre
+		// width et height sont en world units pour contrï¿½ller how much du monde qu'on voit
+		// cela est ensuite scalï¿½ pour s'adapter ï¿½ la grandeur de la fenï¿½tre
 		Viewport view = Viewports.extend(minWorldX, minWorldY,  cam);
 		view.apply();
 		return view;
 	}
 	
-	@Override
-	public void render(float delta) {
+	protected void renderShadows(float delta) {
+		// render les shadows avant de clearScreen
 		shadowLight.begin(Vector3.Zero, getCam().direction);
 		shadowBatch.begin(shadowLight.getCamera());
 		shadowBatch.render(world.cache, env);
+		world.tempModels.forEach(m -> shadowBatch.render(m, env));
 		shadowBatch.end();
 		shadowLight.end();
+	}
+	
+	@Override
+	public void render(float delta) {
+		world.buildCache();
+		renderShadows(delta);
+		// clearScreen + renderHook
 		super.render(delta);
+	}
+	
+	
+	protected void renderWorld(float delta) {
+		batch.begin(getCam());
+		// render the cached models
+		batch.render(world.cache, env);
+		// render the temp models
+		world.tempModels.forEach(m -> batch.render(m, env));
+		batch.end();
 	}
 	
 	@Override
 	protected void renderHook(float delta) {
-		batch.begin(getCam());
-		batch.render(world.cache, env);
-		batch.end();
+		renderWorld(delta);
 	}
 
 	
 	@Override public void dispose(){ 
 		batch.dispose();
-		world.cache.dispose();
+		world.dispose(); //.cache.dispose();
 	}
 
     public World getWorld() {

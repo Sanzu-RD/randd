@@ -1,10 +1,6 @@
 package com.souchy.randd.ebishoal.commons.lapis.screens;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens.Screen2d;
 import com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens.Screen3d;
 
@@ -19,9 +15,19 @@ public abstract class ComposedScreen extends Screen3d {
         Gdx.input.setInputProcessor(getHud().getStage());
 	}
 	
+	
 	@Override
-	public void render(float delta) {
-		super.render(delta);
+	protected void renderHook(float delta) {
+		if(orderHudToFront()) {
+			super.renderHook(delta);
+			renderHud(delta);
+		} else {
+			renderHud(delta);
+			super.renderHook(delta);
+		}
+	}
+	
+	protected void renderHud(float delta) {
 		getHud().renderHook(delta);
 	}
 	
@@ -33,5 +39,8 @@ public abstract class ComposedScreen extends Screen3d {
 
 	
 	public abstract Screen2d getHud();
+
+
+	protected abstract boolean orderHudToFront() ;
 	
 }

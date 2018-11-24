@@ -28,14 +28,14 @@ public abstract class Screen2d extends BaseScreen {
 	@Override
 	protected Camera createCam() {
 		OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // space dimensions
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f); // camera view position (x,y) on the space (center of the space dimension)
+        //camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f); // camera view position (x,y) on the space (center of the space dimension)
         camera.update();
         return camera;
         /*
 		Vector3 camPos = new Vector3(0, 0, 0);
-		float zoom = 0f; // à mettre dans les settings public
-		float near = 0.0f;   // à mettre dans les settings public
-		float far = 200f;  // à mettre dans les settings public
+		float zoom = 0f; // + mettre dans les settings public
+		float near = 0.0f;   // + mettre dans les settings public
+		float far = 200f;  // + mettre dans les settings public
 		Camera cam = Cameras.orthogonal(camPos, Vector3.Zero, zoom, near, far);
 		cam.position.set(cam.viewportWidth / 2, cam.viewportHeight / 2, 0f);
 		cam.update();
@@ -46,11 +46,11 @@ public abstract class Screen2d extends BaseScreen {
 	protected Viewport createView(Camera cam) {
 		return new ScreenViewport(cam);
 		/*
-		float aspectRatio = 16/9f;	// ratio à mettre dans les settings public
-		float minWorldY = 50; 		// hauteur min à mettre ds settings privés
+		float aspectRatio = 16/9f;	// ratio Ã  mettre dans les settings public
+		float minWorldY = 50; 		// hauteur min Ã  mettre ds settings privï¿½s
 		float minWorldX = minWorldY * aspectRatio;
-		// width et height sont en world units pour contrôller how much du monde qu'on voit
-		// cela est ensuite scalé pour s'adapter à la grandeur de la fenêtre
+		// width et height sont en world units pour contrÃ´ller how much du monde qu'on voit
+		// cela est ensuite scalï¿½ pour s'adapter Ã  la grandeur de la fenï¿½tre
 		Viewport view = Viewports.extend(minWorldX, minWorldY,  cam);
 		view.apply();
 		return view;*/
@@ -72,7 +72,7 @@ public abstract class Screen2d extends BaseScreen {
 	}
 	
 	/**
-	 * @return Le stage servant de HUD à tous les actors, labels, etc
+	 * @return Le stage servant de HUD ï¿½ tous les actors, labels, etc
 	 */
 	public Stage getStage() {
 		return stage;
@@ -87,5 +87,6 @@ public abstract class Screen2d extends BaseScreen {
 	public void resize(int width, int height) {
 		getViewport().update(width, height, true);
 	}
+
 	
 }

@@ -1,6 +1,9 @@
 package com.souchy.randd.tools.mapeditor.ui;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens.Screen2d;
 import com.souchy.randd.tools.mapeditor.ui.components.BottomBar;
@@ -11,11 +14,11 @@ import com.souchy.randd.tools.mapeditor.ui.components.TopBar;
 public class EditorScreenHud extends Screen2d {
 	
 
-	private PropertiesPanel properties;
+	public PropertiesPanel properties;
 	//private EditorLayoutPanel layout;
 
-	private TopBar top;
-	private BottomBar bottom;
+	public TopBar top;
+	public BottomBar bottom;
 	
 	
 	@Override
@@ -24,8 +27,12 @@ public class EditorScreenHud extends Screen2d {
 
 		//getStage().setDebugAll(true);
 		
-		VisTable root = new VisTable();
-		getStage().addActor(root);
+		Texture t = new Texture(Gdx.files.absolute("F:\\Users\\Souchy\\Desktop\\Robyn\\Git\\res\\assets\\textures\\1370834-galaxy.jpg"));
+		Image a = new Image(t);
+		//getDrawingSpace();
+		a.setBounds(0, 0, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
+		
+		getStage().addActor(a);
 		
 		top = new TopBar();
 		bottom = new BottomBar();
@@ -36,6 +43,14 @@ public class EditorScreenHud extends Screen2d {
 		getStage().addActor(properties);
 		//getStage().addActor(actor);
 		
+		
+		/*
+		VisTable root = new VisTable();
+		getStage().addActor(root);
+		root.add(top.getTable());
+		root.row();
+		root.add(properties);
+		root.row();*/
 	}
 	
 	@Override
@@ -47,11 +62,21 @@ public class EditorScreenHud extends Screen2d {
 	public void resize(int width, int height) {
 		super.resize(width, height);
 
-		top.resize(width, height); // la menubar est spéciale ...
+		top.resize(width, height); // la menubar est spÃ©ciale ...
 		getStage().getActors()
 			.select(a -> a instanceof Component)
 			.forEach(a -> ((Component)a).resize(width, height));
 	}
 	
+
+	public Rectangle getDrawingSpace() {
+		int x = 0;
+		int y = (int) (bottom.getHeight() + bottom.getY());
+		int spaceWidth = (int) (getViewport().getScreenWidth() - properties.getChildren().get(0).getWidth()) - 4;
+		int spaceHeight = (int) (getViewport().getScreenHeight() - bottom.getHeight() - top.getTable().getHeight()); //(int) (top.getTable().getY() - top.getTable().getHeight()) - y; //.getHeight();
+		//int[] space = new int[] {x + 5, y + 5, spaceWidth - 10, spaceHeight - 10};
+		//System.out.println(spaceHeight);
+		return new Rectangle(x + 5, y + 5, spaceWidth - 10, spaceHeight - 10);
+	}
 	
 }

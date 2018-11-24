@@ -3,6 +3,7 @@ package com.souchy.randd.ebishoal.commons.lapis.main;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.math.Vector2;
+import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.commons.ebishoal.EbiCore;
 
 /**

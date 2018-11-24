@@ -1,6 +1,5 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
-import com.badlogic.gdx.math.Vector2;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 

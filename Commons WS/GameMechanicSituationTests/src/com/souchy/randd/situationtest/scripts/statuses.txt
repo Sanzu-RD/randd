@@ -1,0 +1,41 @@
+
+
+
+
+
+Terrain Statuses						On parle ici de status standards, avec lesquels on peut faire des checks dans le code général
+						
+	ImmovableTerrain					ce ne sont pas des status spéciaux provenant de sorts, eux ont leurs propre checks ajouté dans leur code
+	BlocksLineOfSightTerrain					
+	UnWalkableTerrain					
+	UnchangeableTerrain (cant transform to another terrain type)					
+	UnTargetableTerrain (pour sorts qu'on vise une cellule, ex aoe, )					
+						
+						
+						
+CharacterStatuses						
+						
+	Sleeping : pass turn		
+	Immovable : 				
+	UnTargetable : 				
+	UnDamageable : 					
+	UnHealable :
+	Heavy ? : cant lift, cant jump up			
+	Silenced : cant cast spells but can move		
+	Rooted : cant move but can cast spells
+	
+	
+	
+	
+	
+	iffy: 
+	Hovering : can walk over holes 
+				(just modifies the pathing to include cells which are much lower in Z, 
+				ex height map : [9,0,0,9] start at first cell (9), keep the height in memory, 
+				ur base height is now 9 instead of 0 so u can get the to last cell 
+				even if ur jump power is lower than 9,
+				so u basically keep ur highest height,
+				so u could i.e. climb stairs and jump over a hole because u got higher, all in one movement : [2,4,6,8,0,0,8] )	
+	Flying : puts u higher than the cell ur on, so you're harder to reach with spells  (tbh idk if i'll do the reach thing, it's prob too much)
+	
+	maybe just have hover and rename it to Flying and make ur jump 99

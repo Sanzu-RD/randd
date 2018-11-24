@@ -44,7 +44,7 @@ public class TopBar extends MenuBar implements Component {
 		getTable().pack();
 		getTable().setWidth(width);
 		//getTable().setHeight(27);
-		getTable().setPosition(0, height - 1, Align.topLeft);
+		getTable().setPosition(0, height, Align.topLeft);
 	}
 	
 	private void createFileMenu() {
@@ -106,6 +106,7 @@ public class TopBar extends MenuBar implements Component {
 				} else {
 					//MapEditorGame.cache.set(MapEditorGame.currentFile.get().name(), MapEditorGame.currentMap.get());
 					MapEditorGame.cache.set(MapEditorGame.currentFile.get().file().getPath(), MapEditorGame.currentMap.get());
+					MapEditorGame.properties.save();
 				}
 			}
 		});

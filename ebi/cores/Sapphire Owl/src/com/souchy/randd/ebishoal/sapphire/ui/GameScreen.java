@@ -1,29 +1,16 @@
 package com.souchy.randd.ebishoal.sapphire.ui;
 
-import java.util.List;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
-import com.badlogic.gdx.graphics.VertexAttributes.Usage;
-import com.badlogic.gdx.graphics.g3d.Material;
-import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
-import com.badlogic.gdx.graphics.g3d.attributes.DepthTestAttribute;
-import com.badlogic.gdx.graphics.g3d.attributes.IntAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
-import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.souchy.randd.ebishoal.commons.lapis.drawing.Line;
 import com.souchy.randd.ebishoal.commons.lapis.drawing.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.screens.Cameras;
 import com.souchy.randd.ebishoal.commons.lapis.screens.ComposedScreen;
@@ -41,8 +28,8 @@ public class GameScreen extends ComposedScreen {
 	//Line viewLine;
 	
 	
-	private float aspectRatio = 16/9f;	// ratio à mettre dans les settings public
-	private float minWorldY = 50; 		// hauteur min à mettre ds settings privés
+	private float aspectRatio = 16/9f;	// ratio ï¿½ mettre dans les settings public
+	private float minWorldY = 50; 		// hauteur min ï¿½ mettre ds settings privï¿½s
 	private float minWorldX = minWorldY * aspectRatio;
 	
 
@@ -110,9 +97,9 @@ public class GameScreen extends ComposedScreen {
 	protected Camera createCam() {
 
 		Vector3 camPos = new Vector3(40, -20, 100);
-		float fieldOfView = 67; // à mettre dans les settings
-		float near = 0.1f; 		  // à mettre dans les settings
-		float far = 1000f; 		  // à mettre dans les settings
+		float fieldOfView = 67; // ï¿½ mettre dans les settings
+		float near = 0.1f; 		  // ï¿½ mettre dans les settings
+		float far = 1000f; 		  // ï¿½ mettre dans les settings
 		Camera cam = Cameras.perspective(camPos, Vector3.Zero, fieldOfView, near, far);
 		cam.lookAt(0, 0, 0);
 		cam.update();
@@ -166,8 +153,8 @@ public class GameScreen extends ComposedScreen {
 
 	@Override
 	protected Viewport createView(Camera cam) {
-		// width et height sont en world units pour contrôller how much du monde qu'on voit
-		// cela est ensuite scalé pour s'adapter à la grandeur de la fenêtre
+		// width et height sont en world units pour contrï¿½ller how much du monde qu'on voit
+		// cela est ensuite scalï¿½ pour s'adapter ï¿½ la grandeur de la fenï¿½tre
 		Viewport view = Viewports.extend(minWorldX, minWorldY, cam);
 		//Viewport view = Viewports.scaling(Scaling.fill, minWorldX, minWorldY, getCam());
 		view.apply(false);

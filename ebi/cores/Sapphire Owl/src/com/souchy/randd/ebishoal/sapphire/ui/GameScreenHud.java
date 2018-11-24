@@ -11,14 +11,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens.Screen2d;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 
 public class GameScreenHud extends Screen2d {
 
@@ -110,11 +106,11 @@ public class GameScreenHud extends Screen2d {
 	protected Viewport createView(Camera cam) {
 		// TODO Auto-generated method stub
 		return super.createView(cam);
-		/*float aspectRatio = 16/9f;	// ratio à mettre dans les settings public
-		float minWorldY = 50; 		// hauteur min à mettre ds settings privés
+		/*float aspectRatio = 16/9f;	// ratio ï¿½ mettre dans les settings public
+		float minWorldY = 50; 		// hauteur min ï¿½ mettre ds settings privï¿½s
 		float minWorldX = minWorldY * aspectRatio;
-		// width et height sont en world units pour contrôller how much du monde qu'on voit
-		// cela est ensuite scalé pour s'adapter à la grandeur de la fenêtre
+		// width et height sont en world units pour contrï¿½ller how much du monde qu'on voit
+		// cela est ensuite scalï¿½ pour s'adapter ï¿½ la grandeur de la fenï¿½tre
 		//Viewport view = Viewports.extend(minWorldX, minWorldY,  cam);
 		Viewport view = Viewports.scaling(Scaling.none, minWorldX, minWorldY,  cam);
 		view.apply();

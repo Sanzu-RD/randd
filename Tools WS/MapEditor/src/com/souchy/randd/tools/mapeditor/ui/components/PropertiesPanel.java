@@ -1,22 +1,26 @@
 package com.souchy.randd.tools.mapeditor.ui.components;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.Align;
+import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisCheckBox;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisSplitPane;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextField;
+import com.souchy.randd.commons.tealwaters.properties.Property;
 import com.souchy.randd.tools.mapeditor.MapEditorCore;
 import com.souchy.randd.tools.mapeditor.MapEditorGame;
 
@@ -35,62 +39,152 @@ public class PropertiesPanel extends VisSplitPane  implements Component {
 		//Color charcoal = new Color(47 / 255f, 47 / 255f, 47 / 255f, 1);
 		
 		
-		Skin skin = new Skin(Gdx.files.internal("res/uiskin.json"));
+		Skin skin = MapEditorGame.skin;//new Skin(Gdx.files.internal("res/uiskin.json"));
+		//table.setSkin(skin);
 		
-		Texture honkongTex = new Texture(Gdx.files.internal("res/hongkonghustle-hiero-100_00.png"), true); // true enables mipmaps
+		/*
+		Texture honkongTex = new Texture(Gdx.files.internal("fonts/hongkonghustle-hiero-100_00.png"), true); // true enables mipmaps
 		honkongTex.setFilter(TextureFilter.MipMapLinearNearest, TextureFilter.Linear); // linear filtering in nearest mipmap image
-		BitmapFont hongkongFont = new BitmapFont(Gdx.files.internal("res/hongkonghustle-hiero-100.fnt"), new TextureRegion(honkongTex), false);
+		BitmapFont hongkongFont = new BitmapFont(Gdx.files.internal("fonts/hongkonghustle-hiero-100.fnt"), new TextureRegion(honkongTex), false);
 		LabelStyle hongkong = new LabelStyle();
-		hongkong.font = hongkongFont;
-		
-		
+		hongkong.font = hongkongFont;*/
+		//
+
+		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		parameter.size = 23;
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/GeosansLight.ttf"));
+		BitmapFont font = generator.generateFont(parameter);
+		font.setColor(Color.PINK);
+		generator.dispose();
+		/*
+		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		parameter.size = 18;
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Romance-Fatal-Serif-Std.ttf"));
+		BitmapFont romance = generator.generateFont(parameter);
+		romance.setColor(Color.PINK);
+		generator.dispose();
+
+		//skin.add("default-font", romance, BitmapFont.class);
+		//VisUI.getSkin().remove("default-font", BitmapFont.class);
+		//VisUI.getSkin().add("default-font", romance, BitmapFont.class);
+		VisUI.getSkin().get(Label.LabelStyle.class).font = romance; // -> lui marche
+		//VisUI.getSkin().getFont("default-font").getData().scale(1.5f);
+		 */
+
+		VisUI.getSkin().get(Label.LabelStyle.class).font = font; // -> lui marche
 		VisLabel ta = new VisLabel("Properties");
-		ta.setFontScale(1.5f);
-		ta.pack();
+	//	ta.getStyle().font = romance;
+	//	ta.setFontScale(1.5f);
+	//	ta.pack();
 		table.add(ta).height(50);
 		table.row();
+
+		var titleEntry = new VisTextField();
+		titleEntry.setName("title");
+		linkStringProperty(titleEntry, MapEditorCore.core.getProperties().title);
+		table.add(new VisLabel("Title"));
+		table.add(titleEntry);
+		table.row();
+		
 		table.add(new VisLabel("Width")).width(125);
 		table.add(new NumberEntryField("40")).width(125);
 		table.row();
+		
 		table.add(new VisLabel("Height"));
 		table.add(new NumberEntryField("40"));
 		table.row();
+
+		var showGridEntry = new VisCheckBox("", false); 
+		showGridEntry.setName("showGrid");
+		linkBoolProperty(showGridEntry, MapEditorGame.properties.showGrid);
 		table.add(new VisLabel("Show grid"));
-		table.add(new VisCheckBox("", false));
+		table.add(showGridEntry);
 		table.row();
-		table.add(new VisLabel("Title"));
-		table.add(new VisTextField("enter title") {
-			{
-				this.addListener(new ChangeListener() {
-					@Override
-					public void changed(ChangeEvent event, Actor actor) {
-						var text = ((VisTextField)actor).getText();
-						System.out.println("changed text field : " + text);
-						MapEditorCore.core.getProperties().title.set(text);
-						System.out.println("prop.title : " + MapEditorCore.core.getProperties().title.get());
-					}
-				});
-			}
+		
+		var ambiantEntry = new NumberEntryField();
+		ambiantEntry.setName("ambiantBrightness");
+		linkFloatProperty(ambiantEntry, MapEditorGame.properties.ambiantBrightness);
+		MapEditorGame.properties.ambiantBrightness.addListener((e) -> {
+			MapEditorGame.screen.getEnvironment().clear();
+			MapEditorGame.screen.createEnvironment();
 		});
+		table.add(new VisLabel("Ambiant Brightness"));
+		table.add(ambiantEntry);
+		table.row();
+
+		var dirBrightEntry = new NumberEntryField();
+		dirBrightEntry.setName("directionalBrightness");
+		linkFloatProperty(dirBrightEntry, MapEditorGame.properties.directionalBrightness);
+		MapEditorGame.properties.directionalBrightness.addListener((e) -> {
+			MapEditorGame.screen.getEnvironment().clear();
+			MapEditorGame.screen.createEnvironment();
+		});
+		table.add(new VisLabel("Dir Brightness"));
+		table.add(dirBrightEntry);
+		table.row();
+
+		var dirCountEntry = new NumberEntryField();
+		dirCountEntry.setName("directionalLightCount");
+		linkIntProperty(dirCountEntry, MapEditorGame.properties.directionalLightCount);
+		MapEditorGame.properties.directionalLightCount.addListener((e) -> {
+			MapEditorGame.screen.getEnvironment().clear();
+			MapEditorGame.screen.createEnvironment();
+		});
+		table.add(new VisLabel("Dir Light Count"));
+		table.add(dirCountEntry);
 		table.row();
 		
 		table.getCells().forEach(c -> c.align(Align.left));
 		table.background(skin.newDrawable("white"));
 		table.setColor(Color.DARK_GRAY);
 		table.align(Align.topLeft);
-	//	table.pack();
+		table.pack();
 		
 		//this.pack();
-		this.setWidth(250);
+		this.setWidth(300);
 		this.setSplitAmount(0);
 	}
+	
+
+	private void linkStringProperty(VisTextField entry, Property<String> p) {
+		linkProperty(entry, p, entry::setText, entry::getText);
+	}
+	private void linkBoolProperty(VisCheckBox entry, Property<Boolean> p) {
+		linkProperty(entry, p, entry::setChecked, entry::isChecked);
+	}
+	private void linkIntProperty(NumberEntryField entry, Property<Integer> p) {
+		linkProperty(entry, p, entry::setText, entry::getText, Integer::parseInt, i -> i.toString());
+	}
+	private void linkFloatProperty(NumberEntryField entry, Property<Float> p) {
+		linkProperty(entry, p, entry::setText, entry::getText, Float::parseFloat, f -> f.toString());
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T,E> void linkProperty(Actor entry, Property<T> p, Consumer<E> actorSetter, Supplier<E> actorGetter) {
+		linkProperty(entry, p, actorSetter, actorGetter, v -> (T)v, v -> (E)v);
+	}
+	private <T,E> void linkProperty(Actor entry, Property<T> p, Consumer<E> actorSetter, Supplier<E> actorGetter, Function<E, T> convert1, Function<T, E> convert2) {
+		actorSetter.accept(convert2.apply(p.get()));
+		entry.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				var actorValue = actorGetter.get();//  ((VisTextField) actor).getText();
+				try {
+					p.set(convert1.apply(actorValue));
+				} catch(Exception e) { }
+				System.out.println("Changed prop ["+entry.getName()+"] : " + p.get());
+			}
+		});
+	}
+	
+	
 	
 	@Override
 	public void act(float delta) {
 		super.act(delta);
 
 		this.setPosition(getStage().getWidth(), 0, Align.bottomRight);
-		this.setHeight(getStage().getHeight());
+		this.setHeight(getStage().getHeight() - 31);
 	}
 
 	@Override

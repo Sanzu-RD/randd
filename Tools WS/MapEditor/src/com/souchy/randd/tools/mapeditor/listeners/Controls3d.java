@@ -17,11 +17,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.souchy.randd.tools.mapeditor.MapEditorGame;
+import com.souchy.randd.tools.mapeditor.ui.EditorScreenHud;
 
 public class Controls3d extends InputListener {
 	
@@ -43,12 +45,6 @@ public class Controls3d extends InputListener {
 	
 	public void update(float delta) {
 
-		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
-			//cam.position.set(0, 0, 60);
-			//cam.direction.set(0, 0, -1);
-			//cam.up.set(0, 1, 0);
-			MapEditorGame.screen.resetCam();
-		}
 		
 		//long currentTime = System.currentTimeMillis();
 		//long delta = currentTime - previousTime;
@@ -76,7 +72,7 @@ public class Controls3d extends InputListener {
 		if(Gdx.input.isKeyPressed(LEFT)) ur.add(0, 0, -1f); // look left
 		if(Gdx.input.isKeyPressed(RIGHT)) ur.add(0, 0, 1f); // look right
 		
-		// p = le point qu'on regarde avec la caméra
+		// p = le point qu'on regarde avec la camï¿½ra
 		float scl = Math.abs(cam.position.z / dir.z);
 		Vector3 p = new Vector3(dir.x * scl + pos.x, dir.y * scl + pos.y, 0); // new Vector3((float)GridMap.width/2, (float)GridMap.height/2, 0); // -> si on
 																				// voulait tjrs tourner autour du point central
@@ -97,7 +93,8 @@ public class Controls3d extends InputListener {
 	@Override
 	public void touchDragged(InputEvent event, float x, float y, int pointer) {
 		super.touchDragged(event, x, y, pointer);
-		if(x >= 1600 - 200) {
+		Rectangle space = ((EditorScreenHud)MapEditorGame.screen.getHud()).getDrawingSpace();
+		if(space.contains(x, y) == false) {
 			return; // pas dans la zone
 		}
 		
@@ -111,7 +108,7 @@ public class Controls3d extends InputListener {
 		float dy = y - previousY;
 		
 		
-		// p = le point qu'on regarde avec la caméra
+		// p = le point qu'on regarde avec la camï¿½ra
 		float scl = Math.abs(cam.position.z / dir.z);
 		Vector3 target = new Vector3(dir.x * scl + pos.x, dir.y * scl + pos.y, 0);
 		
@@ -154,8 +151,13 @@ public class Controls3d extends InputListener {
 	@Override
 	public boolean keyDown(InputEvent event, int keycode) {
 		// System.out.println("key down " + keycode);
-		
-		//previousTime = System.currentTimeMillis();
+
+		if(keycode == Keys.SPACE) { //Gdx.input.isKeyPressed(Keys.SPACE)) {
+			//cam.position.set(0, 0, 60);
+			//cam.direction.set(0, 0, -1);
+			//cam.up.set(0, 1, 0);
+			MapEditorGame.screen.resetCam();
+		}
 		return true; // super.keyDown(event, keycode);
 	}
 	

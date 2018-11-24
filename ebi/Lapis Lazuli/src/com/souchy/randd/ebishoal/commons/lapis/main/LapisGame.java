@@ -4,21 +4,29 @@ import java.util.List;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.ebishoal.commons.lapis.discoverers.FontDiscoverer;
 import com.souchy.randd.ebishoal.commons.lapis.discoverers.ModelDiscoverer;
+import com.souchy.randd.ebishoal.commons.lapis.managers.ModelManager;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 import com.souchy.randd.situationtest.models.org.FightContext;
 
 
 public abstract class LapisGame extends Game {
 
-	
+
 	public final FontDiscoverer fonts;
 	public final ModelDiscoverer modelDiscoverer;
 	
-	public List<LabelStyle> labelStyles;
+	private final AssetManager assets;
+	public final ModelManager modelManager;
 	
+	public List<LabelStyle> labelStyles;
 	
 	//public final FightContext context;
 	
@@ -27,10 +35,10 @@ public abstract class LapisGame extends Game {
 	 * Cannot have any use of Gdx. here as the application hasn't started yet
 	 */
 	public LapisGame() {
+		assets = new AssetManager();
 		fonts = new FontDiscoverer();
 		modelDiscoverer = new ModelDiscoverer();
-
-		//context = new FightContext();
+		modelManager = new ModelManager(assets);
 	}
 	
 	
@@ -40,14 +48,17 @@ public abstract class LapisGame extends Game {
 	 */
 	@Override
 	public void create() {
-		labelStyles = fonts.explore("res");
-		//models.explore("");
+		VisUI.load();
+		labelStyles = fonts.explore(""); //"res");
+		List<FileHandle> files = modelDiscoverer.explore("g3d"); //"res");
+		files.forEach(f -> {
+			modelManager.load(f.path());
+		});
+		assets.finishLoading();
 		
-		//createScreens();
 		onCreateHook();
 		setScreen(getStartScreen());
 	}
-
 
 	/**
 	 * 

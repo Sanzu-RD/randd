@@ -3,15 +3,6 @@
 	<classpathentry excluding="com/souchy/randd/tools/mapeditor/ui/components/EditorLayoutPanel.java|com/souchy/randd/tools/mapeditor/ui/components/LayoutPanel.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="src" path="data"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Sapphire Owl"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/MapCache"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/GameMechanicSituationTests"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/EbiCore"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Cache"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-10">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -20,5 +11,15 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Cache"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EbiCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GameMechanicSituationTests"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MapCache"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Sapphire Owl"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/PiranhaPlants"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -20,6 +20,8 @@ public class MapEditorCore extends LapisCore {
 	protected String[] getRootPackages() {
 		return new String[] { "com.souchy.randd.tools.mapeditor" };
 	}
+	
+	
 
 	
 }

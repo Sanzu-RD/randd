@@ -4,12 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.DepthTestAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.IntAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -38,8 +41,9 @@ public class MapEditorGame extends LapisGame {
 	public void onCreateHook() {
 		properties = new EditorProperties();
 		properties.load();
+
 		
-		skin = new Skin(Gdx.files.internal("res/uiskin.json"));
+		skin = new Skin(Gdx.files.internal("ui/common/uiskin.json"));
 		cache = new MapCache(); //"data/maps/", FileType.Internal);
 		System.out.println("on create :" + cache.getRoot());
 		screen = new EditorScreen();
@@ -50,6 +54,12 @@ public class MapEditorGame extends LapisGame {
 	}
 	
 	@Override
+	public void dispose() {
+		properties.save(); // save on exit
+		super.dispose();
+	}
+	
+	@Override
 	public Screen getStartScreen() {
 		return screen;
 	}
@@ -57,7 +67,7 @@ public class MapEditorGame extends LapisGame {
 	public static void loadMap() {
 		//MapCache cache = new MapCache();
 
-		screen.getWorld().cache.begin();
+		//screen.getWorld().cache.begin();
 		
 		if(currentFile.get() != null) {
 			String path = currentFile.get().file().getAbsolutePath();
@@ -65,29 +75,30 @@ public class MapEditorGame extends LapisGame {
 			MapEditorGame.currentMap.set(data);
 
 			//MapData data = currentMap.get(); //cache.get("data/maps/map1.map");
-			for(int i = 0; i < data.models.length; i++) {
-				for(int j = 0; j < data.models[i].length; j++) {
-					int modelID = data.getModel(i, j);
-					int height = data.getElevation(i, j);
-					boolean walk = data.isWalkable(i, j);
-					boolean los = data.isLos(i, j);
+			for(int x = 0; x < data.models.length; x++) {
+				for(int y = 0; y < data.models[x].length; y++) {
+					int modelID = data.getModel(x, y);
+					int z = data.getElevation(x, y);
+					boolean walk = data.isWalkable(x, y);
+					boolean los = data.isLos(x, y);
 					
 					if(modelID != MatrixFlags.PositionningFlags.NoFlag.getID()) {
 						//Model model = manager.get("data/cellModels/" + modelID + ".g3dj");
 						ModelInstance instance = testModelGenerator(modelID); //new ModelInstance(model);
 						
-						EbiCell c = new EbiCell(i, j, height, walk, los, instance);
-						instance.transform.setTranslation(new Vector3(cellSize * i + cellSize/2, cellSize * j + cellSize/2, height * cellSize - cellSize/2));
+						EbiCell c = new EbiCell(x, y, z, walk, los, instance);
+						instance.transform.setTranslation(new Vector3(cellSize * x + cellSize/2, cellSize * y + cellSize/2, z * cellSize - cellSize/2));
 						
 						//board.getCells().put(i, j, c);
-						screen.getWorld().cache.add(c.model);
+						//screen.getWorld().cache.add(c.model);
+						screen.getWorld().addToCache(c.model);
 					}
 				}
 			}
 		}
 		screen.resetCam();
 
-		screen.getWorld().cache.end();
+		//screen.getWorld().cache.end();
 	}
 	
 	private static ModelInstance testModelGenerator(int id) {
@@ -102,10 +113,10 @@ public class MapEditorGame extends LapisGame {
 	
 	private static Material getMat(int id) {
 		Material mat1 = new Material(
-			  //  IntAttribute.createCullFace(GL20.GL_FRONT),//For some reason, libgdx ModelBuilder makes boxes with faces wound in reverse, so cull FRONT
-			  //  new BlendingAttribute(1f), //opaque since multiplied by vertex color
+			    //IntAttribute.createCullFace(GL20.GL_FRONT),//For some reason, libgdx ModelBuilder makes boxes with faces wound in reverse, so cull FRONT
+			    new BlendingAttribute(1f), //opaque since multiplied by vertex color
 			    new DepthTestAttribute(true), //don't want depth mask or rear cubes might not show through
-			    ColorAttribute.createDiffuse(Color.WHITE));
+			    ColorAttribute.createDiffuse(Color.valueOf("AEE897")));
 		Material mat2 = mat1.copy();
 		Material mat3 = mat1.copy();
 		Material mat4 = mat1.copy();
@@ -122,5 +133,6 @@ public class MapEditorGame extends LapisGame {
 			default: return mat1;
 		}
 	}
+
 	
 }
