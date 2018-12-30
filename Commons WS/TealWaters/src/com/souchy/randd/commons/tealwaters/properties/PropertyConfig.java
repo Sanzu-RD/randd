@@ -20,11 +20,11 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
- * Implémente cette interface en créant des fields de type Property. ex :
+ * ImplÃ©mente cette interface en crÃ©ant des fields de type Property. ex :
  * Property nameOfAProp; Property nameOfAnotherProp;
  * <p>
  * L'interface se charge d'initialiser les fiedls (initFields()) au moment ou la
- * config est loadée (load())
+ * config est loadÃ©e (load())
  * 
  * @author Souchy
  *

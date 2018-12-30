@@ -29,7 +29,7 @@ public class Board implements IBoard {
 	}
 	
 	/**
-	 * Fonction coûteuse. Appeler le moins souvent. Garder le résultat en mémoire locale
+	 * Fonction coï¿½teuse. Appeler le moins souvent. Garder le rï¿½sultat en mï¿½moire locale
 	 * @param e
 	 * @return
 	 */
@@ -56,7 +56,7 @@ public class Board implements IBoard {
 	/**
 	 * autrefois List<IEntity>, ptete qu'on devrait avoir les deux ou quoi ?
 	 * <p>
-	 * on obtient les entités à partir des celles anyway : List<IEntity> = List<Cell>.map(c -> c.getEntity();
+	 * on obtient les entitï¿½s ï¿½ partir des celles anyway : List<IEntity> = List<Cell>.map(c -> c.getEntity();
 	 * 
 	 * @param targetCell
 	 * @param aoe
@@ -70,8 +70,8 @@ public class Board implements IBoard {
 		if(targetCell == null) return cells;
 		aoe.foreach((i, j) -> {
 			if(aoe.get(i, j) >= MatrixFlags.EffectFlags.Effect1.getID()) { // si *any* effect flag
-				int x = targetCell.getPos().x - aoe.insideSource.x + i;
-				int y = targetCell.getPos().y - aoe.insideSource.y + j;
+				int x = targetCell.getPos().x - aoe.origin.x + i;
+				int y = targetCell.getPos().y - aoe.origin.y + j;
 				if(map.contains(x, y)) {
 					cells.add(map.get(x, y));
 				}
@@ -98,8 +98,8 @@ public class Board implements IBoard {
 	public List<ICell> getCells(PositionMatrix matrix){
 		List<ICell> cells = new ArrayList<>();
 		matrix.foreach((i, j) -> {
-			int x = matrix.getAbsolutePos().x - matrix.getMatrixPos().x + i;
-			int y = matrix.getAbsolutePos().y - matrix.getMatrixPos().x + j;
+			int x = matrix.getPosition().x - matrix.getOrigin().x + i;
+			int y = matrix.getPosition().y - matrix.getOrigin().x + j;
 			if(map.contains(x, y)) {
 				cells.add(map.get(x, y));
 			}

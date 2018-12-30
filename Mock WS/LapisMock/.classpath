@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Cache"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EbiCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GameMechanicSituationTests"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PiranhaPlants"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-10">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RabbitMQ"/>
+	<classpathentry kind="src" path="data"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

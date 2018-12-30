@@ -72,7 +72,7 @@ public abstract class Screen2d extends BaseScreen {
 	}
 	
 	/**
-	 * @return Le stage servant de HUD � tous les actors, labels, etc
+	 * @return Le stage servant de HUD à tous les actors, labels, etc
 	 */
 	public Stage getStage() {
 		return stage;

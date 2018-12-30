@@ -40,7 +40,11 @@ public abstract class ComposedScreen extends Screen3d {
 	
 	public abstract Screen2d getHud();
 
-
+	/**
+	 * True to put the hud screen over the 3d screen
+	 * False to put the 3d screen over the hud screen
+	 * @return
+	 */
 	protected abstract boolean orderHudToFront() ;
 	
 }

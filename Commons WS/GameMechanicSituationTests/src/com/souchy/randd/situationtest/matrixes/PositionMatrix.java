@@ -17,37 +17,37 @@ import com.souchy.randd.situationtest.models.org.FightContext;
 public class PositionMatrix extends Matrix {
 
 	/**
-	 * Position du point d'origine dans la matrice
+	 * Position du point d'origine dans la matrice (local)
 	 */
-	private Point2D matrixPos;
+	private Point2D origin;
 	/**
-	 * Position du point d'origine sur le board
+	 * Position du point d'origine sur le board (world)
 	 */
-	private Point3D absolutePos;
+	private Point3D position;
 	
 	
-	public PositionMatrix(int[][] matrix) {
-		super(matrix);
+	public PositionMatrix(FightContext context, MatrixFlags[][] matrix) {
+		super(context, matrix);
 		for(int i = 0; i < matrix.length; i++) {
 			for(int j = 0; j < matrix[0].length; j++) {
-				if(matrix[i][j] == Matrix.Flags.SOURCE) {
-					matrixPos = new Point2D(i, j);
+				if(matrix[i][j] == MatrixFlags.PositionningFlags.Source) { //Matrix.Flags.SOURCE) {
+					origin = new Point2D(i, j);
 					break;
 				}
 			}
 		}
 	}
 	
-	public Point2D getMatrixPos() {
-		return matrixPos;
+	public Point2D getOrigin() {
+		return origin;
 	}
 	
-	public Point3D getAbsolutePos() {
-		return absolutePos;
+	public Point3D getPosition() {
+		return position;
 	}
 	
 	public void setPos(Point3D pos) {
-		this.absolutePos = pos;
+		this.position = pos;
 	}
 	
 	

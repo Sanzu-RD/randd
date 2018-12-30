@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 import com.souchy.randd.situationtest.matrixes.PositionMatrix;
+import com.souchy.randd.situationtest.models.org.ContextualObject;
 import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.scripts.Status;
 
@@ -28,7 +29,7 @@ import com.souchy.randd.situationtest.scripts.Status;
  * @author Souchy
  *
  */
-public abstract class IEntity implements EventProxy, Identifiable<Integer> {
+public abstract class IEntity extends ContextualObject implements EventProxy, Identifiable<Integer> {
 	
 	/**
 	 * Matrix representing the cells occupied by the entity
@@ -36,8 +37,6 @@ public abstract class IEntity implements EventProxy, Identifiable<Integer> {
 	 */
 //	public PositionMatrix getOccupiedCells();
 
-	public final FightContext context;
-	
 	private final int id;
 	protected PositionMatrix position;
 	
@@ -48,8 +47,8 @@ public abstract class IEntity implements EventProxy, Identifiable<Integer> {
 	
 	
 	public IEntity(FightContext context, final int id) {
+		super(context);
 		this.id = id;
-		this.context = context;
 		statuss = new ArrayList<>();
 	}
 	

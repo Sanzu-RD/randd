@@ -51,8 +51,8 @@ public abstract class EbiCore {
 	public abstract void start();
 
 	/**
-	 * Sert à savoir ou aller chercher les classes de Message et de MessageHandler pour les Discoverers.
-	 * @return - Noms des packages contenant les classes. La recherche est récursive. 
+	 * Sert Ã  savoir ou aller chercher les classes de Message et de MessageHandler pour les Discoverers.
+	 * @return - Noms des packages contenant les classes. La recherche est rï¿½cursive. 
 	 */
 	protected abstract String[] getRootPackages();
 	

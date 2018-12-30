@@ -5,7 +5,10 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.Renderable;
+import com.badlogic.gdx.graphics.g3d.Shader;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalShadowLight;
@@ -29,6 +32,7 @@ public class EditorScreen extends ComposedScreen {
 	private LineDrawing lining;
 	
 	//ModelInstance tree;
+	ShaderProgram shaderp;
 	
 	@Override
 	protected void createHook() {
@@ -64,14 +68,16 @@ public class EditorScreen extends ComposedScreen {
 		System.out.println(bb);
 		
 		ModelInstance tree = new ModelInstance(obj);
+		//tree.nodes.forEach(n -> n.parts.forEach(np -> np.meshPart.););
+		//getBatch().render(tree);
 		
 		tree.transform.translate(new Vector3(3, 7, 0).scl(MapEditorGame.cellSize));
 		tree.transform.rotateRad(Vector3.X, (float) (Math.PI/2));
 		getWorld().addTemp(tree);
-		
+
 		
 		//Shader s;
-		ShaderProgram shader = new ShaderProgram(Gdx.files.internal("shaders/passthrough.vsh"), Gdx.files.internal("shaders/passthrough.fsh"));
+		shaderp = new ShaderProgram(Gdx.files.internal("shaders/passthrough.vsh"), Gdx.files.internal("shaders/passthrough.fsh"));
 	}
 	
 
@@ -96,8 +102,8 @@ public class EditorScreen extends ComposedScreen {
 //		if(MapEditorGame.properties.directionalLightCount.get() >= 4) getEnvironment().add(new DirectionalLight().set(db, db, db, -dx, dy, dz));
 		
 		//getEnvironment().set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, .6f, 1f));
-		getEnvironment().add((shadowLight = new DirectionalShadowLight(5024, 5024, 600f, 600f, 0.1f, 100f))                  
-	                .set(db, db, db, dx, dy, dz)); //.set(1f, 1f, 1f, 40.0f, -35f, -35f));   
+		//getEnvironment().add((shadowLight = new DirectionalShadowLight(1024, 1024, 20f, 20f, 1f, 300f))        
+		getEnvironment().add((shadowLight = new DirectionalShadowLight(1024*4, 1024*4, 600f, 600f, 0.1f, 100f)).set(db, db, db, dx, dy, dz)); 
 		getEnvironment().shadowMap = shadowLight; 
 		
 //			Gdx.gl.glEnable(GL20.GL_POLYGON_OFFSET_FILL);
@@ -117,6 +123,9 @@ public class EditorScreen extends ComposedScreen {
 		//int[] drawingSpace = hud.getDrawingSpace();
 	  //  Gdx.gl.glViewport(drawingSpace[0], drawingSpace[1], 300, 300); //drawingSpace[2], drawingSpace[3]); //0, 0, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight());
 		// TODO Auto-generated method stub
+
+		//Gdx.gl.glCullFace(GL20.GL_FRONT);
+		
 		super.renderShadows(delta);
 		
 		time += delta;
@@ -127,6 +136,8 @@ public class EditorScreen extends ComposedScreen {
 		double adj = Math.cos(radian) / radius;
 		shadowLight.direction.x = (float) adj; //+= 0.001;
 		shadowLight.direction.y = (float) opp; //+= 0.001;
+
+		//Gdx.gl.glCullFace(GL20.GL_BACK);
 	}
 	
 	@Override
@@ -137,7 +148,7 @@ public class EditorScreen extends ComposedScreen {
 	
 	@Override
 	protected boolean orderHudToFront() {
-		return false;
+		return true;
 	}
 	
 	@Override
@@ -169,8 +180,12 @@ public class EditorScreen extends ComposedScreen {
 			MapEditorGame.screen.getViewport().update((int) drawingSpace.width, (int) drawingSpace.height); //drawingSpace[2], drawingSpace[3], false);
 		}
 		previousSplit = currSplit;
+		
 		if(MapEditorGame.properties.showGrid.get()) lining.renderLines();
+		
+	//	shaderp.begin();
 		super.renderWorld(delta);
+	//	shaderp.end();
 	}
 	
 	
@@ -212,6 +227,4 @@ public class EditorScreen extends ComposedScreen {
 		return hud;
 	}
 
-
-	
 }

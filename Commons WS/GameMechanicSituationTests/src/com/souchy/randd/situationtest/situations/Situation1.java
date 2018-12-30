@@ -37,15 +37,15 @@ public class Situation1 {
 	public static <T> void apply(Matrix map, EffectMatrix effect, Point2D target, Function1<Matrix, EffectMatrix, Point2D, Point2D> action) {
 		Matrix appliedMap = map.copy();
 		effect.foreach((i, j) -> {
-			// i et j sont les positions relative à la matrice de l'effet
+			// i et j sont les positions relative ï¿½ la matrice de l'effet
 			Point2D local = new Point2D(i, j);
 			// x et y sont les positions absolue dans la map
-			Point2D global = local.copy().add(target).sub(effect.insideSource);
+			Point2D global = local.copy().add(target).sub(effect.origin);
 			action.apply(appliedMap, effect, local, global);
 			//System.out.println(new Point2D(x, y));
 		});
 
-		System.out.println("Effect source : \n" + effect.insideSource);
+		System.out.println("Effect source : \n" + effect.origin);
 		System.out.println("Effect map : \n" + effect.toString());
 		System.out.println("Applied map : \n" + appliedMap.toString());
 	}

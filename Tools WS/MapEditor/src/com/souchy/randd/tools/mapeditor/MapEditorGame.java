@@ -29,7 +29,7 @@ public class MapEditorGame extends LapisGame {
 	
 	public static Bean<FileHandle> currentFile = new Bean<FileHandle>();
 	public static Bean<MapData> currentMap = new Bean<MapData>();
-	public static MapCache cache;
+	public static MapCache mapCache;
 	
 	public static EditorScreen screen;
 	public static Skin skin;
@@ -44,8 +44,8 @@ public class MapEditorGame extends LapisGame {
 
 		
 		skin = new Skin(Gdx.files.internal("ui/common/uiskin.json"));
-		cache = new MapCache(); //"data/maps/", FileType.Internal);
-		System.out.println("on create :" + cache.getRoot());
+		mapCache = new MapCache(); //"data/maps/", FileType.Internal);
+		System.out.println("on create :" + mapCache.getRoot());
 		screen = new EditorScreen();
 		screen.create();
 		
@@ -65,13 +65,9 @@ public class MapEditorGame extends LapisGame {
 	}
 
 	public static void loadMap() {
-		//MapCache cache = new MapCache();
-
-		//screen.getWorld().cache.begin();
-		
 		if(currentFile.get() != null) {
 			String path = currentFile.get().file().getAbsolutePath();
-			MapData data = MapEditorGame.cache.get(path);
+			MapData data = MapEditorGame.mapCache.get(path);
 			MapEditorGame.currentMap.set(data);
 
 			//MapData data = currentMap.get(); //cache.get("data/maps/map1.map");
@@ -85,25 +81,22 @@ public class MapEditorGame extends LapisGame {
 					if(modelID != MatrixFlags.PositionningFlags.NoFlag.getID()) {
 						//Model model = manager.get("data/cellModels/" + modelID + ".g3dj");
 						ModelInstance instance = testModelGenerator(modelID); //new ModelInstance(model);
+						instance.transform.setTranslation(new Vector3(cellSize * x + cellSize/2, cellSize * y + cellSize/2, z * cellSize - cellSize/2));
+						screen.getWorld().addToCache(instance);
 						
 						EbiCell c = new EbiCell(x, y, z, walk, los, instance);
-						instance.transform.setTranslation(new Vector3(cellSize * x + cellSize/2, cellSize * y + cellSize/2, z * cellSize - cellSize/2));
-						
 						//board.getCells().put(i, j, c);
-						//screen.getWorld().cache.add(c.model);
-						screen.getWorld().addToCache(c.model);
 					}
 				}
 			}
 		}
 		screen.resetCam();
-
-		//screen.getWorld().cache.end();
+		Gdx.graphics.getClass();
 	}
 	
 	private static ModelInstance testModelGenerator(int id) {
 		ModelBuilder builder = new ModelBuilder();
-		long attributes = Usage.Position | Usage.Normal | Usage.ColorPacked;
+		long attributes = Usage.Position | Usage.Normal; // | Usage.ColorPacked;
 		Model model = builder.createBox(cellSize, cellSize, cellSize, getMat(id), attributes);
 		ModelInstance instance = new ModelInstance(model);
 		//instance.transform.set(new Vector3(5 * i + 1f, 5 * j + 1f, 0), new Quaternion(0, 0, 0, 0));
@@ -113,9 +106,10 @@ public class MapEditorGame extends LapisGame {
 	
 	private static Material getMat(int id) {
 		Material mat1 = new Material(
-			    //IntAttribute.createCullFace(GL20.GL_FRONT),//For some reason, libgdx ModelBuilder makes boxes with faces wound in reverse, so cull FRONT
-			    new BlendingAttribute(1f), //opaque since multiplied by vertex color
-			    new DepthTestAttribute(true), //don't want depth mask or rear cubes might not show through
+				//IntAttribute.createCullFace(GL20.GL_FALSE), //new IntAttribute(IntAttribute.CullFace, 0),
+			    //IntAttribute.createCullFace(GL20.GL_BACK),//For some reason, libgdx ModelBuilder makes boxes with faces wound in reverse, so cull FRONT
+			   // new BlendingAttribute(1f), //opaque since multiplied by vertex color
+			   // new DepthTestAttribute(true), //don't want depth mask or rear cubes might not show through
 			    ColorAttribute.createDiffuse(Color.valueOf("AEE897")));
 		Material mat2 = mat1.copy();
 		Material mat3 = mat1.copy();

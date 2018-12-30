@@ -105,7 +105,7 @@ public class TopBar extends MenuBar implements Component {
 					saveAs();
 				} else {
 					//MapEditorGame.cache.set(MapEditorGame.currentFile.get().name(), MapEditorGame.currentMap.get());
-					MapEditorGame.cache.set(MapEditorGame.currentFile.get().file().getPath(), MapEditorGame.currentMap.get());
+					MapEditorGame.mapCache.set(MapEditorGame.currentFile.get().file().getPath(), MapEditorGame.currentMap.get());
 					MapEditorGame.properties.save();
 				}
 			}
@@ -124,7 +124,7 @@ public class TopBar extends MenuBar implements Component {
 				//System.out.println("Files : " + String.join(", ", Arrays.asList(files.items).stream().map(f -> f.name()).collect(Collectors.toList())));
 
 				MapEditorGame.currentFile.set(files.get(0));
-				MapEditorGame.cache.set(MapEditorGame.currentFile.get().file().getPath(), MapEditorGame.currentMap.get());
+				MapEditorGame.mapCache.set(MapEditorGame.currentFile.get().file().getPath(), MapEditorGame.currentMap.get());
 				//fileChooser.remove();
 			}
 		});

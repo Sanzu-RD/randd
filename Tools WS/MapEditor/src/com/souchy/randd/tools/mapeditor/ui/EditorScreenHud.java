@@ -27,12 +27,11 @@ public class EditorScreenHud extends Screen2d {
 
 		//getStage().setDebugAll(true);
 		
-		Texture t = new Texture(Gdx.files.absolute("F:\\Users\\Souchy\\Desktop\\Robyn\\Git\\res\\assets\\textures\\galaxy-red-stars-red-space.jpg"));
-		Image a = new Image(t);
-		//getDrawingSpace();
-		a.setBounds(0, 0, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
-		
-		getStage().addActor(a);
+//		Texture t = new Texture(Gdx.files.absolute("F:\\Users\\Souchy\\Desktop\\Robyn\\Git\\res\\assets\\textures\\galaxy-red-stars-red-space.jpg"));
+//		Image a = new Image(t);
+//		//getDrawingSpace();
+//		a.setBounds(0, 0, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
+//		getStage().addActor(a);
 		
 		top = new TopBar();
 		bottom = new BottomBar();

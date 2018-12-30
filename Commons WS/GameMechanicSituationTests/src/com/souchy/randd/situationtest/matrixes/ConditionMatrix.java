@@ -1,11 +1,12 @@
 package com.souchy.randd.situationtest.matrixes;
 
 import com.souchy.randd.situationtest.models.map.Cell;
+import com.souchy.randd.situationtest.models.org.FightContext;
 
 public class ConditionMatrix extends Matrix {
 
-	public ConditionMatrix(int[][] matrix) {
-		super(matrix);
+	public ConditionMatrix(FightContext context, MatrixFlags[][] matrix) {
+		super(context, matrix);
 	}
 	
 	

@@ -1,6 +1,8 @@
 package com.souchy.randd.situationtest.models.items;
 
 import com.souchy.randd.situationtest.models.entities.Character;
+import com.souchy.randd.situationtest.models.org.ContextualObject;
+import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.properties.ElementValue;
 import com.souchy.randd.situationtest.properties.StatProperty;
 import com.souchy.randd.situationtest.properties.Stats;
@@ -15,11 +17,14 @@ import com.souchy.randd.situationtest.properties.types.StatProperties;
  * @author Souchy
  *
  */
-public class Item {
+public class Item extends ContextualObject {
 	
 	public final ItemType type;
 	public final Stats stats;
 	
+	public Item(FightContext context, ItemType type, Stats stats) {
+		super(context);
+	}
 	
 	/*
 	 * 
@@ -33,11 +38,11 @@ public class Item {
 	 */
 	
 	/*public static class Statss {
-		*//** Propriétés de base (resources (hp, mana, pm, shields) *//*
+		*//** Propriï¿½tï¿½s de base (resources (hp, mana, pm, shields) *//*
 	    @Inject
 		private Cache<StatProperties, StatProperty> properties;
 
-		*//** Affinités aux éléments (dmg et res, scl et flat) *//*
+		*//** Affinitï¿½s aux ï¿½lï¿½ments (dmg et res, scl et flat) *//*
 	    @Inject
 		private Cache<Elements, ElementBundle> elementAffinities;
 	    public StatProperty get(StatProperties stat) {

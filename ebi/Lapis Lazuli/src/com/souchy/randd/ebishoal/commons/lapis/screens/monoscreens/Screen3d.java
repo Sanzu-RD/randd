@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalShadowLight;
+import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.DepthShaderProvider;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -32,7 +33,7 @@ public abstract class Screen3d extends BaseScreen {
 	@Override
 	protected void createHook() {
 		//super.createHook();
-    	batch = new ModelBatch();
+    	batch = new ModelBatch();//new DepthShaderProvider());
     	env = new Environment();
     	createEnvironment();
 		shadowBatch = new ModelBatch(new DepthShaderProvider());
@@ -87,12 +88,21 @@ public abstract class Screen3d extends BaseScreen {
 		float minWorldY = 50; 		// hauteur min à mettre ds settings priv�s
 		float minWorldX = minWorldY * aspectRatio;
 		// width et height sont en world units pour contr�ller how much du monde qu'on voit
-		// cela est ensuite scal� pour s'adapter � la grandeur de la fen�tre
+		// cela est ensuite scalé pour s'adapter � la grandeur de la fen�tre
 		Viewport view = Viewports.extend(minWorldX, minWorldY,  cam);
 		view.apply();
 		return view;
 	}
 	
+	
+	@Override
+	public void render(float delta) {
+		world.buildCache();
+		renderShadows(delta);
+		// clearScreen + renderHook
+		super.render(delta);
+	}
+
 	protected void renderShadows(float delta) {
 		// render les shadows avant de clearScreen
 		shadowLight.begin(Vector3.Zero, getCam().direction);
@@ -103,22 +113,13 @@ public abstract class Screen3d extends BaseScreen {
 		shadowLight.end();
 	}
 	
-	@Override
-	public void render(float delta) {
-		world.buildCache();
-		renderShadows(delta);
-		// clearScreen + renderHook
-		super.render(delta);
-	}
-	
-	
 	protected void renderWorld(float delta) {
-		batch.begin(getCam());
+		getBatch().begin(getCam());
 		// render the cached models
-		batch.render(world.cache, env);
+		getBatch().render(getWorld().cache, getEnvironment());
 		// render the temp models
-		world.tempModels.forEach(m -> batch.render(m, env));
-		batch.end();
+		getWorld().tempModels.forEach(m -> getBatch().render(m, getEnvironment()));
+		getBatch().end();
 	}
 	
 	@Override
