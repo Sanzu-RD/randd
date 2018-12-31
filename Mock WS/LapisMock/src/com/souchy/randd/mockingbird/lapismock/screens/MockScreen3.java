@@ -22,7 +22,6 @@ public class MockScreen3 extends BaseScreen {
 
 	DirectionalShadowLight shadowLight;
 	ModelBatch shadowBatch;
-	Environment shadowEnv;
 	
 	PostProcessingFBO noise;
 	
@@ -35,13 +34,19 @@ public class MockScreen3 extends BaseScreen {
         noise = new PostProcessingFBO(cam);
 		Gdx.gl.glEnable(GL20.GL_LINEAR);
 	}
+
+
+	@Override
+    public boolean useOrtho() {
+    	return true;
+    }
 	
 	@Override
 	public void createEnvironment() {
 		//super.createEnvironment();
 		
 		//(shadowLight = new DirectionalShadowLight(1024, 1024, 30f, 30f, 1f, 100f)).set(0.8f, 0.8f, 0.8f, -1f, -.8f, -.2f);
-		(shadowLight = new DirectionalShadowLight(1024*2*2, 1024*2*2, 50, 50, 1f, 100f)).set(0.8f, 0.8f, 0.8f, -1f, -.8f, -.5f);
+		(shadowLight = new DirectionalShadowLight(1024*2*2, 1024*2*2, 50, 50, 1f, 100f)).set(0.8f, 0.8f, 0.8f, -1f, -1.0f, -.5f);
 
 		var ambiant = 0.6f;
 		
@@ -52,11 +57,6 @@ public class MockScreen3 extends BaseScreen {
 	//	env.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -.8f, -.2f));
 		// env.add(new PointLight().set(0.8f, 0.8f, 0.8f, 18, 18, 1, 2f));
 		// env.set(new ColorAttribute(ColorAttribute.Specular, .5f, .5f, .5f, 1f));
-		
-		shadowEnv = new Environment();
-		shadowEnv.set(new ColorAttribute(ColorAttribute.AmbientLight, .5f, .5f, .5f, 1f));
-		shadowEnv.add(shadowLight);
-		shadowEnv.shadowMap = shadowLight;
 	}
 	
 	@Override

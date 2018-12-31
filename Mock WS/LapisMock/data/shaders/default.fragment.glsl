@@ -236,18 +236,17 @@ void main() {
 
 	// checkers shader
 	vec4 floored = floor(v_pos);
-//	int ax = int(floored.x);
-//	int ay = int(floored.y);
-//	int az = int(floored.z);
 	float m =  mod(floored.x + floored.y, 2);
-	gl_FragColor = vec4(m, m, m, 1);
+//	gl_FragColor = vec4(m, m, m, 1);
+
+	// increase intensity (black becomes gray)
+//	gl_FragColor += 0.5;
 
 	// shadow map shader
 	//gl_FragColor = texture2D(u_shadowTexture, v_shadowMapUv.xy);
 
 	// gradiant shader
-	//if(gl_FragColor == vec4(0,0,0,1))
-	gl_FragColor = (gl_FragColor + 01) * normalize(vec4(v_pos) * vec4(1, 1, 1, 1));
+//	 gl_FragColor *= normalize(vec4(v_pos) * vec4(1, 1, 1, 1)) ;
 
 //	gl_FragColor -= getShadow();
 
@@ -257,7 +256,7 @@ void main() {
 	bool inY = abs(floored.y - v_pos.y) < outlineWidth || abs(floored.y + 1 - v_pos.y) < outlineWidth;
 	bool inZ = abs(floored.z - v_pos.z) < outlineWidth || abs(floored.z + 1 - v_pos.z) < outlineWidth;
 	if(  (inZ && (inX || inY))  ||  (inY && (inX || inZ))  ){
-		gl_FragColor = vec4(0, 0, 0, 1);
+	//	gl_FragColor = vec4(0, 0, 0, 1);
 	}
 
 	/*float radius = 1;

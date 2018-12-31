@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
@@ -44,14 +45,35 @@ public abstract class BaseScreen implements Screen {
 		*/
 	}
     
+    public boolean useOrtho() {
+    	return false;
+    }
+    
     public void createCam() {
-		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        cam.position.set(worldCenter.x, worldCenter.y*0.6f, worldCenter.x*1.8f);
-        cam.lookAt(worldCenter.x, worldCenter.y*0.9f, 0);
-        //cam.direction.set(0, 0, -1);
-        cam.near = 1f;
-        cam.far = 300f;
-        cam.update();
+    	if(useOrtho()) {
+    		//cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    		float viewportSize = 30;
+    		cam = new OrthographicCamera(viewportSize*16/9, viewportSize);
+            //cam.position.set(worldCenter.x, worldCenter.y*0.6f, worldCenter.x*1.5f);
+            //cam.lookAt(worldCenter.x, worldCenter.y*0.9f, 0);
+            cam.direction.set(-1, 1, -1f);
+            cam.up.set(-1, 1, 1f);
+            cam.position.set(14, 14, 0);
+            cam.near = -30f;
+            cam.far = 300f;
+            cam.update();
+    	} else {
+    		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            cam.position.set(worldCenter.x, worldCenter.y*0.6f, worldCenter.x*1.8f);
+            cam.lookAt(worldCenter.x, worldCenter.y*0.9f, 0);
+            //cam.direction.set(0, 0, -1);
+            cam.direction.set(-1, 1, -1f);
+            cam.up.set(-1, 1, 1f);
+            cam.position.set(14, 14, 0);
+            cam.near = 1f;
+            cam.far = 300f;
+            cam.update();
+    	}
     }
     
     public void createEnvironment() {

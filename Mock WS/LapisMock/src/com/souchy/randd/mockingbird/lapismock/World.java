@@ -63,7 +63,7 @@ public class World {
         model.materials.clear();
         model.materials.add(new Material(ColorAttribute.createDiffuse(Color.GREEN)));
     	
-        int side = 30;
+        int side = 29;
 		for(int x = 0; x < side; x++) {
 			for(int y = 0; y < side; y++) {
 				if(x == side/2 && y == side/2) continue;
