@@ -31,7 +31,7 @@ public class LineDrawing {
 	public ShapeRenderer srender;
 	public HashMap<Color, Array<Line>> lineMap;
 
-	// seulement si veut créer des body Box2d
+	// seulement si veut crï¿½er des body Box2d
 	public World world;
 
 	/*
@@ -66,12 +66,15 @@ public class LineDrawing {
 	}
 
 	public void createCross(){
-		createCross(Color.RED, Color.GREEN, Color.BLUE);
+		createCross(Color.RED, Color.GREEN, Color.BLUE, 3000);
 	}
-	public void createCross(Color crossXColor, Color crossYColor, Color crossZColor){
-		int fromX = 0, toX = 3000;
-		int fromY = 0, toY = 3000;
-		int fromZ = 0, toZ = 3000;
+	public void createCross(int length){
+		createCross(Color.RED, Color.GREEN, Color.BLUE, length);
+	}
+	public void createCross(Color crossXColor, Color crossYColor, Color crossZColor, int length){
+		int fromX = 0, toX = length;
+		int fromY = 0, toY = length;
+		int fromZ = 0, toZ = length;
 		// (0,0) crosss
 		addLine(new Vector3(fromX, 0, 0), new Vector3(toX, 0, 0), crossXColor);
 		addLine(new Vector3(0, fromY, 0), new Vector3(0, toY, 0), crossYColor);
@@ -79,13 +82,13 @@ public class LineDrawing {
 	}
 
 	public void createGrid(){
-		createGrid(1, 20, 20);
+		createGrid(1, 20, 20, true);
 	}
 	
-	public void createGrid(int gap, int width, int height) {
-		createGrid(gap, width, height, Color.GRAY);
+	public void createGrid(int gap, int width, int height, boolean withCross) {
+		createGrid(gap, width, height, Color.GRAY, withCross);
 	}
-	public void createGrid(int gap, int width, int height, Color color) {
+	public void createGrid(int gap, int width, int height, Color color, boolean withCross) {
 		// Draw a grid
 		lineMap.put(color, new Array<>());
 		//Color crossColor = Color.PURPLE;
@@ -97,14 +100,14 @@ public class LineDrawing {
 		int toY = height;
 		
 		// vertical
-		for (int x = fromX; x <= toX; x += gap) {
+		for (int x = withCross ? gap : fromX; x <= toX; x += gap) {
 			addLine(color, new Vector3(x, fromY, 0), new Vector3(x, toY, 0));
 		}
 		// horizontal
-		for (int y = fromY; y <= toY; y += gap) {
+		for (int y = withCross ? gap : fromY; y <= toY; y += gap) {
 			addLine(color, new Vector3(fromX, y, 0), new Vector3(toX, y, 0));
 		}
-		
+		if(withCross) createCross();
 		// (0,0) cross
 		//lineMap.get(crossColor).add(new Line(crossColor, new Vector3(fromX, 0, 0), new Vector3(toX, 0, 0), null));
 		//lineMap.get(crossColor).add(new Line(crossColor, new Vector3(0, fromY, 0), new Vector3(0, toY, 0), null));
