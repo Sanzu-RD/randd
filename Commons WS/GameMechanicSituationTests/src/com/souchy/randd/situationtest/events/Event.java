@@ -1,6 +1,6 @@
 package com.souchy.randd.situationtest.events;
 
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 
 public abstract class Event {
 	
@@ -10,13 +10,13 @@ public abstract class Event {
 	 * 
 	 * Except for Fight and Round Start/End
 	 */
-	public final IEntity source;
+	public final AEntity source;
 	
 	
 	//public Entity target;
 	
 	
-	public Event(IEntity source) {
+	public Event(AEntity source) {
 		this.source = source;
 	}
 	

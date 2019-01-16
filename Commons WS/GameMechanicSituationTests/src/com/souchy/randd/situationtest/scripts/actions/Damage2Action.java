@@ -1,6 +1,6 @@
 package com.souchy.randd.situationtest.scripts.actions;
 
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 import com.souchy.randd.situationtest.properties.ElementValue;
 import com.souchy.randd.situationtest.properties.types.Damages;
 import com.souchy.randd.situationtest.scripts.ScriptedAction;
@@ -16,14 +16,14 @@ import com.souchy.randd.situationtest.scripts.ScriptedAction;
 public class Damage2Action extends ScriptedAction {
 	
 	//public final Entity source;
-	public final IEntity target;
+	public final AEntity target;
 	
 	public final Damages dmgType;
 
 	public final ElementValue dmg;
 	
 	
-	public Damage2Action(IEntity source, IEntity target, Damages dmgType, ElementValue dmg) {
+	public Damage2Action(AEntity source, AEntity target, Damages dmgType, ElementValue dmg) {
 		super(source);
 		//this.source = source;
 		this.target = target;

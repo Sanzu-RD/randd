@@ -8,7 +8,7 @@ import com.souchy.randd.situationtest.properties.Stats;
 import com.souchy.randd.situationtest.scripts.ScriptedSkill;
 import com.souchy.randd.situationtest.scripts.Status;
 
-public abstract class ICombatEntity extends IEntity {
+public abstract class ICombatEntity extends AEntity {
 
 	public Stats stats;
 	
@@ -20,8 +20,8 @@ public abstract class ICombatEntity extends IEntity {
 	/**
 	 * <b>Primary / survivability resource, ex. HP.</b>
 	 * <br>
-	 * - Quelques classes pourraient faire des trucs cools comme renvoyer la secondary resource à la place de la primary si la primary est trop basse,
-	 * comme ça quand t'es low tu prend du dommage dans ta mana à la place de ton HP.
+	 * - Quelques classes pourraient faire des trucs cools comme renvoyer la secondary resource ï¿½ la place de la primary si la primary est trop basse,
+	 * comme ï¿½a quand t'es low tu prend du dommage dans ta mana ï¿½ la place de ton HP.
 	 * Un peu comme MoM sur POE.
 	 */
 	//public abstract void getPrimaryResource();
@@ -29,7 +29,7 @@ public abstract class ICombatEntity extends IEntity {
 	/**
 	 * <b>Secondary / spellcasting resource, ex. PA, mana, rage, energy</b>
 	 * <br>
-	 * - Certaines classe peuvent renvoyer leur primaryResource à la place de la secondary et donc utiliser du HP pour caster leur sorts (ex vlad, mundo)
+	 * - Certaines classe peuvent renvoyer leur primaryResource ï¿½ la place de la secondary et donc utiliser du HP pour caster leur sorts (ex vlad, mundo)
 	 * <br>
 	 * - Certaines classes on juste pas de secondary resource. Ou pas de primary.
 	 */
@@ -79,7 +79,7 @@ public abstract class ICombatEntity extends IEntity {
 	
 	/**
 	 * 
-	 * @return - Cellules sur lesquelles l'entité est. 
+	 * @return - Cellules sur lesquelles l'entitï¿½ est. 
 	 */
 	public abstract void occupiedCells(); // ou Cell[][] getArea(); qui renvoie une matrice montrant [1,1;1,1]
 	

@@ -19,7 +19,7 @@ public interface IEffect extends Identifiable<Integer> {
 	/**
 	 * Apply the effect to an entity
 	 */
-	public void apply(IEntity target);
+	public void apply(AEntity target);
 	
 	/**
 	 * 
@@ -57,11 +57,11 @@ public interface IEffect extends Identifiable<Integer> {
 	public void maxDuration();
 	
 	/**
-	 * J'sais pas si c'est une bonne idée cette fonction,
+	 * J'sais pas si c'est une bonne idï¿½e cette fonction,
 	 * <br>
-	 * Mais ça serait pour choisir si l'effet est visible dans la barre des effets du personnage.
+	 * Mais ï¿½a serait pour choisir si l'effet est visible dans la barre des effets du personnage.
 	 * <br>
-	 * Ex certains passifs pourraient ptete être cachés.
+	 * Ex certains passifs pourraient ptete ï¿½tre cachï¿½s.
 	 */
 	public void isVisible();
 	
@@ -70,7 +70,7 @@ public interface IEffect extends Identifiable<Integer> {
 	 * <br>
 	 * Example an AoE that hits only enemies, or only allies, or both, or only summons, etc.
 	 * @return Prob a byte or short that you do bitwise operations to.
-	 * <br> Ex flag = <s>00000000 |=</s> (ALLY_HEROES | ALLY_SUMMONS) pour target juste les alliés
+	 * <br> Ex flag = <s>00000000 |=</s> (ALLY_HEROES | ALLY_SUMMONS) pour target juste les alliï¿½s
 	 * <br> Ex flag = (ALLY_SUMMONS | ENEMY_SUMMONS) pour target juste les invocations
 	 * <br> Ex flag = (ALLY_TRAPS | ENEMY_TRAPS) pour target juste les traps
 	 */
@@ -95,8 +95,8 @@ public interface IEffect extends Identifiable<Integer> {
 	 * <p>
 	 * -> pas besoin d'avoir cette fonction dans l'environnement client 
 	 * <p>
-	 * -> edit : rectification, c'est une bonne chose d'avoir les conditions côté client aussi pour pouvoir faire les calculs priliminaires sur chaque cellules de ce côté.
-	 * <br>Comme ça, une fois que le client a décidé de son cast, le serveur a juste besoin de vérifier le cast sur la cellule demandé plutôt que toutes les cellules
+	 * -> edit : rectification, c'est une bonne chose d'avoir les conditions cï¿½tï¿½ client aussi pour pouvoir faire les calculs priliminaires sur chaque cellules de ce cï¿½tï¿½.
+	 * <br>Comme ï¿½a, une fois que le client a dï¿½cidï¿½ de son cast, le serveur a juste besoin de vï¿½rifier le cast sur la cellule demandï¿½ plutï¿½t que toutes les cellules
 	 */
 	public void conditions();
 	

@@ -58,35 +58,34 @@ public class Situation7Matrixes {
 		// now we have the cells where to actually apply the effect
 		//List<IEntity> entities1 = 
 		*/
-		
-		
 
-		Matrix heightMap = new Matrix(new int[][] {
+		// CrÃ©Ã© le contexte et la map
+		FightContext context = new FightContext();
+
+		Matrix heightMap = new Matrix(context, new MatrixFlags[][] {
 			{1,2,3,4,5,6},
 			{2,0,0,0,0,0},
 			{3,0,0,0,0,0},
 			{4,0,0,0,0,0},
 			{5,0,0,0,0,0},
 		});
-		EffectMatrix aoe1 = new EffectMatrix(new int[][]{
+		EffectMatrix aoe1 = new EffectMatrix(context, new MatrixFlags[][]{
 			{4,4,4},
 			{4,4,0},
 			{4,0,0},
 		});
-		ConditionMatrix cond1 = new ConditionMatrix(new int[][]{
+		ConditionMatrix cond1 = new ConditionMatrix(context, new MatrixFlags[][]{
 			{0,0,0},
 			{0,0,0},
 			{0,0,0},
 		});
 		
-		// Créé le contexte et la map
-		FightContext context = new FightContext();
 		IBoard board = context.board;
 		heightMap.foreach((i, j) -> {
 			Cell c = new Cell(i, j, heightMap.get(i, j));
 			board.getCells().put(i, j, c);
 		});
-		// Créé deux perso
+		// Crï¿½ï¿½ deux perso
 		// need to optimize this so we write the pos only once etc, make everything linked in 1
 		Character source = new Character(context, 1, new Point3D(1, 2, 0));
 		Character target = new Character(context, 2, new Point3D(2, 2, 0));
@@ -95,7 +94,7 @@ public class Situation7Matrixes {
 		source.baseStats.get(StatProperties.Resource1).value = 30;
 		target.baseStats.get(StatProperties.Resource1).value = 100;
 
-		// Créé des EventHandlers
+		// Crï¿½ï¿½ des EventHandlers
 		// target.register((OnHitEvent e)  -> { // marche pas :(
 		OnHitReceived h = target.register(e -> {
 			System.out.println("target has been hit by (sourceID:"+e.source.getID()+") !");
@@ -143,7 +142,7 @@ public class Situation7Matrixes {
 			int[][] em = { {  MatrixFlags.PositionningFlags.TargetCell.getID() } };
 			int[][] cm = { { MatrixFlags.CellConditiontFlags.EnemyCell.getID() } };
 			
-			// TODO faudrait mettre les paramètres de dommages dans le ctor du bleedstatus
+			// TODO faudrait mettre les paramï¿½tres de dommages dans le ctor du bleedstatus
 			effect1 = new DamageEffect(context, source, Damages.Dot, Elements.Physical, 
 					new ElementValue(Elements.Physical, 50), new ElementValue(Elements.Physical, 50), 
 					new EffectMatrix(em),  new ConditionMatrix(cm));
@@ -160,10 +159,10 @@ public class Situation7Matrixes {
 						+ ",\n\t result :"  + target().stats.get(p.type));
 			}));*/
 			this.<OnTurnEndHandler>register((e) -> {
-				target().getOccupiedCells().getCells().forEach(c -> {
+				target().getPos().getCells().forEach(c -> {
 					effect1.applyAoe(c, Orientation.North, c2 -> true);
-					// TODO devrait mettre un flag dans le context pour dire si un character a déjà été affecté par un même effet
-					// pour pas l'affecter 2 fois (via aoe sur une entité 2x2) d'un coup
+					// TODO devrait mettre un flag dans le context pour dire si un character a dï¿½jï¿½ ï¿½tï¿½ affectï¿½ par un mï¿½me effet
+					// pour pas l'affecter 2 fois (via aoe sur une entitï¿½ 2x2) d'un coup
 					// on mettrait la condition dans effect.applyAoe
 				});
 			});
@@ -171,7 +170,7 @@ public class Situation7Matrixes {
 		@Override
 		public void unroute() {
 			super.unroute();
-			// enlève le router du contexte
+			// enlï¿½ve le router du contexte
 			/*context().unregister(onStatRouter);*/
 			// pourrait enlever le handler de ce bus aussi
 		}

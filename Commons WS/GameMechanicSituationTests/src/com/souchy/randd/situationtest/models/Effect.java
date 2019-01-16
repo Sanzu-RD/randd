@@ -15,7 +15,7 @@ import com.souchy.randd.situationtest.properties.types.Orientation;
  * 
  * TODO les classes d'effet 
  * 
- * TODO la fonction effet.description() peut être implémentée en renvoyant une string standard avec des %s dedans. ex les langs dans dofus, on peut juste renvoyer une référence à une ligne du lang en incluant les certains paramètres. Ça permet de faire le i18n en même temps 
+ * TODO la fonction effet.description() peut ï¿½tre implï¿½mentï¿½e en renvoyant une string standard avec des %s dedans. ex les langs dans dofus, on peut juste renvoyer une rï¿½fï¿½rence ï¿½ une ligne du lang en incluant les certains paramï¿½tres. ï¿½a permet de faire le i18n en mï¿½me temps 
  * 
  * @author Souchy
  *
@@ -45,8 +45,8 @@ public abstract class Effect {
 	
 	
 	/**
-	 * Vérifie si toutes les conditions sont remplies
-	 * @param context - contexte/état du combat
+	 * Vï¿½rifie si toutes les conditions sont remplies
+	 * @param context - contexte/ï¿½tat du combat
 	 * @return - True si toutes les conditions sont remplies, false si au moins une condition ne l'est pas.
 	 */
 	public boolean assertConditions(FightContext context) {
@@ -56,12 +56,12 @@ public abstract class Effect {
 	}
 
 	/**
-	 * Trouve les cellules dans l'Aoe autour de la targetCell pointée. <p>
-	 * Filtre les bonnes cellules à affecter grâce à un predicate. <p>
+	 * Trouve les cellules dans l'Aoe autour de la targetCell pointÃ©e. <p>
+	 * Filtre les bonnes cellules Ã  affecter grÃ¢ce Ã  un predicate. <p>
 	 * Applique l'effet sur les cellules restantes.
 	 * 
-	 * @param targetCell Cellule pointé par la souris, cellule sur laquelle on cast le sort ou action
-	 * @param filter Predicate pour filtrer les targets dans l'Aoe créée autour de la cellule pointée
+	 * @param targetCell Cellule pointï¿½ par la souris, cellule sur laquelle on cast le sort ou action
+	 * @param filter Predicate pour filtrer les targets dans l'Aoe crÃ©Ã©e autour de la cellule pointï¿½e
 	 */
 	public void applyAoe(ICell targetCell, Orientation ori, Predicate<ICell> filter) {
 		List<ICell> cells = context.board.getTargets(targetCell, ori, aoe); //, targetFlags());
@@ -72,7 +72,7 @@ public abstract class Effect {
 			int y = c.getPos().y;
 			cm.get(x, y);
 		})*/
-		.forEach(c -> apply(c)); 	 // applique l'effet à chaque cell
+		.forEach(c -> apply(c)); 	 // applique l'effet ï¿½ chaque cell
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public abstract class Effect {
 	 * <br>
 	 * Example an AoE that hits only enemies, or only allies, or both, or only summons, etc.
 	 * @return Prob a byte or short that you do bitwise operations to.
-	 * <br> Ex flag = <s>00000000 |=</s> (ALLY_HEROES | ALLY_SUMMONS) pour target juste les alliés
+	 * <br> Ex flag = <s>00000000 |=</s> (ALLY_HEROES | ALLY_SUMMONS) pour target juste les alliï¿½s
 	 * <br> Ex flag = (ALLY_SUMMONS | ENEMY_SUMMONS) pour target juste les invocations
 	 * <br> Ex flag = (ALLY_TRAPS | ENEMY_TRAPS) pour target juste les traps
 	 */
@@ -104,8 +104,8 @@ public abstract class Effect {
 	 * <p>
 	 * -> pas besoin d'avoir cette fonction dans l'environnement client 
 	 * <p>
-	 * -> edit : rectification, c'est une bonne chose d'avoir les conditions côté client aussi pour pouvoir faire les calculs priliminaires sur chaque cellules de ce côté.
-	 * <br>Comme ça, une fois que le client a décidé de son cast, le serveur a juste besoin de vérifier le cast sur la cellule demandé plutôt que toutes les cellules
+	 * -> edit : rectification, c'est une bonne chose d'avoir les conditions cï¿½tï¿½ client aussi pour pouvoir faire les calculs priliminaires sur chaque cellules de ce cï¿½tï¿½.
+	 * <br>Comme ï¿½a, une fois que le client a dï¿½cidï¿½ de son cast, le serveur a juste besoin de vï¿½rifier le cast sur la cellule demandï¿½ plutï¿½t que toutes les cellules
 	 */
 	//public void conditions();
 	

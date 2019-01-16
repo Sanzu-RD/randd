@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 import com.souchy.randd.situationtest.math.Point2D;
+import com.souchy.randd.situationtest.models.org.ContextualObject;
 import com.souchy.randd.situationtest.models.org.FightContext;
 
-public class Matrix implements ContextualObject {
+public class Matrix extends ContextualObject {
 
 	/*public static enum Flags {
 		Null(-1),
@@ -30,17 +31,17 @@ public class Matrix implements ContextualObject {
 		public static final int EFFECT_3 = 	 	0b0000010000;
 	}*/
 	
-	private final FightContext context;
+	//private final FightContext context;
 	
 	private MatrixFlags[][] matrix;
 	
 	
 	public Matrix(FightContext context, MatrixFlags[][] matrix) {
-		this.context = context;
+		super(context);
 		this.matrix = matrix;
 	}
 	public Matrix(FightContext context, int width, int height) { //int size) {
-		this.context = context;
+		super(context);
 		this.matrix = new MatrixFlags[width][height];
 	}
 	

@@ -1,15 +1,15 @@
 package com.souchy.randd.situationtest.events2;
 
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 
 public class Trigger {
 
-	public final IEntity source;
+	public final AEntity source;
 	
 	//public Entity target;
 	
 	
-	public Trigger(IEntity source) {
+	public Trigger(AEntity source) {
 		this.source = source;
 	}
 	

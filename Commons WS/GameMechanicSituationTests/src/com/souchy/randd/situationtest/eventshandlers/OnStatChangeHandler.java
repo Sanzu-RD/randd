@@ -3,14 +3,14 @@ package com.souchy.randd.situationtest.eventshandlers;
 import java.util.function.Consumer;
 
 import com.google.common.eventbus.Subscribe;
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 import com.souchy.randd.situationtest.events.statschange.StatChangeEvent;
 import com.souchy.randd.situationtest.properties.StatProperty;
 
 public class OnStatChangeHandler implements EventHandler<StatChangeEvent> {
 	
 	private final boolean inflict;
-	private final IEntity handlerEntity;
+	private final AEntity handlerEntity;
 	private final Consumer<StatChangeEvent> method;
 	
 	/**
@@ -19,7 +19,7 @@ public class OnStatChangeHandler implements EventHandler<StatChangeEvent> {
 	 * @param inflict - If we're trying handle inflicting dmg or receiving dmg
 	 * @param method - What to do when the event occurs
 	 */
-	public OnStatChangeHandler(IEntity handlerEntity, boolean inflict, Consumer<StatChangeEvent> method) {
+	public OnStatChangeHandler(AEntity handlerEntity, boolean inflict, Consumer<StatChangeEvent> method) {
 		this.handlerEntity = handlerEntity;
 		this.inflict = inflict;
 		this.method = method;

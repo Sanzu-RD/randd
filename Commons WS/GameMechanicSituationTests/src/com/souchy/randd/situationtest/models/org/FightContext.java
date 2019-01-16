@@ -7,7 +7,7 @@ import com.google.common.eventbus.EventBus;
 import com.google.inject.Guice;
 import com.souchy.randd.jade.api.EventProxy;
 import com.souchy.randd.jade.api.IBoard;
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 import com.souchy.randd.situationtest.math.Buffer;
 import com.souchy.randd.situationtest.models.map.Board;
 import com.souchy.randd.situationtest.models.map.Cell;
@@ -26,10 +26,10 @@ public class FightContext implements EventProxy {
 	public final IBoard board;
 	
 	/* queue line of playing entities (player characters and summons) */
-	public final Buffer<IEntity> playerQueue; //Queue<IEntity> playerQueue;
+	public final Buffer<AEntity> playerQueue; //Queue<IEntity> playerQueue;
 	
 	/* full list of all the entities on the board, including all players, summons, traps, glyphs */ //(not traps and glyphs anymore since theyre statuses)
-	public final List<IEntity> entities;
+	public final List<AEntity> entities;
 	
 	
 	public FightContext() {

@@ -2,7 +2,7 @@ package com.souchy.randd.situationtest.models.entities;
 
 import java.util.function.Consumer;
 
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 import com.souchy.randd.situationtest.events.cell.EnterCellEvent;
 import com.souchy.randd.situationtest.eventshandlers.EventHandler;
 import com.souchy.randd.situationtest.models.org.FightContext;
@@ -15,7 +15,7 @@ import com.souchy.randd.situationtest.models.org.FightContext;
  * @author Souchy
  *
  */
-public class Trap extends IEntity implements EventHandler<EnterCellEvent> {
+public class Trap extends AEntity implements EventHandler<EnterCellEvent> {
 	
 	public final Character source;
 	private Consumer<EnterCellEvent> onProcScript;
@@ -32,22 +32,22 @@ public class Trap extends IEntity implements EventHandler<EnterCellEvent> {
 	@Override
 	public void handle(EnterCellEvent event) {
 		// to be scripted actually,
-		// à moins que le script du spell passe une Function dans le constructeur de Trap et qu'on exécute ça ici :
+		// ï¿½ moins que le script du spell passe une Function dans le constructeur de Trap et qu'on exï¿½cute ï¿½a ici :
 		onProcScript.accept(event);
-		// ne pas oublier qu'on a un ActionScriptEffect pour créer les traps/glyphs dont on pourra se servir pour
-		//   builder le Trap object, donner la fonction à exécuter lors du proc,
+		// ne pas oublier qu'on a un ActionScriptEffect pour crï¿½er les traps/glyphs dont on pourra se servir pour
+		//   builder le Trap object, donner la fonction ï¿½ exï¿½cuter lors du proc,
 		//    set les eventHandlers sur chaque cell.onEnterCell et sur source.onDeath, etc...
 		
 		// et c'est le spell qui lance la trap qui va donner la fonction au TrapAction
 		
-		// Donc overall ça fait : 
+		// Donc overall ï¿½a fait : 
 		// cast spell -> spell script -> post SpawnTrapAction to context -> context handler spawntrap script -> create trap object + setup handlers etc
 		dispose();
 	}
 	
 	
 	public void dispose() {
-		// enlève la trap de sur les cells
+		// enlï¿½ve la trap de sur les cells
 	}
 
 }

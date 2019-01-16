@@ -3,7 +3,7 @@ package com.souchy.randd.situationtest.situations;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 import com.souchy.randd.situationtest.models.entities.Character;
 import com.souchy.randd.situationtest.models.org.FightContext;
 import com.souchy.randd.situationtest.properties.ElementValue;
@@ -50,8 +50,8 @@ public class Situation5GuiceScripts {
 		System.out.println("damage1script = " + damage1script);
 		
 	    FightContext context = new FightContext();
-	    IEntity source = new Character(context, 1, null);
-	    IEntity	target = new Character(context, 2, null);
+	    AEntity source = new Character(context, 1, null);
+	    AEntity	target = new Character(context, 2, null);
 	    
 	    ElementValue scl = new ElementValue(Elements.Dark, 10);
 	    ElementValue flat = new ElementValue(Elements.Dark, 5);

@@ -53,9 +53,9 @@ public interface ICell extends EventProxy {
 
 	/**
 	 * 
-	 * @return - All combat entities riding this cell, ex si un panda porte qqn ou s'il y a une glyphe/piège ? 
+	 * @return - All combat entities riding this cell, ex si un panda porte qqn ou s'il y a une glyphe/piï¿½ge ? 
 	 */
-	public List<IEntity> getEntities(); //FightContext context);
+	public List<AEntity> getEntities(); //FightContext context);
 	
 	/**
 	 * 

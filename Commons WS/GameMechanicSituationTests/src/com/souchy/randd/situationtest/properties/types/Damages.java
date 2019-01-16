@@ -1,6 +1,6 @@
 package com.souchy.randd.situationtest.properties.types;
 
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 import com.souchy.randd.situationtest.properties.ElementValue;
 
 /**
@@ -18,7 +18,7 @@ public enum Damages {
 	 */
 	Hit {
 		@Override
-		public void some(ElementValue v, IEntity t) {
+		public void some(ElementValue v, AEntity t) {
 			// TODO Auto-generated method stub
 			
 		}
@@ -29,7 +29,7 @@ public enum Damages {
 	 */
 	PenetrationHit {
 		@Override
-		public void some(ElementValue v, IEntity t) {
+		public void some(ElementValue v, AEntity t) {
 			// TODO Auto-generated method stub
 			
 		}
@@ -40,7 +40,7 @@ public enum Damages {
 	 */
 	Dot {
 		@Override
-		public void some(ElementValue v, IEntity t) {
+		public void some(ElementValue v, AEntity t) {
 			// TODO Auto-generated method stub
 			
 		}
@@ -51,7 +51,7 @@ public enum Damages {
 	 */
 	Counter {
 		@Override
-		public void some(ElementValue v, IEntity t) {
+		public void some(ElementValue v, AEntity t) {
 			// TODO Auto-generated method stub
 			
 		}
@@ -59,6 +59,6 @@ public enum Damages {
 	;
 	
 	
-	public abstract void some(ElementValue v, IEntity t);
+	public abstract void some(ElementValue v, AEntity t);
 
 }

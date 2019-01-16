@@ -1,6 +1,6 @@
 package com.souchy.randd.situationtest.events;
 
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 
 
 /**
@@ -16,9 +16,9 @@ import com.souchy.randd.jade.api.IEntity;
 public class OnHitEvent extends Event {
 	
 	/** receiver of the hit */
-	public final IEntity target;
+	public final AEntity target;
 
-	public OnHitEvent(IEntity source, IEntity target) {
+	public OnHitEvent(AEntity source, AEntity target) {
 		super(source);
 
 		this.target = target;

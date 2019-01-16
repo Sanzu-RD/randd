@@ -1,6 +1,6 @@
 package com.souchy.randd.situationtest.scripts.actions;
 
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 import com.souchy.randd.situationtest.properties.ElementValue;
 import com.souchy.randd.situationtest.properties.types.Damages;
 import com.souchy.randd.situationtest.properties.types.Elements;
@@ -15,7 +15,7 @@ import com.souchy.randd.situationtest.scripts.ScriptedAction;
 public class Damage1Action extends ScriptedAction {
 	
 	//public final Entity source;
-	public final IEntity target;
+	public final AEntity target;
 	
 	public final Damages dmgType;
 	public final Elements dmgEle;
@@ -23,7 +23,7 @@ public class Damage1Action extends ScriptedAction {
 	public final ElementValue flat;
 	
 	
-	public Damage1Action(IEntity source, IEntity target, Damages dmgType, Elements dmgEle, ElementValue scl, ElementValue flat) {
+	public Damage1Action(AEntity source, AEntity target, Damages dmgType, Elements dmgEle, ElementValue scl, ElementValue flat) {
 		super(source);
 		//this.source = source;
 		this.target = target;

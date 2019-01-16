@@ -1,6 +1,6 @@
 package com.souchy.randd.situationtest.events.statschange;
 
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 import com.souchy.randd.situationtest.events.Event;
 import com.souchy.randd.situationtest.properties.StatProperty;
 
@@ -17,7 +17,7 @@ import com.souchy.randd.situationtest.properties.StatProperty;
  */
 public class StatChangeEvent extends Event {
 	
-	public final IEntity target;
+	public final AEntity target;
 	public final StatProperty changedProp;
 	
 	/**
@@ -25,7 +25,7 @@ public class StatChangeEvent extends Event {
 	 * @param prop <b>.enum</b> : Which property has been changed (ex Resource1)
 	 * @param prop <b>.value</b> : The difference in how much is has been changed (ex +50 heal)
 	 */
-	public StatChangeEvent(IEntity source, IEntity target, StatProperty prop) {
+	public StatChangeEvent(AEntity source, AEntity target, StatProperty prop) {
 		super(source);
 		this.target = target;
 		this.changedProp = prop;

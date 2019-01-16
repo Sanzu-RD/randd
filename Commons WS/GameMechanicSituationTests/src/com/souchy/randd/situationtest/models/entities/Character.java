@@ -3,7 +3,7 @@ package com.souchy.randd.situationtest.models.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 import com.souchy.randd.situationtest.eventshandlers.OnStatChangeHandler;
 import com.souchy.randd.situationtest.math.Point3D;
 import com.souchy.randd.situationtest.models.items.Item;
@@ -20,7 +20,7 @@ import com.souchy.randd.situationtest.scripts.ScriptedSkill;
  * A character is either a player or a summon. <br>
  * You can differentiate them by using c.isSummon() <br>
  */
-public class Character extends IEntity {
+public class Character extends AEntity {
 
 	/**
 	 * initialize stats via JSON
@@ -32,7 +32,7 @@ public class Character extends IEntity {
 	/** This character's items and weapons */
 	public final List<Item> items;
 
-	/** This character's current buffs  // déplacé dans IEntity */
+	/** This character's current buffs  // dï¿½placï¿½ dans IEntity */
 	//public final List<Status> statuss;
 	
 	public Character(FightContext context, int id, Point3D pos) {
@@ -42,7 +42,7 @@ public class Character extends IEntity {
 		// TODO stats = context.injector.getInstance(CompoundStats.class);
 		baseStats = new Stats(context.injector);
 		stats = new CompoundStats(this);
-		//statuss = new ArrayList<>(); // déplacé dans IEntity
+		//statuss = new ArrayList<>(); // dï¿½placï¿½ dans IEntity
 		spells = new ArrayList<>();
 		items = new ArrayList<>();
 
@@ -61,7 +61,7 @@ public class Character extends IEntity {
 
 	/**
 	 * 
-	 * @return - Cellules sur lesquelles l'entité est. 
+	 * @return - Cellules sur lesquelles l'entitï¿½ est. 
 	 */
 	public void occupiedCells() {
 		 // ou Cell[][] getArea(); qui renvoie une matrice montrant [1,1;1,1]

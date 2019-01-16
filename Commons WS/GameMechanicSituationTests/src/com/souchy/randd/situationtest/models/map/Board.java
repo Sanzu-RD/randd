@@ -7,7 +7,7 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import com.souchy.randd.jade.api.IBoard;
 import com.souchy.randd.jade.api.ICell;
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 import com.souchy.randd.situationtest.math.Point2D;
 import com.souchy.randd.situationtest.matrixes.EffectMatrix;
 import com.souchy.randd.situationtest.matrixes.MatrixFlags;
@@ -33,7 +33,7 @@ public class Board implements IBoard {
 	 * @param e
 	 * @return
 	 */
-	public List<ICell> getPosition(IEntity e){
+	public List<ICell> getPosition(AEntity e){
 		List<ICell> pos = new ArrayList<>();
 		map.values().forEach(c -> {
 			if(c.getCharacter() == e) //.getEntities(context).contains(e))

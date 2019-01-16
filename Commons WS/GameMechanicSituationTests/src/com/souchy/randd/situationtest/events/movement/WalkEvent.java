@@ -1,6 +1,6 @@
 package com.souchy.randd.situationtest.events.movement;
 
-import com.souchy.randd.jade.api.IEntity;
+import com.souchy.randd.jade.api.AEntity;
 import com.souchy.randd.situationtest.events.Event;
 
 
@@ -14,11 +14,11 @@ import com.souchy.randd.situationtest.events.Event;
 public class WalkEvent extends Event {
 
 	/**
-	 * Nombre de points de movement utilisés / cellules parcourues en marchant
+	 * Nombre de points de movement utilisï¿½s / cellules parcourues en marchant
 	 */
 	public final int movementPointsUsed;
 	
-	public WalkEvent(IEntity source, int movementPointsUsed) {
+	public WalkEvent(AEntity source, int movementPointsUsed) {
 		super(source);
 		this.movementPointsUsed = movementPointsUsed;
 	}

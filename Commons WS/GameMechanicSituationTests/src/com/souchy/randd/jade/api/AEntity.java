@@ -29,7 +29,7 @@ import com.souchy.randd.situationtest.scripts.Status;
  * @author Souchy
  *
  */
-public abstract class IEntity extends ContextualObject implements EventProxy, Identifiable<Integer> {
+public abstract class AEntity extends ContextualObject implements EventProxy, Identifiable<Integer> {
 	
 	/**
 	 * Matrix representing the cells occupied by the entity
@@ -46,7 +46,7 @@ public abstract class IEntity extends ContextualObject implements EventProxy, Id
 	private final EventBus bus = new EventBus();
 	
 	
-	public IEntity(FightContext context, final int id) {
+	public AEntity(FightContext context, final int id) {
 		super(context);
 		this.id = id;
 		statuss = new ArrayList<>();
@@ -63,7 +63,7 @@ public abstract class IEntity extends ContextualObject implements EventProxy, Id
 	}
 	
 	//@Override
-	public PositionMatrix getOccupiedCells() {
+	public PositionMatrix getPos() {
 		return position;
 	}
 	
