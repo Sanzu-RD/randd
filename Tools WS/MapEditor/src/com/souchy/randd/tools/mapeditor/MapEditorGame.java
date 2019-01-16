@@ -65,6 +65,8 @@ public class MapEditorGame extends LapisGame {
 	}
 
 	public static void loadMap() {
+		screen.getWorld().clearCache();
+		//screen.getWorld().clearTemp();
 		if(currentFile.get() != null) {
 			String path = currentFile.get().file().getAbsolutePath();
 			MapData data = MapEditorGame.mapCache.get(path);
@@ -115,7 +117,7 @@ public class MapEditorGame extends LapisGame {
 		Material mat3 = mat1.copy();
 		Material mat4 = mat1.copy();
 		Material mat5 = mat1.copy();
-		mat2.set(ColorAttribute.createDiffuse(Color.PINK));
+		mat2.set(ColorAttribute.createDiffuse(Color.SKY));
 		mat3.set(ColorAttribute.createDiffuse(Color.BROWN));
 		mat4.set(ColorAttribute.createDiffuse(Color.WHITE));
 		mat5.set(ColorAttribute.createDiffuse(Color.BLACK));

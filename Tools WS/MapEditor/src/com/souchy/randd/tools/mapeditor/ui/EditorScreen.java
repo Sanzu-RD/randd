@@ -43,7 +43,7 @@ public class EditorScreen extends ComposedScreen {
 		// Gdx.input.setInputProcessor(camController);
 		
 		lining = new LineDrawing(getCam(), null);
-		lining.createGrid(5, 3000, 3000);
+		lining.createGrid(5, 3000, 3000, true);
 		lining.createCross();
 		controls = new Controls3d(getCam());
 		hud.getStage().addListener(controls);
