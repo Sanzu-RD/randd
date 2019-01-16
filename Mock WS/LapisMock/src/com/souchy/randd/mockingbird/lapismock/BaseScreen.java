@@ -66,10 +66,6 @@ public abstract class BaseScreen implements Screen {
     		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             cam.position.set(worldCenter.x, worldCenter.y*0.6f, worldCenter.x*1.8f);
             cam.lookAt(worldCenter.x, worldCenter.y*0.9f, 0);
-            //cam.direction.set(0, 0, -1);
-            cam.direction.set(-1, 1, -1f);
-            cam.up.set(-1, 1, 1f);
-            cam.position.set(14, 14, 0);
             cam.near = 1f;
             cam.far = 300f;
             cam.update();
@@ -94,18 +90,22 @@ public abstract class BaseScreen implements Screen {
         Gdx.input.setInputProcessor(camController);
 	}
 	
-	public void clear() {
-		Color color = Color.BLACK;
+	public void clearScreen() {
+		Color color = getBackgroundColor();
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Gdx.gl.glClearColor(color.r, color.g, color.b, color.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling ? GL20.GL_COVERAGE_BUFFER_BIT_NV : 0));
+	}
+	
+	public Color getBackgroundColor() {
+		return Color.SKY;//Color.BLACK;
 	}
 	
 	@Override
 	public void render(float delta) {
         camController.update();
 
-        clear();
+        clearScreen();
         
         /*modelBatch.begin(cam);
         modelBatch.render(cache, shader);
