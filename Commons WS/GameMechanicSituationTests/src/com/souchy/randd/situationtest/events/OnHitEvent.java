@@ -6,7 +6,7 @@ import com.souchy.randd.jade.api.AEntity;
 /**
  * 
  * To differentiate InflictOnHit and RecvOnHit : <br>
- *  just compare event.source == thischaracter in the handler <br>
+ *  just compare event.source == this.character in the handler <br>
  *  if true then it's an "inflict" event <br>
  *  if false, then it's a "recv" event <br>
  * 

@@ -9,7 +9,7 @@ import com.souchy.randd.jade.api.ICell;
 import com.souchy.randd.jade.api.AEntity;
 import com.souchy.randd.situationtest.math.Point3D;
 import com.souchy.randd.situationtest.models.entities.Character;
-import com.souchy.randd.situationtest.scripts.Status;
+import com.souchy.randd.situationtest.scripts.ScriptedStatus;
 
 public class Cell implements ICell {
 
@@ -21,10 +21,13 @@ public class Cell implements ICell {
 	private boolean los;
 	
 	/** TODO Cell.List<Status> , du coup on pourrait tourner les cell en entities ? */
-	public List<Status> statuss;
-	/** TODO Cell.List<Entity> ou character ?? pour les tours de persos port�s genre et initialement les trap/glyphs, mais ptete quon les change en statuts eux .. */
+	public List<ScriptedStatus> statuss;
+	
+	
+	/** TODO Cell.List<Entity> ou character ?? pour les tours de persos portés genre et initialement les trap/glyphs, mais ptete quon les change en statuts eux .. */
 	public List<AEntity> entities;
 	public Character character;
+	
 	
 	public Cell(int x, int y, int z) {
 		pos = new Point3D(x, y, z);

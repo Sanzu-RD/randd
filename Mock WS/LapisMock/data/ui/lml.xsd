@@ -1,0 +1,1771 @@
+<schema
+  xmlns='http://www.w3.org/2000/10/XMLSchema'
+  targetNamespace='http://www.w3.org/namespace/'
+  xmlns:t='http://www.w3.org/namespace/'>
+
+ <element name='visslider'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='textarea'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='tooltip'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='validatabletextfield'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='extendedpicker'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='validatable'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='collapsible'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='popupmenu'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='scrollabletextarea'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='formvalidator'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='viswindow'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='onchange'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='greaterthanvalidator'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='greaterorequal' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='spinner'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='visimagetextbutton'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='tree'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='visvalidatabletextfield'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='toast'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='focusborder' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='vistextfield'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='horizontalcollapsiblewidget'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='visimagebutton'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='visselectbox'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='scrollbarspositions' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='button'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='focusborder' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='drag'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='listener' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='notemptyvalidator'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='errormessage' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='floatinggroup'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='imagetextbutton'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='visimage'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='basicpicker'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='floatspinner'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='touch'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='listview'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='responsivecolorpicker' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='horizontalgroup'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='grid'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='dialog'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='intspinner'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='oninput'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='onclick'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='imagebutton'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='selectbox'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='scrollbarspositions' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='vislist'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='horizontalflow'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='menubar'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='focusborder' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='vistextarea'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='verticalflowgroup'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='integervalidator'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name='menu'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='focusborder' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='draggable'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='listener' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='vissplitpane'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='isinteger'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name='horizontalcollapsible'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='visdialog'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='multisplitpane'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='image'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='horizontalflowgroup'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='clicklistener'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='isfloat'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name='floatvalidator'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name='linklabel'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='busybar'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minsize' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='inputlistener'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='tabbedpane'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='container'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='splitpane'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='isnotempty'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='errormessage' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='isint'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name='validator'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='errormessage' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='stack'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='formtable'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='lesserthanvalidator'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='orequal' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='buttongroup'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='textfield'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='disable' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='vislabel'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='textbutton'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='tab'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='title' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='animatedimage'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='customvalidator'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='errormessage' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='greaterthan'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='greaterorequal' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='dragpane'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='list'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='submenu'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='arrayspinner'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='verticalflow'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='visprogressbar'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='lesserthan'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='orequal' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='isolate'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='vistable'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='colorpicker'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='scrollpane'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='velocityy' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='vistree'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='vistextbutton'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='checkbox'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='basiccolorpicker'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='form'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='progressbar'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='verticalgroup'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='collapsiblewidget'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='visradiobutton'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='table'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='verticalcollapsible'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='visscrollpane'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='velocityy' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='extendedcolorpicker'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='focusborder' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='actor'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='buttontable'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='focusborder' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='changelistener'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='slider'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='vischeckbox'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='separator'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='b' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='actorstorage'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='radiobutton'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='highlighttextarea'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='simplefloatspinner'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='window'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='menuitem'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='minheight' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='touchpad'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='vistooltip'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='defaultpadright' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='gridgroup'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='link'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='menuseparator'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='padbottom' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name='label'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ontagclose' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':eval'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='method' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':each'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='element' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':classpathimport'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='replace' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':check'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='test' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':check:else'>
+  <complexType/>
+ </element>
+
+ <element name=':onclick'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ids' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':tablerow'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='growx' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':logdebug'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='log' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':test'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='test' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':test:else'>
+  <complexType/>
+ </element>
+
+ <element name=':calculation'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='value' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':times'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='times' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':evaluate'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='method' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':tag'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='method' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':attribute'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='method' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':if'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='test' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':if:else'>
+  <complexType/>
+ </element>
+
+ <element name=':calculate'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='value' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':val'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='value' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':internalimport'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='replace' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':loop'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='times' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':import'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='replace' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':actor'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='method' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':var'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='value' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':logerror'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='log' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':replacearguments'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name=':row'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='growx' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':info'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='log' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':externalimport'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='replace' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':style'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='value' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':importstylesheet'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='filetype' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':replace'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name=':cell'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='growx' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':eachnested'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='element' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':logtrace'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='log' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':clicklistener'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ids' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':argument'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='value' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':foreachnested'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='element' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':ifnotnull'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='test' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':ifnotnull:else'>
+  <complexType/>
+ </element>
+
+ <element name=':random'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='value' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':log'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='log' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':trace'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='log' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':todo'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name=':for'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='element' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':foreach'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='element' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':oninput'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ids' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':macro'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='replace' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':onchange'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ids' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':localimport'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='replace' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':tablecell'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='growx' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':exception'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='strict' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':debug'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='log' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':column'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='maxwidth' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':notnull'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='test' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':notnull:else'>
+  <complexType/>
+ </element>
+
+ <element name=':preference'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='value' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':absoluteimport'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='replace' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':until'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='test' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':comment'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name=':root'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name=':noop'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name=':changelistener'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ids' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':throw'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='strict' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':assign'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='value' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':any'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='test' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':any:else'>
+  <complexType/>
+ </element>
+
+ <element name=':fixme'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+  </complexType>
+ </element>
+
+ <element name=':anynotnull'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='test' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':anynotnull:else'>
+  <complexType/>
+ </element>
+
+ <element name=':tablecolumn'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='maxwidth' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':while'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='test' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':loginfo'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='log' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':error'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='strict' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':nls'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='value' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':nested'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='element' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':invoke'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='method' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':newtag'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='method' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':exists'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='test' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':exists:else'>
+  <complexType/>
+ </element>
+
+ <element name=':newattribute'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='method' type='string' use='optional'/>
+  </complexType>
+ </element>
+
+ <element name=':inputlistener'>
+  <complexType>
+   <sequence>
+   <any namespace='http://www.w3.org/namespace/'/>
+   </sequence>
+   <attribute name='ids' type='string' use='optional'/>
+  </complexType>
+ </element>
+</schema>

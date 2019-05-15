@@ -13,7 +13,7 @@ public enum Orientation {
 	South,
 	West,
 	
-	// Activées uniquement lorsqu'un spell a canDiagonal() == true;
+	// ActivÃ©es uniquement lorsqu'un spell a canDiagonal() == true;
 	NE,
 	ES,
 	SE,

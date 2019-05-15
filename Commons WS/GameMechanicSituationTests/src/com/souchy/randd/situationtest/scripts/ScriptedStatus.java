@@ -1,14 +1,14 @@
 package com.souchy.randd.situationtest.scripts;
 
-import com.google.common.eventbus.EventBus;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.souchy.randd.commons.tealwaters.commons.Disposable;
 import com.souchy.randd.jade.api.EventProxy;
-import com.souchy.randd.situationtest.eventshandlers.turn.OnTurnEndHandler;
-import com.souchy.randd.situationtest.eventshandlers.turn.OnTurnStartHandler;
+import com.souchy.randd.situationtest.eventshandlers.EventHandler;
 import com.souchy.randd.situationtest.models.entities.Character;
 import com.souchy.randd.situationtest.models.org.FightContext;
-import com.souchy.randd.situationtest.properties.Stats;
-
+import com.souchy.randd.situationtest.events.Event;
 
 /**
  * Has to be implemented in ruby.
@@ -20,38 +20,51 @@ import com.souchy.randd.situationtest.properties.Stats;
  * @author Souchy
  *
  */
-public abstract class Status implements EventProxy, Disposable {
+public abstract class ScriptedStatus implements /*EventProxy,*/ Disposable {
 
-	private final EventBus bus = new EventBus();
+	//private final EventBus bus = new EventBus();
 	
 	private final FightContext context;
-	private OnTurnStartHandler onStartTurnRouter;
-	private OnTurnEndHandler onEndTurnRouter;
-
 	private final Character source;
-	/**
-	 * FIXME : Status.target can't only be Characters, it has to be able to be Cells too
-	 */
+	/** FIXME : Status.target can't only be Characters, it has to be able to be Cells too */
 	private final Character target;
 	
 	// private int duration; -> dans redis ?
-
+	//private OnTurnStartHandler onStartTurnRouter;
+	//private OnTurnEndHandler onEndTurnRouter;
 	
-	public final Stats stats;
+	//public final Stats stats;
 	
-	@Override
+	/*@Override
 	public EventBus bus() {
 		return bus;
-	}
+	}*/
+	
+	List<EventHandler<?>> handlers = new ArrayList<>();
 
-	public Status(FightContext context, Character source, Character target) {
+	public ScriptedStatus(FightContext context, Character source, Character target) {
 		this.context = context;
-
 		this.source = source;
 		this.target = target;
 
-		onStartTurnRouter = context.<OnTurnStartHandler>route(this);
-		onEndTurnRouter = context.<OnTurnEndHandler>route(this);
+		//onStartTurnRouter = context.<OnTurnStartHandler>route(this);
+		//onEndTurnRouter = context.<OnTurnEndHandler>route(this);
+		
+		/*context.register((TurnStartEvent e) -> {
+			
+		});
+		register((TurnStartEvent e) -> {
+			
+		});
+		register(new OnTurnStartHandler() {
+
+			@Override
+			public void handle(TurnStartEvent event) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});*/
 		
 		registerHandlers();
 	}
@@ -61,13 +74,25 @@ public abstract class Status implements EventProxy, Disposable {
 		unregister();
 	}
 	
-	public void unroute() {
+	
+	/*public void unroute() {
 		context.unregister(onStartTurnRouter);
 		context.unregister(onEndTurnRouter);
+	}*/
+
+	/**
+	 * À moins que tu veule register ders handler auprès d'autres bus, à ce moment il faudrait avoir un Hash<Bus, EventHandler>
+	 * @param h
+	 */
+	public <T extends Event> void register(EventProxy proxy, EventHandler<T> h) {
+		//context.register(h);
+		proxy.register(h);
+		handlers.add(h);
 	}
 	
 	public void unregister() {
-
+		handlers.forEach(h -> context.unregister(h));
+		handlers.clear();
 	}
 
 	/* ===========================  Status properties accessors to use in script  ===========================*/
@@ -98,6 +123,7 @@ public abstract class Status implements EventProxy, Disposable {
 	public int duration() {
 		return 1;
 	}
+	
 
 	public abstract void registerHandlers();
 	

@@ -23,7 +23,7 @@ public abstract class LapisGame extends Game {
 	public final FontDiscoverer fonts;
 	public final ModelDiscoverer modelDiscoverer;
 	
-	private final AssetManager assets;
+	public final AssetManager assets;
 	public final ModelManager modelManager;
 	
 	public List<LabelStyle> labelStyles;

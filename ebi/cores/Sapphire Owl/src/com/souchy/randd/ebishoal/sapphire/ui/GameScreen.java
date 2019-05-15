@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.environment.DirectionalShadowLight;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -68,8 +69,11 @@ public class GameScreen extends ComposedScreen {
 		getEnvironment().set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
 		getEnvironment().add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 		
+		(this.shadowLight = new DirectionalShadowLight(1024*2*2, 1024*2*2, 50, 50, 1f, 100f)).set(.7f, .7f, .7f, -1f, -1.0f, -.5f);
+		
+		
 		lines = new LineDrawing(getCam(), null);
-		lines.createCross(Color.RED, Color.GREEN, Color.BLUE);
+		lines.createCross(Color.RED, Color.GREEN, Color.BLUE, 30);
 		/*lines.addLine(new Vector3(1,1,1), new Vector3(2,2,2), Color.CORAL);
 		lines.addLine(new Vector3(2.5f,2.5f,5), new Vector3(-2.5f,2.5f,5), Color.CYAN);
 		lines.addLine(new Vector3(2.5f,2.5f,5), new Vector3(2.5f,-2.5f,5), Color.CYAN);
@@ -237,6 +241,12 @@ public class GameScreen extends ComposedScreen {
 	@Override
 	public Screen2d getHud() {
 		return hud;
+	}
+
+
+	@Override
+	protected boolean orderHudToFront() {
+		return true;
 	}
 
 

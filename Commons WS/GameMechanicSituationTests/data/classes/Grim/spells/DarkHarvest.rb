@@ -36,8 +36,8 @@ class DarkHarvest < ScriptedSkill
     # Applying damage as 1st effect ==========================
     #targets1 = getTargets(event.targetCell, effectMatrix(Effect1))
     #characters = getTargets(event.target, effectMatrix(Effect1), EntityType.Fighter).filterOut(EntityType.Summon);
-    characters = board.getTargets(event.target, effectMatrix(EffectFlags.Effect1), EntityType.Character);
-    summons = getTargets(event.target, effectMatrix(MatrixFlags.EffectFlags.Effect1), EntityType.Summon);
+    characters = board.getTargets(event.target, effectMatrix(MatrixFlags.EffectFlags.Effect1), EntityType.Character);
+    summons = board.getTargets(event.target, effectMatrix(MatrixFlags.EffectFlags.Effect1), EntityType.Summon);
     sclDmg = ElementValue.new(Elements.Dark, 40); # will multiply with scaling Dark stats from source
     flatDmg = ElementValue.new(Elements.Dark, 100); # will go get flat Dark dmg from source too
     # formula = (source.dark.scl * sclDmg) + (source.dark.flat + flatDmg)
@@ -67,12 +67,13 @@ class DarkHarvest < ScriptedSkill
         #First orientation, only one in this case
         [
           [NoFlag,  CanCast, NoFlag],
-          [CanCast, Source | CannotCast,  CanCast]
+          [CanCast, Source | CannotCast,  CanCast],
+          [NoFlag,  CanCast, NoFlag]
         ]
       ]
   end
 
-  # Defines conditions for positionning and classes of targets
+  # Defines casting conditions for positionning and classes of targets
   def conditionMatrix()
     return
       [

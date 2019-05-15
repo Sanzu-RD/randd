@@ -49,7 +49,7 @@ public class MapEditorGame extends LapisGame {
 		screen = new EditorScreen();
 		screen.create();
 		
-		currentFile.set(Gdx.files.internal("data/maps/map1.map"));
+		currentFile.set(Gdx.files.internal("data/maps/goulta7.map"));
 		loadMap();
 	}
 	
@@ -73,8 +73,8 @@ public class MapEditorGame extends LapisGame {
 			MapEditorGame.currentMap.set(data);
 
 			//MapData data = currentMap.get(); //cache.get("data/maps/map1.map");
-			for(int x = 0; x < data.models.length; x++) {
-				for(int y = 0; y < data.models[x].length; y++) {
+			for(int x = 0; x < data.cells.length; x++) {
+				for(int y = 0; y < data.cells[x].length; y++) {
 					int modelID = data.getModel(x, y);
 					int z = data.getElevation(x, y);
 					boolean walk = data.isWalkable(x, y);

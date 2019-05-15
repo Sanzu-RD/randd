@@ -13,7 +13,6 @@ public class EbiCell extends Cell {
 		super(x, y, z, walkable, los);
 		
 		this.model = model;
-		
 	}
 	
 	

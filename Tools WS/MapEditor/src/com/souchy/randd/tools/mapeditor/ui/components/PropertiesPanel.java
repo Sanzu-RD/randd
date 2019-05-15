@@ -40,7 +40,7 @@ public class PropertiesPanel extends VisSplitPane  implements Component {
 		
 		
 		Skin skin = MapEditorGame.skin;//new Skin(Gdx.files.internal("res/uiskin.json"));
-		//table.setSkin(skin);
+		table.setSkin(skin);
 		
 		/*
 		Texture honkongTex = new Texture(Gdx.files.internal("fonts/hongkonghustle-hiero-100_00.png"), true); // true enables mipmaps
@@ -86,7 +86,7 @@ public class PropertiesPanel extends VisSplitPane  implements Component {
 		table.add(titleEntry);
 		table.row();
 		
-		table.add(new VisLabel("Width")).width(125);
+		table.add(new VisLabel("Width")).width(125); // new Label("Width", skin)
 		table.add(new NumberEntryField("40")).width(125);
 		table.row();
 		

@@ -16,7 +16,6 @@ import com.souchy.randd.situationtest.eventshandlers.EventHandler;
  */
 public interface EventProxy {
 	
-	
 	public EventBus bus();
 	
 	public default void post(Event event) {
@@ -63,7 +62,7 @@ public interface EventProxy {
 	
 	/**
 	 * Utile par exemple pour appliquer un event sur une liste de cellules, ou appliquer sur une liste de personnages.
-	 * @param list - Liste de trucs à foreach qu'on utilise pour créer et poster l'event
+	 * @param list - Liste de trucs ï¿½ foreach qu'on utilise pour crï¿½er et poster l'event
 	 * @param eventCreator
 	 */
 	public default <T> void multipost(List<T> list, Function<T, Event> eventCreator) {
@@ -75,7 +74,7 @@ public interface EventProxy {
 
 	/**
 	 * Utile par exemple pour appliquer un event sur une liste de cellules, ou appliquer sur une liste de personnages.
-	 * @param list - Liste de trucs à foreach qu'on utilise pour créer et poster l'event
+	 * @param list - Liste de trucs ï¿½ foreach qu'on utilise pour crï¿½er et poster l'event
 	 * @param eventCreator
 	 */
 	public default <T extends EventProxy> void broadcast(List<T> list, Function<T, Event> eventCreator) {

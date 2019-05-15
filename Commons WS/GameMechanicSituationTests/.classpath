@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="com/souchy/randd/situationtest/events/movement/TPEvent.java|com/souchy/randd/situationtest/events/statschange/HpChangeEvent.java|com/souchy/randd/situationtest/eventshandlers/OnHpChange.java|com/souchy/randd/situationtest/models/Action.java|com/souchy/randd/situationtest/models/effects/|com/souchy/randd/situationtest/interfaces/ICombatEntity.java|com/souchy/randd/situationtest/events/statschange/RecvStatChangeEvent.java|com/souchy/randd/situationtest/events/statschange/InflictStatChangeEvent.java|com/souchy/randd/jade/interfaces/ICombatEntity.java" kind="src" path="src"/>
+	<classpathentry excluding="com/souchy/randd/situationtest/events/movement/TPEvent.java|com/souchy/randd/situationtest/events/statschange/HpChangeEvent.java|com/souchy/randd/situationtest/eventshandlers/OnHpChange.java|com/souchy/randd/situationtest/models/Action.java|com/souchy/randd/situationtest/models/effects/|com/souchy/randd/situationtest/interfaces/ICombatEntity.java|com/souchy/randd/situationtest/events/statschange/RecvStatChangeEvent.java|com/souchy/randd/situationtest/events/statschange/InflictStatChangeEvent.java|com/souchy/randd/jade/interfaces/ICombatEntity.java|com/souchy/randd/jade/api/IEffect.java|com/souchy/randd/ecs/Systems.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="data"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Cache"/>

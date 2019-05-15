@@ -29,7 +29,7 @@ public class Board implements IBoard {
 	}
 	
 	/**
-	 * Fonction co�teuse. Appeler le moins souvent. Garder le r�sultat en m�moire locale
+	 * Fonction coûteuse. Appeler le moins souvent. Garder le résultat en mémoire locale
 	 * @param e
 	 * @return
 	 */
@@ -56,7 +56,7 @@ public class Board implements IBoard {
 	/**
 	 * autrefois List<IEntity>, ptete qu'on devrait avoir les deux ou quoi ?
 	 * <p>
-	 * on obtient les entit�s � partir des celles anyway : List<IEntity> = List<Cell>.map(c -> c.getEntity();
+	 * on obtient les entités à partir des celles anyway : List<IEntity> = List<Cell>.map(c -> c.getEntity();
 	 * 
 	 * @param targetCell
 	 * @param aoe
@@ -69,7 +69,7 @@ public class Board implements IBoard {
 		List<ICell> cells = new ArrayList<>();
 		if(targetCell == null) return cells;
 		aoe.foreach((i, j) -> {
-			if(aoe.get(i, j) >= MatrixFlags.EffectFlags.Effect1.getID()) { // si *any* effect flag
+			if(aoe.get(i, j).getID() >= MatrixFlags.EffectFlags.Effect1.getID()) { // si *any* effect flag
 				int x = targetCell.getPos().x - aoe.origin.x + i;
 				int y = targetCell.getPos().y - aoe.origin.y + j;
 				if(map.contains(x, y)) {

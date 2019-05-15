@@ -32,7 +32,7 @@ public class Character extends AEntity {
 	/** This character's items and weapons */
 	public final List<Item> items;
 
-	/** This character's current buffs  // d�plac� dans IEntity */
+	/** This character's current buffs  // déplacé dans IEntity */
 	//public final List<Status> statuss;
 	
 	public Character(FightContext context, int id, Point3D pos) {
@@ -61,7 +61,7 @@ public class Character extends AEntity {
 
 	/**
 	 * 
-	 * @return - Cellules sur lesquelles l'entit� est. 
+	 * @return - Cellules sur lesquelles l'entité est. 
 	 */
 	public void occupiedCells() {
 		 // ou Cell[][] getArea(); qui renvoie une matrice montrant [1,1;1,1]
@@ -74,5 +74,6 @@ public class Character extends AEntity {
 	public boolean isSummon() {
 		return false;
 	}
+	
 	
 }

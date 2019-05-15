@@ -45,7 +45,7 @@ public abstract class Effect {
 	
 	
 	/**
-	 * V�rifie si toutes les conditions sont remplies
+	 * Vérifie si toutes les conditions sont remplies
 	 * @param context - contexte/�tat du combat
 	 * @return - True si toutes les conditions sont remplies, false si au moins une condition ne l'est pas.
 	 */
@@ -60,7 +60,7 @@ public abstract class Effect {
 	 * Filtre les bonnes cellules à affecter grâce à un predicate. <p>
 	 * Applique l'effet sur les cellules restantes.
 	 * 
-	 * @param targetCell Cellule point� par la souris, cellule sur laquelle on cast le sort ou action
+	 * @param targetCell Cellule pointé par la souris, cellule sur laquelle on cast le sort ou action
 	 * @param filter Predicate pour filtrer les targets dans l'Aoe créée autour de la cellule point�e
 	 */
 	public void applyAoe(ICell targetCell, Orientation ori, Predicate<ICell> filter) {
@@ -72,7 +72,7 @@ public abstract class Effect {
 			int y = c.getPos().y;
 			cm.get(x, y);
 		})*/
-		.forEach(c -> apply(c)); 	 // applique l'effet � chaque cell
+		.forEach(c -> apply(c)); 	 // applique l'effet à chaque cell
 	}
 	
 	/**

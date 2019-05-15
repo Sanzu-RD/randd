@@ -17,7 +17,6 @@ import com.souchy.randd.situationtest.models.map.MapData;
  */
 public class MapCache extends JSONCache<MapData> {
 	
-	
 	private String rootPath;
 
 	public MapCache() {

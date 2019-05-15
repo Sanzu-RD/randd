@@ -22,7 +22,6 @@ public abstract class LibGdxFileDiscoverer<O> implements Discoverer<String, File
 		var f = directory.file();
 		var s = f.getAbsolutePath();
 		FileHandle absDir = Gdx.files.absolute(f.getAbsolutePath());
-		
 
 		loop(files, absDir);
 		

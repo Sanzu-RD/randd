@@ -37,9 +37,11 @@ class KunaiThrow < ScriptedSpell
     # Applying damage as 1st effect ==========================
     if event.targetCell.getEntity() != null
       # dommage + apply status
+      # physical hit
       sclDmg = ElementValue.new(Elements.Physical, 40);
       flatDmg = ElementValue.new(Elements.Physical, 100);
       post(ApplyEffectEvent.new(DamageEffect3, Damage.Hit, event.source, event.targetCell.getEntity(), Elements.Physical, sclDmg, flatDmg)); # dmg vs persos
+      # poison hit
       sclDmg = ElementValue.new(Elements.Poison, 40);
       flatDmg = ElementValue.new(Elements.Poison, 100);
       post(ApplyEffectEvent.new(DamageEffect3, Damage.Hit, event.source, event.targetCell.getEntity(), Elements.Poison, sclDmg, flatDmg)); # dmg vs persos
@@ -54,8 +56,6 @@ class KunaiThrow < ScriptedSpell
         effect1.apply(e); # -> post(ApplyEffectEvent.new(effect1, targetCell));
 
       effect1.applyAoe(targetCell); # -> ferait le foreach à l'intérieur de ça pour pas avoir à réécrire le getTargets et foreach à chaque fois
-
-
 
     end
 
@@ -80,7 +80,7 @@ class KunaiThrow < ScriptedSpell
       ]
   end
 
-  # Defines conditions for positionning and classes of targets
+  # Defines conditions for casting, ex : positionning and classes of targets
   def conditionMatrix()
     return
       [

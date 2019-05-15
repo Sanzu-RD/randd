@@ -13,8 +13,8 @@ import com.souchy.randd.situationtest.situations.CacheInjector;
  * initialize via JSON and inject via Guice
  * 
  * 
- * TODO stats : what if, à chq fois qu'on fait un .get(), on fait un foreach sur tous les items/status/cellstatus et on additionne ceux qui donnent des stats ?
- * 	aussi, un status dont la description qui donne +60% vita p.ex, pourrait être codé en hp fixe, ex sur un gars à 1000hp*60%, on donne un +600hp fixe, c'est simple 
+ * TODO stats : what if, Ã  chq fois qu'on fait un .get(), on fait un foreach sur tous les items/status/cellstatus et on additionne ceux qui donnent des stats ?
+ * 	aussi, un status dont la description qui donne +60% vita p.ex, pourrait ï¿½tre codï¿½ en hp fixe, ex sur un gars ï¿½ 1000hp*60%, on donne un +600hp fixe, c'est simple 
  * 
  */
 public class Stats {
@@ -26,13 +26,13 @@ public class Stats {
 	
 	
 	/**
-	 * Propriétés de base (resources (hp, mana, pm, shields)
+	 * PropriÃ©tÃ©s de base (resources (hp, mana, pm, shields)
 	 */
     @Inject
 	private Cache<StatProperties, StatProperty> properties;
 
 	/**
-	 * Affinités aux éléments (dmg et res, scl et flat)
+	 * AffinitÃ©s aux Ã©lÃ©ments (dmg et res, scl et flat)
 	 */
     @Inject
 	private Cache<Elements, ElementBundle> elementAffinities;
@@ -54,7 +54,7 @@ public class Stats {
 	}
 	
 	/**
-	 * @param type : propriété à inspecter
+	 * @param type : propriÃ©tÃ© Ã  inspecter
 	 * @return Stat voulue 
 	 */
 	public StatProperty get(StatProperties type) {
@@ -64,31 +64,34 @@ public class Stats {
 	public void setElementBundle(ElementBundle bundle) {
 		elementAffinities.set(bundle.scl.element, bundle);
 	}
+	public ElementBundle get(Elements ele) {
+		return elementAffinities.get(ele);
+	}
 	
 	/**
-	 * @param type : element à inspecter
-	 * @return Dommages scaling associés à cet élément
+	 * @param type : Ã©lÃ©ment Ã  inspecter
+	 * @return Dommages scaling associÃ©s Ã  cet Ã©lÃ©ment
 	 */
 	public ElementValue scl(Elements type) {
 		return elementAffinities.get(type).scl;
 	}
 	/**
-	 * @param type : element à inspecter
-	 * @return Dommages flat associés à cet élément
+	 * @param type : Ã©lÃ©ment Ã  inspecter
+	 * @return Dommages flat associÃ©s Ã  cet Ã©lÃ©ment
 	 */
 	public ElementValue flat(Elements type) {
 		return elementAffinities.get(type).flat;
 	}
 	/**
-	 * @param type : element à inspecter
-	 * @return Résistances scaling associése à cet élément
+	 * @param type : Ã©lÃ©ment Ã  inspecter
+	 * @return RÃ©sistances scaling associÃ©es Ã  cet Ã©lÃ©ment
 	 */
 	public ElementValue resScl(Elements type) {
 		return elementAffinities.get(type).resScl;
 	}
 	/**
-	 * @param type : element à inspecter
-	 * @return Résistances flat associées à cet élément
+	 * @param type : Ã©lÃ©ment Ã  inspecter
+	 * @return RÃ©sistances flat associÃ©es Ã  cet Ã©lÃ©ment
 	 */
 	public ElementValue resFlat(Elements type) {
 		return elementAffinities.get(type).resFlat;

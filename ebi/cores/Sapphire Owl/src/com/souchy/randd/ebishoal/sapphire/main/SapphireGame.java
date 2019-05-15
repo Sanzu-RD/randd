@@ -38,7 +38,6 @@ public class SapphireGame extends LapisGame {
 	@Override
 	public void onCreateHook() {
 
-		VisUI.load();
 		skin = new Skin(Gdx.files.internal("res/uiskin.json"));
 		System.out.println("skin =" + skin);
 		//labelStyles.add(new LabelStyle());
@@ -52,7 +51,7 @@ public class SapphireGame extends LapisGame {
 		//Injector injector = Guice.createInjector(new SapphireModule());
 		
 		// Context board and World model cache
-		//FightContext context = new FightContext();
+		FightContext context = new FightContext();
 		IBoard board = context.board;
 		
 		
@@ -67,11 +66,11 @@ public class SapphireGame extends LapisGame {
 		
 		// Loading a map
 		MapCache cache = new MapCache();
-		
-		MapData data = cache.get("data/maps/map1.json");
+		String path = Gdx.files.internal("data/maps/map1.json").file().getAbsolutePath();
+		MapData data = cache.get(path); //"data/maps/map1.json");
 		gfx.getWorld().cache.begin();
-		for(int i = 0; i < data.models.length; i++) {
-			for(int j = 0; j < data.models[i].length; j++) {
+		for(int i = 0; i < data.cells.length; i++) {
+			for(int j = 0; j < data.cells[i].length; j++) {
 				int modelID = data.getModel(i, j);
 				int height = data.getElevation(i, j);
 				boolean walk = data.isWalkable(i, j);
@@ -92,7 +91,7 @@ public class SapphireGame extends LapisGame {
 		gfx.getWorld().cache.end();
 	}
 	
-	private ModelInstance testModelGenerator(int id) {
+	public static ModelInstance testModelGenerator(int id) {
 		ModelBuilder builder = new ModelBuilder();
 		long attributes = Usage.Position | Usage.Normal | Usage.ColorPacked;
 		Model model = builder.createBox(5f, 5f, 5f, getMat(id), attributes);
@@ -102,7 +101,7 @@ public class SapphireGame extends LapisGame {
 		return instance;
 	}
 	
-	private Material getMat(int id) {
+	private static Material getMat(int id) {
 		Material mat1 = new Material(
 			  //  IntAttribute.createCullFace(GL20.GL_FRONT),//For some reason, libgdx ModelBuilder makes boxes with faces wound in reverse, so cull FRONT
 			  //  new BlendingAttribute(1f), //opaque since multiplied by vertex color
@@ -127,7 +126,7 @@ public class SapphireGame extends LapisGame {
 
 	private void testGenerateMapFile() {
 		MapData test = new MapData();
-		test.models = test.elevation = test.walkableLos = new int[][] {
+		test.cells = test.elevation = test.walkableLos = new int[][] {
 			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},

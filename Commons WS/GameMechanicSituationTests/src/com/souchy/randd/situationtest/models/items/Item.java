@@ -1,8 +1,11 @@
 package com.souchy.randd.situationtest.models.items;
 
+import java.util.function.Consumer;
+
 import com.souchy.randd.situationtest.models.entities.Character;
 import com.souchy.randd.situationtest.models.org.ContextualObject;
 import com.souchy.randd.situationtest.models.org.FightContext;
+import com.souchy.randd.situationtest.properties.ElementBundle;
 import com.souchy.randd.situationtest.properties.ElementValue;
 import com.souchy.randd.situationtest.properties.StatProperty;
 import com.souchy.randd.situationtest.properties.Stats;
@@ -83,6 +86,38 @@ public class Item extends ContextualObject {
 			e.items.forEach(i -> val.addSet(i.stats.resFlat(ele)));   // items
 			e.statuss.forEach(i -> val.addSet(i.stats.resFlat(ele))); // status
 			return val;
+		}
+		
+		public ElementBundle get(Elements ele) {
+			ElementBundle bundle = new ElementBundle();
+			
+			Consumer<ElementBundle> compoundStats = b -> {
+				bundle.baseScl.addSet(b.baseScl);
+				bundle.scl.addSet(b.scl);
+				bundle.flat.addSet(b.flat);
+				bundle.moreScl.addSet(b.moreScl);
+				for(var e : Elements.values()) {
+					bundle.convRates.get(e.ordinal()).addSet(b.convRates.get(e.ordinal()));
+				}
+				for(var e : Elements.values()) {
+					bundle.extraAs.get(e.ordinal()).addSet(b.extraAs.get(e.ordinal()));
+				}
+				for(var e : Elements.values()) {
+					bundle.convOutput.get(e.ordinal()).addSet(b.convOutput.get(e.ordinal()));
+				}
+				bundle.resFlat.addSet(b.resFlat);
+				bundle.resScl.addSet(b.resScl);
+				bundle.resMore.addSet(b.resMore);
+
+				bundle.penFlat.addSet(b.penFlat);
+				bundle.penScl.addSet(b.penScl);
+			};
+			
+			compoundStats.accept(e.baseStats.get(ele)); // base stats
+			e.items.forEach(i -> compoundStats.accept(i.stats.get(ele))); // items
+			e.statuss.forEach(i -> compoundStats.accept(i.stats.get(ele))); // items
+			
+			return bundle;
 		}
 	}
 	

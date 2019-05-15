@@ -4,16 +4,20 @@ public enum Elements {
 
 	/**
 	 * Pour avoir une valeur disont flat qui ne va pas chercher les +do du personnage.
-	 * Ex tu mets ElementValue(10, NULL), ça va toujours être 10 dégâts fixe, sinon is on met un élément ça ajouterait les +do du perso
+	 * Ex tu mets ElementValue(10, NULL), Ã§a va toujours ï¿½tre 10 dï¿½gï¿½ts fixe, sinon is on met un ï¿½lï¿½ment ï¿½a ajouterait les +do du perso
 	 */
 	PURE,
+	/**
+	 * Affects all elements
+	 */
+	Global, 
 	
 	//Physical, // bleeding included in phys ?
 	
 	Fire, // red : 
-	Earth, // green : nature   // earth ou nature
-	Water,
-	Wind, // wind ou air
+	Water, // blue :
+	Nature, // green : nature   // earth ou nature
+	Air, // yellow : wind ou air
 	
 	Dark, // black : peut inclure du genre skills de vampire/blood magic
 	Light, // white : for good things, like candy/fairy magic, blessings, w/e
@@ -48,7 +52,7 @@ public enum Elements {
 	// Curse ?
 	// Psychic / Mind ? Mystic ? Cosmic ?
 	
-	// TODO éléments : https://powerlisting.wikia.com/wiki/Category:Form_of_magic
+	// TODO Ã©lÃ©ments : https://powerlisting.wikia.com/wiki/Category:Form_of_magic
 	
 	
 }

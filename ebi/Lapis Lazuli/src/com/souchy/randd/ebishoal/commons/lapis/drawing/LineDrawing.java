@@ -98,14 +98,15 @@ public class LineDrawing {
 		int toX = width;
 		int fromY = 0; // = -height
 		int toY = height;
+		int zPlane = 1;
 		
 		// vertical
 		for (int x = withCross ? gap : fromX; x <= toX; x += gap) {
-			addLine(color, new Vector3(x, fromY, 0), new Vector3(x, toY, 0));
+			addLine(color, new Vector3(x, fromY, zPlane), new Vector3(x, toY, zPlane));
 		}
 		// horizontal
 		for (int y = withCross ? gap : fromY; y <= toY; y += gap) {
-			addLine(color, new Vector3(fromX, y, 0), new Vector3(toX, y, 0));
+			addLine(color, new Vector3(fromX, y, zPlane), new Vector3(toX, y, zPlane));
 		}
 		if(withCross) createCross();
 		// (0,0) cross

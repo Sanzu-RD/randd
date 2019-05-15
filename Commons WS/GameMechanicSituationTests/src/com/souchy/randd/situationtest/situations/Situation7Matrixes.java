@@ -85,7 +85,7 @@ public class Situation7Matrixes {
 			Cell c = new Cell(i, j, heightMap.get(i, j));
 			board.getCells().put(i, j, c);
 		});
-		// Cr�� deux perso
+		// Créé deux perso
 		// need to optimize this so we write the pos only once etc, make everything linked in 1
 		Character source = new Character(context, 1, new Point3D(1, 2, 0));
 		Character target = new Character(context, 2, new Point3D(2, 2, 0));
@@ -94,7 +94,7 @@ public class Situation7Matrixes {
 		source.baseStats.get(StatProperties.Resource1).value = 30;
 		target.baseStats.get(StatProperties.Resource1).value = 100;
 
-		// Cr�� des EventHandlers
+		// Créé des EventHandlers
 		// target.register((OnHitEvent e)  -> { // marche pas :(
 		OnHitReceived h = target.register(e -> {
 			System.out.println("target has been hit by (sourceID:"+e.source.getID()+") !");
@@ -112,6 +112,22 @@ public class Situation7Matrixes {
 			System.out.println("target has had a property changed by : " + e.changedProp + ",\n\t result :"  + ((Character)e.target).stats.get(e.changedProp.type));
 		}));
 		
+		OnHitReceived aSD = source.register(e -> {
+			
+		});
+		OnHitReceived fdsa = source.register(Situation7Matrixes::handleOnHitRecv);
+		
+		source.register(new OnHitReceived() {
+			@Override
+			public void handle(OnHitEvent event) {
+				
+			}
+		});
+		OnHitReceived asdf = e -> {
+			
+		};
+		
+		
 		/* this comment block code works. commented just to try it from a scriptedskill
 		// Spell effects creation :
 		ElementValue scl = new ElementValue(Elements.Dark, 50);
@@ -127,6 +143,10 @@ public class Situation7Matrixes {
 		ScriptedSkill spell = ScriptedEngine.eval("data/test/spells/Bubble.rb");
 		ICell targetCell = board.getCell(1, 1);
 		spell.getOnCastHandler().handle(new CastSpellEvent(context, source, (Cell)targetCell, spell));
+	}
+	
+	public static void handleOnHitRecv(OnHitEvent e) {
+		
 	}
 	
 	

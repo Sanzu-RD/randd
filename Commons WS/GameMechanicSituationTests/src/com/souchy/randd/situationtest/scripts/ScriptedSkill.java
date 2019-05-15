@@ -4,46 +4,36 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import com.souchy.randd.jade.api.IEffect;
+import com.souchy.randd.jade.api.IEffect2;
 import com.souchy.randd.situationtest.eventshandlers.OnCast;
 import com.souchy.randd.situationtest.models.org.FightContext;
+import com.souchy.randd.situationtest.models.entities.*;
+import com.souchy.randd.situationtest.models.entities.Character;
+import com.souchy.randd.situationtest.models.map.Cell;
 
 public abstract class ScriptedSkill {
 
-	public String name = "java name";
 	
+	public ScriptedSkill() {
 
-	public ScriptedSkill(String str) {
-		name = str;
 	}
-	
-	//public abstract void hiRuby();
-	
-	/*public void test() {
-		System.out.println("hey test");
-	}*/
 	
 	/**
 	 * ce qu'on applique 
 	 */
-	public List<IEffect> effects;
+	public List<IEffect2> effects;
 	
 	/**
 	 * ce qu'il se fait appeler quand on cast le spell
 	 */
 	public OnCast onCast;
-	
 
 	/**
 	 * general conditions
 	 */
 	public List<Predicate<FightContext>> conditions;
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String str) {
-		name = str;
-	} 
+	public abstract String getName();
 	
 	public void setOnCast(OnCast handler) {
 		this.onCast = handler;
@@ -53,26 +43,47 @@ public abstract class ScriptedSkill {
 	}
 	
 	/**
-	 * Active l'utilisation des orientations diagonales, c-à-d :
+	 * Active l'utilisation des orientations diagonales, c-Ã -d :
 	 * ex un sort avec une aoe en ligne :
 	 * [x,x,x] 
-	 * sera tournée comme ça par défaut quand la souris est en diago : 
+	 * sera tournÃ©e comme Ã§a par dÃ©faut quand la souris est en diago : 
 	 * [x,_,_]
 	 * [_,x,_]
 	 * [_,_,x]
 	 * 
-	 * + ça autorise cette orientation quand on fait tourner l'aoe avec le contrôle d'orientation 
+	 * + Ã§a autorise cette orientation quand on fait tourner l'aoe avec le contrÃ´le d'orientation 
 	 * TODO ScriptedSkill.canDiagonal() ?
 	 * @return
 	 */
 	public boolean canOrientDiagonal() {
 		return false;
 	}
+
+	/**
+	 * Check if the ability can be cast *at all*
+	 * @param c
+	 * @return
+	 */
+	public boolean canCast(Character c) {
+		
+		return false;
+	}
+
+	/**
+	 * Check if the ability can be cast on a cell
+	 * Checks for lines of sight, untargetability, etc
+	 * @param c
+	 * @return
+	 */
+	public boolean canCast(Character c, Cell cell) {
+		
+		return false;
+	}
 	
 	
 	/**
-	 * Vérifie si toutes les conditions sont remplies
-	 * @param context - contexte/état du combat
+	 * VÃ©rifie si toutes les conditions sont remplies
+	 * @param context - contexte/ï¿½tat du combat
 	 * @return - True si toutes les conditions sont remplies, false si au moins une condition ne l'est pas.
 	 */
 	public boolean assertConditions(FightContext context) {

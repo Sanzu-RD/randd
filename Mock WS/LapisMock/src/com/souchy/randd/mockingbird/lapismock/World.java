@@ -81,10 +81,12 @@ public class World {
         //model.materials.clear();
         //model.materials.add(new Material(ColorAttribute.createDiffuse(Color.GREEN)));
     	
-        int side = 29;
+		var rng = new Random();
+        int side = 50;
 		for(int x = 0; x < side; x++) {
 			for(int y = 0; y < side; y++) {
 				if(x == side/2 && y == side/2) continue;
+				if(rng.nextBoolean()) continue;
 				//Vector3 pos = new Vector3(sum * x + sum/2, sum * y + sum/2, 0);//z * cellSize - cellSize/2));
 				
 				//model = snowModel(Color.WHITE); //(x + y) % 2 == 0 ? new Color(0.9f,0.9f,0.9f,0.9f) : Color.WHITE);
@@ -155,7 +157,7 @@ public class World {
     			new Material(ColorAttribute.createDiffuse(color)),  // new Material(ta), //
     			//new Material(ColorAttribute.createDiffuse(color)), 
     			Usage.Position | Usage.Normal | Usage.TextureCoordinates);
-    	//model.meshParts.forEach(m -> m.primitiveType = GL20.GL_LINES);
+    	// model.meshParts.forEach(m -> m.primitiveType = GL20.GL_LINES);
     	return model;
     }
     

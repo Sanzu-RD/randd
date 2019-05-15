@@ -46,10 +46,10 @@ public class DamageEffect extends Effect {
 	}
 	public void previsu(Character source, Character target) {
 		
-		// Calcule les dégâts de base selon les affinités et les res
-		DmgInstance inst = calculate(source, target);
+		// Calcule les dÃ©gÃ¢ts de base selon les affinitÃ©s et les res
+		DmgInstanceEvent inst = calculate(source, target);
 	    		
-		// Post l'instance pour appliquer les statuts modificateurs du style invulnérabilité, +dmg finaux, etc
+		// Post l'instance pour appliquer les statuts modificateurs du style invulnÃ©rabilitÃ©, +dmg finaux, etc
 		source.post(inst);
 		target.post(inst);
 	}
@@ -63,10 +63,10 @@ public class DamageEffect extends Effect {
 	}
 	public void apply(Character target) {
 		
-		// Calcule les dégâts de base selon les affinités et les res
-		DmgInstance inst = calculate(source, target);
+		// Calcule les dÃ©gÃ¢ts de base selon les affinitï¿½s et les res
+		DmgInstanceEvent inst = calculate(source, target);
 	    		
-		// Post l'instance pour appliquer les statuts modificateurs du style invulnérabilité, +dmg finaux, etc
+		// Post l'instance pour appliquer les statuts modificateurs du style invulnï¿½rabilitï¿½, +dmg finaux, etc
 		source.post(inst);
 		target.post(inst);
 
@@ -96,9 +96,9 @@ public class DamageEffect extends Effect {
 		
 		OnHitEvent onhit = new OnHitEvent(source, target);
 		// proc les onHit/onDot ..
-		// proc les onhit du target en premier vu qu'on a déjà fait le hit du sort lui-même
+		// proc les onhit du target en premier vu qu'on a dï¿½jï¿½ fait le hit du sort lui-mï¿½me
 		target.post(onhit);
-		// puis proc les onhit de la source ensuite pour que ceux-cis puissent proc les onhits du target une deuxième fois (s'il y a des dmg onhit)
+		// puis proc les onhit de la source ensuite pour que ceux-cis puissent proc les onhits du target une deuxiï¿½me fois (s'il y a des dmg onhit)
 		// post l'event juste une fois si la source == le target
 		if(source != target) source.post(onhit);
 	    
@@ -136,40 +136,40 @@ public class DamageEffect extends Effect {
 		}
 	}*/
 	
-	private DmgInstance calculate(Character source, Character target) {
+	private DmgInstanceEvent calculate(Character source, Character target) {
 		
 	    
-		return new DmgInstance(this, source, target); //type, shieldLoss, hpLoss);
+		return new DmgInstanceEvent(this, source, target); //type, shieldLoss, hpLoss);
 	}
 	
-	private void applyDamage(DmgInstance inst) {
+	private void applyDamage(DmgInstanceEvent inst) {
 		
 	}
 
-	public static class DmgInstance extends Event {
-		//public Character source; // déjà délaré dans Event, mais il nous faut en tant que character
+	public static class DmgInstanceEvent extends Event {
+		//public Character source; // dÃ©jÃ  dï¿½larï¿½ dans Event, mais il nous faut en tant que character
 		/**
-		 * Possible d'avoir un modificateur qui redirige les dégâts vers une autre personne (ex sacrifice du sacrieur)
+		 * Possible d'avoir un modificateur qui redirige les dÃ©gÃ¢ts vers une autre personne (ex sacrifice du sacrieur)
 		 */
 		public Character target;
 		
-		// Peut avoir des status modificateurs sur toutes ces propriétés là
-		// ex colère iop augmente les dégâts de base s'il a le statut coco à 1 tour restant
+		// Peut avoir des status modificateurs sur toutes ces propriÃ©tÃ©s lÃ 
+		// ex colÃ¨re iop augmente les dÃ©gÃ¢ts de base s'il a le statut coco Ã  1 tour restant
 		public final Damages type;
 		public final Elements ele;
 		public final ElementValue scl;
 		public final ElementValue flat;
-		/** Normalement on tape la resource1 (HP), mais c'est possible d'avoir un modificateur qui redirige les dégâts vers une autre resource */
+		/** Normalement on tape la resource1 (HP), mais c'est possible d'avoir un modificateur qui redirige les dÃ©gÃ¢ts vers une autre resource */
 		//public StatProperties resourceHit = StatProperties.Resource1;
 
 	    StatProperty hpL = new StatProperty(StatProperties.Resource1, 0);
 	    StatProperty shieldL = new StatProperty(StatProperties.Resource1Shield, 0);
 		
-		/** Résultats de dégâts précalculés sur le shield et l'hp */
+		/** RÃ©sultats de dÃ©gÃ¢ts prÃ©calculÃ©s sur le shield et l'hp */
 		//public ElementValue shieldDmg, hpDmg;
 		//public ElementValue dmg;
 		
-		public DmgInstance(DamageEffect e, Character source, Character target) { //, Damages type, ElementValue shieldDmg, ElementValue hpDmg) { //ElementValue dmg) {
+		public DmgInstanceEvent(DamageEffect e, Character source, Character target) { //, Damages type, ElementValue shieldDmg, ElementValue hpDmg) { //ElementValue dmg) {
 			super(source);
 			//this.source = source;
 			this.target = target;
@@ -203,7 +203,7 @@ public class DamageEffect extends Effect {
 		    		- target.stats.resFlat(ele).value)
 		    		* (1 - target.stats.resScl(ele).value / 100);
 		    
-		    // pour pas se soigner avec des dégâts négatifs
+		    // pour pas soigner avec des dÃ©gÃ¢ts nÃ©gatifs
 		    if(dmg < 0)
 				dmg = 0;
 
@@ -228,7 +228,7 @@ public class DamageEffect extends Effect {
 		    	
 		    	// source.post(onDmg/onHitSomeone(source, target, shieldLoss, hpLoss)); ?????
 		    		// pour que la source puisse proc d'autres onHit
-		    		// peut ajouter des effets de splash/multihit à cet endroit
+		    		// peut ajouter des effets de splash/multihit ï¿½ cet endroit
 		    	// target.post(onDmg/onHitReceive(source, target, shieldLoss, hpLoss)); ?????
 		    		// pour que le target puisse proc ses OnHitReceive
 		    }

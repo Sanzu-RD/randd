@@ -21,8 +21,8 @@ import com.souchy.randd.commons.ebishoal.EbiCore;
 public abstract class LapisCore extends EbiCore {
 	
 	private LwjglApplicationConfiguration config;
-	private LapisGame game;
 	private LapisProperties properties;
+	private LapisGame game;
 
 	/**
 	 * @inheritDoc

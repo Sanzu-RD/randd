@@ -246,18 +246,38 @@ void main() {
 	//gl_FragColor = texture2D(u_shadowTexture, v_shadowMapUv.xy);
 
 	// gradiant shader
-//	 gl_FragColor *= normalize(vec4(v_pos) * vec4(1, 1, 1, 1)) ;
+//	gl_FragColor *= normalize(vec4(v_pos) * vec4(1, 1, 1, 1)) ;
 
-//	gl_FragColor -= getShadow();
+	//gl_FragColor -= getShadow();
 
 	// outline shader
-	float outlineWidth = 0.02;
-	bool inX = abs(floored.x - v_pos.x) < outlineWidth || abs(floored.x + 1 - v_pos.x) < outlineWidth;
-	bool inY = abs(floored.y - v_pos.y) < outlineWidth || abs(floored.y + 1 - v_pos.y) < outlineWidth;
-	bool inZ = abs(floored.z - v_pos.z) < outlineWidth || abs(floored.z + 1 - v_pos.z) < outlineWidth;
-	if(  (inZ && (inX || inY))  ||  (inY && (inX || inZ))  ){
-	//	gl_FragColor = vec4(0, 0, 0, 1);
+	if(false){
+		float outlineWidth = 0.02;
+		float dx = abs(floored.x - v_pos.x);
+		float dy = abs(floored.y - v_pos.y);
+		float dz = abs(floored.z - v_pos.z);
+		//float b = abs(floored.x + 1 - v_pos.x);
+		bool inX = abs(floored.x - v_pos.x) < outlineWidth || abs(floored.x + 1 - v_pos.x) < outlineWidth;
+		bool inY = abs(floored.y - v_pos.y) < outlineWidth || abs(floored.y + 1 - v_pos.y) < outlineWidth;
+		bool inZ = abs(floored.z - v_pos.z) < outlineWidth || abs(floored.z + 1 - v_pos.z) < outlineWidth;
+		if(  (inZ && (inX || inY))  ||  inY && inX ){
+			gl_FragColor = vec4(0, 0, 0, 1);
+		}
+		if(inX && inZ){
+		//	smoothstep(vec3(0.0), gl_FragColor, vBC);
+		//	float coeff = ((dx + dz) / 2) / outlineWidth;
+		//	gl_FragColor *= vec4(coeff, coeff, coeff, 1);
+		}
+		if(inY && inZ){
+		//	float coeff = ((dy + dz) / 2) / outlineWidth;
+		//	gl_FragColor *= vec4(coeff, coeff, coeff, 1);
+		}
+		if(inX && inY){
+		//	float coeff = ((dx + dy) / 2) / outlineWidth;
+		//	gl_FragColor *= vec4(coeff, coeff, coeff, 1);
+		}
 	}
+
 
 	/*float radius = 1;
 	float blur = 1/radius/2;

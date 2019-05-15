@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.model.MeshPart;
 import com.badlogic.gdx.graphics.g3d.model.Node;
@@ -38,6 +39,11 @@ public class CustomGreedyMesh {
 		public Voxel(Material[] mat) {
 			mats = mat;
 		}
+		public void setMats(Material mat) {
+			setTop(mat); setBottom(mat);
+			setEast(mat); setWest(mat);
+			setNoth(mat); setSouth(mat); 
+		}
 		public void setTop(Material mat) {
 			mats[TOP] = mat;
 		}
@@ -50,11 +56,11 @@ public class CustomGreedyMesh {
 		public void setWest(Material mat) {
 			mats[WEST] = mat;
 		}
-		public void setSouth(Material mat) {
-			mats[NORTH] = mat;
-		}
 		public void setNoth(Material mat) {
 			mats[SOUTH] = mat;
+		}
+		public void setSouth(Material mat) {
+			mats[NORTH] = mat;
 		}
 		public boolean canFuse(Voxel v2, int face) {
 			return mats[face] == v2.mats[face];
@@ -83,17 +89,32 @@ public class CustomGreedyMesh {
     public Model rootNode = new Model();
     public Color color;
     public Material mat1;
+    public Material mat2;
+    public Material mat3;
     public int renderType = GL20.GL_TRIANGLES;
     public int id = 0;
+    public Random rng = new Random();
+
     
-    public final int HEIGHT = 25;
-    public final int WIDTH = 25;
+    public final int HEIGHT = 50;
+    public final int WIDTH = 50;
 	Voxel[][] voxels = new Voxel[HEIGHT][WIDTH];
+
+	//var quads = new int[0];
+	int[] dims = new int[] {WIDTH, HEIGHT, 3};
+	Voxel[][][] volume;
+	
+	public int vertexCount = 0;
+	public int faceCount = 0;
 	
 	public CustomGreedyMesh() {
 		color = Color.valueOf("AEE897");
-		mat1 = new Material("mat1", ColorAttribute.createDiffuse(color));
+		//color.a = 0.3f;
+		mat1 = new Material("mat1", ColorAttribute.createDiffuse(color)); //, new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
+		mat2 = new Material("mat2", ColorAttribute.createDiffuse(Color.SKY));
+		mat3 = new Material("mat3", ColorAttribute.createDiffuse(Color.PINK));
 		
+		volume = mikolalysenkoGenerateVolume(dims[0], dims[1], dims[2]);
 		
 		/*for(int j = 0; j < voxels.length; j++) { // y
 			for(int i = 0; i < voxels[j].length; i++) { // x
@@ -107,8 +128,7 @@ public class CustomGreedyMesh {
 		generateMesh();*/
 		
 
-		mikolalysenko(true);
-		mikolalysenko(false);
+		mikolalysenko();
 	}
 	
 	private void generateMesh() {
@@ -159,21 +179,158 @@ public class CustomGreedyMesh {
 	}
 	
 	
-	//var quads = new int[0];
-	int[] dims = new int[] {WIDTH, HEIGHT, 3};
-	Voxel[][][] volume = mikolalysenkoGenerateVolume(dims[0], dims[1], dims[2]);
+	public static class VoxelFace {
+		public final Material m;
+		public final boolean backface;
+		public VoxelFace(Material material, boolean b) {
+			m = material;
+			backface = b;
+		}
+		public boolean canFuse(VoxelFace f) {
+			return 	m == f.m &&
+					backface == f.backface;
+		}
+	}
 	
-	private void mikolalysenko(boolean backface) {
-		
+	public int getSide(int d, boolean backface) {
+		int side = 0;
+		if (d == 0)      { side = backface ? WEST   : EAST; }
+        else if (d == 1) { side = backface ? SOUTH  : NORTH; }
+        else if (d == 2) { side = backface ? BOTTOM : TOP; }  
+		return side;
+	}
+	
+	private void sushi() {
+		// sweep 3 axes d = {0,1,2}
+		for(var d=0; d<2; ++d) {
+			int i, j, k,  // coordonées dans le plan actuel
+			l, 
+			w, h // largeur et hauteur du current chunk being fused
+			;
+		    int u = (d + 1) % 3;
+			int v = (d + 2) % 3;
+			// d = 0,1,2
+			// uv = 12, 20, 01
+			// donc d est ma normale et uv sont les deux autres axes qui forment le plan (d tjrs != uv)
+			// d = x+, y+, z+  (q est le vecteur unitaire de ça)
+			// plans : yz, zx, xy
+			// sides : east, north, top
+
+			// X = actual coordinates : 
+			// x[d] = position dans l'axe en cours (exemple position Z)
+			// x[u] = la largeur du le plan en cours (exemple position X)
+			// x[v] = la hauteur du le plan en cours (exemple position Y)
+			int[] x = new int[] { 0, 0, 0 };
+			// Q sert à incrémenter la position dans la bonne direction pour savoir le 'next voxel' dans le mask
+			// c'est égal à un vecteur unitaire de l'axe en cours / la direction dans laquelle on va/incrémente
+			int[] q = new int[] { 0, 0, 0 };
+			q[d] = 1; 
+
+			VoxelFace[] mask = new VoxelFace[dims[u] * dims[v]];
+
+			for(x[d]=-1; x[d]<dims[d]; ) {
+				// Compute mask
+				var n = 0;
+			    for(x[v]=0; x[v]<dims[v]; ++x[v])
+			    for(x[u]=0; x[u]<dims[u]; ++x[u]) {
+			    	// Observe le voxel courrant et le suivant dans la direction normale au plan
+			    	// - Si les deux voxels sont nulls, on ne créé pas de face entre les deux
+			    	// - Si les deux voxels sont ne sont pas nulls, on ne créé pas de face entre les deux non plus car on fusionne
+			    	// - Si seulement a n'est pas null, on créé la frontface de a
+			    	// - Si seulement b n'est pas null, on créé la backface de b
+			    	Voxel a = x[d] >=         0 ? v(volume, x[0],      x[1],      x[2]) : null;
+			    	Voxel b = x[d] <  dims[d]-1 ? v(volume, x[0]+q[0], x[1]+q[1], x[2]+q[2]) : null;
+			    	
+			    	var nulla = a == null;
+			    	var nullb = b == null;
+			    	if(nulla == nullb) {
+			    		mask[n++] = null;
+			    	} else if(!nulla) {
+			    		mask[n++] = new VoxelFace(a.mats[getSide(d, false)], false);
+			    	}else if(!nullb) {
+			    		mask[n++] = new VoxelFace(b.mats[getSide(d, true)], true);
+			    	}
+				}
+				
+				// Increment x[d]
+				++x[d];
+				
+				// Generate mesh for mask using lexicographic ordering
+				// Iterate each cell in the mask to check if they have a material 
+				n = 0;
+				for (j = 0; j < dims[v]; ++j)  // coordonée verticale dans le plan actuel
+				for (i = 0; i < dims[u];) { // coordonnée horizontale dans le plan actuel
+					var vox = mask[n];
+					if(vox != null) {
+						// Compute width
+						for (w = 1; i + w < dims[u] && mask[n + w] != null && vox.canFuse(mask[n + w]); ++w) {
+						}
+						// Compute height (this is slightly awkward
+						var done = false;
+						for (h = 1; j + h < dims[v]; ++h) {
+							for (k = 0; k < w; ++k) {
+								// cherche jusqu'au prochain voxel null ou d'un matériau différent
+								var vox2 = mask[n + k + h * dims[u]];
+								if(vox2 == null || !vox.canFuse(vox2)) { 
+									done = true;
+									break;
+								}
+							}
+							if(done) {
+								break;
+							}
+						}
+						// Add quad
+						x[u] = i; x[v] = j;
+						int[] du = new int[] {0,0,0}; du[u] = w;
+						int[] dv = new int[] {0,0,0}; dv[v] = h;
+						
+						var curr = v(volume, x[0],      x[1],      x[2]);
+						var next = v(volume, x[0]+q[0], x[1]+q[1], x[2]+q[2]);
+						if(curr.height != next.height) {
+							
+						}
+						
+						mikolalysenkoQuad(
+								new Vector3(x[0],             x[1],             x[2]            ),
+								new Vector3(x[0]+du[0],       x[1]+du[1],       x[2]+du[2]      ),
+								new Vector3(x[0]+du[0]+dv[0], x[1]+du[1]+dv[1], x[2]+du[2]+dv[2]),
+								new Vector3(x[0]      +dv[0], x[1]      +dv[1], x[2]      +dv[2]),
+								getSide(d, vox.backface),
+								vox.backface,
+								vox 
+								);
+						
+						// Zero-out mask
+						for (l = 0; l < h; ++l) 
+						for (k = 0; k < w; ++k) {
+							mask[n + k + l * dims[u]] = null;
+						}
+						// Increment counters and continue
+						i += w;
+						n += w;
+					} else {
+						++i;
+						++n;
+					}
+				}
+			      
+			}
+		}
+	}
+	
+	private void mikolalysenko() {
 		/*Function<Integer[], Boolean> f = (ijk) -> {
 			volume[ijk[0] + dims[0] * (ijk[1] + dims[1] * ijk[2])];
 			return true;
 		};*/
-		int side = 0; // added
 		
 		// sweep 3 axes d = {0,1,2}
 		for(var d=0; d<3; ++d) {
-			int i, j, k, l, w, h;
+			int i, j, k,  // coordonées dans le plan actuel
+			l, 
+			w, h // largeur et hauteur du current chunk being fused
+			;
 		    int u = (d + 1) % 3;
 			int v = (d + 2) % 3;
 			// d = 0,1,2
@@ -193,11 +350,7 @@ public class CustomGreedyMesh {
 			int[] q = new int[] { 0, 0, 0 };
 			q[d] = 1; 
 			
-			boolean[] mask = new boolean[dims[u] * dims[v]];
-			
-			if (d == 0)      { side = backface ? WEST   : EAST; }
-            else if (d == 1) { side = backface ? SOUTH  : NORTH; }
-            else if (d == 2) { side = backface ? BOTTOM : TOP; }  
+			VoxelFace[] mask = new VoxelFace[dims[u] * dims[v]];
 			
 			
 			for(x[d]=-1; x[d]<dims[d]; ) {
@@ -210,33 +363,51 @@ public class CustomGreedyMesh {
 			    			!=
 			    			(x[d] <  dims[d]-1 ? f(volume, x[0]+q[0], x[1]+q[1], x[2]+q[2]) : false);*/
 			    	
-			    	// check si le voxel actuel et le voxel suivant peuvent être fusionné (les deux sont non-nulls, etc)
-					boolean a = x[d] >=         0  &&  f(volume, x[0],      x[1],      x[2]); 			
+			    	
+					/*boolean a = x[d] >=         0  &&  f(volume, x[0],      x[1],      x[2]); 			
 					boolean b = x[d] <  dims[d]-1  &&  f(volume, x[0]+q[0], x[1]+q[1], x[2]+q[2]);
 					mask[n++] = a != b;
-			    	/*Voxel v1 = x[d] >=         0 ? v(volume, x[0],      x[1],      x[2]) : null;
-			    	Voxel v2 = x[d] <  dims[d]-1 ? v(volume, x[0]+q[0], x[1]+q[1], x[2]+q[2]) : null;
-			    	if(v1 != null && v2 != null && v1.canFuse(v2, side)) {
-			    		
-			    	}*/
+					*/
+					
+			    	// Observe le voxel courrant et le suivant dans la direction normale au plan
+			    	// - Si les deux voxels sont nulls, on ne créé pas de face entre les deux
+			    	// - Si les deux voxels sont ne sont pas nulls, on ne créé pas de face entre les deux non plus car on fusionne
+			    	// - Si seulement a n'est pas null, on créé la frontface de a
+			    	// - Si seulement b n'est pas null, on créé la backface de b
+			    	Voxel a = x[d] >=         0 ? v(volume, x[0],      x[1],      x[2]) : null;
+			    	Voxel b = x[d] <  dims[d]-1 ? v(volume, x[0]+q[0], x[1]+q[1], x[2]+q[2]) : null;
+
+			    	var nulla = a == null;
+			    	var nullb = b == null;
+			    	if(nulla == nullb) {
+			    		mask[n++] = null;
+			    	} else if(!nulla) {
+			    		mask[n++] = new VoxelFace(a.mats[getSide(d, false)], false);
+			    	}else if(!nullb) {
+			    		mask[n++] = new VoxelFace(b.mats[getSide(d, true)], true);
+			    	}
 				}
 				
 				// Increment x[d]
 				++x[d];
 				
 				// Generate mesh for mask using lexicographic ordering
+				// Iterate each cell in the mask to check if they have a material 
 				n = 0;
-				for (j = 0; j < dims[v]; ++j) 
-				for (i = 0; i < dims[u];) {
-					if(mask[n]) {
+				for (j = 0; j < dims[v]; ++j)  // coordonée verticale dans le plan actuel
+				for (i = 0; i < dims[u];) { // coordonnée horizontale dans le plan actuel
+					var vox = mask[n];
+					if(vox != null) {
 						// Compute width
-						for (w = 1; mask[n + w] && i + w < dims[u]; ++w) {
+						for (w = 1; i + w < dims[u] && mask[n + w] != null && vox.canFuse(mask[n + w]) /*mask[n + w].mats[side] == vox.mats[side]*/; ++w) {
 						}
 						// Compute height (this is slightly awkward
 						var done = false;
 						for (h = 1; j + h < dims[v]; ++h) {
 							for (k = 0; k < w; ++k) {
-								if(!mask[n + k + h * dims[u]]) {
+								// cherche jusqu'au prochain voxel null ou d'un matériau différent
+								var vox2 = mask[n + k + h * dims[u]];
+								if(vox2 == null || !vox.canFuse(vox2)) { //vox2.mats[side] != vox.mats[side]) {
 									done = true;
 									break;
 								}
@@ -255,20 +426,21 @@ public class CustomGreedyMesh {
 				            , [x[0]+du[0]+dv[0], x[1]+du[1]+dv[1], x[2]+du[2]+dv[2]]
 				            , [x[0]      +dv[0], x[1]      +dv[1], x[2]      +dv[2]]
 			          	]);*/
-						
-						getVoxel(x, d, u, v);
+						//getVoxel(x, d, u, v);
 						mikolalysenkoQuad(
 								new Vector3(x[0],             x[1],             x[2]            ),
 								new Vector3(x[0]+du[0],       x[1]+du[1],       x[2]+du[2]      ),
 								new Vector3(x[0]+du[0]+dv[0], x[1]+du[1]+dv[1], x[2]+du[2]+dv[2]),
 								new Vector3(x[0]      +dv[0], x[1]      +dv[1], x[2]      +dv[2]),
-								side,
-								backface
+								getSide(d, vox.backface),
+								vox.backface,
+								vox //mask[n].mats[side]
 								);
+						
 						// Zero-out mask
 						for (l = 0; l < h; ++l) 
 						for (k = 0; k < w; ++k) {
-								mask[n + k + l * dims[u]] = false;
+							mask[n + k + l * dims[u]] = null;
 						}
 						// Increment counters and continue
 						i += w;
@@ -316,7 +488,7 @@ public class CustomGreedyMesh {
 	}
 	
 	private static final int cellSize = 1;
-	private void mikolalysenkoQuad(Vector3 botLeft, Vector3 botRight, Vector3 topRight, Vector3 topLeft, int side, boolean backface) {
+	private void mikolalysenkoQuad(Vector3 botLeft, Vector3 botRight, Vector3 topRight, Vector3 topLeft, int side, boolean backface, VoxelFace face) {
 		if(false) {
 			botLeft.sub(cellSize);
 			botRight.sub(cellSize);
@@ -336,15 +508,19 @@ public class CustomGreedyMesh {
     	Mesh mesh = new Mesh(true, vertices.length, indices.length, VertexAttribute.Position(), VertexAttribute.Normal());
     	mesh.setVertices(vertices);
     	mesh.setIndices(indices);
-
+    	
+    	//if(mat == null) mat = mat3;
         MeshPart meshPart = new MeshPart("meshpart_" + id, mesh, 0, vertices.length, renderType);
         Node node = new Node();
         node.id = "node_" + id;
-        node.parts.add(new NodePart(meshPart, mat1));
+        node.parts.add(new NodePart(meshPart, face.m));
         
         rootNode.meshes.add(mesh);
         rootNode.meshParts.add(meshPart);
         rootNode.nodes.add(node);
+        
+        vertexCount +=4;
+        faceCount++;
         id++;
 	}
 	
@@ -363,21 +539,29 @@ public class CustomGreedyMesh {
 	 * @return
 	 */
 	private Voxel[][][] mikolalysenkoGenerateVolume(int w, int h, int d){
-		var rng = new Random();
 		Voxel[][][] volume = new Voxel[d][h][w];
 		for(int k = 0; k < d; k++) {
 			for(int j = 0; j < h; j++) {
 				for(int i = 0; i < w; i++) {
 					if(k >= d-2) continue;
-					if(rng.nextBoolean()) continue;
+					if(rng.nextInt(20) == 1) continue;
 					//if((i + j) % 2 == 0) continue;
 					volume[k][j][i] = new Voxel(mat1);
 					volume[k][j][i].height = k; // height in this object is different (z) than in this function (y)
+					
+			    	Material mat = null;
+			    	if(i >= 13 && j >= 13 && i <= 15 && j <= 15) {
+			    		mat = mat2;
+			    	} else {
+			    		mat = mat1;
+			    	}
+			    	volume[k][j][i].setMats(mat);
 				}
 			}
 		}
-	//	volume[d-3][5][5] = null;
-	//	volume[d-1][3][3] = new Voxel(mat1);
+		volume[d-3][5][5] = null;
+		volume[d-1][3][3] = new Voxel(mat1);
+		
 		return volume;
 	}
 	

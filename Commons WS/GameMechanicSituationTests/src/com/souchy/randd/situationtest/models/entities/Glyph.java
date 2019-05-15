@@ -24,7 +24,7 @@ public class Glyph extends AEntity { //implements EventHandler<EnterCellEvent> {
 	//@Override
 	public void handle(EnterCellEvent event) {
 		// to be scripted actually,
-		// � moins que le script du spell passe une Function dans le constructeur de Trap et qu'on ex�cute �a ici :
+		// à moins que le script du spell passe une Function dans le constructeur de Trap et qu'on ex�cute �a ici :
 		onProcScript.accept(event);
 		// ne pas oublier qu'on a un ActionScriptEffect pour cr�er les traps/glyphs dont on pourra se servir pour
 		//   builder le Trap object, donner la fonction � ex�cuter lors du proc,

@@ -1,0 +1,247 @@
+
+// Variables
+* {
+   bgColor1: #1e1e1e;
+   lblColor1: lightseagreen;
+   lblColor2: #75b9e0;
+}
+
+// Root
+.root {
+  -fx-background-color: bgColor1; //#282828; // #f2f7ff;
+  -fx-border-color: lblColor2;
+  -fx-padding: 1 1 1 1;
+  //-fx-background-radius: 10;
+  //-fx-border-radius: 10;
+}
+
+
+// Every label color and font
+.label {
+  -fx-text-fill: lblColor1;
+  -fx-font-family: "Lucida Bright";
+}
+
+// Label text
+.label  .text {
+//    -fx-fill: lblColor1;
+//    -fx-stroke: black;
+//    -fx-stroke-width: 0.1px;
+}
+
+// Top bar
+.topbar-hbox {
+  -fx-spacing: 25;
+  -fx-padding: 25 20 20 30;
+}
+// Top bar label
+.topbar-hbox .label {
+  -fx-font-size: 30 px;
+  -fx-text-fill: lblColor1;
+}
+
+// Sub bar
+.subbar-hbox {
+  -fx-spacing: 25;
+  -fx-padding: 0 20 20 30;
+}
+// Sub bar label
+.subbar-hbox .label {
+  -fx-font-size: 25 px;
+  -fx-text-fill: lblColor1;
+}
+
+// Play button
+.label.play {
+  -fx-text-fill: lblColor1;
+  -fx-font-size: 40 px;
+  //-fx-padding: 0 20 0 0;
+}
+// Play button 2
+.label.playCenter {
+  -fx-text-fill: lblColor1;
+  -fx-border-color: lblColor1;
+  -fx-font-size: 50 px;
+  -fx-padding: 10 10 10 10;
+}
+
+// Titles
+.label.title1 {
+  -fx-font-size: 40 px;
+}
+.label.title2 {
+  -fx-font-size: 35 px;
+}
+.label.title3 {
+  -fx-font-size: 30 px;
+}
+.label.title4 {
+  -fx-font-size: 25 px;
+}
+.label.title5 {
+  -fx-font-size: 20 px;
+}
+
+
+// Menu bar
+.menu-bar {
+  -fx-background-color: bgColor1;
+}
+.menu { /* The File menu item */
+
+}
+.menu:showing { /* menu when it's being shown (activated) */
+
+}
+.menu .label { /* Styles the text on a menu item */
+  -fx-font-size: 15 px;
+}
+.menu:showing .label { /* Styles the text on a menu item when activated */
+
+}
+
+/* Parent tab panes */
+.tab-pane {
+  -fx-background-color: bgColor1;
+  //-fx-padding: 25 0 0 30;
+}
+.tab {
+  -fx-background-color: bgColor1;
+  -fx-background-radius: 0;
+  -fx-cursor: hand;
+}
+.tab  .tab-label {
+  -fx-font-size: 30 px;
+  -fx-text-fill: lblColor1;
+  -fx-font-family: "Lucida Bright";
+}
+.bottomBorder {
+  -fx-border-width: 0 0 3 0;
+  -fx-border-color: lblColor2;
+}
+.tab:selected {
+  -fx-text-fill: lblColor2;
+  -fx-border-width: 0 0 2 0;
+  -fx-border-color: lblColor2;
+}
+.tab:selected .tab-label {
+  -fx-text-fill: lblColor2;
+}
+.tab:selected .focus-indicator {
+  //-fx-border-radius: 10 10 0 0, 10 10 0 0;
+  -fx-border-width: 0;
+}
+.tab-header-area {
+    -fx-padding: 25 0 10 30; /* overridden as 5 2 0 0 */
+ }
+
+/* Child tab panes */
+.tab-pane .tab-pane {
+  //-fx-padding: 15 0 0 0;
+}
+.tab-pane .tab-pane .tab  .tab-label {
+  -fx-font-size: 25 px;
+  -fx-text-fill: lblColor1;
+  -fx-font-family: "Lucida Bright";
+}
+.tab-pane .tab-pane .tab:selected .tab-label {
+  -fx-text-fill: lblColor2;
+}
+.tab-pane .tab-pane .tab-header-area {
+    -fx-padding: 15 0 0 30; /* overridden as 5 2 0 0 */
+ }
+
+/* other tab props */
+.tab-pane:top *.tab-header-area {
+    -fx-background-insets: 10, 10 10 10 10;
+  //  -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
+  //  -fx-padding: 25 0 0 30; /* overridden as 5 2 0 0 */
+}
+/* .tab-pane .tab-header-area .tab-header-background */
+.tab-header-background {
+  -fx-opacity: 0;
+}
+
+/* Scroll panes */
+.scroll-pane {
+   //-fx-background: #FFFFFF;
+   //-fx-border-color: #FFFFFF;
+  -fx-background-color: transparent;
+}
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+.scroll-pane Line {
+  -fx-stroke: transparent;
+}
+
+/* Scroll Bar */
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: lblColor2;
+    -fx-background-radius: 5em;
+}
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.scroll-bar .increment-button .increment-arrow,
+.scroll-bar .decrement-button .decrement-arrow {
+    -fx-background-color: lblColor2;
+    -fx-border-color: lblColor2;
+}
+
+/* Lists */
+.list-view {
+  -fx-background-color: transparent;
+}
+
+
+/* Titled Panes */
+.titled-pane {
+  -fx-border-width: 0;
+  -fx-border-color: lblColor2;
+  -fx-text-fill: lblColor2;
+}
+.titled-pane .title {
+  -fx-background-color: transparent;
+}
+.titled-pane>.title>.text {
+  //-fx-text-fill: red;
+}
+.titled-pane .title .arrow-button {
+  //-fx-background-color: -fx-focus-color;
+}
+.titled-pane .title .arrow-button .arrow {
+  //-fx-background-color: -fx-focus-color;
+  -fx-color: lblColor2;
+}
+.titled-pane:focused > .title {
+  -fx-color: -fx-focus-color;
+}
+.titled-pane > *.content {
+  -fx-background-color: transparent;
+  -fx-border-width: 0;
+  //-fx-border-color: transparent;
+  //-fx-box-border,
+  //linear-gradient(to bottom, derive(-fx-color,-02%), derive(-fx-color,65%) 12%,      derive(-fx-color,23%) 88%, derive(-fx-color,50%) 99%, -fx-box-border);
+  //-fx-background-insets: 0, 0 1 1 1;
+  //-fx-padding: 0.167em;
+}
+
+
+/* Flow Panes */
+.flow-pane {
+  -fx-background-color: black;
+}

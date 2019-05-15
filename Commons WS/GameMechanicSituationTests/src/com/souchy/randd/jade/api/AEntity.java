@@ -8,7 +8,7 @@ import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 import com.souchy.randd.situationtest.matrixes.PositionMatrix;
 import com.souchy.randd.situationtest.models.org.ContextualObject;
 import com.souchy.randd.situationtest.models.org.FightContext;
-import com.souchy.randd.situationtest.scripts.Status;
+import com.souchy.randd.situationtest.scripts.ScriptedStatus;
 
 /**
  * 
@@ -41,7 +41,7 @@ public abstract class AEntity extends ContextualObject implements EventProxy, Id
 	protected PositionMatrix position;
 	
 	/** This entity's current buffs */
-	public final List<Status> statuss;
+	public final List<ScriptedStatus> statuss;
 	
 	private final EventBus bus = new EventBus();
 	

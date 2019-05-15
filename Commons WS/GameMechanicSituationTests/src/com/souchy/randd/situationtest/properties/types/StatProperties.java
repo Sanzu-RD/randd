@@ -12,14 +12,18 @@ public enum StatProperties {
 	/** Shield for resource 2 */
 	Resource2Shield,
 	
-	/** pm */
-	MovementPoints,
+	/** points de movements / pm, mais tu peux avoir un perso qui utilise sa mana pour se déplacer à la place */
+	Resource3,
+
+	/** special points specific to certain classes
+	 * p.ex. exemple des points que t'accumule en lancant des sorts normaux et qui te permettent de lancer un sort spécial */
+	Resource4,
+
+	
+	
 	
 	/** Height difference between 2 cells which a character can jump/walk over */
 	Jump,
-	
-	/** sp�cial */
-	Resource5,
 
 	/** nb d'invocations */
 	MaxInvocation,
@@ -32,9 +36,9 @@ public enum StatProperties {
 	
 	
 	/** Crit ou pas ? */
-	CritChance,
+	//CritChance,
 	/** Dodge ? */
-	DodgeChance,
+	//DodgeChance,
 	
 	
 	
