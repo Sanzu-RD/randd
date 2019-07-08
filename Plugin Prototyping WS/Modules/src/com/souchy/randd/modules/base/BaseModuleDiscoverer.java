@@ -9,6 +9,7 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.modules.api.ModuleDiscoverer;
 
 public class BaseModuleDiscoverer implements ModuleDiscoverer {
@@ -30,8 +31,8 @@ public class BaseModuleDiscoverer implements ModuleDiscoverer {
 		try (JarFile jar = new JarFile(file)) {
 			ZipEntry entry = jar.getEntry("info.properties");
 			return (entry != null);
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (IOException e) {
+			Log.error("BaseModuleDiscoverer identify error : ", e);
 			return false;
 		}
 	}

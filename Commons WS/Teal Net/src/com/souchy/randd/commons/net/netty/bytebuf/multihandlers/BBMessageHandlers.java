@@ -8,6 +8,8 @@ import java.util.stream.Stream;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 
+import io.netty.channel.ChannelHandlerContext;
+
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class BBMessageHandlers { // extends ResponsibilityManager<BBMessage, BBMessage> {
@@ -18,10 +20,10 @@ public class BBMessageHandlers { // extends ResponsibilityManager<BBMessage, BBM
 		return handlers.containsKey(msg.getID());
 	}
 
-	public void handle(BBMessage msg) {
+	public void handle(ChannelHandlerContext ctx, BBMessage msg) {
 		if (canHandle(msg)) {
 			System.out.println("BBHandlerManager handling message [" + msg + "] of ID [" + msg.getID() + "]");
-			handlers.get(msg.getID()).handle(msg);
+			handlers.get(msg.getID()).handle(ctx, msg);
 		} else {
 			System.out.println("BBHandlerManager cant handle message [" + msg + "] of ID [" + msg.getID() + "]");
 		}

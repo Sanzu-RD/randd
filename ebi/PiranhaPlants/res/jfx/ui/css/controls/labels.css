@@ -1,0 +1,36 @@
+
+// Every label color and font
+.label {
+  -fx-text-fill: lblColor1;
+  -fx-font-family: "Lucida Bright";
+}
+
+// Label text
+.label  .text {
+//    -fx-fill: lblColor1;
+//    -fx-stroke: black;
+//    -fx-stroke-width: 0.1px;
+}
+
+// Titles
+.label.title1 {
+  -fx-font-size: 40 px;
+}
+.label.title2 {
+  -fx-font-size: 35 px;
+}
+.label.title3 {
+  -fx-font-size: 30 px;
+}
+.label.title4 {
+  -fx-font-size: 25 px;
+}
+.label.title5 {
+  -fx-font-size: 20 px;
+}
+.label.title6 {
+  -fx-font-size: 17 px;
+}
+.label.title7 {
+  -fx-font-size: 15 px;
+}

@@ -53,6 +53,30 @@ public class MockScreen2 extends BaseScreen {
 	    modelBatch.end();
 
 	}
+
+	@Override
+	protected void updateLight(float delta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void act(float delta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void renderShadows(World world) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void renderParticleEffects() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

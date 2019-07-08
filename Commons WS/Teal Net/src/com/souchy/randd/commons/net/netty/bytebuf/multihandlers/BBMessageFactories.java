@@ -26,8 +26,8 @@ public class BBMessageFactories {
 	 */
 
 	/*
-	 * public BBMessage create(int id) { // jveux pas return de null, j'préfère
-	 * forcer l'utilisateur de BBMessageFactory à caller lui-même le has(id) plutot
+	 * public BBMessage create(int id) { // jveux pas return de null, j'prï¿½fï¿½re
+	 * forcer l'utilisateur de BBMessageFactory ï¿½ caller lui-mÃªme le has(id) plutot
 	 * que if(f!=null) if(!has(id)) return null; return factories.get(id).create();
 	 * }
 	 */

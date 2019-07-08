@@ -1,24 +1,15 @@
 package com.souchy.randd.ebishoal.commons.lapis.drawing;
 
 
-import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector3;
-
-import static com.badlogic.gdx.graphics.Color.DARK_GRAY;
-import static com.badlogic.gdx.graphics.Color.PURPLE;
-import static com.badlogic.gdx.graphics.Color.RED;
-import static com.badlogic.gdx.graphics.Color.GREEN;
+import com.badlogic.gdx.utils.Array;
 
 
 public class LineDrawing {
@@ -31,9 +22,6 @@ public class LineDrawing {
 	public ShapeRenderer srender;
 	public HashMap<Color, Array<Line>> lineMap;
 
-	// seulement si veut cr�er des body Box2d
-	public World world;
-
 	/*
 	 * trucs de linerider
 	public String tool = "line";
@@ -41,9 +29,8 @@ public class LineDrawing {
 	public Rectangle eraser;
 	*/
 
-	public LineDrawing(final Camera cam, final World world) {
+	public LineDrawing(final Camera cam) {
 		this.cam = cam;
-		this.world = world;
 		//eraser = new Rectangle();
 		srender = new ShapeRenderer();
 		lineMap = new HashMap<Color, Array<Line>>();
@@ -54,10 +41,10 @@ public class LineDrawing {
 	
 
 	public void addLine(Color color, Vector3 start, Vector3 end) {
-		addLine(new Line(color, start, end, world));
+		addLine(new Line(color, start, end));
 	}
 	public void addLine(Vector3 start, Vector3 end, Color color) {
-		addLine(new Line(color, start, end, world));
+		addLine(new Line(color, start, end));
 	}
 	public void addLine(Line line) {
 		if(!lineMap.containsKey(line.color)) 

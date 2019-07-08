@@ -3,18 +3,19 @@ package com.souchy.randd.ebishoal.sapphire.models;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
-import com.souchy.randd.situationtest.math.Point3D;
-import com.souchy.randd.situationtest.models.entities.Character;
-import com.souchy.randd.situationtest.models.org.FightContext;
 
-public class EbiCharacter extends Character {
+import gamemechanics.common.Vector2;
+import gamemechanics.models.Fight;
+import gamemechanics.models.entities.Creature;
+
+public class EbiCharacter extends Creature {
 
 	
 	private AnimationController animationController;
 	private ModelInstance modelInst;
-	
-	public EbiCharacter(FightContext context, int id, Point3D pos) {
-		super(context, id, pos);
+
+	public EbiCharacter(Fight context, int id, Vector2 pos) {
+		//super(context, id, pos);
 		// TODO Auto-generated constructor stub
 		
 		Model model = null;

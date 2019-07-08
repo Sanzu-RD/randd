@@ -12,6 +12,7 @@ import com.souchy.randd.modules.base.BaseModule;
 import com.souchy.randd.modules.base.BaseModuleInformation;
 import com.souchy.randd.modules.monitor.main.App;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -28,34 +29,34 @@ import javafx.stage.DirectoryChooser;
 
 public class Root extends VBox {
 	
-	@FXML private ResourceBundle resources;
-	@FXML private URL location;
-	@FXML private Font x1;
-	@FXML private Color x2;
-	@FXML private Font x11;
-	@FXML private Color x21;
-	@FXML private Font x12;
-	@FXML private Color x22;
-	@FXML private Font x3;
-	@FXML private Color x4;
+	@FXML public ResourceBundle resources;
+	@FXML public URL location;
+	@FXML public Font x1;
+	@FXML public Color x2;
+	@FXML public Font x11;
+	@FXML public Color x21;
+	@FXML public Font x12;
+	@FXML public Color x22;
+	@FXML public Font x3;
+	@FXML public Color x4;
 
-	@FXML private MenuItem menuFileOpen;
-	@FXML private Label statusRight;
-	@FXML private Label statusLeft;
-	@FXML private ToggleButton btnToggle;
-	@FXML private Button btn1;
-	@FXML private Button btn2;
-	@FXML private ListView<String> listModules;
-	@FXML private ListView<String> listProps;
-	@FXML private Label labelName;
-    @FXML private AnchorPane detailsPane;
-    @FXML private TextArea console;
+	@FXML public MenuItem menuFileOpen;
+	@FXML public Label statusRight;
+	@FXML public Label statusLeft;
+	@FXML public ToggleButton btnToggle;
+	@FXML public Button btn1;
+	@FXML public Button btn2;
+	@FXML public ListView<String> listModules;
+	@FXML public ListView<String> listProps;
+	@FXML public Label labelName;
+    @FXML public AnchorPane detailsPane;
+    @FXML public TextArea console;
 
 	private final DirectoryChooser chooser = new DirectoryChooser();
 	
 	public Root() {
 		try {
-			FXMLLoader loader = new FXMLLoader(FilesManager.get().getResource("root.fxml"));
+			FXMLLoader loader = new FXMLLoader(FilesManager.getResource("root.fxml"));
 			loader.setController(this);
 			loader.setRoot(this);
 			loader.load();
@@ -67,7 +68,7 @@ public class Root extends VBox {
 	private Set<BaseModule> persistanceTest = new HashSet<>();
 	
 	@FXML
-	void initialize() {
+	public void initialize() {
         assert x1 != null : "fx:id=\"x1\" was not injected: check your FXML file 'root.fxml'.";
         assert x2 != null : "fx:id=\"x2\" was not injected: check your FXML file 'root.fxml'.";
         assert listModules != null : "fx:id=\"listModules\" was not injected: check your FXML file 'root.fxml'.";
@@ -112,7 +113,7 @@ public class Root extends VBox {
 				BaseModuleInformation info = this.getSelectedInfo();
 				BaseModule module = null;
 				try {
-					module = App.manager.instanciate(info);
+					module = App.manager.instantiate(info);
 				} catch (Exception e1) {
 					print(e1.getMessage());
 					return;
@@ -129,13 +130,14 @@ public class Root extends VBox {
 				print("btn unload : " + b);
 			}
 		});
-		btn1.setOnAction(e -> {
-			BaseModule module = App.manager.get(getSelectedInfo());
-			if (module != null)
-				print(module.doSomething());
-			else
-				print("cant because module not loaded");
-		});
+//		btn1.setOnAction(e -> {
+//			BaseModule module = App.manager.get(getSelectedInfo());
+//			if (module != null)
+//				print(module.doSomething());
+//			else
+//				print("cant because module not loaded");
+//		});
+//		btn1.setOnAction(this::doSomething);
 		btn2.setOnAction(e -> {
 			btnToggle.setText("Load");
 		});
@@ -143,6 +145,16 @@ public class Root extends VBox {
 		
 		open(lastDir);
 	}
+	
+
+    @FXML
+    public void doSomething(ActionEvent e) {
+		BaseModule module = App.manager.get(getSelectedInfo());
+		if (module != null)
+			print(module.doSomething());
+		else
+			print("cant because module not loaded");
+    }
 	
 	private BaseModuleInformation getSelectedInfo() {
 		//int i = listModules.getSelectionModel().getSelectedIndex();

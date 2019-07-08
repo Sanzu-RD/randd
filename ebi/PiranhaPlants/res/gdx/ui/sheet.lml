@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE table SYSTEM "lml.dtd">
+
+
+<table defaultpad="5" debug="false" y="0" x="0" fillparent="true" >
+
+    <!-- CONTENT -->
+    <:row expand="true" filly="true">
+        <container/>
+    </:row>
+
+    <:row align="bottom" >
+        <stack fill="true" debug="false">
+            <verticalgroup id="chat" align="bottomleft" padleft="55" padbottom="25" width="200" height="400" debug="false" >
+                <textarea debug="false" value="lanlkisaudnflkjnsadfkljndsakjfnak" disabled="true" width="400" height="400"/>
+                <textfield debug="false"/>
+            </verticalgroup>
+
+            <table id="currentlyPlayingSheet" align="bottom" defaultpad="3" debug="false" >
+                <!-- Portrait -->
+                <stack width="64" height="64">
+                    <roundImage id="portrait" tooltip="Grim" style="ava2" />
+                    <image id="portraitBorder" style="ring_frame" />
+                </stack>
+
+                <!-- Resources -->
+                <table>
+                    <label id="life" value="1550/1550"/>
+                    <:row/>
+                    <label id="mana" value="10/12"/>
+                    <:row/>
+                    <label id="move" value="0/6"/>
+                </table>
+
+                <!-- Page content (items, spells, affinities, resistances) -->
+                <table id="content" defaultpad="1">
+                    <stack  width="55" height="55">
+                        <roundImage id="spell" tooltip="Desecrate" style="spell0" />
+                        <image id="spellBorder" style="ring_frame" />
+                    </stack>
+                    <stack width="55" height="55">
+                        <roundImage id="spell" tooltip="Rise Zombie" style="spell1" />
+                        <image id="spellBorder" style="ring_frame" />
+                    </stack>
+                    <stack width="55" height="55">
+                        <roundImage id="spell" tooltip="Rise Zombie" style="spell2" />
+                        <image id="spellBorder" style="ring_frame" />
+                    </stack>
+                    <stack width="55" height="55">
+                        <roundImage id="spell" tooltip="Rise Zombie" style="spell3" />
+                        <image id="spellBorder" style="ring_frame" />
+                    </stack>
+                    <stack width="55" height="55">
+                        <roundImage id="spell" tooltip="Rise Zombie" style="spell4" />
+                        <image id="spellBorder" style="ring_frame" />
+                    </stack>
+                    <stack width="55" height="55">
+                        <roundImage id="spell" tooltip="Rise Zombie" style="spell5" />
+                        <image id="spellBorder" style="ring_frame" />
+                    </stack>
+                    <stack width="55" height="55">
+                        <roundImage id="spell" tooltip="Rise Zombie" style="spell6" />
+                        <image id="spellBorder" style="ring_frame" />
+                    </stack>
+                    <stack width="55" height="55">
+                        <roundImage id="spell" tooltip="Rise Zombie" style="spell7" />
+                        <image id="spellBorder" style="ring_frame" />
+                    </stack>
+                    <stack width="55" height="55">
+                        <roundImage id="spell" tooltip="Rise Zombie" style="spell8" />
+                        <image id="spellBorder" style="ring_frame" />
+                    </stack>
+                </table>
+
+                <!-- Page control buttons -->
+                <table>
+                    <button id="pageUp" style="transparent" width="20" height="20" >
+                        <image id="pageUpImage" style="up" scaling="fit" />
+                    </button>
+                    <:row/>
+                    <label id="pageLbl" value="1/3"/>
+                    <:row/>
+                    <button id="pageDown" style="transparent" width="20" height="20" >
+                        <image id="pageDownImage" style="down" scaling="fit" />
+                    </button>
+                </table>
+
+            </table>
+
+            <!-- Timer -->
+            <container align="bottomright" padbottom="40" padright="70" debug="false">
+                <label value="25s" />
+            </container>
+
+            <!-- Timeline -->
+            <table id="timeline" padright="10" padbottom="25" align="bottomright" debug="false" defaultpad="3" defaultpadleft="10">
+                <container/>
+                <stack width="42" height="42">
+                    <roundImage id="portrait" tooltip="Grim" style="ava1"/>
+                    <image id="portraitBorder" style="ring_frame"/>
+                </stack>
+                <:row/>
+                <container/>
+                <stack width="42" height="42">
+                    <roundImage id="portrait" tooltip="Grim" style="ava2"/>
+                    <image id="portraitBorder" style="ring_frame"/>
+                </stack>
+                <:row/>
+                <container/>
+                <stack width="42" height="42">
+                    <roundImage id="portrait" tooltip="Grim" style="ava1"/>
+                    <image id="portraitBorder" style="ring_frame"/>
+                </stack>
+                <:row/>
+                <container/>
+                <stack width="42" height="42">
+                    <roundImage id="portrait" tooltip="Grim" style="ava2"/>
+                    <image id="portraitBorder" style="ring_frame"/>
+                </stack>
+                <:row/>
+                <container/>
+                <stack width="42" height="42">
+                    <roundImage id="portrait" tooltip="Grim" style="ava1"/>
+                    <image id="portraitBorder" style="ring_frame"/>
+                </stack>
+                <:row/>
+                <container/>
+                <stack width="42" height="42">
+                    <roundImage id="portrait" tooltip="Grim" style="ava2"/>
+                    <image id="portraitBorder" style="ring_frame"/>
+                </stack>
+                <:row/>
+                <container/>
+                <stack width="42" height="42">
+                    <roundImage id="portrait" tooltip="Grim" style="ava1"/>
+                    <image id="portraitBorder" style="ring_frame"/>
+                </stack>
+                <:row/>
+                <container>
+                </container>
+                <stack width="42" height="42">
+                    <roundImage id="portrait" tooltip="Grim" style="ava2"/>
+                    <image id="portraitBorder" style="ring_frame"/>
+                </stack>
+            </table>
+        </stack>
+    </:row>
+
+
+</table>

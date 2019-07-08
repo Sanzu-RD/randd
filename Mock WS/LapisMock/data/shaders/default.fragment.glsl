@@ -97,9 +97,14 @@ float getShadowness(vec2 offset)
     const vec4 bitShifts = vec4(1.0, 1.0 / 255.0, 1.0 / 65025.0, 1.0 / 16581375.0);
 
     // EDIT
-    float bias = 0.0005f;
+    float bias = 0.005f;
 
-    return step(v_shadowMapUv.z - bias, dot(texture2D(u_shadowTexture, v_shadowMapUv.xy + offset), bitShifts));//+(1.0/255.0));
+	//if(v_shadowMapUv.z - bias < texture(u_shadowTexture, v_shadowMapUv.xy).r){
+	//	return 1;
+	//}
+	//return 0;
+	
+    return step(v_shadowMapUv.z - bias, dot(texture2D(u_shadowTexture, v_shadowMapUv.xy + offset), bitShifts)); //+(1.0/255.0));
 }
 
 float getShadow()
@@ -113,18 +118,20 @@ float getShadow()
 //	);
 //	return poissonDisk;
 
-//	float pcfOffset = 0.0f;
-//	return (//getShadowness(vec2(0,0)) +
-//				getShadowness(vec2(pcfOffset, pcfOffset)) +
-//				getShadowness(vec2(-pcfOffset, pcfOffset)) +
-//				getShadowness(vec2(pcfOffset, -pcfOffset)) +
-//				getShadowness(vec2(-pcfOffset, -pcfOffset))) * 0.25;
-
+	float pcfOffset = u_shadowPCFOffset;
+	
+	// average des 4 coins genre
 	return (//getShadowness(vec2(0,0)) +
-			getShadowness(vec2(u_shadowPCFOffset, u_shadowPCFOffset)) +
-			getShadowness(vec2(-u_shadowPCFOffset, u_shadowPCFOffset)) +
-			getShadowness(vec2(u_shadowPCFOffset, -u_shadowPCFOffset)) +
-			getShadowness(vec2(-u_shadowPCFOffset, -u_shadowPCFOffset))) * 0.25;
+				getShadowness(vec2(pcfOffset, pcfOffset)) +
+				getShadowness(vec2(-pcfOffset, pcfOffset)) +
+				getShadowness(vec2(pcfOffset, -pcfOffset)) +
+				getShadowness(vec2(-pcfOffset, -pcfOffset))) * 0.25;
+
+	//return (//getShadowness(vec2(0,0)) +
+	//		getShadowness(vec2(u_shadowPCFOffset, u_shadowPCFOffset)) +
+	//		getShadowness(vec2(-u_shadowPCFOffset, u_shadowPCFOffset)) +
+	//		getShadowness(vec2(u_shadowPCFOffset, -u_shadowPCFOffset)) +
+	//		getShadowness(vec2(-u_shadowPCFOffset, -u_shadowPCFOffset))) * 0.25;
 }
 #endif //shadowMapFlag
 
@@ -180,6 +187,7 @@ void main() {
 		#if defined(ambientFlag) && defined(separateAmbientFlag)
 			#ifdef shadowMapFlag
 				gl_FragColor.rgb = (diffuse.rgb * (v_ambientLight + getShadow() * v_lightDiffuse)) + emissive.rgb;
+				//gl_FragColor.rgb = (diffuse.rgb * (v_ambientLight + getShadow() * v_lightDiffuse)) + emissive.rgb;
 				//gl_FragColor.rgb = texture2D(u_shadowTexture, v_shadowMapUv.xy);
 			#else
 				gl_FragColor.rgb = (diffuse.rgb * (v_ambientLight + v_lightDiffuse)) + emissive.rgb;
@@ -234,19 +242,20 @@ void main() {
 
 
 
+
 	// checkers shader
 	vec4 floored = floor(v_pos);
 	float m =  mod(floored.x + floored.y, 2);
 //	gl_FragColor = vec4(m, m, m, 1);
 
 	// increase intensity (black becomes gray)
-//	gl_FragColor += 0.5;
+	//gl_FragColor += 0.5;
 
 	// shadow map shader
 	//gl_FragColor = texture2D(u_shadowTexture, v_shadowMapUv.xy);
 
 	// gradiant shader
-//	gl_FragColor *= normalize(vec4(v_pos) * vec4(1, 1, 1, 1)) ;
+	//gl_FragColor *= normalize(vec4(v_pos) * vec4(1, 1, 1, 1)) ;
 
 	//gl_FragColor -= getShadow();
 
@@ -277,7 +286,7 @@ void main() {
 		//	gl_FragColor *= vec4(coeff, coeff, coeff, 1);
 		}
 	}
-
+	
 
 	/*float radius = 1;
 	float blur = 1/radius/2;

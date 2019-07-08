@@ -11,10 +11,10 @@ public abstract class ScreenAPI implements Screen {
 
 
 	/**
-	 * Creates this screen's camera, view and calls the createHook.
-	 * {@link #BaseScreen.createCam()}
-	 * {@link #BaseScreen.createView(Camera cam)}
-	 * {@link #BaseScreen.createHook()}
+	 * Creates this screen's camera, view and calls the createHook. <br>
+	 * {@link #BaseScreen.createCam()} <br>
+	 * {@link #BaseScreen.createView(Camera cam)} <br>
+	 * {@link #BaseScreen.createHook()} <br>
 	 */
 	public abstract void create();
 	

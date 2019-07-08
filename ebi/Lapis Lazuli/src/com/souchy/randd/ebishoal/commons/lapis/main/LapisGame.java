@@ -6,15 +6,11 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.ebishoal.commons.lapis.discoverers.FontDiscoverer;
 import com.souchy.randd.ebishoal.commons.lapis.discoverers.ModelDiscoverer;
 import com.souchy.randd.ebishoal.commons.lapis.managers.ModelManager;
-import com.souchy.randd.ebishoal.commons.lapis.world.World;
-import com.souchy.randd.situationtest.models.org.FightContext;
 
 
 public abstract class LapisGame extends Game {

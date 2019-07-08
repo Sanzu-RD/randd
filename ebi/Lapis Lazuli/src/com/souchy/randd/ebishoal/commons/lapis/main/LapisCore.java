@@ -1,10 +1,9 @@
 package com.souchy.randd.ebishoal.commons.lapis.main;
 
+import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.math.Vector2;
-import com.kotcrab.vis.ui.VisUI;
-import com.souchy.randd.commons.ebishoal.EbiCore;
+import com.souchy.randd.ebishoal.commons.EbiCore;
 
 /**
  * 
@@ -30,6 +29,7 @@ public abstract class LapisCore extends EbiCore {
 	@Override
 	public void init() throws Exception {
 		config = new LwjglApplicationConfiguration();
+		config.addIcon("G:\\Assets\\pack\\fantasy bundle\\tcgcardspack\\Tex_krakken_icon.png", FileType.Absolute);
 		properties = new LapisProperties(config);
 		properties.load();
 	    game = createGame();

@@ -1,11 +1,7 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
-import java.util.List;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Material;
@@ -14,42 +10,36 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.DepthTestAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.kotcrab.vis.ui.VisUI;
-import com.souchy.randd.commons.cache.map.MapCache;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
-import com.souchy.randd.ebishoal.sapphire.models.EbiCell;
-import com.souchy.randd.ebishoal.sapphire.ui.GameScreen;
-import com.souchy.randd.jade.api.IBoard;
-import com.souchy.randd.situationtest.matrixes.MatrixFlags;
-import com.souchy.randd.situationtest.models.map.MapData;
-import com.souchy.randd.situationtest.models.org.FightContext;
+import com.souchy.randd.ebishoal.sapphire.ui.SapphireScreen;
+
+import gamemechanics.models.Fight;
 
 public class SapphireGame extends LapisGame {
 	
 	public Skin skin;
 	
-	public GameScreen gfx;
-	public FightContext context;
-	
+	public SapphireScreen gfx;
+	//public FightContext context;
+	public Fight context;
 	
 	@Override
 	public void onCreateHook() {
 
-		skin = new Skin(Gdx.files.internal("res/uiskin.json"));
+		skin = new Skin(Gdx.files.internal("res/gdx/ui/uiskin.json"));
 		System.out.println("skin =" + skin);
 		//labelStyles.add(new LabelStyle());
 		
 		// All graphics
-		gfx = new GameScreen();
-		gfx.create();
+		gfx = new SapphireScreen(); //gfx = new GameScreen();
+		//gfx.create();
 		
 		
 		// Might use or not 
 		//Injector injector = Guice.createInjector(new SapphireModule());
 		
+		/*
 		// Context board and World model cache
 		FightContext context = new FightContext();
 		IBoard board = context.board;
@@ -88,7 +78,7 @@ public class SapphireGame extends LapisGame {
 				}
 			}
 		}
-		gfx.getWorld().cache.end();
+		gfx.getWorld().cache.end();*/
 	}
 	
 	public static ModelInstance testModelGenerator(int id) {
@@ -124,44 +114,9 @@ public class SapphireGame extends LapisGame {
 		}
 	}
 
-	private void testGenerateMapFile() {
-		MapData test = new MapData();
-		test.cells = test.elevation = test.walkableLos = new int[][] {
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-		};
-		test.setModel(0, 0, 1);
-		test.setModel(1, 0, 1);
-		test.setModel(2, 0, 1);
-		test.setModel(0, 1, 2);
-		test.setModel(0, 2, 3);
-
-		MapCache cache = new MapCache();
-		cache.set("F:\\Users\\Souchy\\Desktop\\Robyn\\Git\\r and d\\ebi\\cores\\Sapphire Owl\\data\\maps\\test.json", test);
-	}
 
 	@Override
 	public Screen getStartScreen() {
-		//var hud = new GameScreenHud(); 
-		//var hud = new ShitScreen(); 
 		return gfx;
 	}
 	

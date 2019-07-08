@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE window SYSTEM "lml.dtd">
+
+<window title="@firstTitle" defaultpad="5">
+	@helloWorld
+
+	<textbutton onclick="roll">@randomPrompt</textbutton>
+
+	<label id="random"/>
+
+	<table colspan="2" row="true">
+		<:for element="en;fr">
+			<!-- {element} will be replaced with values from the "en;fr" array on each iteration. Basically, it creates two buttons: "en" and "fr", which allow to change locales. -->
+			<textbutton onchange="setLocale" id="{element}" pad="10">{element}</textbutton>
+		</:for>
+	</table>
+	<textbutton onchange="setView" id="first">@back</textbutton>
+	<textbutton onchange="exit">@exit</textbutton>
+
+</window>

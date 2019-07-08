@@ -1,111 +1,59 @@
 package com.souchy.randd.ebishoal.commons.lapis.world;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.g3d.Environment;
-import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelCache;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
+import com.souchy.randd.commons.tealwaters.commons.Disposable;
 
-public class World {
+public class World implements Disposable {
 	
-	// public Table<Integer, Integer, ModelInstance> models;
-	/**
-	 * 
-	 */
-	public final ModelCache cache;
+	public ModelCache cache;
+	public List<ModelInstance> instances;
 	
-	public final List<ModelInstance> toCacheModels;
-	public final List<ModelInstance> tempModels;
-	// private final List<Lambda> cacheMods; // = new Array<>(); // modification aux
-	// tiles de la grid qui impliquent qu'on rebuild le cache
-	
-	private AtomicBoolean dirty = new AtomicBoolean(true);
+	protected Vector3 center = Vector3.Zero;
 	
 	public World() {
 		cache = new ModelCache();
-		// pu besoin d'avoir des synchronized() blocks partout grâce à ça
-		toCacheModels = Collections.synchronizedList(new ArrayList<>());
-		tempModels = Collections.synchronizedList(new ArrayList<>());
-		// cacheMods = Collections.synchronizedList(new ArrayList<>());
+		instances = new ArrayList<>();
 	}
-	
-	/*public void addCell() {
-		
-	}*/
-	
 	
 	/**
-	 * 
-	 * @param inst
+	 * This is WRONG and INVALID
+	 * (only checks translation transform + we use greedy meshing so it doesnt get the correct values)
 	 */
-	public void addToCache(ModelInstance inst) {
-		toCacheModels.add(inst);
-		dirty.set(true);
-	}
-	
-	public void removeFromCache(ModelInstance inst) {
-		toCacheModels.remove(inst);
-		dirty.set(true);
-	}
-	
-	public void clearCache() {
-		toCacheModels.clear();
-		dirty.set(true);
-	}
-	
+	/*public BoundingBox getBoundingBox() {
+    	Vector3 min = new Vector3();
+    	Vector3 max = new Vector3();
+		Vector3 v = new Vector3();
+		Consumer<ModelInstance> consumer = inst -> {
+    		inst.transform.getTranslation(v);
+			if(v.x > max.x) max.x = v.x;
+			if(v.x < min.x) min.x = v.x;
+			if(v.y > max.y) max.y = v.y;
+			if(v.y < min.y) min.y = v.y;
+			if(v.z > max.z) max.z = v.z;
+			if(v.z < min.z) min.z = v.z;
+    	};
+		//toCacheModels.forEach(consumer);
+		//tempModels.forEach(consumer);
+		instances.forEach(consumer);
+    	return new BoundingBox(min, max);
+	}*/
 
-	public void addTemp(ModelInstance inst) {
-		tempModels.add(inst);
-	}
-	public void removeTemp(ModelInstance inst) {
-		tempModels.remove(inst);
-	}
-	
-	public void clearTemp() {
-		tempModels.clear();
-	}
-	
-	
-	/**
-	 * 
-	 * @param l
-	 */
-	/*
-	 * public void mod(Lambda l) { synchronized(cacheMods){ cacheMods.add(l); } }
-	 */
-	
-	/*
-	 * public void flushGridMods(){ synchronized (cacheMods) { if(cacheMods.size >
-	 * 0){ cacheMods.forEach(Lambda::call); // apply mods cacheMods.clear(); //
-	 * clear the mods list buildCache(); // rebuild the cache } } }
-	 */
-	
-	public void buildCache() {
-		if(dirty.get()) {
-			cache.begin();
-			toCacheModels.forEach(cache::add);
-			cache.end();
-			dirty.set(false);
-		}
-	}
-	
-	/*public void render(ModelBatch batch, Environment env, Camera cam) {
-		batch.begin(cam);
-		// render the cached models
-		batch.render(cache, env);
-		// render the temp models
-		tempModels.forEach(m -> batch.render(m, env));
-		batch.end();
-	}*/
-	
+	@Override
 	public void dispose() {
+		// TODO Auto-generated method stub
+		instances.clear();
 		cache.dispose();
 	}
 
+	public Vector3 getCenter() {
+		return center;
+	}
 	
 }

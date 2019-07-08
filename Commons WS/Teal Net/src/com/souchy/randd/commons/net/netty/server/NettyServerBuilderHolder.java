@@ -17,7 +17,7 @@ public final class NettyServerBuilderHolder {
 	}
 
 	public static interface NettyServerBuilderEncoder {
-		public NettyServerBuilderDecoder encoder(Factory<MessageToByteEncoder<?>> encoder);
+		public NettyServerBuilderDecoder encoder(MessageToByteEncoder<?> encoder);
 	}
 
 	public static interface NettyServerBuilderDecoder {
@@ -25,24 +25,24 @@ public final class NettyServerBuilderHolder {
 	}
 
 	public static interface NettyServerBuilderHandler {
-		public NettyServerConfiguration handler(Factory<NettyHandler> handler);
+		public NettyServerBuilderWrapper handler(NettyHandler handler); // NettyServerConfiguration
 	}
 
-	public static interface NettyServerConfiguration {
-		public NettyServerBuilderWrapper adapt();
-	}
+//	public static interface NettyServerConfiguration {
+//		public NettyServerBuilderWrapper adapt();
+//	}
 
 	public static interface NettyServerBuilderWrapper {
 		public NettyServer wrap() throws Exception;
 	}
 
 	public static final class NettyServerBuilder implements NettyServerBuilderPort, NettyServerBuilderSSL, NettyServerBuilderEncoder, NettyServerBuilderDecoder,
-			NettyServerBuilderHandler, NettyServerConfiguration, NettyServerBuilderWrapper {
+			NettyServerBuilderHandler, /* NettyServerConfiguration, */ NettyServerBuilderWrapper {
 		private boolean ssl;
 		private int port;
-		private Factory<MessageToByteEncoder<?>> encoder;
+		private MessageToByteEncoder<?> encoder;
 		private Factory<ByteToMessageDecoder> decoder;
-		private Factory<NettyHandler> handler;
+		private NettyHandler handler;
 
 		@Override
 		public NettyServerBuilderSSL port(int port) {
@@ -57,7 +57,7 @@ public final class NettyServerBuilderHolder {
 		}
 
 		@Override
-		public NettyServerBuilderDecoder encoder(Factory<MessageToByteEncoder<?>> encoder) {
+		public NettyServerBuilderDecoder encoder(MessageToByteEncoder<?> encoder) {
 			this.encoder = encoder;
 			return this;
 		}
@@ -68,16 +68,16 @@ public final class NettyServerBuilderHolder {
 			return this;
 		}
 
-		@Override
-		public NettyServerConfiguration handler(Factory<NettyHandler> handler) {
+		@Override 
+		public NettyServerBuilderWrapper handler(NettyHandler handler) { // NettyServerConfiguration
 			this.handler = handler;
 			return this;
 		}
 
-		@Override
-		public NettyServerBuilderWrapper adapt() {
-			return this;
-		}
+//		@Override
+//		public NettyServerBuilderWrapper adapt() {
+//			return this;
+//		}
 
 		@Override
 		public NettyServer wrap() throws Exception {

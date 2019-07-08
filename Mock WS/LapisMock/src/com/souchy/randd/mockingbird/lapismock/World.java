@@ -6,8 +6,6 @@ import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.AssetLoader;
-import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -24,8 +22,6 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
-import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
-import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
@@ -56,37 +52,41 @@ public class World {
     
     public void createWorld() {
     	var sum = cellSize; // + offset;
-    	
-		
 		
 		//String file = "models/cube.obj";
-		String file = "g3d/board/cell_models/roundedCube05.g3dj";
-		String treeFile1 = "g3d/object_models/pinetree.obj";
-		String penguinFile = "F:\\Users\\Souchy\\Desktop\\Robyn\\Git\\res\\assets\\models\\characters\\playables\\penguin.obj";
-		String snowTextureFile = "F:\\Users\\Souchy\\Desktop\\Robyn\\Git\\r and d\\ebi\\PiranhaPlants\\res\\g3d\\board\\textures\\snow_ice.png";
+		String file = "gdx/g3d/board/cell_models/roundedCube05.g3dj";
+		String treeFile1 = "gdx/g3d/object_models/pinetree.obj";
+		String penguinFile = "F:/Users/Souchy/Desktop/Robyn/Git/res/assets/models/characters/playables/penguin.g3dj";
+		String snowTextureFile = "F:/Users/Souchy/Desktop/Robyn/Git/r and d/ebi/PiranhaPlants/res/gdx/g3d/board/textures/snow_ice.png";
+		String cliffFile = "F:/Users/Souchy/Desktop/Robyn/Git/res/assets/models/scenery/3d/clifftile.obj";
         //ModelLoader loader = new ObjLoader();
         //model = loader.loadModel(Gdx.files.internal(file));
 
         assets.load(file, Model.class);
         assets.load(treeFile1, Model.class);
         assets.load(snowTextureFile, Texture.class);
-      //  assets.load(penguinFile, Model.class);
+        assets.load(cliffFile, Model.class);
+        assets.load(penguinFile, Model.class);
         assets.finishLoading();
+        
+        var names = assets.getAssetNames();
+        System.out.println(names);
         
 		Model model;
 		model = createModel(Color.valueOf("AEE897"));
 		//model = snowModel(Color.WHITE);
        // model = assets.get(file);
+		//model = assets.get(cliffFile);
         
         //model.materials.clear();
         //model.materials.add(new Material(ColorAttribute.createDiffuse(Color.GREEN)));
-    	
+
 		var rng = new Random();
         int side = 50;
 		for(int x = 0; x < side; x++) {
 			for(int y = 0; y < side; y++) {
-				if(x == side/2 && y == side/2) continue;
-				if(rng.nextBoolean()) continue;
+			//	if(x == side/2 && y == side/2) continue;
+			//	if(rng.nextBoolean()) continue;
 				//Vector3 pos = new Vector3(sum * x + sum/2, sum * y + sum/2, 0);//z * cellSize - cellSize/2));
 				
 				//model = snowModel(Color.WHITE); //(x + y) % 2 == 0 ? new Color(0.9f,0.9f,0.9f,0.9f) : Color.WHITE);
@@ -99,7 +99,8 @@ public class World {
 		addInstance(createModel(Color.SKY), new Vector3(1, 0, 1)); // X
 		//ModelLoader a = new ObjLoader();
 		//Model penguin = a.loadModel(Gdx.files.absolute(treeFile1));
-		addInstance(assets.get(treeFile1), new Vector3(3, 17, 0), true);
+		
+	//	addInstance(assets.get(treeFile1), new Vector3(1, 1, 0), true);
 		
 		/*modelBuilder.begin();
 		for(int i = 0; i < instances.size(); i++) {
@@ -146,15 +147,25 @@ public class World {
     
     
     private Model createModel(Color color) {
-    	/*var pixCyan = new Pixmap(64, 64, Format.RGBA8888);
-    	pixCyan.setColor(color);
-    	pixCyan.fill();
-    	Texture tex = new Texture(pixCyan);
-    	tex.setFilter(TextureFilter.MipMap, TextureFilter.Nearest);
-    	TextureAttribute ta = TextureAttribute.createDiffuse(tex);*/
+    	var pix = new Pixmap(512, 512, Format.RGBA8888);
+    	pix.setColor(color);
+    	pix.fill();
+    	Texture tex = new Texture(pix);
+    	tex.setFilter(TextureFilter.Linear, TextureFilter.Linear); 
+    	//tex.setFilter(TextureFilter.MipMap, TextureFilter.Nearest);
+    	var colorMat = new Material(TextureAttribute.createDiffuse(tex));
+    	
+    	Texture terracotta = new Texture(Gdx.files.absolute("G:\\Assets\\test\\glazedTerracotta.png"));
+    	var terracottaMat = new Material(TextureAttribute.createDiffuse(new Texture(Gdx.files.absolute("G:\\Assets\\test\\glazedTerracotta.png"))));
+
+    	Texture grass = new Texture(Gdx.files.absolute("G:\\Assets\\test\\grass512x512.png"));
+    	var grassMat = new Material(TextureAttribute.createDiffuse(grass));
+    	
+    	var mats = new Material[] {colorMat, grassMat, terracottaMat};
+    	
     	Model model = modelBuilder.createBox(
     			cellSize, cellSize, cellSize, 
-    			new Material(ColorAttribute.createDiffuse(color)),  // new Material(ta), //
+    			colorMat, // mats[rnd.nextInt(mats.length)], //new Material(ColorAttribute.createDiffuse(color)),  // new Material(ta), //
     			//new Material(ColorAttribute.createDiffuse(color)), 
     			Usage.Position | Usage.Normal | Usage.TextureCoordinates);
     	// model.meshParts.forEach(m -> m.primitiveType = GL20.GL_LINES);

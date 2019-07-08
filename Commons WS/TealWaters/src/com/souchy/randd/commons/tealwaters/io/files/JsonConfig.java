@@ -1,50 +1,107 @@
 package com.souchy.randd.commons.tealwaters.io.files;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.Instant;
+import java.time.ZonedDateTime;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers.Exclude;
+import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers.InstantAdapter;
+import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers.ZonedDateTimeAdapter;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
+public class JsonConfig {
 
-public interface JsonConfig {
+	private static final String extension = ".conf";
+	public static final Gson gson = new GsonBuilder()
+			.setPrettyPrinting()
+			.registerTypeHierarchyAdapter(Instant.class, new InstantAdapter())
+			.registerTypeHierarchyAdapter(ZonedDateTime.class, new ZonedDateTimeAdapter())
+			.setExclusionStrategies(JsonHelpers.exclusionStrategy)
+			.create();
 	
-	/**
-	 * use new File("...") for general <br>
-	 * use Gdx.files.Internal("...") for libgdx app 
-	 * @return
-	 */
-	public File getFile();
 	
-
-	default void load() {
+	// -------------------------------------------
+	
+	@Exclude
+	protected Path rememberPath;
+	
+	private static <T extends JsonConfig> T read(Class<T> c, Path path) {
 		try {
-			InputStream in;
-			// in = FilesManager.get().getResourceAsStream(getPath());s
-			File f = getFile(); // new File(getPath());
-			System.out.println("load : " + f.getAbsolutePath());
-			
-			Gson gson = new Gson();
-			
-			gson.fromJson(f.getAbsolutePath(), this.getClass());
-			
-			
-			in = new FileInputStream(f);
-			getProperties().load(in);
+			T config = null;
+			if(Files.exists(path)) {
+				config = gson.fromJson(Files.readString(path), c);
+			} else {
+				config = c.getDeclaredConstructor().newInstance();
+			}
+			config.rememberPath = path;
+			config.save();
+			return config;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	private static <T extends JsonConfig> String name(Class<T> c) {
+		return c.getSimpleName().toLowerCase().replace("config", "").replace("conf", "") + extension;
+	}
 
-			initFields();
-			in.close();
+	public static <T extends JsonConfig> T read(Class<T> c, String path) {
+		var url = FilesManager.getResource(path + name(c));
+		try {
+			return read(c, Paths.get(url.toURI())); 
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public static <T extends JsonConfig> T read(Class<T> c) {
+		return read(c, "");
+	}
+	/**
+	 * 
+	 * @param <T> - Type of Config
+	 * @param c - Config sub class
+	 * @param filePaths - Can be either absolute or relative to current application directory. Will default to "./" if no given path is valid.
+	 * @return T Config instance
+	 */
+	public static <T extends JsonConfig> T readExternal(Class<T> c, String... filePaths) {
+		//Log.info("readExternal");
+		String defaultPath = "./";
+		String chosenPath = null;
+		if(filePaths == null || filePaths.length == 0) filePaths = new String[] { defaultPath };
+		for(var path : filePaths) 
+			if(new File(path).exists()) 
+				chosenPath = path;
+		if(chosenPath == null) chosenPath = defaultPath;
+		try {
+			//Log.info("readExternal filePath : " + filePath);
+			var file = FilesManager.getFileOutside(chosenPath + name(c));
+			//Log.info("readExternal file : " + file);
+			var config = read(c, file.toPath());
+			//Log.info("readExternal config : " + file);
+			return config;
+		} catch(Exception e) {
+			Log.warning("readExternal error : ", e);
+			return null;
+		}
+	}
+	
+	public void save() {
+		var content = gson.toJson(this);
+		//var file = new File(rememberPath + name(this.getClass()));
+		//Log.info("save " + this.rememberPath);
+		try {
+			Files.writeString(rememberPath/*file.toPath()*/, content);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		List<String> propstrings = getProperties().entrySet().stream().map(e -> e.getKey() + " = " + e.getValue()).collect(Collectors.toList());
-		System.out.println("load : " + "[" + String.join(", ", propstrings) + "]");
 	}
-
-	
 	
 }

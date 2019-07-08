@@ -3,14 +3,9 @@ package com.souchy.randd.mockingbird.lapismock.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import com.badlogic.gdx.graphics.g3d.Renderable;
-import com.badlogic.gdx.graphics.g3d.Shader;
-import com.badlogic.gdx.graphics.g3d.utils.BaseShaderProvider;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.souchy.randd.mockingbird.lapismock.BaseScreen;
 import com.souchy.randd.mockingbird.lapismock.World;
-import com.souchy.randd.mockingbird.lapismock.lwjgl1.LShader;
 
 public class MockScreen4 extends BaseScreen {
 
@@ -41,6 +36,30 @@ public class MockScreen4 extends BaseScreen {
 		modelBatch.begin(cam);
 		modelBatch.render(world.cache, env);
 		modelBatch.end();
+	}
+
+	@Override
+	protected void updateLight(float delta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void act(float delta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void renderShadows(World world) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void renderParticleEffects() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

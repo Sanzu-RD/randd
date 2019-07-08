@@ -9,7 +9,7 @@ import com.souchy.randd.commons.cache.impl.JSONCache;
 import com.souchy.randd.situationtest.models.map.MapData;
 
 /**
- * Do it do this or a HashCache of <string, map>
+ * Do this or a HashCache of <string, map>
  * i guess this is fine
  * 
  * @author Souchy

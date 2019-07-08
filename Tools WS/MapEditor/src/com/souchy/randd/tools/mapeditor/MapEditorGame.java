@@ -16,8 +16,8 @@ import com.badlogic.gdx.graphics.g3d.attributes.IntAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.souchy.randd.beans.Bean;
 import com.souchy.randd.commons.cache.map.MapCache;
+import com.souchy.randd.commons.tealwaters.commons.Bean;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.sapphire.models.EbiCell;
 import com.souchy.randd.situationtest.matrixes.MatrixFlags;
@@ -86,7 +86,7 @@ public class MapEditorGame extends LapisGame {
 						instance.transform.setTranslation(new Vector3(cellSize * x + cellSize/2, cellSize * y + cellSize/2, z * cellSize - cellSize/2));
 						screen.getWorld().addToCache(instance);
 						
-						EbiCell c = new EbiCell(x, y, z, walk, los, instance);
+						EbiCell c = new EbiCell(x, y, instance); //new EbiCell(x, y, z, walk, los, instance);
 						//board.getCells().put(i, j, c);
 					}
 				}

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#onRootKeyRelease" onMouseDragged="#onDrag" onMousePressed="#onPress" prefHeight="900.0" prefWidth="1600.0" styleClass="login" stylesheets="@../css/commons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.tools.rainbow.ui.LoginScene">
+   <children>
+      <ImageView fx:id="background" fitWidth="1596.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="file:/G:/Assets/pack/fantasy%20bundle/tcgcardspack/Tex_krakken_crop.PNG" />
+         </image>
+      </ImageView>
+      <HBox fx:id="decorations" alignment="CENTER" layoutX="1454.0" layoutY="42.0" spacing="25.0" styleClass="decorations" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <ImageView fx:id="minimizeBtn" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#minimize" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/G:/Assets/pack/kenney/gameicons/PNG/White/2x/minus_crop.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="settingBtn" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#openSettings" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="file:/G:/Assets/pack/kenney/gameicons/PNG/White/2x/gear_crop.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="exitBtn" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/G:/Assets/pack/kenney/gameicons/PNG/White/2x/power_crop.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox alignment="BOTTOM_LEFT" layoutX="109.0" layoutY="599.0" spacing="100.0">
+         <children>
+            <VBox spacing="40.0">
+               <children>
+                  <VBox spacing="15.0">
+                     <children>
+                        <Label text="Username" />
+                        <TextField fx:id="usernameField" prefHeight="40.0" />
+                     </children>
+                  </VBox>
+                  <VBox spacing="15.0">
+                     <children>
+                        <Label text="Password" />
+                        <PasswordField fx:id="passwordField" prefHeight="40.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <Button fx:id="loginBtn" mnemonicParsing="false" onMouseClicked="#login" prefHeight="30.0" prefWidth="98.0" text="Sign In" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -15,8 +15,8 @@ public class BaseModuleInformation implements ModuleInformation { //, PropertyCo
 		ModuleReleaseDate, // Date de release 
 		ModuleDescription, // Description 
 		ModuleAuthor, // Auteur
-		ModuleSupportedVersions, // Version supportées de l'application parente par le module
-		ModuleDependencies, // Dépendances à d'autres modules / libs 
+		ModuleSupportedVersions, // Version supportÃ©es de l'application parente par le module
+		ModuleDependencies, // DÃ©pendances Ã  d'autres modules / libs 
 		ModuleMainClass; // Package+nom de la class module main
 	}
 	
@@ -29,7 +29,7 @@ public class BaseModuleInformation implements ModuleInformation { //, PropertyCo
 	}
 
 	//@Override
-	public File getFile(){
+	public File getJarFile(){
 		return file;
 	}
 	public String getName(){

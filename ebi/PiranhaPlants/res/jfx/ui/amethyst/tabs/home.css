@@ -1,0 +1,39 @@
+
+// Play button
+.label.play {
+  -fx-text-fill: lblColor1;
+  -fx-font-size: 40 px;
+  //-fx-padding: 0 20 0 0;
+}
+// Play button 2
+.label.playCenter {
+  -fx-text-fill: lblColor1;
+  -fx-border-color: lblColor1;
+  -fx-font-size: 50 px;
+  -fx-padding: 10 10 10 10;
+}
+
+/** Play btn, img, lbl */
+.playBtn {
+
+}
+.playBtn .image-view {
+  -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 20, 0, 0, 0);
+}
+.playBtn:hover .image-view {
+  -fx-effect: dropshadow(three-pass-box, rgba(0,100,0,0.6), 20, 0, 0, 0);
+}
+.playBtn .label {
+  -fx-text-fill: black;
+  -fx-font-size: 45 px;
+  -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+  -fx-background-color:  rgba(0, 0, 0, 0.20);
+  -fx-padding: 0 0 0 20;
+}
+.playBtn .label .text {
+  -fx-stroke: black;
+  -fx-stroke-width: 1px;
+}
+.playBtn:hover .label {
+  -fx-effect: dropshadow(three-pass-box, rgba(0,100,100,0.6), 10, 0, 0, 0);
+}

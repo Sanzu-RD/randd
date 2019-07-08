@@ -14,8 +14,8 @@ public class PluginMonitorConfig implements PropertyConfig {
 	private final File path = new File("res/config.properties");
 	//private final PropertyFactory factory = PropertyFactory.createFactory(this::get, this::set);
 	
-	public Property lastDirectory; //= factory.create("lastDirectory");
-	public Property windowTitle;
+	public Property<String> lastDirectory; //= factory.create("lastDirectory");
+	public Property<String> windowTitle;
 
 //	public PluginMonitorConfig() {
 //		initFields();

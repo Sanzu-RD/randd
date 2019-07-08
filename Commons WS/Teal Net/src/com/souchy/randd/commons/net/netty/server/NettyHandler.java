@@ -1,13 +1,25 @@
 package com.souchy.randd.commons.net.netty.server;
 
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.net.netty.bytebuf.multihandlers.BBMessageHandlers;
+import com.souchy.randd.commons.tealwaters.logging.Log;
+
+import static io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
+@Sharable
 public class NettyHandler extends ChannelInboundHandlerAdapter {
 
+	private final BBMessageHandlers msgHandlers;
+	
+	public NettyHandler(BBMessageHandlers msgHandlers) {
+		this.msgHandlers = msgHandlers;
+	}
+	
 	@Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-    /*	
+		/*	
 		@SuppressWarnings("unchecked")
 		Message<String> pack = (Message<String>) msg;
 		-> // something like that so that when I do pack.onReceive, I know who sent the packet so I can message him back or do things with him
@@ -21,8 +33,12 @@ public class NettyHandler extends ChannelInboundHandlerAdapter {
 		p.onSend();
         ctx.write(p);
         //ctx.write(msg);
-       
-      */	
+      	*/
+		//Log.info("NettyHandler : " + msg.toString());
+		var bb = (BBMessage) msg;
+		if (msgHandlers.canHandle(bb)) { // res.canHandle(packetid)){
+			msgHandlers.handle(ctx, bb);
+		}
     }
 
 	@Override
@@ -33,8 +49,10 @@ public class NettyHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
 		// Close the connection when an exception is raised.
-		cause.printStackTrace();
+		Log.error("NettyHandler", cause); // + cause.getLocalizedMessage() + stackTrace);
+	//	cause.printStackTrace();
 		ctx.close();
 	}
-
+	
+	
 }

@@ -7,7 +7,7 @@ public class BBMessageDiscoverer extends ClassDiscoverer<BBMessage> {
 
 	@Override
 	public boolean identify(Class<?> c) {
-		return BBMessage.class.isAssignableFrom(c);
+		return c != BBMessage.class && BBMessage.class.isAssignableFrom(c);
 	}
 	
 	

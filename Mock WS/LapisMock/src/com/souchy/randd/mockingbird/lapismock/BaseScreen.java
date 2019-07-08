@@ -21,9 +21,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.bitfire.postprocessing.PostProcessor;
-import com.bitfire.postprocessing.PostProcessorEffect;
 import com.bitfire.postprocessing.effects.Bloom;
-import com.bitfire.postprocessing.filters.Blur.BlurType;
 import com.bitfire.utils.ShaderLoader;
 
 public abstract class BaseScreen implements Screen {
@@ -75,8 +73,12 @@ public abstract class BaseScreen implements Screen {
             cam.update();
     	} else {
     		cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            cam.position.set(worldCenter.x, worldCenter.y*0.6f, worldCenter.x*1.8f);
-            cam.lookAt(worldCenter.x, worldCenter.y*0.9f, 0);
+//            cam.position.set(worldCenter.x, worldCenter.y*0.6f, worldCenter.x*1.8f);
+//            cam.lookAt(worldCenter.x, worldCenter.y*0.9f, 0);
+           //  cam.lookAt(14, 14, 0);
+            cam.direction.set(-1, 1, -1f);
+            cam.up.set(-1, 1, 1f);
+            cam.position.set(25, -5, 15);
             cam.near = 1f;
             cam.far = 300f;
             cam.update();
@@ -159,6 +161,7 @@ public abstract class BaseScreen implements Screen {
 			clearScreen();
 	        renderWorld(world);
 	        renderParticleEffects();
+	        
 		}
         
         /*
@@ -176,24 +179,19 @@ public abstract class BaseScreen implements Screen {
     		fbo.end();
             clearScreen();
             
-            
+            // récupère l'image générée par les model batch
             Texture tex = fbo.getColorBufferTexture();
             fboRegion = new TextureRegion(tex
     				//, 0, 0,
     				// Gdx.graphics.getWidth(), Gdx.graphics.getHeight() // track.getRegionWidth(), track.getRegionHeight()
     				);
     		fboRegion.flip(false, true); // FBO uses lower left, TextureRegion uses upper-left
-            
-    		/*Color c = Color.PINK;
-    		Gdx.gl.glClearColor(c.r, c.g, c.b, 1f);
-    		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling ? GL20.GL_COVERAGE_BUFFER_BIT_NV : 0));
-    		*/
-            //batch.setBlendFunction(GL20.GL_ONE, GL20.GL_ONE_MINUS_SRC_ALPHA);
-    		//batch.disableBlending();
+
+    		// render l'image à travers la sprite batch du post processor
     		batch.begin();
     		batch.draw(fboRegion, 0, 0);
-    		batch.draw(slider, 0, 0);
-    		//batch.draw(fboRegion, 0, 0);
+    		//batch.draw(slider, 0, 0);
+    		//batch.draw(new Texture(Gdx.files.absolute("G:\\Assets\\test\\glazedTerracotta.png")), 500, 500);
     		batch.end();
         }
         

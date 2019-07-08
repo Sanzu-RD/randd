@@ -1,0 +1,19 @@
+
+
+/** match history */
+.matchhistory {
+}
+.matchhistory VBox {
+}
+.matchhistory AnchorPane {
+  -fx-border-color: lblColor1;
+  -fx-border-width: 0 0 1 0;
+  -fx-padding: 10 0 10 0;
+}
+
+.matchhistory .label {
+  -fx-font-size: 17 px;
+}
+.matchhistory HBox .label {
+  -fx-font-size: 15 px;
+}

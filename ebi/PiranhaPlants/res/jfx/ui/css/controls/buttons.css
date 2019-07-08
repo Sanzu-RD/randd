@@ -1,0 +1,13 @@
+
+
+/** every Button */
+.button {
+  -fx-text-fill: lblColor1;
+  -fx-border-color: lblColor1;
+  -fx-background-color: transparent;
+  -fx-font-size: 17 px;
+}
+.button:hover {
+  -fx-text-fill: lblColor2;
+  -fx-border-color: lblColor2;
+}

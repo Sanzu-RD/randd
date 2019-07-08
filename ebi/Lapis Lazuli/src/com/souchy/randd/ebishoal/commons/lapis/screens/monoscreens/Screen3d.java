@@ -4,9 +4,7 @@ package com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalShadowLight;
-import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.DepthShaderProvider;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -106,19 +104,19 @@ public abstract class Screen3d extends BaseScreen {
 	protected void renderShadows(float delta) {
 		// render les shadows avant de clearScreen
 		shadowLight.begin(Vector3.Zero, getCam().direction);
-		shadowBatch.begin(shadowLight.getCamera());
-		shadowBatch.render(world.cache, env);
-		world.tempModels.forEach(m -> shadowBatch.render(m, env));
-		shadowBatch.end();
+			shadowBatch.begin(shadowLight.getCamera());
+				shadowBatch.render(world.cache, env);
+				world.tempModels.forEach(m -> shadowBatch.render(m, env));
+			shadowBatch.end();
 		shadowLight.end();
 	}
 	
 	protected void renderWorld(float delta) {
 		getBatch().begin(getCam());
-		// render the cached models
-		getBatch().render(getWorld().cache, getEnvironment());
-		// render the temp models
-		getWorld().tempModels.forEach(m -> getBatch().render(m, getEnvironment()));
+			// render the cached models
+			getBatch().render(getWorld().cache, getEnvironment());
+			// render the temp models
+			getWorld().tempModels.forEach(m -> getBatch().render(m, getEnvironment()));
 		getBatch().end();
 	}
 	

@@ -1,8 +1,6 @@
 package com.souchy.randd.ebishoal.commons.lapis.discoverers;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g3d.Model;
 
 public class ModelDiscoverer extends LibGdxFileDiscoverer<FileHandle> {
 

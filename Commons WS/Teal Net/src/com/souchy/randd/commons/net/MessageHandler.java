@@ -3,7 +3,7 @@ package com.souchy.randd.commons.net;
 import com.souchy.randd.commons.tealwaters.commons.AnnotatedIdentifiable;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 
-public interface MessageHandler<M extends Message<?, ?>> extends Identifiable<Integer>
+public interface MessageHandler<C, M extends Message<?, ?>> extends Identifiable<Integer>
 // ,Responsibility<M, ?>
 {
 
@@ -12,7 +12,7 @@ public interface MessageHandler<M extends Message<?, ?>> extends Identifiable<In
 		return AnnotatedIdentifiable.getID(getMessageClass());
 	}
 
-	public void handle(M message);
+	public void handle(C client, M message);
 
 	public Class<M> getMessageClass();
 

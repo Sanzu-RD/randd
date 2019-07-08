@@ -1,0 +1,36 @@
+
+@import "containers/tabs.css";
+@import "containers/menus.css";
+@import "containers/scrolls.css";
+@import "containers/splits.css";
+@import "containers/lists.css";
+@import "containers/titleds.css";
+
+@import "controls/labels.css";
+@import "controls/buttons.css";
+@import "controls/checkboxes.css";
+@import "controls/textAreas.css";
+@import "controls/thumbnails.css";
+
+
+// Variables
+* {
+   bgColor1: #1e1e1e;
+   lblColor1: lightseagreen;
+   lblColor2: #75b9e0;
+}
+
+// Root
+.root {
+  -fx-background-color: bgcolor1; // #282828; // #f2f7ff;
+  -fx-border-color: lblColor2;
+  -fx-padding: 1 1 1 1;
+  //-fx-background-radius: 10;
+  //-fx-border-radius: 10;
+}
+
+// Hover function for every control
+.hover:hover {
+  -fx-text-fill: lblColor2;
+  -fx-border-color: lblColor2;
+}

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="collectionPane" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../../css/commons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.ebishoal.amethyst.ui.tabs.Collection">
+   <children>
+      <HBox fx:id="filters" layoutX="36.0" layoutY="70.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Spells">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </CheckBox>
+            <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Items">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </CheckBox>
+            <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Creatures">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </CheckBox>
+            <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Owned">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </CheckBox>
+            <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Unowned">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </CheckBox>
+            <TextField promptText="Search" />
+         </children>
+      </HBox>
+      <FlowPane hgap="20.0" layoutX="64.0" layoutY="144.0" prefHeight="384.0" prefWidth="900.0" vgap="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+         <children>
+            <AnchorPane maxHeight="128.0" maxWidth="128.0" minHeight="128.0" minWidth="128.0" prefHeight="128.0" prefWidth="128.0" styleClass="thumbnail">
+               <children>
+                  <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:/G:/Assets/pack/fantasy bundle/mobsavataricons/Mobs_crystal_golem_01.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="128.0" maxWidth="128.0" minHeight="128.0" minWidth="128.0" prefHeight="128.0" prefWidth="128.0" styleClass="thumbnail">
+               <children>
+                  <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:/G:/Assets/pack/fantasy bundle/mobsavataricons/Mobs_crystal_golem_01.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="128.0" maxWidth="128.0" minHeight="128.0" minWidth="128.0" prefHeight="128.0" prefWidth="128.0" styleClass="thumbnail">
+               <children>
+                  <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:/G:/Assets/pack/fantasy bundle/mobsavataricons/Mobs_crystal_golem_01.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </FlowPane>
+   </children>
+   <padding>
+      <Insets left="60.0" top="40.0" />
+   </padding>
+</AnchorPane>

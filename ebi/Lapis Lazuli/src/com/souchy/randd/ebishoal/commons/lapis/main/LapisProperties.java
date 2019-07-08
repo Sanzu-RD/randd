@@ -1,16 +1,10 @@
 package com.souchy.randd.ebishoal.commons.lapis.main;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.Properties;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
-import com.souchy.randd.commons.tealwaters.io.files.FilesManager;
 import com.souchy.randd.commons.tealwaters.properties.Property;
 import com.souchy.randd.commons.tealwaters.properties.PropertyConfig;
 
@@ -33,7 +27,7 @@ public class LapisProperties implements PropertyConfig {
 	public LapisProperties(LwjglApplicationConfiguration config) {
 		this.config = config;
 		this.properties = new Properties();
-		this.file = new File("data/lapis.properties"); 
+		this.file = new File("lapis.properties"); 
 	}
 	
 	@Override

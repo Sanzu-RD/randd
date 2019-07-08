@@ -1,15 +1,8 @@
-/**
- * 
- */
-/**
- * @author Souchy
- *
- */
-module com.souchy.randd.commons.ebishoal.EbiCore {
-	exports com.souchy.randd.commons.ebishoal;
+module com.souchy.randd.ebishoal.commons.EbiCore {
+	exports com.souchy.randd.ebishoal.commons;
 	
-
-	requires transitive com.souchy.randd.commons.TealWaters;
 	requires transitive com.souchy.randd.commons.TealNet;
-	requires netty.all;
+	requires transitive com.souchy.randd.commons.TealWaters;
+	requires transitive netty.all;
+	requires transitive com.souchy.randd.pluginprototyping.Modules;
 }

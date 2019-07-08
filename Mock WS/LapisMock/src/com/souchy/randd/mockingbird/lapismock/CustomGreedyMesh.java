@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -15,7 +13,6 @@ import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.model.MeshPart;
 import com.badlogic.gdx.graphics.g3d.model.Node;
@@ -107,12 +104,16 @@ public class CustomGreedyMesh {
 	public int vertexCount = 0;
 	public int faceCount = 0;
 	
+	public boolean oneMesh = true;
+	
 	public CustomGreedyMesh() {
 		color = Color.valueOf("AEE897");
 		//color.a = 0.3f;
 		mat1 = new Material("mat1", ColorAttribute.createDiffuse(color)); //, new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA));
 		mat2 = new Material("mat2", ColorAttribute.createDiffuse(Color.SKY));
 		mat3 = new Material("mat3", ColorAttribute.createDiffuse(Color.PINK));
+		
+        
 		
 		volume = mikolalysenkoGenerateVolume(dims[0], dims[1], dims[2]);
 		
@@ -127,8 +128,35 @@ public class CustomGreedyMesh {
 		
 		generateMesh();*/
 		
-
 		mikolalysenko();
+
+		if(oneMesh) {
+	        rootNode.materials.add(mat1);
+			
+			var vs = new float[vertic.size()];
+			for(int i = 0; i < vertic.size(); i++)
+				vs[i] = vertic.get(i);
+
+			var is = new short[indic.size()];
+			for(int i = 0; i < indic.size(); i++)
+				is[i] = indic.get(i);
+			
+	        Mesh mesh = new Mesh(true, vs.length, is.length, VertexAttribute.Position(), VertexAttribute.Normal());
+	        mesh.setVertices(vs);
+	        mesh.setIndices(is);
+	        
+	    	MeshPart meshPart = new MeshPart("meshpart_" + "root", mesh, 0, vs.length, renderType);
+	        Node node = new Node();
+	        NodePart np = new NodePart(meshPart, mat1);
+	        
+	        node.id = "node_" + "root";
+	        node.parts.add(np);
+	        
+	        rootNode.meshes.add(mesh);
+	        rootNode.meshParts.add(meshPart);
+	        rootNode.nodes.add(node);
+		}
+        
 	}
 	
 	private void generateMesh() {
@@ -505,24 +533,36 @@ public class CustomGreedyMesh {
 		var norm = crossProduct(topLeft, botRight);
     	var indices = new short[] {0,   1,   2,       2,   3,   0};
     	if(backface) indices = new short[] { indices[5], indices[4], indices[3], indices[2], indices[1], indices[0] };
-    	Mesh mesh = new Mesh(true, vertices.length, indices.length, VertexAttribute.Position(), VertexAttribute.Normal());
-    	mesh.setVertices(vertices);
-    	mesh.setIndices(indices);
     	
-    	//if(mat == null) mat = mat3;
-        MeshPart meshPart = new MeshPart("meshpart_" + id, mesh, 0, vertices.length, renderType);
-        Node node = new Node();
-        node.id = "node_" + id;
-        node.parts.add(new NodePart(meshPart, face.m));
-        
-        rootNode.meshes.add(mesh);
-        rootNode.meshParts.add(meshPart);
-        rootNode.nodes.add(node);
-        
-        vertexCount +=4;
+    	if(!oneMesh) {
+        	Mesh mesh = new Mesh(true, vertices.length, indices.length, VertexAttribute.Position(), VertexAttribute.Normal());
+        	mesh.setVertices(vertices);
+        	mesh.setIndices(indices);
+        	
+        	//if(mat == null) mat = mat3;
+            MeshPart meshPart = new MeshPart("meshpart_" + id, mesh, 0, vertices.length, renderType);
+            Node node = new Node();
+            node.id = "node_" + id;
+            node.parts.add(new NodePart(meshPart, face.m));
+            
+            rootNode.meshes.add(mesh);
+            rootNode.meshParts.add(meshPart);
+            rootNode.nodes.add(node);
+    	}
+    
+        vertexCount += 4;
         faceCount++;
         id++;
+        
+        
+        for(var s : vertices)
+        	vertic.add(s);
+        for(var i : indices)
+        	indic.add(i);
 	}
+	
+	public List<Float> vertic = new ArrayList<>();
+	public List<Short> indic = new ArrayList<>();
 	
 
 	private Voxel v(Voxel[][][] volume, int i, int j, int k) {
@@ -544,8 +584,11 @@ public class CustomGreedyMesh {
 			for(int j = 0; j < h; j++) {
 				for(int i = 0; i < w; i++) {
 					if(k >= d-2) continue;
-					if(rng.nextInt(20) == 1) continue;
+//					if(rng.nextInt(20) == 1) continue;
 					//if((i + j) % 2 == 0) continue;
+					//if(x == side/2 && y == side/2) continue;
+					if(rng.nextBoolean()) continue;
+					
 					volume[k][j][i] = new Voxel(mat1);
 					volume[k][j][i].height = k; // height in this object is different (z) than in this function (y)
 					
@@ -566,7 +609,7 @@ public class CustomGreedyMesh {
 	}
 	
 	
-	public void foreachVoxels(BiConsumer<Integer, Integer> action) {
+	private void foreachVoxels(BiConsumer<Integer, Integer> action) {
 		for(int j = 0; j < voxels.length; j++) { // y
 			for(int i = 0; i < voxels[j].length; i++) { // x
 				action.accept(i, j);
@@ -574,7 +617,7 @@ public class CustomGreedyMesh {
 		}
 	}
 	
-	public void quad(int side, Vector3 pos, int w, int h, Material mat) {
+	private void quad(int side, Vector3 pos, int w, int h, Material mat) {
 		var vertices = new float[] {
 				0.000000f, 1.000000f, 1.000000f, 
 				0.000000f, 0.000000f, 0.000000f, 

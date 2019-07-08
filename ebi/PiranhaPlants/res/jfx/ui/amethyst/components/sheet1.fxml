@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="128.0" maxWidth="128.0" minHeight="128.0" minWidth="128.0" prefHeight="128.0" prefWidth="128.0" styleClass="thumbnail" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/G:/Assets/pack/fantasy bundle/mobsavataricons/Mobs_crystal_golem_01.png" />
+               </image>
+            </ImageView>
+            <Label text="Grim" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="140.0" layoutY="12.0" prefHeight="17.0" prefWidth="193.0" AnchorPane.topAnchor="12.0">
+         <children>
+            <JFXProgressBar layoutX="27.0" layoutY="3.0" prefHeight="11.0" prefWidth="176.0" progress="0.72" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0" />
+            <Label id="resName" layoutY="2.0" opacity="0.0" text="HP" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label id="resValue" alignment="CENTER_RIGHT" layoutX="129.0" style="-fx-text-fill: black;" text="6000/6000" textAlignment="RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="140.0" layoutY="31.0" prefHeight="17.0" prefWidth="193.0">
+         <children>
+            <JFXProgressBar layoutX="27.0" layoutY="3.0" prefHeight="11.0" prefWidth="176.0" progress="0.72" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0" />
+            <Label id="resName" layoutY="2.0" opacity="0.0" text="HP" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label id="resValue" alignment="CENTER_RIGHT" layoutX="129.0" style="-fx-text-fill: black;" text="400/400" textAlignment="RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+      <TabPane layoutX="18.0" layoutY="275.0" prefHeight="190.0" prefWidth="358.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <tabs>
+          <Tab text="Spells">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" />
+            </content>
+          </Tab>
+            <Tab text="Passives">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Affinities">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Resistances">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label fx:id="itemsTitle" layoutX="12.0" layoutY="246.0" text="Items" AnchorPane.leftAnchor="10.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <HBox fx:id="items" layoutX="12.0" layoutY="276.0" prefHeight="60.0" prefWidth="327.0" spacing="15.0" styleClass="inventory" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <children>
+            <AnchorPane prefWidth="60.0" styleClass="thumbnail" />
+            <AnchorPane prefWidth="60.0" styleClass="thumbnail" />
+            <AnchorPane prefWidth="60.0" styleClass="thumbnail" />
+            <AnchorPane prefWidth="60.0" styleClass="thumbnail" />
+         </children>
+      </HBox>
+      <GridPane alignment="CENTER" layoutX="14.0" layoutY="370.0" styleClass="tabs" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Spells" GridPane.halignment="CENTER" />
+            <Label text="Passives" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+            <Label text="Affinities" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+            <Label text="Resistances" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </GridPane>
+      <ProgressBar layoutX="167.0" layoutY="58.0" prefHeight="18.0" prefWidth="168.0" progress="0.46" />
+   </children>
+   <stylesheets>
+      <URL value="@../../css/commons.css" />
+      <URL value="@sheet1.css" />
+   </stylesheets>
+</AnchorPane>

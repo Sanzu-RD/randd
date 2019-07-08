@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="root" fx:id="root" maxHeight="900.0" maxWidth="1600.0" minHeight="900.0" minWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.ebishoal.amethyst.ui.MainScene">
+  <children>
+    <ImageView id="background" fx:id="background" fitWidth="1596.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <image>
+        <Image url="file:/G:/Assets/pack/fantasy%20bundle/tcgcardspack/Tex_krakken_crop.PNG" />
+      </image>
+    </ImageView>
+    <TabPane id="tabs" fx:id="mainTabs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseDragged="#onDrag" onMousePressed="#onPress" styleClass="tab-pane-top" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="300.0" tabMaxWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <tabs>
+        <Tab id="tabHome" fx:id="homeTab" closable="true" text="HOME">
+          <content>
+            <fx:include fx:id="home" source="../tabs/home.fxml" />
+          </content>
+        </Tab>
+        <Tab id="tabProfile" fx:id="profileTab" closable="false" text="PROFILE">
+          <content>
+            <fx:include fx:id="profile" source="../tabs/profile.fxml" />
+          </content>
+        </Tab>
+        <Tab id="tabTeams" fx:id="teamsTab" styleClass="teams" text="TEAMS">
+          <content>
+            <fx:include fx:id="teams" source="../tabs/teams.fxml" />
+          </content>
+        </Tab>
+        <Tab id="tabCollection" fx:id="collectionTab" closable="false" text="COLLECTION">
+          <content>
+            <fx:include fx:id="collection" source="../tabs/collection.fxml" />
+          </content>
+        </Tab>
+        <Tab id="tabCollection" fx:id="shopTab" closable="false" text="SHOP">
+          <content>
+            <fx:include fx:id="shop" source="../tabs/shop.fxml" />
+          </content>
+        </Tab>
+        <Tab id="tabSettings" fx:id="settingsTab" closable="false" disable="true">
+          <content>
+            <fx:include fx:id="settings" source="../tabs/settings.fxml" />
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+    <HBox id="decorations" fx:id="decorations" alignment="CENTER" layoutX="1444.0" layoutY="32.0" spacing="25.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+      <children>
+        <ImageView fx:id="minimizeBtn" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#minimize" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="file:/G:/Assets/pack/kenney/gameicons/PNG/White/2x/minus_crop.png" />
+          </image>
+          <cursor>
+            <Cursor fx:constant="HAND" />
+          </cursor>
+        </ImageView>
+        <ImageView fx:id="settingBtn" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#openSettings" pickOnBounds="true" preserveRatio="true">
+          <cursor>
+            <Cursor fx:constant="HAND" />
+          </cursor>
+          <image>
+            <Image url="file:/G:/Assets/pack/kenney/gameicons/PNG/White/2x/gear_crop.png" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="exitBtn" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="file:/G:/Assets/pack/kenney/gameicons/PNG/White/2x/power_crop.png" />
+          </image>
+          <cursor>
+            <Cursor fx:constant="HAND" />
+          </cursor>
+        </ImageView>
+      </children>
+    </HBox>
+    <AnchorPane id="chatbox" fx:id="chatbox" layoutX="1160.0" layoutY="431.0" prefHeight="300.0" prefWidth="358.0" styleClass="chatbox" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0">
+      <children>
+        <ListView fx:id="chatHistory" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <TextField fx:id="chatField" layoutY="334.0" onKeyReleased="#chatBoxOnKey" prefHeight="35.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="34.0" />
+      </children>
+    </AnchorPane>
+    <AnchorPane id="chatbtn" fx:id="chatBtn" onMouseClicked="#openChat" prefHeight="35.0" prefWidth="35.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="30.0">
+      <children>
+        <ImageView fx:id="chatBtnBg" fitHeight="32.0" fitWidth="32.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="1.0">
+          <image>
+            <Image url="file:/G:/Assets/pack/fantasy%20bundle/guimegapack/Fantasy_GUI/fantasy_gui_png/bg_06.png" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="chatBtnIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="1.0">
+          <image>
+            <Image url="file:/G:/Assets/pack/fantasy%20bundle/spellbookmegapack/Flat_Skills_Icons/PNG/violet/v_20.png" />
+          </image>
+        </ImageView>
+        <ImageView fx:id="chatBtnBorder" fitHeight="34.0" fitWidth="32.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="1.0" AnchorPane.rightAnchor="1.0">
+          <image>
+            <Image url="file:/G:/Assets/pack/fantasy%20bundle/spellbookmegapack/Flat_Skills_Icons/PNG/ui/slot_02.PNG" />
+          </image>
+        </ImageView>
+      </children>
+      <cursor>
+        <Cursor fx:constant="HAND" />
+      </cursor>
+    </AnchorPane>
+  </children>
+   <stylesheets>
+      <URL value="@../../css/commons.css" />
+      <URL value="@main.css" />
+   </stylesheets>
+</AnchorPane>

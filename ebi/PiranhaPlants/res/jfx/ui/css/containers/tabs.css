@@ -1,0 +1,89 @@
+/*
+// Top bar
+.topbar-hbox {
+  -fx-spacing: 25;
+  -fx-padding: 25 20 20 30;
+}
+// Top bar label
+.topbar-hbox .label {
+  -fx-font-size: 30 px;
+  -fx-text-fill: lblColor1;
+}
+
+// Sub bar
+.subbar-hbox {
+  -fx-spacing: 25;
+  -fx-padding: 0 20 20 30;
+}
+// Sub bar label
+.subbar-hbox .label {
+  -fx-font-size: 25 px;
+  -fx-text-fill: lblColor1;
+}
+*/
+
+/* Parent tab panes */
+.tab-pane {
+    -fx-background-color: transparent;
+}
+  /* tab bar offset */
+  .tab-pane .tab-header-area {
+      -fx-padding: 30 0 0 50;
+   }
+.tab {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+  .tab .tab-label {
+    -fx-padding: 0 15 0 15;
+    -fx-font-size: 25 px;
+    -fx-text-fill: lblColor1;
+    -fx-font-family: "Lucida Bright";
+  }
+  .tab:selected {
+    -fx-border-width: 0 0 0 0;
+    -fx-border-color: lblColor2;
+  }
+  .tab:selected .tab-label {
+    -fx-text-fill: lblColor2;
+  }
+  /* enlève la bordure de focus */
+  .tab:selected .focus-indicator {
+    -fx-border-width: 0;
+  }
+  .tab:hover .tab-label {
+    -fx-text-fill: lblColor2;
+  }
+
+
+/* Child tab panes */
+.tab-pane .tab-pane {
+
+}
+  /* tab bar offset */
+  .tab-pane .tab-pane .tab-header-area {
+      -fx-padding: 20 0 0 50;
+   }
+  .tab-pane .tab-pane .tab  .tab-label {
+    -fx-font-size: 20 px;
+    -fx-text-fill: lblColor1;
+    -fx-font-family: "Lucida Bright";
+  }
+  .tab-pane .tab-pane .tab:selected .tab-label {
+    -fx-text-fill: lblColor2;
+  }
+  .tab-pane .tab-pane .tab:hover .tab-label {
+    -fx-text-fill: lblColor2;
+  }
+
+/* other tab props */
+.tab-pane:top *.tab-header-area {
+  //  -fx-background-insets: 10, 10 10 10 10;
+  //  -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
+  //  -fx-padding: 25 0 0 30; /* overridden as 5 2 0 0 */
+}
+/* .tab-pane .tab-header-area .tab-header-background */
+.tab-header-background {
+  -fx-opacity: 0;
+}

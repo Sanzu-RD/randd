@@ -1,0 +1,19 @@
+
+
+/** chatbox (anchorpane>listview + textfield + anchorpane>3images)*/
+.chatbox {
+}
+.chatbox .list-view {
+  -fx-background-color: rgba(0, 0, 0, 0.19);
+  //-fx-border-color: lblColor1;
+  -fx-border-width: 1 1 0 1;
+}
+.chatbox .text-field {
+  -fx-background-color: rgba(0, 0, 0, 0.19);
+  -fx-text-fill: white;
+  -fx-font-size: 13 px;
+}
+.chatbox AnchorPane {
+  -fx-border-color: lblColor1;
+  -fx-border-width: 1 1 1 1;
+}
