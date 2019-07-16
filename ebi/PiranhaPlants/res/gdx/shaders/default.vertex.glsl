@@ -241,6 +241,7 @@ void main() {
 		vec4 pos = u_worldTrans * vec4(a_position, 1.0);
 	#endif
 
+	// pass the pos to the fragment shader // couldnt i just use gl_Position??
 	v_pos =  pos;
 
 	gl_Position = u_projViewTrans * pos;

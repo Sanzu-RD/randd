@@ -20,7 +20,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
  *
  * @param <T> - type de classe à charger
  */
-public class ClassDiscoverer<T> implements Discoverer<String, Class<?>, Class<T>> {
+public abstract class ClassDiscoverer<T> implements Discoverer<String, Class<?>, Class<T>> {
 	
 	
 	/**
@@ -30,7 +30,10 @@ public class ClassDiscoverer<T> implements Discoverer<String, Class<?>, Class<T>
 	 *
 	 */
 	public static class DefaultClassDiscoverer extends ClassDiscoverer<Object> {
-		
+		@Override
+		public boolean identify(Class<?> c) {
+			return true; // default impl. It's different for other impls.
+		}
 	}
 	
 	
@@ -104,10 +107,6 @@ public class ClassDiscoverer<T> implements Discoverer<String, Class<?>, Class<T>
 		}
 	}
 	
-	@Override
-	public boolean identify(Class<?> c) {
-		return true; // default impl. It's different for other impls.
-	}
 
 	@SuppressWarnings("unchecked")
 	public void accept(List<Class<T>> classes, String resource) throws ClassNotFoundException {

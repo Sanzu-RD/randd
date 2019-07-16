@@ -1,6 +1,5 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
@@ -10,7 +9,6 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.DepthTestAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.sapphire.ui.SapphireScreen;
 
@@ -18,23 +16,14 @@ import gamemechanics.models.Fight;
 
 public class SapphireGame extends LapisGame {
 	
-	public Skin skin;
-	
-	public SapphireScreen gfx;
-	//public FightContext context;
-	public Fight context;
+	public static SapphireScreen gfx;
+
+	public static Fight context;
 	
 	@Override
 	public void onCreateHook() {
-
-		skin = new Skin(Gdx.files.internal("res/gdx/ui/uiskin.json"));
-		System.out.println("skin =" + skin);
-		//labelStyles.add(new LabelStyle());
-		
 		// All graphics
-		gfx = new SapphireScreen(); //gfx = new GameScreen();
-		//gfx.create();
-		
+		gfx = new SapphireScreen(); 
 		
 		// Might use or not 
 		//Injector injector = Guice.createInjector(new SapphireModule());

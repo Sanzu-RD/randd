@@ -29,7 +29,6 @@ public abstract class LapisCore extends EbiCore {
 	@Override
 	public void init() throws Exception {
 		config = new LwjglApplicationConfiguration();
-		config.addIcon("G:\\Assets\\pack\\fantasy bundle\\tcgcardspack\\Tex_krakken_icon.png", FileType.Absolute);
 		properties = new LapisProperties(config);
 		properties.load();
 	    game = createGame();
@@ -66,6 +65,11 @@ public abstract class LapisCore extends EbiCore {
 	public LapisProperties getProperties() {
 		return properties;
 	}
+
+	/*
+	 * Example : config.addIcon("G:\\Assets\\pack\\fantasy bundle\\tcgcardspack\\Tex_krakken_icon.png", FileType.Absolute);
+	 */
+	public abstract void addIcon(LwjglApplicationConfiguration config);
 	
 	/* 
 	 * might add these functions here and make the game variable completely private

@@ -3,11 +3,18 @@ package com.souchy.randd.ebishoal.sapphire.ui;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
+import com.badlogic.gdx.math.Vector3;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.lapis.screen.GlobalLML;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML;
+import com.souchy.randd.ebishoal.sapphire.defaul.CellInputEvent;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 
 public class SapphireController extends CameraInputController {
+
+	public Vector3 old = Vector3.Zero.cpy();
+	private Vector3 target = Vector3.Zero.cpy();
+	private Vector3 temp = Vector3.Zero.cpy();
 
 	public SapphireController(Camera camera) {
 		super(camera);
@@ -45,8 +52,10 @@ public class SapphireController extends CameraInputController {
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		Log.info("touch down");
 		var s = (SapphireScreen) SapphireOwl.game.getScreen();
-		s.getView().getStage().unfocusAll();
-		s.getView().getStage().cancelTouchFocus();
+		if(s.getView() != null) {
+			s.getView().getStage().unfocusAll();
+			s.getView().getStage().cancelTouchFocus();
+		}
 		return super.touchDown(screenX, screenY, pointer, button);
 	}
 
@@ -62,6 +71,24 @@ public class SapphireController extends CameraInputController {
 
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
+	//	temp.x = screenX;
+	//	temp.y = screenY;
+		/*
+		SapphireGame.gfx.getCamera().unproject(temp);
+ 
+		//CellInputEvent.postMove(null, target, old); //newX, newY); //listener.mouseMoved(newBox);
+		if(target.x != temp.x || target.y != temp.y){ 
+			//System.out.println("-------------------MOVE");
+			old.set(target);
+			target.set(temp);
+			CellInputEvent.postExit(old); 
+			CellInputEvent.postEnter(target); 
+		}
+		//System.out.println("moved 1 - "+"["+x+","+y+"] = "+test);
+		//GridController.mouseMoved(x, y);
+		return super.mouseMoved(event, x, y);
+		
+		*/
 		return super.mouseMoved(screenX, screenY);
 	}
 

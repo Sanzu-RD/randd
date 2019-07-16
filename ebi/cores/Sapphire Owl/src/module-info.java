@@ -1,8 +1,9 @@
 module com.souchy.randd.ebishoal.SapphireOwl {
 	exports com.souchy.randd.ebishoal.sapphire.main;
-	exports com.souchy.randd.ebishoal.sapphire.models;
 	exports com.souchy.randd.ebishoal.sapphire.ui;
 	exports com.souchy.randd.ebishoal.sapphire.ui.roundImage;
+	exports com.souchy.randd.ebishoal.sapphire.data;
+	exports com.souchy.randd.ebishoal.sapphire.defaul;
 	
 	requires transitive GameMechanics2;
 	requires transitive com.google.common;
@@ -15,4 +16,5 @@ module com.souchy.randd.ebishoal.SapphireOwl {
 	requires transitive gdx.lml;
 	requires transitive gson;
 	requires vis.ui;
+	requires com.souchy.randd.pluginprototyping.Modules;
 }

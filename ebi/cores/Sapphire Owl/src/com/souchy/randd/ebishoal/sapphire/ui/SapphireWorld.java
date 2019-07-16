@@ -39,12 +39,12 @@ public class SapphireWorld extends World {
 	 * 		Creatures
 	 * 		Glyphs
 	 * 		Traps
-	 *		Highlighting (ex: previsualising a spell aoe)
+	 *		Highlighting area (ex: previsualising/targetting a spell aoe)
 	 */
 	
 	
-	
 	public SapphireWorld() {
+		/*
 		String devPath = "gdx/g3d/";
 		String deployPath = "res/" + devPath;
 		String path = new File(devPath).exists() ? devPath : deployPath;
@@ -64,6 +64,7 @@ public class SapphireWorld extends World {
         var shading = 0.15f;
         
         // models
+       
         var cube = assets.get(cubeFile, Model.class);
         var pineTree = assets.get(treeFile, Model.class);
         
@@ -73,10 +74,12 @@ public class SapphireWorld extends World {
         var cubeBlock = createModel(Color.SKY);
         var cubeFloor = createModel(Color.SKY);
         var cubePink = createModel(Color.PINK);
+        */
         
         
         // create instances
-        MapData data = MapData.read("F:\\Users\\Souchy\\Desktop\\Robyn\\eclipse-workspaces\\hidden workspaces\\r and d\\Maps\\data\\maps\\goulta7.map");
+        String mapFolder = "F:/Users/Souchy/Desktop/Robyn/eclipse-workspaces/hidden workspaces/r and d/Maps/data/maps/";
+        MapData data = MapData.read(mapFolder + "goulta7.map");
         this.center = new Vector3(data.cellModels[0].length / 2f, data.cellModels.length / 2f, 0);
         
         if(true) {
@@ -118,8 +121,7 @@ public class SapphireWorld extends World {
         cache.end();
 	}
 	
-
-	// make a mikael angelo mesh generator (greedy) which accepts different texture per side (6 sides of cube) and texture tiling (instead of stretching over large meshes)
+	/*
     private Model createModel(Color color) {
     	var pix = new Pixmap(512, 512, Format.RGBA8888);
     	pix.setColor(color);
@@ -145,6 +147,6 @@ public class SapphireWorld extends World {
     	// model.meshParts.forEach(m -> m.primitiveType = GL20.GL_LINES);
     	return model;
     }
-	
+	*/
 	
 }

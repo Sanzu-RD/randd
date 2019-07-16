@@ -1,31 +1,23 @@
 package com.souchy.randd.ebishoal.sapphire.ui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g3d.Shader;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Widget;
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
-import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
+import com.github.czyzby.lml.vis.util.VisLml;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.lapis.screen.LapisHud;
-import com.souchy.randd.ebishoal.sapphire.ui.roundImage.RoundImage;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
+import com.souchy.randd.ebishoal.sapphire.ui.roundImage.RoundImageLmlTagProvider;
 
 public class SapphireHud extends LapisHud {
 
@@ -41,19 +33,37 @@ public class SapphireHud extends LapisHud {
 	@LmlActor("pageDownImage")
 	public Image pageDownImage;
 	
+	
 	public SapphireHud() {
-		super(new Stage(
-				new ScreenViewport(), 
-				//new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), //new ScalingViewport(Scaling.none, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), //new ScalingViewport(Scaling.stretch, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera()),
-				new SapphireBatch()
-		));
+		// Stage(viewport, batch)
+		var batch = new SapphireBatch();
+		var viewport = new ScreenViewport();
+		this.setStage(new Stage(viewport, batch));
+		
+		// Batch(shader)
 		var vert = Gdx.files.absolute("F:/Users/Souchy/Desktop/Robyn/Git/r and d/ebi/PiranhaPlants/res/gdx/shaders/ui.vertex.glsl"); //Gdx.files.internal("res/gdx/shaders/postProcess.vertex.glsl");
 		var frag = Gdx.files.absolute("F:/Users/Souchy/Desktop/Robyn/Git/r and d/ebi/PiranhaPlants/res/gdx/shaders/ui.fragment.glsl"); //Gdx.files.internal("res/gdx/shaders/postProcess.fragment.glsl");
 		var shader = new ShaderProgram(vert, frag);
-		getStage().getBatch().setShader(shader);
+		batch.setShader(shader);
+
+		// Parser(actions, i18n, skin, tags)
+		var i18n = Gdx.files.internal("i18n/bundle");
+		var skin = new SapphireHudSkin(getStyleFile());
+		var parser = VisLml.parser()
+				// Registering global action container:
+				.actions("global", GlobalLMLActions.class)
+				// Adding localization support:
+				 .i18nBundle(I18NBundle.createBundle(i18n))
+				// Set default skin
+				.skin(skin) 
+				// Tags
+				.tag(new RoundImageLmlTagProvider(), "roundImage")
+				.build();
+		
+		parser.createView(this, getTemplateFile());
+		
+		createListeners();
 	}
-	
-	
 	
 	@Override
 	public String getViewId() {
@@ -69,22 +79,39 @@ public class SapphireHud extends LapisHud {
 	public FileHandle getStyleFile() {
 		return Gdx.files.absolute("F:/Users/Souchy/Desktop/Robyn/Git/r and d/ebi/PiranhaPlants/res/gdx/ui/" + getViewId() + ".json");
 	}
-	
-	public void sadfgffd() {
-		var assets = new AssetManager();
-		
-		// round borders
-		assets.load("res/gdx/ui/res/borders/ring_frame.PNG", Texture.class);
-		assets.load("res/gdx/ui/res/borders/map_01_01.png", Texture.class);
-		// round backgrounds
-		assets.load("res/gdx/ui/res/backgrounds/map_01_02.png", Texture.class);
-		assets.load("res/gdx/ui/res/backgrounds/map_01_03.png", Texture.class);
-		assets.load("res/gdx/ui/res/backgrounds/map_01_04.png", Texture.class);
-		assets.load("res/gdx/ui/res/backgrounds/scale_01_03.png", Texture.class);
-		// buttons
-		assets.load("res/gdx/ui/res/buttons/slider_02_03.png", Texture.class);
-		
-		new Image(new Texture(""));
+
+	private void createListeners() {
+		pageUp.addListener(new ClickListener() {
+			@Override
+			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+				Log.info("enter");
+				var light = 1.3f;
+				//view.pageUpImage.setColor(light, light, light, view.pageUpImage.getColor().a);
+				super.enter(event, x, y, pointer, fromActor);
+			}
+			@Override
+			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+				Log.info("exit");
+				pageUpImage.setColor(1, 1, 1, pageUpImage.getColor().a);
+				super.exit(event, x, y, pointer, toActor);
+			}
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				Log.info("touch down");
+				//view.pageUpImage.setDrawable(parser.getData().getDefaultSkin().getDrawable("down"));
+				var shade = 0.7f;
+				pageUpImage.setColor(shade, shade, shade, pageUpImage.getColor().a);
+				return super.touchDown(event, x, y, pointer, button);
+			}
+			@Override
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+				Log.info("touch up");
+				var light = 1.0f;
+				pageUpImage.setColor(light, light, light, pageUpImage.getColor().a);
+				//view.pageUpImage.setDrawable(parser.getData().getDefaultSkin().getDrawable("up"));
+				super.touchUp(event, x, y, pointer, button);
+			}
+		});
 	}
 	
 }

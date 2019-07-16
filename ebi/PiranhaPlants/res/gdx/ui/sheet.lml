@@ -19,7 +19,7 @@
             <table id="currentlyPlayingSheet" align="bottom" defaultpad="3" debug="false" >
                 <!-- Portrait -->
                 <stack width="64" height="64">
-                    <roundImage id="portrait" tooltip="Grim" style="ava2" />
+                    <roundImage id="portrait" tooltip="Grim" style="ava1" />
                     <image id="portraitBorder" style="ring_frame" />
                 </stack>
 
@@ -35,39 +35,47 @@
                 <!-- Page content (items, spells, affinities, resistances) -->
                 <table id="content" defaultpad="1">
                     <stack  width="55" height="55">
-                        <roundImage id="spell" tooltip="Desecrate" style="spell0" />
+                        <roundImage id="spell0" tooltip="Desecrate" style="spell0" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell" tooltip="Rise Zombie" style="spell1" />
+                        <roundImage id="spell1" tooltip="Rise Zombie" style="spell1" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell" tooltip="Rise Zombie" style="spell2" />
+                        <roundImage id="spell2" tooltip="Rise Zombie" style="spell2" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell" tooltip="Rise Zombie" style="spell3" />
+                        <roundImage id="spell3" tooltip="Rise Zombie" style="spell3" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell" tooltip="Rise Zombie" style="spell4" />
+                        <roundImage id="spell4" tooltip="Rise Zombie" style="spell4" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell" tooltip="Rise Zombie" style="spell5" />
+                        <roundImage id="spell5" tooltip="Rise Zombie" style="spell5" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell" tooltip="Rise Zombie" style="spell6" />
+                        <roundImage id="spell6" tooltip="Rise Zombie" style="spell6" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell" tooltip="Rise Zombie" style="spell7" />
+                        <roundImage id="spell7" tooltip="Rise Zombie" style="spell7" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell" tooltip="Rise Zombie" style="spell8" />
+                        <roundImage id="spell8" tooltip="Rise Zombie" style="spell8" />
+                        <image id="spellBorder" style="ring_frame" />
+                    </stack>
+                    <stack width="55" height="55">
+                        <roundImage id="spell9" tooltip="Rise Zombie" style="spell9" />
+                        <image id="spellBorder" style="ring_frame" />
+                    </stack>
+                    <stack width="55" height="55">
+                        <roundImage id="spell10" tooltip="Rise Zombie" style="spell10" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                 </table>
@@ -96,12 +104,6 @@
             <table id="timeline" padright="10" padbottom="25" align="bottomright" debug="false" defaultpad="3" defaultpadleft="10">
                 <container/>
                 <stack width="42" height="42">
-                    <roundImage id="portrait" tooltip="Grim" style="ava1"/>
-                    <image id="portraitBorder" style="ring_frame"/>
-                </stack>
-                <:row/>
-                <container/>
-                <stack width="42" height="42">
                     <roundImage id="portrait" tooltip="Grim" style="ava2"/>
                     <image id="portraitBorder" style="ring_frame"/>
                 </stack>
@@ -133,13 +135,19 @@
                 <container/>
                 <stack width="42" height="42">
                     <roundImage id="portrait" tooltip="Grim" style="ava1"/>
+                    <image id="portraitBorder" style="ring_frame"/>
+                </stack>
+                <:row/>
+                <container/>
+                <stack width="42" height="42">
+                    <roundImage id="portrait" tooltip="Grim" style="ava2"/>
                     <image id="portraitBorder" style="ring_frame"/>
                 </stack>
                 <:row/>
                 <container>
                 </container>
                 <stack width="42" height="42">
-                    <roundImage id="portrait" tooltip="Grim" style="ava2"/>
+                    <roundImage id="portrait" tooltip="Grim" style="ava1"/>
                     <image id="portraitBorder" style="ring_frame"/>
                 </stack>
             </table>

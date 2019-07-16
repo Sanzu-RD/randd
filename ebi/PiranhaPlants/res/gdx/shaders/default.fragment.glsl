@@ -246,7 +246,7 @@ void main() {
 	// checkers shader
 	vec4 floored = floor(v_pos);
 	if(v_pos.z <= 1){
-		float shade = 0.1f;
+		float shade = 0.2f;
 		float m = mod(floored.x + floored.y, 2);
 		m *= shade;
 		m += (1 - shade);
@@ -292,18 +292,6 @@ void main() {
 		}
 	}
 	
-
-	/*float radius = 1;
-	float blur = 1/radius/2;
-	float count = radius * 2 * radius * 2;
-
-	vec4 sum = vec4(0.0);
-	for(float i = -radius; i <= radius; i++) {
-		for(float j = -radius; j <= radius; j++) {
-			sum += texture2D(u_diffuseTexture, vec2(v_pos.x + i, v_pos.y + j) );
-		}
-	}*/
-	//gl_FragColor = sum / count;
 	
 	//gl_FragColor = vec4(1, 0, 0, 1);
 

@@ -25,7 +25,7 @@ void main() {
 		if (texture2D(u_diffuseTexture, v_texCoords0).a < u_alphaTest)
 			discard;
 	#endif // blendedTextureFlag
-
+	
 	#ifdef PackedDepthFlag
 		HIGH float depth = v_depth;
 		const HIGH vec4 bias = vec4(1.0 / 255.0, 1.0 / 255.0, 1.0 / 255.0, 0.0);
@@ -34,6 +34,7 @@ void main() {
 		// colorful shader
 		gl_FragColor = color - (color.yzww * bias);
 		// shadow color
-		//gl_FragColor = vec4(0,0,0,1); //color - (color.yzww * bias);
+	//	gl_FragColor = vec4(depth, depth, depth, 1.0); //vec4(0,0,0,1); //color - (color.yzww * bias);
+	
 	#endif //PackedDepthFlag
 }

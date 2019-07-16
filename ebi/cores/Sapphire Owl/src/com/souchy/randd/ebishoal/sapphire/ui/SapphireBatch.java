@@ -31,7 +31,6 @@ import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.NumberUtils;
-import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.sapphire.ui.roundImage.RoundTextureRegion;
 
 /** Draws batched quads using indices.

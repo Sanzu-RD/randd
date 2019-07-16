@@ -1,6 +1,6 @@
 package com.souchy.randd.commons.tealwaters.commons;
 
-public class Namespace {
+public abstract class Namespace {
 	
 	
 	protected StringBuilder namespace;
@@ -15,6 +15,10 @@ public class Namespace {
 		public RedisNamespace(String... name) {
 			super(":", name);
 		}
+		@Override
+		protected RedisNamespace copy() {
+			return new RedisNamespace();
+		}
 	}
 	public static class HttpNamespace extends Namespace {
 		public HttpNamespace(String... name) {
@@ -24,10 +28,18 @@ public class Namespace {
 		public HttpNamespace in(String keyword) {
 			return new HttpNamespace(toString(), keyword);
 		}
+		@Override
+		protected HttpNamespace copy() {
+			return new HttpNamespace();
+		}
 	}
 	public static class JavaPackageNamespace extends Namespace {
 		public JavaPackageNamespace(String... name) {
 			super(".", name);
+		}
+		@Override
+		protected JavaPackageNamespace copy() {
+			return new JavaPackageNamespace();
 		}
 	}
 	public static class MongoNamespace extends Namespace {
@@ -40,6 +52,23 @@ public class Namespace {
 			super(".", db, collection);
 			this.db = db;
 			this.collection = collection;
+		}
+		@Override
+		protected MongoNamespace copy() {
+			return new MongoNamespace(db, collection);
+		}
+	}
+	public static class I18NNamespace extends Namespace {
+		public I18NNamespace(String... name) {
+			super(".", name);
+		}
+		@Override
+		public I18NNamespace in(String keyword) {
+			return new I18NNamespace(toString(), keyword);
+		}
+		@Override
+		protected I18NNamespace copy() {
+			return new I18NNamespace();
 		}
 	}
 	
@@ -67,7 +96,22 @@ public class Namespace {
 	 * @return
 	 */
 	public Namespace in(String keyword) {
-		return new Namespace(String.join(delimiter, toString(), keyword));
+		return copy().append(toString()).append(keyword);
+		//return new Namespace(toString()).append(keyword); //String.join(delimiter, toString(), keyword));
+	}
+	
+	/**
+	 * Returns a string from this namespace + its delimiter + added keyword
+	 */
+	public String inString(String keyword) {
+		return this.toString() + delimiter + keyword;
+	}
+	
+	protected abstract Namespace copy();
+	
+
+	public CharSequence delimiter() {
+		return delimiter;
 	}
 	
 	@Override

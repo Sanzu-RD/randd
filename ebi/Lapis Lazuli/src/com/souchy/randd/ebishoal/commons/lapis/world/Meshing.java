@@ -126,8 +126,8 @@ public class Meshing {
 					assets.load(m.textures[t], Texture.class);
 					assets.finishLoading();
 					//Log.info("assets : " + assets.getAssetNames());
-					//Texture tex = assets.get(t, Texture.class);
-			    	Texture tex = new Texture(Gdx.files.absolute(m.textures[t]));
+					Texture tex = assets.get(m.textures[t], Texture.class);
+			    	//Texture tex = new Texture(Gdx.files.absolute(m.textures[t]));
 			    	tex.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
 			    	var color = Color.valueOf(m.colorAttributes[t]);
 			    	var mat = new Material(TextureAttribute.createDiffuse(tex), ColorAttribute.createDiffuse(color));
@@ -249,12 +249,36 @@ public class Meshing {
 	private static void mikolalysenkoQuad(Model root, int id, int renderType, VoxelFace face, Vector3 botLeft, Vector3 botRight, Vector3 topRight, Vector3 topLeft, 
 			int side, boolean backface, int cellSize) {
 
+		float width = 1;
+		float height = 1;
+		switch(side) {
+			case TOP:
+			case BOTTOM:
+				width = Math.abs(botLeft.x - topRight.x);
+				height = Math.abs(botLeft.y - topRight.y);
+				break;
+			case EAST:
+			case WEST:
+				width = -Math.abs(botLeft.y - topRight.y);
+				height = Math.abs(botLeft.z - topRight.z);
+				break;
+			case NORTH:
+			case SOUTH:
+				width = Math.abs(botLeft.z - topRight.z);
+				height = Math.abs(botLeft.x - topRight.x);
+				break;
+		}
+		
+		//if(face.m.id.contains("cartesian")) {
+		//	Log.info(String.format("w h [%s, %s]  { %s, %s, %s, %s }", width, height, botLeft, botRight, topLeft, topRight));
+		//}
+		
 		Vector3 normal = getNormal(side);
 		var vertices = new float[] {
-				 botLeft.x + face.origin[0],  botLeft.y + face.origin[1],  botLeft.z + face.origin[2],	normal.x, normal.y, normal.z, face.texCoord[0], face.texCoord[3],
-				botRight.x + face.origin[0], botRight.y + face.origin[1], botRight.z + face.origin[2],  normal.x, normal.y, normal.z, face.texCoord[2], face.texCoord[3],
-				topRight.x + face.origin[0], topRight.y + face.origin[1], topRight.z + face.origin[2],	normal.x, normal.y, normal.z, face.texCoord[2], face.texCoord[1],
-				 topLeft.x + face.origin[0],  topLeft.y + face.origin[1],  topLeft.z + face.origin[2], 	normal.x, normal.y, normal.z, face.texCoord[0], face.texCoord[1]
+				 botLeft.x + face.origin[0],  botLeft.y + face.origin[1],  botLeft.z + face.origin[2],	normal.x, normal.y, normal.z, face.texCoord[0] * 1, face.texCoord[3] * height,
+				botRight.x + face.origin[0], botRight.y + face.origin[1], botRight.z + face.origin[2],  normal.x, normal.y, normal.z, face.texCoord[2] * width, face.texCoord[3] * height,
+				topRight.x + face.origin[0], topRight.y + face.origin[1], topRight.z + face.origin[2],	normal.x, normal.y, normal.z, face.texCoord[2] * width, face.texCoord[1] * 1,
+				 topLeft.x + face.origin[0],  topLeft.y + face.origin[1],  topLeft.z + face.origin[2], 	normal.x, normal.y, normal.z, face.texCoord[0] * 1, face.texCoord[1] * 1
 		};
     	var indices = new short[] {0,   1,   2,       2,   3,   0};
     	if(backface) indices = new short[] { indices[5], indices[4], indices[3], indices[2], indices[1], indices[0] }; // flip l'array

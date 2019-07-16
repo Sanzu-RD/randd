@@ -14,17 +14,19 @@ uniform sampler2D u_texture;
 const float RADIUS = 0.95;
 
 //softness of our vignette, between 0.0 and 1.0
-const float SOFTNESS = 0.7;
+const float SOFTNESS = 0.8;
 
 void main() {
 
 	vec4 finalColor = v_color * texture2D(u_texture, v_texCoords);
 	
-	float width = 1920.0 * 5; //3000; //
-	float height = 1080.0 * 5; //2000; //
+	if(false) {
+		gl_FragColor = finalColor;
+		return;
+	}
 	
-	float array[3] = float[3](2.5, 7.0, 1.5);
-	
+	float width = 1920.0; // * 5; //3000; //
+	float height = 1080.0; // * 5; //2000; //
 	
 	vec4 top         = texture2D(u_texture, vec2(v_texCoords.x, v_texCoords.y + 1.0 / height));
 	vec4 bottom      = texture2D(u_texture, vec2(v_texCoords.x, v_texCoords.y - 1.0 / height));
@@ -35,8 +37,8 @@ void main() {
 	vec4 bottomLeft  = texture2D(u_texture, vec2(v_texCoords.x - 1.0 / width, v_texCoords.y - 1.0 / height));
 	vec4 bottomRight = texture2D(u_texture, vec2(v_texCoords.x + 1.0 / width, v_texCoords.y - 1.0 / height));
 		
- 	// Noise reduction
-	if(true){
+ 	// Noise reduction /-> fps-intensive, drop from 350 fps to 150 and from 600 to 250
+	if(false){
 		vec4 colors[9] = vec4[9](finalColor, top, bottom, left, right, topLeft, topRight, bottomLeft, bottomRight);
 		
 		int maxCount = 0;
@@ -66,12 +68,12 @@ void main() {
 		finalColor = center; 
 	}
 	
-	// Sobel operator
+	// Sobel operator /-> faudrait qu'il affecte juste le world, sans les shadows
 	if(true){
 		vec4 sx = -topLeft - 2 * left - bottomLeft + topRight   + 2 * right  + bottomRight;
 		vec4 sy = -topLeft - 2 * top  - topRight   + bottomLeft + 2 * bottom + bottomRight;
 		vec4 sobel = sqrt(sx * sx + sy * sy);
-		finalColor += sobel;
+		finalColor += sobel / 3;
 	}
 	
 	// vignette

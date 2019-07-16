@@ -1,13 +1,12 @@
 module com.souchy.randd.ebishoal.commons.LapisLazuli {
-	//exports com.souchy.randd.ebishoal.commons.lapis.screens.monoscreens;
-	exports com.souchy.randd.ebishoal.commons.lapis.ui;
-	//exports com.souchy.randd.ebishoal.commons.lapis.screens;
+	exports com.souchy.randd.ebishoal.commons.lapis.gfx.ui;
+	exports com.souchy.randd.ebishoal.commons.lapis.gfx.screen;
+	exports com.souchy.randd.ebishoal.commons.lapis.gfx.shadows;
 	exports com.souchy.randd.ebishoal.commons.lapis.discoverers;
-	exports com.souchy.randd.ebishoal.commons.lapis.drawing;
+	exports com.souchy.randd.ebishoal.commons.lapis.lining;
 	exports com.souchy.randd.ebishoal.commons.lapis.main;
 	exports com.souchy.randd.ebishoal.commons.lapis.managers;
 	exports com.souchy.randd.ebishoal.commons.lapis.world;
-	exports com.souchy.randd.ebishoal.commons.lapis.screen;
 	
 	requires transitive com.souchy.randd.commons.TealWaters;
 	requires transitive com.souchy.randd.ebishoal.commons.EbiCore;

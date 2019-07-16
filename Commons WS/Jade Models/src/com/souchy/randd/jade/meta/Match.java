@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.bson.types.ObjectId;
 
-import gamemechanics.common.Action;
 
 public class Match {
 

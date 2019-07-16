@@ -13,5 +13,5 @@ module com.souchy.randd.pluginprototyping.Modules {
 	
 	requires transitive gson;
 	requires transitive com.souchy.randd.commons.TealWaters;
-	requires com.google.common;
+	requires transitive com.google.common;
 }
