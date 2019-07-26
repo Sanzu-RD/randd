@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project Amethyst with libraries in sub-folder">
+	<!--this file was created by Eclipse Runnable JAR Export Wizard-->
+	<!--ANT 1.7 is required                                        -->
+	<!--define folder properties-->
+	<property name="dir.buildfile" value="."/>
+	<property name="dir.workspace" value="${dir.buildfile}/.."/>
+	<property name="dir.jarfile" value="F:/Users/Souchy/Desktop/Robyn/Git/r and d"/>
+	<target name="create_run_jar">
+		<jar destfile="${dir.jarfile}/amethyst.jar">
+			<manifest>
+				<attribute name="Main-Class" value="com.souchy.randd.ebishoal.amethyst.main.Amethyst"/>
+				<attribute name="Class-Path" value=". amethyst_lib/netty-all-4.1.19.Final.jar amethyst_lib/annotationprocessor.jar amethyst_lib/guava-26.0-jre.jar amethyst_lib/guice-4.2.0-no_aop.jar amethyst_lib/gson-2.8.5.jar amethyst_lib/javax.inject-1.jar amethyst_lib/javafx.base.jar amethyst_lib/javafx.controls.jar amethyst_lib/javafx.fxml.jar amethyst_lib/javafx.graphics.jar amethyst_lib/javafx.media.jar amethyst_lib/javafx.swing.jar amethyst_lib/javafx.web.jar amethyst_lib/javafx-swt.jar"/>
+			</manifest>
+			<fileset dir="${dir.buildfile}/bin"/>
+			<fileset dir="${dir.jarfile}/ebi/EbiCore/bin"/>
+			<fileset dir="${dir.jarfile}/Commons WS/Teal Net/bin"/>
+			<fileset dir="${dir.jarfile}/Commons WS/TealWaters/bin"/>
+		</jar>
+		<delete dir="${dir.jarfile}/amethyst_lib"/>
+		<mkdir dir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/net/netty-all-4.1.19.Final.jar" todir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="${dir.jarfile}/annotationprocessor.jar" todir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/guava-26.0-jre.jar" todir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/guice-4.2.0-no_aop.jar" todir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/gson-gson-parent-2.8.5/gson/target/gson-2.8.5.jar" todir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/javax.inject-1.jar" todir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.base.jar" todir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.controls.jar" todir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.fxml.jar" todir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.graphics.jar" todir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.media.jar" todir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.swing.jar" todir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.web.jar" todir="${dir.jarfile}/amethyst_lib"/>
+		<copy file="F:/Users/Souchy/Desktop/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx-swt.jar" todir="${dir.jarfile}/amethyst_lib"/>
+	</target>
+</project>

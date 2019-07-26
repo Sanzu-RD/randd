@@ -1,0 +1,6 @@
+{
+  "ModuleName": "Data.Creatures.Sungjin",
+  "ModuleReleaseDate": "10-july-2019",
+  "ModuleDescription": "Creature named Sungjin.",
+  "ModuleMainClass": "com.souchy.randd.data.creatures.sungjin.SungjinModule"
+}

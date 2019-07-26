@@ -35,47 +35,47 @@
                 <!-- Page content (items, spells, affinities, resistances) -->
                 <table id="content" defaultpad="1">
                     <stack  width="55" height="55">
-                        <roundImage id="spell0" tooltip="Desecrate" style="spell0" />
+                        <image id="spell0" tooltip="Desecrate" style="spell0" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell1" tooltip="Rise Zombie" style="spell1" />
+                        <image id="spell1" tooltip="Rise Zombie" style="spell1" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell2" tooltip="Rise Zombie" style="spell2" />
+                        <image id="spell2" tooltip="Rise Zombie" style="spell2" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell3" tooltip="Rise Zombie" style="spell3" />
+                        <image id="spell3" tooltip="Rise Zombie" style="spell3" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell4" tooltip="Rise Zombie" style="spell4" />
+                        <image id="spell4" tooltip="Rise Zombie" style="spell4" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell5" tooltip="Rise Zombie" style="spell5" />
+                        <image id="spell5" tooltip="Rise Zombie" style="spell5" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell6" tooltip="Rise Zombie" style="spell6" />
+                        <image id="spell6" tooltip="Rise Zombie" style="spell6" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell7" tooltip="Rise Zombie" style="spell7" />
+                        <image id="spell7" tooltip="Rise Zombie" style="spell7" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell8" tooltip="Rise Zombie" style="spell8" />
+                        <image id="spell8" tooltip="Rise Zombie" style="spell8" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell9" tooltip="Rise Zombie" style="spell9" />
+                        <image id="spell9" tooltip="Rise Zombie" style="spell9" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <roundImage id="spell10" tooltip="Rise Zombie" style="spell10" />
+                        <image id="spell10" tooltip="Rise Zombie" style="spell10" />
                         <image id="spellBorder" style="ring_frame" />
                     </stack>
                 </table>

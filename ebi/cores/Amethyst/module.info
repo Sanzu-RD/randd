@@ -1,0 +1,6 @@
+{
+  "ModuleName": "Amethyst",
+  "ModuleReleaseDate": "29-june-2019",
+  "ModuleDescription": "Hidden Piranha client",
+  "ModuleMainClass": "com.souchy.randd.ebishoal.amethyst.main.AmethystModule"
+}

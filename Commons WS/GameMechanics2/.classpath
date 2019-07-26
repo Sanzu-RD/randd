@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="events/OnWalk.java|gamemechanics/models/Spell.java|data/CreatureData.java|data/CreatureResources.java|data/CreatureSkin.java|data/EbiCreatureData.java|data/EbiCreatureTypeI18N.java|data/EbiSpellData.java|data/SpellData.java|data/SpellDiscoverer.java|gamemechanics/stats/StatTable.java|gamemechanics/stats/BaseSpellCost.java|gamemechanics/stats/StatModifier.java|gamemechanics/models/Effect.java|gamemechanics/stats/ConversionType.java" kind="src" path="src"/>
+	<classpathentry kind="src" path="data"/>
+	<classpathentry kind="src" path="jade-database"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="F:/Users/Souchy/Desktop/Robyn/Git/res/libs gdx/ashley-1.7.0.jar" sourcepath="F:/Users/Souchy/Desktop/Robyn/Git/res/libs src/ashley-1.7.0-sources.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

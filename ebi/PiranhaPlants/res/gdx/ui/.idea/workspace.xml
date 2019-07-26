@@ -2,73 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3289a53a-125d-4777-a02b-797ef50a63c2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/combat/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/oldcombat/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/combat/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/oldcombat/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/combat/CombatEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/oldcombat/CombatEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/combat/EffectTrigger.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/oldcombat/EffectTrigger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/combat/FightContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/oldcombat/FightContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/combat/IEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/oldcombat/IEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/combat/Spell.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/oldcombat/Spell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/combat/SpellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/oldcombat/SpellEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/meta/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/meta/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/TealWaters/src/com/souchy/randd/commons/tealwaters/commons/Namespace.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/TealWaters/src/com/souchy/randd/commons/tealwaters/commons/Namespace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/TealWaters/src/com/souchy/randd/commons/tealwaters/io/files/ClassDiscoverer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/TealWaters/src/com/souchy/randd/commons/tealwaters/io/files/ClassDiscoverer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Plugin Prototyping WS/Modules/src/com/souchy/randd/modules/api/EntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Plugin Prototyping WS/Modules/src/com/souchy/randd/modules/api/EntryPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Plugin Prototyping WS/Modules/src/com/souchy/randd/modules/node/NodeModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Plugin Prototyping WS/Modules/src/com/souchy/randd/modules/node/NodeModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Plugin Prototyping WS/Modules/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Plugin Prototyping WS/Modules/src/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/drawing/Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/lining/Line.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/drawing/LineDrawing.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/lining/LineDrawing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/main/LapisCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/main/LapisCore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/screen/GlobalLML.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/GlobalLML.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/screen/LapisHud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisHud.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/screen/LapisScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/screen/LapisScreenCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisScreenCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/screen/LapisScreenRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisScreenRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/shadows/ShadowBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/shadows/ShadowBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/ui/UIBehaviour.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/ui/UIBehaviour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/world/Meshing.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/world/Meshing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../avatars/Tex_AnimeAva_30.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shaders/default.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../shaders/default.fragment.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shaders/default.vertex.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../shaders/default.vertex.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shaders/depth.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../shaders/depth.fragment.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../shaders/postProcess.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../shaders/postProcess.fragment.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sheet.lml" beforeDir="false" afterPath="$PROJECT_DIR$/sheet.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_07.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_19.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_27.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_29.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_34.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_55.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_56.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_59.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_72.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_74.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_79.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_81.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_82.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_83.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_87.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_90.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_91.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../sungjin/SpellBook01_98.PNG" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/sapphireowl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/sapphireowl.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/data/CreatureSkin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/data/EbiCell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/data/EbiCreatureData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/data/EbiCreatureTypeI18N.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/data/EbiSpellData.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireOwl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireOwl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/models/EbiCell.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/data/EbiCell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/models/EbiCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/data/EbiCharacter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/SapphireBatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/SapphireBatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/SapphireController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/SapphireController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/SapphireHud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/SapphireHud.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/SapphireScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/SapphireScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/SapphireViewport.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/SapphireViewport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/SapphireWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/SapphireWorld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/roundImage/RoundImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/roundImage/RoundImage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/module-info.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -86,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sheet.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="84">
+              <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -131,7 +72,6 @@
       <find>roundImage</find>
       <find>imagebu</find>
       <find>imagescali</find>
-      <find>roundImage</find>
       <find>widge</find>
       <find>32</find>
       <find>48</find>
@@ -150,6 +90,7 @@
       <find>input</find>
       <find>ava2</find>
       <find>ava3</find>
+      <find>roundImage</find>
     </findStrings>
     <replaceStrings>
       <replace>/</replace>
@@ -161,6 +102,7 @@
       <replace>55</replace>
       <replace>ava3</replace>
       <replace>ava1</replace>
+      <replace>image</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -181,8 +123,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="-1550" />
-    <option name="y" value="100" />
+    <option name="x" value="-1507" />
+    <option name="y" value="47" />
     <option name="width" value="1479" />
     <option name="height" value="923" />
   </component>
@@ -210,7 +152,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563059202186" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563412843482" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -249,7 +191,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1550" y="100" width="1479" height="923" extended-state="0" />
+    <frame x="-1507" y="47" width="1479" height="923" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Image Layers" />
@@ -372,8 +314,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sheet.lml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="84">
+          <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
         </state>
       </provider>
     </entry>

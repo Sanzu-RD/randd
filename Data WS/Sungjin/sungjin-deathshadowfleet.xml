@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project Mimic with libraries in sub-folder">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="${dir.buildfile}/.."/>
+    <property name="dir.root" value="G:/www/deathshadowfleet/"/>
+	<property name="dir.git" value="F:/Users/Souchy/Desktop/Robyn/Git"/>
+    <property name="dir.data" value="${dir.root}/data"/>
+	<property name="dir.lib" value="${dir.root}/lib"/>
+	<property name="dir.res" value="${dir.root}/res"/>
+		
+    <target name="create_run_jar">
+        <jar destfile="${dir.data}/sungjin.jar">
+        	<!--
+            <manifest>
+                <attribute name="Class-Path" value=". ../lib/
+                	../lib/annotationprocessor.jar ../lib/guava-26.0-jre.jar ../lib/guice-4.2.0-no_aop.jar ../lib/gson-2.8.5.jar ../lib/reflections-0.9.11.jar ../lib/javassist.jar ../lib/ftp4j-1.7.2.jar ../lib/org.eclipse.jgit-5.4.0.201906121030-r.jar ../lib/slf4j-api-1.7.12.jar ../lib/slf4j-jdk14-1.6.4.jar"/>
+            </manifest>
+        	-->
+
+        	<fileset dir="${dir.buildfile}/bin">
+				<include name="com/**"/>
+				<include name="module-info.class"/>
+				<include name="../module.info"/>
+			</fileset>
+
+        	<fileset dir="${dir.buildfile}">
+				<include name="module.info"/>
+			</fileset>
+            <!-- <fileset dir="${dir.git}/r and d/Commons WS/TealWaters/bin"/> -->
+        </jar>
+        	
+		<!-- Delete libs -->
+		<!-- <delete dir="${dir.lib}"/> -->
+		<mkdir dir="${dir.lib}"/>
+
+		<!-- res -->
+		<!--
+		<copy overwrite="true" todir="${dir.res}">
+			<fileset dir="${dir.buildfile}/res"/>
+		</copy>
+		-->
+    	
+    	<!-- libs -->
+        <copy file="${dir.git}/r and d/annotationprocessor.jar" todir="${dir.lib}"/>
+        <copy file="${dir.git}/res/libs other/guava-26.0-jre.jar" todir="${dir.lib}"/>
+        <copy file="${dir.git}/res/libs other/guice-4.2.0-no_aop.jar" todir="${dir.lib}"/>
+        <copy file="${dir.git}/res/libs other/gson-gson-parent-2.8.5/gson/target/gson-2.8.5.jar" todir="${dir.lib}"/>
+        <copy file="${dir.git}/res/libs other/reflections-0.9.11.jar" todir="${dir.lib}"/>
+        <copy file="${dir.git}/res/libs other/javassist.jar" todir="${dir.lib}"/>
+        <copy file="${dir.git}/res/libs other/ftp4j-1.7.2/ftp4j-1.7.2.jar" todir="${dir.lib}"/>
+        <copy file="${dir.git}/res/libs other/org.eclipse.jgit-5.4.0.201906121030-r.jar" todir="${dir.lib}"/>
+        <copy file="${dir.git}/res/libs other/slf4j-api-1.7.12.jar" todir="${dir.lib}"/>
+        <copy file="${dir.git}/res/libs other/slf4j-jdk14-1.6.4.jar" todir="${dir.lib}"/>
+    </target>
+</project>

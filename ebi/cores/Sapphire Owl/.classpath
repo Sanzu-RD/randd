@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="com/souchy/randd/ebishoal/sapphire/models/EbiCell.java|com/souchy/randd/ebishoal/sapphire/ui_old/|com/souchy/randd/ebishoal/sapphire/data/EbiBoard.java|com/souchy/randd/ebishoal/sapphire/data/EbiCell.java|com/souchy/randd/ebishoal/sapphire/data/EbiCharacter.java|com/souchy/randd/ebishoal/sapphire/ui/SapphireViewport.java" kind="src" path="src"/>
+	<classpathentry excluding="com/souchy/randd/ebishoal/sapphire/models/EbiCell.java|com/souchy/randd/ebishoal/sapphire/ui_old/|com/souchy/randd/ebishoal/sapphire/data/EbiBoard.java|com/souchy/randd/ebishoal/sapphire/data/EbiCell.java|com/souchy/randd/ebishoal/sapphire/data/EbiCharacter.java|com/souchy/randd/ebishoal/sapphire/ui/SapphireViewport.java|com/souchy/randd/ebishoal/sapphire/data/|com/souchy/randd/ebishoal/sapphire/main/SapphireModule.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="src" path="data"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
@@ -29,22 +29,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Modules">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/EbiCore">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/GameMechanics2">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli">
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
@@ -54,7 +39,27 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters">
+	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/GameMechanics2">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/EbiCore">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Modules">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

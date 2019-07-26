@@ -28,20 +28,30 @@ public class SapphireOwl extends LapisCoreClient implements EntryPoint {
 	private static boolean ssl = false;
 	
 	public static void main(String[] args) throws Exception {
+		// prob wont need this when we will hook Black Moonstone
 		if(args != null && args.length >= 2) {
 			ip = args[0];
 			port = Integer.parseInt(args[1]);
 		}
+		// launch sapphire core
 		launch(core);
 	}
 	
 	@Override
 	public void init() throws Exception {
 		super.init();
+		// load sapphire config
 		conf = JsonConfig.readExternal(SapphireOwlConf.class, "./modules/");
+		
+		// need an event bus since this is an entry point
 		bus = new EventBus();
+		
+		// make a node manager to load creatures data
 		manager = new NodeManager(this);
-		//manager.explore(new File("./modules/data/"));
+		
+		// load all creatures data modules
+		manager.explore(new File("./data/"));
+		manager.instantiateAll();
 	}
 	
 	@Override
