@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.DepthTestAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
-import com.souchy.randd.ebishoal.sapphire.ui.SapphireScreen;
+import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 
 import gamemechanics.models.Fight;
 

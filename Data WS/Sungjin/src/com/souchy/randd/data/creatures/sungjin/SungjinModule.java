@@ -1,5 +1,7 @@
 package com.souchy.randd.data.creatures.sungjin;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
@@ -11,14 +13,14 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.github.czyzby.lml.parser.LmlData;
 import com.google.common.eventbus.Subscribe;
-import com.souchy.randd.ebishoal.sapphire.ui.roundImage.RoundTextureRegion;
 import com.souchy.randd.modules.api.EntryPoint;
 import com.souchy.randd.modules.api.Module;
 import com.souchy.randd.modules.api.ModuleClassLoader;
 import com.souchy.randd.modules.api.ModuleInformation;
 import com.souchy.randd.modules.node.*;
 
-import data.CreatureData;
+import data.modules.AzurEntryPoint;
+import data.modules.AzurModule;
 import data.new1.CreatureModel;
 
 /**
@@ -27,13 +29,10 @@ import data.new1.CreatureModel;
  * @author Blank
  *
  */
-public class SungjinModule extends NodeModule {
+public class SungjinModule extends AzurModule {
 
-	@Override
-	public void enter(EntryPoint entry, NodeInformation info) {
-		this.info = info;
-		entry.getBus().register(this);
-	}
+
+
 	/*
 	public class CreateCreatureEvent {
 		public final int id;
@@ -123,11 +122,6 @@ public class SungjinModule extends NodeModule {
 			d.value.getRegion().getTexture().setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear);
 		});
 	}
-	
-	@Override
-	public void askUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 }

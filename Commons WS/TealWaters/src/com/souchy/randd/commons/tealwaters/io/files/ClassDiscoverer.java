@@ -21,18 +21,16 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
  * @param <T> - type de classe à charger
  */
 public abstract class ClassDiscoverer<T> implements Discoverer<String, Class<?>, Class<T>> {
-	
-	
-	/**
-	 * Charge tous les types de classes
-	 * 
-	 * @author Souchy
-	 *
-	 */
-	public static class DefaultClassDiscoverer extends ClassDiscoverer<Object> {
+
+
+	public static class DefaultClassDiscoverer<T> extends ClassDiscoverer<T> {
+		private Class<T> superClass;
+		public DefaultClassDiscoverer(Class<T> superClass) {
+			this.superClass = superClass;
+		}
 		@Override
-		public boolean identify(Class<?> c) {
-			return true; // default impl. It's different for other impls.
+		public boolean identify(Class<?> subClass) {
+			return superClass != subClass && superClass.isAssignableFrom(subClass); // default impl. It's different for other impls.
 		}
 	}
 	

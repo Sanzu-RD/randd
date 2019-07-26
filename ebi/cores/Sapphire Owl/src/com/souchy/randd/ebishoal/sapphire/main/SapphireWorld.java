@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.ui;
+package com.souchy.randd.ebishoal.sapphire.main;
 
 import java.io.File;
 import java.util.function.Consumer;

@@ -16,10 +16,12 @@ module GameMechanics2 {
 	exports gamemechanics.status;
 	//exports data;
 	exports data.new1;
+	exports data.modules;
 	
 	requires transitive com.google.common;
 	requires com.souchy.randd.commons.TealWaters;
 	requires com.google.guice;
 	requires com.souchy.randd.commons.Jade;
 	requires gdx;
+	requires com.souchy.randd.pluginprototyping.Modules;
 }

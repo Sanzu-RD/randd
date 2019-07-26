@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.ui;
+package com.souchy.randd.ebishoal.sapphire.gfx.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;

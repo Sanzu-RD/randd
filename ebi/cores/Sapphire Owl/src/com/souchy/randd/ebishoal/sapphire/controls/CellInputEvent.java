@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.defaul;
+package com.souchy.randd.ebishoal.sapphire.controls;
 
 import com.badlogic.gdx.math.Vector3;
 

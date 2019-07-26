@@ -9,10 +9,15 @@ import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCoreClient;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
+import com.souchy.randd.jade.combat.JadeCreature;
 import com.souchy.randd.modules.api.EntryPoint;
 import com.souchy.randd.modules.node.NodeManager;
 
-public class SapphireOwl extends LapisCoreClient implements EntryPoint {
+import data.modules.AzurEntryPoint;
+import data.new1.CreatureModel;
+import gamemechanics.models.entities.Creature;
+
+public class SapphireOwl extends LapisCoreClient { //implements EntryPoint {
 	
 	/**
 	 * would be final if we didnt instantiate i
@@ -26,6 +31,8 @@ public class SapphireOwl extends LapisCoreClient implements EntryPoint {
 	private static String ip = "192.168.2.15"; // default, but the real ip should come from main(String[] args)
 	private static int port = 11000;
 	private static boolean ssl = false;
+
+	public static AzurEntryPoint data = new AzurEntryPoint();
 	
 	public static void main(String[] args) throws Exception {
 		// prob wont need this when we will hook Black Moonstone
@@ -42,16 +49,23 @@ public class SapphireOwl extends LapisCoreClient implements EntryPoint {
 		super.init();
 		// load sapphire config
 		conf = JsonConfig.readExternal(SapphireOwlConf.class, "./modules/");
-		
+
 		// need an event bus since this is an entry point
-		bus = new EventBus();
+		//bus = new EventBus();
 		
 		// make a node manager to load creatures data
-		manager = new NodeManager(this);
+		manager = new AzurManager(data);
 		
 		// load all creatures data modules
 		manager.explore(new File("./data/"));
 		manager.instantiateAll();
+		
+		// create instances for players' creatures
+		int id = 1;
+		CreatureModel model = data.creatures.get(id);
+		JadeCreature jade = null;
+		Creature inst = new Creature(model, jade, data);
+		fight.add(inst, team0);
 	}
 	
 	@Override

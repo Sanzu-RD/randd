@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.souchy.randd.jade.combat.JadeCreature;
 
+import data.modules.AzurEntryPoint;
 import data.new1.CreatureModel;
 import data.new1.ItemCache;
 import data.new1.SpellCache;
@@ -35,9 +36,11 @@ public class Creature extends Entity {
 	public List<SpellModel> spellbook;
 	
 
-	public Creature(CreatureModel model, JadeCreature jade) {
+	public Creature(CreatureModel model, JadeCreature jade, AzurEntryPoint dep) {
+		this.model = model;
+		this.stats = new NewStats();
 		for(int si : jade.spellIDs) {
-			spellbook.add(SpellCache.get(si));
+			spellbook.add(dep.spells.get(si));
 //			for(var sm : model.spells) {
 //				if(sm.id() == si) {
 //					spellbook.add(sm); //new Spell(sm));
@@ -45,7 +48,7 @@ public class Creature extends Entity {
 //			}
 		}
 		for(int ii : jade.itemIDs) {
-			items.add(ItemCache.get(ii));
+			items.add(dep.items.get(ii));
 		}
 	}
 	

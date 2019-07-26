@@ -85,6 +85,11 @@ public class NewStats {
 	private Double get(StatProperty p, Modifier... mods) {
 		return table.get(p, Modifier.compile(mods));
 	}
+	public void add(double value, StatProperty prop,  Modifier... mods) {
+		int tot = Modifier.compile(mods);
+		add(value, prop, tot);
+	}
+	
 	public void add(double value, StatProperty prop, int mods) {
 		var value0 = table.get(prop,  mods);
 		if(value0 == null) value0 = Double.valueOf(0);

@@ -4,10 +4,33 @@ import java.util.List;
 
 import data.new1.Effect;
 import gamemechanics.common.Disposable;
+import gamemechanics.events.OnCanCastActionCheck.OnCanCastActionHandler;
 import gamemechanics.models.entities.Entity;
 
-
+/**
+ * 1. Create a subclass of status 
+ * 2. Implement its fusion policy
+ * 3. Implement any event handler so it can react to events (ex : "implements OnCanCastActionHandler")
+ * 
+ * @author Souchy
+ *
+ */
 public abstract class Status implements Disposable {
+
+	public static class Passive extends Status {
+//		public <T extends FightEvent> void register(Class<T> e, Consumer<T> h) {
+//			EventBus bus = new EventBus();
+//			bus.register(h);
+//		}
+//		@Subscribe
+//		public void handle(FightEvent e) {
+//			
+//		}
+		@Override 
+		public void fuse(Status s) {
+			// no fusion
+		}
+	}
 	
 	public Entity source;
 	public Entity target;

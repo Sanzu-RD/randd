@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.ui;
+package com.souchy.randd.ebishoal.sapphire.gfx;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -13,6 +13,8 @@ import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
+import com.souchy.randd.ebishoal.sapphire.controls.SapphireController;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 
 public class SapphireScreen extends LapisScreen {
 	

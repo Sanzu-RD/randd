@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.defaul;
+package com.souchy.randd.ebishoal.sapphire.controls;
 
 public enum CellInputEventType {
 

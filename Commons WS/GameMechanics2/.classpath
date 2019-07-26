@@ -33,5 +33,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Modules"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

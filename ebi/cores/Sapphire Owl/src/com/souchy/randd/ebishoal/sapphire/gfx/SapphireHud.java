@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.ui;
+package com.souchy.randd.ebishoal.sapphire.gfx;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -17,6 +17,8 @@ import com.github.czyzby.lml.vis.util.VisLml;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
+import com.souchy.randd.ebishoal.sapphire.gfx.utils.SapphireBatch;
+import com.souchy.randd.ebishoal.sapphire.gfx.utils.SapphireHudSkin;
 import com.souchy.randd.ebishoal.sapphire.ui.roundImage.RoundImageLmlTagProvider;
 
 public class SapphireHud extends LapisHud {

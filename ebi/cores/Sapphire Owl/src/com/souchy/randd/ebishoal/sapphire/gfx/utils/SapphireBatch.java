@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.ui;
+package com.souchy.randd.ebishoal.sapphire.gfx.utils;
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
  * 

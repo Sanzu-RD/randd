@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TransformDrawable;
-import com.souchy.randd.ebishoal.sapphire.ui.SapphireBatch;
+import com.souchy.randd.ebishoal.sapphire.gfx.utils.SapphireBatch;
 
 public class RoundImage extends Image {
 	public RoundImage(Drawable d) {
