@@ -1,5 +1,6 @@
 package gamemechanics.status;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -8,6 +9,10 @@ public class StatusList {
 	
 	private Map<Class<? extends Status>, Status> statuses;
 	//private List<Status> statuses;
+	
+	public StatusList() {
+		statuses = new HashMap<>();
+	}
 	
 	public void add(Status s) {
 		if(has(s.getClass())) {

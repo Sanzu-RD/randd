@@ -1,8 +1,8 @@
 package com.souchy.randd.ebishoal.commons.lapis.gfx.shadows;
 
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
+//import org.lwjgl.util.vector.Matrix4f;
+//import org.lwjgl.util.vector.Vector3f;
+//import org.lwjgl.util.vector.Vector4f;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;

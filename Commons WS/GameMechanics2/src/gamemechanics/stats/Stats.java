@@ -1,6 +1,8 @@
 package gamemechanics.stats;
 
+import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import data.new1.Effect;
 import gamemechanics.data.effects.other.StatEffect;
@@ -21,7 +23,7 @@ import static gamemechanics.stats.Modifier.resourceMod.*;
 import static gamemechanics.stats.Modifier.eleMod.*;
 import static gamemechanics.stats.Modifier.mathMod.*;
 
-public class NewStats {
+public class Stats {
 
 	private List<StatModConverter> tempConverters = new ArrayList<>();
 	
@@ -31,8 +33,9 @@ public class NewStats {
 
 		// commence par prendre tous les boosts des items et status
 		for(var i : target.items)
-			for(var e : i.effects)
-				if(e instanceof StatEffect) e.apply(target, target);
+			i.stats.table.cellSet().forEach(c -> 
+				add(c.getValue(), c.getRowKey(), c.getColumnKey())
+			);
 		
 		target.getStatus().forEach(s -> {
 			for(var e : s.effects)
@@ -77,13 +80,19 @@ public class NewStats {
 	 * - compiled mod bits (tot = mod1 | mod2 | mod3...), each mod is 1 bit in the int
 	 * - value
 	 */
-	private Table<StatProperty, Integer, Double> table;
+	private Table<StatProperty, Integer, Double> table = HashBasedTable.create();
 
 	private void set(double value, StatProperty p, Modifier... mods) {
 		table.put(p, Modifier.compile(mods), value);
 	}
 	private Double get(StatProperty p, Modifier... mods) {
-		return table.get(p, Modifier.compile(mods));
+		var tot = Modifier.compile(mods);
+		return get(p, tot);
+	}
+	private Double get(StatProperty p, int mods) {
+		var val = table.get(p, mods);
+		if(val == null) return 0d;
+		return val;
 	}
 	public void add(double value, StatProperty prop,  Modifier... mods) {
 		int tot = Modifier.compile(mods);
@@ -91,8 +100,7 @@ public class NewStats {
 	}
 	
 	public void add(double value, StatProperty prop, int mods) {
-		var value0 = table.get(prop,  mods);
-		if(value0 == null) value0 = Double.valueOf(0);
+		var value0 = get(prop, mods);
 		table.put(prop, mods, value0 + value);
 	}
 	
@@ -150,7 +158,7 @@ public class NewStats {
 	 * Set spell properties with normal range patterns
 	 */
 	public void setSpellProperies(boolean isInstant, int cooldown, int maxCastsPerTurn, int maxCastsPerTurnPerTarget, int minRange, int maxRange) {
-		setSpellProperies(isInstant, cooldown, maxCastsPerTurn, maxCastsPerTurnPerTarget, RangePattern.normal.val(), RangePattern.normal.val());
+		setSpellProperies(isInstant, cooldown, maxCastsPerTurn, maxCastsPerTurnPerTarget, minRange, maxRange, RangePattern.normal.val(), RangePattern.normal.val());
 	}
 	/**
 	 * @param minRangePattern - made from rangePattern enum (ex : pattern = line | diago | square)

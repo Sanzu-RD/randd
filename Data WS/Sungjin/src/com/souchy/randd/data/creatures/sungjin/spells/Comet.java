@@ -5,7 +5,7 @@ import com.souchy.randd.data.creatures.sungjin.SungjinModel;
 import data.new1.*;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
-import gamemechanics.stats.NewStats;
+import gamemechanics.stats.Stats;
 
 public class Comet extends SpellModel {
 	
@@ -15,8 +15,8 @@ public class Comet extends SpellModel {
 	}
 	
 	@Override
-	protected NewStats initBaseStats() {
-		var stats = new NewStats();
+	protected Stats initBaseStats() {
+		var stats = new Stats();
 		stats.setSpellProperies(false, 0, 2, 2, 1, 7);
 		return stats;
 	}

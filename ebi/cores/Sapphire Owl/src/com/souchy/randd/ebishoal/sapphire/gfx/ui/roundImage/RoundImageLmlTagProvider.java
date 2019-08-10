@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.ui.roundImage;
+package com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage;
 
 import com.github.czyzby.lml.parser.LmlParser;
 import com.github.czyzby.lml.parser.tag.LmlTag;

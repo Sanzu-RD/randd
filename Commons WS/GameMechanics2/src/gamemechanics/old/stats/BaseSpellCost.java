@@ -1,4 +1,4 @@
-package gamemechanics.stats;
+package gamemechanics.old.stats;
 
 import static gamemechanics.stats.StatModifier.mo.fight;
 

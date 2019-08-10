@@ -13,13 +13,15 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.github.czyzby.lml.parser.LmlData;
 import com.google.common.eventbus.Subscribe;
+import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.data.creatures.sungjin.spells.GhostFish;
 import com.souchy.randd.modules.api.EntryPoint;
 import com.souchy.randd.modules.api.Module;
 import com.souchy.randd.modules.api.ModuleClassLoader;
 import com.souchy.randd.modules.api.ModuleInformation;
 import com.souchy.randd.modules.node.*;
 
-import data.modules.AzurEntryPoint;
+import data.modules.AzurCache;
 import data.modules.AzurModule;
 import data.new1.CreatureModel;
 
@@ -31,7 +33,19 @@ import data.new1.CreatureModel;
  */
 public class SungjinModule extends AzurModule {
 
-
+	@Override
+	public void onInit(AzurCache entry) {
+		//super.onInit(entry);
+		Log.info("Init Sungjin Azur Module");
+		
+//		var a = new SungjinModel();
+//		entry.creatures.put(a.id(), a);
+		
+		Log.info("Init sungjin entry creatures : " + entry.creatures.values() + ", " + entry);
+		
+//		var b = new GhostFish();
+//		entry.spells.put(b.id(), b);
+	}
 
 	/*
 	public class CreateCreatureEvent {
@@ -70,6 +84,8 @@ public class SungjinModule extends AzurModule {
 		public CreatureModel model = null;
 	}
 	
+	
+	/*
 	@Subscribe
 	public void loadResources(LmlData data) {
 		
@@ -122,6 +138,6 @@ public class SungjinModule extends AzurModule {
 			d.value.getRegion().getTexture().setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear);
 		});
 	}
-
+	*/
 	
 }

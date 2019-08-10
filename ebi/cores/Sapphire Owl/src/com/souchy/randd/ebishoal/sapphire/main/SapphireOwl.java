@@ -1,23 +1,28 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import com.badlogic.gdx.Files.FileType;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.google.common.eventbus.EventBus;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g3d.Material;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
-import com.souchy.randd.ebishoal.commons.lapis.main.LapisCoreClient;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.jade.combat.JadeCreature;
-import com.souchy.randd.modules.api.EntryPoint;
-import com.souchy.randd.modules.node.NodeManager;
 
-import data.modules.AzurEntryPoint;
+import data.modules.AzurCache;
+import data.modules.AzurManager;
 import data.new1.CreatureModel;
+import gamemechanics.common.Vector2;
+import gamemechanics.models.Fight;
 import gamemechanics.models.entities.Creature;
+import gamemechanics.models.entities.Entity.Team;
 
-public class SapphireOwl extends LapisCoreClient { //implements EntryPoint {
+public class SapphireOwl extends LapisCore { //implements EntryPoint {
 	
 	/**
 	 * would be final if we didnt instantiate i
@@ -25,21 +30,24 @@ public class SapphireOwl extends LapisCoreClient { //implements EntryPoint {
 	public static SapphireOwl core = new SapphireOwl();
 	public static SapphireGame game;
 	public static SapphireOwlConf conf;
-	public static NodeManager manager;
-	public static EventBus bus;
+	public static AzurManager manager;
+	public static AzurCache data;
 	
-	private static String ip = "192.168.2.15"; // default, but the real ip should come from main(String[] args)
-	private static int port = 11000;
-	private static boolean ssl = false;
 
-	public static AzurEntryPoint data = new AzurEntryPoint();
+//	private static String ip = "192.168.2.15"; // default, but the real ip should come from main(String[] args)
+//	private static int port = 11000;
+//	private static boolean ssl = false;
+	// todo instance of black moonstone
 	
+
 	public static void main(String[] args) throws Exception {
 		// prob wont need this when we will hook Black Moonstone
-		if(args != null && args.length >= 2) {
-			ip = args[0];
-			port = Integer.parseInt(args[1]);
-		}
+//		if(args != null && args.length >= 2) {
+//			ip = args[0];
+//			port = Integer.parseInt(args[1]);
+//		}
+		// pass args to black moonstone directly 
+		// ...
 		// launch sapphire core
 		launch(core);
 	}
@@ -52,20 +60,16 @@ public class SapphireOwl extends LapisCoreClient { //implements EntryPoint {
 
 		// need an event bus since this is an entry point
 		//bus = new EventBus();
-		
+
 		// make a node manager to load creatures data
-		manager = new AzurManager(data);
+		manager = new AzurManager();
+		data = manager.getEntry();
 		
 		// load all creatures data modules
 		manager.explore(new File("./data/"));
 		manager.instantiateAll();
-		
-		// create instances for players' creatures
-		int id = 1;
-		CreatureModel model = data.creatures.get(id);
-		JadeCreature jade = null;
-		Creature inst = new Creature(model, jade, data);
-		fight.add(inst, team0);
+		manager.getExecutors().shutdown();
+		manager.getExecutors().awaitTermination(1000, TimeUnit.MILLISECONDS);
 	}
 	
 	@Override
@@ -74,7 +78,7 @@ public class SapphireOwl extends LapisCoreClient { //implements EntryPoint {
 	}
 
 	@Override
-	protected String[] getRootPackages() {
+	protected String[] getRootPackages(){
 		return new String[] { "com.souchy.randd.ebishoal.sapphire" };
 	}
 	
@@ -86,21 +90,6 @@ public class SapphireOwl extends LapisCoreClient { //implements EntryPoint {
 	@Override
 	public void addIcon(LwjglApplicationConfiguration config) {
 		config.addIcon("G:\\Assets\\pack\\fantasy bundle\\tcgcardspack\\Tex_krakken_icon.png", FileType.Absolute);
-	}
-
-	protected String getIp() {
-		return ip;
-	}
-	protected int getPort() {
-		return port;
-	}
-	protected boolean getSsl() {
-		return ssl;
-	}
-
-	@Override
-	public EventBus getBus() {
-		return bus;
 	}
 
 	

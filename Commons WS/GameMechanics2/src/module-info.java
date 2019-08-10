@@ -24,4 +24,5 @@ module GameMechanics2 {
 	requires com.souchy.randd.commons.Jade;
 	requires gdx;
 	requires com.souchy.randd.pluginprototyping.Modules;
+	requires gdx.lml;
 }

@@ -5,15 +5,16 @@ import gamemechanics.events.OnVisibilityCheck;
 import gamemechanics.models.Fight;
 import gamemechanics.properties.Properties;
 import gamemechanics.properties.Targetability;
-import gamemechanics.stats.NewStats;
+import gamemechanics.stats.Stats;
 import gamemechanics.status.StatusList;
 
 public abstract class Entity {
 
 	public static enum Team {
-		Neutral,
 		A,
-		B
+		B,
+		/** C is Neutral */
+		C,
 	}
 	
 	/** Fight reference */
@@ -31,7 +32,11 @@ public abstract class Entity {
 	/** Properties like pathing,  line of sights, visibility, orientation */
 	public Properties properties;
 	
-
+	public Entity() {
+		statuses = new StatusList();
+		properties = new Properties(); // should be in stats
+	}
+	
 	/**
 	 * If this entity can cast through an entity
 	 */
@@ -62,8 +67,8 @@ public abstract class Entity {
 	 * Default empty stat table.
 	 * Override for creatures
 	 */
-	public NewStats getStats() {
-		return new NewStats();
+	public Stats getStats() {
+		return new Stats();
 	}
 	/**
 	 * Default empty status table. 

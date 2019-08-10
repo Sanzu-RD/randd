@@ -11,7 +11,7 @@ public class FilesManager {
 	
 	private FilesManager() { }
 
-	private static ClassLoader getClassLoader() {
+	public static ClassLoader getClassLoader() {
 		return FilesManager.class.getClassLoader();
 	}
 	

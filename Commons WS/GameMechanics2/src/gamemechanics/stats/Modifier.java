@@ -6,7 +6,7 @@ import java.util.Map;
 public interface Modifier {
 	
 	public static class ModifierID {
-		private static int i = 1;
+		private static int i = 0;
 		private static Map<Modifier, Integer> modifierBits = new HashMap<>();
 		public static int register(Modifier m) {
 			if(modifierBits.containsKey(m) == false) {

@@ -3,6 +3,11 @@ package data.modules;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.github.czyzby.lml.parser.LmlData;
 import com.google.common.eventbus.EventBus;
 import com.souchy.randd.jade.combat.JadeCreature;
 import com.souchy.randd.modules.api.EntryPoint;
@@ -12,7 +17,7 @@ import data.new1.SpellModel;
 import gamemechanics.models.Item;
 import gamemechanics.models.entities.Creature;
 
-public class AzurEntryPoint implements EntryPoint {
+public class AzurCache implements EntryPoint {
 
 	private EventBus bus;
 
@@ -20,7 +25,8 @@ public class AzurEntryPoint implements EntryPoint {
 	public Map<Integer, Item> items;
 	public Map<Integer, SpellModel> spells;
 	
-	public AzurEntryPoint() {
+	
+	public AzurCache() {
 		// need an event bus since this is an entry point
 		bus = new EventBus();
 		creatures = new HashMap<>();
@@ -32,7 +38,8 @@ public class AzurEntryPoint implements EntryPoint {
 	public EventBus getBus() {
 		return bus;
 	}
-
+	
+	
 	/**
 	 * Create a creature instance from a model and jade data
 	 */

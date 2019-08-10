@@ -5,14 +5,14 @@ import java.util.List;
 
 import data.new1.Effect;
 import gamemechanics.models.entities.Creature;
-import gamemechanics.stats.NewStats;
+import gamemechanics.stats.Stats;
 import gamemechanics.status.Status;
 import gamemechanics.status.Status.Passive;
 
 public abstract class Item {
 	
 	public List<Passive> passives = new ArrayList<>();
-	public NewStats stats = new NewStats();
+	public Stats stats = new Stats();
 	
 	//public List<Effect> effects;
 	

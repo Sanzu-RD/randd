@@ -8,6 +8,7 @@ import com.google.common.eventbus.EventBus;
 import gamemechanics.common.Action;
 import gamemechanics.common.ActionPipeline;
 import gamemechanics.models.entities.Creature;
+import gamemechanics.models.entities.Entity.Team;
 
 
 public class Fight {
@@ -24,6 +25,10 @@ public class Fight {
 	 */
 	public List<Creature> timeline;
 	
+	public List<Creature> teamA;
+	public List<Creature> teamB;
+	public List<Creature> teamC;
+	
 	/**
 	 * action pipeline : actions currently on the stack
 	 */
@@ -35,11 +40,29 @@ public class Fight {
 	public List<Action> history; 
 	
 	
-	
 	public Fight() {
+		bus = new EventBus();
+		
+		board = new Board();
+		
+		timeline = new ArrayList<>();
+		teamA = new ArrayList<>();
+		teamB = new ArrayList<>();
+		teamC = new ArrayList<>();
+		
+		pipe = new ActionPipeline();
 		history = new ArrayList<>();
 	}
 	
+	
+	public void add(Creature c, Team team) {
+		timeline.add(c);
+		switch(team) {
+			case A -> teamA.add(c);
+			case B -> teamB.add(c);
+			case C -> teamC.add(c);
+		}
+	}
 	
 	
 }

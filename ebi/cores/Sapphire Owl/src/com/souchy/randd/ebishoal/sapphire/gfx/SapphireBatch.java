@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.gfx.utils;
+package com.souchy.randd.ebishoal.sapphire.gfx;
 /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
  * 
@@ -31,7 +31,7 @@ import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.NumberUtils;
-import com.souchy.randd.ebishoal.sapphire.ui.roundImage.RoundTextureRegion;
+import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
 
 /** Draws batched quads using indices.
  * @see Batch
@@ -215,10 +215,10 @@ public class SapphireBatch implements Batch {
 		color = NumberUtils.intToFloatColor(intBits);
 	}
 
-	@Override
-	public void setColor (float color) {
-		this.color = color;
-	}
+//	@Override
+//	public void setColor (float color) {
+//		this.color = color;
+//	}
 
 	@Override
 	public Color getColor () {
@@ -1184,5 +1184,29 @@ public class SapphireBatch implements Batch {
 
 	public boolean isDrawing () {
 		return drawing;
+	}
+
+	@Override
+	public void setPackedColor(float packedColor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setBlendFunctionSeparate(int srcFuncColor, int dstFuncColor, int srcFuncAlpha, int dstFuncAlpha) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getBlendSrcFuncAlpha() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getBlendDstFuncAlpha() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

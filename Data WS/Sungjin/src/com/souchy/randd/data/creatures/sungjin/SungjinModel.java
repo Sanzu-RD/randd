@@ -5,13 +5,16 @@ import static gamemechanics.creatures.CreatureType.Blue;
 import static gamemechanics.creatures.CreatureType.Summoner;
 
 import com.google.common.collect.ImmutableList;
+import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.data.creatures.sungjin.spells.Comet;
 
 import data.new1.CreatureModel;
 import data.new1.SpellModel;
 import gamemechanics.creatures.CreatureType;
 import gamemechanics.stats.Modifier.mathMod;
-import gamemechanics.stats.NewStats;
+import gamemechanics.stats.Stats;
 import gamemechanics.stats.StatProperty;
+import gamemechanics.stats.StatProperty.resource;
 import gamemechanics.status.Status;
 
 public class SungjinModel extends CreatureModel {
@@ -28,16 +31,17 @@ public class SungjinModel extends CreatureModel {
 	}
 
 	@Override
-	protected NewStats initBaseStats() {
-		var stats = new NewStats();
-		stats.add(1500, StatProperty.resource.life, mathMod.flat.val());
-		stats.add(12, StatProperty.resource.mana, mathMod.flat.val());
-		stats.add(6, StatProperty.resource.move, mathMod.flat.val());
+	protected Stats initBaseStats() {
+		var stats = new Stats();
+		stats.add(1500d, resource.life, mathMod.flat);
+		stats.add(12, StatProperty.resource.mana, mathMod.flat);
+		stats.add(6, StatProperty.resource.move, mathMod.flat);
 
-		stats.add(30, StatProperty.element.blue, mathMod.flat.val());
-		stats.add(30, StatProperty.element.blue, mathMod.scl.val());
-		stats.add(30, StatProperty.element.black, mathMod.flat.val());
-		stats.add(30, StatProperty.element.black, mathMod.scl.val());
+		stats.add(30, StatProperty.element.blue, mathMod.flat);
+		stats.add(30, StatProperty.element.blue, mathMod.scl);
+		stats.add(30, StatProperty.element.black, mathMod.flat);
+		stats.add(30, StatProperty.element.black, mathMod.scl);
+
 		return stats;
 	}
 
@@ -53,12 +57,12 @@ public class SungjinModel extends CreatureModel {
 
 	@Override
 	protected ImmutableList<SpellModel> initSpells() {
-		return null;
+		return ImmutableList.of();
 	}
 
 	@Override
 	protected ImmutableList<Status> initStatuses() {
-		return null;
+		return ImmutableList.of();
 	}
 
 

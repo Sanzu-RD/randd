@@ -9,4 +9,5 @@ module com.souchy.randd.commons.TealWaters {
 	requires transitive java.desktop;
 	requires transitive gson;
 	requires reflections;
+	requires com.google.common;
 }

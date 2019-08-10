@@ -11,4 +11,16 @@ import gamemechanics.models.Item;
  */
 public class BlankSpellBook extends Item {
 
+	@Override
+	public Integer id() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -17,7 +17,7 @@ public class Log {
 	public Log(LogImportance importance, String details) {
 		this.importance = importance;
 		this.details = details;
-		this.module = Logging.rootModule.getName();
+		this.module = String.valueOf(Logging.rootModule); //.getName();
 		this.date = ZonedDateTime.now(); // Instant.now(Clock.system(ZoneId.));
 	}
 	

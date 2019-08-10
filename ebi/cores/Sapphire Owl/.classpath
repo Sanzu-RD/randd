@@ -3,6 +3,41 @@
 	<classpathentry excluding="com/souchy/randd/ebishoal/sapphire/models/EbiCell.java|com/souchy/randd/ebishoal/sapphire/ui_old/|com/souchy/randd/ebishoal/sapphire/data/EbiBoard.java|com/souchy/randd/ebishoal/sapphire/data/EbiCell.java|com/souchy/randd/ebishoal/sapphire/data/EbiCharacter.java|com/souchy/randd/ebishoal/sapphire/ui/SapphireViewport.java|com/souchy/randd/ebishoal/sapphire/data/|com/souchy/randd/ebishoal/sapphire/main/SapphireModule.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="src" path="data"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/GameMechanics2">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Modules">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/EbiCore">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -18,48 +53,17 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="F:/Users/Souchy/Desktop/Robyn/Git/res/libs gdx/natives"/>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LML">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters">
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DB">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/GameMechanics2">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/EbiCore">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Modules">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models">
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX2">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

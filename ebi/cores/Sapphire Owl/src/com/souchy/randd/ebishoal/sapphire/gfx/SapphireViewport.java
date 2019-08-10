@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.gfx.utils;
+package com.souchy.randd.ebishoal.sapphire.gfx;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;

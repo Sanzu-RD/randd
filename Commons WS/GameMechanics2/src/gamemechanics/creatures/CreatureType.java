@@ -3,8 +3,6 @@ package gamemechanics.creatures;
 import com.google.inject.Inject;
 import com.souchy.randd.commons.tealwaters.commons.Namespace.I18NNamespace;
 
-import data.CreatureData;
-
 public enum CreatureType {
 	
 	Red,
@@ -31,7 +29,7 @@ public enum CreatureType {
 	/**
 	 * Namespace { Creatures.Types } for i18n properties
 	 */
-	public static final I18NNamespace creaturesTypes = CreatureData.creatures.in("Types");
+	public static final I18NNamespace creaturesTypes = new I18NNamespace("Creatures.Types"); //CreatureData.creatures.in("Types");
 	
 	/**
 	 * i18n identifier example : "Creatures.Types.Skeleton"

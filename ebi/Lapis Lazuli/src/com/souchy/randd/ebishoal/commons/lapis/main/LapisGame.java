@@ -10,19 +10,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.ebishoal.commons.lapis.discoverers.FontDiscoverer;
 import com.souchy.randd.ebishoal.commons.lapis.discoverers.ModelDiscoverer;
-import com.souchy.randd.ebishoal.commons.lapis.managers.ModelManager;
 
 
 public abstract class LapisGame extends Game {
 
 
-	public final FontDiscoverer fonts;
-	public final ModelDiscoverer modelDiscoverer;
+	//public final FontDiscoverer fonts;
+	//public final ModelDiscoverer modelDiscoverer;
 	
-	public final AssetManager assets;
-	public final ModelManager modelManager;
+	//public final AssetManager assets;
+	//public final ModelManager modelManager;
 	
-	public List<LabelStyle> labelStyles;
+	//public List<LabelStyle> labelStyles;
 	
 	//public final FightContext context;
 	
@@ -31,10 +30,10 @@ public abstract class LapisGame extends Game {
 	 * Cannot have any use of Gdx. here as the application hasn't started yet
 	 */
 	public LapisGame() {
-		assets = new AssetManager();
-		fonts = new FontDiscoverer();
-		modelDiscoverer = new ModelDiscoverer();
-		modelManager = new ModelManager(assets);
+		//assets = new AssetManager();
+		//fonts = new FontDiscoverer();
+		//modelDiscoverer = new ModelDiscoverer();
+		//modelManager = new ModelManager(assets);
 	}
 	
 	
@@ -45,33 +44,28 @@ public abstract class LapisGame extends Game {
 	@Override
 	public void create() {
 		VisUI.load();
-		labelStyles = fonts.explore(""); //"res");
-		List<FileHandle> files = modelDiscoverer.explore("g3d"); //"res");
-		files.forEach(f -> {
-			modelManager.load(f.path());
-		});
-		assets.finishLoading();
+		//labelStyles = fonts.explore(""); //"res");
+		//List<FileHandle> files = modelDiscoverer.explore("g3d"); //"res");
 		
-		onCreateHook();
+		//files.forEach(f -> {
+		//	modelManager.load(f.path());
+		//});
+		//assets.finishLoading();
+		
+		init();
 		setScreen(getStartScreen());
 	}
 
-	/**
-	 * 
-	 * Create / initialize a bunch of screens for later use ? maybe dont need this, i kinda dislike going towards singletons again
-	 */
-	//public abstract void createScreens();
 	
 	/**
-	 * 
+	 * Create screens etc.
+	 */
+	public abstract void init();
+	
+	/**
 	 * @return The first screen you want to startup with and show
 	 */
 	public abstract Screen getStartScreen();
-	
-	/**
-	 * 
-	 */
-	public abstract void onCreateHook();
 	
 	
 }

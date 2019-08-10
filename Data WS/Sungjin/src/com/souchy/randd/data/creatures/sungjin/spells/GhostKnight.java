@@ -1,26 +1,28 @@
 package com.souchy.randd.data.creatures.sungjin.spells;
 
 
+import com.souchy.randd.data.creatures.sungjin.SungjinModel;
+
 import data.new1.Effect;
 import data.new1.SpellModel;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
-import gamemechanics.stats.NewStats;
+import gamemechanics.stats.Stats;
 
 public class GhostKnight  extends SpellModel { //implements EbiSpellData {
 
 	@Override
 	public int id() {
-		return 4;
+		return SungjinModel.id + 4;
 	}
 	
-//	@Override
-//	public String getIconName() {
-//		return "SpellBook01_29.PNG";
-//	}
+	@Override
+	public String getIconName() {
+		return "SpellBook01_29.PNG";
+	}
 
 	@Override
-	protected NewStats initBaseStats() {
+	protected Stats initBaseStats() {
 		// TODO Auto-generated method stub
 		return null;
 	}

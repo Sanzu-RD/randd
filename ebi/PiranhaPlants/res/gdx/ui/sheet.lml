@@ -19,64 +19,74 @@
             <table id="currentlyPlayingSheet" align="bottom" defaultpad="3" debug="false" >
                 <!-- Portrait -->
                 <stack width="64" height="64">
-                    <roundImage id="portrait" tooltip="Grim" style="ava1" />
-                    <image id="portraitBorder" style="ring_frame" />
+                    <image id="playingCreatureAvatar" tooltip="Grim" style="playingCreatureAvatar" />
                 </stack>
 
                 <!-- Resources -->
                 <table>
-                    <label id="life" value="1550/1550"/>
+                    <label id="life" value="{playingCreatureLifeCurrent} / {playingCreatureLifeMax}"/>
                     <:row/>
-                    <label id="mana" value="10/12"/>
+                    <label id="mana" value="{playingCreatureManaCurrent} / {playingCreatureManaMax}"/>
                     <:row/>
-                    <label id="move" value="0/6"/>
+                    <label id="move" value="{playingCreatureMoveCurrent} / {playingCreatureMoveMax}"/>
                 </table>
 
                 <!-- Page content (items, spells, affinities, resistances) -->
                 <table id="content" defaultpad="1">
                     <stack  width="55" height="55">
-                        <image id="spell0" tooltip="Desecrate" style="spell0" />
-                        <image id="spellBorder" style="ring_frame" />
+                        <image id="spellBg" style="spell_bg" />
+                        <image id="playingCreatureSpell0" tooltip="Desecrate" style="playingCreatureSpell0" />
+                        <image id="spellBorder" style="spell_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <image id="spell1" tooltip="Rise Zombie" style="spell1" />
-                        <image id="spellBorder" style="ring_frame" />
+                        <image id="spellBg" style="spell_bg" />
+                        <image id="playingCreatureSpell1" tooltip="Rise Zombie" style="playingCreatureSpell1" />
+                        <image id="spellBorder" style="spell_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <image id="spell2" tooltip="Rise Zombie" style="spell2" />
-                        <image id="spellBorder" style="ring_frame" />
+                        <image id="spellBg" style="spell_bg" />
+                        <image id="playingCreatureSpell2" tooltip="Rise Zombie" style="playingCreatureSpell2" />
+                        <image id="spellBorder" style="spell_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <image id="spell3" tooltip="Rise Zombie" style="spell3" />
-                        <image id="spellBorder" style="ring_frame" />
+                        <image id="spellBg" style="spell_bg" />
+                        <image id="playingCreatureSpell3" tooltip="Rise Zombie" style="playingCreatureSpell3" />
+                        <image id="spellBorder" style="spell_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <image id="spell4" tooltip="Rise Zombie" style="spell4" />
-                        <image id="spellBorder" style="ring_frame" />
+                        <image id="spellBg" style="spell_bg" />
+                        <image id="playingCreatureSpell4" tooltip="Rise Zombie" style="playingCreatureSpell4" />
+                        <image id="spellBorder" style="spell_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <image id="spell5" tooltip="Rise Zombie" style="spell5" />
-                        <image id="spellBorder" style="ring_frame" />
+                        <image id="spellBg" style="spell_bg" />
+                        <image id="playingCreatureSpell5" tooltip="Rise Zombie" style="playingCreatureSpell5" />
+                        <image id="spellBorder" style="spell_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <image id="spell6" tooltip="Rise Zombie" style="spell6" />
-                        <image id="spellBorder" style="ring_frame" />
+                        <image id="spellBg" style="spell_bg" />
+                        <image id="playingCreatureSpell6" tooltip="Rise Zombie" style="playingCreatureSpell6" />
+                        <image id="spellBorder" style="spell_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <image id="spell7" tooltip="Rise Zombie" style="spell7" />
-                        <image id="spellBorder" style="ring_frame" />
+                        <image id="spellBg" style="spell_bg" />
+                        <image id="playingCreatureSpell7" tooltip="Rise Zombie" style="playingCreatureSpell7" />
+                        <image id="spellBorder" style="spell_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <image id="spell8" tooltip="Rise Zombie" style="spell8" />
-                        <image id="spellBorder" style="ring_frame" />
+                        <image id="spellBg" style="spell_bg" />
+                        <image id="playingCreatureSpell8" tooltip="Rise Zombie" style="playingCreatureSpell8" />
+                        <image id="spellBorder" style="spell_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <image id="spell9" tooltip="Rise Zombie" style="spell9" />
-                        <image id="spellBorder" style="ring_frame" />
+                        <image id="spellBg" style="spell_bg" />
+                        <image id="playingCreatureSpell9" tooltip="Rise Zombie" style="playingCreatureSpell9" />
+                        <image id="spellBorder" style="spell_frame" />
                     </stack>
                     <stack width="55" height="55">
-                        <image id="spell10" tooltip="Rise Zombie" style="spell10" />
-                        <image id="spellBorder" style="ring_frame" />
+                        <image id="spellBg" style="spell_bg" />
+                        <image id="playingCreatureSpell10" tooltip="Rise Zombie" style="playingCreatureSpell10" />
+                        <image id="spellBorder" style="spell_frame" />
                     </stack>
                 </table>
 

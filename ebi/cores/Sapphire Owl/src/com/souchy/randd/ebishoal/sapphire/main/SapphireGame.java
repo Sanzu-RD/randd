@@ -1,5 +1,6 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
@@ -9,100 +10,65 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.DepthTestAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
+import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHudSkin;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
+import com.souchy.randd.jade.combat.JadeCreature;
 
+import data.new1.CreatureModel;
+import gamemechanics.common.Vector2;
 import gamemechanics.models.Fight;
+import gamemechanics.models.entities.Creature;
+import gamemechanics.models.entities.Entity.Team;
 
 public class SapphireGame extends LapisGame {
 	
 	public static SapphireScreen gfx;
 
-	public static Fight context;
+	public static Fight fight;
 	
 	@Override
-	public void onCreateHook() {
-		// All graphics
+	public void init() {
 		gfx = new SapphireScreen(); 
 		
-		// Might use or not 
-		//Injector injector = Guice.createInjector(new SapphireModule());
 		
-		/*
-		// Context board and World model cache
-		FightContext context = new FightContext();
-		IBoard board = context.board;
+		// load creature and creature spells assets (creature i18n bundle, creature avatar, spells icons)
+//		SapphireOwl.data.creatures.values().forEach(model -> {
+//			SapphireResources.loadResources(model);
+//		});
 		
+		SapphireResources.loadResources(SapphireOwl.data);
 		
-		// Loading assets / models
-		AssetManager manager = new AssetManager();
-		List<FileHandle> modelFiles = modelDiscoverer.explore("data/cellModels");
-		modelFiles.forEach(f -> {
-			manager.load(f.name(), Model.class);
-		});
+		// need to load items resources and random spells resources (spells should already be loaded through creatures th)
+		// ...
 		
-		// testGenerateMapFile();
-		
-		// Loading a map
-		MapCache cache = new MapCache();
-		String path = Gdx.files.internal("data/maps/map1.json").file().getAbsolutePath();
-		MapData data = cache.get(path); //"data/maps/map1.json");
-		gfx.getWorld().cache.begin();
-		for(int i = 0; i < data.cells.length; i++) {
-			for(int j = 0; j < data.cells[i].length; j++) {
-				int modelID = data.getModel(i, j);
-				int height = data.getElevation(i, j);
-				boolean walk = data.isWalkable(i, j);
-				boolean los = data.isLos(i, j);
+		{
+			try {
+				Log.info("data.creatures : " + SapphireOwl.manager.getEntry().creatures.values() + ", " + SapphireOwl.manager.getEntry());
+				// create instances for players' creatures
+				int id = 1000;
+				CreatureModel model = SapphireOwl.data.creatures.get(id);
+				JadeCreature jade = new JadeCreature();
+				jade.creatureID = model.id();
+				jade.itemIDs = new int[4];
+				jade.spellIDs = new int[]{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+				for(int i = 0; i < jade.spellIDs.length; i++)
+					jade.spellIDs[i] += model.id();
+				Creature inst = new Creature(model, jade, SapphireOwl.data, new Vector2(0, 0));
 				
-				if(modelID != MatrixFlags.PositionningFlags.NoFlag.getID()) {
-					//Model model = manager.get("data/cellModels/" + modelID + ".g3dj");
-					ModelInstance instance = testModelGenerator(modelID); //new ModelInstance(model);
-					
-					EbiCell c = new EbiCell(i, j, height, walk, los, instance);
-					instance.transform.set(new Vector3(5 * i, 5 * j, height * 5), new Quaternion(0, 0, 0, 0));
-					
-					board.getCells().put(i, j, c);
-					gfx.getWorld().cache.add(c.model);
-				}
+				fight = new Fight();
+				fight.add(inst, Team.A);
+				fight.timeline.add(inst);
+				
+				SapphireHudSkin.play(inst);
+			} catch(Exception e) {
+				Log.error("SapphireOwl creature error : ", e);
+				Gdx.app.exit();
+				System.exit(0);
 			}
 		}
-		gfx.getWorld().cache.end();*/
 	}
-	
-	public static ModelInstance testModelGenerator(int id) {
-		ModelBuilder builder = new ModelBuilder();
-		long attributes = Usage.Position | Usage.Normal | Usage.ColorPacked;
-		Model model = builder.createBox(5f, 5f, 5f, getMat(id), attributes);
-		ModelInstance instance = new ModelInstance(model);
-		//instance.transform.set(new Vector3(5 * i + 1f, 5 * j + 1f, 0), new Quaternion(0, 0, 0, 0));
-		//getWorld().cache.add(instance);
-		return instance;
-	}
-	
-	private static Material getMat(int id) {
-		Material mat1 = new Material(
-			  //  IntAttribute.createCullFace(GL20.GL_FRONT),//For some reason, libgdx ModelBuilder makes boxes with faces wound in reverse, so cull FRONT
-			  //  new BlendingAttribute(1f), //opaque since multiplied by vertex color
-			    new DepthTestAttribute(true), //don't want depth mask or rear cubes might not show through
-			    ColorAttribute.createDiffuse(Color.GREEN));
-		Material mat2 = mat1.copy();
-		Material mat3 = mat1.copy();
-		Material mat4 = mat1.copy();
-		Material mat5 = mat1.copy();
-		mat2.set(ColorAttribute.createDiffuse(Color.PINK));
-		mat3.set(ColorAttribute.createDiffuse(Color.BROWN));
-		mat4.set(ColorAttribute.createDiffuse(Color.WHITE));
-		mat5.set(ColorAttribute.createDiffuse(Color.BLACK));
-		switch(id) {
-			case 1: return mat1;
-			case 2: return mat2;
-			case 3: return mat3;
-			case 4: return mat4;
-			default: return mat1;
-		}
-	}
-
 
 	@Override
 	public Screen getStartScreen() {

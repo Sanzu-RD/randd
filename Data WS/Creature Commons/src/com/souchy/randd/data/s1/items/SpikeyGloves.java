@@ -23,13 +23,19 @@ import gamemechanics.status.Status.Passive;
 
 public class SpikeyGloves extends Item {
 	
-	public SpikeyGloves() {
+	@Override
+	public Integer id() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void init() {
 		passives.add(new SpikeyGlovesPassive());
 		
 		stats.add(300, resource.life, mathMod.scl);
 		stats.add(20, element.globalEle, mathMod.scl);
 	}
-
 	
 	public static class SpikeyGlovesPassive extends Passive implements OnActionResolvedHandler {
 		private DmgEffect effect;
@@ -48,5 +54,7 @@ public class SpikeyGloves extends Item {
 			}
 		}
 	}
+
+
 
 }

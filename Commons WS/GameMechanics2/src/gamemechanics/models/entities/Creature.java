@@ -1,17 +1,19 @@
 package gamemechanics.models.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.souchy.randd.jade.combat.JadeCreature;
 
-import data.modules.AzurEntryPoint;
+import data.modules.AzurCache;
 import data.new1.CreatureModel;
 import data.new1.ItemCache;
 import data.new1.SpellCache;
 import data.new1.SpellModel;
+import gamemechanics.common.Vector2;
+import gamemechanics.models.Fight;
 import gamemechanics.models.Item;
-import gamemechanics.stats.NewStats;
-import gamemechanics.stats.StatTable;
+import gamemechanics.stats.Stats;
 
 public class Creature extends Entity {
 
@@ -25,7 +27,7 @@ public class Creature extends Entity {
 	/**
 	 * temporary calculated stats
 	 */
-	private NewStats stats; 
+	private Stats stats; 
 	/**
 	 * items
 	 */
@@ -36,11 +38,17 @@ public class Creature extends Entity {
 	public List<SpellModel> spellbook;
 	
 
-	public Creature(CreatureModel model, JadeCreature jade, AzurEntryPoint dep) {
+	public Creature(CreatureModel model, JadeCreature jade, AzurCache dep, Vector2 pos) {
 		this.model = model;
-		this.stats = new NewStats();
+		this.stats = new Stats();
+		this.spellbook = new ArrayList<>();
+		this.items = new ArrayList<>();
+		//this.fight = fight;
+		this.pos = pos;
+		
 		for(int si : jade.spellIDs) {
-			spellbook.add(dep.spells.get(si));
+			var s = dep.spells.get(si);
+			if(s != null) spellbook.add(s);
 //			for(var sm : model.spells) {
 //				if(sm.id() == si) {
 //					spellbook.add(sm); //new Spell(sm));
@@ -48,21 +56,22 @@ public class Creature extends Entity {
 //			}
 		}
 		for(int ii : jade.itemIDs) {
-			items.add(dep.items.get(ii));
+			var i = dep.items.get(ii);
+			if(i != null) items.add(i);
 		}
 	}
 	
 	/**
 	 * Same as getStats() except this one doesn't compile before
 	 */
-	public NewStats getTempStats() {
+	public Stats getTempStats() {
 		return stats;
 	}
 	/**
 	 * Same as getTempStats() except this one compiles them before returning
 	 */
 	@Override
-	public NewStats getStats() {
+	public Stats getStats() {
 		stats.compile(this);
 		return stats;
 	}

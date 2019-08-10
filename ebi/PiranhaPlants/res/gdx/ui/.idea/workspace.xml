@@ -2,14 +2,57 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3289a53a-125d-4777-a02b-797ef50a63c2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/CreatureModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/CreatureModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/SpellDiscoverer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/SpellDiscoverer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/SpellModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/SpellModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/models/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/models/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/models/entities/Creature.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/models/entities/Creature.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/models/entities/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/models/entities/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/stats/BaseSpellCost.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/old/stats/BaseSpellCost.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/stats/ConversionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/old/stats/ConversionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/stats/NewStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/stats/Stats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/stats/StatModifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/old/stats/StatModifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/stats/StatTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/old/stats/StatTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/res/creatures/types/necromancer/SummonSkeleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/res/creatures/types/necromancer/SummonSkeleton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/res/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/res/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/items/BlankSpellBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/items/BlankSpellBook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/items/SpikeyGloves.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/items/SpikeyGloves.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/SungjinModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/SungjinModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/SungjinModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/SungjinModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/Comet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/Comet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/GhostBird.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/GhostBird.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/GhostFish.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/GhostFish.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/GhostKnight.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/GhostKnight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/Hail.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/Hail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/IceShield.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/IceShield.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/IceWall.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/IceWall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/Revive.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/Revive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../EbiCore/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../EbiCore/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/main/LapisCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/main/LapisCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/main/LapisGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/main/LapisGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/world/Meshing.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/world/Meshing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shaders/postProcess.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../shaders/postProcess.fragment.glsl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sheet.lml" beforeDir="false" afterPath="$PROJECT_DIR$/sheet.lml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Amethyst/amethyst.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Amethyst/amethyst.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/components/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/components/LoginForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/data/CreatureSkin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/data/EbiCell.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/data/EbiCreatureData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/data/EbiCreatureTypeI18N.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/data/EbiSpellData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/sapphireowl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/sapphireowl.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHud.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/utils/SapphireBatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/utils/SapphireBatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/utils/SapphireHudSkin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/utils/SapphireHudSkin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireOwl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireOwl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/roundImage/RoundImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/ui/roundImage/RoundImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/roundImage/RoundImageLmlTag.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/ui/roundImage/RoundImageLmlTag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/roundImage/RoundImageLmlTagProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/ui/roundImage/RoundImageLmlTagProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ui/roundImage/RoundTextureRegion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/ui/roundImage/RoundTextureRegion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/module-info.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -23,12 +66,12 @@
     <favorites_list name="ui" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sheet.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+            <state relative-caret-position="238">
+              <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -36,7 +79,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lml.dtd">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-987">
+            <state relative-caret-position="247639">
               <caret line="14567" column="15" selection-start-line="14567" selection-start-column="10" selection-end-line="14567" selection-end-column="15" />
             </state>
           </provider>
@@ -54,8 +97,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sheet.atlas">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="762" column="14" lean-forward="true" selection-start-line="762" selection-start-column="14" selection-end-line="762" selection-end-column="14" />
+            <state relative-caret-position="12954">
+              <caret line="762" column="14" selection-start-line="762" selection-start-column="14" selection-end-line="762" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -64,7 +107,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>\</find>
       <find>title</find>
       <find>default-windo</find>
       <find>tool</find>
@@ -79,7 +121,6 @@
       <find>50</find>
       <find>udn</find>
       <find>toolt</find>
-      <find>image</find>
       <find>button</find>
       <find>skin</find>
       <find>default-round</find>
@@ -90,7 +131,12 @@
       <find>input</find>
       <find>ava2</find>
       <find>ava3</find>
-      <find>roundImage</find>
+      <find>style=&quot;spell</find>
+      <find>id=&quot;spell</find>
+      <find>Life</find>
+      <find>ring_frame</find>
+      <find>square_frame_bg</find>
+      <find>square_frame</find>
     </findStrings>
     <replaceStrings>
       <replace>/</replace>
@@ -103,6 +149,13 @@
       <replace>ava3</replace>
       <replace>ava1</replace>
       <replace>image</replace>
+      <replace>style=&quot;playingCreatureSpell</replace>
+      <replace>id=&quot;playingCreatureSpell</replace>
+      <replace>Mana</replace>
+      <replace>Move</replace>
+      <replace>square_frame</replace>
+      <replace>spell_bg</replace>
+      <replace>spell_frame</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -123,10 +176,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="-1507" />
-    <option name="y" value="47" />
-    <option name="width" value="1479" />
-    <option name="height" value="923" />
+    <option name="x" value="-1437" />
+    <option name="y" value="18" />
+    <option name="width" value="1398" />
+    <option name="height" value="927" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -136,7 +189,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -149,6 +201,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -191,19 +244,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1507" y="47" width="1479" height="923" extended-state="0" />
+    <frame x="-1437" y="18" width="1398" height="927" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" sideWeight="0.5005192" side_tool="true" weight="0.16791044" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49948078" visible="true" weight="0.1888654" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49948078" visible="true" weight="0.2032885" />
       <window_info id="Structure" order="1" sideWeight="0.5005192" side_tool="true" weight="0.16791044" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.5005192" side_tool="true" weight="0.16791044" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.30612245" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -211,14 +261,17 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Maven" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Maven" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
   <component name="editorHistoryManager">
@@ -291,9 +344,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sheet.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lml.dtd">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-987">
+        <state relative-caret-position="247639">
           <caret line="14567" column="15" selection-start-line="14567" selection-start-column="10" selection-end-line="14567" selection-end-column="15" />
         </state>
       </provider>
@@ -307,15 +367,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sheet.atlas">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="762" column="14" lean-forward="true" selection-start-line="762" selection-start-column="14" selection-end-line="762" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sheet.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="25" column="34" lean-forward="true" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
+        <state relative-caret-position="12954">
+          <caret line="762" column="14" selection-start-line="762" selection-start-column="14" selection-end-line="762" selection-end-column="14" />
         </state>
       </provider>
     </entry>

@@ -63,6 +63,10 @@ public class LoginForm { //extends VBox {
 	
 	@FXML
 	public void login(MouseEvent event) {
+		if(event == null) {
+			Log.error("Amethyst.LoginForm.login : event is null");
+			return;
+		}
 		if(event.getButton() == MouseButton.SECONDARY) {
 			AmethystApp.stage.setScene(AmethystApp.mainScene);
 			return;

@@ -4,8 +4,8 @@
     <!--ANT 1.7 is required                                        -->
     <!--define folder properties-->
     <property name="dir.buildfile" value="."/>
-    <property name="dir.workspace" value="${dir.buildfile}/.."/>
-	<property name="dir.git" value="F:/Users/Souchy/Desktop/Robyn/Git"/>
+    <property name="dir.workspace" value="F:/Users/Souchy/Desktop/Robyn/eclipse-workspaces/hidden workspaces/r and d/"/> <!-- ${dir.buildfile}/.."/> -->
+	<property name="dir.git" value="F:/Users/Souchy/Desktop/Robyn/Git/"/>
     <property name="dir.jarfile" value="G:/www/ebishoal"/>
     <property name="dir.lib" value="${dir.jarfile}/lib"/>
     <property name="dir.res" value="${dir.jarfile}/res"/>
@@ -36,7 +36,7 @@
             <fileset dir="${dir.git}/r and d/Commons WS/TealWaters/bin"/>
             <fileset dir="${dir.git}/r and d/Commons WS/Teal Net/bin"/>
             <fileset dir="${dir.git}/r and d/Plugin Prototyping WS/Modules/bin"/>
-            <fileset dir="${dir.workspace}/GameMechanics2/bin"/>
+            <fileset dir="${dir.git}/r and d/Commons WS/GameMechanics2/bin"/>
             <fileset dir="${dir.workspace}/Opaline/bin"/>
             <fileset dir="${dir.workspace}/Opal-commons/bin"/>
         </jar>

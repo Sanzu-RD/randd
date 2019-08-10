@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.ui.roundImage;
+package com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

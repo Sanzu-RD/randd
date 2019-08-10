@@ -92,7 +92,8 @@ void main() {
 		//finalColor.rgb *= vignette;
 		
 		// transparence only in the vignette around the map so it doesnt affect the board
-		finalColor.ra *= vignette;
+		finalColor.r *= vignette;
+		finalColor.a *= vignette;
 	}
 	
 	

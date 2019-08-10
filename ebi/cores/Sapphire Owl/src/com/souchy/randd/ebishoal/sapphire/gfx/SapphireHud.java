@@ -13,13 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.czyzby.lml.annotation.LmlActor;
+import com.github.czyzby.lml.parser.LmlParser;
 import com.github.czyzby.lml.vis.util.VisLml;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
-import com.souchy.randd.ebishoal.sapphire.gfx.utils.SapphireBatch;
-import com.souchy.randd.ebishoal.sapphire.gfx.utils.SapphireHudSkin;
-import com.souchy.randd.ebishoal.sapphire.ui.roundImage.RoundImageLmlTagProvider;
+import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImageLmlTagProvider;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireResources;
 
 public class SapphireHud extends LapisHud {
 
@@ -35,6 +35,10 @@ public class SapphireHud extends LapisHud {
 	@LmlActor("pageDownImage")
 	public Image pageDownImage;
 	
+	public static LmlParser parser;
+	public static SapphireHud single;
+	public static SapphireHudSkin skin;
+	public static I18NBundle i18n;
 	
 	public SapphireHud() {
 		// Stage(viewport, batch)
@@ -49,22 +53,29 @@ public class SapphireHud extends LapisHud {
 		batch.setShader(shader);
 
 		// Parser(actions, i18n, skin, tags)
-		var i18n = Gdx.files.internal("i18n/bundle");
-		var skin = new SapphireHudSkin(getStyleFile());
-		var parser = VisLml.parser()
+		i18n = I18NBundle.createBundle(Gdx.files.internal("i18n/bundle"));
+		skin = new SapphireHudSkin(getStyleFile());
+		parser = VisLml.parser()
 				// Registering global action container:
 				.actions("global", GlobalLMLActions.class)
 				// Adding localization support:
-				 .i18nBundle(I18NBundle.createBundle(i18n))
+				 .i18nBundle(i18n)
 				// Set default skin
 				.skin(skin) 
 				// Tags
 				.tag(new RoundImageLmlTagProvider(), "roundImage")
 				.build();
 		
-		parser.createView(this, getTemplateFile());
+		parser.createView(single = this, getTemplateFile());
 		
 		createListeners();
+	}
+	
+	public static void refresh() {
+		// var asd = SapphireHud.parser.createView(SapphireHud.single,SapphireHud.single.getTemplateFile());
+		//SapphireHud.parser.parseTemplate(SapphireHud.single.getTemplateFile());
+		SapphireHud.single.getStage().getActors().clear();
+		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), SapphireHud.single.getTemplateFile());
 	}
 	
 	@Override
