@@ -4,7 +4,7 @@ import data.new1.Effect;
 import data.new1.SpellModel;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
-import gamemechanics.stats.Stats;
+import gamemechanics.statics.stats.Stats;
 
 /**
  * These spells need to be registered to their creature type to be available to creatures of that type when the creature data is created

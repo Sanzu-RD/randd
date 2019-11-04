@@ -1,26 +1,17 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
-import java.io.File;
-import java.util.concurrent.TimeUnit;
+import java.nio.file.Paths;
 
 import com.badlogic.gdx.Files.FileType;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g3d.Material;
+import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
-import com.souchy.randd.jade.combat.JadeCreature;
 
 import data.modules.AzurCache;
 import data.modules.AzurManager;
-import data.new1.CreatureModel;
-import gamemechanics.common.Vector2;
-import gamemechanics.models.Fight;
-import gamemechanics.models.entities.Creature;
-import gamemechanics.models.entities.Entity.Team;
 
 public class SapphireOwl extends LapisCore { //implements EntryPoint {
 	
@@ -34,11 +25,12 @@ public class SapphireOwl extends LapisCore { //implements EntryPoint {
 	public static AzurCache data;
 	
 
+	// todo instance of black moonstone
 //	private static String ip = "192.168.2.15"; // default, but the real ip should come from main(String[] args)
 //	private static int port = 11000;
 //	private static boolean ssl = false;
-	// todo instance of black moonstone
 	
+	public static boolean isEclipse = false;
 
 	public static void main(String[] args) throws Exception {
 		// prob wont need this when we will hook Black Moonstone
@@ -49,14 +41,19 @@ public class SapphireOwl extends LapisCore { //implements EntryPoint {
 		// pass args to black moonstone directly 
 		// ...
 		// launch sapphire core
+		Log.info("SapphireOwl args : " + String.join(", ", args));
+		if(args.length > 0) Environment.root = Paths.get(args[0]); // first arg = root folder
+		if(args.length > 1) isEclipse = args[1].contentEquals("eclipse"); // second arg = isEclipse
+		Log.info(args[1] + ", isEclipse="+isEclipse);
 		launch(core);
 	}
 	
 	@Override
 	public void init() throws Exception {
 		super.init();
+		
 		// load sapphire config
-		conf = JsonConfig.readExternal(SapphireOwlConf.class, "./modules/");
+		conf = JsonConfig.readExternal(SapphireOwlConf.class, "modules/");
 
 		// need an event bus since this is an entry point
 		//bus = new EventBus();
@@ -66,10 +63,10 @@ public class SapphireOwl extends LapisCore { //implements EntryPoint {
 		data = manager.getEntry();
 		
 		// load all creatures data modules
-		manager.explore(new File("./data/"));
+		manager.explore(Environment.getFile("data/")); //new File("data/"));
 		manager.instantiateAll();
-		manager.getExecutors().shutdown();
-		manager.getExecutors().awaitTermination(1000, TimeUnit.MILLISECONDS);
+//		manager.getExecutors().shutdown();
+//		manager.getExecutors().awaitTermination(1000, TimeUnit.MILLISECONDS);
 	}
 	
 	@Override

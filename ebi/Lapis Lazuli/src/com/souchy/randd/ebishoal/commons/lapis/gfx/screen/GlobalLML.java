@@ -29,7 +29,7 @@ public class GlobalLML extends LmlApplicationListener {
 	}
 	
 	public GlobalLML() {
-		i18n = Gdx.files.internal("i18n/bundle");
+		i18n = Gdx.files.internal("res/i18n/bundle");
 		create();
 	}
 	

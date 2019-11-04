@@ -2,15 +2,9 @@ package com.souchy.randd.ebishoal.sapphire.main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.VertexAttributes.Usage;
-import com.badlogic.gdx.graphics.g3d.Material;
-import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
-import com.badlogic.gdx.graphics.g3d.attributes.DepthTestAttribute;
-import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.commons.lapis.main.LapisFiles;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHudSkin;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
@@ -30,8 +24,11 @@ public class SapphireGame extends LapisGame {
 	
 	@Override
 	public void init() {
-		gfx = new SapphireScreen(); 
+		if(SapphireOwl.isEclipse) {
+			Gdx.files = new LapisFiles(Environment.root.toString());//"G:/www/ebishoal/");
+		}
 		
+		gfx = new SapphireScreen(); 
 		
 		// load creature and creature spells assets (creature i18n bundle, creature avatar, spells icons)
 //		SapphireOwl.data.creatures.values().forEach(model -> {

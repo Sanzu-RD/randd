@@ -1,7 +1,7 @@
 package gamemechanics.ext;
 
 
-import gamemechanics.properties.Targetability;
+import gamemechanics.statics.properties.Targetability;
 
 public enum CellType {
 	Type00(0, 0, 0, 0), // block/wall/column/pillar

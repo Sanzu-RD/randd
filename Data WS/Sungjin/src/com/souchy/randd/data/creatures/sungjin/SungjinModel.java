@@ -1,21 +1,19 @@
 package com.souchy.randd.data.creatures.sungjin;
 
-import static gamemechanics.creatures.CreatureType.Black;
-import static gamemechanics.creatures.CreatureType.Blue;
-import static gamemechanics.creatures.CreatureType.Summoner;
+import static gamemechanics.statics.creatures.CreatureType.Black;
+import static gamemechanics.statics.creatures.CreatureType.Blue;
+import static gamemechanics.statics.creatures.CreatureType.Summoner;
 
 import com.google.common.collect.ImmutableList;
-import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.data.creatures.sungjin.spells.Comet;
 
 import data.new1.CreatureModel;
 import data.new1.SpellModel;
-import gamemechanics.creatures.CreatureType;
-import gamemechanics.stats.Modifier.mathMod;
-import gamemechanics.stats.Stats;
-import gamemechanics.stats.StatProperty;
-import gamemechanics.stats.StatProperty.resource;
-import gamemechanics.status.Status;
+import data.new1.timed.Status;
+import gamemechanics.statics.creatures.CreatureType;
+import gamemechanics.statics.stats.Stats;
+import gamemechanics.statics.stats.modifiers.mathMod;
+import gamemechanics.statics.stats.properties.Color;
+import gamemechanics.statics.stats.properties.Resource;
 
 public class SungjinModel extends CreatureModel {
 	
@@ -33,14 +31,14 @@ public class SungjinModel extends CreatureModel {
 	@Override
 	protected Stats initBaseStats() {
 		var stats = new Stats();
-		stats.add(1500d, resource.life, mathMod.flat);
-		stats.add(12, StatProperty.resource.mana, mathMod.flat);
-		stats.add(6, StatProperty.resource.move, mathMod.flat);
+		stats.add(1500d, Resource.life, mathMod.flat);
+		stats.add(12, Resource.mana, mathMod.flat);
+		stats.add(6, Resource.move, mathMod.flat);
 
-		stats.add(30, StatProperty.element.blue, mathMod.flat);
-		stats.add(30, StatProperty.element.blue, mathMod.scl);
-		stats.add(30, StatProperty.element.black, mathMod.flat);
-		stats.add(30, StatProperty.element.black, mathMod.scl);
+		stats.add(30, Color.blue, mathMod.flat);
+		stats.add(30, Color.blue, mathMod.scl);
+		stats.add(30, Color.black, mathMod.flat);
+		stats.add(30, Color.black, mathMod.scl);
 
 		return stats;
 	}

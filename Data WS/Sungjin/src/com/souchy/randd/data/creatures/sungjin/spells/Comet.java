@@ -2,10 +2,11 @@ package com.souchy.randd.data.creatures.sungjin.spells;
 
 import com.souchy.randd.data.creatures.sungjin.SungjinModel;
 
-import data.new1.*;
+import data.new1.Effect;
+import data.new1.SpellModel;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
-import gamemechanics.stats.Stats;
+import gamemechanics.statics.stats.Stats;
 
 public class Comet extends SpellModel {
 	

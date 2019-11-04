@@ -1,4 +1,4 @@
-package gamemechanics.creatures;
+package gamemechanics.statics.creatures;
 
 import com.google.inject.Inject;
 import com.souchy.randd.commons.tealwaters.commons.Namespace.I18NNamespace;

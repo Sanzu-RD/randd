@@ -12,7 +12,7 @@ import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import gamemechanics.models.entities.Cell;
-import gamemechanics.properties.Targetability;
+import gamemechanics.statics.properties.Targetability;
 
 public class MapData {
 	

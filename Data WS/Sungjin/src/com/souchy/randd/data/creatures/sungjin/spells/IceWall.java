@@ -6,7 +6,7 @@ import data.new1.Effect;
 import data.new1.SpellModel;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
-import gamemechanics.stats.Stats;
+import gamemechanics.statics.stats.Stats;
 
 public class IceWall extends SpellModel { // implements EbiSpellData {
 

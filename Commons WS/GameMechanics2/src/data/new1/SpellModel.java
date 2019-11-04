@@ -4,7 +4,7 @@ import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
-import gamemechanics.stats.Stats;
+import gamemechanics.statics.stats.Stats;
 
 public abstract class SpellModel {
 	

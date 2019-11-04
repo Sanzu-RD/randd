@@ -1,8 +1,8 @@
 package gamemechanics.data.status;
 
+import data.new1.timed.Status;
 import gamemechanics.events.OnLifeDmgInstance;
 import gamemechanics.events.OnLifeDmgInstance.OnLifeDmgInstanceHandler;
-import gamemechanics.status.Status;
 
 /** could also be coded as "do 1000% less damage" (basicmod, globalDmg, more, -1000) */
 public class Inoffensive extends Status implements OnLifeDmgInstanceHandler {

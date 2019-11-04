@@ -1,10 +1,10 @@
 package gamemechanics.data.status;
 
+import data.new1.timed.Status;
 import gamemechanics.models.Effect.StatsEffect;
-import gamemechanics.stats.StatModifier.BasicMod;
-import gamemechanics.stats.StatModifier.mo;
-import gamemechanics.stats.StatModifier.st;
-import gamemechanics.status.Status;
+import gamemechanics.statics.stats.StatModifier.BasicMod;
+import gamemechanics.statics.stats.StatModifier.mo;
+import gamemechanics.statics.stats.StatModifier.st;
 
 /**
  * Doubles the cost of walking

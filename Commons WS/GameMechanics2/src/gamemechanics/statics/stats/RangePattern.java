@@ -1,4 +1,4 @@
-package gamemechanics.stats;
+package gamemechanics.statics.stats;
 
 public enum RangePattern {
 

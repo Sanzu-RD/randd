@@ -1,4 +1,4 @@
-package gamemechanics.properties;
+package gamemechanics.statics.properties;
 
 import gamemechanics.common.Vector2;
 

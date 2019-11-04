@@ -1,9 +1,9 @@
 package gamemechanics.data.status;
 
+import data.new1.timed.Status;
 import gamemechanics.common.Constants;
 import gamemechanics.events.OnCanCastActionCheck;
 import gamemechanics.events.OnCanCastActionCheck.OnCanCastActionHandler;
-import gamemechanics.status.Status;
 
 public class Rooted extends Status implements OnCanCastActionHandler {
 	@Override

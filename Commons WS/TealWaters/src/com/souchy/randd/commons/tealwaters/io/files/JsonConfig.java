@@ -11,6 +11,7 @@ import java.time.ZonedDateTime;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers.Exclude;
 import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers.InstantAdapter;
 import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers.ZonedDateTimeAdapter;
@@ -77,12 +78,12 @@ public class JsonConfig {
 		String chosenPath = null;
 		if(filePaths == null || filePaths.length == 0) filePaths = new String[] { defaultPath };
 		for(var path : filePaths) 
-			if(new File(path).exists()) 
+			if(Environment.exists(path)) //new File(path).exists()) 
 				chosenPath = path;
 		if(chosenPath == null) chosenPath = defaultPath;
 		try {
 			//Log.info("readExternal filePath : " + filePath);
-			var file = FilesManager.getFileOutside(chosenPath + name(c));
+			var file = Environment.getFile(chosenPath + name(c)); //FilesManager.getFileOutside(chosenPath + name(c));
 			//Log.info("readExternal file : " + file);
 			var config = read(c, file.toPath());
 			//Log.info("readExternal config : " + file);

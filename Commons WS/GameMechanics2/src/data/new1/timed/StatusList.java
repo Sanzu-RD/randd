@@ -1,4 +1,4 @@
-package gamemechanics.status;
+package data.new1.timed;
 
 import java.util.HashMap;
 import java.util.Iterator;

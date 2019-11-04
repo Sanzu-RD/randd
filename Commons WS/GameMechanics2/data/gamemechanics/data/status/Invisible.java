@@ -1,8 +1,8 @@
 package gamemechanics.data.status;
 
+import data.new1.timed.Status;
 import gamemechanics.events.OnVisibilityCheck;
 import gamemechanics.events.OnVisibilityCheck.IsVisibleHandler;
-import gamemechanics.status.Status;
 
 /**
  * 

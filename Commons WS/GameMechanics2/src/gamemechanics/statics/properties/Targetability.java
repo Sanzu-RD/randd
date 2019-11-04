@@ -1,4 +1,4 @@
-package gamemechanics.properties;
+package gamemechanics.statics.properties;
 
 public enum Targetability {
 	CanBeWalkedOn,

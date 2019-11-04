@@ -3,8 +3,8 @@ package gamemechanics.data.effects.other;
 import data.new1.Effect;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.models.entities.Entity;
-import gamemechanics.stats.StatMod;
-import gamemechanics.stats.StatModConverter;
+import gamemechanics.statics.stats.StatMod;
+import gamemechanics.statics.stats.StatModConverter;
 
 public class StatEffect extends Effect {
 

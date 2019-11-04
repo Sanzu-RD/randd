@@ -1,78 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="homePane" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.ebishoal.amethyst.ui.tabs.Home">
-   <children>
-      <HBox fx:id="news" layoutX="70.0" layoutY="570.0" spacing="35.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="70.0">
-         <children>
-            <AnchorPane fx:id="new1" prefHeight="180.0" prefWidth="250.0" styleClass="thumbnail">
-               <children>
-                  <ImageView fitHeight="180.0" fitWidth="250.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <ImageView id="new_thumbnail_1" fx:id="new1_thumbnail" fitHeight="180.0" fitWidth="250.0" layoutX="34.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
-                     <image>
-                        <Image url="file:/G:/Assets/pack/fantasy%20bundle/rpgclassbadges/Badges_png/Badge_mage.png" />
-                     </image>
-                  </ImageView>
-                  <Label id="new_title_1" fx:id="new1_title" prefHeight="30.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </AnchorPane>
-            <AnchorPane fx:id="new2" prefHeight="180.0" prefWidth="250.0" styleClass="thumbnail">
-               <children>
-                  <ImageView fitHeight="180.0" fitWidth="250.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <ImageView id="new_thumbnail_2" fx:id="new2_thumbnail" fitHeight="180.0" fitWidth="250.0" layoutX="34.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
-                     <image>
-                        <Image url="file:/G:/Assets/pack/fantasy%20bundle/rpgclassbadges/Badges_png/Badge_assassin.PNG" />
-                     </image>
-                  </ImageView>
-                  <Label id="new_title_2" fx:id="new2_title" prefHeight="30.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </AnchorPane>
-            <AnchorPane fx:id="new3" prefHeight="180.0" prefWidth="250.0" styleClass="thumbnail">
-               <children>
-                  <ImageView fitHeight="180.0" fitWidth="250.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <ImageView id="new_thumbnail_3" fx:id="new3_thumbnail" fitHeight="180.0" fitWidth="250.0" layoutX="34.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
-                     <image>
-                        <Image url="file:/G:/Assets/pack/fantasy%20bundle/rpgclassbadges/Badges_png/Badge_paladin.PNG" />
-                     </image>
-                  </ImageView>
-                  <Label id="new_title_3" fx:id="new3_title" prefHeight="30.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-               </children>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </AnchorPane>
-         </children>
-      </HBox>
-      <StackPane fx:id="playBtn" alignment="BOTTOM_CENTER" layoutX="73.0" layoutY="107.0" onMouseClicked="#play" prefHeight="451.0" prefWidth="825.0" styleClass="playBtn">
-         <children>
-            <ImageView fx:id="playImg" fitHeight="455.0" fitWidth="825.0" pickOnBounds="true" preserveRatio="true" styleClass="playImg">
-               <image>
-                  <Image url="file:/G:/Assets/pack/fantasy%20bundle/tcgcardspack/Tex_portal_crop.PNG" />
-               </image>
+  <children>
+    <HBox fx:id="news" layoutX="70.0" layoutY="570.0" spacing="35.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="70.0">
+      <children>
+        <AnchorPane fx:id="new1" prefHeight="180.0" prefWidth="250.0" styleClass="thumbnail">
+          <children>
+            <ImageView fitHeight="180.0" fitWidth="250.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ImageView id="new_thumbnail_1" fx:id="new1_thumbnail" fitHeight="180.0" fitWidth="250.0" layoutX="34.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
+              <image>
+                <Image url="file:/G:/Assets/pack/fantasy%20bundle/rpgclassbadges/Badges_png/Badge_mage.png" />
+              </image>
             </ImageView>
-            <Label fx:id="playLbl" prefHeight="66.0" prefWidth="1062.0" text="Play" />
-         </children>
-         <cursor>
+            <Label id="new_title_1" fx:id="new1_title" prefHeight="30.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+          </children>
+          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor>
-      </StackPane>
-   </children>
-   <stylesheets>
-      <URL value="@../../css/commons.css" />
-      <URL value="@home.css" />
-   </stylesheets>
+          </cursor>
+        </AnchorPane>
+        <AnchorPane fx:id="new2" prefHeight="180.0" prefWidth="250.0" styleClass="thumbnail">
+          <children>
+            <ImageView fitHeight="180.0" fitWidth="250.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ImageView id="new_thumbnail_2" fx:id="new2_thumbnail" fitHeight="180.0" fitWidth="250.0" layoutX="34.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
+              <image>
+                <Image url="file:/G:/Assets/pack/fantasy%20bundle/rpgclassbadges/Badges_png/Badge_assassin.PNG" />
+              </image>
+            </ImageView>
+            <Label id="new_title_2" fx:id="new2_title" prefHeight="30.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+          </children>
+          <cursor>
+            <Cursor fx:constant="HAND" />
+          </cursor>
+        </AnchorPane>
+        <AnchorPane fx:id="new3" prefHeight="180.0" prefWidth="250.0" styleClass="thumbnail">
+          <children>
+            <ImageView fitHeight="180.0" fitWidth="250.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ImageView id="new_thumbnail_3" fx:id="new3_thumbnail" fitHeight="180.0" fitWidth="250.0" layoutX="34.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">
+              <image>
+                <Image url="file:/G:/Assets/pack/fantasy%20bundle/rpgclassbadges/Badges_png/Badge_paladin.PNG" />
+              </image>
+            </ImageView>
+            <Label id="new_title_3" fx:id="new3_title" prefHeight="30.0" text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+          </children>
+          <cursor>
+            <Cursor fx:constant="HAND" />
+          </cursor>
+        </AnchorPane>
+      </children>
+    </HBox>
+    <StackPane fx:id="playBtn" alignment="BOTTOM_CENTER" layoutX="73.0" layoutY="107.0" onMouseClicked="#play" prefHeight="451.0" prefWidth="825.0" styleClass="playBtn">
+      <children>
+        <ImageView fx:id="playImg" fitHeight="455.0" fitWidth="825.0" pickOnBounds="true" preserveRatio="true" styleClass="playImg">
+          <image>
+            <Image url="file:/G:/Assets/pack/fantasy%20bundle/tcgcardspack/Tex_portal_crop.PNG" />
+          </image>
+        </ImageView>
+        <GridPane style="-fx-border-color: black;" vgap="20.0">
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <children>
+            <VBox alignment="CENTER_LEFT" spacing="15.0" styleClass="playModes">
+              <children>
+                <Label prefHeight="66.0" prefWidth="1000.0" text="Normal" />
+                        <Label prefHeight="66.0" prefWidth="1000.0" text="Ranked" />
+              </children>
+              <GridPane.margin>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+              </GridPane.margin>
+            </VBox>
+                  <VBox alignment="CENTER" spacing="15.0" styleClass="playTeam" GridPane.columnIndex="1">
+                     <children>
+                <ImageView fitHeight="200.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="file:/G:/Assets/pack/fantasy%20bundle/spellbookmegapack/SpellBookPage01/SpellBook01_04.PNG" />
+                  </image>
+                </ImageView>
+                <Label alignment="BOTTOM_CENTER" text="MyDeck" />
+                     </children>
+                  </VBox>
+            <Label fx:id="playLbl" prefHeight="66.0" prefWidth="2000.0" styleClass="playLbl" text="Play" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+              <cursor>
+                <Cursor fx:constant="HAND" />
+              </cursor>
+            </Label>
+          </children>
+        </GridPane>
+      </children>
+    </StackPane>
+
+  </children>
+  <stylesheets>
+    <URL value="@../../css/commons.css" />
+    <URL value="@home.css" />
+  </stylesheets>
 </AnchorPane>

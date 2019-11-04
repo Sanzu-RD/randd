@@ -2,6 +2,7 @@ package data.new1;
 
 import com.souchy.randd.jade.combat.JadeEffect;
 
+import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Entity;
 
 /**
@@ -26,6 +27,12 @@ public abstract class Effect {
 		this.targetConditions = targetConditions;
 	}
 	
-	public abstract void apply(Entity caster, Entity target);
+	public abstract void apply(Entity caster, Cell target); //, Effect parent);
+	
+//	public abstract class SingleTargetEffect extends Effect {
+//		public SingleTargetEffect() {
+//			super(new int[1], 0);
+//		}
+//	}
 	
 }

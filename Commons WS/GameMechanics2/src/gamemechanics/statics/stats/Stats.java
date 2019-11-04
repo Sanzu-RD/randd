@@ -1,31 +1,34 @@
-package gamemechanics.stats;
+package gamemechanics.statics.stats;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import com.souchy.randd.commons.tealwaters.logging.Log;
-
-import data.new1.Effect;
 import gamemechanics.data.effects.other.StatEffect;
 import gamemechanics.models.entities.Creature;
+import gamemechanics.statics.stats.modifiers.Modifier;
+import gamemechanics.statics.stats.modifiers.mathMod;
+import gamemechanics.statics.stats.modifiers.resourceMod;
+import gamemechanics.statics.stats.properties.Color;
+import gamemechanics.statics.stats.properties.Resource;
+import gamemechanics.statics.stats.properties.SpellProperty;
+import gamemechanics.statics.stats.properties.StatProperty;
 
-import static gamemechanics.stats.StatProperty.*;
-import static gamemechanics.stats.StatProperty.resource.*;
-import static gamemechanics.stats.StatProperty.element.*;
-import static gamemechanics.stats.StatProperty.property.*;
-import static gamemechanics.stats.StatProperty.spellProperty.*;
-import static gamemechanics.stats.StatProperty.targetingProperty.*;
+import static gamemechanics.statics.stats.modifiers.mathMod.*;
+import static gamemechanics.statics.stats.modifiers.resourceMod.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static gamemechanics.stats.Modifier.*;
-import static gamemechanics.stats.Modifier.resourceMod.*;
-import static gamemechanics.stats.Modifier.eleMod.*;
-import static gamemechanics.stats.Modifier.mathMod.*;
-
 public class Stats {
 
+	/**
+	 * - Property
+	 * - compiled mod bits (tot = mod1 | mod2 | mod3...), each mod is 1 bit in the int
+	 * - value
+	 */
+	private Table<StatProperty, Integer, Double> table = HashBasedTable.create();
+	
 	private List<StatModConverter> tempConverters = new ArrayList<>();
+	
 	
 	public void compile(Creature target) {
 		// wipe everything except fight mods (used/lost resources)
@@ -38,8 +41,9 @@ public class Stats {
 			);
 		
 		target.getStatus().forEach(s -> {
-			for(var e : s.effects)
-				if(e instanceof StatEffect) e.apply(s.source, target);
+//			for(var e : s.effects)
+//				if(e instanceof StatEffect) e.apply(s.source, target, e);
+			s.stats.forEach(sm -> add(sm.value, sm.prop, sm.mods));
 		});
 
 		// applique les conversions et nullifiers de stats
@@ -75,12 +79,6 @@ public class Stats {
 		});
 	}
 	
-	/**
-	 * - Property
-	 * - compiled mod bits (tot = mod1 | mod2 | mod3...), each mod is 1 bit in the int
-	 * - value
-	 */
-	private Table<StatProperty, Integer, Double> table = HashBasedTable.create();
 
 	private void set(double value, StatProperty p, Modifier... mods) {
 		table.put(p, Modifier.compile(mods), value);
@@ -110,7 +108,7 @@ public class Stats {
 	 * @param r what resource
 	 * @param shield if we want the value of the resource's shield instead
 	 */
-	public int getResourceFightMod(resource r, boolean shield) {
+	public int getResourceFightMod(Resource r, boolean shield) {
 		if(shield) 
 			return get(r, fight, resourceMod.shield).intValue();
 		else
@@ -121,7 +119,7 @@ public class Stats {
 	 * @param r what resource
 	 * @param shield if we want the value of the resource's shield instead
 	 */
-	public int getResourceCurrent(resource r, boolean shield) {
+	public int getResourceCurrent(Resource r, boolean shield) {
 		return getResourceMax(r) + getResourceFightMod(r, shield);
 		//return table.get(r.val(), 1).intValue();
 	}
@@ -130,7 +128,7 @@ public class Stats {
 	 * The sum of stats give the max value of the resource while the fight mod gives the difference to the max value
 	 * shield have no max value
 	 */
-	public int getResourceMax(resource r) {
+	public int getResourceMax(Resource r) {
 		var a = get(r, flat) * get(r, scl) * get(r, more);
 		return (int) Math.round(a);
 	}
@@ -138,19 +136,19 @@ public class Stats {
 	/**
 	 * Gets the total of an Element + GlobalEle on the chosen mods
 	 */
-	public double getEle(element e, Modifier... mods) {
-		double a = get(element.globalEle, mods) + get(e, mods);
+	public double getEle(Color e, Modifier... mods) {
+		double a = get(Color.globalEle, mods) + get(e, mods);
 		return (int) Math.round(a);
 	}
 	
 	
-	public double getCostMods(resource r, mathMod m) {
+	public double getCostMods(Resource r, mathMod m) {
 		return get(r, resourceMod.cost, m);
 	}
 	/** action cost for each resource genre. array must include every resources. unsused resources have cost of 0. */
 	public void setCosts(int[] costs) {
-		for(int i = 0; i < resource.values().length; i++) 
-			set(costs[i], resource.values()[i], cost, flat);
+		for(int i = 0; i < Resource.values().length; i++) 
+			set(costs[i], Resource.values()[i], cost, flat);
 	}
 	
 
@@ -165,15 +163,15 @@ public class Stats {
 	 * @param maxRangePattern - made from rangePattern enum (ex : pattern = line | diago | square)
 	 */
 	public void setSpellProperies(boolean isInstant, int cooldown, int maxCastsPerTurn, int maxCastsPerTurnPerTarget, int minRange, int maxRange, int minRangePattern, int maxRangePattern) {
-		set(isInstant ? 1 : 0, spellProperty.isInstant, bool);
-		set(minRangePattern, spellProperty.minRangePattern, flat);
-		set(maxRangePattern, spellProperty.maxRangePattern, flat);
+		set(isInstant ? 1 : 0, SpellProperty.isInstant, bool);
+		set(minRangePattern, SpellProperty.minRangePattern, flat);
+		set(maxRangePattern, SpellProperty.maxRangePattern, flat);
 		
-		set(cooldown, spellProperty.cooldown, flat);
-		set(maxCastsPerTurn, spellProperty.maxCastsPerTurn, flat);
-		set(maxCastsPerTurnPerTarget, spellProperty.maxCastsPerTurnPerTarget, flat);
-		set(minRange, spellProperty.minRange, flat);
-		set(maxRange, spellProperty.maxRange, flat);
+		set(cooldown, SpellProperty.cooldown, flat);
+		set(maxCastsPerTurn, SpellProperty.maxCastsPerTurn, flat);
+		set(maxCastsPerTurnPerTarget, SpellProperty.maxCastsPerTurnPerTarget, flat);
+		set(minRange, SpellProperty.minRange, flat);
+		set(maxRange, SpellProperty.maxRange, flat);
 	}
 
 	

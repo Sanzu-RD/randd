@@ -8,7 +8,7 @@ import com.google.common.base.Predicate;
 import gamemechanics.models.Board;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Entity;
-import gamemechanics.properties.Orientation;
+import gamemechanics.statics.properties.Orientation;
 
 public class Pathfinding {
 	

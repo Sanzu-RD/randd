@@ -13,7 +13,7 @@ import data.new1.SpellModel;
 import gamemechanics.common.Vector2;
 import gamemechanics.models.Fight;
 import gamemechanics.models.Item;
-import gamemechanics.stats.Stats;
+import gamemechanics.statics.stats.Stats;
 
 public class Creature extends Entity {
 

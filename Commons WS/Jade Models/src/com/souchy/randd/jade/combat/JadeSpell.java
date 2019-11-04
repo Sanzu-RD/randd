@@ -9,7 +9,7 @@ public interface JadeSpell {
 	 * 
 	 *********/
 	/** resource costs (life, mana, movement usually) */
-	public int[] costs();
+	public SpellCost[] costs();
 	public boolean isInstant();
 	public boolean needsLineOfSight();
 	public boolean onlyInLine();
@@ -25,5 +25,11 @@ public interface JadeSpell {
 	public int[] getInta(SpellProperty prop);
 	
 	public JadeEffect[] effects();
+	
+	public class SpellCost {
+		StatProperty prop;
+		Modifier mod;
+		int val;
+	}
 	
 }

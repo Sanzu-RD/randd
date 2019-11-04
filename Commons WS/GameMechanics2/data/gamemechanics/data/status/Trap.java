@@ -2,12 +2,12 @@ package gamemechanics.data.status;
 
 import java.util.List;
 
+import data.new1.timed.Status;
 import gamemechanics.events.OnEnterCell;
 import gamemechanics.events.OnEnterCell.OnEnterCellHandler;
 import gamemechanics.models.Effect.CellEffect;
 import gamemechanics.models.Effect.CreatureEffect;
 import gamemechanics.models.entities.Cell;
-import gamemechanics.status.Status;
 
 public abstract class Trap extends Status implements OnEnterCellHandler {
 

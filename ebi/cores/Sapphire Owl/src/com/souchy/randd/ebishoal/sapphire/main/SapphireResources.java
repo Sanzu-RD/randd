@@ -1,31 +1,16 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
-import java.util.stream.Collectors;
-
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
-import com.badlogic.gdx.assets.loaders.resolvers.ExternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.github.czyzby.lml.parser.LmlData;
-import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
-import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
-import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
 
 import data.modules.AzurCache;
-import data.new1.CreatureModel;
-import gamemechanics.creatures.CreatureType;
-import gamemechanics.models.entities.Creature;
-import gamemechanics.stats.Modifier;
-import gamemechanics.stats.Modifier.mathMod;
-import gamemechanics.stats.StatProperty.element;
-import gamemechanics.stats.StatProperty.resource;
+import gamemechanics.statics.creatures.CreatureType;
 
 /**
  * 

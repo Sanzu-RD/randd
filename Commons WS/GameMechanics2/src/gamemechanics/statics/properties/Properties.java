@@ -1,4 +1,4 @@
-package gamemechanics.properties;
+package gamemechanics.statics.properties;
 
 
 public class Properties {

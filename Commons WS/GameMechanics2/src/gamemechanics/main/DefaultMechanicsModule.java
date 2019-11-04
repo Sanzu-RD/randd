@@ -2,8 +2,8 @@ package gamemechanics.main;
 
 import com.google.inject.AbstractModule;
 
-import gamemechanics.creatures.CreatureType;
-import gamemechanics.creatures.CreatureType.CreatureTypeI18N;
+import gamemechanics.statics.creatures.CreatureType;
+import gamemechanics.statics.creatures.CreatureType.CreatureTypeI18N;
 
 public class DefaultMechanicsModule extends AbstractModule {
 	

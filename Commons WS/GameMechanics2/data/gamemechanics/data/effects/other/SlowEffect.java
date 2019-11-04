@@ -13,8 +13,8 @@ import gamemechanics.models.Spell;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.models.entities.Entity;
-import gamemechanics.stats.BaseSpellCost;
-import gamemechanics.stats.StatModifier.st;
+import gamemechanics.statics.stats.BaseSpellCost;
+import gamemechanics.statics.stats.StatModifier.st;
 
 public class SlowEffect extends Effect<Creature> {
 

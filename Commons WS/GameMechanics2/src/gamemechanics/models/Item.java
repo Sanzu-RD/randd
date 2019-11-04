@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.new1.Effect;
+import data.new1.timed.Status;
+import data.new1.timed.Status.Passive;
 import gamemechanics.models.entities.Creature;
-import gamemechanics.stats.Stats;
-import gamemechanics.status.Status;
-import gamemechanics.status.Status.Passive;
+import gamemechanics.statics.stats.Stats;
 
 public abstract class Item {
 	

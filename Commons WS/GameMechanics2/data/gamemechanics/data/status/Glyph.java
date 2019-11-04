@@ -2,12 +2,12 @@ package gamemechanics.data.status;
 
 import java.util.List;
 
+import data.new1.timed.Status;
 import gamemechanics.events.OnEnterCell.OnEnterCellHandler;
 import gamemechanics.events.OnLeaveCell.OnLeaveCellHandler;
 import gamemechanics.events.OnTurnEnd.OnTurnEndHandler;
 import gamemechanics.events.OnTurnStart.OnTurnStartHandler;
 import gamemechanics.models.entities.Cell;
-import gamemechanics.status.Status;
 
 /**
  * 

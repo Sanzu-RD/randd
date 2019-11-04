@@ -1,8 +1,8 @@
 package gamemechanics.data.effects.status;
 
+import data.new1.timed.Status;
 import gamemechanics.models.Effect;
 import gamemechanics.models.entities.Entity;
-import gamemechanics.status.Status;
 
 /** One-shot effect */
 public class RemoveStatusEffect extends Effect<Entity> {

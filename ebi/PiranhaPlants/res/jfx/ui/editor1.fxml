@@ -446,7 +446,22 @@
             </Tab>
             <Tab id="spellTab" closable="false" text="Spells">
                <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="24.0" layoutY="35.0" spacing="15.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <VBox fx:id="left" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" spacing="10.0">
+                                 <children>
+                                    <Label styleClass="title4" text="Class" />
+                                    <ListView prefHeight="250.0" />
+                                    <Label styleClass="title4" text="Spell" />
+                                    <ListView prefHeight="250.0" />
+                                 </children>
+                              </VBox>
+                              <fx:include source="rainbow/properties_spell.fxml" />
+                           </children>
+                        </HBox>
+                     </children></AnchorPane>
                </content>
             </Tab>
          </tabs>

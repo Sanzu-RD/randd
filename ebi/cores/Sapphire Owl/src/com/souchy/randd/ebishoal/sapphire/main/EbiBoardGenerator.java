@@ -5,7 +5,7 @@ import gamemechanics.ext.CellType;
 import gamemechanics.ext.MapData;
 import gamemechanics.models.Board;
 import gamemechanics.models.entities.Cell;
-import gamemechanics.properties.Targetability;
+import gamemechanics.statics.properties.Targetability;
 
 public class EbiBoardGenerator extends BoardGenerator {
 	

@@ -1,4 +1,4 @@
-package gamemechanics.stats;
+package gamemechanics.statics.stats.modifiers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,31 +34,6 @@ public interface Modifier {
 	 */
 	public default boolean has(int tot) {
 		return (tot & val()) > 0;
-	}
-	
-	public static enum resourceMod implements Modifier {
-		cost, shield, 
-		/** fight mod is the sum of everything used/healed/lost in a resource */
-		fight;
-		private resourceMod() { 
-			ModifierID.register(this); 
-		}
-	}
-	
-	public static enum eleMod implements Modifier {
-		affinity, res, pen,
-		dmg, heal,
-		summon;
-		private eleMod() {
-			ModifierID.register(this);
-		}
-	}
-	
-	public static enum mathMod implements Modifier {
-		flat, scl, more, bool;
-		private mathMod() {
-			ModifierID.register(this);
-		}
 	}
 	
 }

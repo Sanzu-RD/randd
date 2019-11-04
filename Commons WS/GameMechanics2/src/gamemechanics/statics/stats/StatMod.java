@@ -1,4 +1,7 @@
-package gamemechanics.stats;
+package gamemechanics.statics.stats;
+
+import gamemechanics.statics.stats.modifiers.Modifier;
+import gamemechanics.statics.stats.properties.StatProperty;
 
 public class StatMod {
 	

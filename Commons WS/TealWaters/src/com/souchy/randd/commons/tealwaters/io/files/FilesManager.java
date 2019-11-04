@@ -55,9 +55,9 @@ public class FilesManager {
 		return getClassLoader().getResources(name);
 	}
 	
-	public static File getFileOutside(String name) {
-		return new File(name);
-	}
+//	public static File getFileOutside(String name) {
+//		return new File(name);
+//	}
 	
 	public static boolean hasExtension(File fileName, String extension) {
 		return hasExtension(fileName.getName(), extension);

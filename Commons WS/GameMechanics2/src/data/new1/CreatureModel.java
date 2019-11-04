@@ -2,9 +2,9 @@ package data.new1;
 
 import com.google.common.collect.ImmutableList;
 
-import gamemechanics.creatures.CreatureType;
-import gamemechanics.stats.Stats;
-import gamemechanics.status.Status;
+import data.new1.timed.Status;
+import gamemechanics.statics.creatures.CreatureType;
+import gamemechanics.statics.stats.Stats;
 
 public abstract class CreatureModel {
 

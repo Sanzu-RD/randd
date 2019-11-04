@@ -1,72 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="com/souchy/randd/ebishoal/sapphire/models/EbiCell.java|com/souchy/randd/ebishoal/sapphire/ui_old/|com/souchy/randd/ebishoal/sapphire/data/EbiBoard.java|com/souchy/randd/ebishoal/sapphire/data/EbiCell.java|com/souchy/randd/ebishoal/sapphire/data/EbiCharacter.java|com/souchy/randd/ebishoal/sapphire/ui/SapphireViewport.java|com/souchy/randd/ebishoal/sapphire/data/|com/souchy/randd/ebishoal/sapphire/main/SapphireModule.java" kind="src" path="src"/>
+	<classpathentry excluding="com/souchy/randd/ebishoal/sapphire/models/EbiCell.java|com/souchy/randd/ebishoal/sapphire/ui_old/|com/souchy/randd/ebishoal/sapphire/data/EbiBoard.java|com/souchy/randd/ebishoal/sapphire/data/EbiCell.java|com/souchy/randd/ebishoal/sapphire/data/EbiCharacter.java|com/souchy/randd/ebishoal/sapphire/ui/SapphireViewport.java|com/souchy/randd/ebishoal/sapphire/data/|com/souchy/randd/ebishoal/sapphire/main/SapphireModule.java" kind="src" path="src">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="F:/Users/Souchy/Desktop/Robyn/Git/res/libs gdx/natives"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="src" path="data"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/GameMechanics2">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Modules">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/EbiCore">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/EbiCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GameMechanics2"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Modules"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LML">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DB">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX2">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LML"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DB"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -6,8 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
@@ -19,12 +19,12 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireResources;
 
-import gamemechanics.creatures.CreatureType;
 import gamemechanics.models.entities.Creature;
-import gamemechanics.stats.Modifier;
-import gamemechanics.stats.Modifier.mathMod;
-import gamemechanics.stats.StatProperty.element;
-import gamemechanics.stats.StatProperty.resource;
+import gamemechanics.statics.creatures.CreatureType;
+import gamemechanics.statics.stats.modifiers.Modifier;
+import gamemechanics.statics.stats.modifiers.Modifier.mathMod;
+import gamemechanics.statics.stats.properties.StatProperty.element;
+import gamemechanics.statics.stats.properties.StatProperty.resource;
 
 /**
  * 
@@ -36,11 +36,11 @@ public class SapphireHudSkin extends Skin {
 	public SapphireHudSkin(FileHandle file) {
 		super(file);
 
-		add("spell_bg", new Texture(Gdx.files.internal("gdx/ui/res/borders/spell_bg.png"), true));
+		add("spell_bg", new Texture(Gdx.files.internal("res/gdx/ui/res/borders/spell_bg.png"), true));
 		add("spell_frame", new Texture(Gdx.files.absolute("G:/Assets/test/blackborder.png"), true));
-		add("ring_frame", new Texture(Gdx.files.internal("gdx/ui/res/borders/ring_frame.PNG"), true));
-		add("up", new Texture(Gdx.files.internal("gdx/ui/res/buttons/slider_02_03.png"), true));
-		add("down", new Texture(Gdx.files.internal("gdx/ui/res/buttons/slider_02_04.png"), true));
+		add("ring_frame", new Texture(Gdx.files.internal("res/gdx/ui/res/borders/ring_frame.PNG"), true));
+		add("up", new Texture(Gdx.files.internal("res/gdx/ui/res/buttons/slider_02_03.png"), true));
+		add("down", new Texture(Gdx.files.internal("res/gdx/ui/res/buttons/slider_02_04.png"), true));
 		add("defaultTexture", new Texture(Gdx.files.absolute("G:/Assets/test/default.png"), true));
 		
 		this.getAll(Texture.class).values().forEach(t -> t.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear));

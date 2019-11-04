@@ -1,6 +1,5 @@
 module GameMechanics2 {
 	exports gamemechanics.common;
-	exports gamemechanics.creatures;
 	exports gamemechanics.data.status;
 	exports gamemechanics.data.spells;
 	exports gamemechanics.data.effects.status;
@@ -11,11 +10,16 @@ module GameMechanics2 {
 	exports gamemechanics.ext;
 	exports gamemechanics.models;
 	exports gamemechanics.models.entities;
-	exports gamemechanics.properties;
-	exports gamemechanics.stats;
-	exports gamemechanics.status;
+	exports gamemechanics.statics.creatures;
+	exports gamemechanics.statics.filters;
+	exports gamemechanics.statics.properties;
+	exports gamemechanics.statics.stats;
+	exports gamemechanics.statics.stats.properties;
+	exports gamemechanics.statics.stats.modifiers;
+	//exports gamemechanics.status;
 	//exports data;
 	exports data.new1;
+	exports data.new1.timed;
 	exports data.modules;
 	
 	requires transitive com.google.common;

@@ -16,10 +16,9 @@ import com.github.czyzby.lml.annotation.LmlActor;
 import com.github.czyzby.lml.parser.LmlParser;
 import com.github.czyzby.lml.vis.util.VisLml;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImageLmlTagProvider;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireResources;
 
 public class SapphireHud extends LapisHud {
 
@@ -53,7 +52,7 @@ public class SapphireHud extends LapisHud {
 		batch.setShader(shader);
 
 		// Parser(actions, i18n, skin, tags)
-		i18n = I18NBundle.createBundle(Gdx.files.internal("i18n/bundle"));
+		i18n = I18NBundle.createBundle(Gdx.files.internal("res/i18n/bundle"));
 		skin = new SapphireHudSkin(getStyleFile());
 		parser = VisLml.parser()
 				// Registering global action container:

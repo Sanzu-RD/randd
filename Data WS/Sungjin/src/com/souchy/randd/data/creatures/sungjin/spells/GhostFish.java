@@ -7,7 +7,7 @@ import data.new1.Effect;
 import data.new1.SpellModel;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
-import gamemechanics.stats.Stats;
+import gamemechanics.statics.stats.Stats;
 
 public class GhostFish  extends SpellModel { //implements EbiSpellData {
 	
@@ -36,7 +36,7 @@ public class GhostFish  extends SpellModel { //implements EbiSpellData {
 	@Override
 	public void onCast(Creature caster, Cell target) {
 		// TODO Auto-generated method stub
-		
+		new SummonEffect();
 	}
 
 	@Override

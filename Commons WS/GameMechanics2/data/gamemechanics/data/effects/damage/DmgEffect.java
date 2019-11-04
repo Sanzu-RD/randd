@@ -7,11 +7,11 @@ import java.util.Map;
 import gamemechanics.models.Effect;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.models.entities.Entity;
-import gamemechanics.stats.StatModifier;
-import gamemechanics.stats.StatTable;
-import gamemechanics.stats.StatModifier.BasicMod;
-import gamemechanics.stats.StatModifier.mo;
-import gamemechanics.stats.StatModifier.st;
+import gamemechanics.statics.stats.StatModifier;
+import gamemechanics.statics.stats.StatTable;
+import gamemechanics.statics.stats.StatModifier.BasicMod;
+import gamemechanics.statics.stats.StatModifier.mo;
+import gamemechanics.statics.stats.StatModifier.st;
 
 public class DmgEffect extends Effect<Creature> {
 	

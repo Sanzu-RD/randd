@@ -1,6 +1,6 @@
 package gamemechanics.data.status;
 
-import gamemechanics.status.Status;
+import data.new1.timed.Status;
 
 public class Untargetable extends Status {
 	@Override
