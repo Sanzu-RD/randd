@@ -2,12 +2,11 @@ package gamemechanics.statics.stats;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import gamemechanics.data.effects.other.StatEffect;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.stats.modifiers.Modifier;
 import gamemechanics.statics.stats.modifiers.mathMod;
 import gamemechanics.statics.stats.modifiers.resourceMod;
-import gamemechanics.statics.stats.properties.Color;
+import gamemechanics.statics.stats.properties.Element;
 import gamemechanics.statics.stats.properties.Resource;
 import gamemechanics.statics.stats.properties.SpellProperty;
 import gamemechanics.statics.stats.properties.StatProperty;
@@ -136,8 +135,8 @@ public class Stats {
 	/**
 	 * Gets the total of an Element + GlobalEle on the chosen mods
 	 */
-	public double getEle(Color e, Modifier... mods) {
-		double a = get(Color.globalEle, mods) + get(e, mods);
+	public double getEle(Element e, Modifier... mods) {
+		double a = get(Element.globalEle, mods) + get(e, mods);
 		return (int) Math.round(a);
 	}
 	

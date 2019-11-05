@@ -16,7 +16,7 @@ public class StatusList {
 	
 	public void add(Status s) {
 		if(has(s.getClass())) {
-			get(s.getClass()).stackAdd(s.stacks);
+			get(s.getClass()).fuse(s); //.stackAdd(s.stacks);
 		} else {
 			statuses.put(s.getClass(), s);
 		}

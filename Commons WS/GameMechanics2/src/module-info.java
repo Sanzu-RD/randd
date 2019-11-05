@@ -10,7 +10,8 @@ module GameMechanics2 {
 	exports gamemechanics.ext;
 	exports gamemechanics.models;
 	exports gamemechanics.models.entities;
-	exports gamemechanics.statics.creatures;
+	//exports gamemechanics.statics.creatures;
+	exports gamemechanics.statics;
 	exports gamemechanics.statics.filters;
 	exports gamemechanics.statics.properties;
 	exports gamemechanics.statics.stats;

@@ -11,7 +11,7 @@ public class DefaultMechanicsModule extends AbstractModule {
 	protected void configure() {
 		bind(CreatureTypeI18N.class).to(CreatureTypeI18N.class);
 		
-		requestStaticInjection(CreatureType.class);
+		requestStaticInjection(CreatureTypeModel.class);
 	}
 	
 	

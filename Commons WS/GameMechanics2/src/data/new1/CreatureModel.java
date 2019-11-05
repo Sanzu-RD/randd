@@ -1,9 +1,12 @@
 package data.new1;
 
+import java.util.List;
+
 import com.google.common.collect.ImmutableList;
 
 import data.new1.timed.Status;
-import gamemechanics.statics.creatures.CreatureType;
+import gamemechanics.statics.CreatureType;
+import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.Stats;
 
 public abstract class CreatureModel {
@@ -19,24 +22,29 @@ public abstract class CreatureModel {
 	 */
 	public abstract String getStrID();
 	
-	public final ImmutableList<CreatureType> colors;
-	public final ImmutableList<CreatureType> types;
-	public final ImmutableList<SpellModel> spells;
-	public final ImmutableList<Status> statuses;
+//	public final ImmutableList<Element> elements;
+//	public final ImmutableList<CreatureType> types;
+//	public final ImmutableList<SpellModel> spells;
+//	public final ImmutableList<Status> statuses;
 	public final Stats baseStats;
 	
 	public CreatureModel() {
-		colors = initColors();
-		types = initTypes();
-		spells = initSpells();
-		statuses = initStatuses();
+//		elements = initAffinities();
+//		types = initTypes();
+		initTags();
+//		spells = initSpells();
+//		statuses = initStatuses();
 		baseStats = initBaseStats();
 	}
 	
-	protected abstract ImmutableList<CreatureType> initColors();
-	protected abstract ImmutableList<CreatureType> initTypes();
-	protected abstract ImmutableList<SpellModel> initSpells();
-	protected abstract ImmutableList<Status> initStatuses();
+//	protected abstract ImmutableList<Element> initAffinities();
+//	protected abstract ImmutableList<CreatureType> initTypes();
+	/**
+	 * 
+	 */
+	protected abstract List<Tag> initTags();
+//	protected abstract ImmutableList<SpellModel> initSpells();
+//	protected abstract ImmutableList<Status> initStatuses();
 	protected abstract Stats initBaseStats();
 	
 	// i18n : name, description : in res/creatures/creatureID/i18n/bundle_*.properties

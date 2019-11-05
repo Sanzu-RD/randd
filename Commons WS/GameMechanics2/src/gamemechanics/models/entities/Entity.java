@@ -1,10 +1,7 @@
 package gamemechanics.models.entities;
 
-import data.new1.timed.Buff;
-import data.new1.timed.BuffList;
 import data.new1.timed.StatusList;
 import gamemechanics.common.Vector2;
-import gamemechanics.events.OnVisibilityCheck;
 import gamemechanics.models.Fight;
 import gamemechanics.statics.properties.Properties;
 import gamemechanics.statics.properties.Targetability;
@@ -30,9 +27,6 @@ public abstract class Entity {
 
 	/** Statuses */
 	private StatusList statuses;
-	
-	/** Buffs */
-	private BuffList buffs;
 	
 	/** Properties like pathing,  line of sights, visibility, orientation */
 	public Properties properties;
@@ -81,9 +75,6 @@ public abstract class Entity {
 	 */
 	public StatusList getStatus() {
 		return statuses; //new StatusList();
-	}
-	public BuffList getBuffs() {
-		return buffs;
 	}
 	
 	public Cell getCell() {

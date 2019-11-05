@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="com/souchy/randd/jade/meta/ObjectId.java|com/souchy/randd/jade/oldcombat/" kind="src" path="src"/>
+	<classpathentry excluding="com/souchy/randd/jade/meta/ObjectId.java|com/souchy/randd/jade/oldcombat/|com/souchy/randd/jade/combat/JadeCreature.java|com/souchy/randd/jade/combat/JadeEffect.java|com/souchy/randd/jade/combat/JadeSpell.java|com/souchy/randd/jade/combat/EffectProperty.java|com/souchy/randd/jade/combat/SpellProperty.java" kind="src" path="src"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters">
 		<attributes>
 			<attribute name="module" value="true"/>
