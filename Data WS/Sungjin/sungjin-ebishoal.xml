@@ -30,6 +30,8 @@
 				<include name="module.info"/>
 			</fileset>
             <!-- <fileset dir="${dir.git}/r and d/Commons WS/TealWaters/bin"/> -->
+        	
+            <fileset dir="${dir.git}/r and d/Data WS/Creature Commons/bin"/> 
         </jar>
         	
 		<!-- Delete libs -->

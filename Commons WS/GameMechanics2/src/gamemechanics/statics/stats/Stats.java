@@ -3,16 +3,17 @@ package gamemechanics.statics.stats;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import gamemechanics.models.entities.Creature;
+import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.modifiers.Modifier;
 import gamemechanics.statics.stats.modifiers.mathMod;
 import gamemechanics.statics.stats.modifiers.resourceMod;
-import gamemechanics.statics.stats.properties.Element;
 import gamemechanics.statics.stats.properties.Resource;
-import gamemechanics.statics.stats.properties.SpellProperty;
 import gamemechanics.statics.stats.properties.StatProperty;
+import gamemechanics.statics.stats.properties.spells.SpellProperty;
 
 import static gamemechanics.statics.stats.modifiers.mathMod.*;
 import static gamemechanics.statics.stats.modifiers.resourceMod.*;
+import static gamemechanics.statics.stats.modifiers.eleMod.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,17 +102,38 @@ public class Stats {
 		table.put(prop, mods, value0 + value);
 	}
 	
+
+	/** easier shortcut */
+	public void addResource(double value, Resource r) {
+		add(value, r, flat);
+	}
+	/** easier shortcut */
+	public void addAffinity(double value, Element e) {
+		add(value, e, affinity, scl);
+	}
+	/** easier shortcut */
+	public void addResistance(double value, Element e) {
+		add(value, e, res, scl);
+	}
+	/** easier shortcut */
+	public void addFightResource(double value, Resource r) {
+		add(value, r, fight, flat);
+	}
+	
+	
+	
 	/**
 	 * Currently used/lost resource (ex 3000/5000 hp, this returns 2000)
+	 * This is always flat mods
 	 * The sum of stats give the max value of the resource while the fight mod gives the difference to the max value
 	 * @param r what resource
 	 * @param shield if we want the value of the resource's shield instead
 	 */
 	public int getResourceFightMod(Resource r, boolean shield) {
 		if(shield) 
-			return get(r, fight, resourceMod.shield).intValue();
+			return get(r, fight, flat, resourceMod.shield).intValue();
 		else
-			return get(r, fight).intValue();
+			return get(r, fight, flat).intValue();
 	}
 	/**
 	 * Current value of the target resource (ex 3000/5000 hp, this returns 3000)
@@ -128,7 +150,7 @@ public class Stats {
 	 * shield have no max value
 	 */
 	public int getResourceMax(Resource r) {
-		var a = get(r, flat) * get(r, scl) * get(r, more);
+		var a = get(r, flat) * (1d + get(r, scl) / 100d) * (1d + get(r, more) / 100d);
 		return (int) Math.round(a);
 	}
 	
@@ -136,7 +158,7 @@ public class Stats {
 	 * Gets the total of an Element + GlobalEle on the chosen mods
 	 */
 	public double getEle(Element e, Modifier... mods) {
-		double a = get(Element.globalEle, mods) + get(e, mods);
+		double a = get(Element.global, mods) + get(e, mods);
 		return (int) Math.round(a);
 	}
 	

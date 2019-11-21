@@ -7,13 +7,16 @@ package data.new1;
  * @author Blank
  * @date 5 nov. 2019
  */
-public class Tag {
+public interface Tag {
 	
-	private String tag;
+//	private String tag;
+//	
+//	@Override
+//	public String toString() {
+//		return tag;
+//	}
 	
-	@Override
-	public String toString() {
-		return tag;
-	}
+	
+	public String tag();
 	
 }

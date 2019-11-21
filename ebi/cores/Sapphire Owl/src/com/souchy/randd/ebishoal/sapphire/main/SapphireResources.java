@@ -1,16 +1,19 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
+import com.badlogic.gdx.Files;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.commons.lapis.main.LapisFiles;
 
 import data.modules.AzurCache;
-import gamemechanics.statics.creatures.CreatureType;
 
 /**
  * 
@@ -19,8 +22,7 @@ import gamemechanics.statics.creatures.CreatureType;
  */
 public class SapphireResources {
 	
-	// ça pourrait être dans une classe de sapphire, ex SapphireAsset,
-	// SapphireResource...
+	// ça pourrait être dans une classe de sapphire, ex SapphireAsset, SapphireResource...
 	// c'aurait un assetmanager STATIC
 	
 	/**
@@ -28,48 +30,41 @@ public class SapphireResources {
 	 */
 	public static AssetManager assets = new AssetManager();
 	
+	private static final TextureParameter params = new TextureParameter();
+	static {
+		params.genMipMaps = true;
+	}
+	
 	/**
 	 * Load all resources for all AzurModules (assets for creatures, items and spells) into the global asset manager
 	 * We can start with this and add lazier loading later
 	 * @param cache
 	 */
 	public static void loadResources(AzurCache cache) {
-		var params = new TextureParameter();
-		params.genMipMaps = true;
+
+		// load i18n
+		for(var cat : I18nCategory.values())
+			assets.load(getI18nPath(cat), I18NBundle.class);
 		
+		/*
+		// load creatures icons
 		cache.creatures.values().forEach(model -> {
-			// load i18n
-			var i18nPath = getI18nPath(model.getStrID());
-			assets.load(i18nPath, I18NBundle.class);
+			assets.load(getCreatureIconPath(model.getIconName()), Texture.class, params);
+			assets.load(getCreatureModelPath(model.getIconName()), Model.class);
+		});
 		
-			// load creature avatar
-			var avatarPath = getCreatureGfx(model.getStrID(), model.getAvatarName());
-			assets.load(avatarPath, Texture.class, params);
-		});
-		cache.items.values().forEach(i -> {
-//			var iconPath = getItemIconPath(model.getStrID(), s.getIconName());
-//			assets.load(iconPath, Texture.class);
-		});
+		// load spells icons
 		cache.spells.values().forEach(s -> {
-			int typeid = s.id() / 1000000 * 1000000;
-			int creatureid = s.id() / 1000 * 1000;
-			int sid = s.id() - typeid - creatureid;
-			var path = "";
-			if(typeid > 0) {
-				// res/creaturestypes/necromancer/gfx/spellName.png
-				path = getCreatureTypeGfx(CreatureType.values()[typeid].name(), s.getIconName()); 
-			} else 
-			if (creatureid > 0) {
-				// res/creatures/sungjin/gfx/spellName.png
-				path = getCreatureGfx(cache.creatures.get(creatureid).getStrID(), s.getIconName());
-			}
-			assets.load(path, Texture.class, params);
-
-//			var iconPath = getSpellIconPath(model.getStrID(), s.getIconName());
-//			assets.load(iconPath, Texture.class);
+			assets.load(getSpellIconPath(s.getIconName()), Texture.class, params);
 		});
+		*/
 
+		loadTextures(Gdx.files.internal("res/textures"));
+		loadModels(Gdx.files.internal("res/models"));
+		//loadDirectory(Gdx.files.local("res/i18n"), I18NBundle.class);
+		
 		//assets.load("G:/www/ebishoal/res/creatures/sungjin/gfx/avatar.png", Texture.class);
+		
 		assets.finishLoading();
 		Log.info("sapphire resources : { " + String.join(",", assets.getAssetNames()) + " }");
 		var textures = assets.getAll(Texture.class, new Array<>());
@@ -79,35 +74,72 @@ public class SapphireResources {
 			Log.error("", e);
 		}
 	}
-
 	
-	public static String getCreatureGfx(String creatureName, String iconName) {
-		return "res/creatures/" + creatureName + "/gfx/" + iconName;
-	}
-
-	public static String getCreatureTypeGfx(String creatureTypeName, String iconName) {
-		return "res/creaturestypes/" + creatureTypeName + "/gfx/" + iconName;
+	private static void loadTextures(FileHandle dir) {
+		for (var f : dir.list()) {
+			if(f.isDirectory()) {
+				loadTextures(f);
+			} else {
+				assets.load(f.path().substring(f.path().indexOf("res/"), f.path().length()), Texture.class, params);
+			}
+		}
 	}
 	
-	public static String getI18nPath(String creatureName) {
-		return "res/creatures/" + creatureName + "/i18n/bundle";
+	private static void loadModels(FileHandle dir) {
+		for (var f : dir.list()) {
+			if(f.isDirectory()) {
+				loadModels(f);
+			} else if(f.name().endsWith(".g3dj")){
+				assets.load(f.path().substring(f.path().indexOf("res/"), f.path().length()), Model.class);
+			}
+		}
 	}
+	
+	public static String getCreatureIconPath(String iconName) {
+		return "res/textures/creatures/" + iconName + ".png";
+	}
+
+	public static String getCreatureModelPath(String modelName) {
+		return "res/models/creatures/" + modelName + ".g3dj";
+	}
+	
+	public static String getSpellIconPath(String iconName) {
+		return "res/textures/spells/" + iconName + ".png";
+	}
+
+	public static String getI18nPath(I18nCategory cat) {
+		return "res/i18n/" + cat.name() + "/bundle";
+	}
+	
 	
 	public static Texture getCreatureIcon(String iconName) {
-		return assets.get(iconName, Texture.class);
+		return assets.get(getCreatureIconPath(iconName), Texture.class);
+	}
+	
+	public static Texture getSpellIcon(String iconName) {
+		return assets.get(getSpellIconPath(iconName), Texture.class);
 	}
 	
 	public static Model getCreatureModel(int creatureModelID) {
 		return assets.get("" + creatureModelID, Model.class);
 	}
 	
-	public static Texture getSpellIcon(String iconName) {
-		return assets.get(iconName, Texture.class);
-	}
-	
 	public static Texture getPfx(String iconName) {
 		return assets.get(iconName, Texture.class);
 	}
 
+	public static I18NBundle getI18nBundle(I18nCategory cat) {
+		return assets.get(getI18nPath(cat));
+	}
+	
+	public static enum I18nCategory {
+		//main,
+		ui,
+		creatures,
+		creaturetypes,
+		effects,
+		elements,
+		spells
+	}
 
 }

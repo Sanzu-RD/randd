@@ -126,8 +126,8 @@ interface LapisScreenCreator {
 	 * Create a model batch for the world
 	 */
 	public default ModelBatch createWorldBatch() {
-		String vert = Gdx.files.internal("res/gdx/shaders/default.vertex.glsl").readString();
-		String frag = Gdx.files.internal("res/gdx/shaders/default.fragment.glsl").readString();
+		String vert = Gdx.files.internal("res/shaders/default.vertex.glsl").readString();
+		String frag = Gdx.files.internal("res/shaders/default.fragment.glsl").readString();
 		return new ModelBatch(new DefaultShaderProvider(vert, frag)); 
 	}
 
@@ -135,8 +135,8 @@ interface LapisScreenCreator {
 	 * Create a shadow model batch for the world
 	 */
 	public default ModelBatch createWorldShadowBatch() {
-		String vert = Gdx.files.internal("res/gdx/shaders/depth.vertex.glsl").readString();
-		String frag = Gdx.files.internal("res/gdx/shaders/depth.fragment.glsl").readString();
+		String vert = Gdx.files.internal("res/shaders/depth.vertex.glsl").readString();
+		String frag = Gdx.files.internal("res/shaders/depth.fragment.glsl").readString();
 		return new ModelBatch(new DepthShaderProvider(vert, frag)); 
 	}
 
@@ -151,8 +151,8 @@ interface LapisScreenCreator {
 	 * Create a sprite batch for post process
 	 */
 	public default SpriteBatch createSpriteBatch() {
-		var vert = Gdx.files.internal("res/gdx/shaders/postProcess.vertex.glsl");
-		var frag = Gdx.files.internal("res/gdx/shaders/postProcess.fragment.glsl");
+		var vert = Gdx.files.internal("res/shaders/postProcess.vertex.glsl");
+		var frag = Gdx.files.internal("res/shaders/postProcess.fragment.glsl");
 		return new SpriteBatch(1000, new ShaderProgram(vert, frag));
 	}
 
@@ -172,8 +172,8 @@ interface LapisScreenCreator {
 	 * Create a model batch to render the whole Particle Effects System
 	 */
 	public default ModelBatch createPfxBatch() {
-		String vert = Gdx.files.internal("res/gdx/shaders/default.vertex.glsl").readString();
-		String frag = Gdx.files.internal("res/gdx/shaders/default.fragment.glsl").readString();
+		String vert = Gdx.files.internal("res/shaders/default.vertex.glsl").readString();
+		String frag = Gdx.files.internal("res/shaders/default.fragment.glsl").readString();
 		return new ModelBatch(new DefaultShaderProvider(vert, frag)); 
 	}
 	

@@ -72,10 +72,10 @@ public class AzurInstantiator implements ModuleInstantiator<AzurModule, AzurInfo
 					var model = ClassInstanciator.<SpellModel>create(c);
 					azurCache.spells.put(model.id(), model);
 				}
-				if(Item.class.isAssignableFrom(c)) {
-					var model = ClassInstanciator.<Item>create(c);
-					azurCache.items.put(model.id(), model);
-				}
+//				if(Item.class.isAssignableFrom(c)) {
+//					var model = ClassInstanciator.<Item>create(c);
+//					azurCache.items.put(model.id(), model);
+//				}
 			});
 //			Log.info("AzurInstantiator : creatureModels : " + azurCache.creatures.values());
 //			Log.info("AzurInstantiator : spells : " + azurCache.spells.values());

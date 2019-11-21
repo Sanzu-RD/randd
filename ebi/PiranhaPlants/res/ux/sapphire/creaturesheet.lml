@@ -1,0 +1,19 @@
+
+<table defaultpad="5" debug="true" y="0" x="0" fillparent="true" >
+
+    <!-- CONTENT -->
+    <:row expand="true" filly="true">
+        <container/>
+    </:row>
+
+
+    <:row align="bottom" >
+        <stack fill="true" debug="false">
+            <container align="bottomright" padbottom="100" padright="100" debug="false">
+                <label value="sdfgfdsgsdfgsdfg" />
+            </container>
+            <image id="portraitBorder" style="textures.borders.ring_frame" width="100" height="100"/>
+        </stack>
+    </:row>
+
+</table>

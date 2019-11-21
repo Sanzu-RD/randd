@@ -1,9 +1,10 @@
 package com.souchy.randd.data.s1.main;
 
+import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.properties.StatProperty;
 import statics.IEElement;
 
-public enum Elements implements IEElement, StatProperty {
+public enum Elements implements Element, StatProperty {
 	
 //	public static enum asdf implements StatProperty {
 //		
@@ -14,20 +15,25 @@ public enum Elements implements IEElement, StatProperty {
 	fire,
 	water,
 	nature,
-	earth,
 	air,
 	
 	light,
 	dark,
 
-	physical,
+	earth,
+	ghost,
 	ice,
 	steel,
+	physical,
+	psychic,
 	electricity,
-	
-	ghost,
-	
+	toxin,
 	
 	;
+	
+	private Elements() {
+		values.add(this);
+		StatPropertyID.register(this);
+	}
 	
 }

@@ -3,7 +3,7 @@ package gamemechanics.models.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.souchy.randd.jade.combat.JadeCreature;
+import com.souchy.randd.jade.meta.JadeCreature;
 
 import data.modules.AzurCache;
 import data.new1.CreatureModel;
@@ -55,10 +55,10 @@ public class Creature extends Entity {
 //				}
 //			}
 		}
-		for(int ii : jade.itemIDs) {
-			var i = dep.items.get(ii);
-			if(i != null) items.add(i);
-		}
+//		for(int ii : jade.itemIDs) {
+//			var i = dep.items.get(ii);
+//			if(i != null) items.add(i);
+//		}
 	}
 	
 	/**

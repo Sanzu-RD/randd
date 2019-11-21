@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Locale;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Mesh;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.g3d.Environment;
@@ -41,9 +43,13 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.bitfire.postprocessing.PostProcessor;
 import com.bitfire.postprocessing.effects.Bloom;
@@ -53,10 +59,18 @@ import com.github.czyzby.lml.annotation.LmlActor;
 import com.github.czyzby.lml.parser.LmlParser;
 import com.github.czyzby.lml.parser.action.ActionContainer;
 import com.github.czyzby.lml.parser.impl.AbstractLmlView;
+import com.github.czyzby.lml.parser.impl.tag.AbstractActorLmlTag;
+import com.github.czyzby.lml.parser.impl.tag.AbstractGroupLmlTag;
+import com.github.czyzby.lml.parser.tag.LmlActorBuilder;
+import com.github.czyzby.lml.parser.tag.LmlTag;
+import com.github.czyzby.lml.parser.tag.LmlTagProvider;
 import com.github.czyzby.lml.util.LmlApplicationListener;
 import com.github.czyzby.lml.util.LmlUtilities;
 import com.github.czyzby.lml.vis.util.VisLml;
-import com.souchy.randd.ebishoal.commons.lapis.drawing.LineDrawing;
+import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML;
+import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
+import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.mockingbird.lapismock.BaseScreen;
 import com.souchy.randd.mockingbird.lapismock.CustomGreedyMesh;
 import com.souchy.randd.mockingbird.lapismock.GreedyMeshMaker;
@@ -66,6 +80,7 @@ import com.souchy.randd.mockingbird.lapismock.shaders.PostProcessingFBO;
 
 @SuppressWarnings("deprecation")
 public class MockScreen3 extends BaseScreen {
+
 	
 	DirectionalShadowLight shadowLight;
 	ModelBatch shadowBatch;
@@ -93,8 +108,8 @@ public class MockScreen3 extends BaseScreen {
 	boolean greedyOrInstances = false;
 	
 	
-	boolean particles = false;
-	boolean creatures = false;
+	boolean particles = true;
+	boolean creatures = true;
 
 	
 	public MockScreen3() {
@@ -123,10 +138,10 @@ public class MockScreen3 extends BaseScreen {
 		Model spider = LapisMock.core.getGame().modelManager.get("Wasp");
 		System.out.println("spider 2 = " + spider);
 		
-		var names = LapisMock.core.getGame().modelManager.getAssetNames();
-		System.out.println("Names : ");
-		names.forEach(s -> System.out.println(s));
-		System.out.println("Names END");
+//		var names = LapisMock.core.getGame().modelManager.getAssetNames();
+//		System.out.println("Names : ");
+//		names.forEach(s -> System.out.println(s));
+//		System.out.println("Names END");
 		
 		var spiderInst = new ModelInstance(spider);
 		spiderInst.transform.scl(1f / 100f);
@@ -135,17 +150,18 @@ public class MockScreen3 extends BaseScreen {
 		characters.add(spiderInst);
 		
 		spiderController = new AnimationController(spiderInst);
-	//	spiderController.setAnimation("HumanArmature|Spider_Walk", -1);
+		//spiderController.setAnimation("HumanArmature|Spider_Walk", -1);
 		
 		String blender = "G:/Assets/myblender/";
 		// KUNAI MODEL :
 		LapisMock.core.getGame().modelManager.loadSync(new FileHandle(blender + "kunai.g3dj"));
+		
 		Model kunai = LapisMock.core.getGame().modelManager.get("kunai");
 		var kunaiInst = new ModelInstance(kunai);
 		kunaiInst.transform.scl(1f / 100f);
 		kunaiInst.transform.setTranslation(0, 0, 1);
 		kunaiInst.transform.rotate(1, 0, 0, 90);
-		// characters.add(kunaiInst);
+		 characters.add(kunaiInst);
 
 		// CHIP MODEL :
 		LapisMock.core.getGame().modelManager.loadSync(new FileHandle(blender + "kunai.g3dj"));
@@ -160,13 +176,18 @@ public class MockScreen3 extends BaseScreen {
 		// GlobalLML.lmlParser.parseTemplate("ui/test1.lml");
 		// GlobalLML.init();
 		GlobalLML.getLmlParser().createView(view, view.getTemplateFile());
+		//var test2 = GlobalLML.getLmlParser().parseTemplate(Gdx.files.internal("ui/test2.lml")).first();
+		Test2 test2 = LmlWidgets.createGroup("ui/test2.lml");
+		test2.refresh("1");
+		view.getStage().addActor(test2);
+		
 		
 		// Generating DTD:
 		// GlobalLML.lml().saveDtdSchema(Gdx.files.local("lml.dtd"));
 		
 		// PARTICLE EFFECTS :
+		var fxPath = "fx/laser1.pfx";
 		var pfxTestPath = "G:/Assets/pfx/test/";
-		var fxPath = "gdx/g3d/anims_fx_etc/laser1.pfx";
 		var kunaifxPath = pfxTestPath + "unlimitedKunaiWorks.pfx"; // "kunaiNova8.pfx";
 		// var fx = Gdx.files.internal(fxPath);
 		// System.out.println("fx : " + fx);
@@ -233,6 +254,68 @@ public class MockScreen3 extends BaseScreen {
 //		cache.end();
 	}
 	
+	public static class MockWidget extends Group {
+		public void setImage(Image img, String imgid) {
+			if(img == null) return;
+			var drawable = GlobalLML.getLmlParser().getData().getDefaultSkin().getDrawable(imgid);
+			img.setDrawable(drawable);
+		}
+		public void setText(Label lbl, String text) {
+			
+		}
+	}
+	
+	public static class Test2 extends MockWidget {
+		@LmlActor("icon")
+		public Image icon;
+		@LmlActor("border")
+		public Image border;
+		@LmlActor("stacks")
+		public Label stacks;
+		@LmlActor("duration")
+		public Label duration;
+		public void refresh(String asdf) {
+			this.setPosition(1000, 300);
+			
+			LapisMock.core.getGame().assets.load("G:/Assets/test/grass137x137.png", Texture.class);
+			LapisMock.core.getGame().assets.load("G:/Assets/test/blackborder.png", Texture.class);
+			LapisMock.core.getGame().assets.finishLoading();
+			GlobalLML.getLmlParser().getData().getDefaultSkin().add("bg", LapisMock.core.getGame().assets.get("G:/Assets/test/grass137x137.png"));
+			GlobalLML.getLmlParser().getData().getDefaultSkin().add("border", LapisMock.core.getGame().assets.get("G:/Assets/test/blackborder.png"));
+			
+			setImage(icon, "bg");
+			setImage(border, "border");
+			setText(stacks, "1");
+			setText(duration, "2");
+		}
+	}
+	
+	/**
+	 * Injects LML fields 
+	 */
+	public static class LmlInjector {
+		public static <T extends Group> void inject(T group) {
+			for(var field : group.getClass().getFields()) {
+				try {
+					LmlActor ann = field.getAnnotation(LmlActor.class);
+					var actorId = ann.value()[0];
+					field.set(group, group.findActor(actorId));
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public static class LmlWidgets {
+		public static <T extends Group> T createGroup(String path) {
+			var group = (T) GlobalLML.getLmlParser().parseTemplate(Gdx.files.internal(path)).first();
+			LmlInjector.inject(group);
+			return group;
+		}
+	}
+	
+	
 	private FirstView view = new FirstView();
 	
 	public static class FirstView extends AbstractLmlView {
@@ -284,6 +367,8 @@ public class MockScreen3 extends BaseScreen {
 					.actions("global", GlobalLMLActions.class)
 					// Adding localization support:
 					.i18nBundle(I18NBundle.createBundle(Gdx.files.internal("i18n/bundle")))
+					// custom tags
+					.tag(new Test2TagProvider(), "test2")
 					// Add custom skin
 					.skin(new Skin(Gdx.files.internal("uiskin.json"))).build();
 		}
@@ -304,6 +389,27 @@ public class MockScreen3 extends BaseScreen {
 			GlobalLML.lml().reloadViews();
 		}
 	}
+	
+	public static class Test2TagProvider implements LmlTagProvider {
+		@Override
+		public LmlTag create(LmlParser parser, LmlTag parentTag, StringBuilder rawTagData) {
+			Log.info("tag provider");
+			return new Test2Tag(parser, parentTag, rawTagData);
+		}
+	}
+	public static class Test2Tag extends AbstractGroupLmlTag {
+		public Test2Tag(LmlParser parser, LmlTag parentTag, StringBuilder rawTagData) {
+			super(parser, parentTag, rawTagData);
+			Log.info("tag 1");
+		}
+		@Override
+		protected Test2 getNewInstanceOfGroup(LmlActorBuilder builder) {
+			Log.info("tag 2");
+			return new Test2();
+		}
+		
+	}
+	
 	
 	/**
 	 * test de model pour highlighter des cellules. p.ex. des pièges, glyphes,
@@ -518,9 +624,8 @@ public class MockScreen3 extends BaseScreen {
 	}
 	
 	public void renderUI() {
-		
-			// Render UI view
-			 view.render();
+		// Render UI view
+		view.render();
 	}
 	
 	/*
@@ -561,13 +666,14 @@ public class MockScreen3 extends BaseScreen {
 		if(particles) {
 			pfxBatch.begin(cam);
 			
-			/*
-			 * // matrix.idt(); Vector3 pos = new Vector3();
-			 * characters.get(0).transform.getTranslation(pos); pos.z = 2;
-			 * matrix.setTranslation(pos);
-			 * 
-			 * laserFX.setTransform(matrix);
-			 */
+			
+			   matrix.idt(); 
+			   Vector3 pos = new Vector3();
+			  characters.get(0).transform.getTranslation(pos); pos.z = 2;
+			  matrix.setTranslation(pos);
+			  
+			  laserFX.setTransform(matrix);
+			 
 			
 			// kunaiFX.reset();
 			// kunaiFX.start();

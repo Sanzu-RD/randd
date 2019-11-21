@@ -1,5 +1,6 @@
 package data.new1.timed;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import data.new1.Effect;
@@ -21,12 +22,12 @@ import gamemechanics.statics.stats.StatMod;
  */
 public abstract class Status extends TimedEffect implements Disposable {
 	
-	//public List<Effect> effects;
+	// buff stats à compiler dans les stats de la cible du status
+	public List<StatMod> stats = new ArrayList<>();
 	
-	// stats à compiler dans les stats de la cible du status
-	public List<StatMod> stats;
-	
-	public Status() { //Entity source, Entity target) {
+	public Status(Entity source, Entity target) {
+		this.source = source;
+		this.target = target;
 		source.fight.bus.register(this);
 	}
 	
@@ -34,11 +35,15 @@ public abstract class Status extends TimedEffect implements Disposable {
 	@Override
 	public void dispose() {
 		super.dispose();
-		//effects = null;
 	}
 	
 
 	public static class Passive extends Status {
+		public Passive(Entity source) {
+			super(source, source);
+			this.canDebuff = false;
+			this.canRemove = false;
+		}
 		@Override 
 		public void fuse(TimedEffect s) {
 			// no fusion

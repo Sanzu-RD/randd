@@ -160,7 +160,7 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	@Override
 	public void render(float delta) {
 		// update input controller
-		if(getInputProcessor() != null && getInputProcessor() instanceof CameraInputController) ((CameraInputController) inputProcessor).update();
+		if(getInputProcessor() != null && getInputProcessor() instanceof CameraInputController) ((CameraInputController) getInputProcessor()).update();
 		
 		// act
 		act(delta);

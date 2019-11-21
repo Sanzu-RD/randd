@@ -1,0 +1,10 @@
+
+
+
+<:macro alias="chat">
+    <!-- Chat -->
+    <verticalgroup id="chat" align="bottomleft" padleft="55" padbottom="25" width="200" height="400" debug="false" >
+        <textarea debug="false" value="lanlkisaudnflkjnsadfkljndsakjfnak" disabled="true" width="400" height="400"/>
+        <textfield debug="false"/>
+    </verticalgroup>
+</:macro>

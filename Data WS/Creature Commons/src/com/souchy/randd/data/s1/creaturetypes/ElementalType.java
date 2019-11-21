@@ -13,9 +13,9 @@ public final class ElementalType extends CreatureTypeModel {
 	
 	private ElementalType() {
 		// resources
-		stats.add(400, Resource.life, mathMod.flat); 
-		stats.add(8, Resource.mana, mathMod.flat); 
-		stats.add(5, Resource.move, mathMod.flat); 
+		stats.addResource(400, Resource.life); 
+		stats.addResource(8, Resource.mana); 
+		stats.addResource(5, Resource.move); 
 		// affinities
 		// res
 		

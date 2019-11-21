@@ -13,14 +13,18 @@ public final class KnightType extends CreatureTypeModel {
 	
 	private KnightType() {
 		// resources
-		stats.add(600, Resource.life, mathMod.flat); 
-		stats.add(8, Resource.mana, mathMod.flat); 
-		stats.add(4, Resource.move, mathMod.flat); 
+		stats.addResource(1000, Resource.life); 
+		stats.addResource(100, Resource.mana); 
+		stats.addResource(6, Resource.move); 
 		// affinities
-		stats.add(25, Elements.steel, eleMod.affinity, mathMod.scl);
+		stats.addAffinity(25, Elements.steel);
 		// res
-		stats.add(25, Elements.steel, eleMod.res, mathMod.scl);
-		stats.add(25, Elements.physical, eleMod.res, mathMod.scl);
+		stats.addResistance(25, Elements.steel);
+		stats.addResistance(25, Elements.physical);
+		
+
+		// passive is flat resistance
+		stats.add(20, Elements.global, eleMod.res, mathMod.flat);
 	}
 	
 }

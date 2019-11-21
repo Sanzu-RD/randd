@@ -46,6 +46,10 @@ public enum CreatureType {
 	}
 	
 	
+	public static String getName(int id) {
+		return values()[id].name();
+	}
+	
 	public static class CreatureTypeI18N {
 		public String get(CreatureType type) {
 			return type.name();

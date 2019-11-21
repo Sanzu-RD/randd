@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -19,6 +20,8 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImageLmlTagProvider;
+import com.souchy.randd.ebishoal.sapphire.ux.Chat;
+import com.souchy.randd.ebishoal.sapphire.ux.CreatureSheet;
 
 public class SapphireHud extends LapisHud {
 
@@ -40,32 +43,41 @@ public class SapphireHud extends LapisHud {
 	public static I18NBundle i18n;
 	
 	public SapphireHud() {
-		// Stage(viewport, batch)
+
 		var batch = new SapphireBatch();
 		var viewport = new ScreenViewport();
-		this.setStage(new Stage(viewport, batch));
 		
 		// Batch(shader)
-		var vert = Gdx.files.absolute("F:/Users/Souchy/Desktop/Robyn/Git/r and d/ebi/PiranhaPlants/res/gdx/shaders/ui.vertex.glsl"); //Gdx.files.internal("res/gdx/shaders/postProcess.vertex.glsl");
-		var frag = Gdx.files.absolute("F:/Users/Souchy/Desktop/Robyn/Git/r and d/ebi/PiranhaPlants/res/gdx/shaders/ui.fragment.glsl"); //Gdx.files.internal("res/gdx/shaders/postProcess.fragment.glsl");
+		var vert = Gdx.files.internal("res/shaders/ui.vertex.glsl"); //Gdx.files.internal("res/gdx/shaders/postProcess.vertex.glsl");
+		var frag = Gdx.files.internal("res/shaders/ui.fragment.glsl"); //Gdx.files.internal("res/gdx/shaders/postProcess.fragment.glsl");
 		var shader = new ShaderProgram(vert, frag);
 		batch.setShader(shader);
 
+		this.setStage(new Stage(viewport, batch));
+		
 		// Parser(actions, i18n, skin, tags)
-		i18n = I18NBundle.createBundle(Gdx.files.internal("res/i18n/bundle"));
-		skin = new SapphireHudSkin(getStyleFile());
+		//i18n = I18NBundle.createBundle(Gdx.files.internal("res/i18n/ui/bundle"));
+		skin = new SapphireHudSkin(getSkinFile());
 		parser = VisLml.parser()
 				// Registering global action container:
 				.actions("global", GlobalLMLActions.class)
 				// Adding localization support:
-				 .i18nBundle(i18n)
+				//.i18nBundle(i18n)
 				// Set default skin
 				.skin(skin) 
 				// Tags
 				.tag(new RoundImageLmlTagProvider(), "roundImage")
+				.tag(null, "")
 				.build();
 		
-		parser.createView(single = this, getTemplateFile());
+		single = this;
+		parser.createView(single, getTemplateFile());
+		
+		Dialog d;
+		//parser.parseTemplate(lmlTemplateFile)
+
+		parser.createView(CreatureSheet.class, "res/ux/sapphire/creaturesheet.lml");
+		
 		
 		createListeners();
 	}
@@ -75,6 +87,12 @@ public class SapphireHud extends LapisHud {
 		//SapphireHud.parser.parseTemplate(SapphireHud.single.getTemplateFile());
 		SapphireHud.single.getStage().getActors().clear();
 		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), SapphireHud.single.getTemplateFile());
+//		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/chat.lml"));
+//		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timer.lml"));
+//		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timeline.lml"));
+//		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/statusbar.lml"));
+//		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/playbar.lml"));
+//		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/creaturesheet.lml"));
 	}
 	
 	@Override
@@ -84,12 +102,12 @@ public class SapphireHud extends LapisHud {
 	
 	@Override
 	public FileHandle getTemplateFile() {
-		return Gdx.files.absolute("F:/Users/Souchy/Desktop/Robyn/Git/r and d/ebi/PiranhaPlants/res/gdx/ui/" + getViewId() + ".lml");
+		return Gdx.files.internal("res/ux/sapphire/" + getViewId() + ".lml");
 	}
 	
 	@Override
-	public FileHandle getStyleFile() {
-		return Gdx.files.absolute("F:/Users/Souchy/Desktop/Robyn/Git/r and d/ebi/PiranhaPlants/res/gdx/ui/" + getViewId() + ".json");
+	public FileHandle getSkinFile() {
+		return Gdx.files.internal("res/ux/sapphire/" + getViewId() + ".json");
 	}
 
 	private void createListeners() {

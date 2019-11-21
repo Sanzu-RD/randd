@@ -1,0 +1,16 @@
+<:macro alias="statusbar" creatureId="0">
+
+    <:status></:status>
+
+    <table id="statusbar" padright="35" padbottom="25" align="bottomright" debug="false" defaultpad="3" defaultpadleft="10">
+
+        <:loop times="$getCreatureStatusCount({creatureId})">
+            <container/>
+            <:status creatureId="{creatureId}" statusId="{loop:index}"></:status>
+            <:row/>
+        </:loop>
+
+    </table>
+
+
+</:macro>

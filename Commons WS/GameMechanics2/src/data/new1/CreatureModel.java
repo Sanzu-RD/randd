@@ -20,7 +20,7 @@ public abstract class CreatureModel {
 	 * this is not localized. 
 	 * it is the name used primarely for identifying the resource folder of the creature.
 	 */
-	public abstract String getStrID();
+	//public abstract String getStrID();
 	
 //	public final ImmutableList<Element> elements;
 //	public final ImmutableList<CreatureType> types;
@@ -31,7 +31,7 @@ public abstract class CreatureModel {
 	public CreatureModel() {
 //		elements = initAffinities();
 //		types = initTypes();
-		initTags();
+		//initTags();
 //		spells = initSpells();
 //		statuses = initStatuses();
 		baseStats = initBaseStats();
@@ -42,7 +42,7 @@ public abstract class CreatureModel {
 	/**
 	 * 
 	 */
-	protected abstract List<Tag> initTags();
+	//protected abstract List<Tag> initTags();
 //	protected abstract ImmutableList<SpellModel> initSpells();
 //	protected abstract ImmutableList<Status> initStatuses();
 	protected abstract Stats initBaseStats();
@@ -50,8 +50,9 @@ public abstract class CreatureModel {
 	// i18n : name, description : in res/creatures/creatureID/i18n/bundle_*.properties
 	// 
 	
-	public String getAvatarName() {
-		return "avatar.png"; //"res/creatures/" + getStrID() + "/gfx/avatar.png";
+	public String getIconName() {
+		return Integer.toString(id());
+		//return "avatar"; //"res/creatures/" + getStrID() + "/gfx/avatar.png";
 	}
 	
 }

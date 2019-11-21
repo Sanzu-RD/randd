@@ -45,5 +45,8 @@ public class StatusList {
 		statuses.values().forEach(s -> c.accept(s));
 	}
 
+	public int size() {
+		return statuses.size();
+	}
 	
 }

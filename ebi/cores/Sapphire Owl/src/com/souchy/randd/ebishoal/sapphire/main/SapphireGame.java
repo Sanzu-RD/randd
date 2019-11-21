@@ -8,13 +8,14 @@ import com.souchy.randd.ebishoal.commons.lapis.main.LapisFiles;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHudSkin;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
-import com.souchy.randd.jade.combat.JadeCreature;
+import com.souchy.randd.jade.meta.JadeCreature;
 
 import data.new1.CreatureModel;
 import gamemechanics.common.Vector2;
 import gamemechanics.models.Fight;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.models.entities.Entity.Team;
+import gamemechanics.statics.stats.properties.Resource;
 
 public class SapphireGame extends LapisGame {
 	
@@ -28,6 +29,8 @@ public class SapphireGame extends LapisGame {
 			Gdx.files = new LapisFiles(Environment.root.toString());//"G:/www/ebishoal/");
 		}
 		
+		SapphireResources.loadResources(SapphireOwl.data);
+		
 		gfx = new SapphireScreen(); 
 		
 		// load creature and creature spells assets (creature i18n bundle, creature avatar, spells icons)
@@ -35,7 +38,6 @@ public class SapphireGame extends LapisGame {
 //			SapphireResources.loadResources(model);
 //		});
 		
-		SapphireResources.loadResources(SapphireOwl.data);
 		
 		// need to load items resources and random spells resources (spells should already be loaded through creatures th)
 		// ...
@@ -45,15 +47,21 @@ public class SapphireGame extends LapisGame {
 				Log.info("data.creatures : " + SapphireOwl.manager.getEntry().creatures.values() + ", " + SapphireOwl.manager.getEntry());
 				// create instances for players' creatures
 				int id = 1000;
+				// base model
 				CreatureModel model = SapphireOwl.data.creatures.get(id);
+				// jade customization
 				JadeCreature jade = new JadeCreature();
 				jade.creatureID = model.id();
 				jade.itemIDs = new int[4];
 				jade.spellIDs = new int[]{ 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 				for(int i = 0; i < jade.spellIDs.length; i++)
 					jade.spellIDs[i] += model.id();
+				// instance
 				Creature inst = new Creature(model, jade, SapphireOwl.data, new Vector2(0, 0));
+				inst.model.baseStats.addResource(30, Resource.life);
+				inst.getStats().addFightResource(-130, Resource.life);
 				
+				// fight
 				fight = new Fight();
 				fight.add(inst, Team.A);
 				fight.timeline.add(inst);

@@ -30,7 +30,7 @@ public class LapisFiles implements Files {
 
 	@Override
 	public FileHandle internal (String path) {
-		if(path.substring(1).startsWith(":/")) return absolute(path);
+		if(path.length() > 0 && path.substring(1).startsWith(":/")) return absolute(path);
 		return new LwjglFileHandle(rootPrefix + path, FileType.Internal);
 	}
 

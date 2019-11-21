@@ -54,10 +54,10 @@ public class World {
     	var sum = cellSize; // + offset;
 		
 		//String file = "models/cube.obj";
-		String file = "gdx/g3d/board/cell_models/roundedCube05.g3dj";
-		String treeFile1 = "gdx/g3d/object_models/pinetree.obj";
+		String file = "delete/roundedCube05.g3dj";
+		String treeFile1 = "models/decor/pinetree.obj";
 		String penguinFile = "F:/Users/Souchy/Desktop/Robyn/Git/res/assets/models/characters/playables/penguin.g3dj";
-		String snowTextureFile = "F:/Users/Souchy/Desktop/Robyn/Git/r and d/ebi/PiranhaPlants/res/gdx/g3d/board/textures/snow_ice.png";
+		String snowTextureFile = "delete/snow_ice.png";
 		String cliffFile = "F:/Users/Souchy/Desktop/Robyn/Git/res/assets/models/scenery/3d/clifftile.obj";
         //ModelLoader loader = new ObjLoader();
         //model = loader.loadModel(Gdx.files.internal(file));

@@ -32,36 +32,9 @@ public abstract class Common {
     @FXML public ImageView settingBtn;
 
     @FXML public ImageView exitBtn;
-    
 
     @FXML
-    public void minimize(MouseEvent event) {
-		var stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-    	stage.setIconified(true);
-    }
-
-//    @FXML
-//    public void openSettings(MouseEvent event) {
-//    	var current = mainTabs.getSelectionModel().getSelectedItem();
-//    	if(current != settingsTab) {
-//        	tabBeforeSettings = current;
-//        	mainTabs.getSelectionModel().select(settingsTab); 
-//    	} else if(tabBeforeSettings != null)  {
-//        	mainTabs.getSelectionModel().select(tabBeforeSettings); 
-//        	tabBeforeSettings = null;
-//    	}
-//    }
-    
-    @FXML
-    public void exit(MouseEvent event) {
-    	Log.info("on exit");
-    	if(AmethystApp.stage.getScene() == AmethystApp.loginScene) {
-    		Platform.exit(); 
-    		//System.exit(0);
-    	} else {
-        	AmethystApp.stage.setScene(AmethystApp.loginScene);
-    	}
-    }
+    public abstract void openSettings(MouseEvent event);
     
     @FXML 
     public void initialize() {
@@ -79,6 +52,25 @@ public abstract class Common {
 
 
     @FXML
+    public void minimize(MouseEvent event) {
+		var stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+    	stage.setIconified(true);
+    }
+
+    
+    @FXML
+    public void exit(MouseEvent event) {
+    	Log.info("on exit");
+    	if(AmethystApp.stage.getScene() == AmethystApp.loginScene) {
+    		Platform.exit(); 
+    		//System.exit(0);
+    	} else {
+        	AmethystApp.stage.setScene(AmethystApp.loginScene);
+    	}
+    }
+    
+
+    @FXML
     public void onPress(MouseEvent event) {
 		var stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		dragX = stage.getX() - event.getScreenX();
@@ -91,9 +83,5 @@ public abstract class Common {
         stage.setY(event.getScreenY() + drawY);
     }
 
-
-
-    @FXML
-    public abstract void openSettings(MouseEvent event);
     
 }

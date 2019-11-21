@@ -2,6 +2,7 @@ package com.souchy.randd.ebishoal.sapphire.main;
 
 import java.util.function.Consumer;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -68,8 +69,8 @@ public class SapphireWorld extends World {
         
         
         // create instances
-        String mapFolder = "F:/Users/Souchy/Desktop/Robyn/eclipse-workspaces/hidden workspaces/r and d/Maps/data/maps/";
-        MapData data = MapData.read(mapFolder + "goulta7.map");
+        String mapFolder = "res/maps/"; //"F:/Users/Souchy/Desktop/Robyn/eclipse-workspaces/hidden workspaces/r and d/Maps/data/maps/";
+        MapData data = MapData.read(Gdx.files.internal(mapFolder + "goulta7.map").path());
         this.center = new Vector3(data.cellModels[0].length / 2f, data.cellModels.length / 2f, 0);
         
         if(true) {
@@ -78,31 +79,32 @@ public class SapphireWorld extends World {
     		instances.add(new ModelInstance(greed));
     		// add every other models as instances
     		
-    		Vector3 origin = Vector3.Zero;
-    		Consumer<int[][]> generateModels = layer -> {
-                for(int i = 0; i < layer[0].length; i++) {
-                    for(int j = 0; j < layer.length; j++) {
-                    	var m = data.getModel(layer[i][j]);
-                    	if(m != null && !m.isVoxel()) {
-                    		assets.load(m.model, Model.class);
-                    		assets.finishLoading();
-                    		var model = assets.get(m.model, Model.class);
-                    		model.materials.get(0).set(ColorAttribute.createDiffuse(Color.valueOf(m.colorAttributes[0])));
-                    		var inst = new ModelInstance(model);
-                    		inst.transform
-        					.translate(i * cellSize + cellSize * m.transform[0][0], j * cellSize + cellSize * m.transform[0][1], -cellSize + cellSize * m.transform[0][2])
-        					.rotate(m.transform[1][0],  m.transform[1][1],  m.transform[1][2], 90)
-        					.scale( m.transform[2][0],  m.transform[2][1],  m.transform[2][2]);
-                    		instances.add(inst);
-                    	}
-                    }
-                }
-    		};
-    		
-    		generateModels.accept(data.layer0Models);
-    		generateModels.accept(data.cellModels);
-    		generateModels.accept(data.layer2Models);
-            
+    		if(true) {
+	    		Vector3 origin = Vector3.Zero;
+	    		Consumer<int[][]> generateModels = layer -> {
+	                for(int i = 0; i < layer[0].length; i++) {
+	                    for(int j = 0; j < layer.length; j++) {
+	                    	var m = data.getModel(layer[i][j]);
+	                    	if(m != null && !m.isVoxel()) {
+	                    		assets.load(m.model, Model.class);
+	                    		assets.finishLoading();
+	                    		var model = assets.get(m.model, Model.class);
+	                    		model.materials.get(0).set(ColorAttribute.createDiffuse(Color.valueOf(m.colorAttributes[0])));
+	                    		var inst = new ModelInstance(model);
+	                    		inst.transform
+	        					.translate(i * cellSize + cellSize * m.transform[0][0], j * cellSize + cellSize * m.transform[0][1], -cellSize + cellSize * m.transform[0][2])
+	        					.rotate(m.transform[1][0],  m.transform[1][1],  m.transform[1][2], 90)
+	        					.scale( m.transform[2][0],  m.transform[2][1],  m.transform[2][2]);
+	                    		instances.add(inst);
+	                    	}
+	                    }
+	                }
+	    		};
+	    		
+	    		generateModels.accept(data.layer0Models);
+	    		generateModels.accept(data.cellModels);
+	    		generateModels.accept(data.layer2Models);
+    		}
         } 
         
         cache.begin();

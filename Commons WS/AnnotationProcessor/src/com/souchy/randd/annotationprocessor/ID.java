@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation pour donner un numéro d'identification à un type / classe
+ * Annotation pour donner un numÃ©ro d'identification ï¿½ un type / classe
  * 
  * @author Souchy
  *
@@ -18,12 +18,12 @@ import java.lang.annotation.Target;
 public @interface ID {
 	
 	/**
-	 * id par défaut signifiant que l'id du type annoté n'a pas été implémenté
+	 * id par dÃ©faut signifiant que l'id du type annotÃ© n'a pas Ã©tÃ© implÃ©mentÃ©
 	 */
 	public static final int NO_ID = Integer.MIN_VALUE;
 	
 	/**
-	 * Numéro d'identification du type
+	 * NumÃ©ro d'identification du type
 	 * @return
 	 */
 	int id();// default NO_ID;

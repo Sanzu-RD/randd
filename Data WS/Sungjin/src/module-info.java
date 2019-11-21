@@ -6,4 +6,5 @@ module Sungjin {
 	requires transitive gdx.lml;
 	requires transitive com.souchy.randd.commons.TealWaters;
 	requires GameMechanics2;
+	requires CreatureCommons;
 }

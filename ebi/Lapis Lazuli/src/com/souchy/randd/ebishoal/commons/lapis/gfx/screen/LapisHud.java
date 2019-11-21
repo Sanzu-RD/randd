@@ -20,7 +20,7 @@ public abstract class LapisHud extends AbstractLmlView {
 		return Gdx.files.internal(getViewId() + ".lml");
 	}
 	
-	public FileHandle getStyleFile() {
+	public FileHandle getSkinFile() {
 		return Gdx.files.internal(getViewId() + ".json");
 	}
 	

@@ -1,9 +1,14 @@
 package data.new1;
 
+import java.util.List;
+
+import com.google.common.collect.ImmutableList;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
+import gamemechanics.statics.CreatureType;
+import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.Stats;
 
 public abstract class SpellModel {
@@ -11,16 +16,27 @@ public abstract class SpellModel {
 	/** return source owner id (creature or type) + spell id to make a 0000 0000 0000 number */
 	public abstract int id();
 	
+
+	public final ImmutableList<CreatureType> taggedCreatureTypes;
+	public final ImmutableList<Class<CreatureModel>> taggedCreatures;
+	public final ImmutableList<Element> taggedElements;
+	
 	public final Stats baseStats;
-	public final Effect[] effects;
+	//public final Effect[] effects;
 	
 	public SpellModel() {
 		baseStats = initBaseStats();
-		effects = initEffects();
+		taggedElements = initElements();
+		taggedCreatureTypes = initCreatureTypes();
+		taggedCreatures = null; //initCreatures();
+		//effects = initEffects();
 	}
 	
 	protected abstract Stats initBaseStats();
-	protected abstract Effect[] initEffects();
+	//protected abstract Effect[] initEffects();
+	protected abstract ImmutableList<Element> initElements();
+	protected abstract ImmutableList<CreatureType> initCreatureTypes();
+	//TODO protected abstract ImmutableList<Class<CreatureModel>> initCreatures();
 
 	/**
 	 * Actual casting action. Applies all effects.
@@ -53,24 +69,21 @@ public abstract class SpellModel {
 	}
 	/**
 	 * Default pfx played on the caster's position (none by default)
-	 * // to get the pfx  : it's in the creature's or type's folder : res/creatures/creatureID/spells/spellid.pfx  || res/creatures/types/typeID/spells/spellid.pfx
 	 */
 	public String getPfxCaster() {
 		return "";
 	}
 	/**
 	 * Default pfx played on the target position (none by default)
-	 * // to get the pfx  : it's in the creature's or type's folder : res/creatures/creatureID/spells/spellid.pfx  || res/creatures/types/typeID/spells/spellid.pfx
 	 */
 	public String getPfxTarget() {
 		return "";
 	}
 	/**
 	 * Default icon name
-	 * // to get the icon : it's in the creature's or type's folder : res/creatures/creatureID/spells/spellid.png  || res/creatures/types/typeID/spells/spellid.png
 	 */
 	public String getIconName() {
-		return "spell" + Integer.toString(id()) + ".png";
+		return Integer.toString(id());
 	}
 	
 	/**
@@ -80,6 +93,7 @@ public abstract class SpellModel {
 	 */
 	public static class SpellInstance {
 		public final SpellModel model;
+		public List<Element> elements; // can change elements
 		public Stats currStats;
 		public SpellInstance(SpellModel model) {
 			this.model = model;

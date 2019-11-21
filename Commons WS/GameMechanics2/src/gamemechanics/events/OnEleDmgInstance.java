@@ -6,7 +6,7 @@ import com.google.common.eventbus.Subscribe;
 
 import gamemechanics.common.FightEvent;
 import gamemechanics.models.entities.Entity;
-import gamemechanics.statics.stats.properties.Element;
+import gamemechanics.statics.Element;
 
 public class OnEleDmgInstance implements FightEvent {
 

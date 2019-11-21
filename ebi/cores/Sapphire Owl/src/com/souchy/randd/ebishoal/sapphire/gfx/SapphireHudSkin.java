@@ -15,16 +15,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireResources;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireResources.I18nCategory;
 
+import data.modules.AzurCache;
 import gamemechanics.models.entities.Creature;
-import gamemechanics.statics.creatures.CreatureType;
+import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.modifiers.Modifier;
-import gamemechanics.statics.stats.modifiers.Modifier.mathMod;
-import gamemechanics.statics.stats.properties.StatProperty.element;
-import gamemechanics.statics.stats.properties.StatProperty.resource;
+import gamemechanics.statics.stats.modifiers.mathMod;
+import gamemechanics.statics.stats.modifiers.eleMod;
+import gamemechanics.statics.stats.properties.Resource;
 
 /**
  * 
@@ -36,15 +39,41 @@ public class SapphireHudSkin extends Skin {
 	public SapphireHudSkin(FileHandle file) {
 		super(file);
 
-		add("spell_bg", new Texture(Gdx.files.internal("res/gdx/ui/res/borders/spell_bg.png"), true));
-		add("spell_frame", new Texture(Gdx.files.absolute("G:/Assets/test/blackborder.png"), true));
-		add("ring_frame", new Texture(Gdx.files.internal("res/gdx/ui/res/borders/ring_frame.PNG"), true));
-		add("up", new Texture(Gdx.files.internal("res/gdx/ui/res/buttons/slider_02_03.png"), true));
-		add("down", new Texture(Gdx.files.internal("res/gdx/ui/res/buttons/slider_02_04.png"), true));
 		add("defaultTexture", new Texture(Gdx.files.absolute("G:/Assets/test/default.png"), true));
+		//add("spell_frame", new Texture(Gdx.files.absolute("G:/Assets/test/blackborder.png"), true));
+//		
+//		add("spell_bg", new Texture(Gdx.files.internal("res/ui/res/borders/spell_bg.png"), true));
+//		add("ring_frame", new Texture(Gdx.files.internal("res/ui/res/borders/ring_frame.PNG"), true));
+//		add("up", new Texture(Gdx.files.internal("res/ui/res/buttons/slider_02_03.png"), true));
+//		add("down", new Texture(Gdx.files.internal("res/ui/res/buttons/slider_02_04.png"), true));
 		
 		this.getAll(Texture.class).values().forEach(t -> t.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear));
 		//Sungjin.loadResources(this);
+		
+		/*
+		var lml = SapphireHud.parser.getData();
+		// load i18n
+		for(var cat : I18nCategory.values())
+			lml.addI18nBundle("i18n."+cat.name(), SapphireResources.getI18nBundle(cat)); //assets.load(getI18nPath(cat), I18NBundle.class);
+		
+		AzurCache cache = null;
+		cache.creatures.values().forEach(model -> {
+			add("textures.creatures."+model.id(), SapphireResources.getCreatureIcon(model.getIconName()));
+		});
+		cache.spells.values().forEach(model -> {
+			add("textures.spells."+model.id(), SapphireResources.getSpellIcon(model.getIconName()));
+		});
+		*/
+		
+		SapphireResources.assets.getAssetNames().forEach(a -> {
+			Log.info("hud skin asset : " + a);
+			if(a.startsWith("res/textures")) {
+				var str = a.substring("res/".length(), a.lastIndexOf(".")).replace("/", "."); // enlève le res/, enlève l'extension, et rempalace / par .
+				add(str, SapphireResources.assets.get(a));
+			}
+//			if(a.startsWith("i18n"))
+//				lml.addI18nBundle(a.substring(0, a.lastIndexOf("/")).replace("/", "."), SapphireResources.assets.get(a));
+		});
 	}
 	
 
@@ -74,33 +103,38 @@ public class SapphireHudSkin extends Skin {
 		int val = 0;
 		
 		// set i18n
-		var i18nPath = SapphireResources.getI18nPath(model.getStrID());
-		lml.addI18nBundle(prefix + "I18N", SapphireResources.assets.get(i18nPath));
+//		var i18nPath = SapphireResources.getI18nPath(model.getStrID());
+//		lml.addI18nBundle(prefix + "I18N", SapphireResources.assets.get(i18nPath));
 		
 		// set creature avatar
-		var avatarPath = SapphireResources.getCreatureGfx(model.getStrID(), model.getAvatarName());
+		var avatarPath = SapphireResources.getCreatureIconPath(model.getIconName());
 		lml.getDefaultSkin().add(prefix + "Avatar", new TextureRegionDrawable(new RoundTextureRegion(SapphireResources.assets.get(avatarPath))));
+		
 		//Log.info("c.spellbook : " + c.spellbook);
 		// set spell icons
+		
 		for(var s : c.spellbook) {
-			int typeid = s.id() / 1000000 * 1000000;
-			int creatureid = s.id() / 1000 * 1000;
-			int sid = s.id() - typeid - creatureid;
-			String iconPath = "";
+			//int typeid = s.id() / 1000000 * 1000000;
+			//int creatureid = s.id() / 1000 * 1000;
+			//int sid = s.id() - typeid - creatureid;
+			//String iconPath = "";
 			//Log.info("SapphireHudSkin spell ids : " + typeid + ", " + creatureid + ", " + sid);
-			if(typeid > 0) {
-				iconPath = SapphireResources.getCreatureTypeGfx(CreatureType.values()[typeid].name(), s.getIconName());
+			//if(typeid > 0) {
+				//iconPath = SapphireResources.getCreatureTypeGfx(CreatureType.getName(typeid), s.getIconName());
 				//Log.info("SapphireHudSkin spell asset path (creature type) : " + iconPath + ". For creature type : " + CreatureType.values()[typeid].name() + ". For Spell : " + s.getIconName());
-			} else 
-			if (creatureid > 0) {
-				iconPath = SapphireResources.getCreatureGfx(model.getStrID(), s.getIconName());
+			//} else 
+			//if (creatureid > 0) {
+				String iconPath = SapphireResources.getSpellIconPath(s.getIconName()); //model.getStrID(), 
+				//var str = iconPath.substring("res/".length(), iconPath.lastIndexOf(".")).replace("/", ".");
 				//Log.info("SapphireHudSkin spell asset path (creature) : " + iconPath + ". For creature : " + model.getStrID() + ". For Spell : " + s.getIconName());
-			}
+			//}
 			lml.getDefaultSkin().add(prefix + "Spell" + i, SapphireResources.assets.get(iconPath));
 			i++;
 		}
+		
+		
 		// set all resources (current, max and shields)
-		for (var r : resource.values()) {
+		for (var r : Resource.values()) {
 			for (int j = 0; j <= 1; j++) {
 				val = c.getStats().getResourceCurrent(r, j == 1);
 				lml.addArgument(prefix + camel(r.name(), "Current", (j == 0 ? "" : "Shield")), val);
@@ -110,10 +144,11 @@ public class SapphireHudSkin extends Skin {
 			
 			c.getStats().getResourceMax(r);
 		}
+		
 		// set all resistances
-		for (var e : element.values())
+		for (var e : Element.values)
 			for (var m : mathMod.values()) {
-				val = (int) c.getStats().getEle(e, m, Modifier.eleMod.res);
+				val = (int) c.getStats().getEle(e, m, eleMod.res);
 				lml.addArgument(prefix + camel(e.name(), "Resistance", m.name()), val);
 			}
 		

@@ -1,0 +1,15 @@
+
+
+<test2 debug="true">
+
+    <stack debug="false" width="42" height="42">
+        <image id="icon" />
+        <image id="border" />
+        <table debug="false" width="42" height="42">
+            <label id="stacks" color="black" align="bottomleft" expand="true" padbottom="2" padleft="2">-</label>
+            <label id="duration" color="black" align="bottomright" expand="true" padbottom="2" padright="2">-</label>
+        </table>
+    </stack>
+
+</test2>
+
