@@ -21,6 +21,8 @@ import gamemechanics.statics.stats.StatMod;
  *
  */
 public abstract class Status extends TimedEffect implements Disposable {
+
+	public abstract int id();
 	
 	// buff stats à compiler dans les stats de la cible du status
 	public List<StatMod> stats = new ArrayList<>();
@@ -31,14 +33,13 @@ public abstract class Status extends TimedEffect implements Disposable {
 		source.fight.bus.register(this);
 	}
 	
- 
 	@Override
 	public void dispose() {
 		super.dispose();
 	}
 	
 
-	public static class Passive extends Status {
+	public static abstract class Passive extends Status {
 		public Passive(Entity source) {
 			super(source, source);
 			this.canDebuff = false;
@@ -48,5 +49,10 @@ public abstract class Status extends TimedEffect implements Disposable {
 		public void fuse(TimedEffect s) {
 			// no fusion
 		}
+	}
+
+	
+	public String getIconName() {
+		return Integer.toString(id());
 	}
 }

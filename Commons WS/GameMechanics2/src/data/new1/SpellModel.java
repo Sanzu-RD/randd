@@ -13,7 +13,6 @@ import gamemechanics.statics.stats.Stats;
 
 public abstract class SpellModel {
 	
-	/** return source owner id (creature or type) + spell id to make a 0000 0000 0000 number */
 	public abstract int id();
 	
 
