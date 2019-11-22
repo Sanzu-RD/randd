@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE :macro SYSTEM "lml.dtd">
+<!DOCTYPE playbar SYSTEM "lml.dtd">
 
-<:macro alias="">
+<playbar>
 
     <table defaultpad="5" debug="false" y="0" x="0" fillparent="true" >
 
@@ -107,4 +107,4 @@
 
     </table>
 
-</:macro>
+</playbar>

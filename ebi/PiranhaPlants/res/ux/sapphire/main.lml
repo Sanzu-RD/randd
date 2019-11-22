@@ -11,15 +11,15 @@
     <:row align="bottom" >
         <stack fill="true" debug="false">
 
-            <:chat></:chat>
+            <chat></chat>
 
-            <:playbar></:playbar>
+            <playbar></playbar>
 
-            <:timer></:timer>
+            <statusbar></statusbar>
 
-            <:statusbar></:statusbar>
+            <timeline></timeline>
 
-            <:timeline></:timeline>
+            <timer></timer>
 
         </stack>
     </:row>

@@ -22,6 +22,10 @@ import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImageLmlTagProvider;
 import com.souchy.randd.ebishoal.sapphire.ux.Chat;
 import com.souchy.randd.ebishoal.sapphire.ux.CreatureSheet;
+import com.souchy.randd.ebishoal.sapphire.ux.PlayBar;
+import com.souchy.randd.ebishoal.sapphire.ux.StatusIcon;
+import com.souchy.randd.ebishoal.sapphire.ux.*;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.SapphireWidgetTagProvider;
 
 public class SapphireHud extends LapisHud {
 
@@ -54,7 +58,7 @@ public class SapphireHud extends LapisHud {
 		batch.setShader(shader);
 
 		this.setStage(new Stage(viewport, batch));
-		
+
 		// Parser(actions, i18n, skin, tags)
 		//i18n = I18NBundle.createBundle(Gdx.files.internal("res/i18n/ui/bundle"));
 		skin = new SapphireHudSkin(getSkinFile());
@@ -67,7 +71,12 @@ public class SapphireHud extends LapisHud {
 				.skin(skin) 
 				// Tags
 				.tag(new RoundImageLmlTagProvider(), "roundImage")
-				.tag(null, "")
+				.tag(new SapphireWidgetTagProvider<>(Chat.class), "chat")
+				.tag(new SapphireWidgetTagProvider<>(PlayBar.class), "playbar")
+				.tag(new SapphireWidgetTagProvider<>(StatusIcon.class), "statusicon")
+				.tag(new SapphireWidgetTagProvider<>(StatusBar.class), "statusbar")
+				.tag(new SapphireWidgetTagProvider<>(Timeline.class), "timeline")
+				.tag(new SapphireWidgetTagProvider<>(CreatureSheet.class), "creaturesheet")
 				.build();
 		
 		single = this;

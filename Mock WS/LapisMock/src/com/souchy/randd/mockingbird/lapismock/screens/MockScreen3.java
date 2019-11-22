@@ -171,6 +171,13 @@ public class MockScreen3 extends BaseScreen {
 		chipInst.transform.setTranslation(3, 3, 1);
 		chipInst.transform.rotate(1, 0, 0, 90);
 		
+		// SOME TEXTURES :
+		LapisMock.core.getGame().assets.load("G:/Assets/test/grass137x137.png", Texture.class);
+		LapisMock.core.getGame().assets.load("G:/Assets/test/blackborder.png", Texture.class);
+		LapisMock.core.getGame().assets.finishLoading();
+		GlobalLML.getLmlParser().getData().getDefaultSkin().add("bg", LapisMock.core.getGame().assets.get("G:/Assets/test/grass137x137.png"));
+		GlobalLML.getLmlParser().getData().getDefaultSkin().add("border", LapisMock.core.getGame().assets.get("G:/Assets/test/blackborder.png"));
+		
 		// GUI :
 		LmlApplicationListener a;
 		// GlobalLML.lmlParser.parseTemplate("ui/test1.lml");
@@ -265,6 +272,16 @@ public class MockScreen3 extends BaseScreen {
 		}
 	}
 	
+	/*
+	 * Peut avoir une config avec la position initiale de chacun des composants ex :
+	 * {
+	 * 		"chat": { "align":"bottomleft", "x":100, "y":100 },
+	 * 		"playbar": { "align":"bottomcenter", "x":0, "y":100 },
+	 * 		"timeline": { "align":"bottomright", "x":100, "y":100, "orientation":"vertical" },
+	 * }
+	 * ou pas besoin de ça quand t'as déjà le lml que les users peuvent éditer
+	 */
+	
 	public static class Test2 extends MockWidget {
 		@LmlActor("icon")
 		public Image icon;
@@ -276,12 +293,6 @@ public class MockScreen3 extends BaseScreen {
 		public Label duration;
 		public void refresh(String asdf) {
 			this.setPosition(1000, 300);
-			
-			LapisMock.core.getGame().assets.load("G:/Assets/test/grass137x137.png", Texture.class);
-			LapisMock.core.getGame().assets.load("G:/Assets/test/blackborder.png", Texture.class);
-			LapisMock.core.getGame().assets.finishLoading();
-			GlobalLML.getLmlParser().getData().getDefaultSkin().add("bg", LapisMock.core.getGame().assets.get("G:/Assets/test/grass137x137.png"));
-			GlobalLML.getLmlParser().getData().getDefaultSkin().add("border", LapisMock.core.getGame().assets.get("G:/Assets/test/blackborder.png"));
 			
 			setImage(icon, "bg");
 			setImage(border, "border");
@@ -407,7 +418,6 @@ public class MockScreen3 extends BaseScreen {
 			Log.info("tag 2");
 			return new Test2();
 		}
-		
 	}
 	
 	

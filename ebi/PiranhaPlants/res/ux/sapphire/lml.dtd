@@ -1,3 +1,16 @@
+
+<!-- Custom Tags -->
+<!ELEMENT chat ANY>
+<!ELEMENT timer ANY>
+<!ELEMENT creaturesheet ANY>
+<!ELEMENT playbar ANY>
+<!ELEMENT statusicon ANY>
+<!ELEMENT statusbar ANY>
+<!ELEMENT timeline ANY>
+<!-- RoundImageLmlTag -->
+<!ELEMENT roundImage ANY>
+
+
 <!-- Actor tags: -->
 <!-- VisSliderLmlTag -->
 <!ELEMENT visslider ANY>
@@ -107,8 +120,6 @@
 <!ELEMENT multisplitpane ANY>
 <!-- VisImageLmlTag -->
 <!ELEMENT image ANY>
-        <!-- VisImageLmlTag -->
-        <!ELEMENT roundImage ANY>
 <!-- HorizontalFlowGroupLmlTag -->
 <!ELEMENT horizontalflowgroup ANY>
 <!-- ClickListenerLmlTag -->

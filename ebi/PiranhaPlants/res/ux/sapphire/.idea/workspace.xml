@@ -2,203 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="711c9478-3b9c-4de5-9330-84df3ac55110" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/AnnotationProcessor/src/com/souchy/randd/annotationprocessor/ID.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/AnnotationProcessor/src/com/souchy/randd/annotationprocessor/ID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/data/gamemechanics/data/effects/other/SummonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/data/gamemechanics/data/effects/other/SummonEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurCache.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurInstantiator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurInstantiator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/CreatureModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/CreatureModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/SpellModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/SpellModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/Tag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/timed/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/timed/Status.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/events/OnEleDmgInstance.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/events/OnEleDmgInstance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/models/entities/Creature.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/models/entities/Creature.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/CreatureType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/CreatureType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/creatures/CreatureType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/creatures/CreatureType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/Stats.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/Stats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/properties/CreatureProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/properties/creatures/CreatureProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/properties/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/properties/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/properties/SpellProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/properties/spells/SpellProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/properties/TargetingProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/properties/spells/TargetingProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/combat/JadeCreature.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/meta/JadeCreature.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/res/creatures/types/necromancer/SummonSkeleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/spells/dark/SummonSkeleton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/res/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/res/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/creaturetypes/ElementalType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/creaturetypes/ElementalType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/creaturetypes/KnightType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/creaturetypes/KnightType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/creaturetypes/ZombieType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/creaturetypes/ZombieType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/items/BlankSpellBook.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/items/SpikeyGloves.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/main/CreatureTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/main/CreatureTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/main/Elements.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/main/Elements.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/spells/ShiningArmour.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/spells/light/ShiningArmour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/SungjinModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/SungjinModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/Comet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/Comet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/GhostBird.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/GhostBird.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/GhostFish.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/GhostFish.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/GhostKnight.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/GhostKnight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/Hail.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/Hail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/IceShield.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/IceShield.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/IceWall.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/IceWall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/Revive.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/spells/Revive.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/sungjin-deathshadowfleet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/sungjin-deathshadowfleet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/sungjin-ebishoal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/sungjin-ebishoal.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/.project" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/.project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/src/com/souchy/randd/mockingbird/lapismock/LapisMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/src/com/souchy/randd/mockingbird/lapismock/LapisMock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/src/com/souchy/randd/mockingbird/lapismock/World.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/src/com/souchy/randd/mockingbird/lapismock/World.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/src/com/souchy/randd/mockingbird/lapismock/screens/MockScreen3.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/src/com/souchy/randd/mockingbird/lapismock/screens/MockScreen3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Tools WS/Rainbow/.project" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Tools WS/Rainbow/.project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisHud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisHud.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisScreenCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisScreenCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/main/LapisFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/main/LapisFiles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/main/LapisGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/main/LapisGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../avatars/Tex_AnimeAva_15.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/avatars/Tex_AnimeAva_15.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/anims_fx_etc/laser1.pfx" beforeDir="false" afterPath="$PROJECT_DIR$/../../fx/laser1.pfx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/cell_models/cube.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../models/decor/cube.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/cell_models/cube.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/../../models/decor/cube.mtl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/cell_models/cube.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../../models/decor/cube.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/cell_models/cube.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../models/decor/cube.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/cell_models/roundedCube.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/roundedCube.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/cell_models/roundedCube05.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/roundedCube05.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/cell_models/roundedCube05.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/roundedCube05.mtl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/cell_models/roundedCube05.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/roundedCube05.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/cell_models/slab.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/slab.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/cell_models/slab.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/slab.mtl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/cell_models/slab.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/slab.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/cell_models/slab.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/slab.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/textures/snow_ice.pdn" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/snow_ice.pdn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/board/textures/snow_ice.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/snow_ice.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/character_models/Frog.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/Frog.fbx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/character_models/Frog.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/Frog.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/character_models/Rat.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/Rat.fbx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/character_models/Rat.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/Rat.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/character_models/Snake.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/Snake.fbx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/character_models/Snake.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/Snake.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/character_models/Snake_angry.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/Snake_angry.fbx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/character_models/Snake_angry.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/Snake_angry.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/character_models/Spider.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/Spider.fbx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/character_models/Spider.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/Spider.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/character_models/Wasp.fbx" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/Wasp.fbx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/character_models/Wasp.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/Wasp.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/object_models/pinetree.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../models/decor/pinetree.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/object_models/pinetree.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/../../models/decor/pinetree.mtl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/object_models/pinetree.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../../models/decor/pinetree.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/object_models/pinetree.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../models/decor/pinetree.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/object_models/tree1.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/tree1.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/object_models/tree1m - Copie.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/tree1m - Copie.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/g3d/object_models/tree1m.g3dj" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/tree1m.g3dj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/shaders/default.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/default.fragment.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/shaders/default.vertex.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/default.vertex.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/shaders/depth.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/depth.fragment.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/shaders/depth.vertex.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/depth.vertex.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/shaders/passthrough.fsh" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/passthrough.fsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/shaders/passthrough.vsh" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/passthrough.vsh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/shaders/postProcess.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/postProcess.fragment.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/shaders/postProcess.vertex.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/postProcess.vertex.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/shaders/test.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/test.fragment.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/shaders/test.vertex.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/test.vertex.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/shaders/ui.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/ui.fragment.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/shaders/ui.vertex.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/ui.vertex.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/.idea/dictionaries/Blank.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/baseskin.json" beforeDir="false" afterPath="$PROJECT_DIR$/old/baseskin.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/default.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/old/default.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/default.png" beforeDir="false" afterPath="$PROJECT_DIR$/old/default.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/defaultTemplate.pfx" beforeDir="false" afterPath="$PROJECT_DIR$/old/defaultTemplate.pfx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/font-small.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/font-small.fnt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/lml.dtd" beforeDir="false" afterPath="$PROJECT_DIR$/lml.dtd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/lml.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/lml.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/cave/cave_bg.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/cave/cave_bg.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/cave/cave_bricks_01.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/cave/cave_bricks_01.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/cave/cave_bricks_02.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/cave/cave_bricks_02.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/cave/cave_bricks_03.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/cave/cave_bricks_03.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/circles/map_01_02.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/circles/map_01_02.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/circles/map_01_03.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/circles/map_01_03.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/circles/map_01_04.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/circles/map_01_04.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/circles/scale_01_03.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/circles/scale_01_03.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/desert/desert_bg.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/desert/desert_bg.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/desert/deserted_bricks_01.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/desert/deserted_bricks_01.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/desert/deserted_bricks_02.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/desert/deserted_bricks_02.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/desert/deserted_bricks_03.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/desert/deserted_bricks_03.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/grassland/grassland_bg.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/grassland/grassland_bg.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/grassland/grassland_bricks_01.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/grassland/grassland_bricks_01.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/grassland/grassland_bricks_02.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/grassland/grassland_bricks_02.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/backgrounds/grassland/grassland_bricks_03.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/backgrounds/grassland/grassland_bricks_03.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/borders/map_01_01.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/borders/map_01_01.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/borders/ring_frame.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/borders/ring_frame.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/borders/spell_bg.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/borders/spell_bg.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/borders/spell_frame.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/borders/spell_frame.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/buttons/slider_02_03.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/buttons/slider_up.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/res/buttons/slider_02_04.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../textures/buttons/slider_down.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/sheet.atlas" beforeDir="false" afterPath="$PROJECT_DIR$/sheet.atlas" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/sheet.json" beforeDir="false" afterPath="$PROJECT_DIR$/sheet.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/sheet.lml" beforeDir="false" afterPath="$PROJECT_DIR$/sheet.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/sheet.lss" beforeDir="false" afterPath="$PROJECT_DIR$/sheet.lss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/sheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/sheet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/sheet1.atlas" beforeDir="false" afterPath="$PROJECT_DIR$/old/sheet1.atlas" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/sheet1.png" beforeDir="false" afterPath="$PROJECT_DIR$/old/sheet1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/test1.lml" beforeDir="false" afterPath="$PROJECT_DIR$/old/test1.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/test1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/old/test1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/ui.iml" beforeDir="false" afterPath="$PROJECT_DIR$/old/ui.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/uiskin.atlas" beforeDir="false" afterPath="$PROJECT_DIR$/old/uiskin.atlas" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/uiskin.json" beforeDir="false" afterPath="$PROJECT_DIR$/old/uiskin.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../gdx/ui/uiskin.png" beforeDir="false" afterPath="$PROJECT_DIR$/old/uiskin.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../i18n/bundle_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../i18n/ui/bundle_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../i18n/bundle_fr.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../i18n/ui/bundle_fr.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/components/loginForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/components/loginForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/components/registerForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/components/registerForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/components/sheet1.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/components/sheet1.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/components/sheet1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/components/sheet1.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/scenes/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/scenes/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/scenes/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/scenes/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/scenes/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/scenes/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/scenes/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/scenes/main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/scenes/scenesCommons.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/scenes/scenesCommons.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/tabs/collection.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/tabs/collection.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/tabs/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/tabs/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/tabs/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/tabs/home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/tabs/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/tabs/profile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/tabs/profile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/tabs/profile.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/tabs/settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/tabs/settings.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/tabs/shop.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/tabs/shop.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/tabs/teameditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/tabs/teameditor.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/amethyst/tabs/teams.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/tabs/teams.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/css/commons.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/css/commons.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/css/containers/lists.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/css/containers/lists.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/css/containers/menus.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/css/containers/menus.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/css/containers/scrolls.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/css/containers/scrolls.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/css/containers/splits.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/css/containers/splits.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/css/containers/tabs.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/css/containers/tabs.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/css/containers/titleds.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/css/containers/titleds.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/css/controls/buttons.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/css/controls/buttons.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/css/controls/checkboxes.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/css/controls/checkboxes.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/css/controls/labels.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/css/controls/labels.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/css/controls/textAreas.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/css/controls/textAreas.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/css/controls/thumbnails.css" beforeDir="false" afterPath="$PROJECT_DIR$/../amethyst/css/controls/thumbnails.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/editor1.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/editor1.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/gridExplorer.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/gridExplorer.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/rainbow/properties_class.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Tools WS/Rainbow/res/ui/rainbow/properties_class.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/rainbow/properties_effect.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Tools WS/Rainbow/res/ui/rainbow/properties_effect.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/rainbow/properties_spell.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Tools WS/Rainbow/res/ui/rainbow/properties_spell.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/rainbow/rainbow-login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Tools WS/Rainbow/res/ui/rainbow/rainbow-login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/rainbow/rainbow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Tools WS/Rainbow/res/ui/rainbow/rainbow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../jfx/ui/search-list.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../delete/search-list.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/controls/SapphireController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/controls/SapphireController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lml.dtd" beforeDir="false" afterPath="$PROJECT_DIR$/lml.dtd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.lml" beforeDir="false" afterPath="$PROJECT_DIR$/main.lml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playbar.lml" beforeDir="false" afterPath="$PROJECT_DIR$/playbar.lml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/statusbar.lml" beforeDir="false" afterPath="$PROJECT_DIR$/statusbar.lml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testdialog.lml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHud.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHudSkin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHudSkin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireResources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/SapphireWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/SapphireWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/StatusIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/StatusIcon.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -217,29 +30,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+            <state relative-caret-position="340">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/timer.lml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/statusbar.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="55" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="55" />
+            <state relative-caret-position="153">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -247,31 +51,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/status.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sheet.lml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="61" column="26" lean-forward="true" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
-              <folding>
-                <element signature="n#verticalgroup#0;n#stack#0;n#:row#1;n#table#0;n#!!top" />
-                <element signature="n#table#0;n#stack#0;n#:row#0;n#stack#0;n#:row#1;n#table#0;n#!!top" />
-                <element signature="n#table#0;n#stack#0;n#:row#1;n#table#0;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testdialog.lml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="34">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -279,29 +60,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/playbar.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="110" selection-start-line="110" selection-end-line="110" />
+            <state>
+              <caret selection-end-line="1" selection-end-column="35" />
               <folding>
                 <element signature="n#:row#1;n#table#0;n#:macro#0;n#!!top" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../../../../Mock WS/LapisMock/data/ui/test1.lml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../../../../Mock WS/LapisMock/data/ui/test2.lml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="90" selection-start-line="8" selection-start-column="90" selection-end-line="8" selection-end-column="90" />
             </state>
           </provider>
         </entry>
@@ -314,6 +77,11 @@
       <find>spell_frame</find>
       <find>spell_bg</find>
       <find>loop:index</find>
+      <find>stack</find>
+      <find>stack</find>
+      <find>stack</find>
+      <find>root</find>
+      <find>table</find>
     </findStrings>
     <replaceStrings>
       <replace>textures.borders.ring_frame</replace>
@@ -330,21 +98,22 @@
       <list>
         <option value="$PROJECT_DIR$/creatureSheet.lml" />
         <option value="$PROJECT_DIR$/chat.lml" />
-        <option value="$PROJECT_DIR$/playbar.lml" />
         <option value="$PROJECT_DIR$/timer.lml" />
         <option value="$PROJECT_DIR$/timeline.lml" />
-        <option value="$PROJECT_DIR$/statusbar.lml" />
         <option value="$PROJECT_DIR$/status.lml" />
         <option value="$PROJECT_DIR$/sheet.lml" />
         <option value="$PROJECT_DIR$/testdialog.lml" />
         <option value="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/data/ui/test2.lml" />
+        <option value="$PROJECT_DIR$/playbar.lml" />
+        <option value="$PROJECT_DIR$/lml.dtd" />
         <option value="$PROJECT_DIR$/main.lml" />
+        <option value="$PROJECT_DIR$/statusbar.lml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1342" />
-    <option name="y" value="170" />
+    <option name="x" value="-1299" />
+    <option name="y" value="119" />
     <option name="width" value="1286" />
     <option name="height" value="851" />
   </component>
@@ -370,7 +139,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574371647604" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574433192470" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
@@ -409,7 +178,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1342" y="170" width="1286" height="851" extended-state="0" />
+    <frame x="-1299" y="119" width="1286" height="851" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Image Layers" />
@@ -489,41 +258,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/statusbar.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="55" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/playbar.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="110" selection-start-line="110" selection-end-line="110" />
-          <folding>
-            <element signature="n#:row#1;n#table#0;n#:macro#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../../Mock WS/LapisMock/data/ui/test1.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testdialog.lml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/status.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="9" />
         </state>
       </provider>
     </entry>
@@ -546,10 +284,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../Mock WS/LapisMock/data/ui/test1.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lml.dtd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/status.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.lml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+        <state relative-caret-position="340">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/playbar.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="1" selection-end-column="35" />
+          <folding>
+            <element signature="n#:row#1;n#table#0;n#:macro#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/statusbar.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
