@@ -6,6 +6,12 @@ public class StatusBar extends SapphireWidget {
 	public String getTemplateId() {
 		return "statusbar";
 	}
-	
+
+
+	@Override
+	protected void init() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

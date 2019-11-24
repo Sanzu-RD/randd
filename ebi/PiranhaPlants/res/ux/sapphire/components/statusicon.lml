@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE :macro SYSTEM "lml.dtd">
+
+<:macro alias="status">
+    <statusicon>
+        <stack width="42" height="42">
+            <roundImage id="buff-{statusId}"
+                        tooltip="$getStatusName({creatureId}, {statusId})"
+                        style="$getStatusIcon({creatureId}, {statusId})"/>
+            <image id="buffBorder-{statusId}" style="textures.borders.ring_frame"/>
+        </stack>
+        <tooltip>
+            <:loop times="$getStatusEffectCount({creatureId}, {statusId})">
+                <label>$getStatusEffect({creatureId}, {statusId}, {loop:index})</label>
+            </:loop>
+        </tooltip>
+    </statusicon>
+</:macro>

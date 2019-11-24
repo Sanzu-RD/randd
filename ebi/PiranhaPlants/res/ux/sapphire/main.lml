@@ -1,7 +1,8 @@
-<!--<?xml version="1.0" encoding="UTF-8"?>-->
-<!--<!DOCTYPE table SYSTEM "lml.dtd">-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE table SYSTEM "lml.dtd">
 
-<table defaultpad="5" debug="false" y="0" x="0" fillparent="true" >
+
+<table defaultpad="5" debug="true" y="0" x="0" fillparent="true" >
 
     <!-- CONTENT -->
     <:row expand="true" filly="true">
@@ -9,20 +10,18 @@
     </:row>
 
     <:row align="bottom" >
-        <stack fill="true" debug="false">
-
-            <chat></chat>
-
-            <playbar></playbar>
-
-            <statusbar></statusbar>
-
-            <timeline></timeline>
-
-            <timer></timer>
-
-        </stack>
     </:row>
 
+    <stack fill="true" debug="true">
+
+        <:chat></:chat>
+
+        <:playbar ></:playbar>
+
+        <:statusbar></:statusbar>
+
+        <:timeline></:timeline>
+
+    </stack>
 
 </table>

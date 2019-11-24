@@ -66,7 +66,7 @@ public class SapphireHudSkin extends Skin {
 		*/
 		
 		SapphireResources.assets.getAssetNames().forEach(a -> {
-			Log.info("hud skin asset : " + a);
+			//Log.info("hud skin asset : " + a);
 			if(a.startsWith("res/textures")) {
 				var str = a.substring("res/".length(), a.lastIndexOf(".")).replace("/", "."); // enlève le res/, enlève l'extension, et rempalace / par .
 				add(str, SapphireResources.assets.get(a));

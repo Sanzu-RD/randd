@@ -16,5 +16,12 @@ public class TimelineIcon extends SapphireWidget {
 	public String getTemplateId() {
 		return "timelineicon";
 	}
+
+
+	@Override
+	protected void init() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

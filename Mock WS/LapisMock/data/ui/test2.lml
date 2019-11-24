@@ -11,5 +11,9 @@
         </table>
     </stack>
 
+    <asdf id="asdf">
+        <label id="lbl"> asdf </label>
+    </asdf>
+
 </test2>
 

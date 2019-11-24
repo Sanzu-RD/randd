@@ -1,5 +1,8 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -76,24 +79,25 @@ public class SapphireResources {
 	}
 	
 	private static void loadTextures(FileHandle dir) {
+		recurseFiles(dir, f -> true, 
+				f -> assets.load(f.path().substring(f.path().indexOf("res/"), f.path().length()), Texture.class, params));
+	}
+	
+	private static void loadModels(FileHandle dir) {
+		recurseFiles(dir, f -> f.name().endsWith("g3dj"), 
+				f -> assets.load(f.path().substring(f.path().indexOf("res/"), f.path().length()), Model.class));
+	}
+	
+	public static void recurseFiles(FileHandle dir, Predicate<FileHandle> filter, Consumer<FileHandle> action) {
 		for (var f : dir.list()) {
 			if(f.isDirectory()) {
-				loadTextures(f);
-			} else {
-				assets.load(f.path().substring(f.path().indexOf("res/"), f.path().length()), Texture.class, params);
+				recurseFiles(f, filter, action);
+			} else if(filter.test(f)) { 
+				action.accept(f);
 			}
 		}
 	}
 	
-	private static void loadModels(FileHandle dir) {
-		for (var f : dir.list()) {
-			if(f.isDirectory()) {
-				loadModels(f);
-			} else if(f.name().endsWith(".g3dj")){
-				assets.load(f.path().substring(f.path().indexOf("res/"), f.path().length()), Model.class);
-			}
-		}
-	}
 	
 	public static String getCreatureIconPath(String iconName) {
 		return "res/textures/creatures/" + iconName + ".png";

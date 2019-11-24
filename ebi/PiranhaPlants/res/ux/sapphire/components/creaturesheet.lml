@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE :macro SYSTEM "lml.dtd">
+
+<:macro alias="creaturesheet">
+    <table defaultpad="5" debug="true" y="0" x="0" fillparent="true" >
+        <!-- Icon + Resources row-->
+        <:row align="top" >
+            <stack>
+                <image id="icon" style="textures.creatures.$getCreatureModelId" width="100" height="100"/>
+                <image id="border" style="textures.borders.ring_frame" width="100" height="100"/>
+            </stack>
+
+            <container>
+                <label id="name" value="@creatures.$getCreatureModelId.name"/>
+                <:row/>
+                <label id="life" value="$getHpShield   $getHp / $getHpMax"/>
+                <:row/>
+                <label id="mana" value="$getManaShield   $getMana / $getManaMax"/>
+                <:row/>
+                <label id="move" value="$getMoveShield   $getMove / $getMoveMax"/>
+            </container>
+        </:row>
+
+        <!-- Description / Passive row -->
+        <:row>
+            <stack fill="true" debug="false">
+                <container align="bottomright" padbottom="100" padright="100" debug="false">
+                    <label value="sdfgfdsgsdfgsdfg" />
+                </container>
+            </stack>
+        </:row>
+
+        <!-- Status list -->
+        <:row>
+            <stack fill="true" debug="false">
+                <container align="bottomright" padbottom="100" padright="100" debug="false">
+                    <label value="sdfgfdsgsdfgsdfg" />
+                </container>
+            </stack>
+        </:row>
+    </table>
+</:macro>

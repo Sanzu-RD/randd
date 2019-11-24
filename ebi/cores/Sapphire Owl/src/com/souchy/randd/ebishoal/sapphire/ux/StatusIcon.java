@@ -23,11 +23,20 @@ public class StatusIcon extends SapphireWidget {
 //		status = s;
 //	}
 
-	public void refresh() {
+	@Override
+	protected void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public StatusIcon refresh(Status s) {
+		if(s != null)
+			this.status = s;
 		setImage(icon, "textures.statuses." + status.getIconName());
 		setImage(border, "textures.borders.blackborder");
 		setText(stacks, status.stacks + "");
 		setText(duration, status.duration + "");
+		return this;
 	}
 
 	@Override

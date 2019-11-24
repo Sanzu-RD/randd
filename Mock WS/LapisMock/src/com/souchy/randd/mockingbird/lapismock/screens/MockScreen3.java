@@ -268,7 +268,7 @@ public class MockScreen3 extends BaseScreen {
 			img.setDrawable(drawable);
 		}
 		public void setText(Label lbl, String text) {
-			
+			lbl.setText(text);
 		}
 	}
 	
@@ -291,14 +291,22 @@ public class MockScreen3 extends BaseScreen {
 		public Label stacks;
 		@LmlActor("duration")
 		public Label duration;
-		public void refresh(String asdf) {
+		@LmlActor("asdf")
+		public Asdf asdf;
+		public void refresh(String str) {
 			this.setPosition(1000, 300);
 			
 			setImage(icon, "bg");
 			setImage(border, "border");
 			setText(stacks, "1");
 			setText(duration, "2");
+			
+			setText(asdf.lbl, "okok");
 		}
+	}
+	public static class Asdf extends MockWidget {
+		@LmlActor("lbl")
+		public Label lbl;
 	}
 	
 	/**
@@ -310,7 +318,12 @@ public class MockScreen3 extends BaseScreen {
 				try {
 					LmlActor ann = field.getAnnotation(LmlActor.class);
 					var actorId = ann.value()[0];
-					field.set(group, group.findActor(actorId));
+					var value = group.findActor(actorId);
+					field.set(group, value);
+					
+					// inject sub groups
+					if(value instanceof Group) 
+						inject((Group) value);
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					e.printStackTrace();
 				}
@@ -380,6 +393,7 @@ public class MockScreen3 extends BaseScreen {
 					.i18nBundle(I18NBundle.createBundle(Gdx.files.internal("i18n/bundle")))
 					// custom tags
 					.tag(new Test2TagProvider(), "test2")
+					.tag(new AsdfTagProvider(), "asdf")
 					// Add custom skin
 					.skin(new Skin(Gdx.files.internal("uiskin.json"))).build();
 		}
@@ -419,6 +433,23 @@ public class MockScreen3 extends BaseScreen {
 			return new Test2();
 		}
 	}
+	
+	public static class AsdfTagProvider implements LmlTagProvider {
+		@Override
+		public LmlTag create(LmlParser parser, LmlTag parentTag, StringBuilder rawTagData) {
+			return new AsdfTag(parser, parentTag, rawTagData);
+		}
+	}
+	public static class AsdfTag extends AbstractGroupLmlTag {
+		public AsdfTag(LmlParser parser, LmlTag parentTag, StringBuilder rawTagData) {
+			super(parser, parentTag, rawTagData);
+		}
+		@Override
+		protected Asdf getNewInstanceOfGroup(LmlActorBuilder builder) {
+			return new Asdf();
+		}
+	}
+	
 	
 	
 	/**

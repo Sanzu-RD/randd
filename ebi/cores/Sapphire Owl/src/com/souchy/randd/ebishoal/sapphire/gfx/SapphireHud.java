@@ -15,11 +15,13 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.github.czyzby.lml.parser.LmlParser;
+import com.github.czyzby.lml.parser.tag.LmlTag;
 import com.github.czyzby.lml.vis.util.VisLml;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImageLmlTagProvider;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireResources;
 import com.souchy.randd.ebishoal.sapphire.ux.Chat;
 import com.souchy.randd.ebishoal.sapphire.ux.CreatureSheet;
 import com.souchy.randd.ebishoal.sapphire.ux.PlayBar;
@@ -29,25 +31,24 @@ import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.SapphireWidgetTagPro
 
 public class SapphireHud extends LapisHud {
 
-	@LmlActor("life")
-	public Label life;
-
-	@LmlActor("pageUp")
-	public Button pageUp;
-
-	@LmlActor("pageUpImage")
-	public Image pageUpImage;
-
-	@LmlActor("pageDownImage")
-	public Image pageDownImage;
-	
 	public static LmlParser parser;
 	public static SapphireHud single;
 	public static SapphireHudSkin skin;
 	public static I18NBundle i18n;
 	
+	@LmlActor("chat")
+	public Chat chat;
+	@LmlActor("playbar")
+	public PlayBar playbar;
+	@LmlActor("statusbar")
+	public StatusBar statusBar;
+	@LmlActor("timeline")
+	public Timeline timeline;
+//	@LmlActor("timer")
+//	public Timer timer;
+	
+	
 	public SapphireHud() {
-
 		var batch = new SapphireBatch();
 		var viewport = new ScreenViewport();
 		
@@ -71,24 +72,27 @@ public class SapphireHud extends LapisHud {
 				.skin(skin) 
 				// Tags
 				.tag(new RoundImageLmlTagProvider(), "roundImage")
-				.tag(new SapphireWidgetTagProvider<>(Chat.class), "chat")
+				.tag(new SapphireWidgetTagProvider<Chat>(Chat.class), "chat")
 				.tag(new SapphireWidgetTagProvider<>(PlayBar.class), "playbar")
 				.tag(new SapphireWidgetTagProvider<>(StatusIcon.class), "statusicon")
 				.tag(new SapphireWidgetTagProvider<>(StatusBar.class), "statusbar")
 				.tag(new SapphireWidgetTagProvider<>(Timeline.class), "timeline")
 				.tag(new SapphireWidgetTagProvider<>(CreatureSheet.class), "creaturesheet")
+				//.macro(new SapphireWidgetTagProvider<>(Chat.class), "chat")
 				.build();
-		
+		parser.setStrict(false);
 		single = this;
-		parser.createView(single, getTemplateFile());
 		
-		Dialog d;
-		//parser.parseTemplate(lmlTemplateFile)
+		// parse all templates
+		SapphireResources.recurseFiles(Gdx.files.internal("res/ux/sapphire/components/"), f -> f.name().endsWith(".lml"), parser::parseTemplate);
 
-		parser.createView(CreatureSheet.class, "res/ux/sapphire/creaturesheet.lml");
+		//Log.info("macro tags : " + String.join(", ", parser.getSyntax().getMacroTags().keys()));
 		
+		// create view
+		parser.createView(single, getTemplateFile());
+
 		
-		createListeners();
+		//createListeners();
 	}
 	
 	public static void refresh() {
@@ -106,7 +110,7 @@ public class SapphireHud extends LapisHud {
 	
 	@Override
 	public String getViewId() {
-		return "sheet";
+		return "main";
 	}
 	
 	@Override
@@ -119,38 +123,5 @@ public class SapphireHud extends LapisHud {
 		return Gdx.files.internal("res/ux/sapphire/" + getViewId() + ".json");
 	}
 
-	private void createListeners() {
-		pageUp.addListener(new ClickListener() {
-			@Override
-			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-				Log.info("enter");
-				var light = 1.3f;
-				//view.pageUpImage.setColor(light, light, light, view.pageUpImage.getColor().a);
-				super.enter(event, x, y, pointer, fromActor);
-			}
-			@Override
-			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-				Log.info("exit");
-				pageUpImage.setColor(1, 1, 1, pageUpImage.getColor().a);
-				super.exit(event, x, y, pointer, toActor);
-			}
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				Log.info("touch down");
-				//view.pageUpImage.setDrawable(parser.getData().getDefaultSkin().getDrawable("down"));
-				var shade = 0.7f;
-				pageUpImage.setColor(shade, shade, shade, pageUpImage.getColor().a);
-				return super.touchDown(event, x, y, pointer, button);
-			}
-			@Override
-			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-				Log.info("touch up");
-				var light = 1.0f;
-				pageUpImage.setColor(light, light, light, pageUpImage.getColor().a);
-				//view.pageUpImage.setDrawable(parser.getData().getDefaultSkin().getDrawable("up"));
-				super.touchUp(event, x, y, pointer, button);
-			}
-		});
-	}
 	
 }

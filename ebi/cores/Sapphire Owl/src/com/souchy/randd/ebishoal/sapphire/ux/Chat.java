@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.github.czyzby.lml.parser.impl.AbstractLmlView;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 
 public class Chat extends SapphireWidget {
@@ -24,10 +25,20 @@ public class Chat extends SapphireWidget {
 		return "chat";
 	}
     
-	@LmlAction("sendMsg")
-	public void sendMsg(String str) {
+	public Chat() {
+		Log.info("ctor chat");
+	}
+
+	@Override
+	protected void init() {
+		// TODO Auto-generated method stub
 		
 	}
+	
+//	@LmlAction("sendMsg")
+//	public void sendMsg(String str) {
+//		
+//	}
 	
 	
 }

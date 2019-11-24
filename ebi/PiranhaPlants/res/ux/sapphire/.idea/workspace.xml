@@ -2,16 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="711c9478-3b9c-4de5-9330-84df3ac55110" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/components/chat.lml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/creaturesheet.lml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/playbar.lml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/statusbar.lml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/statusicon.lml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/testmacro.lml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/timeline.lml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/data/ui/test2.lml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/data/ui/test2.lml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/src/com/souchy/randd/mockingbird/lapismock/screens/MockScreen3.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/src/com/souchy/randd/mockingbird/lapismock/screens/MockScreen3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../i18n/creatures/bundle_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../i18n/creatures/bundle_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../i18n/creatures/bundle_fr.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../i18n/creatures/bundle_fr.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../i18n/creatures/names.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lml.dtd" beforeDir="false" afterPath="$PROJECT_DIR$/lml.dtd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat.lml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/creaturesheet.lml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.lml" beforeDir="false" afterPath="$PROJECT_DIR$/main.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/playbar.lml" beforeDir="false" afterPath="$PROJECT_DIR$/playbar.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statusbar.lml" beforeDir="false" afterPath="$PROJECT_DIR$/statusbar.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testdialog.lml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/old/default.fnt" beforeDir="false" afterPath="$PROJECT_DIR$/../../fonts/default.fnt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old/default.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../fonts/default.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old/uiskin.png" beforeDir="false" afterPath="$PROJECT_DIR$/main.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playbar.lml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sheet.atlas" beforeDir="false" afterPath="$PROJECT_DIR$/main.atlas" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sheet.json" beforeDir="false" afterPath="$PROJECT_DIR$/main.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sheet.lml" beforeDir="false" afterPath="$PROJECT_DIR$/old/sheet.lml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sheet.lss" beforeDir="false" afterPath="$PROJECT_DIR$/main.lss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sheet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/status.lml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/statusbar.lml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/timeline.lml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/timer.lml" beforeDir="false" afterPath="$PROJECT_DIR$/components/timer.lml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHud.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHudSkin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHudSkin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireResources.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/CreatureSheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/CreatureSheet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/PlayBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/PlayBar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/SapphireWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/SapphireWidget.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/StatusIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/StatusIcon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/Timeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/Timeline.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,49 +51,83 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/timeline.lml">
+        <entry file="file://$PROJECT_DIR$/main.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="16" />
+            <state relative-caret-position="306">
+              <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.lml">
+        <entry file="file://$PROJECT_DIR$/old/sheet.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="221">
+              <caret line="13" column="25" lean-forward="true" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+              <folding>
+                <element signature="n#verticalgroup#0;n#stack#0;n#:row#1;n#table#0;n#!!top" />
+                <element signature="n#table#0;n#stack#0;n#:row#1;n#table#0;n#!!top" />
+                <element signature="n#container#0;n#stack#0;n#:row#1;n#table#0;n#!!top" />
+                <element signature="n#table#1;n#stack#0;n#:row#1;n#table#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/chat.lml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/statusbar.lml">
+        <entry file="file://$PROJECT_DIR$/components/playbar.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/status.lml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/playbar.lml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="1" selection-end-column="35" />
+            <state relative-caret-position="68">
+              <caret line="4" column="56" lean-forward="true" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="56" />
               <folding>
-                <element signature="n#:row#1;n#table#0;n#:macro#0;n#!!top" />
+                <element signature="n#table#1;n#table#0;n#stack#0;n#:row#1;n#table#0;n#playbar#0;n#!!top" />
+                <element signature="n#table#2;n#table#0;n#stack#0;n#:row#1;n#table#0;n#playbar#0;n#!!top" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lml.dtd">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="279">
+              <caret line="23096" column="16" selection-start-line="23096" selection-start-column="9" selection-end-line="23096" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/timeline.lml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="53" lean-forward="true" selection-start-line="10" selection-start-column="53" selection-end-line="10" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/statusbar.lml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="28" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/statusicon.lml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -82,6 +145,8 @@
       <find>stack</find>
       <find>root</find>
       <find>table</find>
+      <find>align</find>
+      <find>table</find>
     </findStrings>
     <replaceStrings>
       <replace>textures.borders.ring_frame</replace>
@@ -97,25 +162,36 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/creatureSheet.lml" />
-        <option value="$PROJECT_DIR$/chat.lml" />
         <option value="$PROJECT_DIR$/timer.lml" />
-        <option value="$PROJECT_DIR$/timeline.lml" />
         <option value="$PROJECT_DIR$/status.lml" />
         <option value="$PROJECT_DIR$/sheet.lml" />
         <option value="$PROJECT_DIR$/testdialog.lml" />
-        <option value="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/data/ui/test2.lml" />
-        <option value="$PROJECT_DIR$/playbar.lml" />
         <option value="$PROJECT_DIR$/lml.dtd" />
-        <option value="$PROJECT_DIR$/main.lml" />
+        <option value="$PROJECT_DIR$/icon.lml" />
+        <option value="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/data/ui/test2.lml" />
+        <option value="$PROJECT_DIR$/testmacro.lml" />
+        <option value="$PROJECT_DIR$/chat.lml" />
+        <option value="$PROJECT_DIR$/creaturesheet.lml" />
         <option value="$PROJECT_DIR$/statusbar.lml" />
+        <option value="$PROJECT_DIR$/statusicon.lml" />
+        <option value="$PROJECT_DIR$/timeline.lml" />
+        <option value="$PROJECT_DIR$/playbar.lml" />
+        <option value="$PROJECT_DIR$/main.atlas" />
+        <option value="$PROJECT_DIR$/main.json" />
+        <option value="$PROJECT_DIR$/components/timeline.lml" />
+        <option value="$PROJECT_DIR$/old/sheet.lml" />
+        <option value="$PROJECT_DIR$/components/statusbar.lml" />
+        <option value="$PROJECT_DIR$/components/chat.lml" />
+        <option value="$PROJECT_DIR$/main.lml" />
+        <option value="$PROJECT_DIR$/components/playbar.lml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-1299" />
-    <option name="y" value="119" />
-    <option name="width" value="1286" />
-    <option name="height" value="851" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="-1229" />
+    <option name="y" value="143" />
+    <option name="width" value="1213" />
+    <option name="height" value="898" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -130,6 +206,11 @@
               <item name="sapphire" type="b2602c69:ProjectViewProjectNode" />
               <item name="sapphire" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="sapphire" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sapphire" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -139,14 +220,15 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574433192470" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574563698389" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Users\Souchy\Desktop\Robyn\Git\r and d\ebi\PiranhaPlants\res\ux\sapphire" />
       <recent name="F:\Users\Souchy\Desktop\Robyn\Git\r and d\ebi\PiranhaPlants\res\ux\sapphire\old" />
+      <recent name="F:\Users\Souchy\Desktop\Robyn\Git\r and d\ebi\PiranhaPlants\res\ux\sapphire" />
+      <recent name="F:\Users\Souchy\Desktop\Robyn\Git\r and d\ebi\PiranhaPlants\res\ux\sapphire\components" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Users\Souchy\Desktop\Robyn\Git\r and d\ebi\PiranhaPlants\res\ux\sapphire" />
@@ -178,7 +260,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1299" y="119" width="1286" height="851" extended-state="0" />
+    <frame x="-1229" y="143" width="1213" height="898" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Image Layers" />
@@ -186,7 +268,7 @@
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18597063" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18647008" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
@@ -209,20 +291,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/creaturesheet.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chat.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/creaturesheet.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -230,31 +298,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sheet.lss">
+    <entry file="file://$PROJECT_DIR$/main.lss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sheet.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="53" lean-forward="true" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/timer.lml">
+    <entry file="file://$PROJECT_DIR$/components/timer.lml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/timeline.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="16" />
         </state>
       </provider>
     </entry>
@@ -265,25 +319,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sheet.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="61" column="26" lean-forward="true" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
-          <folding>
-            <element signature="n#verticalgroup#0;n#stack#0;n#:row#1;n#table#0;n#!!top" />
-            <element signature="n#table#0;n#stack#0;n#:row#0;n#stack#0;n#:row#1;n#table#0;n#!!top" />
-            <element signature="n#table#0;n#stack#0;n#:row#1;n#table#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../../Mock WS/LapisMock/data/ui/test2.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="90" selection-start-line="8" selection-start-column="90" selection-end-line="8" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../../Mock WS/LapisMock/data/ui/test1.lml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
@@ -291,41 +326,131 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lml.dtd">
+    <entry file="file://$PROJECT_DIR$/icon.lml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/status.lml">
+    <entry file="file://$PROJECT_DIR$/components/testmacro.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/creaturesheet.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="27" lean-forward="true" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../Mock WS/LapisMock/data/ui/test2.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.atlas">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="553">
+          <caret line="775" column="10" lean-forward="true" selection-start-line="775" selection-start-column="10" selection-end-line="775" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/test1.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="31" column="34" lean-forward="true" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/ui.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/statusicon.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+          <caret line="2" column="37" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lml.dtd">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="23096" column="16" selection-start-line="23096" selection-start-column="9" selection-end-line="23096" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/chat.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.lml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="306">
+          <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/playbar.lml">
+    <entry file="file://$PROJECT_DIR$/old/sheet.lml">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="1" selection-end-column="35" />
+        <state relative-caret-position="221">
+          <caret line="13" column="25" lean-forward="true" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
           <folding>
-            <element signature="n#:row#1;n#table#0;n#:macro#0;n#!!top" />
+            <element signature="n#verticalgroup#0;n#stack#0;n#:row#1;n#table#0;n#!!top" />
+            <element signature="n#table#0;n#stack#0;n#:row#1;n#table#0;n#!!top" />
+            <element signature="n#container#0;n#stack#0;n#:row#1;n#table#0;n#!!top" />
+            <element signature="n#table#1;n#stack#0;n#:row#1;n#table#0;n#!!top" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/statusbar.lml">
+    <entry file="file://$PROJECT_DIR$/components/statusbar.lml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="68">
+          <caret line="4" column="28" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/timeline.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="53" lean-forward="true" selection-start-line="10" selection-start-column="53" selection-end-line="10" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/playbar.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="56" lean-forward="true" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="56" />
+          <folding>
+            <element signature="n#table#1;n#table#0;n#stack#0;n#:row#1;n#table#0;n#playbar#0;n#!!top" />
+            <element signature="n#table#2;n#table#0;n#stack#0;n#:row#1;n#table#0;n#playbar#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>

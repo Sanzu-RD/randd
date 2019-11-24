@@ -6,7 +6,10 @@ import java.util.List;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Array;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.github.czyzby.lml.parser.LmlParser;
 import com.github.czyzby.lml.parser.impl.AbstractLmlView;
@@ -24,17 +27,36 @@ public class CreatureSheet extends SapphireWidget {
 
 	public final Creature creature;
 
+	@LmlActor("name")
+	public Label name;
+	@LmlActor("hp")
+	public Label hp;
+	@LmlActor("mana")
+	public Label mana;
+	@LmlActor("move")
+	public Label move;
+	@LmlActor("icon")
+	public Image icon;
+
 	@LmlActor("")
-	public List<StatusIcon> icons;
+	public Array<StatusIcon> icons;
 	
 	public CreatureSheet(Creature c) {
 		creature = c;
 		
-		icons = new ArrayList<>();
-		creature.getStatus().forEach(s -> icons.add(new StatusIcon(s)));
+		//icons = new ArrayList<>();
+		creature.getStatus().forEach(s -> icons.add(new StatusIcon().refresh(s)));
+		
 		
 		// inject
 		SapphireHud.parser.createView(this, getTemplateFile());
+	}
+
+
+	@Override
+	protected void init() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -45,9 +67,13 @@ public class CreatureSheet extends SapphireWidget {
 	public int getStatusCount() {
 		return creature.getStatus().size();
 	}
+
+	public int getCreatureModelId() {
+		return creature.model.id();
+	}
 	
 	public int getCreatureId() {
-		return 0; //creature.id();
+		return 0; // creature.id();
 	}
 	
 	public int getHp() {

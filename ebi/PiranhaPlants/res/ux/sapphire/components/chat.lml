@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE :macro SYSTEM "lml.dtd">
+
+<:macro alias="chat">
+    <chat id="chat" align="bottomleft" padleft="55" padbottom="25" width="200" height="400">
+        <verticalgroup debug="false" >
+            <textarea id="area" debug="false" disabled="true" width="400" height="400"/>
+            <textfield id="field" debug="false"/>
+        </verticalgroup>
+    </chat>
+</:macro>
