@@ -1,0 +1,20 @@
+
+
+
+
+
+c'est pas vraiment css pcq la barre de mana p.ex change selon la resource, mana, rage ou autre même si c'est le même composant donc il faut une config en plus
+
+
+
+
+
+secondary-resource-color-mana = blue
+secondary-resource-color-rage = orange
+secondary-resource-color-mana = white
+secondary-resource-color-mana = black
+secondary-resource-color-mana = red
+
+
+
+
