@@ -2,7 +2,7 @@
 <!DOCTYPE :macro SYSTEM "lml.dtd">
 
 <:macro alias="playbar">
-    <playbar id="playbar" align="bottom" defaultpad="3" >
+    <playbar id="playbar" align="bottom" defaultpad="3" debug="false">
         <!-- Spells and stats for current playable character  -->
         <table id="currentlyPlayingSheet" debug="false">
             <!-- Portrait -->

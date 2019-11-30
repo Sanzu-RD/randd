@@ -1,5 +1,6 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
+import java.io.File;
 import java.nio.file.Paths;
 
 import com.badlogic.gdx.Files.FileType;
@@ -46,7 +47,7 @@ public class SapphireOwl extends LapisCore { //implements EntryPoint {
 		data = azur.getEntry();
 		
 		// load all creatures data modules
-		azur.explore(Environment.getFile("data/")); //new File("data/"));
+		azur.explore(new File("data/")); //Environment.getFile("data/")); //new File("data/"));
 		azur.instantiateAll();
 		
 //		manager.getExecutors().shutdown();

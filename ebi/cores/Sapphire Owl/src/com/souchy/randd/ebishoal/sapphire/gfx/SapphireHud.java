@@ -11,6 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.czyzby.lml.annotation.LmlActor;
@@ -27,6 +31,7 @@ import com.souchy.randd.ebishoal.sapphire.ux.CreatureSheet;
 import com.souchy.randd.ebishoal.sapphire.ux.PlayBar;
 import com.souchy.randd.ebishoal.sapphire.ux.StatusIcon;
 import com.souchy.randd.ebishoal.sapphire.ux.*;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.LmlWidgets;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.SapphireWidgetTagProvider;
 
 public class SapphireHud extends LapisHud {
@@ -36,8 +41,8 @@ public class SapphireHud extends LapisHud {
 	public static SapphireHudSkin skin;
 	public static I18NBundle i18n;
 	
-	@LmlActor("chat")
-	public Chat chat;
+	//@LmlActor("chat")
+	//public Chat chat;
 	@LmlActor("playbar")
 	public PlayBar playbar;
 	@LmlActor("statusbar")
@@ -63,7 +68,6 @@ public class SapphireHud extends LapisHud {
 		// Parser(actions, i18n, skin, tags)
 		//i18n = I18NBundle.createBundle(Gdx.files.internal("res/i18n/ui/bundle"));
 		skin = new SapphireHudSkin(getSkinFile());
-		parser = createParser();
 		single = this;
 		
 
@@ -104,18 +108,46 @@ public class SapphireHud extends LapisHud {
 	}
 	
 	public static void refresh() {
+		parser = createParser();
 		// var asd = SapphireHud.parser.createView(SapphireHud.single,SapphireHud.single.getTemplateFile());
 		//SapphireHud.parser.parseTemplate(SapphireHud.single.getTemplateFile());
 		SapphireHud.single.getStage().getActors().clear();
 		//SapphireHud.parser.fillStage(SapphireHud.single.getStage(), SapphireHud.single.getTemplateFile());
 		parser.createView(single, SapphireHud.single.getTemplateFile());
 		
+		testCreatureSheet();
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/chat.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timer.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timeline.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/statusbar.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/playbar.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/creaturesheet.lml"));
+	}
+	
+	public static void testCreatureSheet() {
+		var widget = LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml");
+		widget.setPosition(200, 500);
+		
+		var drag = new DragAndDrop();
+		drag.addTarget(new TableDrag(widget));
+		SapphireHud.single.getStage().addActor(widget);
+	}
+	
+	public static class TableDrag extends Target {
+		public TableDrag(Actor actor) {
+			super(actor);
+		}
+
+		@Override
+		public boolean drag(Source source, Payload payload, float x, float y, int pointer) {
+			return true;
+		}
+
+		@Override
+		public void drop(Source source, Payload payload, float x, float y, int pointer) {
+			
+		}
+		
 	}
 	
 	@Override

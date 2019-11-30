@@ -38,18 +38,18 @@ public class CreatureSheet extends SapphireWidget {
 	@LmlActor("icon")
 	public Image icon;
 
-	@LmlActor("")
+	//@LmlActor("")
 	public Array<StatusIcon> icons;
 	
-	public CreatureSheet(Creature c) {
-		creature = c;
+	public CreatureSheet() {
+		creature = null;
 		
 		//icons = new ArrayList<>();
-		creature.getStatus().forEach(s -> icons.add(new StatusIcon().refresh(s)));
+	//	creature.getStatus().forEach(s -> icons.add(new StatusIcon().refresh(s)));
 		
 		
 		// inject
-		SapphireHud.parser.createView(this, getTemplateFile());
+	//	SapphireHud.parser.createView(this, getTemplateFile());
 	}
 
 

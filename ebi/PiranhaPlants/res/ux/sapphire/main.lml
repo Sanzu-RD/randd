@@ -2,25 +2,21 @@
 <!DOCTYPE table SYSTEM "lml.dtd">
 
 
-<table defaultpad="5" debug="true" y="0" x="0" fillparent="true" >
+<table defaultpad="5" y="0" x="0" fillparent="true" debug="false" >
 
     <!-- CONTENT -->
-    <:row expand="true" filly="true">
-        <container/>
+    <:row expand="true" filly="true" align="bottom" >
+        <stack fill="true" debug="false">
+
+            <:chat></:chat>
+
+            <:playbar></:playbar>
+
+            <:statusbar></:statusbar>
+
+            <:timeline></:timeline>
+
+        </stack>
     </:row>
-
-    <:row align="bottom" >
-    </:row>
-
-    <stack fill="true" debug="true">
-
-
-        <:playbar ></:playbar>
-
-        <:statusbar></:statusbar>
-
-        <:timeline></:timeline>
-
-    </stack>
 
 </table>

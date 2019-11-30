@@ -37,6 +37,9 @@ public class SapphireController extends CameraInputController {
 			SapphireHud.refresh();
 			//GlobalLML.lml().reloadViews();
 		}
+		if(keycode == Keys.E) {
+			SapphireHud.testCreatureSheet();
+		}
 		return super.keyDown(keycode);
 	}
 

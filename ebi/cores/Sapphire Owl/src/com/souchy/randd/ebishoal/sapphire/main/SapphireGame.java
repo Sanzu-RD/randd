@@ -3,6 +3,9 @@ package com.souchy.randd.ebishoal.sapphire.main;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.data.creatures.sungjin.SungjinModel;
+import com.souchy.randd.data.creatures.sungjin.SungjinModule;
+import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisResources;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHudSkin;
@@ -45,6 +48,8 @@ public class SapphireGame extends LapisGame {
 		
 		{
 			try {
+				if(LapisCore.isEclipse) // for testing purposes
+					SapphireOwl.data.creatures.put(1000, new SungjinModel());
 				Log.info("data.creatures : " + SapphireOwl.azur.getEntry().creatures.values() + ", " + SapphireOwl.azur.getEntry());
 				// create instances for players' creatures
 				int id = 1000;

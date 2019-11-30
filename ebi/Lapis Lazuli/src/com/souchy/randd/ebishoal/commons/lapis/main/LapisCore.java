@@ -72,7 +72,7 @@ public abstract class LapisCore extends EbiCore {
 
 	protected static void arguments(String[] args) {
 		Log.info("Lapis args : " + String.join(", ", args));
-		if(args.length > 0) Environment.root = Paths.get(args[0]); // first arg = root folder
+		//if(args.length > 0) Environment.root = Paths.get(args[0]); // first arg = root folder
 		if(args.length > 1) isEclipse = args[1].contentEquals("eclipse"); // second arg = isEclipse
 		if(args.length > 1) Log.info(args[1] + ", isEclipse=" + isEclipse);
 	}

@@ -41,9 +41,9 @@ public abstract class LapisGame extends Game {
 	 */
 	@Override
 	public void create() {
-		if(LapisCore.isEclipse) {
+		if(LapisCore.isEclipse) 
 			Gdx.files = new LapisFiles(Environment.root.toString());//"G:/www/ebishoal/");
-		}
+		
 		VisUI.load();
 		/*
 		//labelStyles = fonts.explore(""); //"res");

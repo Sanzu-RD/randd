@@ -15,11 +15,11 @@ public class Environment {
 	/**
 	 * Application root directory
 	 */
-	public static Path root = Paths.get("").toAbsolutePath();
+	public static Path root = Paths.get("");
 	/**
 	 * Application logs directory
 	 */
-	public static Path logs = Paths.get(root + "/logs/");
+	public static Path logs = Paths.get(root.toAbsolutePath() + "/logs/");
 	
 	public static Path fromRoot(String path) {
 		return Paths.get(root + "/" + path);

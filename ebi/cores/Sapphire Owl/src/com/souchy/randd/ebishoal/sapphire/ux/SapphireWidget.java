@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.github.czyzby.lml.parser.LmlParser;
@@ -18,7 +19,9 @@ import com.github.czyzby.lml.parser.action.ActorConsumer;
 import com.github.czyzby.lml.parser.impl.AbstractLmlView;
 import com.github.czyzby.lml.parser.impl.tag.AbstractGroupLmlTag;
 import com.github.czyzby.lml.parser.impl.tag.actor.ContainerLmlTag;
+import com.github.czyzby.lml.parser.impl.tag.actor.TableLmlTag;
 import com.github.czyzby.lml.parser.impl.tag.actor.provider.ContainerLmlTagProvider;
+import com.github.czyzby.lml.parser.impl.tag.actor.provider.TableLmlTagProvider;
 import com.github.czyzby.lml.parser.tag.LmlActorBuilder;
 import com.github.czyzby.lml.parser.tag.LmlTag;
 import com.github.czyzby.lml.parser.tag.LmlTagProvider;
@@ -29,7 +32,7 @@ import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
  * @author Blank
  * @date 22 nov. 2019
  */
-public abstract class SapphireWidget extends Container implements ActionContainer {
+public abstract class SapphireWidget extends Table implements ActionContainer {
 
 	public abstract String getTemplateId();
 	protected abstract void init();
@@ -72,6 +75,7 @@ public abstract class SapphireWidget extends Container implements ActionContaine
 				try {
 					Log.info("inject field : " + field.getName());
 					LmlActor ann = field.getAnnotation(LmlActor.class);
+					if(ann == null) continue;
 					var actorId = ann.value()[0];
 					var value = group.findActor(actorId);
 					field.set(group, value);
@@ -88,7 +92,7 @@ public abstract class SapphireWidget extends Container implements ActionContaine
 		}
 	}
 	
-	public static class SapphireWidgetTagProvider<T extends SapphireWidget> extends ContainerLmlTagProvider {
+	public static class SapphireWidgetTagProvider<T extends SapphireWidget> extends TableLmlTagProvider {
 		private Class<T> c;
 		public SapphireWidgetTagProvider(Class<T> c) {
 			this.c = c;
@@ -99,7 +103,7 @@ public abstract class SapphireWidget extends Container implements ActionContaine
 			return new SapphireWidgetTag(parser, parentTag, rawTagData, c);
 		}
 
-		public class SapphireWidgetTag extends ContainerLmlTag {
+		public class SapphireWidgetTag extends TableLmlTag {
 			//private Class<T> c;
 			public SapphireWidgetTag(LmlParser parser, LmlTag parentTag, StringBuilder rawTagData, Class<T> c) {
 				super(parser, parentTag, rawTagData);
@@ -108,7 +112,7 @@ public abstract class SapphireWidget extends Container implements ActionContaine
 			}
 			@Override
 			protected T getNewInstanceOfActor(LmlActorBuilder builder) {
-				Log.info("create instance of group : " + c);
+				Log.info("create instance of table : " + c);
 				try {
 					if(c != null)
 						return c.newInstance();

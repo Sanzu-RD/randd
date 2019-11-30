@@ -2,10 +2,9 @@
 <!DOCTYPE :macro SYSTEM "lml.dtd">
 
 <:macro alias="chat">
-    <chat id="chat" align="bottomleft" padleft="55" padbottom="25" width="200" height="400">
-        <verticalgroup debug="false" >
-            <textarea id="area" debug="false" disabled="true" width="400" height="400"/>
-            <textfield id="field" debug="false"/>
-        </verticalgroup>
+    <chat id="chat" align="bottomleft" padleft="55" padbottom="25" width="200" height="400" debug="false">
+        <textarea id="area" fillx="true" filly="true" height="150" width="400" disabled="true"/>
+        <:row></:row>
+        <textfield id="field" width="400" debug="false"/>
     </chat>
 </:macro>
