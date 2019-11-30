@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.commons.tealwaters.properties.Property;
 import com.souchy.randd.commons.tealwaters.properties.PropertyConfig;
 
@@ -21,6 +22,7 @@ public class LapisProperties implements PropertyConfig {
 	public Property<Integer> fpsBackground;
 	public Property<Integer> samples;
 	public Property<Boolean> vsync;
+	public Property<String> root;
 	
 	private LwjglApplicationConfiguration config;
 	
@@ -33,6 +35,7 @@ public class LapisProperties implements PropertyConfig {
 	@Override
 	public void load() {
 		PropertyConfig.super.load();
+		Log.info("root = " + root.get());
 		
 		config.width = width.get();
 		config.height = height.get();

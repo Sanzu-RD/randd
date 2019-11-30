@@ -124,10 +124,10 @@ public abstract class BaseScreen implements Screen {
 	private boolean ppb = false; //!fbob;
 	{
 		fbo = new FrameBuffer(Format.RGBA8888, 1024 * 2 * 2, 1024 * 2 * 2, true, false);
-		batch = new SpriteBatch(1000, new ShaderProgram(Gdx.files.internal("shaders/postProcess.vertex.glsl"), Gdx.files.internal("shaders/postProcess.fragment.glsl")));
+		batch = new SpriteBatch(1000, new ShaderProgram(Gdx.files.internal("data/shaders/postProcess.vertex.glsl"), Gdx.files.internal("data/shaders/postProcess.fragment.glsl")));
 		slider = new Texture(Gdx.files.internal("data/textures/slider.png"));
 		
-		ShaderLoader.BasePath = "shaders/manuelbua_shaders/";
+		ShaderLoader.BasePath = "data/shaders/manuelbua_shaders/";
 		pp = new PostProcessor(true, true, true);
 		pfxPp = new PostProcessor(true, true, true);
 		

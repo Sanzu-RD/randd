@@ -19,9 +19,9 @@ import com.github.czyzby.lml.parser.tag.LmlTag;
 import com.github.czyzby.lml.vis.util.VisLml;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
+import com.souchy.randd.ebishoal.commons.lapis.main.LapisResources;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImageLmlTagProvider;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireResources;
 import com.souchy.randd.ebishoal.sapphire.ux.Chat;
 import com.souchy.randd.ebishoal.sapphire.ux.CreatureSheet;
 import com.souchy.randd.ebishoal.sapphire.ux.PlayBar;
@@ -51,7 +51,7 @@ public class SapphireHud extends LapisHud {
 	public SapphireHud() {
 		var batch = new SapphireBatch();
 		var viewport = new ScreenViewport();
-		
+
 		// Batch(shader)
 		var vert = Gdx.files.internal("res/shaders/ui.vertex.glsl"); //Gdx.files.internal("res/gdx/shaders/postProcess.vertex.glsl");
 		var frag = Gdx.files.internal("res/shaders/ui.fragment.glsl"); //Gdx.files.internal("res/gdx/shaders/postProcess.fragment.glsl");
@@ -63,7 +63,22 @@ public class SapphireHud extends LapisHud {
 		// Parser(actions, i18n, skin, tags)
 		//i18n = I18NBundle.createBundle(Gdx.files.internal("res/i18n/ui/bundle"));
 		skin = new SapphireHudSkin(getSkinFile());
-		parser = VisLml.parser()
+		parser = createParser();
+		single = this;
+		
+
+		//Log.info("macro tags : " + String.join(", ", parser.getSyntax().getMacroTags().keys()));
+		
+		// create view
+		//parser.createView(single, getTemplateFile());
+		refresh();
+
+		
+		//createListeners();
+	}
+	
+	public static LmlParser createParser() {
+		var parser = VisLml.parser()
 				// Registering global action container:
 				.actions("global", GlobalLMLActions.class)
 				// Adding localization support:
@@ -72,34 +87,29 @@ public class SapphireHud extends LapisHud {
 				.skin(skin) 
 				// Tags
 				.tag(new RoundImageLmlTagProvider(), "roundImage")
-				.tag(new SapphireWidgetTagProvider<Chat>(Chat.class), "chat")
+				.tag(new SapphireWidgetTagProvider<>(Chat.class), "chat")
 				.tag(new SapphireWidgetTagProvider<>(PlayBar.class), "playbar")
 				.tag(new SapphireWidgetTagProvider<>(StatusIcon.class), "statusicon")
 				.tag(new SapphireWidgetTagProvider<>(StatusBar.class), "statusbar")
 				.tag(new SapphireWidgetTagProvider<>(Timeline.class), "timeline")
 				.tag(new SapphireWidgetTagProvider<>(CreatureSheet.class), "creaturesheet")
-				//.macro(new SapphireWidgetTagProvider<>(Chat.class), "chat")
+				//.macro(new SapphireWidgetTagProvider<>(Chat.class), ":chat")
 				.build();
 		parser.setStrict(false);
-		single = this;
-		
-		// parse all templates
-		SapphireResources.recurseFiles(Gdx.files.internal("res/ux/sapphire/components/"), f -> f.name().endsWith(".lml"), parser::parseTemplate);
 
-		//Log.info("macro tags : " + String.join(", ", parser.getSyntax().getMacroTags().keys()));
+		// parse all templates to put them in memory
+		LapisResources.recurseFiles(Gdx.files.internal("res/ux/sapphire/components/"), f -> f.name().endsWith(".lml"), parser::parseTemplate);
 		
-		// create view
-		parser.createView(single, getTemplateFile());
-
-		
-		//createListeners();
+		return parser;
 	}
 	
 	public static void refresh() {
 		// var asd = SapphireHud.parser.createView(SapphireHud.single,SapphireHud.single.getTemplateFile());
 		//SapphireHud.parser.parseTemplate(SapphireHud.single.getTemplateFile());
 		SapphireHud.single.getStage().getActors().clear();
-		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), SapphireHud.single.getTemplateFile());
+		//SapphireHud.parser.fillStage(SapphireHud.single.getStage(), SapphireHud.single.getTemplateFile());
+		parser.createView(single, SapphireHud.single.getTemplateFile());
+		
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/chat.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timer.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timeline.lml"));

@@ -9,9 +9,10 @@ public class LapisMock extends LapisCore {
 	
 	public static final LapisMock core = new LapisMock();
 	
-	public static void main(String[] args) throws Exception {  
-	     launch(core); 
-	 }
+	public static void main(String[] args) throws Exception {
+		LapisCore.arguments(args);
+		launch(core);
+	}
 	
 	@Override
 	protected LapisGame createGame() {

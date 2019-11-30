@@ -42,5 +42,5 @@ void main()
 		c += texture2D(u_texture0, v_texCoord0 + SampleOffsets[i]) * SampleWeights[i];
 	}
 
-	gl_FragColor = vec4(1,0,0,1); //c;
+	gl_FragColor = c;
 }

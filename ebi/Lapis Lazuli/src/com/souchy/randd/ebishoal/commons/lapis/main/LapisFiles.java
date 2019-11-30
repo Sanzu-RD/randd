@@ -7,7 +7,13 @@ import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglFileHandle;
 import com.badlogic.gdx.files.FileHandle;
 
-public class LapisFiles implements Files {
+/**
+ * Implements Gdx.files when running from Eclipse
+ * 
+ * @author Blank
+ * @date 26 nov. 2019
+ */
+class LapisFiles implements Files {
 
 	public static final String externalPath = System.getProperty("user.home") + File.separator;
 	public static final String localPath = new File("").getAbsolutePath() + File.separator;
@@ -19,34 +25,40 @@ public class LapisFiles implements Files {
 	}
 	
 	@Override
-	public FileHandle getFileHandle (String fileName, FileType type) {
-		return new LwjglFileHandle(rootPrefix + fileName, type);
+	public FileHandle getFileHandle (String path, FileType type) {
+		var file = new LwjglFileHandle(path, FileType.Internal);
+		if(file.exists()) 
+			return file;
+		return new LwjglFileHandle(rootPrefix + path, type);
 	}
 
 	@Override
 	public FileHandle classpath (String path) {
-		return new LwjglFileHandle(/* rootPrefix + */ path, FileType.Classpath);
+		return getFileHandle(path, FileType.Classpath); //new LwjglFileHandle(/* rootPrefix + */ path, FileType.Classpath);
 	}
 
 	@Override
 	public FileHandle internal (String path) {
-		if(path.length() > 0 && path.substring(1).startsWith(":/")) return absolute(path);
+		var file = new LwjglFileHandle(path, FileType.Internal);
+		if(file.exists()) 
+			return file;
+		if(path.length() > 0 && path.substring(1).replace("\\", "/").startsWith(":/")) return absolute(path);
 		return new LwjglFileHandle(rootPrefix + path, FileType.Internal);
 	}
 
 	@Override
 	public FileHandle external (String path) {
-		return new LwjglFileHandle(rootPrefix + path, FileType.External);
+		return getFileHandle(path, FileType.External); //new LwjglFileHandle(rootPrefix + path, FileType.External);
 	}
 
 	@Override
 	public FileHandle absolute (String path) {
-		return new LwjglFileHandle(/* rootPrefix + */ path, FileType.Absolute);
+		return getFileHandle(path, FileType.Absolute); //new LwjglFileHandle(/* rootPrefix + */ path, FileType.Absolute);
 	}
 
 	@Override
 	public FileHandle local (String path) {
-		return new LwjglFileHandle(rootPrefix + path, FileType.Local);
+		return getFileHandle(path, FileType.Local); //new LwjglFileHandle(rootPrefix + path, FileType.Local);
 	}
 
 	@Override

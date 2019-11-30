@@ -14,12 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.commons.lapis.main.LapisResources;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireResources;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireResources.I18nCategory;
 
 import data.modules.AzurCache;
 import gamemechanics.models.entities.Creature;
@@ -40,36 +42,15 @@ public class SapphireHudSkin extends Skin {
 		super(file);
 
 		add("defaultTexture", new Texture(Gdx.files.absolute("G:/Assets/test/default.png"), true));
-		//add("spell_frame", new Texture(Gdx.files.absolute("G:/Assets/test/blackborder.png"), true));
-//		
-//		add("spell_bg", new Texture(Gdx.files.internal("res/ui/res/borders/spell_bg.png"), true));
-//		add("ring_frame", new Texture(Gdx.files.internal("res/ui/res/borders/ring_frame.PNG"), true));
-//		add("up", new Texture(Gdx.files.internal("res/ui/res/buttons/slider_02_03.png"), true));
-//		add("down", new Texture(Gdx.files.internal("res/ui/res/buttons/slider_02_04.png"), true));
 		
-		this.getAll(Texture.class).values().forEach(t -> t.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear));
-		//Sungjin.loadResources(this);
-		
-		/*
-		var lml = SapphireHud.parser.getData();
-		// load i18n
-		for(var cat : I18nCategory.values())
-			lml.addI18nBundle("i18n."+cat.name(), SapphireResources.getI18nBundle(cat)); //assets.load(getI18nPath(cat), I18NBundle.class);
-		
-		AzurCache cache = null;
-		cache.creatures.values().forEach(model -> {
-			add("textures.creatures."+model.id(), SapphireResources.getCreatureIcon(model.getIconName()));
-		});
-		cache.spells.values().forEach(model -> {
-			add("textures.spells."+model.id(), SapphireResources.getSpellIcon(model.getIconName()));
-		});
-		*/
-		
-		SapphireResources.assets.getAssetNames().forEach(a -> {
-			//Log.info("hud skin asset : " + a);
-			if(a.startsWith("res/textures")) {
-				var str = a.substring("res/".length(), a.lastIndexOf(".")).replace("/", "."); // enlève le res/, enlève l'extension, et rempalace / par .
-				add(str, SapphireResources.assets.get(a));
+		//this.getAll(Texture.class).values().forEach(t -> t.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear));
+
+		// Link all textures
+		LapisResources.assets.getAssetNames().forEach(a -> {
+			Log.info("hud skin asset : " + a);
+			if(a.contains("res/textures")) {
+				var str = a.substring(a.indexOf("textures"), a.lastIndexOf(".")).replace("/", "."); // enlève le res/, enlève l'extension, et remplace / par .
+				add(str, LapisResources.assets.get(a));
 			}
 //			if(a.startsWith("i18n"))
 //				lml.addI18nBundle(a.substring(0, a.lastIndexOf("/")).replace("/", "."), SapphireResources.assets.get(a));
@@ -108,7 +89,7 @@ public class SapphireHudSkin extends Skin {
 		
 		// set creature avatar
 		var avatarPath = SapphireResources.getCreatureIconPath(model.getIconName());
-		lml.getDefaultSkin().add(prefix + "Avatar", new TextureRegionDrawable(new RoundTextureRegion(SapphireResources.assets.get(avatarPath))));
+		lml.getDefaultSkin().add(prefix + "Avatar", new TextureRegionDrawable(new RoundTextureRegion(LapisResources.get(avatarPath))));
 		
 		//Log.info("c.spellbook : " + c.spellbook);
 		// set spell icons
@@ -128,7 +109,7 @@ public class SapphireHudSkin extends Skin {
 				//var str = iconPath.substring("res/".length(), iconPath.lastIndexOf(".")).replace("/", ".");
 				//Log.info("SapphireHudSkin spell asset path (creature) : " + iconPath + ". For creature : " + model.getStrID() + ". For Spell : " + s.getIconName());
 			//}
-			lml.getDefaultSkin().add(prefix + "Spell" + i, SapphireResources.assets.get(iconPath));
+			lml.getDefaultSkin().add(prefix + "Spell" + i, LapisResources.assets.get(iconPath));
 			i++;
 		}
 		

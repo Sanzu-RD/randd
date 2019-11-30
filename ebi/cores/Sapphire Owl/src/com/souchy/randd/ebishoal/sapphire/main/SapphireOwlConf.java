@@ -4,4 +4,6 @@ import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 
 public class SapphireOwlConf extends JsonConfig {
 	
+	public String root = "";
+	
 }

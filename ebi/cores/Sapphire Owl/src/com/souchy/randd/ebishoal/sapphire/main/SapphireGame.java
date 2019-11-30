@@ -2,10 +2,9 @@ package com.souchy.randd.ebishoal.sapphire.main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.lapis.main.LapisFiles;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
+import com.souchy.randd.ebishoal.commons.lapis.main.LapisResources;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHudSkin;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.jade.meta.JadeCreature;
@@ -25,11 +24,13 @@ public class SapphireGame extends LapisGame {
 	
 	@Override
 	public void init() {
-		if(SapphireOwl.isEclipse) {
-			Gdx.files = new LapisFiles(Environment.root.toString());//"G:/www/ebishoal/");
-		}
 		
-		SapphireResources.loadResources(SapphireOwl.data);
+		//LapisResources.loadResources(SapphireOwl.data);
+		
+		LapisResources.loadModels(Gdx.files.internal("res/models/"));
+		LapisResources.loadI18NBundles(Gdx.files.internal("res/i18n/"));
+		LapisResources.loadTextures(Gdx.files.internal("res/textures/"));
+		Log.info("LapisResources : { " + String.join(", ", LapisResources.assets.getAssetNames()) + " }");
 		
 		gfx = new SapphireScreen(); 
 		
@@ -44,7 +45,7 @@ public class SapphireGame extends LapisGame {
 		
 		{
 			try {
-				Log.info("data.creatures : " + SapphireOwl.manager.getEntry().creatures.values() + ", " + SapphireOwl.manager.getEntry());
+				Log.info("data.creatures : " + SapphireOwl.azur.getEntry().creatures.values() + ", " + SapphireOwl.azur.getEntry());
 				// create instances for players' creatures
 				int id = 1000;
 				// base model

@@ -8,6 +8,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 
 public class SapphireController extends CameraInputController {
@@ -22,9 +23,9 @@ public class SapphireController extends CameraInputController {
 
 	@Override
 	public boolean scrolled(int amount) {
-		var ratio = SapphireOwl.game.gfx.getCamera().viewportWidth / SapphireOwl.game.gfx.getCamera().viewportHeight;
-		SapphireOwl.game.gfx.getCamera().viewportWidth += amount;
-		SapphireOwl.game.gfx.getCamera().viewportHeight = SapphireOwl.game.gfx.getCamera().viewportWidth / ratio;
+		var ratio = SapphireGame.gfx.getCamera().viewportWidth / SapphireGame.gfx.getCamera().viewportHeight;
+		SapphireGame.gfx.getCamera().viewportWidth += amount;
+		SapphireGame.gfx.getCamera().viewportHeight = SapphireGame.gfx.getCamera().viewportWidth / ratio;
 		if (autoUpdate) camera.update();
 		return true; //super.scrolled(amount);
 	}
@@ -32,8 +33,9 @@ public class SapphireController extends CameraInputController {
 	@Override
 	public boolean keyDown(int keycode) {
 		if(keycode == Keys.SPACE) {
-			SapphireOwl.game.gfx.resetCamera();
-			GlobalLML.lml().reloadViews();
+			SapphireGame.gfx.resetCamera();
+			SapphireHud.refresh();
+			//GlobalLML.lml().reloadViews();
 		}
 		return super.keyDown(keycode);
 	}
