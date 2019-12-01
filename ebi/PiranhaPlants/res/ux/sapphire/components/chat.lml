@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE :macro SYSTEM "lml.dtd">
+<!DOCTYPE chat SYSTEM "lml.dtd">
 
-<:macro alias="chat">
-    <chat id="chat" align="bottomleft" padleft="55" padbottom="25" width="200" height="400" debug="false">
-        <textarea id="area" fillx="true" filly="true" height="150" width="400" disabled="true"/>
-        <:row></:row>
-        <textfield id="field" width="400" debug="false"/>
-    </chat>
-</:macro>
+<chat id="chat" align="bottomleft" defaultpad="5" width="350" height="200" x="20" y="15" resizable="true" debug="true">
+    <vistextarea id="area" fill="true" expand="true" disabled="true"/>
+    <:row/>
+    <vistextfield id="field" fill="true" debug="false"/>
+</chat>

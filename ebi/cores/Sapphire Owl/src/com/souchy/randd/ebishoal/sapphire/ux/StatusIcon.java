@@ -2,11 +2,17 @@ package com.souchy.randd.ebishoal.sapphire.ux;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.github.czyzby.lml.annotation.LmlActor;
 
 import data.new1.timed.Status;
 
 public class StatusIcon extends SapphireWidget {
+//
+//	public StatusIcon(Skin skin) {
+//		super(skin);
+//		// TODO Auto-generated constructor stub
+//	}
 
 	public Status status;
 

@@ -1,6 +1,14 @@
 package com.souchy.randd.ebishoal.sapphire.ux;
 
-public class StatusBar extends SapphireWidget {
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
+public class StatusFlow extends SapphireWidget {
+
+//	public StatusBar(Skin skin) {
+//		super(skin);
+//		// TODO Auto-generated constructor stub
+//	}
+
 
 	@Override
 	public String getTemplateId() {

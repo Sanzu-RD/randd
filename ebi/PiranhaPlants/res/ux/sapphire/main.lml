@@ -4,19 +4,5 @@
 
 <table defaultpad="5" y="0" x="0" fillparent="true" debug="false" >
 
-    <!-- CONTENT -->
-    <:row expand="true" filly="true" align="bottom" >
-        <stack fill="true" debug="false">
-
-            <:chat></:chat>
-
-            <:playbar></:playbar>
-
-            <:statusbar></:statusbar>
-
-            <:timeline></:timeline>
-
-        </stack>
-    </:row>
 
 </table>

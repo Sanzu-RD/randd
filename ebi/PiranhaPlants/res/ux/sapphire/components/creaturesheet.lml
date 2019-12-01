@@ -1,44 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE creaturesheet SYSTEM "lml.dtd">
 
-<creaturesheet id="creaturesheet" defaultpad="5" y="500" x="200" color="white">
+<creaturesheet id="creaturesheet" align="left" defaultpad="5" width="225" x="20" y="0" background="transparent" debug="true" resizable="true">
+
     <!-- Icon + Resources row-->
-    <:row>
-        <stack width="50" height="50">
-            <image id="icon" style="textures.creatures.$getCreatureModelId" />
+    <table align="topleft" height="100" fill="true" debug="false">
+        <!-- Name & Close button-->
+        <table align="left" colspan="2" debug="false" fill="true">
+            <label id="name" align="left" fill="true" expandx="true" size="30"/>
+        </table>
+        <button id="close" align="top" onclick="close">X</button>
+        <:row/>
+        <!-- Icon -->
+        <stack width="64" height="64">
+            <image id="icon" style="textures.creatures.$getCreatureModelId"/>
             <image id="border" style="textures.borders.blackborder"/>
         </stack>
-
-        <table>
-            <label id="name"/>
-            <!--value="@creatures.$getCreatureModelId.name"/>-->
+        <!-- Main Stats -->
+        <table padleft="10" expandx="true" defaultalign="left">
+            <image style="textures.borders.blackborder"/>
+            <label id="lifeShield" padright="10"/>
+            <label id="lifeCurrent" align="right"/>
+            <label value="/"/>
+            <label id="lifeMax"/>
             <:row/>
-            <label id="life"/>
-            <!--value="$getHpShield   $getHp / $getHpMax"/>-->
+            <image style="textures.borders.blackborder"/>
+            <label id="manaShield" padright="10"/>
+            <label id="manaCurrent" align="right"/>
+            <label value="/"/>
+            <label id="manaMax"/>
             <:row/>
-            <label id="mana"/>
-            <!--value="$getManaShield   $getMana / $getManaMax"/>-->
-            <:row/>
-            <label id="move"/>
-            <!--value="$getMoveShield   $getMove / $getMoveMax"/>-->
+            <image style="textures.borders.blackborder"/>
+            <label id="moveShield" padright="10"/>
+            <label id="moveCurrent" align="right"/>
+            <label value="/"/>
+            <label id="moveMax"/>
         </table>
-    </:row>
+    </table>
+
+
+    <:row expandx="true"/>
 
     <!-- Description / Passive row -->
-    <:row>
-        <stack fill="true" debug="false">
-            <container align="bottomright" padbottom="100" padright="100" debug="false">
-                <label value="sdfgfdsgsdfgsdfg"/>
-            </container>
-        </stack>
-    </:row>
+    <table align="topleft" height="100" fill="true" debug="false">
+        <scrollpane fill="true" expand="true" >
+            <scrollabletextarea height="300" value="Description. Lorem ipsum dolor sit amet, consectetur adipiscing consectetur adipiscing consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        debug="true" disabled="true" />
+        </scrollpane>
+    </table>
+
+    <:row/>
 
     <!-- Status list -->
-    <:row>
-        <stack fill="true" debug="false">
-            <container align="bottomright" padbottom="100" padright="100" debug="false">
-                <label value="sdfgfdsgsdfgsdfg"/>
-            </container>
-        </stack>
-    </:row>
+    <table align="topleft" height="100" fill="true" debug="false" >
+        <scrollpane>
+            <horizontalflow>
+                <label value="Status1 list" disabled="true"/>
+            </horizontalflow>
+        </scrollpane>
+    </table>
 
 </creaturesheet>

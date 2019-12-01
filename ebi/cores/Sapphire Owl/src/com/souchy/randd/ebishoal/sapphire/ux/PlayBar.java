@@ -5,11 +5,16 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
 public class PlayBar extends SapphireWidget {
+
+//	public PlayBar(Skin skin) {
+//		super(skin);
+//	}
 
 	@LmlActor("life")
 	public Label life;
@@ -31,6 +36,10 @@ public class PlayBar extends SapphireWidget {
 	@Override
 	protected void init() {
 		createListeners();
+//		if(this.getX() == -1) 
+//			this.setX(this.getStage().getWidth() / 2 - this.getWidth() / 2);
+//		if(this.getY() == -1)
+//			this.setY(15);
 	}
 
 	private void createListeners() {

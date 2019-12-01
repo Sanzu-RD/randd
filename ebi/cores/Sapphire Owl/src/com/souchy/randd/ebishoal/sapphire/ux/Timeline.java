@@ -1,5 +1,6 @@
 package com.souchy.randd.ebishoal.sapphire.ux;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.github.czyzby.lml.annotation.LmlAction;
@@ -9,7 +10,13 @@ public class Timeline extends SapphireWidget {
 
 	//@LmlActor() ?
 	//public Array<TimelineIcon> creatures;
-	
+//	
+//	public Timeline(Skin skin) {
+//		super(skin);
+//		// TODO Auto-generated constructor stub
+//	}
+
+
 	@LmlActor("table")
 	public Table table;
 	

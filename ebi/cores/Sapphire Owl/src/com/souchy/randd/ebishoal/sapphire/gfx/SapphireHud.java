@@ -1,5 +1,7 @@
 package com.souchy.randd.ebishoal.sapphire.gfx;
 
+import javax.swing.text.AbstractDocument.Content;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -10,6 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
@@ -21,6 +26,7 @@ import com.github.czyzby.lml.annotation.LmlActor;
 import com.github.czyzby.lml.parser.LmlParser;
 import com.github.czyzby.lml.parser.tag.LmlTag;
 import com.github.czyzby.lml.vis.util.VisLml;
+import com.kotcrab.vis.ui.widget.VisTable;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisResources;
@@ -41,14 +47,16 @@ public class SapphireHud extends LapisHud {
 	public static SapphireHudSkin skin;
 	public static I18NBundle i18n;
 	
-	//@LmlActor("chat")
-	//public Chat chat;
-	@LmlActor("playbar")
-	public PlayBar playbar;
-	@LmlActor("statusbar")
-	public StatusBar statusBar;
-	@LmlActor("timeline")
-	public Timeline timeline;
+//	@LmlActor("content")
+//	public Stack content;
+//	//@LmlActor("chat")
+	public static Chat chat;
+//	@LmlActor("playbar")
+	public static PlayBar playbar;
+//	@LmlActor("statusbar")
+//	public StatusBar statusBar;
+//	@LmlActor("timeline")
+//	public Timeline timeline;
 //	@LmlActor("timer")
 //	public Timer timer;
 	
@@ -69,7 +77,6 @@ public class SapphireHud extends LapisHud {
 		//i18n = I18NBundle.createBundle(Gdx.files.internal("res/i18n/ui/bundle"));
 		skin = new SapphireHudSkin(getSkinFile());
 		single = this;
-		
 
 		//Log.info("macro tags : " + String.join(", ", parser.getSyntax().getMacroTags().keys()));
 		
@@ -77,7 +84,6 @@ public class SapphireHud extends LapisHud {
 		//parser.createView(single, getTemplateFile());
 		refresh();
 
-		
 		//createListeners();
 	}
 	
@@ -94,15 +100,16 @@ public class SapphireHud extends LapisHud {
 				.tag(new SapphireWidgetTagProvider<>(Chat.class), "chat")
 				.tag(new SapphireWidgetTagProvider<>(PlayBar.class), "playbar")
 				.tag(new SapphireWidgetTagProvider<>(StatusIcon.class), "statusicon")
-				.tag(new SapphireWidgetTagProvider<>(StatusBar.class), "statusbar")
+				.tag(new SapphireWidgetTagProvider<>(StatusFlow.class), "statusbar")
 				.tag(new SapphireWidgetTagProvider<>(Timeline.class), "timeline")
 				.tag(new SapphireWidgetTagProvider<>(CreatureSheet.class), "creaturesheet")
+				.actions("creaturesheet", CreatureSheet.class)
 				//.macro(new SapphireWidgetTagProvider<>(Chat.class), ":chat")
 				.build();
 		parser.setStrict(false);
 
 		// parse all templates to put them in memory
-		LapisResources.recurseFiles(Gdx.files.internal("res/ux/sapphire/components/"), f -> f.name().endsWith(".lml"), parser::parseTemplate);
+		//LapisResources.recurseFiles(Gdx.files.internal("res/ux/sapphire/components/"), f -> f.name().endsWith(".lml"), parser::parseTemplate);
 		
 		return parser;
 	}
@@ -114,8 +121,14 @@ public class SapphireHud extends LapisHud {
 		SapphireHud.single.getStage().getActors().clear();
 		//SapphireHud.parser.fillStage(SapphireHud.single.getStage(), SapphireHud.single.getTemplateFile());
 		parser.createView(single, SapphireHud.single.getTemplateFile());
-		
-		testCreatureSheet();
+
+		//testCreatureSheet();
+//		var chat = LmlWidgets.createGroup("res/ux/sapphire/components/chat.lml");
+//		chat.setSize(200, 200);
+//		chat.setPosition(20, 15);
+		SapphireHud.single.getStage().addActor(chat = LmlWidgets.createGroup("res/ux/sapphire/components/chat.lml"));
+		SapphireHud.single.getStage().addActor(playbar = LmlWidgets.createGroup("res/ux/sapphire/components/playbar.lml"));
+		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/chat.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timer.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timeline.lml"));
@@ -126,10 +139,13 @@ public class SapphireHud extends LapisHud {
 	
 	public static void testCreatureSheet() {
 		var widget = LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml");
-		widget.setPosition(200, 500);
-		
-		var drag = new DragAndDrop();
-		drag.addTarget(new TableDrag(widget));
+		//var w = new Window("Hi Window", skin);
+		//var d = new Dialog("", skin);
+		//new WindowStyle();
+		//w.add(widget);
+		//w.setBackground("");
+		//Log.info("bg = " + w.getBackground());
+		//widget.setBackground(skin.getDrawable("window"));
 		SapphireHud.single.getStage().addActor(widget);
 	}
 	
