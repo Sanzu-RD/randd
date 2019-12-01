@@ -103,7 +103,9 @@ public class SapphireHud extends LapisHud {
 				.tag(new SapphireWidgetTagProvider<>(StatusFlow.class), "statusbar")
 				.tag(new SapphireWidgetTagProvider<>(Timeline.class), "timeline")
 				.tag(new SapphireWidgetTagProvider<>(CreatureSheet.class), "creaturesheet")
+				.tag(new SapphireWidgetTagProvider<>(QuickOptions.class), "quickoptions")
 				.actions("creaturesheet", CreatureSheet.class)
+//				.actions("quickoptions", QuickOptions.class)
 				//.macro(new SapphireWidgetTagProvider<>(Chat.class), ":chat")
 				.build();
 		parser.setStrict(false);
@@ -129,6 +131,7 @@ public class SapphireHud extends LapisHud {
 		SapphireHud.single.getStage().addActor(chat = LmlWidgets.createGroup("res/ux/sapphire/components/chat.lml"));
 		SapphireHud.single.getStage().addActor(playbar = LmlWidgets.createGroup("res/ux/sapphire/components/playbar.lml"));
 		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml"));
+		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/quickoptions.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/chat.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timer.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timeline.lml"));

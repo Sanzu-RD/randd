@@ -84,13 +84,15 @@ public abstract class SapphireWidget extends Table implements ActionContainer {
 	 */
 	public static class LmlInjector {
 		public static <T extends SapphireWidget> void inject(T group) {
+			//Log.info("inject class name : " + group.getClass().getName().toLowerCase());
+			//SapphireHud.parser.getData().addActionContainer(group.getClass().getName().toLowerCase(), group);
 			for(var field : group.getClass().getDeclaredFields()) {
 				try {
-					//Log.info("inject field : " + field.getName());
 					LmlActor ann = field.getAnnotation(LmlActor.class);
 					if(ann == null) continue;
 					var actorId = ann.value()[0];
 					var value = group.findActor(actorId);
+					Log.info("inject field : " + field.getName() + ", value : " + value);
 					field.set(group, value);
 					
 					// inject sub groups

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE quickoptions SYSTEM "lml.dtd">
+
+<quickoptions id="quickoptions" align="bottomright" defaultpad="5" x="20" y="15" resizable="true" debug="true">
+    <image id="imgFlag" style="textures.buttons.flag"/>
+    <image id="imgRotate" style="textures.buttons.rotate"/>
+    <stack id="btnIsoTop" width="30" height="30">
+        <image id="imgIsoTop" style="textures.backgrounds.graysquare" />
+        <label id="lblIsoTop" value="ISO" scale="0.5" align="center" fill="true"/>
+    </stack>
+    <image id="imgGrid" style="textures.buttons.grid"/>
+    <image id="imgRuler" style="textures.buttons.ruler"/>
+    <image id="imgCenterline" style="textures.buttons.slider_down"/>
+</quickoptions>
