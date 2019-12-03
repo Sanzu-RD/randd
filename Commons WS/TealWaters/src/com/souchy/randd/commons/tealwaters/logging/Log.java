@@ -1,6 +1,7 @@
 package com.souchy.randd.commons.tealwaters.logging;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 public class Log {
 	
@@ -27,6 +28,10 @@ public class Log {
 	
 	public static void info(String details) {
 		Logging.log(new Log(LogImportance.Info, details));
+	}
+	
+	public static void info(String details,  Iterable<? extends CharSequence> elements) {
+		info(details + " { " + String.join(", ", elements) + " }");
 	}
 	
 	public static void info(String details, Throwable e) {

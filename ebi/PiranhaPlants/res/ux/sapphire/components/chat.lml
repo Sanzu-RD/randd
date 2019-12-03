@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chat SYSTEM "lml.dtd">
 
-<chat id="chat" align="bottomleft" defaultpad="5" width="350" height="200" x="20" y="15" resizable="true" debug="true">
-    <vistextarea id="area" fill="true" expand="true" disabled="true"/>
+<chat id="chat" align="bottomleft" defaultpad="5" width="350" height="200" x="20" y="15" debug="true">
+    <textarea id="area" disabled="true"/>
     <:row/>
-    <vistextfield id="field" fill="true" debug="false"/>
+    <textfield id="field" debug="false"/>
 </chat>

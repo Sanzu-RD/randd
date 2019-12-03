@@ -17,10 +17,10 @@ import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 public class Chat extends SapphireWidget {
 
 	@LmlActor("area")
-	public VisTextArea area;
+	public TextArea area;
 
 	@LmlActor("field")
-	public VisTextField field;
+	public TextField field;
 
 	
 	@Override
@@ -40,9 +40,15 @@ public class Chat extends SapphireWidget {
 	}
 	
 	public void refresh() {
+		//this.getCell(field).width(getWidth());
+		//this.getCell(area).width(getWidth());
+		//field.setWidth(this.getWidth());
+		//area.setSize(300, 200);
 		area.appendText("x : " + this.getX());
 		area.appendText("\n");
 		area.appendText("y : " + this.getY());
+		area.appendText("bug style : " + area.getStyle());
+		field.setText("w1 :" + field.getWidth());
 	}
 	
 //	@LmlAction("sendMsg")

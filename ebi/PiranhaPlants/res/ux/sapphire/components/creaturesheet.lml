@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE creaturesheet SYSTEM "lml.dtd">
 
-<creaturesheet id="creaturesheet" align="left" defaultpad="5" width="225" x="20" y="0" background="transparent" debug="true" resizable="true">
+<creaturesheet id="creaturesheet" align="left" defaultpad="5" width="225" x="20" y="0" background="transparent" debug="false" resizable="true">
 
     <!-- Icon + Resources row-->
     <table align="topleft" height="100" fill="true" debug="false">
         <!-- Name & Close button-->
         <table align="left" colspan="2" debug="false" fill="true">
-            <label id="name" align="left" fill="true" expandx="true" size="30"/>
+            <label id="name" align="left" fill="true" expandx="true" style="title" debug="false"/>
         </table>
         <button id="close" align="top" onclick="close">X</button>
         <:row/>
@@ -42,21 +42,17 @@
     <:row expandx="true"/>
 
     <!-- Description / Passive row -->
-    <table align="topleft" height="100" fill="true" debug="false">
-        <scrollpane fill="true" expand="true" >
-            <scrollabletextarea height="300" value="Description. Lorem ipsum dolor sit amet, consectetur adipiscing consectetur adipiscing consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                        debug="true" disabled="true" />
-        </scrollpane>
-    </table>
+    <scrollpane align="topleft" height="100" fillx="true" debug="true">
+    </scrollpane>
 
     <:row/>
 
     <!-- Status list -->
     <table align="topleft" height="100" fill="true" debug="false" >
         <scrollpane>
-            <horizontalflow>
-                <label value="Status1 list" disabled="true"/>
-            </horizontalflow>
+            <table>
+                <label value="Status1 list" />
+            </table>
         </scrollpane>
     </table>
 

@@ -1,7 +1,12 @@
 {
   com.badlogic.gdx.graphics.g2d.BitmapFont: {
     default-font: {file: "../../fonts/default.fnt" },
-    small-font: {file: font-small.fnt }
+    small-font: {file: font-small.fnt },
+
+    title-font: {file: "../../fonts/arial-20.fnt" },
+    normal-font: {file: "../../fonts/arial-16.fnt" },
+    smoll-font: {file: "../../fonts/arial-12.fnt" },
+    mini-font: {file: "../../fonts/arial-8.fnt" },
   },
   com.badlogic.gdx.graphics.Color: {
     black: {a: 1, b: 0, g: 0, r: 0 },
@@ -68,7 +73,11 @@
     default: {font: default-font, fontColor: white },
     link-label: {fontColor: link-label, font: default-font },
     small: {font: small-font, fontColor: white },
-    menuitem-shortcut: {font: default-font, fontColor: menuitem }
+    menuitem-shortcut: {font: default-font, fontColor: menuitem },
+    title: {font: title-font, fontColor: white },
+    normal: {font: normal-font, fontColor: white },
+    smoll: {font: smoll-font, fontColor: white },
+    mini: {font: mini-font, fontColor: white }
   },
   com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
     default: {font: default-font, fontColor: white, disabledFontColor: grey, selection: selection, background: textfield, cursor: cursor, messageFont: default-font, messageFontColor: grey },

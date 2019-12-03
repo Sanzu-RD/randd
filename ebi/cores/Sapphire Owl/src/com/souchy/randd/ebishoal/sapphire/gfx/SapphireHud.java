@@ -14,7 +14,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
@@ -25,6 +28,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.github.czyzby.lml.parser.LmlParser;
 import com.github.czyzby.lml.parser.tag.LmlTag;
+import com.github.czyzby.lml.util.Lml;
 import com.github.czyzby.lml.vis.util.VisLml;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -77,7 +81,12 @@ public class SapphireHud extends LapisHud {
 		//i18n = I18NBundle.createBundle(Gdx.files.internal("res/i18n/ui/bundle"));
 		skin = new SapphireHudSkin(getSkinFile());
 		single = this;
+		
+		Log.info("labelstyles", skin.getAll(LabelStyle.class).keys());
 
+//		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("truetypefont/Amble-Light.ttf"));
+//		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+		
 		//Log.info("macro tags : " + String.join(", ", parser.getSyntax().getMacroTags().keys()));
 		
 		// create view
@@ -88,7 +97,7 @@ public class SapphireHud extends LapisHud {
 	}
 	
 	public static LmlParser createParser() {
-		var parser = VisLml.parser()
+		var parser = Lml.parser()
 				// Registering global action container:
 				.actions("global", GlobalLMLActions.class)
 				// Adding localization support:
@@ -132,6 +141,30 @@ public class SapphireHud extends LapisHud {
 		SapphireHud.single.getStage().addActor(playbar = LmlWidgets.createGroup("res/ux/sapphire/components/playbar.lml"));
 		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml"));
 		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/quickoptions.lml"));
+		
+		var textfield = new TextField("", skin);
+		textfield.setSize(200, 30);
+		textfield.setText("size : " + textfield.getWidth() + ", " + textfield.getHeight());
+		textfield.setPosition(100, 800);
+//		chat.removeActor(chat.field);
+//		chat.add(textfield);
+		
+		var t = new Table();
+		t.add(new TextArea("Description. Lorem ipsum dolor sit amet, \r\n" + 
+				"                  consectetur adipiscing consectetur adipiscing consectetur adipiscing elit, sed do eiusmod tempor \r\n" + 
+				"                  incididunt ut labore et dolore magna aliqua asdkjfnka.sdjfn kasjdnfkjsdanf ksajdbnfkjasbdf k", skin)).expand();
+		t.row();
+		//t.add(textfield).expand().width(200);
+		t.setPosition(500, 400);
+		t.pack();
+		t.invalidate();
+		t.debug();
+		t.setSize(250, 250);
+		SapphireHud.single.getStage().addActor(t);
+		
+
+		SapphireHud.single.getStage().addActor(textfield);
+		
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/chat.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timer.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timeline.lml"));

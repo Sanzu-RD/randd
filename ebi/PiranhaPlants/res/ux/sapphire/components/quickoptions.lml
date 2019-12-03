@@ -6,7 +6,7 @@
     <image id="imgRotate" style="textures.buttons.rotate"/>
     <stack id="btnIsoTop" width="30" height="30">
         <image id="imgIsoTop" style="textures.backgrounds.graysquare" />
-        <label id="lblIsoTop" value="ISO" scale="0.5" align="center" fill="true"/>
+        <label id="lblIsoTop" value="TOP" scale="0.5" align="center" fill="true" color="red"/>
     </stack>
     <image id="imgGrid" style="textures.buttons.grid"/>
     <image id="imgRuler" style="textures.buttons.ruler"/>

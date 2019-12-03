@@ -44,7 +44,7 @@ public abstract class LapisGame extends Game {
 		if(LapisCore.isEclipse) 
 			Gdx.files = new LapisFiles(Environment.root.toString());//"G:/www/ebishoal/");
 		
-		VisUI.load();
+		//VisUI.load();
 		/*
 		//labelStyles = fonts.explore(""); //"res");
 		List<FileHandle> files = modelDiscoverer.explore("g3d"); //"res");
