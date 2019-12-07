@@ -8,15 +8,10 @@
 
 varying LOWP vec4 v_color;
 varying vec2 v_texCoords;
-varying float v_TextureType;
+varying float v_TextureType; // custom attribute i added
 
 uniform sampler2D u_texture;
 
-//RADIUS of our vignette, where 0.5 results in a circle fitting the screen
-const float RADIUS = 0.75;
-
-//softness of our vignette, between 0.0 and 1.0
-const float SOFTNESS = 0;
 
 void main() {
 
@@ -84,7 +79,7 @@ void main() {
 	}
 	
 	//if (finalColor.a  < 0.5) discard;
+
 	
 	gl_FragColor = finalColor;
-	//gl_FragColor = vec4(1, 0, 0, 1);
 }

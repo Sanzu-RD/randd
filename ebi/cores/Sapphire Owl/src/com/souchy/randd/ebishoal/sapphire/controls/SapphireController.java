@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
+import com.kotcrab.vis.ui.FocusManager;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
@@ -55,9 +56,11 @@ public class SapphireController extends CameraInputController {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		Log.info("touch down");
+		//Log.info("touch down");
 		var s = (SapphireScreen) SapphireOwl.game.getScreen();
 		if(s.getView() != null) {
+			Log.info("unfocus");
+			FocusManager.resetFocus(s.getView().getStage());
 			s.getView().getStage().unfocusAll();
 			s.getView().getStage().cancelTouchFocus();
 		}

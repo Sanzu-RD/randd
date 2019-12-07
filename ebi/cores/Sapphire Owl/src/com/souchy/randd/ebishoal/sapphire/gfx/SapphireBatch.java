@@ -16,6 +16,9 @@ package com.souchy.randd.ebishoal.sapphire.gfx;
  ******************************************************************************/
 
 
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -25,12 +28,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Affine2;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.NumberUtils;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
 
 /** Draws batched quads using indices.
@@ -42,6 +47,10 @@ public class SapphireBatch implements Batch {
 	 *             used when gles 3 is not available, defaults to {@link VertexDataType#VertexArray}. */
 	@Deprecated public static VertexDataType defaultVertexDataType = VertexDataType.VertexArray;
 
+	public static final int verticesPerQuad = 4; 
+	public static final int indicesPerQuad = 6;
+	public static final int VERTEX_SIZE = 2 + 1 + 2 + 1;
+	public static final int SPRITE_SIZE = verticesPerQuad * VERTEX_SIZE; // 4 vertices per sprite * (2 + 1 + 2) attributes per vertex (pos, color, texCoord, RoundImg)
 	
 	private Mesh mesh;
 
@@ -59,13 +68,17 @@ public class SapphireBatch implements Batch {
 	private boolean blendingDisabled = false;
 	private int blendSrcFunc = GL20.GL_SRC_ALPHA;
 	private int blendDstFunc = GL20.GL_ONE_MINUS_SRC_ALPHA;
+    private int blendSrcFuncAlpha = GL20.GL_SRC_ALPHA;
+    private int blendDstFuncAlpha = GL20.GL_ONE_MINUS_SRC_ALPHA;
 
 	private final ShaderProgram shader;
 	private ShaderProgram customShader = null;
 	private boolean ownsShader;
 
-	float color = Color.WHITE.toFloatBits();
-	private Color tempColor = new Color(1, 1, 1, 1);
+	//float color = Color.WHITE.toFloatBits();
+	//private Color tempColor = new Color(1, 1, 1, 1);
+	private final Color color = new Color(1, 1, 1, 1);
+    float colorPacked = Color.WHITE_FLOAT_BITS;
 
 	/** Number of render calls since the last {@link #begin()}. **/
 	public int renderCalls = 0;
@@ -102,19 +115,17 @@ public class SapphireBatch implements Batch {
 
 		VertexDataType vertexDataType = (Gdx.gl30 != null) ? VertexDataType.VertexBufferObjectWithVAO : defaultVertexDataType;
 
-		int verticesPerQuad = 4;
-		int indicesPerQuad = 6;
 
 		mesh = new Mesh(vertexDataType, false, size * verticesPerQuad, size * indicesPerQuad,
 			new VertexAttribute(Usage.Position, 2, ShaderProgram.POSITION_ATTRIBUTE),
 			new VertexAttribute(Usage.ColorPacked, 4, ShaderProgram.COLOR_ATTRIBUTE),
-			new VertexAttribute(Usage.TextureCoordinates, 2, ShaderProgram.TEXCOORD_ATTRIBUTE + "0")
-			,new VertexAttribute(512, 1, "a_TextureType")
+			new VertexAttribute(Usage.TextureCoordinates, 2, ShaderProgram.TEXCOORD_ATTRIBUTE + "0"),
+			new VertexAttribute(512, 1, "a_TextureType")
 			);
 
 		projectionMatrix.setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-		vertices = new float[size * (verticesPerQuad * (2 + 4 + 2 + 1))]; //Sprite.SPRITE_SIZE]; // 4 vertices per sprite, 2 + 1 + 2 attributes per vertex (pos and idk what else)
+		vertices = new float[size * SPRITE_SIZE]; 
 		
 		// setup indices winding 
 		int len = size * indicesPerQuad;
@@ -206,36 +217,46 @@ public class SapphireBatch implements Batch {
 
 	@Override
 	public void setColor (Color tint) {
-		color = tint.toFloatBits();
+//		color = tint.toFloatBits();
+		color.set(tint);
+		colorPacked = tint.toFloatBits();
 	}
 
 	@Override
 	public void setColor (float r, float g, float b, float a) {
-		int intBits = (int)(255 * a) << 24 | (int)(255 * b) << 16 | (int)(255 * g) << 8 | (int)(255 * r);
-		color = NumberUtils.intToFloatColor(intBits);
+//		int intBits = (int)(255 * a) << 24 | (int)(255 * b) << 16 | (int)(255 * g) << 8 | (int)(255 * r);
+//		color = NumberUtils.intToFloatColor(intBits);
+		color.set(r, g, b, a);
+		colorPacked = color.toFloatBits();
 	}
-
-//	@Override
-//	public void setColor (float color) {
-//		this.color = color;
-//	}
 
 	@Override
 	public Color getColor () {
-		int intBits = NumberUtils.floatToIntColor(color);
-		Color color = tempColor;
-		color.r = (intBits & 0xff) / 255f;
-		color.g = ((intBits >>> 8) & 0xff) / 255f;
-		color.b = ((intBits >>> 16) & 0xff) / 255f;
-		color.a = ((intBits >>> 24) & 0xff) / 255f;
-		return color;
-	}
-
-	@Override
-	public float getPackedColor () {
+//		int intBits = NumberUtils.floatToIntColor(color);
+//		Color color = tempColor;
+//		color.r = (intBits & 0xff) / 255f;
+//		color.g = ((intBits >>> 8) & 0xff) / 255f;
+//		color.b = ((intBits >>> 16) & 0xff) / 255f;
+//		color.a = ((intBits >>> 24) & 0xff) / 255f;
+//		return color;
 		return color;
 	}
 	
+	@Override
+	public void setPackedColor(float packedColor) {
+		Color.abgr8888ToColor(color, packedColor);
+		this.colorPacked = packedColor;
+	}
+	
+	@Override
+	public float getPackedColor () {
+//		return color;
+		return colorPacked;
+	}
+	
+	/**
+	 * Add data to vertices and increments idx
+	 */
 	private void oneVertex(float type, float color, float x, float y, float u, float v) {
 		vertices[idx++] = x;
 		vertices[idx++] = y;
@@ -243,6 +264,14 @@ public class SapphireBatch implements Batch {
 		vertices[idx++] = u;
 		vertices[idx++] = v;
 		vertices[idx++] = type;
+	}
+	private void oneVertex(int id, float type, float color, float x, float y, float u, float v) {
+		vertices[id++] = x;
+		vertices[id++] = y;
+		vertices[id++] = color;
+		vertices[id++] = u;
+		vertices[id++] = v;
+		vertices[id++] = type;
 	}
 
 	@Override
@@ -374,10 +403,10 @@ public class SapphireBatch implements Batch {
 //		vertices[idx++] = u2;
 //		vertices[idx++] = v;
 //		this.idx = idx + 20;
-		oneVertex(0, color, x1, y1, u, v);
-		oneVertex(0, color, x2, y2, u, v2);
-		oneVertex(0, color, x3, y3, u2, v2);
-		oneVertex(0, color, x4, y4, u2, v);
+		oneVertex(0, getPackedColor(), x1, y1, u, v);
+		oneVertex(0, getPackedColor(), x2, y2, u, v2);
+		oneVertex(0, getPackedColor(), x3, y3, u2, v2);
+		oneVertex(0, getPackedColor(), x4, y4, u2, v);
 	}
 
 	@Override
@@ -437,10 +466,10 @@ public class SapphireBatch implements Batch {
 //		vertices[idx + 18] = u2;
 //		vertices[idx + 19] = v;
 //		this.idx = idx + 20;
-		oneVertex(0, color, x, y, u, v);
-		oneVertex(0, color, x, fy2, u, v2);
-		oneVertex(0, color, fx2, fy2, u2, v2);
-		oneVertex(0, color, fx2, y, u2, v);
+		oneVertex(0, getPackedColor(), x, y, u, v);
+		oneVertex(0, getPackedColor(), x, fy2, u, v2);
+		oneVertex(0, getPackedColor(), fx2, fy2, u2, v2);
+		oneVertex(0, getPackedColor(), fx2, y, u2, v);
 	}
 
 	@Override
@@ -487,10 +516,10 @@ public class SapphireBatch implements Batch {
 //		vertices[idx + 18] = u2;
 //		vertices[idx + 19] = v;
 //		this.idx = idx + 20;
-		oneVertex(0, color, x, y, u, v);
-		oneVertex(0, color, x, fy2, u, v2);
-		oneVertex(0, color, fx2, fy2, u2, v2);
-		oneVertex(0, color, fx2, y, u2, v);
+		oneVertex(0, getPackedColor(), x, y, u, v);
+		oneVertex(0, getPackedColor(), x, fy2, u, v2);
+		oneVertex(0, getPackedColor(), fx2, fy2, u2, v2);
+		oneVertex(0, getPackedColor(), fx2, y, u2, v);
 	}
 
 	@Override
@@ -533,10 +562,10 @@ public class SapphireBatch implements Batch {
 //		vertices[idx + 18] = u2;
 //		vertices[idx + 19] = v;
 //		this.idx = idx + 20;
-		oneVertex(0, color, x, y, u, v);
-		oneVertex(0, color, x, fy2, u, v2);
-		oneVertex(0, color, fx2, fy2, u2, v2);
-		oneVertex(0, color, fx2, y, u2, v);
+		oneVertex(0, getPackedColor(), x, y, u, v);
+		oneVertex(0, getPackedColor(), x, fy2, u, v2);
+		oneVertex(0, getPackedColor(), fx2, fy2, u2, v2);
+		oneVertex(0, getPackedColor(), fx2, y, u2, v);
 	}
 
 	@Override
@@ -588,10 +617,10 @@ public class SapphireBatch implements Batch {
 //		vertices[idx + 18] = u2;
 //		vertices[idx + 19] = v;
 //		this.idx = idx + 20;
-		oneVertex(0, color, x, y, u, v);
-		oneVertex(0, color, x, fy2, u, v2);
-		oneVertex(0, color, fx2, fy2, u2, v2);
-		oneVertex(0, color, fx2, y, u2, v);
+		oneVertex(0, getPackedColor(), x, y, u, v);
+		oneVertex(0, getPackedColor(), x, fy2, u, v2);
+		oneVertex(0, getPackedColor(), fx2, fy2, u2, v2);
+		oneVertex(0, getPackedColor(), fx2, y, u2, v);
 	}
 
 	@Override
@@ -611,17 +640,29 @@ public class SapphireBatch implements Batch {
 		}
 		int copyCount = Math.min(remainingVertices, count);
 
-		//Log.info("6 : " + offset + ", " + count + ", " + copyCount + ", " + spriteVertices.length);
+	//	Log.info("6 : " + offset + ", " + count + ", " + copyCount + ", " + spriteVertices.length);
 		
 		if(true) {
-			int i = offset; 
-			while(i < copyCount) {
-				var x = spriteVertices[i++];
-				var y = spriteVertices[i++];
-				var color = spriteVertices[i++];
-				var u = spriteVertices[i++];
-				var v = spriteVertices[i++];
-				oneVertex(0, color, x, y, u, v);
+//			int i = offset;
+//			while (i < copyCount + offset) {
+//				var x = spriteVertices[i++];
+//				var y = spriteVertices[i++];
+//				var color = spriteVertices[i++];
+//				var u = spriteVertices[i++];
+//				var v = spriteVertices[i++];
+//				oneVertex(0, color, x, y, u, v);
+//			}
+			copyVertices(spriteVertices, offset, vertices, idx, copyCount);
+			//idx += copyCount;
+			count -= copyCount;
+			while (count > 0) {
+				//Log.info("6.1 : " + offset + ", " + count + ", " + copyCount + ", " + spriteVertices.length);
+				offset += copyCount;
+				flush();
+				copyCount = Math.min(verticesLength, count);
+				copyVertices(spriteVertices, offset, vertices, 0, copyCount);
+				//idx += copyCount;
+				count -= copyCount;
 			}
 		} 
 		if(false) {
@@ -629,6 +670,7 @@ public class SapphireBatch implements Batch {
 			idx += copyCount;
 			count -= copyCount;
 			while (count > 0) {
+				//Log.info("6.1 : " + offset + ", " + count + ", " + copyCount + ", " + spriteVertices.length);
 				offset += copyCount;
 				flush();
 				copyCount = Math.min(verticesLength, count);
@@ -636,6 +678,23 @@ public class SapphireBatch implements Batch {
 				idx += copyCount;
 				count -= copyCount;
 			}
+		}
+	}
+	
+	private void copyVertices(float[] src, final int srcPos, float[] dest, final int destPos, final int length) {
+		//int i = srcPos; 
+		int i = srcPos;
+		//int iDest = destPos;
+		while(i < (length + srcPos)) {
+			var x = src[i++];
+			var y = src[i++];
+			var color = src[i++];
+			var u = src[i++];
+			var v = src[i++];
+			//iDest += VERTEX_SIZE;
+			oneVertex(0, color, x, y, u, v);
+//			oneVertex(destPos, 0, color, x, y, u, v);
+//			idx += VERTEX_SIZE;
 		}
 	}
 	
@@ -712,10 +771,10 @@ public class SapphireBatch implements Batch {
 //		vertices[idx++] = type;
 //		this.idx = idx;
 //		//this.idx = idx + 20;
-		oneVertex(type, color, x, y, u, v);
-		oneVertex(type, color, x, fy2, u, v2);
-		oneVertex(type, color, fx2, fy2, u2, v2);
-		oneVertex(type, color, fx2, y, u2, v);
+		oneVertex(type, getPackedColor(), x, y, u, v);
+		oneVertex(type, getPackedColor(), x, fy2, u, v2);
+		oneVertex(type, getPackedColor(), fx2, fy2, u2, v2);
+		oneVertex(type, getPackedColor(), fx2, y, u2, v);
 	}
 
 	@Override
@@ -836,10 +895,10 @@ public class SapphireBatch implements Batch {
 //		vertices[idx + 18] = u2;
 //		vertices[idx + 19] = v;
 //		this.idx = idx + 20;
-		oneVertex(0, color, x1, y1, u, v);
-		oneVertex(0, color, x2, y2, u, v2);
-		oneVertex(0, color, x3, y3, u2, v2);
-		oneVertex(0, color, x4, y4, u2, v);
+		oneVertex(0, getPackedColor(), x1, y1, u, v);
+		oneVertex(0, getPackedColor(), x2, y2, u, v2);
+		oneVertex(0, getPackedColor(), x3, y3, u2, v2);
+		oneVertex(0, getPackedColor(), x4, y4, u2, v);
 	}
 
 	@Override
@@ -976,10 +1035,10 @@ public class SapphireBatch implements Batch {
 //		vertices[idx + 18] = u4;
 //		vertices[idx + 19] = v4;
 //		this.idx = idx + 20;
-		oneVertex(0, color, x1, y1, u1, v1);
-		oneVertex(0, color, x2, y2, u2, v2);
-		oneVertex(0, color, x3, y3, u3, v3);
-		oneVertex(0, color, x4, y4, u4, v4);
+		oneVertex(0, getPackedColor(), x1, y1, u1, v1);
+		oneVertex(0, getPackedColor(), x2, y2, u2, v2);
+		oneVertex(0, getPackedColor(), x3, y3, u3, v3);
+		oneVertex(0, getPackedColor(), x4, y4, u4, v4);
 	}
 
 	@Override
@@ -1036,10 +1095,10 @@ public class SapphireBatch implements Batch {
 //		vertices[idx + 18] = u2;
 //		vertices[idx + 19] = v;
 //		this.idx = idx + 20;
-		oneVertex(0, color, x1, y1, u, v);
-		oneVertex(0, color, x2, y2, u, v2);
-		oneVertex(0, color, x3, y3, u2, v2);
-		oneVertex(0, color, x4, y4, u2, v);
+		oneVertex(0, getPackedColor(), x1, y1, u, v);
+		oneVertex(0, getPackedColor(), x2, y2, u, v2);
+		oneVertex(0, getPackedColor(), x3, y3, u2, v2);
+		oneVertex(0, getPackedColor(), x4, y4, u2, v);
 	}
 
 	@Override
@@ -1048,9 +1107,9 @@ public class SapphireBatch implements Batch {
 
 		renderCalls++;
 		totalRenderCalls++;
-		int spritesInBatch = idx / 20;
+		int spritesInBatch = idx / (SapphireBatch.SPRITE_SIZE);
 		if (spritesInBatch > maxSpritesInBatch) maxSpritesInBatch = spritesInBatch;
-		int count = spritesInBatch * 6; // 6 = num indices per sprites/quad
+		int count = spritesInBatch * SapphireBatch.indicesPerQuad; // 6 = num indices per sprites/quad
 
 		lastTexture.bind();
 		Mesh mesh = this.mesh;
@@ -1062,7 +1121,8 @@ public class SapphireBatch implements Batch {
 			Gdx.gl.glDisable(GL20.GL_BLEND);
 		} else {
 			Gdx.gl.glEnable(GL20.GL_BLEND);
-			if (blendSrcFunc != -1) Gdx.gl.glBlendFunc(blendSrcFunc, blendDstFunc);
+			//if (blendSrcFunc != -1) Gdx.gl.glBlendFunc(blendSrcFunc, blendDstFunc);
+			if (blendSrcFunc != -1) Gdx.gl.glBlendFuncSeparate(blendSrcFunc, blendDstFunc, blendSrcFuncAlpha, blendDstFuncAlpha);
 		}
 
 		mesh.render(customShader != null ? customShader : shader, GL20.GL_TRIANGLES, 0, count);
@@ -1086,12 +1146,24 @@ public class SapphireBatch implements Batch {
 
 	@Override
 	public void setBlendFunction (int srcFunc, int dstFunc) {
-		if (blendSrcFunc == srcFunc && blendDstFunc == dstFunc) return;
-		flush();
-		blendSrcFunc = srcFunc;
-		blendDstFunc = dstFunc;
+//		if (blendSrcFunc == srcFunc && blendDstFunc == dstFunc) return;
+//		flush();
+//		blendSrcFunc = srcFunc;
+//		blendDstFunc = dstFunc;
+		setBlendFunctionSeparate(srcFunc, dstFunc, srcFunc, dstFunc);
 	}
 
+	@Override
+	public void setBlendFunctionSeparate(int srcFuncColor, int dstFuncColor, int srcFuncAlpha, int dstFuncAlpha) {
+		if(blendSrcFunc == srcFuncColor && blendDstFunc == dstFuncColor && blendSrcFuncAlpha == srcFuncAlpha && blendDstFuncAlpha == dstFuncAlpha)
+			return;
+		flush();
+		blendSrcFunc = srcFuncColor;
+		blendDstFunc = dstFuncColor;
+		blendSrcFuncAlpha = srcFuncAlpha;
+		blendDstFuncAlpha = dstFuncAlpha;
+	}
+	
 	@Override
 	public int getBlendSrcFunc () {
 		return blendSrcFunc;
@@ -1101,7 +1173,17 @@ public class SapphireBatch implements Batch {
 	public int getBlendDstFunc () {
 		return blendDstFunc;
 	}
-
+	
+	@Override
+	public int getBlendSrcFuncAlpha() {
+		return blendSrcFuncAlpha;
+	}
+	
+	@Override
+	public int getBlendDstFuncAlpha() {
+		return blendDstFuncAlpha;
+	}
+	
 	@Override
 	public void dispose () {
 		mesh.dispose();
@@ -1186,27 +1268,4 @@ public class SapphireBatch implements Batch {
 		return drawing;
 	}
 
-	@Override
-	public void setPackedColor(float packedColor) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setBlendFunctionSeparate(int srcFuncColor, int dstFuncColor, int srcFuncAlpha, int dstFuncAlpha) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getBlendSrcFuncAlpha() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getBlendDstFuncAlpha() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

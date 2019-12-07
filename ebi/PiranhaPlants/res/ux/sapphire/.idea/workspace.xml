@@ -2,10 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="711c9478-3b9c-4de5-9330-84df3ac55110" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/Effect.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/Effect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/creaturetypes/ZombieType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/creaturetypes/ZombieType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Mock WS/LapisMock/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisHud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisHud.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../shaders/ui.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/ui.fragment.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/chat.lml" beforeDir="false" afterPath="$PROJECT_DIR$/components/chat.lml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/creaturesheet.lml" beforeDir="false" afterPath="$PROJECT_DIR$/components/creaturesheet.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/quickoptions.lml" beforeDir="false" afterPath="$PROJECT_DIR$/components/quickoptions.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.json" beforeDir="false" afterPath="$PROJECT_DIR$/main.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/playbar.lml" beforeDir="false" afterPath="$PROJECT_DIR$/components/playbar.lml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/res/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/res/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/res/shaders/ui.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/res/shaders/ui.fragment.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/controls/SapphireController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/controls/SapphireController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireBatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireBatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHud.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/Chat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/SapphireWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/SapphireWidget.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +37,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="566">
-              <caret line="80" column="4" lean-forward="true" selection-start-line="80" selection-start-column="4" selection-end-line="80" selection-end-column="4" />
+            <state relative-caret-position="345">
+              <caret line="93" column="61" lean-forward="true" selection-start-line="93" selection-start-column="61" selection-end-line="93" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.atlas">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="585">
+              <caret line="761" column="14" lean-forward="true" selection-start-line="761" selection-start-column="14" selection-end-line="761" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/components/chat.lml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -27,8 +69,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/creaturesheet.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="44" column="71" selection-start-line="44" selection-start-column="71" selection-end-line="44" selection-end-column="71" />
+            <state relative-caret-position="476">
+              <caret line="28" column="51" lean-forward="true" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -36,17 +78,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/quickoptions.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="12" lean-forward="true" selection-start-column="12" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/components/chat.lml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+            <state relative-caret-position="221">
+              <caret line="13" column="15" lean-forward="true" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -54,8 +87,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/playbar.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="61" lean-forward="true" selection-start-line="4" selection-start-column="61" selection-end-line="4" selection-end-column="61" />
+            <state relative-caret-position="238">
+              <caret line="14" column="90" lean-forward="true" selection-start-line="14" selection-start-column="90" selection-end-line="14" selection-end-column="90" />
             </state>
           </provider>
         </entry>
@@ -109,6 +142,12 @@
       <find>debug</find>
       <find>area</find>
       <find>field</find>
+      <find>scroll</find>
+      <find>textfiel</find>
+      <find>focus</find>
+      <find>list</find>
+      <find>highli</find>
+      <find>textfield</find>
     </findStrings>
     <replaceStrings>
       <replace>textures.borders.ring_frame</replace>
@@ -147,19 +186,19 @@
         <option value="$PROJECT_DIR$/../../../../../../../eclipse-workspaces/hidden workspaces/r and d/UIEditor/data/uieditor.lml" />
         <option value="$PROJECT_DIR$/old/sheet.lml" />
         <option value="$PROJECT_DIR$/main.lml" />
-        <option value="$PROJECT_DIR$/components/playbar.lml" />
         <option value="$PROJECT_DIR$/components/quickoptions.lml" />
-        <option value="$PROJECT_DIR$/main.json" />
+        <option value="$PROJECT_DIR$/components/playbar.lml" />
         <option value="$PROJECT_DIR$/components/creaturesheet.lml" />
+        <option value="$PROJECT_DIR$/main.json" />
         <option value="$PROJECT_DIR$/components/chat.lml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="-1361" />
-    <option name="y" value="67" />
-    <option name="width" value="1365" />
-    <option name="height" value="948" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-1639" />
+    <option name="y" value="96" />
+    <option name="width" value="1378" />
+    <option name="height" value="885" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -188,7 +227,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1575328237232" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1575747534917" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
@@ -228,10 +267,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1361" y="67" width="1365" height="948" extended-state="0" />
+    <frame x="-1928" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17011495" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.118336886" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -345,9 +384,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../../../../eclipse-workspaces/hidden workspaces/r and d/UIEditor/data/uieditor.lml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -362,13 +398,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/playbar.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="61" lean-forward="true" selection-start-line="4" selection-start-column="61" selection-end-line="4" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.lml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -376,38 +405,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.atlas">
+    <entry file="file://$PROJECT_DIR$/components/playbar.lml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="8" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/quickoptions.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="12" lean-forward="true" selection-start-column="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="80" column="4" lean-forward="true" selection-start-line="80" selection-start-column="4" selection-end-line="80" selection-end-column="4" />
+        <state relative-caret-position="238">
+          <caret line="14" column="90" lean-forward="true" selection-start-line="14" selection-start-column="90" selection-end-line="14" selection-end-column="90" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/components/creaturesheet.lml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="44" column="71" selection-start-line="44" selection-start-column="71" selection-end-line="44" selection-end-column="71" />
+        <state relative-caret-position="476">
+          <caret line="28" column="51" lean-forward="true" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.atlas">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="761" column="14" lean-forward="true" selection-start-line="761" selection-start-column="14" selection-end-line="761" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/quickoptions.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="15" lean-forward="true" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="93" column="61" lean-forward="true" selection-start-line="93" selection-start-column="61" selection-end-line="93" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/components/chat.lml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+        <state relative-caret-position="153">
+          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
         </state>
       </provider>
     </entry>

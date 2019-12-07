@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE creaturesheet SYSTEM "lml.dtd">
 
-<creaturesheet id="creaturesheet" align="left" defaultpad="5" width="225" x="20" y="0" background="transparent" debug="false" resizable="true">
+<creaturesheet id="creaturesheet" align="left" defaultpad="5" width="225" height="350" x="20" y="0" background="transparent" debug="false" resizable="true">
 
     <!-- Icon + Resources row-->
     <table align="topleft" height="100" fill="true" debug="false">

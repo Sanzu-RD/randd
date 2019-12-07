@@ -1,6 +1,5 @@
 package data.new1;
 
-import com.souchy.randd.jade.combat.JadeEffect;
 
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Entity;

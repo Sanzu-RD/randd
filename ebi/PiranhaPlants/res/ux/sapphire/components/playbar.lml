@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE playbar SYSTEM "lml.dtd">
 
-<playbar id="playbar" align="bottom" defaultpad="5" x="0" y="15" debug="true">
+<playbar id="playbar" align="bottom" defaultpad="5" x="0" y="15" debug="true" background="transparent" width="650" height="100">
     <!-- Spells and stats for current playable character  -->
     <!-- Portrait -->
     <stack width="64" height="64">

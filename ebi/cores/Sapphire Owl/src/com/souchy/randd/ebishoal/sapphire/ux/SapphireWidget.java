@@ -2,6 +2,7 @@ package com.souchy.randd.ebishoal.sapphire.ux;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -24,6 +25,7 @@ import com.github.czyzby.lml.parser.impl.AbstractLmlView;
 import com.github.czyzby.lml.parser.impl.tag.AbstractGroupLmlTag;
 import com.github.czyzby.lml.parser.impl.tag.actor.ContainerLmlTag;
 import com.github.czyzby.lml.parser.impl.tag.actor.TableLmlTag;
+import com.github.czyzby.lml.parser.impl.tag.actor.WindowLmlTag;
 import com.github.czyzby.lml.parser.impl.tag.actor.provider.ContainerLmlTagProvider;
 import com.github.czyzby.lml.parser.impl.tag.actor.provider.TableLmlTagProvider;
 import com.github.czyzby.lml.parser.impl.tag.actor.provider.WindowLmlTagProvider;
@@ -32,6 +34,7 @@ import com.github.czyzby.lml.parser.tag.LmlActorBuilder;
 import com.github.czyzby.lml.parser.tag.LmlTag;
 import com.github.czyzby.lml.parser.tag.LmlTagProvider;
 import com.github.czyzby.lml.util.LmlUtilities;
+import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
@@ -92,7 +95,7 @@ public abstract class SapphireWidget extends Table implements ActionContainer {
 					if(ann == null) continue;
 					var actorId = ann.value()[0];
 					var value = group.findActor(actorId);
-					Log.info("inject field : " + field.getName() + ", value : " + value);
+					//Log.info("inject field : " + field.getName() + ", value : " + value);
 					field.set(group, value);
 					
 					// inject sub groups
@@ -106,6 +109,7 @@ public abstract class SapphireWidget extends Table implements ActionContainer {
 			group.init();
 		}
 	}
+	
 	
 	public static class SapphireWidgetTagProvider<T extends SapphireWidget> extends TableLmlTagProvider {
 		private Class<T> c;
@@ -127,7 +131,7 @@ public abstract class SapphireWidget extends Table implements ActionContainer {
 				if(this.getAttribute("y") != null) 
 					getActor().setY(Integer.parseInt(this.getAttribute("y")));
 				// Align the actor on the stage
-				LapisUtil.align((Table) getActor());
+				LapisUtil.align((SapphireWidget) getActor());
 			}
 			@SuppressWarnings("deprecation")
 			@Override

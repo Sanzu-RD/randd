@@ -4,18 +4,23 @@ import javax.swing.text.AbstractDocument.Content;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -27,10 +32,17 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.github.czyzby.lml.parser.LmlParser;
+import com.github.czyzby.lml.parser.impl.attribute.table.window.MovableLmlAttribute;
+import com.github.czyzby.lml.parser.impl.attribute.table.window.ResizeBorderLmlAttribute;
+import com.github.czyzby.lml.parser.impl.attribute.table.window.ResizeableLmlAttribute;
 import com.github.czyzby.lml.parser.tag.LmlTag;
 import com.github.czyzby.lml.util.Lml;
 import com.github.czyzby.lml.vis.util.VisLml;
+import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.widget.ScrollableTextArea;
+import com.kotcrab.vis.ui.widget.Separator;
 import com.kotcrab.vis.ui.widget.VisTable;
+import com.kotcrab.vis.ui.widget.VisTextField;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisResources;
@@ -66,6 +78,15 @@ public class SapphireHud extends LapisHud {
 	
 	
 	public SapphireHud() {
+		single = this;
+		
+		//Log.info("labelstyles", skin.getAll(LabelStyle.class).keys());
+
+//		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("truetypefont/Amble-Light.ttf"));
+//		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+		
+		//Log.info("macro tags : " + String.join(", ", parser.getSyntax().getMacroTags().keys()));
+
 		var batch = new SapphireBatch();
 		var viewport = new ScreenViewport();
 
@@ -80,14 +101,9 @@ public class SapphireHud extends LapisHud {
 		// Parser(actions, i18n, skin, tags)
 		//i18n = I18NBundle.createBundle(Gdx.files.internal("res/i18n/ui/bundle"));
 		skin = new SapphireHudSkin(getSkinFile());
-		single = this;
-		
-		Log.info("labelstyles", skin.getAll(LabelStyle.class).keys());
 
-//		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("truetypefont/Amble-Light.ttf"));
-//		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-		
-		//Log.info("macro tags : " + String.join(", ", parser.getSyntax().getMacroTags().keys()));
+		VisUI.dispose(true);
+		VisUI.load(skin);
 		
 		// create view
 		//parser.createView(single, getTemplateFile());
@@ -96,8 +112,11 @@ public class SapphireHud extends LapisHud {
 		//createListeners();
 	}
 	
+	public void init() {
+	}
+	
 	public static LmlParser createParser() {
-		var parser = Lml.parser()
+		var parser = VisLml.parser()
 				// Registering global action container:
 				.actions("global", GlobalLMLActions.class)
 				// Adding localization support:
@@ -113,6 +132,9 @@ public class SapphireHud extends LapisHud {
 				.tag(new SapphireWidgetTagProvider<>(Timeline.class), "timeline")
 				.tag(new SapphireWidgetTagProvider<>(CreatureSheet.class), "creaturesheet")
 				.tag(new SapphireWidgetTagProvider<>(QuickOptions.class), "quickoptions")
+				.attribute(new MovableLmlAttribute(), "movable")
+				.attribute(new ResizeableLmlAttribute(), "resizeable", "resizable")
+				.attribute(new ResizeBorderLmlAttribute(), "resizeBorder", "border")
 				.actions("creaturesheet", CreatureSheet.class)
 //				.actions("quickoptions", QuickOptions.class)
 				//.macro(new SapphireWidgetTagProvider<>(Chat.class), ":chat")
@@ -126,7 +148,9 @@ public class SapphireHud extends LapisHud {
 	}
 	
 	public static void refresh() {
+		//SapphireHud.single.init();
 		parser = createParser();
+		
 		// var asd = SapphireHud.parser.createView(SapphireHud.single,SapphireHud.single.getTemplateFile());
 		//SapphireHud.parser.parseTemplate(SapphireHud.single.getTemplateFile());
 		SapphireHud.single.getStage().getActors().clear();
@@ -142,28 +166,25 @@ public class SapphireHud extends LapisHud {
 		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml"));
 		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/quickoptions.lml"));
 		
-		var textfield = new TextField("", skin);
-		textfield.setSize(200, 30);
-		textfield.setText("size : " + textfield.getWidth() + ", " + textfield.getHeight());
-		textfield.setPosition(100, 800);
-//		chat.removeActor(chat.field);
-//		chat.add(textfield);
 		
-		var t = new Table();
-		t.add(new TextArea("Description. Lorem ipsum dolor sit amet, \r\n" + 
-				"                  consectetur adipiscing consectetur adipiscing consectetur adipiscing elit, sed do eiusmod tempor \r\n" + 
-				"                  incididunt ut labore et dolore magna aliqua asdkjfnka.sdjfn kasjdnfkjsdanf ksajdbnfkjasbdf k", skin)).expand();
-		t.row();
-		//t.add(textfield).expand().width(200);
-		t.setPosition(500, 400);
-		t.pack();
-		t.invalidate();
-		t.debug();
-		t.setSize(250, 250);
-		SapphireHud.single.getStage().addActor(t);
+//		var field = new VisTextField("");
+//		//field.setSize(300, 30);
+//		field.setText("size : " + field.getWidth() + ", " + field.getHeight());
+//		var area = new ScrollableTextArea("Description. Lorem ipsum dolor sit amet, \r\n" + 
+//				"                  consectetur adipiscing consectetur adipiscing consectetur adipiscing elit, sed do eiusmod tempor \r\n" + 
+//				"                  incididunt ut labore et dolore magna aliqua asdkjfnka.sdjfn kasjdnfkjsdanf ksajdbnfkjasbdf k");
+//		var scroll = new ScrollPane(area);
+//		scroll.setScrollbarsVisible(true);
+//		var group = new Table(skin);
+//		group.add(scroll).grow().padBottom(8);
+//		group.row();
+//		group.add(field).height(30).growX();
+//		group.setSize(450, 200);
+//		group.setPosition(100, 150);
+//		SapphireHud.single.getStage().addActor(group);
 		
-
-		SapphireHud.single.getStage().addActor(textfield);
+		
+		//SapphireHud.single.getStage().addActor(textfield);
 		
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/chat.lml"));
 //		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timer.lml"));

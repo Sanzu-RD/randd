@@ -47,6 +47,10 @@ public class ZombieType extends CreatureTypeModel {
 			}
 			
 		}
+		@Override
+		public int id() {
+			return 0;
+		}
 		
 	}
 	
