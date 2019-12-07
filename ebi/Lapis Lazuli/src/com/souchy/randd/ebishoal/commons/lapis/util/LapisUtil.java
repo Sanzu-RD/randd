@@ -14,21 +14,27 @@ import com.souchy.randd.commons.tealwaters.commons.Lambda;
 
 public class LapisUtil {
 	
-	public static void align(Table a) {
-		float x = a.getX();
-		float y = a.getY();
+	/**
+	 * Correctly align a table on the stage by using its x/y attributes and alignment
+	 */
+	public static void align(Table table) {
+		float x = table.getX();
+		float y = table.getY();
 		// y
-		if((a.getAlign() & Align.top) != 0) y = a.getStage().getHeight() - a.getY(); // top
-		else if((a.getAlign() & Align.bottom) != 0) y = a.getY(); // bottom
-		else y = a.getStage().getHeight() / 2f - a.getY(); // center
+		if((table.getAlign() & Align.top) != 0) y = table.getStage().getHeight() - table.getY(); // top
+		else if((table.getAlign() & Align.bottom) != 0) y = table.getY(); // bottom
+		else y = table.getStage().getHeight() / 2f - table.getY(); // center
 		// x
-		if((a.getAlign() & Align.right) != 0) x = a.getStage().getWidth() - a.getX(); // right
-		else if((a.getAlign() & Align.left) != 0) x = a.getX(); // left
-		else x = a.getStage().getWidth() / 2f - a.getX(); // center
+		if((table.getAlign() & Align.right) != 0) x = table.getStage().getWidth() - table.getX(); // right
+		else if((table.getAlign() & Align.left) != 0) x = table.getX(); // left
+		else x = table.getStage().getWidth() / 2f - table.getX(); // center
 		
-		a.setPosition(x, y, a.getAlign());
+		table.setPosition(x, y, table.getAlign());
 	}
 	
+	/**
+	 * Add a lambda click listener to an actor
+	 */
 	public static void onClick(Actor actor, Lambda lambda) {
 		actor.addListener(new ClickListener() {
             @Override
@@ -38,10 +44,55 @@ public class LapisUtil {
             }
         });
 	}
+	
+	public static void onType(Actor actor, Lambda lambda) {
+		actor.addListener(new ClickListener() {
+			@Override
+			public boolean keyTyped(InputEvent event, char character) {
+				// TODO Auto-generated method stub
+				return super.keyTyped(event, character);
+			}
+			@Override
+			public boolean keyDown(InputEvent event, int keycode) {
+				// TODO Auto-generated method stub
+				return super.keyDown(event, keycode);
+			}
+            @Override
+            public void clicked(final InputEvent event, final float x, final float y) {
+            	lambda.call();
+            	super.clicked(event, x, y);
+            }
+        });
+	}
 
+	/**
+	 * Add an hover listener to an actor with a lambda for entering and another for exiting
+	 */
+	public static void onHover(Actor actor, Lambda in, Lambda out) {
+		actor.addListener(new ClickListener() {
+			@Override
+			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+				in.call();
+				super.enter(event, x, y, pointer, fromActor);
+			}
+			@Override
+			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+				out.call();
+				super.exit(event, x, y, pointer, toActor);
+			}
+		});
+	}
+
+	/**
+	 * Add an hover listener to an actor with a hover color for enter and default white for exit
+	 */
 	public static void onHover(Actor actor, Color in) {
 		onHover(actor, in, Color.WHITE);
 	}
+
+	/**
+	 * Add an hover listener to an actor with a hover color for enter and exit states
+	 */
 	public static void onHover(Actor actor, Color in, Color out) {
 		actor.addListener(new ClickListener() {
 			@Override
@@ -57,9 +108,16 @@ public class LapisUtil {
 		});
 	}
 	
+	/**
+	 * Set the color of an actor/group and all its children recursively
+	 */
 	public static void setColor(Actor actor, Color c) {
 		setColor(actor, c.r, c.g, c.b, c.a);
 	}
+	
+	/**
+	 * Set the color of an actor/group and all its children recursively
+	 */
 	public static void setColor(Actor actor, float r, float g, float b, float a) {
 		actor.setColor(r, g, b, a); //actor.getColor().a);
 		if(actor instanceof Group) {
@@ -69,26 +127,6 @@ public class LapisUtil {
 			});
 		}
 	}
-//	public static void setAlpha(Actor actor, float alpha) {
-//		actor.setColor(actor.getColor().r, actor.getColor().g, actor.getColor().b, alpha);
-//		if(actor instanceof Group) {
-//			var group = (Group) actor;
-//			group.getChildren().forEach(child -> {
-//				child.setColor(child.getColor().r, child.getColor().g, child.getColor().b, alpha);
-//			});
-//		}
-//	}
 
-//	public static int percentConverter(String val, float stageWidth) {
-//		int result = 0;
-//		if(val.contains("%")) {
-//			val = val.substring(0, val.length() - 1);
-//			result = Integer.parseInt(val);
-//			result = (int) (stageWidth * result / 100f);
-//		} else {
-//			result = Integer.parseInt(val);
-//		}
-//		return result;
-//	}
 	
 }
