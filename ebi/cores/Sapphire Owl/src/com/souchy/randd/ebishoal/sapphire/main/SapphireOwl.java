@@ -4,7 +4,7 @@ import java.io.File;
 import java.nio.file.Paths;
 
 import com.badlogic.gdx.Files.FileType;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -34,7 +34,7 @@ public class SapphireOwl extends LapisCore { //implements EntryPoint {
 	@Override
 	public void init() throws Exception {
 		super.init();
-		
+
 		// load sapphire config
 		conf = JsonConfig.readExternal(SapphireOwlConf.class, "modules/");
 
@@ -70,8 +70,9 @@ public class SapphireOwl extends LapisCore { //implements EntryPoint {
 	}
 
 	@Override
-	public void addIcon(LwjglApplicationConfiguration config) {
-		config.addIcon("G:\\Assets\\pack\\fantasy bundle\\tcgcardspack\\Tex_krakken_icon.png", FileType.Absolute);
+	public void addIcon(Lwjgl3ApplicationConfiguration config) {
+		//config.addIcon("G:\\Assets\\pack\\fantasy bundle\\tcgcardspack\\Tex_krakken_icon.png", FileType.Absolute);
+		config.setWindowIcon(FileType.Absolute, "G:/Assets/pack/fantasy bundle/tcgcardspack/Tex_krakken_icon.png");
 	}
 
 	

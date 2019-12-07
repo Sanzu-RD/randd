@@ -4,7 +4,7 @@ import java.io.File;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Files.FileType;
-import com.badlogic.gdx.backends.lwjgl.LwjglFileHandle;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3FileHandle;
 import com.badlogic.gdx.files.FileHandle;
 
 /**
@@ -26,10 +26,10 @@ class LapisFiles implements Files {
 	
 	@Override
 	public FileHandle getFileHandle (String path, FileType type) {
-		var file = new LwjglFileHandle(path, FileType.Internal);
+		var file = new Lwjgl3FileHandle(path, FileType.Internal);
 		if(file.exists()) 
 			return file;
-		return new LwjglFileHandle(rootPrefix + path, type);
+		return new Lwjgl3FileHandle(rootPrefix + path, type);
 	}
 
 	@Override
@@ -39,11 +39,11 @@ class LapisFiles implements Files {
 
 	@Override
 	public FileHandle internal (String path) {
-		var file = new LwjglFileHandle(path, FileType.Internal);
+		var file = new Lwjgl3FileHandle(path, FileType.Internal);
 		if(file.exists()) 
 			return file;
 		if(path.length() > 0 && path.substring(1).replace("\\", "/").startsWith(":/")) return absolute(path);
-		return new LwjglFileHandle(rootPrefix + path, FileType.Internal);
+		return new Lwjgl3FileHandle(rootPrefix + path, FileType.Internal);
 	}
 
 	@Override

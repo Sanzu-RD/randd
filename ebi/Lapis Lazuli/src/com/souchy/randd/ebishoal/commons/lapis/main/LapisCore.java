@@ -3,8 +3,8 @@ package com.souchy.randd.ebishoal.commons.lapis.main;
 import java.nio.file.Paths;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.EbiCore;
@@ -23,8 +23,8 @@ import com.souchy.randd.ebishoal.commons.EbiCore;
  */
 public abstract class LapisCore extends EbiCore {
 	
-	private LwjglApplicationConfiguration config;
-	private LapisProperties properties;
+	private Lwjgl3ApplicationConfiguration config;
+	//private LapisProperties properties;
 	private LapisGame game;
 
 	public static boolean isEclipse = false;
@@ -34,10 +34,14 @@ public abstract class LapisCore extends EbiCore {
 	 */
 	@Override
 	public void init() throws Exception {
-		config = new LwjglApplicationConfiguration();
+		config = new Lwjgl3ApplicationConfiguration();
+		config.setWindowedMode(1600, 900);
+		config.setIdleFPS(60);
+		//config.useVsync(true);
+		config.setTitle("Sapphire Owl");
 		addIcon(config);
-		properties = new LapisProperties(config);
-		properties.load();
+//		properties = new LapisProperties(config);
+//		properties.load();
 	    game = createGame();
 	}
 	
@@ -47,7 +51,7 @@ public abstract class LapisCore extends EbiCore {
 	 */
 	@Override
 	public void start() {
-		new LwjglApplication(game, config);
+		new Lwjgl3Application(game, config);
 	}
 	
 	/** @return LapisGame implementation */
@@ -55,9 +59,9 @@ public abstract class LapisCore extends EbiCore {
 		return game;
 	}
 
-	public LapisProperties getProperties() {
-		return properties;
-	}
+//	public LapisProperties getProperties() {
+//		return properties;
+//	}
 
 	/**
 	 * Called when LapisCore.init is first called to create a new LapisGame() implementation
@@ -67,7 +71,7 @@ public abstract class LapisCore extends EbiCore {
 	/*
 	 * Example : config.addIcon("G:\\Assets\\pack\\fantasy bundle\\tcgcardspack\\Tex_krakken_icon.png", FileType.Absolute);
 	 */
-	public abstract void addIcon(LwjglApplicationConfiguration config);
+	public abstract void addIcon(Lwjgl3ApplicationConfiguration config);
 
 
 	protected static void arguments(String[] args) {
