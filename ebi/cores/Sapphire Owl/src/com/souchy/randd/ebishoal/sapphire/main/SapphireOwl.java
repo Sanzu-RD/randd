@@ -10,6 +10,7 @@ import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
+import com.souchy.randd.ebishoal.sapphire.confs.SapphireOwlConf;
 
 import data.modules.AzurCache;
 import data.modules.AzurManager;
@@ -71,7 +72,7 @@ public class SapphireOwl extends LapisCore { //implements EntryPoint {
 
 	@Override
 	public void addIcon(LwjglApplicationConfiguration config) {
-		config.addIcon("G:\\Assets\\pack\\fantasy bundle\\tcgcardspack\\Tex_krakken_icon.png", FileType.Absolute);
+		config.addIcon("G:/Assets/pack/fantasy bundle/tcgcardspack/Tex_krakken_icon.png", FileType.Absolute);
 	}
 
 	

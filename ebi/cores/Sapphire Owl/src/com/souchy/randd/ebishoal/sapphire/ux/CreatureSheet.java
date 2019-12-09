@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -31,8 +32,14 @@ import com.github.czyzby.lml.parser.impl.tag.AbstractNonParentalActorLmlTag;
 import com.github.czyzby.lml.parser.tag.LmlActorBuilder;
 import com.github.czyzby.lml.parser.tag.LmlTag;
 import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.layout.HorizontalFlowGroup;
+import com.kotcrab.vis.ui.widget.ScrollableTextArea;
+import com.kotcrab.vis.ui.widget.VisScrollPane;
+import com.kotcrab.vis.ui.widget.ScrollableTextArea.ScrollTextAreaListener;
+import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
+import com.souchy.randd.ebishoal.sapphire.controls.DragAndResizeListener;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud.TableDrag;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
@@ -44,7 +51,21 @@ import gamemechanics.statics.stats.properties.Resource;
 public class CreatureSheet extends SapphireWidget {
 
 	public Creature creature;
+	
+	@LmlActor("closeBtn")
+	public Button closeBtn;
+	
+	@LmlActor("scrolldesc")
+	public VisScrollPane scrolldesc;
+	@LmlActor("areadesc")
+	public ScrollableTextArea areadesc;
+	
+	@LmlActor("scrollstatus")
+	public VisScrollPane scrollstatus;
+	@LmlActor("flowstatus")
+	public HorizontalFlowGroup flowstatus;
 
+	
 	@LmlActor("name")
 	public Label name;
 	@LmlActor("icon")
@@ -75,46 +96,53 @@ public class CreatureSheet extends SapphireWidget {
 	public Array<StatusIcon> icons;
 	
 	
-	public CreatureSheet() {
-		//super(SapphireHud.skin);
-		//Log.info("new creature sheet with no skin " + SapphireHud.skin);
-	}
-	//public CreatureSheet(Skin skin) {
-	//	super(skin);
-	//	Log.info("new creature sheet with skin " + skin);
-		//icons = new ArrayList<>();
-	//	creature.getStatus().forEach(s -> icons.add(new StatusIcon().refresh(s)));
-		
-		
-		// inject
-	//	SapphireHud.parser.createView(this, getTemplateFile());
-	//}
-	
-
 	@Override
 	protected void init() {
 		creature = SapphireGame.fight.teamA.get(0);
+
+		this.addListener(new DragAndResizeListener(this));
 		
-		var drag = new DragAndDrop();
-		drag.addSource(new Source(this) {
-			public Payload dragStart (InputEvent event, float x, float y, int pointer) {
-				Payload payload = new Payload();
-				payload.setObject("Some payload!");
+		LapisUtil.onClick(closeBtn, this::close);
+		
+		scrolldesc.setOverscroll(false, false);
+		scrolldesc.setFlickScroll(false);
+		scrolldesc.setFadeScrollBars(false);
+		scrolldesc.setScrollbarsOnTop(false);
+		scrolldesc.setScrollingDisabled(true, false);
+		scrolldesc.setScrollBarPositions(true, false);
 
-				payload.setDragActor(new Label("Some payload!", SapphireHud.skin));
+		scrollstatus.setOverscroll(false, false);
+		scrollstatus.setFlickScroll(false);
+		scrollstatus.setFadeScrollBars(false);
+		scrollstatus.setScrollbarsOnTop(false);
+		scrollstatus.setScrollingDisabled(true, false);
+		scrollstatus.setScrollBarPositions(true, false);
 
-				Label validLabel = new Label("Some payload!", SapphireHud.skin);
-				validLabel.setColor(0, 1, 0, 1);
-				payload.setValidDragActor(validLabel);
-
-				Label invalidLabel = new Label("Some payload!", SapphireHud.skin);
-				invalidLabel.setColor(1, 0, 0, 1);
-				payload.setInvalidDragActor(invalidLabel);
-
-				return payload;
+		areadesc.clearListeners();
+		//flowstatus.clearListeners();
+		//scrollstatus.clearListeners();
+		
+		Lambda focusStatus = () -> getStage().setScrollFocus(scrollstatus);
+		Lambda unfocusDesc = () -> {
+			if(!areadesc.hasKeyboardFocus()) getStage().setScrollFocus(null);
+		};
+		Lambda focusDesc = () -> getStage().setScrollFocus(scrolldesc);
+		Lambda unfocusStatus = () -> getStage().setScrollFocus(null);
+		LapisUtil.onHover(scrolldesc, focusDesc, unfocusDesc);
+		LapisUtil.onHover(scrollstatus, focusStatus, unfocusStatus);
+		LapisUtil.onClick(areadesc, focusDesc);
+		areadesc.addListener(areadesc.new ScrollTextAreaListener() {
+			@Override
+			public boolean keyTyped(InputEvent event, char character) {
+				return true;
+			}
+			@Override
+			public boolean keyDown(InputEvent event, int keycode) {
+				return true;
 			}
 		});
-		//drag.addTarget(new TableDrag(SapphireHud.single.getStage()));
+		
+
 		
 		refresh();
 	}
@@ -146,7 +174,7 @@ public class CreatureSheet extends SapphireWidget {
 			Log.info("stage " + SapphireHud.single.getStage());
 			//Log.info("actors " + SapphireHud.single.getStage().getActors());
 			SapphireHud.single.getStage().getActors().removeValue(this, false);
-			this.setVisible(false);
+			//this.setVisible(false);
 		} catch (Exception e) {
 			Log.info("", e);
 		}

@@ -3,11 +3,17 @@ package com.souchy.randd.ebishoal.sapphire.ux;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
 import com.github.czyzby.lml.annotation.LmlActor;
+import com.kotcrab.vis.ui.VisUI;
+import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 
 import data.new1.timed.Status;
+import data.new1.timed.TimedEffect;
 
-public class StatusIcon extends SapphireWidget {
+public class StatusIcon extends SapphireWidget { //Stack {
 //
 //	public StatusIcon(Skin skin) {
 //		super(skin);
@@ -25,25 +31,39 @@ public class StatusIcon extends SapphireWidget {
 	@LmlActor("duration")
 	public Label duration;
 	
-//	public StatusIcon(Status s) {
+	public StatusIcon() {
 //		status = s;
-//	}
+//		this.add(icon = new Image(LapisUtil.getImage("textures.statuses." + status.getIconName())));
+//		this.add(border = new Image(LapisUtil.getImage("textures.borders.blackborder")));
+//		var t = new Table();
+//		
+//		this.add(stacks = new Label("", VisUI.getSkin()));
+//		this.add(duration = new Label("", VisUI.getSkin()));
+
+//		refresh(s);
+	}
 
 	@Override
 	protected void init() {
 		// TODO Auto-generated method stub
-		
+		refresh(null);
 	}
 
 	public StatusIcon refresh(Status s) {
 		if(s != null)
 			this.status = s;
-		setImage(icon, "textures.statuses." + status.getIconName());
-		setImage(border, "textures.borders.blackborder");
-		setText(stacks, status.stacks + "");
-		setText(duration, status.duration + "");
+		LapisUtil.setImage(icon, "textures.statuses." + "1"); // + status.getIconName());
+		LapisUtil.setImage(border, "textures.borders.blackborder");
+//		LapisUtil.setText(stacks, status.stacks + "");
+//		LapisUtil.setText(duration, status.duration + "");
+		stacks.setText("1"); //status.stacks + "");
+		duration.setText("2"); //status.duration + "");
+		
+		//var tip = new Tooltip<Actor>()
+		
 		return this;
 	}
+
 
 	@Override
 	public String getTemplateId() {

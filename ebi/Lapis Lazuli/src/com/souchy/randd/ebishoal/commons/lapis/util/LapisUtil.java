@@ -6,11 +6,16 @@ import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.github.czyzby.lml.util.LmlUtilities;
+import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 public class LapisUtil {
 	
@@ -94,18 +99,20 @@ public class LapisUtil {
 	 * Add an hover listener to an actor with a hover color for enter and exit states
 	 */
 	public static void onHover(Actor actor, Color in, Color out) {
-		actor.addListener(new ClickListener() {
-			@Override
-			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-				setColor(actor, in);
-				super.enter(event, x, y, pointer, fromActor);
-			}
-			@Override
-			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-				setColor(actor, out);
-				super.exit(event, x, y, pointer, toActor);
-			}
-		});
+		
+		actor.addListener(new HoverColorListener(actor, in, out));
+//		new ClickListener() {
+//			@Override
+//			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+//				setColor(actor, in);
+//				super.enter(event, x, y, pointer, fromActor);
+//			}
+//			@Override
+//			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+//				setColor(actor, out);
+//				super.exit(event, x, y, pointer, toActor);
+//			}
+//		});
 	}
 	
 	/**
@@ -128,5 +135,44 @@ public class LapisUtil {
 		}
 	}
 
+
+	public static Drawable getImage(String key) {
+		return VisUI.getSkin().getDrawable(key);
+	}
+	public static void setImage(Image img, String imgid) {
+		if(img == null) return;
+		var drawable = VisUI.getSkin().getDrawable(imgid);
+		img.setDrawable(drawable);
+	}
 	
+	public static void setText(Label lbl, String text) {
+		lbl.setText(text); 
+	}
+	
+
+	private static class HoverColorListener extends ClickListener {
+		private final Color original;
+		private final Actor actor;
+		private final Color in, out;
+		public HoverColorListener(Actor a, Color in, Color out) {
+			this.original = a.getColor();
+			this.actor = a;
+			this.in = in; this.out = out;
+			//Log.info("HoverColorListener original : " + original + ", in : " + in + ", out : " + out);
+		}
+		@Override
+		public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+			//Log.info("HoverColorListener enter : " + in.mul(original));
+			//setColor(actor, in.r * original.r, in.g * original.g, in.b * original.b, in.a * original.a);
+			setColor(actor, in);
+			super.enter(event, x, y, pointer, fromActor);
+		}
+		@Override
+		public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+			//Log.info("HoverColorListener exit : " + out.mul(original));
+			//setColor(actor, out.r * original.r, out.g * original.g, out.b * original.b, out.a * original.a);
+			setColor(actor, out);
+			super.exit(event, x, y, pointer, toActor);
+		}
+	}
 }

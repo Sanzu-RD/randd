@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE creaturesheet SYSTEM "lml.dtd">
 
-<creaturesheet id="creaturesheet" align="left" defaultpad="5" width="225" height="350" x="20" y="0" background="transparent" debug="false" resizable="true">
+<creaturesheet id="creaturesheet" align="left" defaultpad="5" width="225" height="350"  x="20" y="0" background="window-bg" debug="false">
 
     <!-- Icon + Resources row-->
     <table align="topleft" height="100" fill="true" debug="false">
@@ -9,7 +9,7 @@
         <table align="left" colspan="2" debug="false" fill="true">
             <label id="name" align="left" fill="true" expandx="true" style="title" debug="false"/>
         </table>
-        <button id="close" align="top" onclick="close">X</button>
+        <button id="closeBtn" align="top">X</button>
         <:row/>
         <!-- Icon -->
         <stack width="64" height="64">
@@ -42,18 +42,19 @@
     <:row expandx="true"/>
 
     <!-- Description / Passive row -->
-    <scrollpane align="topleft" height="100" fillx="true" debug="true">
-    </scrollpane>
+    <visscrollpane id="scrolldesc" align="topleft" height="100" style="list" growx="true" debug="true">
+        <scrollabletextarea id="areadesc" style="textArea" value="Description. Lorem ipsum dolor sit amet, consectetur adipiscing consectetur adipiscing consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua asdkjfnka.sdjfn kasjdnfkjsdanf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf"/>
+    </visscrollpane>
 
     <:row/>
 
     <!-- Status list -->
-    <table align="topleft" height="100" fill="true" debug="false" >
-        <scrollpane>
-            <table>
-                <label value="Status1 list" />
-            </table>
-        </scrollpane>
+    <table align="topleft" grow="true" debug="true" >
+        <visscrollpane id="scrollstatus" grow="true" style="list" >
+            <horizontalflow id="flowstatus">
+
+            </horizontalflow>
+        </visscrollpane>
     </table>
 
 </creaturesheet>

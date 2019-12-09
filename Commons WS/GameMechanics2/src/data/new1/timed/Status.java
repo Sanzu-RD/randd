@@ -8,6 +8,7 @@ import gamemechanics.common.Disposable;
 import gamemechanics.events.OnCanCastActionCheck.OnCanCastActionHandler;
 import gamemechanics.models.entities.Entity;
 import gamemechanics.statics.stats.StatMod;
+import gamemechanics.statics.stats.Stats;
 
 /**
  * 
@@ -25,7 +26,9 @@ public abstract class Status extends TimedEffect implements Disposable {
 	public abstract int id();
 	
 	// buff stats à compiler dans les stats de la cible du status
-	public List<StatMod> stats = new ArrayList<>();
+	public Stats buffs = new Stats(); //List<StatMod> buffs = new ArrayList<>();
+	
+	public List<Effect> tooltipEffects = new ArrayList<>();
 	
 	public Status(Entity source, Entity target) {
 		this.source = source;

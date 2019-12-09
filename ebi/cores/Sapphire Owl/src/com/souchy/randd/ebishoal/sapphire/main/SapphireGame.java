@@ -64,6 +64,7 @@ public class SapphireGame extends LapisGame {
 			Creature inst = new Creature(model, jade, SapphireOwl.data, new Vector2(0, 0));
 			inst.model.baseStats.addResource(30, Resource.life);
 			inst.getStats().addFightResource(-130, Resource.life);
+			inst.getStats().addShield(600, Resource.life);
 			
 			// fight
 			fight = new Fight();

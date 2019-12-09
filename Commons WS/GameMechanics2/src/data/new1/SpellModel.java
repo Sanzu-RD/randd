@@ -1,5 +1,6 @@
 package data.new1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
@@ -22,6 +23,7 @@ public abstract class SpellModel {
 	
 	public final Stats baseStats;
 	//public final Effect[] effects;
+	public List<Effect> tooltipEffects = new ArrayList<>();
 	
 	public SpellModel() {
 		baseStats = initBaseStats();

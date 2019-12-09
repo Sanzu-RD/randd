@@ -112,9 +112,6 @@ public class SapphireHud extends LapisHud {
 		//createListeners();
 	}
 	
-	public void init() {
-	}
-	
 	public static LmlParser createParser() {
 		var parser = VisLml.parser()
 				// Registering global action container:
@@ -132,10 +129,10 @@ public class SapphireHud extends LapisHud {
 				.tag(new SapphireWidgetTagProvider<>(Timeline.class), "timeline")
 				.tag(new SapphireWidgetTagProvider<>(CreatureSheet.class), "creaturesheet")
 				.tag(new SapphireWidgetTagProvider<>(QuickOptions.class), "quickoptions")
-				.attribute(new MovableLmlAttribute(), "movable")
-				.attribute(new ResizeableLmlAttribute(), "resizeable", "resizable")
-				.attribute(new ResizeBorderLmlAttribute(), "resizeBorder", "border")
-				.actions("creaturesheet", CreatureSheet.class)
+//				.attribute(new MovableLmlAttribute(), "movable")
+//				.attribute(new ResizeableLmlAttribute(), "resizeable", "resizable")
+//				.attribute(new ResizeBorderLmlAttribute(), "resizeBorder", "border")
+//				.actions("creaturesheet", CreatureSheet.class)
 //				.actions("quickoptions", QuickOptions.class)
 				//.macro(new SapphireWidgetTagProvider<>(Chat.class), ":chat")
 				.build();
@@ -150,7 +147,7 @@ public class SapphireHud extends LapisHud {
 	public static void refresh() {
 		//SapphireHud.single.init();
 		parser = createParser();
-		
+
 		// var asd = SapphireHud.parser.createView(SapphireHud.single,SapphireHud.single.getTemplateFile());
 		//SapphireHud.parser.parseTemplate(SapphireHud.single.getTemplateFile());
 		SapphireHud.single.getStage().getActors().clear();
@@ -161,11 +158,16 @@ public class SapphireHud extends LapisHud {
 //		var chat = LmlWidgets.createGroup("res/ux/sapphire/components/chat.lml");
 //		chat.setSize(200, 200);
 //		chat.setPosition(20, 15);
+		CreatureSheet sheet;
 		SapphireHud.single.getStage().addActor(chat = LmlWidgets.createGroup("res/ux/sapphire/components/chat.lml"));
 		SapphireHud.single.getStage().addActor(playbar = LmlWidgets.createGroup("res/ux/sapphire/components/playbar.lml"));
-		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml"));
+		SapphireHud.single.getStage().addActor(sheet = LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml"));
 		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/quickoptions.lml"));
 		
+
+		var status = LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml");
+		for(int i = 0; i < 17; i++)
+			sheet.flowstatus.addActor(LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml"));
 		
 //		var field = new VisTextField("");
 //		//field.setSize(300, 30);
@@ -180,7 +182,7 @@ public class SapphireHud extends LapisHud {
 //		group.row();
 //		group.add(field).height(30).growX();
 //		group.setSize(450, 200);
-//		group.setPosition(100, 150);
+//		group.setPosition(400, 450);
 //		SapphireHud.single.getStage().addActor(group);
 		
 		

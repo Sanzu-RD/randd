@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisResources;
+import com.souchy.randd.ebishoal.sapphire.confs.SapphireDevConfig;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireResources;
 
@@ -47,7 +48,8 @@ public class SapphireHudSkin extends Skin {
 
 		// Link all textures
 		LapisResources.assets.getAssetNames().forEach(a -> {
-			Log.info("hud skin asset : " + a);
+			if(SapphireDevConfig.conf.logSkinResources)
+				Log.info("hud skin asset : " + a);
 			if(a.contains("res/textures")) {
 				var str = a.substring(a.indexOf("textures"), a.lastIndexOf(".")).replace("/", "."); // enlève le res/, enlève l'extension, et remplace / par .
 				add(str, LapisResources.assets.get(a));
@@ -133,14 +135,16 @@ public class SapphireHudSkin extends Skin {
 				lml.addArgument(prefix + camel(e.name(), "Resistance", m.name()), val);
 			}
 		
-
+		
 		try {
-			lml.getDefaultSkin().getAll(TextureRegionDrawable.class).keys().forEach(s -> Log.info("TextureRegionDrawable : " + s));
+			if(SapphireDevConfig.conf.logSkinResources)
+				lml.getDefaultSkin().getAll(TextureRegionDrawable.class).keys().forEach(s -> Log.info("TextureRegionDrawable : " + s));
 		} catch (Exception e) {
 			Log.error("", e);
 		}
 		try {
-			lml.getDefaultSkin().getAll(Texture.class).keys().forEach(s -> Log.info("Texture : " + s));
+			if(SapphireDevConfig.conf.logSkinResources)
+				lml.getDefaultSkin().getAll(Texture.class).keys().forEach(s -> Log.info("Texture : " + s));
 		} catch (Exception e) {
 			Log.error("", e);
 		}

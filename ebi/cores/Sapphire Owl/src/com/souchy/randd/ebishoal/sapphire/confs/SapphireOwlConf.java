@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.main;
+package com.souchy.randd.ebishoal.sapphire.confs;
 
 import com.badlogic.gdx.graphics.Color;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;

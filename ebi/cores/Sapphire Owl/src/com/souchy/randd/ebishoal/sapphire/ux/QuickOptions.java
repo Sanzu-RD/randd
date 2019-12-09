@@ -38,7 +38,7 @@ public class QuickOptions extends SapphireWidget {
 
 	@Override
 	protected void init() {
-		var c = imgIsoTop.getColor();
+		//var c = imgIsoTop.getColor();
 		Log.info("Quick options init " + lblIsoTop);
 		LapisUtil.onClick(btnIsoTop, this::clickIsoTop);
 		LapisUtil.onClick(imgFlag, this::clickFlag);
@@ -46,8 +46,10 @@ public class QuickOptions extends SapphireWidget {
 		LapisUtil.onClick(imgGrid, this::clickGrid);
 		LapisUtil.onClick(imgRuler, this::clickCenterline);
 		LapisUtil.onClick(imgCenterline, this::clickCenterline);
-		imgIsoTop.setColor(c.r, c.g, c.b, 0.5f);
+		//imgIsoTop.setColor(c.r, c.g, c.b, 0.5f);
+		//LapisUtil.setColor(this, new Color(1, 1, 1, 0.5f));
 		LapisUtil.onHover(btnIsoTop, Color.RED);
+		LapisUtil.onHover(imgRuler, Color.RED);
 	}
 	
 	/**

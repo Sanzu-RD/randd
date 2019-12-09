@@ -37,6 +37,7 @@ import com.github.czyzby.lml.util.LmlUtilities;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
+import com.souchy.randd.ebishoal.sapphire.confs.SapphireDevConfig;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
 
 /**
@@ -58,16 +59,6 @@ public abstract class SapphireWidget extends Table implements ActionContainer {
 	
 	public FileHandle getStyleFile() {
 		return Gdx.files.internal("res/ux/sapphire/" + getTemplateId() + ".json");
-	}
-
-	public void setImage(Image img, String imgid) {
-		if(img == null) return;
-		var drawable = SapphireHud.skin.getDrawable(imgid);
-		img.setDrawable(drawable);
-	}
-	
-	public void setText(Label lbl, String text) {
-		lbl.setText(text); 
 	}
 	
 
@@ -124,7 +115,8 @@ public abstract class SapphireWidget extends Table implements ActionContainer {
 		public class SapphireWidgetTag extends TableLmlTag {
 			public SapphireWidgetTag(LmlParser parser, LmlTag parentTag, StringBuilder rawTagData, Class<T> c) {
 				super(parser, parentTag, rawTagData);
-				Log.info("attributes : " + String.join(", ", getAttributes()));
+				if(SapphireDevConfig.conf.logSapphireWidgets)
+					Log.info("attributes : " + String.join(", ", getAttributes()));
 				// Set position from tags here since the lmlattribute is bugged
 				if(this.getAttribute("x") != null) 
 					getActor().setX(Integer.parseInt(this.getAttribute("x")));
@@ -136,7 +128,8 @@ public abstract class SapphireWidget extends Table implements ActionContainer {
 			@SuppressWarnings("deprecation")
 			@Override
 			protected T getNewInstanceOfActor(LmlActorBuilder builder) {
-				Log.info("create sapphire widget : " + c); // + ", skin : " + SapphireHud.skin);
+				if(SapphireDevConfig.conf.logSapphireWidgets)
+					Log.info("create sapphire widget : " + c); // + ", skin : " + SapphireHud.skin);
 				T t = null;
 				if(c != null) try {
 					t = (T) c.newInstance();

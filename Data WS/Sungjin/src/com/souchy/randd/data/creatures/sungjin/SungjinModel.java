@@ -37,9 +37,9 @@ public class SungjinModel extends CreatureModel {
 	@Override
 	protected Stats initBaseStats() {
 		var stats = new Stats();
-		stats.add(1500d, Resource.life, mathMod.flat);
-		stats.add(12, Resource.mana, mathMod.flat);
-		stats.add(6, Resource.move, mathMod.flat);
+		stats.addResource(1500d, Resource.life); //, mathMod.flat);
+		stats.addResource(12, Resource.mana); //, mathMod.flat);
+		stats.addResource(6, Resource.move); //, mathMod.flat);
 
 		//stats.addAffinity(30, Elements.water, mathMod.flat);
 		//stats.addAffinity(30, Elements.dark, mathMod.flat);

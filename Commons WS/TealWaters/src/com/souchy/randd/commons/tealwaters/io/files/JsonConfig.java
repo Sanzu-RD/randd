@@ -33,13 +33,17 @@ public class JsonConfig {
 	@Exclude
 	protected Path rememberPath;
 	
+	private static <T extends JsonConfig> String name(Class<T> c) {
+		return c.getSimpleName().toLowerCase().replace("config", "").replace("conf", "") + extension;
+	}
+	
 	private static <T extends JsonConfig> T read(Class<T> c, Path path) {
 		try {
 			T config = null;
 			if(Files.exists(path)) {
 				config = gson.fromJson(Files.readString(path), c);
 			} else {
-				config = c.getDeclaredConstructor().newInstance();
+				config = c.getConstructor()/* .getDeclaredConstructor() */.newInstance();
 			}
 			config.rememberPath = path;
 			config.save();
@@ -49,15 +53,16 @@ public class JsonConfig {
 			return null;
 		}
 	}
-	private static <T extends JsonConfig> String name(Class<T> c) {
-		return c.getSimpleName().toLowerCase().replace("config", "").replace("conf", "") + extension;
-	}
 
 	public static <T extends JsonConfig> T read(Class<T> c, String path) {
-		var url = FilesManager.getResource(path + name(c));
+		//var url = FilesManager.getResource(path + name(c));
+		var p = Environment.fromRoot(path + name(c));
+		//Log.info("url = "  + url);
+		//Log.info("p = "  + p);
+		//Log.info("env : " + Environment.fromRoot(path + name(c)));
 		try {
-			return read(c, Paths.get(url.toURI())); 
-		} catch (URISyntaxException e) {
+			return read(c, p); //Paths.get(url.toURI())); 
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}

@@ -120,12 +120,12 @@ public class LapisResources {
 	}
 	
 	public static void recurseFiles(FileHandle dir, Predicate<FileHandle> filter, Consumer<FileHandle> action) {
-		Log.info("dirtype: " + dir.type().name() + ", dir path : " + dir.path());
+		//Log.info("dirtype: " + dir.type().name() + ", dir path : " + dir.path());
 		for (var f : dir.list()) {
 			if(f.isDirectory()) {
 				recurseFiles(f, filter, action);
 			} else if(filter.test(f)) { 
-				Log.info("ftype: " + f.type().name() + ", f path : " + f.path());
+				//Log.info("ftype: " + f.type().name() + ", f path : " + f.path());
 				action.accept(f);
 			}
 		}

@@ -43,7 +43,8 @@ public class Stats {
 		target.getStatus().forEach(s -> {
 //			for(var e : s.effects)
 //				if(e instanceof StatEffect) e.apply(s.source, target, e);
-			s.stats.forEach(sm -> add(sm.value, sm.prop, sm.mods));
+			//s.buffs.forEach(sm -> add(sm.value, sm.prop, sm.mods));
+			s.buffs.table.cellSet().forEach(cell -> add(cell.getValue(), cell.getRowKey(), cell.getColumnKey()));
 		});
 
 		// applique les conversions et nullifiers de stats
@@ -119,17 +120,28 @@ public class Stats {
 	public void addFightResource(double value, Resource r) {
 		add(value, r, fight, flat);
 	}
+	/** easier shortcut */
+	public void addShield(double value, Resource r) {
+		add(value, r, fight, flat, resourceMod.shield);
+	}
+	/** easier shortcut */
+//	public void addFightResource(double value, Resource r, boolean shield) {
+//		if(shield) add(value, r, fight, flat, resourceMod.shield);
+//		else addFightResource(value, r);
+//	}
+	
 	
 	
 	
 	/**
-	 * Currently used/lost resource (ex 3000/5000 hp, this returns 2000)
+	 * Currently used/lost/gained resource (ex 3000/5000 hp, this returns -2000 meanwhile shield is supposed to be a positive value)
+	 * For shield this equals to getResourceCurrent
 	 * This is always flat mods
 	 * The sum of stats give the max value of the resource while the fight mod gives the difference to the max value
 	 * @param r what resource
 	 * @param shield if we want the value of the resource's shield instead
 	 */
-	public int getResourceFightMod(Resource r, boolean shield) {
+	public int getResourceFight(Resource r, boolean shield) {
 		if(shield) 
 			return get(r, fight, flat, resourceMod.shield).intValue();
 		else
@@ -137,11 +149,15 @@ public class Stats {
 	}
 	/**
 	 * Current value of the target resource (ex 3000/5000 hp, this returns 3000)
+	 * For shields this equals to getResourceFight
 	 * @param r what resource
 	 * @param shield if we want the value of the resource's shield instead
 	 */
 	public int getResourceCurrent(Resource r, boolean shield) {
-		return getResourceMax(r) + getResourceFightMod(r, shield);
+		if(shield)
+			return getResourceFight(r, true);
+		else
+			return getResourceMax(r) + getResourceFight(r, false);
 		//return table.get(r.val(), 1).intValue();
 	}
 	/**
