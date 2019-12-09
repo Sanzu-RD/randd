@@ -1,0 +1,21 @@
+{
+  "logger": {
+    "title": "Remote Sync"
+  },
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "192.168.2.15",
+  "port": "22",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**",
+    ".project",
+    "whatisametrine.md"
+  ],
+  "username": "souchy",
+  "password": "z",
+  "watch": [],
+  "transport": "scp",
+  "target": "/var/www/html/"
+}
