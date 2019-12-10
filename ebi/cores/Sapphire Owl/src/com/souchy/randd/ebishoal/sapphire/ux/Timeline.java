@@ -1,9 +1,6 @@
 package com.souchy.randd.ebishoal.sapphire.ux;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Array;
-import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
 
 public class Timeline extends SapphireWidget {

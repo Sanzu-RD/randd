@@ -98,7 +98,7 @@ interface LapisScreenRenderer extends Screen {
 			// clear the screen with the getBackgroundColor()
 			clearScreen();
 			// start with the background
-			drawBackground(getSpriteBatch());
+		//	drawBackground(getSpriteBatch());
 			// draw the world texture
 			getSpriteBatch().draw(fboRegion, 0, 0);
 			//else getSpriteBatch().draw(fboRegion, getViewport().getScreenX(), getViewport().getScreenY());

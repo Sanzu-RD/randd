@@ -1,7 +1,5 @@
 package com.souchy.randd.ebishoal.sapphire.ux;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-
 import gamemechanics.models.entities.Creature;
 
 /**

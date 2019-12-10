@@ -2,37 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="711c9478-3b9c-4de5-9330-84df3ac55110" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/Tooltipable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/confs/SapphireDevConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/confs/SapphireOwlConf.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/controls/DragAndResizeListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/StatusTooltip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/SpellModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/SpellModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/timed/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/timed/Status.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/Stats.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/Stats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/modifiers/Modifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/modifiers/Modifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/TealWaters/src/com/souchy/randd/commons/tealwaters/io/files/JsonConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/TealWaters/src/com/souchy/randd/commons/tealwaters/io/files/JsonConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/SungjinModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Data WS/Sungjin/src/com/souchy/randd/data/creatures/sungjin/SungjinModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/main/LapisResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/main/LapisResources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/util/LapisUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/util/LapisUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/Ametrine/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/Ametrine/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../shaders/default.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/default.fragment.glsl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/chat.lml" beforeDir="false" afterPath="$PROJECT_DIR$/components/chat.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/creaturesheet.lml" beforeDir="false" afterPath="$PROJECT_DIR$/components/creaturesheet.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/playbar.lml" beforeDir="false" afterPath="$PROJECT_DIR$/components/playbar.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/quickoptions.lml" beforeDir="false" afterPath="$PROJECT_DIR$/components/quickoptions.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/statusicon.lml" beforeDir="false" afterPath="$PROJECT_DIR$/components/statusicon.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/lapis.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/lapis.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/res/shaders/default.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/res/shaders/default.fragment.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/controls/DragAndResizeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/controls/DragAndResizeListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/controls/SapphireController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/controls/SapphireController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireBatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireBatch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHud.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHudSkin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHudSkin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireOwl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireOwl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireOwlConf.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireResources.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireWorld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/Chat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/CreatureSheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/CreatureSheet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/PlayBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/PlayBar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/QuickOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/QuickOptions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/SapphireWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/SapphireWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/StatusFlow.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/StatusFlow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/StatusIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/StatusIcon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/Timeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/Timeline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/TimelineIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/TimelineIcon.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,10 +34,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2890">
+            <state relative-caret-position="691">
               <caret line="170" column="46" selection-start-line="170" selection-start-column="46" selection-end-line="170" selection-end-column="46" />
             </state>
           </provider>
@@ -101,7 +93,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/statusicon.lml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="476">
@@ -186,10 +178,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-1449" />
-    <option name="y" value="87" />
-    <option name="width" value="1411" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="-1434" />
+    <option name="y" value="112" />
+    <option name="width" value="1418" />
     <option name="height" value="906" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -198,6 +190,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -214,7 +207,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -259,10 +251,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1449" y="87" width="1411" height="906" extended-state="0" />
+    <frame x="-1434" y="112" width="1418" height="906" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16876388" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17010309" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -390,13 +382,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2890">
-          <caret line="170" column="46" selection-start-line="170" selection-start-column="46" selection-end-line="170" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.atlas">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12937">
@@ -439,6 +424,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="691">
+          <caret line="170" column="46" selection-start-line="170" selection-start-column="46" selection-end-line="170" selection-end-column="46" />
         </state>
       </provider>
     </entry>

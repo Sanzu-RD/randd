@@ -2,16 +2,10 @@ package com.souchy.randd.ebishoal.sapphire.ux;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
 import com.github.czyzby.lml.annotation.LmlActor;
-import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 
 import data.new1.timed.Status;
-import data.new1.timed.TimedEffect;
 
 public class StatusIcon extends SapphireWidget { //Stack {
 //

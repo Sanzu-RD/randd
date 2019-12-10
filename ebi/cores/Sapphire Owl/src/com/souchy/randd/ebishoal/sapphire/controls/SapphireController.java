@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
 import com.kotcrab.vis.ui.FocusManager;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
@@ -37,6 +36,12 @@ public class SapphireController extends CameraInputController {
 			SapphireGame.gfx.resetCamera();
 			SapphireHud.refresh();
 			//GlobalLML.lml().reloadViews();
+		}
+		if(keycode == Keys.R) {
+			SapphireGame.gfx.resetCamera();
+		}
+		if(keycode == Keys.T) {
+			SapphireGame.gfx.topView();
 		}
 		if(keycode == Keys.E) {
 			SapphireHud.testCreatureSheet();

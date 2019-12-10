@@ -1,11 +1,6 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.utils.I18NBundle;
-import com.souchy.randd.commons.tealwaters.commons.Environment;
-import com.souchy.randd.ebishoal.commons.lapis.main.LapisResources;
 
 public class SapphireResources {
 

@@ -1,60 +1,30 @@
 package com.souchy.randd.ebishoal.sapphire.gfx;
 
-import javax.swing.text.AbstractDocument.Content;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Payload;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.github.czyzby.lml.annotation.LmlActor;
 import com.github.czyzby.lml.parser.LmlParser;
-import com.github.czyzby.lml.parser.impl.attribute.table.window.MovableLmlAttribute;
-import com.github.czyzby.lml.parser.impl.attribute.table.window.ResizeBorderLmlAttribute;
-import com.github.czyzby.lml.parser.impl.attribute.table.window.ResizeableLmlAttribute;
-import com.github.czyzby.lml.parser.tag.LmlTag;
-import com.github.czyzby.lml.util.Lml;
 import com.github.czyzby.lml.vis.util.VisLml;
 import com.kotcrab.vis.ui.VisUI;
-import com.kotcrab.vis.ui.widget.ScrollableTextArea;
-import com.kotcrab.vis.ui.widget.Separator;
-import com.kotcrab.vis.ui.widget.VisTable;
-import com.kotcrab.vis.ui.widget.VisTextField;
-import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
-import com.souchy.randd.ebishoal.commons.lapis.main.LapisResources;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImageLmlTagProvider;
 import com.souchy.randd.ebishoal.sapphire.ux.Chat;
 import com.souchy.randd.ebishoal.sapphire.ux.CreatureSheet;
 import com.souchy.randd.ebishoal.sapphire.ux.PlayBar;
-import com.souchy.randd.ebishoal.sapphire.ux.StatusIcon;
-import com.souchy.randd.ebishoal.sapphire.ux.*;
+import com.souchy.randd.ebishoal.sapphire.ux.QuickOptions;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.LmlWidgets;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.SapphireWidgetTagProvider;
+import com.souchy.randd.ebishoal.sapphire.ux.StatusFlow;
+import com.souchy.randd.ebishoal.sapphire.ux.StatusIcon;
+import com.souchy.randd.ebishoal.sapphire.ux.Timeline;
 
 public class SapphireHud extends LapisHud {
 

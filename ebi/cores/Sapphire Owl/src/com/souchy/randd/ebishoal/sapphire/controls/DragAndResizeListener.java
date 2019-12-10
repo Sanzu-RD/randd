@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
-import com.souchy.randd.commons.tealwaters.logging.Log;
 
 public class DragAndResizeListener extends InputListener {
 	private static final int MOVE = 1 << 5;

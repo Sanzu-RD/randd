@@ -1,6 +1,8 @@
 
 varying vec4 v_pos;
 
+uniform float u_time;
+
 #if defined(diffuseTextureFlag) || defined(specularTextureFlag)
 #define textureFlag
 #endif

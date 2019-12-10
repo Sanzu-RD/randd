@@ -76,6 +76,21 @@ public class SapphireScreen extends LapisScreen {
 		return new SapphireWorld();
 	}
 
+	public void topView() {
+//		var viewportSize = 17f; // acts as a zoom (lower number is closer zoom)
+//		var factor = 0.6f;
+		var center = getWorldCenter(); //getWorldBB();
+//		getCamera().viewportWidth = viewportSize * 16 / 9;
+//		getCamera().viewportHeight = viewportSize ;
+		getCamera().direction.set(0, 0, -1f);
+		getCamera().up.set(1, 1, -1f);
+		getCamera().position.set(center.x, center.y, center.z); //bb.max.x * factor, bb.max.y * (1 - factor), 0); //bb.max.z * factor);
+		getCamera().near = -30f;
+		getCamera().far = 120f;
+		getCamera().update();
+	}
+
+	
 	/**
 	 * Get the color to clear the screen with
 	 */
