@@ -52,7 +52,7 @@
     <fx:include fx:id="registerForm" source="../components/registerForm.fxml" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="100.0" />
   </children>
    <stylesheets>
-      <URL value="@../../css/commons.css" />
+      <URL value="@../css/commons.css" />
       <URL value="@login.css" />
    </stylesheets>
 </AnchorPane>

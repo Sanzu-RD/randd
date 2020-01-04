@@ -29,7 +29,7 @@
 }
 */
 .playBtn .playLbl {
-  -fx-text-fill: black;
+  -fx-text-fill: lblColor1; 
   -fx-font-size: 45 px;
   -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
   -fx-background-color:  rgba(0, 0, 0, 0.20);
@@ -43,7 +43,7 @@
 
 .playModes .label {
   -fx-cursor: hand;
-  -fx-text-fill: white;
+  -fx-text-fill: lblColor1;
   -fx-font-size: 22 px;
   -fx-padding: 0 0 0 20;
   -fx-background-color:  rgba(0, 0, 0, 0.50);
@@ -51,12 +51,16 @@
 .playModes .label:hover {
   -fx-background-color:  rgba(200, 100, 0, 0.20);
 }
+.playModeSelected {
+  -fx-background-color:  rgba(200, 100, 0, 0.20);
+  -fx-border-width: 1;
+  -fx-border-color: borderColor1;
+}
 
 .playTeam .image-view {
-
     -fx-cursor: hand;
 }
 .playTeam .label {
-  -fx-text-fill: black;
+  -fx-text-fill: lblColor1;
   -fx-font-size: 22 px;
 }

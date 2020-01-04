@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../../css/commons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.ebishoal.amethyst.ui.tabs.Settings">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../css/commons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.ebishoal.amethyst.ui.tabs.Settings">
    <children>
       <MenuButton layoutX="368.0" layoutY="87.0" mnemonicParsing="false" text="Resolution">
         <items>

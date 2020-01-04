@@ -64,12 +64,12 @@
     </HBox>
     <StackPane fx:id="playBtn" alignment="BOTTOM_CENTER" layoutX="73.0" layoutY="107.0" onMouseClicked="#play" prefHeight="451.0" prefWidth="825.0" styleClass="playBtn">
       <children>
-        <ImageView fx:id="playImg" fitHeight="455.0" fitWidth="825.0" pickOnBounds="true" preserveRatio="true" styleClass="playImg">
+        <ImageView fx:id="playImg" fitHeight="455.0" fitWidth="825.0" pickOnBounds="true" preserveRatio="true" styleClass="playImg" visible="false">
           <image>
             <Image url="file:/G:/Assets/pack/fantasy%20bundle/tcgcardspack/Tex_portal_crop.PNG" />
           </image>
         </ImageView>
-        <GridPane style="-fx-border-color: black;" vgap="20.0">
+        <GridPane style="-fx-border-color: black; -fx-border-width: 0;" vgap="20.0">
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
@@ -79,23 +79,23 @@
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
           </rowConstraints>
           <children>
-            <VBox alignment="CENTER_LEFT" spacing="15.0" styleClass="playModes">
+            <VBox fx:id="playModes" alignment="CENTER_LEFT" spacing="15.0" styleClass="playModes">
               <children>
-                <Label prefHeight="66.0" prefWidth="1000.0" text="Normal" />
-                        <Label prefHeight="66.0" prefWidth="1000.0" text="Ranked" />
+                <Label fx:id="lblBlind" prefHeight="66.0" prefWidth="1000.0" text="Blind" />
+                        <Label fx:id="lblDraft" prefHeight="66.0" prefWidth="1000.0" text="Draft" />
               </children>
               <GridPane.margin>
-                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                <Insets bottom="30.0" right="30.0" top="30.0" />
               </GridPane.margin>
             </VBox>
-                  <VBox alignment="CENTER" spacing="15.0" styleClass="playTeam" GridPane.columnIndex="1">
+                  <VBox fx:id="teamBtn" alignment="CENTER" fillWidth="false" spacing="15.0" styleClass="playTeam" GridPane.columnIndex="1">
                      <children>
-                <ImageView fitHeight="200.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="teamImg" fitHeight="200.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                     <Image url="file:/G:/Assets/pack/fantasy%20bundle/spellbookmegapack/SpellBookPage01/SpellBook01_04.PNG" />
                   </image>
                 </ImageView>
-                <Label alignment="BOTTOM_CENTER" text="MyDeck" />
+                <Label fx:id="teamLbl" alignment="BOTTOM_CENTER" text="My Deck" />
                      </children>
                   </VBox>
             <Label fx:id="playLbl" prefHeight="66.0" prefWidth="2000.0" styleClass="playLbl" text="Play" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
@@ -107,10 +107,9 @@
         </GridPane>
       </children>
     </StackPane>
-
   </children>
   <stylesheets>
-    <URL value="@../../css/commons.css" />
+    <URL value="@../css/commons.css" />
     <URL value="@home.css" />
   </stylesheets>
 </AnchorPane>

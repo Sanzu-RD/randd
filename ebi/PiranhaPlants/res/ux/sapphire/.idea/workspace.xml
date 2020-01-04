@@ -1,7 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="711c9478-3b9c-4de5-9330-84df3ac55110" name="Default Changelist" comment="" />
+    <list default="true" id="711c9478-3b9c-4de5-9330-84df3ac55110" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurInstantiator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurInstantiator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/modules/AzurModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/SpellModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/data/new1/SpellModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/models/entities/Creature.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/models/entities/Creature.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/Element.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/Stats.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/GameMechanics2/src/gamemechanics/statics/stats/Stats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/meta/JadeCreature.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/meta/JadeCreature.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/meta/QueuedUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/mm/QueuedUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/meta/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/meta/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Jade Models/src/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/bytebuf/BBMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/bytebuf/BBMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/bytebuf/BBMessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/bytebuf/BBMessageHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/bytebuf/multihandlers/BBMessageHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/bytebuf/multihandlers/BBMessageHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/bytebuf/pipehandlers/BBMessageDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/bytebuf/pipehandlers/BBMessageDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/bytebuf/pipehandlers/BBMessageEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/bytebuf/pipehandlers/BBMessageEncoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/client/NettyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/client/NettyClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/server/NettyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/server/NettyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/server/NettyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/server/NettyServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Commons WS/Teal Net/src/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/DeathShadowCore/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/DeathShadowCore/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/DeathShadowCore/src/com/souchy/randd/deathshadows/commons/core/CoreServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/DeathShadowCore/src/com/souchy/randd/deathshadows/commons/core/DeathShadowCoreServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/DeathShadowCore/src/com/souchy/randd/deathshadows/commons/core/DeathShadowCore.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/DeathShadowCore/src/com/souchy/randd/deathshadows/commons/core/DeathShadowCore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/Iolite/src/com/souchy/randd/deathshadows/iolite/emerald/Emerald.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/Iolite/src/com/souchy/randd/deathshadows/iolite/emerald/Emerald.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/Moonstone-black/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/Moonstone-black/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/Moonstone-black/src/com/souchy/randd/deathshadows/nodes/moonstone/black/BlackMoonstone.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/Moonstone-black/src/com/souchy/randd/deathshadows/nodes/moonstone/black/BlackMoonstone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/Moonstone-black/src/com/souchy/randd/deathshadows/nodes/moonstone/black/handlers/FightActionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/Moonstone-black/src/com/souchy/randd/deathshadows/nodes/moonstone/black/handlers/FightActionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/Moonstone-black/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/Moonstone-black/src/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/com/souchy/randd/deathshadows/opal/Opal.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/com/souchy/randd/deathshadows/opal/Opal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/com/souchy/randd/deathshadows/opal/api/AuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/com/souchy/randd/deathshadows/opal/api/AuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/com/souchy/randd/deathshadows/opal/api/Collection.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/com/souchy/randd/deathshadows/opal/api/data/Collection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/com/souchy/randd/deathshadows/opal/api/Decks.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/com/souchy/randd/deathshadows/opal/api/data/Decks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/com/souchy/randd/deathshadows/opal/api/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/com/souchy/randd/deathshadows/opal/api/data/News.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/com/souchy/randd/deathshadows/opal/api/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/com/souchy/randd/deathshadows/opal/api/data/Shop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Death Shadows WS/Opal/src/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../EbiCore/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../EbiCore/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Moonstone-white/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Moonstone-white/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Moonstone-white/src/com/souchy/randd/moonstone/white/WhiteMoonstone.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Moonstone-white/src/com/souchy/randd/moonstone/white/WhiteMoonstone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Opaline/src/com/souchy/randd/ebishoal/opaline/api/Opaline.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Opaline/src/com/souchy/randd/ebishoal/opaline/api/Opaline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../shaders/depth.vertex.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../shaders/depth.vertex.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/playbar.lml" beforeDir="false" afterPath="$PROJECT_DIR$/components/playbar.lml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/res/shaders/depth.vertex.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/res/shaders/depth.vertex.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,11 +59,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="691">
-              <caret line="170" column="46" selection-start-line="170" selection-start-column="46" selection-end-line="170" selection-end-column="46" />
+            <state relative-caret-position="204">
+              <caret line="12" column="37" lean-forward="true" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -33,11 +82,11 @@
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/components/playbar.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="15" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
+            <state relative-caret-position="538">
+              <caret line="41" column="15" lean-forward="true" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -45,17 +94,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/chat.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="113" selection-start-line="9" selection-start-column="113" selection-end-line="9" selection-end-column="113" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/creaturesheet.lml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="49" selection-start-line="49" selection-end-line="49" />
+            <state relative-caret-position="136">
+              <caret line="8" column="81" lean-forward="true" selection-start-line="8" selection-start-column="81" selection-end-line="8" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -147,17 +187,17 @@
         <option value="$PROJECT_DIR$/main.lml" />
         <option value="$PROJECT_DIR$/main.json" />
         <option value="$PROJECT_DIR$/components/creaturesheet.lml" />
-        <option value="$PROJECT_DIR$/components/playbar.lml" />
         <option value="$PROJECT_DIR$/components/chat.lml" />
         <option value="$PROJECT_DIR$/components/statusicon.lml" />
         <option value="$PROJECT_DIR$/components/quickoptions.lml" />
+        <option value="$PROJECT_DIR$/components/playbar.lml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="-1434" />
-    <option name="y" value="112" />
-    <option name="width" value="1418" />
+    <option name="x" value="-1350" />
+    <option name="y" value="142" />
+    <option name="width" value="1326" />
     <option name="height" value="906" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -187,7 +227,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1575816185241" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1577420003623" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
@@ -227,10 +267,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1434" y="112" width="1418" height="906" extended-state="1" />
+    <frame x="-1350" y="142" width="1326" height="906" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17231223" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18483412" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -360,8 +400,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="691">
-          <caret line="170" column="46" selection-start-line="170" selection-start-column="46" selection-end-line="170" selection-end-column="46" />
+        <state relative-caret-position="204">
+          <caret line="12" column="37" lean-forward="true" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -375,27 +415,6 @@
     <entry file="file://$PROJECT_DIR$/main.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/playbar.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="15" selection-start-line="15" selection-start-column="15" selection-end-line="15" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/chat.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="113" selection-start-line="9" selection-start-column="113" selection-end-line="9" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/components/creaturesheet.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../../../../Mock WS/LapisMock/data/ui/test2.lml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -407,6 +426,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="12" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/creaturesheet.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="18" column="27" lean-forward="true" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/chat.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="81" lean-forward="true" selection-start-line="8" selection-start-column="81" selection-end-line="8" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/playbar.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="538">
+          <caret line="41" column="15" lean-forward="true" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
         </state>
       </provider>
     </entry>

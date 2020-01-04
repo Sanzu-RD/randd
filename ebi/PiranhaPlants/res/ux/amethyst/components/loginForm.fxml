@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" onKeyReleased="#onRootKeyRelease" prefWidth="270.0" spacing="30.0" stylesheets="@../../css/commons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.ebishoal.amethyst.ui.components.LoginForm">
+<VBox fx:id="root" onKeyReleased="#onRootKeyRelease" prefWidth="270.0" spacing="30.0" stylesheets="@../css/commons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.ebishoal.amethyst.ui.components.LoginForm">
    <children>
       <TextField fx:id="usernameField" prefHeight="40.0" promptText="Username / Email" />
       <PasswordField fx:id="passwordField" prefHeight="40.0" promptText="Password" />

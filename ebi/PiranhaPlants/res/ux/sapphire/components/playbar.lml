@@ -17,6 +17,10 @@
         <label id="move" value="{playingCreatureMoveCurrent} / {playingCreatureMoveMax}"/>
     </table>
 
+    <!--<button id="pageDown" style="transparent" width="20" height="20">-->
+        <!--<image id="pageDownImage" style="textures.buttons.slider_down" scaling="fit"/>-->
+    <!--</button>-->
+
     <!-- Page content (items, spells, affinities, resistances) -->
     <table id="content" defaultpad="1">
         <:loop times="8">

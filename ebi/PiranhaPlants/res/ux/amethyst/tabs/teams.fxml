@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="teamsPane" minHeight="0.0" minWidth="0.0" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../../css/commons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.ebishoal.amethyst.ui.tabs.Teams">
+<AnchorPane fx:id="teamsPane" minHeight="0.0" minWidth="0.0" prefHeight="576.0" prefWidth="1024.0" stylesheets="@../css/commons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.ebishoal.amethyst.ui.tabs.Teams">
    <children>
       <HBox layoutX="80.0" layoutY="57.0" spacing="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>

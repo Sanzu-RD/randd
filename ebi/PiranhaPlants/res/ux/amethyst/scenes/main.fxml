@@ -110,7 +110,7 @@
     </AnchorPane>
   </children>
    <stylesheets>
-      <URL value="@../../css/commons.css" />
+      <URL value="@../css/commons.css" />
       <URL value="@main.css" />
    </stylesheets>
 </AnchorPane>

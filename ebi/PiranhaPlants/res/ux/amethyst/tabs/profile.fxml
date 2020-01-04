@@ -172,7 +172,7 @@
       </ScrollPane>
    </children>
    <stylesheets>
-      <URL value="@../../css/commons.css" />
+      <URL value="@../css/commons.css" />
       <URL value="@profile.css" />
    </stylesheets>
 </AnchorPane>

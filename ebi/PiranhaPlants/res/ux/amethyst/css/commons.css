@@ -16,8 +16,9 @@
 // Variables
 * {
    bgColor1: #1e1e1e;
-   lblColor1: lightseagreen;
-   lblColor2: #75b9e0;
+   lblColor1: white; //lightseagreen; // white;
+   lblColor2: #75b9e0; //antiquewhite; //#75b9e0;
+   borderColor1: #75b9e0;
 }
 
 // Root
