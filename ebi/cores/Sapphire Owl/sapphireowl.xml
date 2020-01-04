@@ -26,13 +26,15 @@
 				<include name="module-info.class"/>
 			</fileset>
         	
+            <fileset dir="${dir.git}/r and d/Plugin Prototyping WS/Modules/bin"/>
             <fileset dir="${dir.git}/r and d/Commons WS/Teal Net/bin"/>
             <fileset dir="${dir.git}/r and d/Commons WS/TealWaters/bin"/>
-            <fileset dir="${dir.git}/r and d/ebi/EbiCore/bin"/>
-            <fileset dir="${dir.git}/r and d/ebi/Lapis Lazuli/bin"/>
             <fileset dir="${dir.git}/r and d/Commons WS/GameMechanics2/bin"/>
             <fileset dir="${dir.git}/r and d/Commons WS/Jade Models/bin"/>
-            <fileset dir="${dir.git}/r and d/Plugin Prototyping WS/Modules/bin"/>
+            <fileset dir="${dir.git}/r and d/ebi/EbiCore/bin"/>
+            <fileset dir="${dir.git}/r and d/ebi/Lapis Lazuli/bin"/>
+            <fileset dir="${dir.workspace}/DeathEbiCommons/bin"/> 
+        	<!-- add DeathEbiCommons, Moonstone-white and Moonstone-commons -->
         </jar>
 
 		<!-- Delete libs -->

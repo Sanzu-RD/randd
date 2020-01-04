@@ -20,4 +20,8 @@ public interface Element extends StatProperty {
 	
 	public String name();
 	
+	public static int count() {
+		return values.size();
+	}
+	
 }

@@ -1,8 +1,5 @@
 package com.souchy.randd.commons.net.netty.server;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.server.NettyServerBuilderHolder.NettyServerBuilder;
 import com.souchy.randd.commons.net.netty.server.NettyServerBuilderHolder.NettyServerBuilderPort;
@@ -12,14 +9,13 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
-import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -32,23 +28,26 @@ import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
 import io.netty.util.concurrent.GlobalEventExecutor;
 
-public final class NettyServer {
+public class NettyServer {
 
 	private final boolean SSL; 	// = System.getProperty("ssl") != null;
 	private final int PORT; 	// = Integer.parseInt(System.getProperty("port", "8007"));
-	private final MessageToByteEncoder<?> encoder;
-	private final Factory<ByteToMessageDecoder> decoder;
-	private final NettyHandler handler;
+	protected final MessageToByteEncoder<?> encoder;
+	protected final Factory<ByteToMessageDecoder> decoder;
+	protected final NettyHandler handler;
 	private final SslContext sslCtx;
-
+	
+	/** server-side channel, closing this closes every connection to it */
+	public Channel serverChannel;
 	/** list of channels (respresents clients) */
-	private Channel serverChannel;
 	ChannelGroup channels = new DefaultChannelGroup("all", GlobalEventExecutor.INSTANCE);
 	
 	
-	NettyServer(int port, boolean ssl, MessageToByteEncoder<?> encoder, Factory<ByteToMessageDecoder> decoder, NettyHandler handler) 
+	protected NettyServer(int port, boolean ssl, MessageToByteEncoder<?> encoder, Factory<ByteToMessageDecoder> decoder, NettyHandler handler) 
 			//Factory<MessageToByteEncoder<?>> encoder, Factory<ByteToMessageDecoder> decoder, Factory<NettyHandler> handler)
 			throws Exception {
 		this.PORT = port;
@@ -64,6 +63,9 @@ public final class NettyServer {
 		} else {
 			sslCtx = null;
 		}
+		
+		// Start
+		start();
 	}
 
 	public static NettyServerBuilderPort create() {
@@ -75,60 +77,71 @@ public final class NettyServer {
 		// Configure the server.
 		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
-		try {
-			ServerBootstrap b = new ServerBootstrap();
-			b.group(bossGroup, workerGroup)
+		ServerBootstrap b = new ServerBootstrap();
+		b.group(bossGroup, workerGroup)
 			.channel(NioServerSocketChannel.class)
 			.option(ChannelOption.SO_BACKLOG, 100)
 			.handler(new LoggingHandler(LogLevel.INFO))
 			.childHandler(channelInit);
+		
+		// Start the server.
+		ChannelFuture f = b.bind(PORT).sync();
 
-			// Start the server.
-			ChannelFuture f = b.bind(PORT).sync();
-
-			serverChannel = f.channel();
+		serverChannel = f.channel();
+		
+		serverChannel.closeFuture().addListener(new GenericFutureListener<Future<? super Void>>() {
+			@Override
+			public void operationComplete(Future<? super Void> future) throws Exception {
+				bossGroup.shutdownGracefully();
+				workerGroup.shutdownGracefully();
+			}
+		});
 			
-			// Wait until the server socket is closed.
-			f.channel().closeFuture().sync();
-		} finally {
-			// Shut down all event loops to terminate all threads.
-			bossGroup.shutdownGracefully();
-			workerGroup.shutdownGracefully();
-		}
-
+		// Wait until the server socket is closed.
+		//serverChannel.closeFuture().sync();
 	}
 	
+	public void block() throws InterruptedException {
+		// Wait until the server socket is closed.
+		serverChannel.closeFuture().sync();
+	}
 	
 	private ChannelInitializer<SocketChannel> channelInit = new ChannelInitializer<>() {
 		@Override
 		protected void initChannel(SocketChannel ch) throws Exception {
-			ChannelPipeline p = ch.pipeline();
-			if (sslCtx != null) {
-				p.addLast(sslCtx.newHandler(ch.alloc()));
-			}
-			//Log.info("Channel init : " + ch);
-			p.addLast(connectionHandler);
-			p.addLast(decoder.create()); 
-			p.addLast(encoder); 
-			p.addLast(handler); 
+			// Log.info("Channel init : " + ch);
+			ChannelPipeline pipe = ch.pipeline();
+			if(sslCtx != null) 
+				pipe.addLast(sslCtx.newHandler(ch.alloc()));
+			initPipeline(pipe);
 		}
 	};
+	
+	/**
+	 * Initialize the ChannelPipeline any new client
+	 */
+	public void initPipeline(ChannelPipeline pipe) {
+		pipe.addLast(connectionHandler);
+		pipe.addLast(decoder.create()); 
+		pipe.addLast(encoder); 
+		pipe.addLast(handler); 
+	}
 
 	/**
-	 * Sharable connectino handler which removes channels from the group when they go inactive
+	 * Sharable connection handler which removes channels from the group when they go inactive
 	 */
-	private ChannelInboundHandlerAdapter connectionHandler = new ChannelInboundHandlerAdapter() {
+	public final ChannelInboundHandlerAdapter connectionHandler = new ChannelInboundHandlerAdapter() {
 		@Override
 		public void channelActive(ChannelHandlerContext ctx) throws Exception {
-			super.channelInactive(ctx);
 			Log.info("Channel active : " + ctx.channel());
 			channels.add(ctx.channel()); // register channel to all
+			super.channelInactive(ctx);
 		}
 		@Override
 		public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-			super.channelInactive(ctx);
 			Log.info("Channel inactive : " + ctx.channel());
 			channels.remove(ctx.channel());
+			super.channelInactive(ctx);
 		}
 		@Override
 		public boolean isSharable() {
@@ -136,9 +149,12 @@ public final class NettyServer {
 		};
 	};
 	
-	
-	public void sendAll(BBMessage msg) {
+
+	public void broadcast(BBMessage msg) {
 		channels.forEach(c -> c.writeAndFlush(msg));
+	}
+	public void sendAll(BBMessage msg) {
+		broadcast(msg);
 	}
 
 }

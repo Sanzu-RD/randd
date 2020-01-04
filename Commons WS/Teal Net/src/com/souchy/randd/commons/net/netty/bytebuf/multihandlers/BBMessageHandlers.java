@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import io.netty.channel.ChannelHandlerContext;
 
@@ -17,15 +18,16 @@ public class BBMessageHandlers { // extends ResponsibilityManager<BBMessage, BBM
 	private final Map<Integer, BBMessageHandler<BBMessage>> handlers = new HashMap<>();
 
 	public boolean canHandle(BBMessage msg) {
+		Log.info("BBHandlerManager can handle ? " + msg.getClass() + " : " + msg);
 		return handlers.containsKey(msg.getID());
 	}
 
 	public void handle(ChannelHandlerContext ctx, BBMessage msg) {
 		if (canHandle(msg)) {
-			System.out.println("BBHandlerManager handling message [" + msg + "] of ID [" + msg.getID() + "]");
+			Log.info("BBHandlerManager handling message [" + msg + "] of ID [" + msg.getID() + "]");
 			handlers.get(msg.getID()).handle(ctx, msg);
 		} else {
-			System.out.println("BBHandlerManager cant handle message [" + msg + "] of ID [" + msg.getID() + "]");
+			Log.info("BBHandlerManager cant handle message [" + msg + "] of ID [" + msg.getID() + "]");
 		}
 	}
 

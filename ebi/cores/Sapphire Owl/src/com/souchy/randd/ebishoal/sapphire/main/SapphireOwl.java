@@ -13,11 +13,12 @@ import data.modules.AzurCache;
 import data.modules.AzurManager;
 
 public class SapphireOwl extends LapisCore { //implements EntryPoint {
-	
+
+
 	/**
 	 * would be final if we didnt instantiate i
 	 */
-	public static final SapphireOwl core = new SapphireOwl();
+	public static SapphireOwl core;
 	public static final SapphireGame game = new SapphireGame();
 	public static SapphireOwlConf conf;
 	public static AzurManager azur;
@@ -26,19 +27,23 @@ public class SapphireOwl extends LapisCore { //implements EntryPoint {
 
 	public static void main(String[] args) throws Exception {
 		LapisCore.arguments(args);
-		launch(core);
+		core = new SapphireOwl(args);
+	}
+
+	public SapphireOwl(String[] args) throws Exception {
+		super(args);
+		//new WhiteMoonstone(args);
 	}
 	
 	@Override
 	public void init() throws Exception {
 		super.init();
-		
 		// load sapphire config
-		conf = JsonConfig.readExternal(SapphireOwlConf.class, "modules/");
+		conf = JsonConfig.readExternal(SapphireOwlConf.class, "./modules/");
 
 		// need an event bus since this is an entry point
 		//bus = new EventBus();
-
+		
 		// make a node manager to load creatures data
 		
 		azur = new AzurManager();

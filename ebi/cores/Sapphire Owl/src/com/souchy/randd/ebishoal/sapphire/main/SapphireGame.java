@@ -44,23 +44,30 @@ public class SapphireGame extends LapisGame {
 		// need to load items resources and random spells resources (spells should already be loaded through creatures th)
 		// ...
 		
+		
+		// server should initiate the Fight object with all the characters already
+		var jadeteam1 = new JadeCreature[4];
+		var jadeteam2 = new JadeCreature[4];
+		// then sapphire should just show these creatures from the deserialized Fight object (dont need to instantiate anything here)
+		
 		try {
 			if(LapisCore.isEclipse) // for testing purposes
 				SapphireOwl.data.creatures.put(1000, new SungjinModel());
 			Log.info("data.creatures : " + SapphireOwl.azur.getEntry().creatures.values() + ", " + SapphireOwl.azur.getEntry());
 			// create instances for players' creatures
 			int id = 1000;
-			// base model
-			CreatureModel model = SapphireOwl.data.creatures.get(id);
 			// jade customization
 			JadeCreature jade = new JadeCreature();
-			jade.creatureID = model.id();
-			jade.itemIDs = new int[4];
+			jade.creatureModelID = id; //model.id();
+			//jade.itemIDs = new int[4];
 			jade.spellIDs = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 			for (int i = 0; i < jade.spellIDs.length; i++)
-				jade.spellIDs[i] += model.id();
+				jade.spellIDs[i] += jade.creatureModelID; //model.id();
+			// base model
+			CreatureModel model = SapphireOwl.data.creatures.get(jade.creatureModelID);
 			// instance
 			Creature inst = new Creature(model, jade, SapphireOwl.data, new Vector2(0, 0));
+			// test stats
 			inst.model.baseStats.addResource(30, Resource.life);
 			inst.getStats().addFightResource(-130, Resource.life);
 			inst.getStats().addShield(600, Resource.life);
@@ -70,9 +77,12 @@ public class SapphireGame extends LapisGame {
 			fight.add(inst, Team.A);
 			fight.timeline.add(inst);
 			
-
+			// screen
 			gfx = new SapphireScreen();
+			
+			// player hud
 			SapphireHudSkin.play(inst);
+			
 		} catch (Exception e) {
 			Log.error("SapphireOwl creature error : ", e);
 			Gdx.app.exit();

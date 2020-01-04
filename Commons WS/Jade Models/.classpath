@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="com/souchy/randd/jade/meta/ObjectId.java|com/souchy/randd/jade/oldcombat/|com/souchy/randd/jade/combat/JadeEffect.java|com/souchy/randd/jade/combat/JadeSpell.java|com/souchy/randd/jade/combat/EffectProperty.java|com/souchy/randd/jade/combat/SpellProperty.java|com/souchy/randd/jade/combat/" kind="src" path="src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry excluding="com/souchy/randd/jade/meta/ObjectId.java|com/souchy/randd/jade/oldcombat/|com/souchy/randd/jade/combat/JadeEffect.java|com/souchy/randd/jade/combat/JadeSpell.java|com/souchy/randd/jade/combat/EffectProperty.java|com/souchy/randd/jade/combat/SpellProperty.java|com/souchy/randd/jade/combat/|com/souchy/randd/jade/mm/QueuedUser.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -17,6 +12,21 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DB">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

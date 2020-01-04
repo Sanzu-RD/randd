@@ -1,13 +1,9 @@
 package com.souchy.randd.ebishoal.commons.lapis.main;
 
-import java.nio.file.Paths;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.EbiCore;
+import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 
 /**
  * 
@@ -21,8 +17,8 @@ import com.souchy.randd.ebishoal.commons.EbiCore;
  * @author Souchy
  *
  */
-public abstract class LapisCore extends EbiCore {
-	
+public abstract class LapisCore extends EbiShoalCore {
+
 	private LwjglApplicationConfiguration config;
 	private LapisProperties properties;
 	private LapisGame game;
@@ -32,7 +28,16 @@ public abstract class LapisCore extends EbiCore {
 	/**
 	 * @inheritDoc
 	 */
-	@Override
+	public LapisCore(String[] args) throws Exception {
+		super(args);
+		init();
+	    new LwjglApplication(game, config);
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	//@Override
 	public void init() throws Exception {
 		config = new LwjglApplicationConfiguration();
 		addIcon(config);
@@ -42,13 +47,13 @@ public abstract class LapisCore extends EbiCore {
 	}
 	
 	
-	/**
-	 * @inheritDoc
-	 */
-	@Override
-	public void start() {
-		new LwjglApplication(game, config);
-	}
+//	/**
+//	 * @inheritDoc
+//	 */
+//	@Override
+//	public void start() {
+//		new LwjglApplication(game, config);
+//	}
 	
 	/** @return LapisGame implementation */
 	public LapisGame getGame() {

@@ -27,6 +27,7 @@ import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.jade.meta.UserLevel;
 
+
 @Provider
 @Priority(Priorities.AUTHENTICATION)  // needs to happen before authorization
 public class AuthenticationFilter implements ContainerRequestFilter {
@@ -52,16 +53,21 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 			Log.info("AuthenticationFilter.filter : restricted.");
 			String authHeader = ctx.getHeaderString(HttpHeaders.AUTHORIZATION); // (1)
 			if(authHeader == null || authHeader.trim().isEmpty()) {
+				//Log.info("AuthenticationFilter.filter : no authotization header.");
 				ctx.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("Invalid authorization header.").build());
 				return;
 			}
-
+			
+			// Read headers
 			String authzHeader = ctx.getHeaderString(HttpHeaders.AUTHORIZATION); // (1)
+	        //Log.info("authzHeader : " + authzHeader);
 	        String decoded = Base64.decodeAsString(authzHeader);
-
+	        //Log.info("authzHeader decoded : " + decoded);
+	        
 	        String[] split = decoded.split(":");
 	        String username = split[0];
 	        String password = split[1];
+	        //Log.info("user : " + username + ", pass : " + password);
 			User user = Emerald.users().find(and(eq(User.name_username, username), eq(User.name_password, password))).first(); // (2)
 
 			if(user == null) { // (3)

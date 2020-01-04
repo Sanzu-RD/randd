@@ -5,7 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("api/ping/")
+@Path("/ping/")
 public class Ping {
 
 	private String pong = "pong";
@@ -13,20 +13,21 @@ public class Ping {
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
 	public String ping() {
+		//Log.info("pingpong");
 		return pong;
 	}
 
-	@GET
-	@Produces(MediaType.TEXT_XML)
-	public String pingXml() {
-		return "<?xml version=\"1.0\"?>" + "<ping>" + pong + "</ping>";
-	} 
+//	@GET
+//	@Produces(MediaType.TEXT_XML)
+//	public String pingXml() {
+//		return "<?xml version=\"1.0\"?>" + "<ping>" + pong + "</ping>";
+//	} 
+//
+//	@GET
+//	@Produces(MediaType.TEXT_HTML)
+//	public String pingHtml() {
+//		return "<html><title>" + pong + "</title>"
+//				+ "<body><h1>" + pong + "</h1></body></html> ";
+//	}
 
-	@GET
-	@Produces(MediaType.TEXT_HTML)
-	public String pingHtml() {
-		return "<html><title>" + pong + "</title>"
-				+ "<body><h1>" + pong + "</h1></body></html> ";
-	}
-	
 }

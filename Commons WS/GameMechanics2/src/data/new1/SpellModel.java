@@ -13,9 +13,23 @@ import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.Stats;
 
 public abstract class SpellModel {
+
+	/**
+	 * Need to compile creature stats before compiling them into the spell stats (spell stats = baseSpellStats + creatureStats)
+	 * 
+	 * @author Blank
+	 */
+	public static class SpellInstance {
+		public final SpellModel model;
+		public List<Element> elements; // can change elements
+		public Stats currStats;
+		public SpellInstance(SpellModel model) {
+			this.model = model;
+			currStats = new Stats();
+		}
+	}
 	
 	public abstract int id();
-	
 
 	public final ImmutableList<CreatureType> taggedCreatureTypes;
 	public final ImmutableList<Class<CreatureModel>> taggedCreatures;
@@ -87,19 +101,5 @@ public abstract class SpellModel {
 		return Integer.toString(id());
 	}
 	
-	/**
-	 * Need to compile creature stats before compiling them into the spell stats (spell stats = baseSpellStats + creatureStats)
-	 * 
-	 * @author Blank
-	 */
-	public static class SpellInstance {
-		public final SpellModel model;
-		public List<Element> elements; // can change elements
-		public Stats currStats;
-		public SpellInstance(SpellModel model) {
-			this.model = model;
-			currStats = new Stats();
-		}
-	}
 	
 }

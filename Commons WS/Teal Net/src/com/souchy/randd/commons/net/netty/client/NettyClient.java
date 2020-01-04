@@ -1,14 +1,10 @@
 package com.souchy.randd.commons.net.netty.client;
 
-import java.security.cert.CertificateException;
-
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.server.NettyHandler;
-import com.souchy.randd.commons.tealwaters.commons.Factory;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -24,6 +20,8 @@ import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
 
 public class NettyClient {
 
@@ -36,9 +34,9 @@ public class NettyClient {
 	private final SslContext sslCtx;
 	private final boolean logs;
 	
-	private Channel channel;
+	public Channel channel;
 	
-	NettyClient(String ip, int port, boolean ssl, boolean logs, MessageToByteEncoder<?> encoder, ByteToMessageDecoder decoder, NettyHandler handler)  throws Exception {
+	protected NettyClient(String ip, int port, boolean ssl, boolean logs, MessageToByteEncoder<?> encoder, ByteToMessageDecoder decoder, NettyHandler handler)  throws Exception {
 		this.IP = ip;
 		this.PORT = port;
 		this.SSL = ssl;
@@ -54,16 +52,19 @@ public class NettyClient {
 		} else {
 			sslCtx = null;
 		}
+		
+		// Start
+		start();
 	}
 	
-	public static NettyClient create(String ip, int port, boolean ssl, boolean logs, 
-			MessageToByteEncoder<?> encoder, ByteToMessageDecoder decoder, NettyHandler handler) throws Exception {
-		return new NettyClient(ip, port, ssl, logs, encoder, decoder, handler);
-	}
+//	public static NettyClient create(String ip, int port, boolean ssl, boolean logs, 
+//			MessageToByteEncoder<?> encoder, ByteToMessageDecoder decoder, NettyHandler handler) throws Exception {
+//		return new NettyClient(ip, port, ssl, logs, encoder, decoder, handler);
+//	}
 
-	public void start() {
+	private void start() throws InterruptedException {
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
-        try {
+        //try {
             Bootstrap b = new Bootstrap(); // (1)
             b.group(workerGroup); // (2)
             b.channel(NioSocketChannel.class); // (3)
@@ -74,17 +75,29 @@ public class NettyClient {
             ChannelFuture f = b.connect(IP, PORT).sync(); // (5)
 
             channel = f.channel();
-            
+
+            channel.closeFuture().addListener(new GenericFutureListener<Future<? super Void>>() {
+    			@Override
+    			public void operationComplete(Future<? super Void> future) throws Exception {
+    				workerGroup.shutdownGracefully();
+    			}
+    		});
+    		
             // Wait until the connection is closed.
-            f.channel().closeFuture().sync();
-        } catch (InterruptedException e) {
-			e.printStackTrace();
-		} finally {
-            workerGroup.shutdownGracefully();
-        }
+            //f.channel().closeFuture().sync();
+//        } catch (InterruptedException e) {
+//			e.printStackTrace();
+//		} finally {
+//            workerGroup.shutdownGracefully();
+//        }
+	}
+	
+	/** block execution until the client closes */
+	public void block() throws InterruptedException {
+		channel.closeFuture().sync();
 	}
 
-	public void stop() {
+	public void close() {
 		channel.close();
 	}
 	
@@ -97,16 +110,18 @@ public class NettyClient {
 		@Override
 		protected void initChannel(SocketChannel ch) throws Exception {
 			ChannelPipeline p = ch.pipeline();
-			if (sslCtx != null) {
+			if (sslCtx != null) 
 				p.addLast(sslCtx.newHandler(ch.alloc()));
-			}
-			p.addLast(new LoggingHandler(LogLevel.INFO));
-			p.addLast(decoder); 
-			p.addLast(encoder); 
-			p.addLast(handler); 
+			initPipeline(p);
 		}
 	};
-
+	
+	protected void initPipeline(ChannelPipeline pipe) {
+		pipe.addLast(new LoggingHandler(LogLevel.INFO));
+		pipe.addLast(decoder); 
+		pipe.addLast(encoder); 
+		pipe.addLast(handler); 
+	}
 	
 	
 }

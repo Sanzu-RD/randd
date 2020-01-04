@@ -5,4 +5,7 @@ module com.souchy.randd.ebishoal.commons.EbiCore {
 	requires transitive com.souchy.randd.commons.TealWaters;
 	requires transitive netty.all;
 	requires transitive com.souchy.randd.pluginprototyping.Modules;
+	requires transitive com.souchy.randd.commons.deathebi;
+	requires jersey.client;
+	requires java.ws.rs;
 }

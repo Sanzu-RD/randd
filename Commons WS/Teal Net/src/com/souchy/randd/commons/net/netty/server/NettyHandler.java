@@ -4,7 +4,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.multihandlers.BBMessageHandlers;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
-import static io.netty.channel.ChannelHandler.Sharable;
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -18,7 +18,8 @@ public class NettyHandler extends ChannelInboundHandlerAdapter {
 	}
 	
 	@Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+		//super.channelRead(ctx, msg);
 		/*	
 		@SuppressWarnings("unchecked")
 		Message<String> pack = (Message<String>) msg;
@@ -34,12 +35,17 @@ public class NettyHandler extends ChannelInboundHandlerAdapter {
         ctx.write(p);
         //ctx.write(msg);
       	*/
+		
 		//Log.info("NettyHandler : " + msg.toString());
 		var bb = (BBMessage) msg;
-		if (msgHandlers.canHandle(bb)) { // res.canHandle(packetid)){
+		if (msgHandlers.canHandle(bb)) 
 			msgHandlers.handle(ctx, bb);
-		}
+		
+		
+		// this would pass to the next handler, but the message is already handled here so no point firing an event when there's no other handler to take it 
+		//super.channelRead(ctx, msg);
     }
+	
 
 	@Override
 	public void channelReadComplete(ChannelHandlerContext ctx) {

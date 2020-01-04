@@ -1,15 +1,41 @@
 package com.souchy.randd.commons.net.netty.bytebuf;
 
 import com.souchy.randd.commons.net.Message;
+import com.souchy.randd.commons.tealwaters.commons.Deserializer;
+import com.souchy.randd.commons.tealwaters.commons.Factory;
+import com.souchy.randd.commons.tealwaters.commons.Serializer;
 
 import io.netty.buffer.ByteBuf;
 
-public interface BBMessage extends Message<ByteBuf, BBMessage> // ,
+/**
+ * Generic byte buf message that can contain anything
+ * 
+ * @author Blank
+ * @date 25 déc. 2019
+ */
+public interface BBMessage extends Message<ByteBuf, BBMessage>, 
+	BBSerializer, //Serializer<ByteBuf, ByteBuf>, 
+	BBDeserializer//, //Deserializer<ByteBuf, BBMessage>, 
+	//Factory<Deserializer<ByteBuf, BBMessage>> // ,
 // Deserializer<ByteBuf, BBMessage>,
 // Factory<Deserializer<ByteBuf, BBMessage>>
 {
 
 	/** Initial capacity */
 	public int getBufferCapacity();
+	
+/*
+	public static void writeString(ByteBuf out, String str) {
+		// write string
+		out.writeByte(str.getBytes().length);
+		out.writeBytes(str.getBytes());
+	}
+	public static String readString(ByteBuf in) {
+		// read string
+		var bytes = new byte[in.readByte()];
+		in.readBytes(bytes);
+		return new String(bytes);
+	}
+*/
 	
 }

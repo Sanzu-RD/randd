@@ -7,12 +7,11 @@ import com.souchy.randd.jade.meta.JadeCreature;
 
 import data.modules.AzurCache;
 import data.new1.CreatureModel;
-import data.new1.ItemCache;
 import data.new1.SpellCache;
 import data.new1.SpellModel;
 import gamemechanics.common.Vector2;
 import gamemechanics.models.Fight;
-import gamemechanics.models.Item;
+//import gamemechanics.models.Item;
 import gamemechanics.statics.stats.Stats;
 
 public class Creature extends Entity {
@@ -31,7 +30,7 @@ public class Creature extends Entity {
 	/**
 	 * items
 	 */
-	public List<Item> items;
+	//public List<Item> items;
 	/**
 	 * spell book containing spells //~~spell groups containing spell~~
 	 */
@@ -42,7 +41,7 @@ public class Creature extends Entity {
 		this.model = model;
 		this.stats = new Stats();
 		this.spellbook = new ArrayList<>();
-		this.items = new ArrayList<>();
+		//this.items = new ArrayList<>();
 		//this.fight = fight;
 		this.pos = pos;
 		

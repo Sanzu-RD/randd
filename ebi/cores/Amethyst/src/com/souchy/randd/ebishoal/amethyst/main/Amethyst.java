@@ -2,9 +2,10 @@ package com.souchy.randd.ebishoal.amethyst.main;
 
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.EbiCore;
+import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 
 import javafx.application.Application;
+
 
 
 /**
@@ -14,38 +15,29 @@ import javafx.application.Application;
  * @author Blank
  *
  */
-public class Amethyst extends EbiCore {
+public class Amethyst extends EbiShoalCore {
+
 
 	public static Amethyst core;
 	public static AmethystApp app;
 	public static AmethystConf conf;
-	public static AmethystModule module;
+	//public static AmethystModule module;
 	//public static ExecutorService service;
 	
 	
 	public static void main(String[] args) throws Exception {
-		launch(core = new Amethyst());
-	}
-	
-	@Override
-	public void init() throws Exception {
-		Log.info("Amethyst init.");
-		
-		conf = JsonConfig.readExternal(AmethystConf.class, "./modules/");
+		core = new Amethyst(args);
 	}
 
-	@Override
-	public void start() {
+	public Amethyst(String[] args) throws Exception {
+		super(args);
+		conf = JsonConfig.readExternal(AmethystConf.class, "./modules/");
+		//Opaline.isOnline();
 		Log.info("Amethyst start.");
-		try {
-//			var service = Executors.newSingleThreadExecutor();
-//			service.execute(() -> Application.launch(AmethystApp.class));
-			Application.launch(AmethystApp.class);
-			Log.info("Amethyst stopped.");
-		} catch (Exception e) {
-			Log.warning("Amethyst start error : ", e);
-		}
+		Application.launch(AmethystApp.class);
+		Log.info("Amethyst stopped.");
 	}
+	
 
 	@Override
 	protected String[] getRootPackages() {

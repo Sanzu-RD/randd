@@ -41,6 +41,8 @@ public class JsonConfig {
 		try {
 			T config = null;
 			if(Files.exists(path)) {
+				//Log.info("path : " + path);
+				//Log.info("content : " + Files.readString(path));
 				config = gson.fromJson(Files.readString(path), c);
 			} else {
 				config = c.getConstructor()/* .getDeclaredConstructor() */.newInstance();
@@ -87,9 +89,9 @@ public class JsonConfig {
 				chosenPath = path;
 		if(chosenPath == null) chosenPath = defaultPath;
 		try {
-			//Log.info("readExternal filePath : " + filePath);
+			//Log.info("readExternal chosenPath : " + chosenPath);
 			var file = Environment.getFile(chosenPath + name(c)); //FilesManager.getFileOutside(chosenPath + name(c));
-			//Log.info("readExternal file : " + file);
+			//Log.info("readExternal file : " + file.getAbsolutePath());
 			var config = read(c, file.toPath());
 			//Log.info("readExternal config : " + file);
 			return config;

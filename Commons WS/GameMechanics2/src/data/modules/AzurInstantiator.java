@@ -14,7 +14,6 @@ import com.souchy.randd.modules.api.ModuleInstantiator;
 
 import data.new1.CreatureModel;
 import data.new1.SpellModel;
-import gamemechanics.models.Item;
 
 public class AzurInstantiator implements ModuleInstantiator<AzurModule, AzurInformation> {
 

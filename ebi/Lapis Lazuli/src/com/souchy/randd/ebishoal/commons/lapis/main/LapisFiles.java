@@ -3,7 +3,6 @@ package com.souchy.randd.ebishoal.commons.lapis.main;
 import java.io.File;
 
 import com.badlogic.gdx.Files;
-import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglFileHandle;
 import com.badlogic.gdx.files.FileHandle;
 

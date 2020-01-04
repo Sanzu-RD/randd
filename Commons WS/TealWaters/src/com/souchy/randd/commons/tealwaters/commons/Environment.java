@@ -15,7 +15,7 @@ public class Environment {
 	/**
 	 * Application root directory
 	 */
-	public static Path root = Paths.get("");
+	public static Path root = Paths.get("./");
 	/**
 	 * Application logs directory
 	 */

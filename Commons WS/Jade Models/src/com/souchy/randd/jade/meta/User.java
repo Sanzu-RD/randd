@@ -5,10 +5,21 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 
+import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 
-public class User {
+import io.netty.buffer.ByteBuf;
+import io.netty.util.AttributeKey;
 
-	
+
+public class User implements BBSerializer, BBDeserializer {
+
+	public static final AttributeKey<User> attrkey = AttributeKey.newInstance("jade.user");
+	public static final AttributeKey<Integer> triesKey = AttributeKey.newInstance("jade.user.tries");
+
+
 	public ObjectId _id;
 	
 	/**
@@ -47,7 +58,10 @@ public class User {
 	 * This is if the phone number has been verified (user asks for 2fa-> server sends SMS for confirmation -> user enters the code from the SMS into Amethyst)
 	 */
 	public boolean verifiedPhone;
-	
+	/**
+	 * Match making rating
+	 */
+	public int mmr;
 	
 	
 	/** can automatically unlock free things at x levels */
@@ -56,16 +70,21 @@ public class User {
 	public int gold; 
 	/** paid currency to buy things */
 	public int gems; 
+	
+	/** friends ids */
 	public List<ObjectId> friends = new ArrayList<>();
+	/** jade decks/teams ids */
 	public List<ObjectId> decks = new ArrayList<>();
+	/** match ids */
 	public List<ObjectId> matchHistory = new ArrayList<>();
-	public List<ObjectId> unlockedCreatures = new ArrayList<>();
-	public List<ObjectId> unlockedItems = new ArrayList<>();
-	public List<ObjectId> unlockedSpells = new ArrayList<>();
+	/** creatures ids */
+	public List<Integer> unlockedCreatures = new ArrayList<>();
+	/** spells ids */
+	public List<Integer> unlockedSpells = new ArrayList<>();
+	//public List<ObjectId> unlockedItems = new ArrayList<>();
 
 	
-	
-	
+
 	public static final String name__id = "_id";
 	public static final String name_username = "username";
 	public static final String name_password = "password";
@@ -81,6 +100,56 @@ public class User {
 	public static final String name_unlockedSpells = "unlockedSpells";
 	public static final String name_matchHistory = "matchHistory";
 	public static final String name_level = "level";
+	public static final String name_mmr = "mmr";
+	
+	
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		writeString(out, _id.toHexString());
+		out.writeByte(level.ordinal());
+		writeString(out, username);
+		writeString(out, password);
+		writeString(out, salt);
+		writeString(out, pseudo);
+		writeString(out, email);
+		writeString(out, phone);
+		out.writeBoolean(verifiedEmail);
+		out.writeBoolean(verifiedPhone);
+		out.writeInt(mmr);
+		out.writeInt(xp);
+		out.writeInt(gold);
+		out.writeInt(gems);
+		writeInt(out, gems);
+		writeListString(out, friends);
+		writeListString(out, decks);
+		writeListString(out, matchHistory);
+		writeListInt(out, unlockedCreatures);
+		writeListInt(out, unlockedSpells);
+		return out;
+	}
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		_id = new ObjectId(readString(in));
+		level = UserLevel.values()[in.readByte()];
+		username = readString(in);
+		password = readString(in);
+		salt = readString(in);
+		pseudo = readString(in);
+		email = readString(in);
+		phone = readString(in);
+		verifiedEmail = in.readBoolean();
+		verifiedPhone = in.readBoolean();
+		mmr = in.readInt();
+		xp = in.readInt();
+		gold = in.readInt();
+		gems = in.readInt();
+		friends = readList(in, () -> new ObjectId(readString(in)));
+		decks = readList(in, () -> new ObjectId(readString(in)));
+		matchHistory = readList(in, () -> new ObjectId(readString(in)));
+		unlockedCreatures = readList(in, in::readInt);
+		unlockedSpells = readList(in, in::readInt);
+		return null;
+	}
 	
 	
 }

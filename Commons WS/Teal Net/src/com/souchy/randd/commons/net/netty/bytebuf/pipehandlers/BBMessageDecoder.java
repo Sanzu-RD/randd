@@ -1,7 +1,6 @@
 package com.souchy.randd.commons.net.netty.bytebuf.pipehandlers;
 
 import java.util.List;
-import io.netty.channel.ChannelHandler.Sharable;
 
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.multihandlers.BBMessageFactories;
@@ -39,8 +38,11 @@ public class BBMessageDecoder extends ByteToMessageDecoder  {
 				Log.info("BBMessageDecoder - " + msg);
 				
 				out.add(msg);
+				
 				// out.add(res.get(packetid).handle(data));
 			}
+			var d = msgFactories.get(packetid).create();
+			d.deserialize(in);
 
 			//if(in.refCnt() > 0) in.release();
 			

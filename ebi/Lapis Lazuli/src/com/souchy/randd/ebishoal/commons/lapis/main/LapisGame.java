@@ -3,11 +3,7 @@ package com.souchy.randd.ebishoal.commons.lapis.main;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
-import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.commons.tealwaters.commons.Environment;
-import com.souchy.randd.ebishoal.commons.lapis.discoverers.ModelDiscoverer;
-import com.souchy.randd.ebishoal.commons.lapis.managers.ModelManager;
 
 
 public abstract class LapisGame extends Game {

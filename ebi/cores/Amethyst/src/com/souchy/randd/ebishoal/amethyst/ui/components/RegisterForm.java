@@ -92,7 +92,7 @@ public class RegisterForm { //extends VBox {
 		var tip = new Tooltip("Account creation is limited at 1 per 30 seconds. Accounts with an unconfirmed email expire after 24 hours.");
 		tip.setShowDelay(Duration.ZERO);
 		helpLbl.setTooltip(tip);
-		Log.info("initialized register form.");
+		//Log.info("initialized register form.");
     }
     
 }

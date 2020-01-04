@@ -5,7 +5,6 @@ module com.souchy.randd.deathshadows.opal {
 	opens com.souchy.randd.deathshadows.opal.api;
 	
 	requires transitive com.souchy.randd.commons.Jade;
-	requires transitive com.souchy.randd.deathshadows.commons.Core;
 	requires transitive com.souchy.randd.deathshadows.iolite;
 	requires transitive com.souchy.randd.commons.TealWaters;
 
@@ -40,5 +39,7 @@ module com.souchy.randd.deathshadows.opal {
 	
 	requires transitive com.souchy.randd.commons.opal;
 	requires transitive java.xml.bind;
-	requires com.google.common;
+	requires transitive com.google.common;
+	requires transitive org.mongodb.bson;
+	requires transitive com.souchy.randd.deathshadow.core;
 }

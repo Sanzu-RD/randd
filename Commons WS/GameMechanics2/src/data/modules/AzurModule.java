@@ -14,7 +14,6 @@ import com.souchy.randd.modules.api.ModuleInformation;
 
 import data.new1.CreatureModel;
 import data.new1.SpellModel;
-import gamemechanics.models.Item;
 
 public abstract class AzurModule implements Module<AzurInformation> {
 	

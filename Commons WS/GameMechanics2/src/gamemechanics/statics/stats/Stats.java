@@ -35,10 +35,10 @@ public class Stats {
 		this.wipe();
 
 		// commence par prendre tous les boosts des items et status
-		for(var i : target.items)
-			i.stats.table.cellSet().forEach(c -> 
-				add(c.getValue(), c.getRowKey(), c.getColumnKey())
-			);
+		//for(var i : target.items)
+		//	i.stats.table.cellSet().forEach(c -> 
+		//		add(c.getValue(), c.getRowKey(), c.getColumnKey())
+		//	);
 		
 		target.getStatus().forEach(s -> {
 //			for(var e : s.effects)

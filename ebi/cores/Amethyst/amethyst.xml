@@ -31,14 +31,16 @@
 				<include name="module-info.class"/>
 			</fileset>
         	
-            <fileset dir="${dir.git}/r and d/ebi/EbiCore/bin"/>
+            <fileset dir="${dir.git}/r and d/Plugin Prototyping WS/Modules/bin"/>
             <fileset dir="${dir.git}/r and d/Commons WS/Jade Models/bin"/>
             <fileset dir="${dir.git}/r and d/Commons WS/TealWaters/bin"/>
             <fileset dir="${dir.git}/r and d/Commons WS/Teal Net/bin"/>
-            <fileset dir="${dir.git}/r and d/Plugin Prototyping WS/Modules/bin"/>
             <fileset dir="${dir.git}/r and d/Commons WS/GameMechanics2/bin"/>
-            <fileset dir="${dir.workspace}/Opaline/bin"/>
-            <fileset dir="${dir.workspace}/Opal-commons/bin"/>
+            <fileset dir="${dir.git}/r and d/ebi/EbiCore/bin"/>
+        	
+            <fileset dir="${dir.git}/r and d/ebi/Opaline/bin"/>
+            <fileset dir="${dir.git}/r and d/Commons WS/Opal-commons/bin"/>
+        	<!-- add DeathEbiCommons, Coraline, Coral-commons,   -->
         </jar>
 
 		<!-- Delete libs -->

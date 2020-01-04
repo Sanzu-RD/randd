@@ -2,7 +2,6 @@ package com.souchy.randd.ebishoal.commons.lapis.gfx.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.github.czyzby.lml.parser.impl.AbstractLmlView;
 
