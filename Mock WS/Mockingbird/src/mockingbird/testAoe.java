@@ -2,18 +2,23 @@ package mockingbird;
 
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
-import gamemechanics.statics.filters.AoePattern.Aoe;
+import gamemechanics.common.Aoe;
+import gamemechanics.common.AoeBuilders;
 
 public class testAoe {
 	
 	public static void main() {
 
-		var aoe1 = Aoe.circleEmpty.apply(3);
-		var aoe2 = Aoe.lineV.apply(5);
+		//var aoe1 = Aoe.circleEmpty.apply(3);
+		var interieur = AoeBuilders.circle.apply(2).move(1, 1);
+		var aoe1 = AoeBuilders.circle.apply(3).sub(interieur);
+		var aoe2 = AoeBuilders.lineV.apply(5);
+
+		Log.info(aoe1.toString());
 		
 		//var result = aoe2.table.move(2, 2).mirrorV().mirrorH().mirrorH();
 		
-		var result = Aoe.diag1.apply(6).table.or(aoe2.table);
+		var result = AoeBuilders.diag1.apply(6).table.or(aoe2.table);
 		
 		Log.info(result.toString());
 		

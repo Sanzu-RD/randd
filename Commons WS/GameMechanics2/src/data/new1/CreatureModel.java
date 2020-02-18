@@ -4,10 +4,10 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 
+import data.new1.spellstats.CreatureStats;
 import data.new1.timed.Status;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
-import gamemechanics.statics.stats.Stats;
 
 public abstract class CreatureModel {
 
@@ -26,7 +26,7 @@ public abstract class CreatureModel {
 //	public final ImmutableList<CreatureType> types;
 //	public final ImmutableList<SpellModel> spells;
 //	public final ImmutableList<Status> statuses;
-	public final Stats baseStats;
+	public final CreatureStats /*Stats*/ baseStats;
 	
 	public CreatureModel() {
 //		elements = initAffinities();
@@ -45,7 +45,7 @@ public abstract class CreatureModel {
 	//protected abstract List<Tag> initTags();
 //	protected abstract ImmutableList<SpellModel> initSpells();
 //	protected abstract ImmutableList<Status> initStatuses();
-	protected abstract Stats initBaseStats();
+	protected abstract CreatureStats initBaseStats();
 	
 	// i18n : name, description : in res/creatures/creatureID/i18n/bundle_*.properties
 	// 

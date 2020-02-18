@@ -9,7 +9,7 @@ module CreatureCommons {
 	exports com.souchy.randd.data.s1.creaturetypes;
 	exports com.souchy.randd.data.s1.spells.ice;
 	
-	requires GameMechanics2;
+	requires transitive GameMechanics2;
 	requires GameMechanics3;
 	requires com.google.common;
 	requires com.souchy.randd.AnnotationProcessor;

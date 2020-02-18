@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
+import gamemechanics.common.generic.Vector2;
 import gamemechanics.models.Board;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Entity;

@@ -1,4 +1,4 @@
-package gamemechanics.common;
+package gamemechanics.common.generic;
 
 @FunctionalInterface
 public interface Disposable {

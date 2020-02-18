@@ -112,23 +112,32 @@ public class SapphireHudSkin extends Skin {
 		
 		// set all resources (current, max and shields)
 		for (var r : Resource.values()) {
-			for (int j = 0; j <= 1; j++) {
-				val = c.getStats().getResourceCurrent(r, j == 1);
-				lml.addArgument(prefix + camel(r.name(), "Current", (j == 0 ? "" : "Shield")), val);
-			}
-			val = c.getStats().getResourceMax(r);
+			val = c.getStats().resources.get(r).value();
+			lml.addArgument(prefix + camel(r.name(), "Current"), val);
+
+			val = c.getStats().shield.get(r).value();
+			lml.addArgument(prefix + camel(r.name(), "Current", "Shield"), val);
+			
+			val = c.getStats().resources.get(r).max(); 
 			lml.addArgument(prefix + camel(r.name()) + "Max", val);
 			
-			c.getStats().getResourceMax(r);
+//			c.getStats().getResourceMax(r);
 		}
 		
 		// set all resistances
-		for (var e : Element.values)
-			for (var m : mathMod.values()) {
-				val = (int) c.getStats().getEle(e, m, eleMod.res);
-				lml.addArgument(prefix + camel(e.name(), "Resistance", m.name()), val);
-			}
-		
+		for (var ele : Element.values) {
+			//for (var m : mathMod.values()) {
+				var res = c.getStats().resistance.get(ele);
+				val = (int) res.baseflat; //.getEle(e, m, eleMod.res);
+				lml.addArgument(prefix + camel(ele.name(), "Resistance", "flat"), val); // m.name()), val);
+
+				val = (int) res.inc; //.getEle(e, m, eleMod.res);
+				lml.addArgument(prefix + camel(ele.name(), "Resistance", "scl"), val); // m.name()), val);
+
+				val = (int) res.more; //.getEle(e, m, eleMod.res);
+				lml.addArgument(prefix + camel(ele.name(), "Resistance", "more"), val); // m.name()), val);
+			//}
+		}
 		
 		try {
 			if(SapphireDevConfig.conf.logSkinResources)

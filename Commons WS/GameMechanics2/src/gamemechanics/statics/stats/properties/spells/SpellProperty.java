@@ -6,9 +6,11 @@ import gamemechanics.statics.stats.properties.StatProperty.StatPropertyID;
 public enum SpellProperty implements StatProperty {
 	
 	isInstant, 
+	
 	cooldown, 
 	maxCastsPerTurn, 
 	maxCastsPerTurnPerTarget, 
+	
 	minRange, 
 	maxRange, 
 	minRangePattern, 

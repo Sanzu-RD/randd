@@ -1,4 +1,4 @@
-package gamemechanics.common;
+package gamemechanics.common.generic;
 
 public class Vector2 {
 	
@@ -22,21 +22,23 @@ public class Vector2 {
 		this.y -= pos.y;
 		return this;
 	}
-	
-	
-	public Vector2 copy() {
-		return new Vector2(x, y);
-	}
-
 
 	public double sum() {
 		return x + y;
+	}
+	
+	public double hypot() {
+		return Math.hypot(x, y);
 	}
 
 	public Vector2 abs() {
 		x = Math.abs(x);
 		y = Math.abs(y);
 		return this;
+	}
+	
+	public Vector2 copy() {
+		return new Vector2(x, y);
 	}
 	
 	@Override

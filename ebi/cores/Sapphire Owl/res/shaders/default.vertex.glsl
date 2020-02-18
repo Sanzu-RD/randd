@@ -249,7 +249,9 @@ void main() {
 	gl_Position = u_projViewTrans * pos;
 
 	#ifdef shadowMapFlag
+	 	// project vertex pos to shadowmap pos
 		vec4 spos = u_shadowMapProjViewTrans * pos;
+		// convert screenspace to texturespace pos
 		v_shadowMapUv.xy = (spos.xy / spos.w) * 0.5 + 0.5;
 		v_shadowMapUv.z = min(spos.z * 0.5 + 0.5, 0.998);
 	#endif //shadowMapFlag

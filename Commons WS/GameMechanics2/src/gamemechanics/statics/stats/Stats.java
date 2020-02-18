@@ -2,6 +2,8 @@ package gamemechanics.statics.stats;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+
+import data.new1.SpellModel;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.modifiers.Modifier;
@@ -17,6 +19,8 @@ import static gamemechanics.statics.stats.modifiers.eleMod.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 public class Stats {
 
@@ -29,8 +33,24 @@ public class Stats {
 	
 	private List<StatModConverter> tempConverters = new ArrayList<>();
 	
+//	private BiPredicate<Creature, SpellModel> condition;
 	
-	public void compile(Creature target) {
+//	public Stats() {
+//		
+//	}
+//	public Stats(BiPredicate<Creature, SpellModel> condition) {
+//		this.condition = condition;
+//	}
+//	
+//	public boolean canApply(Creature creature, SpellModel spell) {
+//		if(condition == null) return true;
+//		
+//		return false;
+//	}
+	
+	
+	
+ 	public void compile(Creature target) {
 		// wipe everything except fight mods (used/lost resources)
 		this.wipe();
 
@@ -196,8 +216,8 @@ public class Stats {
 		setSpellProperies(isInstant, cooldown, maxCastsPerTurn, maxCastsPerTurnPerTarget, minRange, maxRange, RangePattern.normal.val(), RangePattern.normal.val());
 	}
 	/**
-	 * @param minRangePattern - made from rangePattern enum (ex : pattern = line | diago | square)
-	 * @param maxRangePattern - made from rangePattern enum (ex : pattern = line | diago | square)
+	 * @param minRangePattern - bits made from rangePattern enum (ex : pattern = line | diago | square)
+	 * @param maxRangePattern - bits made from rangePattern enum (ex : pattern = line | diago | square)
 	 */
 	public void setSpellProperies(boolean isInstant, int cooldown, int maxCastsPerTurn, int maxCastsPerTurnPerTarget, int minRange, int maxRange, int minRangePattern, int maxRangePattern) {
 		set(isInstant ? 1 : 0, SpellProperty.isInstant, bool);
@@ -211,5 +231,26 @@ public class Stats {
 		set(maxRange, SpellProperty.maxRange, flat);
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

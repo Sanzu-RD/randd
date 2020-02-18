@@ -1,6 +1,7 @@
 package gamemechanics.data.effects.status;
 
 import data.new1.Effect;
+import gamemechanics.events.new1.Event;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Entity;
 
@@ -17,8 +18,14 @@ public class ModifyStatusEffect extends Effect {
 
 	
 	@Override
-	public void apply(Entity caster, Cell target) {
+	public void apply0(Entity caster, Cell target) {
 		
 		
+	}
+
+
+	@Override
+	public Event createAssociatedEvent() {
+		return null;
 	}
 }

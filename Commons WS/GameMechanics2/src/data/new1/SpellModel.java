@@ -6,11 +6,11 @@ import java.util.List;
 import com.google.common.collect.ImmutableList;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 
+import data.new1.spellstats.SpellStats;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
-import gamemechanics.statics.stats.Stats;
 
 public abstract class SpellModel {
 
@@ -22,20 +22,21 @@ public abstract class SpellModel {
 	public static class SpellInstance {
 		public final SpellModel model;
 		public List<Element> elements; // can change elements
-		public Stats currStats;
+		public SpellStats currStats;
 		public SpellInstance(SpellModel model) {
 			this.model = model;
-			currStats = new Stats();
+			currStats = new SpellStats();
 		}
 	}
 	
 	public abstract int id();
 
+	
 	public final ImmutableList<CreatureType> taggedCreatureTypes;
 	public final ImmutableList<Class<CreatureModel>> taggedCreatures;
 	public final ImmutableList<Element> taggedElements;
 	
-	public final Stats baseStats;
+	public final SpellStats baseStats;
 	//public final Effect[] effects;
 	public List<Effect> tooltipEffects = new ArrayList<>();
 	
@@ -47,7 +48,7 @@ public abstract class SpellModel {
 		//effects = initEffects();
 	}
 	
-	protected abstract Stats initBaseStats();
+	protected abstract SpellStats initBaseStats();
 	//protected abstract Effect[] initEffects();
 	protected abstract ImmutableList<Element> initElements();
 	protected abstract ImmutableList<CreatureType> initCreatureTypes();
@@ -64,7 +65,7 @@ public abstract class SpellModel {
 	public abstract boolean canCast(Creature caster);
 
 	/**
-	 * Check if the spell can have a specific target.
+	 * Check if the spell can have a specific target. Notably used to create the highlight preview to know whats cells are targetable
 	 */
 	public abstract boolean canTarget(Creature caster, Cell target);
 
@@ -80,7 +81,7 @@ public abstract class SpellModel {
 	 * // to get the anim, it should be an id or a string name
 	 */
 	public int getAnimationID() {
-		return 2; 
+		return 0; 
 	}
 	/**
 	 * Default pfx played on the caster's position (none by default)

@@ -9,10 +9,10 @@ import data.modules.AzurCache;
 import data.new1.CreatureModel;
 import data.new1.SpellCache;
 import data.new1.SpellModel;
-import gamemechanics.common.Vector2;
+import data.new1.spellstats.CreatureStats;
+import gamemechanics.common.generic.Vector2;
 import gamemechanics.models.Fight;
 //import gamemechanics.models.Item;
-import gamemechanics.statics.stats.Stats;
 
 public class Creature extends Entity {
 
@@ -26,7 +26,7 @@ public class Creature extends Entity {
 	/**
 	 * temporary calculated stats
 	 */
-	private Stats stats; 
+	private CreatureStats stats; 
 	/**
 	 * items
 	 */
@@ -39,7 +39,7 @@ public class Creature extends Entity {
 
 	public Creature(CreatureModel model, JadeCreature jade, AzurCache dep, Vector2 pos) {
 		this.model = model;
-		this.stats = new Stats();
+		this.stats = new CreatureStats();
 		this.spellbook = new ArrayList<>();
 		//this.items = new ArrayList<>();
 		//this.fight = fight;
@@ -63,15 +63,15 @@ public class Creature extends Entity {
 	/**
 	 * Same as getStats() except this one doesn't compile before
 	 */
-	public Stats getTempStats() {
-		return stats;
-	}
+//	public CreatureStats getTempStats() {
+//		return stats;
+//	}
 	/**
 	 * Same as getTempStats() except this one compiles them before returning
 	 */
 	@Override
-	public Stats getStats() {
-		stats.compile(this);
+	public CreatureStats getStats() {
+		//stats.compile(this);
 		return stats;
 	}
 	

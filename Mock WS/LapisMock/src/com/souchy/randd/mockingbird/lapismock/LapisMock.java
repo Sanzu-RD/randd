@@ -7,11 +7,17 @@ import com.souchy.randd.mockingbird.lapismock.screens.MockScreen3;
 
 public class LapisMock extends LapisCore {
 	
-	public static final LapisMock core = new LapisMock();
+	public LapisMock(String[] args) throws Exception {
+		super(args);
+		// TODO Auto-generated constructor stub
+	}
+
+	public static /* final */ LapisMock core;
 	
 	public static void main(String[] args) throws Exception {
+		core = new LapisMock(args);
 		LapisCore.arguments(args);
-		launch(core);
+		//launch(core);
 	}
 	
 	@Override

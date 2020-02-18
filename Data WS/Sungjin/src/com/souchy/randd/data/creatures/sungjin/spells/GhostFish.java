@@ -6,12 +6,12 @@ import com.souchy.randd.data.creatures.sungjin.SungjinModel;
 
 import data.new1.Effect;
 import data.new1.SpellModel;
+import data.new1.spellstats.SpellStats;
 import gamemechanics.data.effects.other.SummonEffect;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
-import gamemechanics.statics.stats.Stats;
 
 public class GhostFish  extends SpellModel { //implements EbiSpellData {
 	
@@ -26,7 +26,7 @@ public class GhostFish  extends SpellModel { //implements EbiSpellData {
 	}
 
 	@Override
-	protected Stats initBaseStats() {
+	protected SpellStats initBaseStats() {
 		// TODO Auto-generated method stub
 		return null;
 	}

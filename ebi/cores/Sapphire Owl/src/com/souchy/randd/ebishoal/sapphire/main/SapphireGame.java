@@ -12,7 +12,8 @@ import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.jade.meta.JadeCreature;
 
 import data.new1.CreatureModel;
-import gamemechanics.common.Vector2;
+import data.new1.spellstats.base.IntStat;
+import gamemechanics.common.generic.Vector2;
 import gamemechanics.models.Fight;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.models.entities.Entity.Team;
@@ -68,9 +69,9 @@ public class SapphireGame extends LapisGame {
 			// instance
 			Creature inst = new Creature(model, jade, SapphireOwl.data, new Vector2(0, 0));
 			// test stats
-			inst.model.baseStats.addResource(30, Resource.life);
-			inst.getStats().addFightResource(-130, Resource.life);
-			inst.getStats().addShield(600, Resource.life);
+			inst.model.baseStats.resources.put(Resource.life, new IntStat(30)); //.get(Resource.life).base = 30; //).addResource(30, Resource.life);
+			inst.getStats().resources.get(Resource.life).fight = -150; //.addFightResource(-130, Resource.life);
+			inst.getStats().shield.get(Resource.life).fight = 600; //.addShield(600, Resource.life);
 			
 			// fight
 			fight = new Fight();

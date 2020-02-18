@@ -73,7 +73,9 @@ interface LapisScreenRenderer extends Screen {
 		{
 			// clear the screen with a transparent background for the fbo
 			clearScreen(0, 0, 0, 0);
+			// world
 			renderWorldContainer();
+			// particle effects
 			renderParticleEffectsContainer();
 		}
 		getFBO().end();
@@ -84,7 +86,6 @@ interface LapisScreenRenderer extends Screen {
 		Texture tex = getFBO().getColorBufferTexture();
 		var fboRegion = new TextureRegion(tex);
 		fboRegion.flip(false, true);
-		
 		
 		// render the resulting texture through the sprite batch of the post-processor
 		getSpriteBatch().begin();
@@ -106,6 +107,7 @@ interface LapisScreenRenderer extends Screen {
 		// render lines
 		if(getLining() != null) getLining().renderLines();
 		
+		// render UI
 		renderView(delta);
 		
 	}
@@ -141,7 +143,8 @@ interface LapisScreenRenderer extends Screen {
 		//if(greedyOrInstances) 
 		//	shadowBatch.render(inst, getEnvironment()); // world.cache, shadowEnv);
 		//else 
-			getShadowBatch().render(getWorld().cache, getEnvironment());
+			// TODO create shadows *only for characters and z>0 blocks* then project *only onto blocks z=0*
+			getShadowBatch().render(getWorld().cache, getEnvironment()); 
 		// dont render shadows on highlight effects like traps, glyphs, etc
 		// shadowBatch.render(cellHighlighterInst);
 		//if(creatures) shadowBatch.render(characters, getEnvironment());

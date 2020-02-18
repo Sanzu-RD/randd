@@ -174,41 +174,41 @@ public class CreatureSheet extends SapphireWidget {
 
 	@LmlAction("getLife")
 	public int getLifeCurrent() {
-		return creature.getStats().getResourceCurrent(Resource.life, false);
+		return creature.getStats().resources.get(Resource.life).value(); //.getResourceCurrent(Resource.life, false);
 	}
 	@LmlAction("getLifeShield")
 	public int getLifeShield() {
-		return creature.getStats().getResourceCurrent(Resource.life, true);
+		return creature.getStats().shield.get(Resource.life).value(); //getResourceCurrent(Resource.life, true);
 	}
 	@LmlAction("getLifeMax")
 	public int getLifeMax() {
-		return creature.getStats().getResourceMax(Resource.life);
+		return creature.getStats().resources.get(Resource.life).max(); //getResourceMax(Resource.life);
 	}
 
 	@LmlAction("getMana")
 	public int getManaCurrent() {
-		return creature.getStats().getResourceCurrent(Resource.mana, false);
+		return creature.getStats().resources.get(Resource.mana).value(); //getResourceCurrent(Resource.mana, false);
 	}
 	@LmlAction("getManaShield")
 	public int getManaShield() {
-		return creature.getStats().getResourceCurrent(Resource.mana, true);
+		return creature.getStats().shield.get(Resource.mana).value(); //getResourceCurrent(Resource.mana, true);
 	}
 	@LmlAction("getManaMax")
 	public int getManaMax() {
-		return creature.getStats().getResourceMax(Resource.mana);
+		return creature.getStats().resources.get(Resource.mana).max(); //getResourceMax(Resource.mana);
 	}
 
 	@LmlAction("getMove")
 	public int getMoveCurrent() {
-		return creature.getStats().getResourceCurrent(Resource.move, false);
+		return creature.getStats().resources.get(Resource.move).value(); //getResourceCurrent(Resource.move, false);
 	}
 	@LmlAction("getMoveShield")
 	public int getMoveShield() {
-		return creature.getStats().getResourceCurrent(Resource.move, true);
+		return creature.getStats().shield.get(Resource.move).value(); //getResourceCurrent(Resource.move, true);
 	}
 	@LmlAction("getMoveMax")
 	public int getMoveMax() {
-		return creature.getStats().getResourceMax(Resource.move);
+		return creature.getStats().resources.get(Resource.move).max(); //getResourceMax(Resource.move);
 	}
 	
 }

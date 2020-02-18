@@ -7,13 +7,16 @@ import com.google.common.eventbus.EventBus;
 
 import gamemechanics.common.Action;
 import gamemechanics.common.ActionPipeline;
+import gamemechanics.events.new1.Event;
+import gamemechanics.events.new1.EventPipeline;
 import gamemechanics.models.entities.Creature;
+import gamemechanics.models.entities.Entity;
 import gamemechanics.models.entities.Entity.Team;
 
 
 public class Fight {
 	
-	public EventBus bus;
+	//public EventPipeline bus;
 	
 	/**
 	 * Board
@@ -41,7 +44,7 @@ public class Fight {
 	
 	
 	public Fight() {
-		bus = new EventBus();
+		//bus = new EventPipeline();
 		
 		board = new Board();
 		
@@ -62,6 +65,11 @@ public class Fight {
 			case B -> teamB.add(c);
 			case C -> teamC.add(c);
 		}
+	}
+	
+	public void postAll(Event event) {
+		List<Entity> entities = null;
+		entities.forEach(e -> e.handlers.post(e, event));
 	}
 	
 	

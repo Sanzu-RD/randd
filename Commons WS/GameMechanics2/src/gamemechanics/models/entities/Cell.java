@@ -2,7 +2,7 @@ package gamemechanics.models.entities;
 
 import java.util.List;
 
-import gamemechanics.common.Vector2;
+import gamemechanics.common.generic.Vector2;
 
 public class Cell extends Entity {
 	

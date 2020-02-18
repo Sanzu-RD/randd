@@ -9,7 +9,7 @@ public class Universe {
 
 	
 	static {
-		injector = Guice.createInjector(new DefaultMechanicsModule());
+	//	injector = Guice.createInjector(new DefaultMechanicsModule());
 	}
 	
 }

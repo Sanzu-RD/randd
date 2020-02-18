@@ -3,44 +3,28 @@ package data.new1.timed;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.eventbus.Subscribe;
+
 import data.new1.Effect;
-import gamemechanics.common.Disposable;
+import gamemechanics.common.generic.Disposable;
+import gamemechanics.events.OnLifeDmgInstance;
 import gamemechanics.events.OnCanCastActionCheck.OnCanCastActionHandler;
 import gamemechanics.models.entities.Entity;
 import gamemechanics.statics.stats.StatMod;
-import gamemechanics.statics.stats.Stats;
 
 /**
  * 
- * How to make a status :
+ * How to make a status : <br>
  * 
- * 1. Create a subclass of status 
- * 2. Implement its fusion() policy
+ * 1. Create a subclass of status  <br>
+ * 2. Implement its fusion() policy <br>
  * 3. Implement any event handler so it can react to events (ex : "implements OnCanCastActionHandler")
+ * 
  * 
  * @author Souchy
  *
  */
-public abstract class Status extends TimedEffect implements Disposable {
-
-	public abstract int id();
-	
-	// buff stats à compiler dans les stats de la cible du status
-	public Stats buffs = new Stats(); //List<StatMod> buffs = new ArrayList<>();
-	
-	public List<Effect> tooltipEffects = new ArrayList<>();
-	
-	public Status(Entity source, Entity target) {
-		this.source = source;
-		this.target = target;
-		source.fight.bus.register(this);
-	}
-	
-	@Override
-	public void dispose() {
-		super.dispose();
-	}
-	
+public abstract class Status /* extends TimedEffect */ implements Disposable {
 
 	public static abstract class Passive extends Status {
 		public Passive(Entity source) {
@@ -49,13 +33,55 @@ public abstract class Status extends TimedEffect implements Disposable {
 			this.canRemove = false;
 		}
 		@Override 
-		public void fuse(TimedEffect s) {
+		public boolean fuse(Status s) {
 			// no fusion
+			return false;
 		}
 	}
 
+	public abstract int id();
+	
+	public Entity source;
+	public Entity target;
+	public Effect parent;
+	
+	public int stacks;
+	public int duration;
+	public boolean canRemove;
+	public boolean canDebuff;
+	
+	/** this or a toString() / description() ? */
+	public List<Effect> tooltipEffects = new ArrayList<>();
+	
+	public Status(Entity source, Entity target) {
+		this.source = source;
+		this.target = target;
+		//source.fight.bus.register(this);
+	}
+
+	/**
+	 * Fuse behaviour to affect stacks count, duration, both, or neither. 
+	 * @return True if fused. False means it doesnt fuse so you have 2 instances of the status with each their own duration and stacks
+	 */
+	public abstract boolean fuse(Status s);
+	
+	/**
+	 * When THIS status is added to a statuslist
+	 */
+	public abstract void onAdd();
+	/** 
+	 * When THIS status is lost from a statuslist
+	 */
+	public abstract void onLose();
 	
 	public String getIconName() {
 		return Integer.toString(id());
+	}
+
+	@Override
+	public void dispose() {
+		source = null;
+		target = null;
+		parent = null;
 	}
 }

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 
 import data.new1.Effect;
 import data.new1.SpellModel;
+import data.new1.spellstats.SpellStats;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.CreatureType;
@@ -19,7 +20,7 @@ public class ShiningArmour extends SpellModel {
 	}
 
 	@Override
-	protected Stats initBaseStats() {
+	protected SpellStats initBaseStats() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -114,6 +114,8 @@ public class MockScreen3 extends BaseScreen {
 	boolean particles = true;
 	boolean creatures = true;
 
+
+	static String internal = "bin/";
 	
 	public MockScreen3() {
 		super();
@@ -130,23 +132,23 @@ public class MockScreen3 extends BaseScreen {
 //		Log.info("test : " + dir.path());
 //		for(var f : dir.list())
 //			Log.info("test : " + f.type() + ",  " + f.path());
-
+		
 		var blender = "G:/Assets/myblender/";
 		var assettests = "G:/Assets/test/";
 		var pfxTestPath = "G:/Assets/pfx/test/";
-		LapisResources.loadModels(Gdx.files.internal("res/delete/"));
-		LapisResources.loadModels(Gdx.files.internal("res/models/"));
-		LapisResources.loadTextures(Gdx.files.internal("res/textures/"));
-		LapisResources.loadI18NBundles(Gdx.files.internal("res/i18n/"));
-		LapisResources.loadParticleEffects(Gdx.files.internal("res/fx"), params);
+		LapisResources.loadModels(Gdx.files.internal(internal+"delete/"));
+		LapisResources.loadModels(Gdx.files.internal(internal+"models/"));
+		LapisResources.loadTextures(Gdx.files.internal(internal+"textures/"));
+		LapisResources.loadI18NBundles(Gdx.files.internal(internal+"i18n/"));
+		LapisResources.loadParticleEffects(Gdx.files.internal(internal+"fx/"), params);
 		LapisResources.loadParticleEffects(Gdx.files.absolute(pfxTestPath), params);
 		LapisResources.loadModels(Gdx.files.absolute(blender));
 		LapisResources.loadTextures(Gdx.files.absolute(assettests));
 		
 		Log.info("assets : { " + String.join(", ", LapisResources.assets.getAssetNames()) + " }");
 		
-		String vert = Gdx.files.internal("shaders/default.vertex.glsl").readString();
-		String frag = Gdx.files.internal("shaders/default.fragment.glsl").readString();
+		String vert = Gdx.files.internal(internal+"shaders/default.vertex.glsl").readString();
+		String frag = Gdx.files.internal(internal+"shaders/default.fragment.glsl").readString();
 		modelBatch = new ModelBatch(vert, frag);
 		var asdf = new ModelBatch(new DefaultShaderProvider());
 		var mod = new Model();
@@ -169,7 +171,7 @@ public class MockScreen3 extends BaseScreen {
 		// List<FileHandle> files =
 		// MockCore.core.getGame().modelDiscoverer.explore("models");
 		// MockCore.core.getGame().modelManager.loadSync(files);
-		Model spider = LapisResources.get("res/delete/Wasp.g3dj"); //LapisMock.core.getGame().modelManager.loadSync("models/Wasp.g3dj");
+		Model spider = LapisResources.get(internal+"delete/Wasp.g3dj"); //LapisMock.core.getGame().modelManager.loadSync("models/Wasp.g3dj");
 		System.out.println("spider 1 = " + spider);
 //		Model spider = LapisResources.assets.get("res/delete/Wasp.g3dj", Model.class); //LapisMock.core.getGame().modelManager.get("Wasp");
 //		System.out.println("spider 2 = " + spider);
@@ -219,7 +221,7 @@ public class MockScreen3 extends BaseScreen {
 		// GlobalLML.init();
 		GlobalLML.getLmlParser().createView(view, view.getTemplateFile());
 		//var test2 = GlobalLML.getLmlParser().parseTemplate(Gdx.files.internal("ui/test2.lml")).first();
-		Test2 test2 = LmlWidgets.createGroup("ui/test2.lml");
+		Test2 test2 = LmlWidgets.createGroup(internal+"ui/test2.lml");
 		test2.refresh("1");
 		view.getStage().addActor(test2);
 		
@@ -228,7 +230,7 @@ public class MockScreen3 extends BaseScreen {
 		// GlobalLML.lml().saveDtdSchema(Gdx.files.local("lml.dtd"));
 		
 		// PARTICLE EFFECTS :
-		var fxPath = "res/fx/laser1.pfx";
+		var fxPath = internal+"fx/laser1.pfx";
 		var kunaifxPath = pfxTestPath + "unlimitedKunaiWorks.pfx"; // "kunaiNova8.pfx";
 		// var fx = Gdx.files.internal(fxPath);
 		// System.out.println("fx : " + fx);
@@ -371,7 +373,7 @@ public class MockScreen3 extends BaseScreen {
 		
 		@Override
 		public FileHandle getTemplateFile() {
-			return Gdx.files.internal("ui/test1.lml");
+			return Gdx.files.internal(internal+"ui/test1.lml");
 		}
 		
 		@Override
@@ -409,12 +411,12 @@ public class MockScreen3 extends BaseScreen {
 					// Registering global action container:
 					.actions("global", GlobalLMLActions.class)
 					// Adding localization support:
-					.i18nBundle(I18NBundle.createBundle(Gdx.files.internal("res/i18n/ux/bundle")))
+					.i18nBundle(I18NBundle.createBundle(Gdx.files.internal(internal+"i18n/ux/bundle")))
 					// custom tags
 					.tag(new Test2TagProvider(), "test2")
 					.tag(new AsdfTagProvider(), "asdf")
 					// Add custom skin
-					.skin(new Skin(Gdx.files.internal("uiskin.json"))).build();
+					.skin(new Skin(Gdx.files.internal(internal+"ui/uiskin.json"))).build();
 		}
 	}
 	
@@ -429,7 +431,7 @@ public class MockScreen3 extends BaseScreen {
 				// Same language.
 				return;
 			}
-			GlobalLML.lml().getParser().getData().setDefaultI18nBundle(I18NBundle.createBundle(Gdx.files.internal("i18n/bundle"), new Locale(localeId)));
+			GlobalLML.lml().getParser().getData().setDefaultI18nBundle(I18NBundle.createBundle(Gdx.files.internal(internal+"i18n/bundle"), new Locale(localeId)));
 			GlobalLML.lml().reloadViews();
 		}
 	}
@@ -596,8 +598,8 @@ public class MockScreen3 extends BaseScreen {
 	@Override
 	public void setupShader() {
 		// TODO Auto-generated method stub
-		String vert = Gdx.files.internal("shaders/depth.vertex.glsl").readString();
-		String frag = Gdx.files.internal("shaders/depth.fragment.glsl").readString();
+		String vert = Gdx.files.internal(internal+"shaders/depth.vertex.glsl").readString();
+		String frag = Gdx.files.internal(internal+"shaders/depth.fragment.glsl").readString();
 		shadowBatch = new ModelBatch(new DepthShaderProvider(vert, frag));
 	}
 	
@@ -617,7 +619,7 @@ public class MockScreen3 extends BaseScreen {
 	{
 		fbo = new FrameBuffer(Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true, true);
 		
-		ShaderLoader.BasePath = "shaders/manuelbua_shaders/";
+		ShaderLoader.BasePath = internal+"shaders/manuelbua_shaders/";
 		pp = new PostProcessor(false, false, true);
 		Bloom bloom = new Bloom((int) (Gdx.graphics.getWidth() * 0.25f), (int) (Gdx.graphics.getHeight() * 0.25f));
 		bloom.enableBlending(1, 1);

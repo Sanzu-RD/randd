@@ -1,11 +1,12 @@
 package gamemechanics.models.entities;
 
+import data.new1.spellstats.CreatureStats;
 import data.new1.timed.StatusList;
-import gamemechanics.common.Vector2;
+import gamemechanics.common.generic.Vector2;
+import gamemechanics.events.new1.EventPipeline;
 import gamemechanics.models.Fight;
 import gamemechanics.statics.properties.Properties;
 import gamemechanics.statics.properties.Targetability;
-import gamemechanics.statics.stats.Stats;
 
 public abstract class Entity {
 
@@ -24,6 +25,9 @@ public abstract class Entity {
 
 	/** board position */
 	public Vector2 pos;
+	
+	/** filled and emptied by StatusAdd and StatusLose effects */
+	public EventPipeline handlers;
 
 	/** Statuses */
 	private StatusList statuses;
@@ -66,12 +70,13 @@ public abstract class Entity {
 	 * Default empty stat table.
 	 * Override for creatures
 	 */
-	public Stats getStats() {
-		return new Stats();
+	public CreatureStats getStats() {
+		return new CreatureStats();
 	}
+	
 	/**
 	 * Default empty status table. 
-	 * Override for creatures, cells
+	 * Override for creatures & cells
 	 */
 	public StatusList getStatus() {
 		return statuses; //new StatusList();

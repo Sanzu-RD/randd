@@ -1,10 +1,13 @@
 package com.souchy.randd.data.s1.spells.dark;
 
+import java.util.List;
+
 import com.google.common.collect.ImmutableList;
 import com.souchy.randd.annotationprocessor.ID;
 
 import data.new1.Effect;
 import data.new1.SpellModel;
+import data.new1.spellstats.SpellStats;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.CreatureType;
@@ -24,8 +27,15 @@ public class SummonSkeleton extends SpellModel { //implements EbiSpellData {
 		return 6;
 	}
 
+	public List<Effect> previsualisation(Creature caster, Cell target) {
+		var stats = new Stats();
+		stats.compile(caster);
+		return null;
+	}
+	
+	
 	@Override
-	protected Stats initBaseStats() {
+	protected SpellStats initBaseStats() {
 		// TODO Auto-generated method stub
 		return null;
 	}

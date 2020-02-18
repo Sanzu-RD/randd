@@ -1,16 +1,14 @@
 package gamemechanics.statics.properties;
 
-import gamemechanics.common.Vector2;
+import gamemechanics.common.generic.Vector2;
 
 public enum Orientation {
 	
 	North {
-
 		@Override
 		public Vector2 getPositionByDirection(Vector2 target) {
 			return target.copy().add(0, 1); //target.x, target.y + 1)
 		}
-		
 	},
 	East {
 		@Override

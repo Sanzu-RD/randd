@@ -6,10 +6,6 @@ import gamemechanics.models.entities.Entity;
 
 /**
  * 
- * Statuses are different from Buffs.
- * Buffs give stats for the time of their duration.
- * Statuses react to events.
- * Both can be used to check a condition.
  * 
  * @author Blank
  * @date 27 oct. 2019
@@ -26,8 +22,12 @@ public abstract class TimedEffect implements Disposable {
 	public boolean canDebuff;
 
 	
-	/** override fuse behaviour to affect stacks count, duration, both, or neither */
-	public abstract void fuse(TimedEffect s);
+	/**
+	 * override fuse behaviour to affect stacks count, duration, both, or neither. 
+	 * @param s
+	 * @return True if fused, false otherwise
+	 */
+	public abstract boolean fuse(TimedEffect s);
 	
 	public void stackAdd(int stacks) {
 		this.stacks += stacks;
