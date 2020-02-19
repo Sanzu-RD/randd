@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.creatures.sungjin.SungjinModel;
+import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisResources;
@@ -59,17 +60,19 @@ public class SapphireGame extends LapisGame {
 			int id = 1000;
 			// jade customization
 			JadeCreature jade = new JadeCreature();
-			jade.creatureModelID = id; //model.id();
-			//jade.itemIDs = new int[4];
+			jade.affinities = new int[Elements.values().length];
+			jade.affinities[Elements.air.ordinal()] = 30; // personalized 30% air affinity
+			jade.creatureModelID = id; 
 			jade.spellIDs = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 			for (int i = 0; i < jade.spellIDs.length; i++)
 				jade.spellIDs[i] += jade.creatureModelID; //model.id();
 			// base model
 			CreatureModel model = SapphireOwl.data.creatures.get(jade.creatureModelID);
+			// override model stats
+			model.baseStats.resources.put(Resource.life, new IntStat(30)); 
 			// instance
 			Creature inst = new Creature(model, jade, SapphireOwl.data, new Vector2(0, 0));
-			// test stats
-			inst.model.baseStats.resources.put(Resource.life, new IntStat(30)); //.get(Resource.life).base = 30; //).addResource(30, Resource.life);
+			// test stats//.get(Resource.life).base = 30; //).addResource(30, Resource.life);
 			inst.getStats().resources.get(Resource.life).fight = -150; //.addFightResource(-130, Resource.life);
 			inst.getStats().shield.get(Resource.life).fight = 600; //.addShield(600, Resource.life);
 			

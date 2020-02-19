@@ -12,7 +12,7 @@ import data.new1.SpellModel;
 import data.new1.spellstats.CreatureStats;
 import gamemechanics.common.generic.Vector2;
 import gamemechanics.models.Fight;
-//import gamemechanics.models.Item;
+import gamemechanics.statics.Element;
 
 public class Creature extends Entity {
 
@@ -24,13 +24,9 @@ public class Creature extends Entity {
 	public CreatureModel model;
 	
 	/**
-	 * temporary calculated stats
+	 * compiled stats (includes model, jade and statuses stats)
 	 */
 	private CreatureStats stats; 
-	/**
-	 * items
-	 */
-	//public List<Item> items;
 	/**
 	 * spell book containing spells //~~spell groups containing spell~~
 	 */
@@ -39,39 +35,29 @@ public class Creature extends Entity {
 
 	public Creature(CreatureModel model, JadeCreature jade, AzurCache dep, Vector2 pos) {
 		this.model = model;
-		this.stats = new CreatureStats();
 		this.spellbook = new ArrayList<>();
-		//this.items = new ArrayList<>();
-		//this.fight = fight;
 		this.pos = pos;
-		
-		for(int si : jade.spellIDs) {
-			var s = dep.spells.get(si);
-			if(s != null) spellbook.add(s);
-//			for(var sm : model.spells) {
-//				if(sm.id() == si) {
-//					spellbook.add(sm); //new Spell(sm));
-//				}
-//			}
+
+		// copy model stats into instance stats
+		this.stats = model.baseStats.copy(); 
+		// then add jade stats
+		for(int i = 0; i < Element.count(); i++) {
+			this.stats.affinity.get(Element.values.get(i)).inc += jade.affinities[i];
 		}
-//		for(int ii : jade.itemIDs) {
-//			var i = dep.items.get(ii);
-//			if(i != null) items.add(i);
-//		}
+		
+		// chosen spells
+		for(int i : jade.spellIDs) {
+			var s = dep.spells.get(i);
+			if(s != null) spellbook.add(s);
+		}
+
 	}
 	
-	/**
-	 * Same as getStats() except this one doesn't compile before
-	 */
-//	public CreatureStats getTempStats() {
-//		return stats;
-//	}
 	/**
 	 * Same as getTempStats() except this one compiles them before returning
 	 */
 	@Override
 	public CreatureStats getStats() {
-		//stats.compile(this);
 		return stats;
 	}
 	

@@ -35,5 +35,15 @@ public class IntStat implements Component {
 		return (int) val;
 	}
 	
+	public IntStat copy() {
+		var s = new IntStat(base);
+		s.baseflat = baseflat;
+		s.inc = inc;
+		s.incflat = incflat;
+		s.more = more;
+		s.fight = fight;
+		return s;
+	}
+	
 	
 }

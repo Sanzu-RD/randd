@@ -57,6 +57,24 @@ public class CreatureStats {
 			shield.put(v, new IntStat(0));
 		}
 	}
+	
+	public CreatureStats copy() {
+		final var s = new CreatureStats();
+		
+		resources.forEach((r, i) -> s.resources.put(r, i.copy()));
+		shield.forEach((r, i) -> s.shield.put(r, i.copy()));
+		
+		affinity.forEach((r, i) -> s.affinity.put(r, i.copy()));
+		resistance.forEach((r, i) -> s.resistance.put(r, i.copy()));
+		penetration.forEach((r, i) -> s.penetration.put(r, i.copy()));
+		
+		s.healing = healing.copy();
+		s.healingRecv = healingRecv.copy();
+		s.range = range.copy();
+		s.summons = summons.copy();
+		
+		return s;
+	}
 
 //	public Predicate<Creature> predicate = (c) -> true;
 //	public CreatureStats() {
