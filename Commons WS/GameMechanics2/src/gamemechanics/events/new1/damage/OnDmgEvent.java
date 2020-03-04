@@ -12,7 +12,6 @@ public class OnDmgEvent extends Event {
 	
 	/** interface for statuses to implement */
 	public interface OnDmgHandler extends Handler<OnDmgEvent> {
-		@Subscribe
 		public void handle(OnDmgEvent e);
 	}
 	
