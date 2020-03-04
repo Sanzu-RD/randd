@@ -1,13 +1,6 @@
 package data.new1;
 
-import java.util.List;
-
-import com.google.common.collect.ImmutableList;
-
 import data.new1.spellstats.CreatureStats;
-import data.new1.timed.Status;
-import gamemechanics.statics.CreatureType;
-import gamemechanics.statics.Element;
 
 public abstract class CreatureModel {
 

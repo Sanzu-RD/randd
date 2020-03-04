@@ -27,7 +27,7 @@ public class EbiBoardGenerator extends BoardGenerator {
 				Cell cell = new Cell(x, y); //EbiCell(x, y, new ModelInstance(m));
 
 				for(int t = 0; t < Targetability.values().length; t++) 
-					cell.properties.setCan(Targetability.values()[t], type.targetability[t]);
+					cell.targeting.setCan(Targetability.values()[t], type.targetability[t]);
 				board.cells.put(x, y, cell);
 			}
 		}

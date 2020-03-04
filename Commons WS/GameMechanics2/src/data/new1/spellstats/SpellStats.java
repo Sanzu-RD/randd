@@ -1,9 +1,11 @@
 package data.new1.spellstats;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
+import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableList;
 
@@ -11,15 +13,16 @@ import data.new1.SpellModel;
 import data.new1.spellstats.base.BoolStat;
 import data.new1.spellstats.base.IntStat;
 import data.new1.spellstats.base.ObjectStat;
+import data.new1.spellstats.imp.TargetConditions;
 import data.new1.timed.Status;
 import gamemechanics.common.Aoe;
 import gamemechanics.common.AoeBuilders;
+import gamemechanics.data.effects.damage.Damage;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.models.entities.Entity;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
-import gamemechanics.statics.filters.AoePattern;
 import gamemechanics.statics.stats.properties.Resource;
 
 public class SpellStats { //extends Entyty {
@@ -27,11 +30,11 @@ public class SpellStats { //extends Entyty {
 	// cast costs
 	public Map<Resource, IntStat> costs;
 	
-	// cast ranges
-	public IntStat minrange;
-	public IntStat maxrange;
-	public IntStat minRangePattern;
-	public IntStat maxRangePattern;
+	// cast ranges and pattern for the cast range
+	public IntStat minRangeRadius;
+	public IntStat maxRangeRadius;
+	public ObjectStat<Aoe> minRangePattern;
+	public ObjectStat<Aoe> maxRangePattern;
 	
 	// cast cooldowns
 	public IntStat cooldown;
@@ -56,11 +59,15 @@ public class SpellStats { //extends Entyty {
 	
 	public static class Shockbomb extends SpellModel {
 		// this doesnt apply to the cast, it applies to an effect so it's specific to this spell so it's here
-		// aoe pattern for the shock
-		public IntStat shockPattern;
+		// aoe pattern for the shock;
+		//public IntStat shockPattern;
 		public IntStat shockRadiusMin;
 		public IntStat shockRadiusMax;
-
+		public ObjectStat<Supplier<Aoe>> shockPattern = new ObjectStat<>(() -> {
+			return AoeBuilders.circle.apply(shockRadiusMax.value())
+			       .sub(AoeBuilders.circle.apply(shockRadiusMin.value()));
+		});
+		
 		@Override
 		public int id() {
 			// TODO Auto-generated method stub
@@ -83,8 +90,14 @@ public class SpellStats { //extends Entyty {
 		}
 		@Override
 		public void onCast(Creature caster, Cell target) {
-			// TODO Auto-generated method stub
 			
+			var aoe = shockPattern.base.get();
+			var board = target.fight.board;
+			
+			// for all cells in the AOE
+			aoe.table.foreach((x, y) -> {
+				new Damage(shockPattern.base.get(), new TargetConditions(), new HashMap<>());
+			});
 		}
 		@Override
 		public boolean canCast(Creature caster) {
@@ -101,7 +114,10 @@ public class SpellStats { //extends Entyty {
 		public void onGain(Creature c) {
 			for(var spell : c.spellbook) {
 				if(spell.id() == 0) {
-					((Shockbomb)spell).shockPattern.setter = new IntStat(AoePattern.Square3.ordinal());
+					var s = ((Shockbomb)spell);
+					s.shockPattern.setter = () -> AoeBuilders.circle.apply(s.shockRadiusMax.value())
+													.sub(AoeBuilders.circle.apply(s.shockRadiusMin.value()));
+					//new IntStat(AoePattern.Square3.ordinal());
 				}
 			}
 		}
@@ -132,7 +148,7 @@ public class SpellStats { //extends Entyty {
 			for(var spell : c.spellbook) {
 				var aoes = new ArrayList<ObjectStat<Aoe>>(); // spell.aoes;
 				aoes.forEach(a -> {
-					a.replacement = AoeBuilders.single.get(); //new IntStat(AoePattern.Single.ordinal());
+					a.setter = AoeBuilders.single.get(); //new IntStat(AoePattern.Single.ordinal());
 				});
 			}
 		}

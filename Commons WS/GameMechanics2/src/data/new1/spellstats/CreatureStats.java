@@ -2,43 +2,67 @@ package data.new1.spellstats;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 
-import data.new1.SpellModel;
+import com.souchy.randd.commons.tealwaters.logging.Log;
+
+import data.new1.spellstats.base.BoolStat;
 import data.new1.spellstats.base.IntStat;
-import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.properties.Resource;
 
 public class CreatureStats {
 	
-	/** resources */
+	/** 
+	 * resources 
+	 */
 	public Map<Resource, IntStat> resources;
-	
-	/** shields for each resources */
+	/** 
+	 * shields for each resources 
+	 */
 	public Map<Resource, IntStat> shield;
-	
-	/** how spells scale */
+	/** 
+	 * how spells scale 
+	 * sourcedmg = (baseflat + casterflat) * (1 + baseinc * casterinc / 100) * (1 + basemore * castermore / 100)
+	 */
 	public Map<Element, IntStat> affinity;
-	
-	/** how damage scales */
+	/** 
+	 * scales against damage 
+	 * finaldmg = sourcedmg * (1 + (casterPenMore-targetResMore) / 100) * (1 + (casterPenInc-targetResInc) / 100 ) + (casterPenFlat-targetResFlat)
+	 */
 	public Map<Element, IntStat> resistance; 
 	
-	/** counter to resists */
+	/** 
+	 * penetration counters resists 
+	 * finaldmg = sourcedmg * (1 + (casterPenMore-targetResMore) / 100) * (1 + (casterPenInc-targetResInc) / 100 ) + (casterPenFlat-targetResFlat)
+	 */
 	public Map<Element, IntStat> penetration; 
 	
-	/** this adds and multiplies to healing spells casts */
-	public IntStat healing;
+	/** 
+	 * this adds and multiplies to healing spells casts 
+	 * sourceheal =  (baseflat + casterflat) * (1 + baseinc * casterinc / 100) * (1 + basemore * castermore / 100)
+	 */
+	public IntStat healingAffinity;
 	
-	/** this adds and multiplies to healing spells received */
-	public IntStat healingRecv;
+	/** 
+	 * this adds and multiplies to healing spells received 
+	 * finalheal = sourceheal * (1 - targetResMore / 100) * (1 - targetResInc / 100 ) - targetResFlat
+	 */
+	public IntStat healingRes;
 	
-	/** range increase value */
+	/** 
+	 * range increase value 
+	 */
 	public IntStat range;
 	
-	/** max number of summons */
+	/** 
+	 * max number of summons
+	 */
 	public IntStat summons;
+	/**
+	 * if creature is visible/invisible
+	 */
+	public BoolStat visible;
+	
 	
 	public CreatureStats() {
 		resources = new HashMap<>();
@@ -46,15 +70,23 @@ public class CreatureStats {
 		affinity = new HashMap<>();
 		resistance = new HashMap<>();
 		penetration = new HashMap<>();
-		healing = new IntStat(0);
-		healingRecv = new IntStat(0);
+		
+		healingAffinity = new IntStat(0);
+		healingRes = new IntStat(0);
 		range = new IntStat(0);
 		summons = new IntStat(0);
-		// peut-être une stat pour aoeRadiusModificator / AoeRange
+		visible = new BoolStat(true);
+		// + peut-être une stat pour aoeRadiusModificator / AoeRange
 		
 		for(var v : Resource.values()) {
 			resources.put(v, new IntStat(0));
 			shield.put(v, new IntStat(0));
+		}
+		for(var ele : Element.values) {
+			//Log.info("creature stat element : " + ele);
+			affinity.put(ele, new IntStat(0));
+			resistance.put(ele, new IntStat(0));
+			penetration.put(ele, new IntStat(0));
 		}
 	}
 	
@@ -68,12 +100,24 @@ public class CreatureStats {
 		resistance.forEach((r, i) -> s.resistance.put(r, i.copy()));
 		penetration.forEach((r, i) -> s.penetration.put(r, i.copy()));
 		
-		s.healing = healing.copy();
-		s.healingRecv = healingRecv.copy();
+		s.healingAffinity = healingAffinity.copy();
+		s.healingRes = healingRes.copy();
 		s.range = range.copy();
 		s.summons = summons.copy();
+		s.visible = visible.copy();
 		
 		return s;
+	}
+	
+	
+	public int getCurrent(Resource res) {
+		return resources.get(res).value();
+	}
+	public int getMax(Resource res) {
+		return resources.get(res).value();
+	}
+	public int getMissing(Resource res) {
+		return (int) resources.get(res).fight;
 	}
 
 //	public Predicate<Creature> predicate = (c) -> true;

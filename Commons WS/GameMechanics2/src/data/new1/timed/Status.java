@@ -10,7 +10,6 @@ import gamemechanics.common.generic.Disposable;
 import gamemechanics.events.OnLifeDmgInstance;
 import gamemechanics.events.OnCanCastActionCheck.OnCanCastActionHandler;
 import gamemechanics.models.entities.Entity;
-import gamemechanics.statics.stats.StatMod;
 
 /**
  * 

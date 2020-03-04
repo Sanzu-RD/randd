@@ -28,6 +28,7 @@ public class SapphireGame extends LapisGame {
 	
 	@Override
 	public void init() {
+		Elements.values(); // init elements
 		
 		//LapisResources.loadResources(SapphireOwl.data);
 		

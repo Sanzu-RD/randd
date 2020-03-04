@@ -9,6 +9,9 @@ public interface Element extends StatProperty {
 	
 	public static List<Element> values = new ArrayList<>();
 	
+	/**
+	 * Global affinity
+	 */
 	public static Element global = new Element() {
 		{
 			StatPropertyID.register(this);
@@ -17,7 +20,6 @@ public interface Element extends StatProperty {
 			return "global";
 		}
 	};
-	
 	public String name();
 	
 	public static int count() {

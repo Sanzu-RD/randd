@@ -27,7 +27,7 @@ public class EventPipeline {
 		reactors.post(e);
 	}
 
-	/** Status Remove Effect : */
+	/** StatusRemove effect : */
 	public void unregister(Status status) {
 		// Status Remove Effect
 		if(status instanceof Handler) {
@@ -40,7 +40,7 @@ public class EventPipeline {
 		}
 	}
 	
-	/** Status Add Effect : */
+	/** StatusAdd effect : */
 	public void register(Status status) {
 		if(status instanceof Handler) {
 			Handler handler = (Handler) status;

@@ -2,10 +2,14 @@ package data.new1.spellstats.base;
 
 public class ObjectStat<T> {
 	public T base;
-	public T replacement;
+	public T setter;
+	
+	public ObjectStat(T t) {
+		this.base = t;
+	}
 	
 	public T value() {
-		if(replacement != null) return replacement;
+		if(setter != null) return setter;
 		return base;
 	}
 	

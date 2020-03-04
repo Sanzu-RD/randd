@@ -12,11 +12,11 @@ public enum CellType {
 	Type05(0, 1, 0, 1),
 	Type06(0, 1, 1, 0),
 	Type07(0, 1, 1, 1),
-	Type08(1, 0, 0, 0), // impossible (walk on but no walk through)
+	Type08(1, 0, 0, 0), // impossible type (walk on but no walk through)
 	Type09(1, 0, 0, 1),
-	Type10(1, 0, 1, 0), // impossible (walk on but no walk through)
-	Type11(1, 0, 1, 1), // impossible (walk on but no walk through)
-	Type12(1, 1, 0, 0), // 
+	Type10(1, 0, 1, 0), // impossible type (walk on but no walk through)
+	Type11(1, 0, 1, 1), // impossible type (walk on but no walk through)
+	Type12(1, 1, 0, 0), // walk on/through but no cast on/through ? how
 	Type13(1, 1, 0, 1),
 	Type14(1, 1, 1, 0), // // mist : can walk on/through, can cast on, but not through
 	Type15(1, 1, 1, 1), // normal cell

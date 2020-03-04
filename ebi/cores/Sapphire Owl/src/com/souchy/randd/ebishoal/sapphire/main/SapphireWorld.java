@@ -82,13 +82,13 @@ public class SapphireWorld extends World {
         this.center = new Vector3(data.cellModels[0].length / 2f, data.cellModels.length / 2f, 0);
         
         if(true) {
-        	// add the voxels as an instance
+        	// create greedy mesh for texture-type cells
             var greed = Meshing.greedy(data, cellSize, GL20.GL_TRIANGLES);
     		instances.add(new ModelInstance(greed));
     		// add every other models as instances
-    		
+
+    		// adds singular models
     		if(true) {
-	    		Vector3 origin = Vector3.Zero;
 	    		Consumer<int[][]> generateModels = layer -> {
 	                for(int i = 0; i < layer[0].length; i++) {
 	                    for(int j = 0; j < layer.length; j++) {
@@ -113,10 +113,11 @@ public class SapphireWorld extends World {
 	    		generateModels.accept(data.cellModels);
 	    		generateModels.accept(data.layer2Models);
 	    		
-	    		var water = waterplane();
-	    		//water.transform.rotate(0, 0, 1, 45);
-	    		instances.add(water);
     		}
+    		// water plane
+    		var water = waterplane();
+    		//water.transform.rotate(0, 0, 1, 45);
+    		instances.add(water);
         } 
         
         cache.begin();
@@ -153,7 +154,7 @@ public class SapphireWorld extends World {
 		Log.info("mesh vertices " + mesh.getNumVertices() + " / " + mesh.getMaxVertices());
 		Log.info("mesh indices " + mesh.getNumIndices() + " / " + mesh.getMaxIndices());
 		
-		String id = "highlight";
+		String id = "water";
 		// if(mat == null) mat = mat3;
 		MeshPart meshPart = new MeshPart("meshpart_" + id, mesh, 0, indices.length, renderType);
 		Node node = new Node();

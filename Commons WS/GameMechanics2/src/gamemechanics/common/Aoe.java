@@ -6,6 +6,7 @@ import gamemechanics.common.generic.Vector2;
 /** Aoe suppliers / functions */
 public class Aoe {
 	
+	
 	/** targeted cell from where the aoe expands */
 	public Vector2 source;
 	

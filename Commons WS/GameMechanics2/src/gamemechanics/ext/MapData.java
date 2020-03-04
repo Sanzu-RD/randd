@@ -95,7 +95,7 @@ public class MapData {
 			
 			var cell = new Cell(i, j);
 			for(int t = 0; t < Targetability.values().length; t++) {
-				cell.properties.setCan(Targetability.values()[t], type.targetability[t]);
+				cell.targeting.setCan(Targetability.values()[t], type.targetability[t]);
 			}
 			
 			/*

@@ -43,9 +43,7 @@ public class DmgEffect extends Effect<Creature> {
 						* (1 - s2.getDmgRes(ele, mo.scl ) + s1.getDmgPen(ele, mo.scl )) // scl  pen vs scl res
 						+ (  - s2.getDmgRes(ele, mo.flat) + s1.getDmgPen(ele, mo.flat)) // flat pen vs flat res
 						;
-				eledmg.put(ele, 
-						val
-				);
+				eledmg.put(ele, val);
 				total += val;
 			}
 		}
