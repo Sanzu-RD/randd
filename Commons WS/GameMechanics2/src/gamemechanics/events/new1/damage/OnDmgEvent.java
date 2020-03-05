@@ -15,15 +15,8 @@ public class OnDmgEvent extends Event {
 		public void handle(OnDmgEvent e);
 	}
 	
-//	public Entity source;
-//	public Cell target;
-//	public Damage effect;
-	
 	public OnDmgEvent(Entity caster, Cell target, Damage effect) {
 		super(caster, target, effect);
-//		this.effect = effect;
-//		this.source = caster;
-//		this.target = target;
 	}
 
 	@Override

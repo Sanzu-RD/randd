@@ -18,8 +18,8 @@ public class Vector2 {
 	}
 	
 	public Vector2 sub(Vector2 pos) {
-		this.x -= pos.x;
-		this.y -= pos.y;
+		x -= pos.x;
+		y -= pos.y;
 		return this;
 	}
 
@@ -39,6 +39,12 @@ public class Vector2 {
 	
 	public Vector2 copy() {
 		return new Vector2(x, y);
+	}
+	
+	public Vector2 mult(double scl) {
+		x *= scl;
+		y *= scl;
+		return this;
 	}
 	
 	@Override

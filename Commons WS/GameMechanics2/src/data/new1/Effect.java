@@ -65,9 +65,7 @@ public abstract class Effect {
 
 		// handlers
 		var casterEvent = createAssociatedEvent(source, cellTarget);
-		interceptors(source, casterEvent);         	// FIXME problème ici est de différencier les interceptors de type source et target. 
-												  	// FIXME Ex : si le caster est sacrifié, ça cancellerait l'effet au complet sur toutes les cibles
-													//    pcq actuellement y'a aucune différence entre les deux si le caster lance un sort de zone et se tape luimeme
+		interceptors(source, casterEvent);  // receive handlers have to check for event level >0 to not cancel entire effects like a outward interceptor
 		modifiers(source, casterEvent);
 		prepareCaster(source, cellTarget);
 		if(casterEvent.intercepted) return;
@@ -84,23 +82,20 @@ public abstract class Effect {
 			
 			// un event différent par cell touchée (copy l'effet aussi)
 			var event = casterEvent.copy(); 
-			
-			// FIXME mettre caster et target dans Event pour pouvoir chnager le target d'un event et l'utiliser ici v
+			event.target = target;
 			
 			// handlers
-			interceptors(target, event); 	// FIXME il y a des problèmes avec la copy et application d'un effet (boucles infini) 
-											// FIXME (Ex : handler de partage de dégâts problématique surtout) 
-											// FIXME Le nouvel effet doit proc les handlers et apply comme il faut, mais doit pas reproc le partage à nouveau
-			modifiers(target, event);
-			prepareTarget(source, target);
+			interceptors(event.target, event); 	
+			modifiers(event.target, event);
+			prepareTarget(event.source, event.target);
 			if(event.intercepted) return;
 			
 			// apply
-			apply0(source, target);
+			apply0(event.source, event.target);
 			
 			// handlers
-			reactors(source, event);
-			reactors(target, event);
+			reactors(event.source, event);
+			reactors(event.target, event);
 		});
 	}
 
@@ -138,11 +133,11 @@ public abstract class Effect {
 	}
 	
 	/**
-	 * Pre-calculation for the caster
+	 * Pre-calculation for the caster. Cell target is the origin of the aoe
 	 */
-	public abstract void prepareCaster(Entity caster, Cell target);
+	public abstract void prepareCaster(Entity caster, Cell aoeOrigin);
 	/**
-	 * Pre-calculation for the target
+	 * Pre-calculation for the target. Cell target is any cell in the aoe.
 	 */
 	public abstract void prepareTarget(Entity caster, Cell target);
 	/**

@@ -23,6 +23,10 @@ import gamemechanics.statics.stats.properties.Resource;
  * dmg = (baseflat + casterflat) * (1 + baseinc * casterinc) * (1 + basemore * castermore)
  * 
  * 
+ * Json representation of Damage effect : { _t: damage, aoe:{}, targetconditions:{}, formula:["dark":{base:60, inc:20}] }
+ * Json representation of Displacement effect : { _t: pushfromcaster, aoe:{}, targetconditions:{}, value:4 } //  (vector=target-caster)
+ * Json representation of Displacement effect : { _t: pushfromaoecenter, aoe:{}, targetconditions:{}, value:4 } // (vector=target-aoe) résulte en une direction différente
+ * 
  * @author Blank
  * @date 19 janv. 2020
  */
@@ -72,7 +76,7 @@ public class Damage extends Effect {
 	/**
 	 * Calcule les dégâts pré-mitigation du caster 
 	 */
-	public void prepareCaster(Entity caster, Cell cell) {
+	public void prepareCaster(Entity caster, Cell aoeOrigin) {
 		var crea = (Creature) caster;
 		
 		var casterAffinity = crea.getStats().affinity;
