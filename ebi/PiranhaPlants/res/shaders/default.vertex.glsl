@@ -252,8 +252,11 @@ void main() {
 	 	// project vertex pos to shadowmap pos
 		vec4 spos = u_shadowMapProjViewTrans * pos;
 		// convert screenspace to texturespace pos
-		v_shadowMapUv.xy = (spos.xy / spos.w) * 0.5 + 0.5;
-		v_shadowMapUv.z = min(spos.z * 0.5 + 0.5, 0.998);
+		//v_shadowMapUv.xy = (spos.xy / spos.w) * 0.5 + 0.5;
+		//v_shadowMapUv.z = min(spos.z * 0.5 + 0.5, 0.998);
+		
+		v_shadowMapUv.xyz = (spos.xyz / spos.w) * 0.5 + 0.5;
+		v_shadowMapUv.z = min(v_shadowMapUv.z, 0.998);
 	#endif //shadowMapFlag
 
 	#if defined(normalFlag)

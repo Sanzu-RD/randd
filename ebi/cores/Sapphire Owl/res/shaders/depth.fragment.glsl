@@ -33,6 +33,7 @@ void main() {
 
 		// colorful shader
 		gl_FragColor = color - (color.yzww * bias);
+		
 		// shadow color
 	//	gl_FragColor = vec4(depth, depth, depth, 1.0); //vec4(0,0,0,1); //color - (color.yzww * bias);
 	

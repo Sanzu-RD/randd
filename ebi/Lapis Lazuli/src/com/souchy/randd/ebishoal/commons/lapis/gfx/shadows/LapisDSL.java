@@ -13,25 +13,38 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 /** @deprecated Experimental, likely to change, do not use!
  * @author Xoppa */
 public class LapisDSL extends DirectionalLight implements ShadowMap, Disposable {
 	protected FrameBuffer fbo;
 	protected Camera cam;
-	protected float halfDepth;
-	protected float halfHeight;
+	protected float halfDepth; // world units
+	protected float halfHeight; // world units
 	protected final Vector3 tmpV = new Vector3();
 	protected final TextureDescriptor textureDesc;
+	
+	// souchy added viewport to manage the camera
+	protected Viewport viewport;
 
 	/** @deprecated Experimental, likely to change, do not use! */
-	public LapisDSL (int shadowMapWidth, int shadowMapHeight, float shadowViewportWidth, float shadowViewportHeight,
-		float shadowNear, float shadowFar) {
-		fbo = new FrameBuffer(Format.RGBA8888, shadowMapWidth, shadowMapHeight, true);
-		cam = new OrthographicCamera(shadowViewportWidth, shadowViewportHeight);
+	public LapisDSL (int shadowMapWidth, int shadowMapHeight, float shadowViewportWidth, float shadowViewportHeight, float shadowNear, float shadowFar) {
+		
+		cam = new OrthographicCamera();
 		cam.near = shadowNear;
 		cam.far = shadowFar;
-		halfHeight = shadowViewportHeight * 0.5f;
+		cam.up.x = 0;
+		cam.up.y = 0;
+		cam.up.z = 1;
+
+		viewport = new ExtendViewport(shadowViewportWidth, shadowViewportHeight, cam);
+
+		// update viewport and create fbo
+		update(shadowMapWidth, shadowMapHeight);
+//		fbo = new FrameBuffer(Format.RGBA8888, shadowMapWidth, shadowMapHeight, true);
+		
 		halfDepth = shadowNear + 0.5f * (shadowFar - shadowNear);
 		textureDesc = new TextureDescriptor();
 		textureDesc.minFilter = textureDesc.magFilter = Texture.TextureFilter.Nearest;
@@ -47,7 +60,7 @@ public class LapisDSL extends DirectionalLight implements ShadowMap, Disposable 
 		cam.position.set(direction).scl(-halfDepth).add(center);
 		cam.direction.set(direction).nor();
 		// cam.up.set(forward).nor();
-		cam.normalizeUp();
+	//	cam.normalizeUp();
 		cam.update();
 	}
 
@@ -97,10 +110,28 @@ public class LapisDSL extends DirectionalLight implements ShadowMap, Disposable 
 		textureDesc.texture = fbo.getColorBufferTexture();
 		return textureDesc;
 	}
+	
+	public Viewport getViewport() {
+		return viewport;
+	}
 
 	@Override
 	public void dispose () {
 		if (fbo != null) fbo.dispose();
 		fbo = null;
+	}
+
+	public void update(int width, int height) {
+		// resize viewport
+		getViewport().update(width, height, false);
+		// calc half of world height
+		halfHeight = viewport.getWorldHeight() * 0.5f;
+		// resize framebuffer
+		createFbo(width, height);
+	}
+	
+	private void createFbo(int shadowMapWidth, int shadowMapHeight) {
+		//if(fbo == null)
+		fbo = new FrameBuffer(Format.RGBA8888, shadowMapWidth, shadowMapHeight, true);
 	}
 }

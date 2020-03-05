@@ -19,6 +19,7 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
@@ -94,20 +95,19 @@ interface LapisScreenCreator {
 		return env;
 	}
 	
-	public default LapisDSL createShadowLight(Environment env) {
+	public default LapisDSL createShadowLight(Viewport viewport) {
+		Log.info("viewport world w " + viewport.getWorldWidth());
 		var shadowMapWidth = Gdx.graphics.getWidth() * 2; //1024 * 2;// * 2 * 2;
 		var shadowMapHeight = Gdx.graphics.getHeight() * 2; //shadowMapWidth;
-		var shadowViewportWidth = 26f; // * 16f/9f;
-		var shadowViewportHeight = shadowViewportWidth; //20f;
+		var shadowViewportWidth = viewport.getWorldWidth(); //26f; // * 16f/9f;
+		var shadowViewportHeight = viewport.getWorldHeight(); // shadowViewportWidth; //20f;
 		float shadowNear = 0.01f;
 		float shadowFar = 60f;
-		float intensity = 0.5f;
+		float intensity = 0.6f;
 		
 		var shadowLight = new LapisDSL(shadowMapWidth, shadowMapHeight, shadowViewportWidth, shadowViewportHeight, shadowNear, shadowFar);
 		shadowLight.set(intensity, intensity, intensity, -1f, -1f, -0.5f);
 		
-		env.shadowMap = shadowLight;
-		env.add(shadowLight);
 		return shadowLight;
 	}
 	

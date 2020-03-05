@@ -107,18 +107,28 @@ uniform float u_shadowPCFOffset;
 varying vec3 v_shadowMapUv;
 #define separateAmbientFlag
 
+// original file : 
+// https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g3d/shaders/default.fragment.glsl
+// shadowmaps : 
+// https://lwjglgamedev.gitbooks.io/3d-game-development-with-lwjgl/content/chapter18/chapter18.html
+// http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/
+
 
 float getShadowness(vec2 offset)
 {
+	
+    // EDIT
+    float bias = 0.004f;
+    
     const vec4 bitShifts = vec4(1.0, 1.0 / 255.0, 1.0 / 65025.0, 1.0 / 16581375.0);
 
-    // EDIT
-    float bias = 0.005f;
+	//return texture(u_shadowTexture, v_shadowMapUv.xy + offset).r; 
 
 	//if(v_shadowMapUv.z - bias < texture(u_shadowTexture, v_shadowMapUv.xy).r){
 	//	return 1;
 	//}
 	//return 0;
+	
 	
     return step(v_shadowMapUv.z - bias, dot(texture2D(u_shadowTexture, v_shadowMapUv.xy + offset), bitShifts)); //+(1.0/255.0));
 }
@@ -137,11 +147,27 @@ float getShadow()
 	float pcfOffset = u_shadowPCFOffset;
 	
 	// average des 4 coins genre
-	return (//getShadowness(vec2(0,0)) +
-				getShadowness(vec2(pcfOffset, pcfOffset)) +
-				getShadowness(vec2(-pcfOffset, pcfOffset)) +
-				getShadowness(vec2(pcfOffset, -pcfOffset)) +
-				getShadowness(vec2(-pcfOffset, -pcfOffset))) * 0.25;
+	//return (getShadowness(vec2(0,0)) +
+	//			getShadowness(vec2(pcfOffset, pcfOffset)) +
+	//			getShadowness(vec2(-pcfOffset, pcfOffset)) +
+	//			getShadowness(vec2(pcfOffset, -pcfOffset)) +
+	//			getShadowness(vec2(-pcfOffset, -pcfOffset))) * 0.25;
+				
+				
+    float bias = 0.005f;
+    float shadowFactor = 0.0;
+	vec2 inc = 1.0 / textureSize(u_shadowTexture, 0);
+	for(int row = -1; row <= 1; ++row)
+	{
+	    for(int col = -1; col <= 1; ++col)
+	    {
+	       	//float textDepth = texture(u_shadowTexture, v_shadowMapUv.xy + vec2(row, col) * inc).r; 
+	        //shadowFactor += v_shadowMapUv.z - bias > textDepth ? 0.0 : 1.0;        
+	        shadowFactor += getShadowness(vec2(row, col) * inc); 
+	    }    
+	}
+	shadowFactor /= 9.0;
+	return shadowFactor;
 
 	//return (//getShadowness(vec2(0,0)) +
 	//		getShadowness(vec2(u_shadowPCFOffset, u_shadowPCFOffset)) +
@@ -293,8 +319,7 @@ void main() {
 
 		#if defined(ambientFlag) && defined(separateAmbientFlag)
 			#ifdef shadowMapFlag
-			gl_FragColor.rgb = (diffuse.rgb * (getShadow() * v_lightDiffuse + v_ambientLight)) + specular + emissive.rgb;
-				//gl_FragColor.rgb = texture2D(u_shadowTexture, v_shadowMapUv.xy);
+				gl_FragColor.rgb = (diffuse.rgb * (getShadow() * v_lightDiffuse + v_ambientLight)) + specular + emissive.rgb;
 			#else
 				gl_FragColor.rgb = (diffuse.rgb * (v_lightDiffuse + v_ambientLight)) + specular + emissive.rgb;
 			#endif //shadowMapFlag
@@ -424,7 +449,17 @@ void main() {
 		}
 	}
 	
+	// test shadows
+	if(false){
+		// depth of the current pixel
+		float currentDepth = v_shadowMapUv.z;
+		gl_FragColor = vec4(currentDepth, currentDepth, currentDepth, 1);
+		
+		// depth of the pixel in the shadow map at the current position
+		float shadowDepth = texture(u_shadowTexture, v_shadowMapUv.xy).r; // - 0.005f;
+		shadowDepth = getShadow();
+		gl_FragColor = vec4(shadowDepth, shadowDepth, shadowDepth, 1);
+	}
 	
-	//gl_FragColor = vec4(1, 0, 0, 1);
 
 }

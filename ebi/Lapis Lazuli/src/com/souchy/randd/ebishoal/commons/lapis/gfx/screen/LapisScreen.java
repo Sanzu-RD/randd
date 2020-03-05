@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.czyzby.lml.parser.impl.AbstractLmlView;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
@@ -94,7 +95,9 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 
 		// create environment lights
 		env = createEnvironment();
-		shadowLight = createShadowLight(env);
+		shadowLight = createShadowLight(viewport);
+		env.shadowMap = shadowLight;
+		env.add(shadowLight);
 
 		// create model batches
 		modelBatch = createWorldBatch();
@@ -174,7 +177,7 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	public void drawBackground(SpriteBatch batch) {
 //		if(background != null && getViewport() != null) getSpriteBatch().draw(background, getViewport().getScreenX(), getViewport().getScreenY());
 //		else 
-		if(background != null) getSpriteBatch().draw(background, 0, 0);
+		if(background != null) batch.draw(background, 0, 0);
 		//else getSpriteBatch().draw(fboRegion, getViewport().getScreenX(), getViewport().getScreenY());
 	}
 	
@@ -185,6 +188,7 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	
 	
 	@Override public void resize(int width, int height) {
+		Log.info("resize : " + width + ", " + height);
 		// resize le FBO
 		if(fbo != null) fbo = createFBO();
 		// resize la sprite batch du fbo / post processing
@@ -193,7 +197,11 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 		if(getViewport() != null) getViewport().update(width, height, false);
 		// resize le hud
 		if(getView() != null) getView().resize(width, height, true);
+		// resize le viewport de la shadowlight pour sa shadowmap
+		if(getShadowLight() != null) getShadowLight().update(width, height);
 		
+		// resize la sprite batch qui n'a pas de post processing
+		cleanSpriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
 		//var center = getWorldCenter();
 		//getCamera().position.set(center.x, center.y, center.z); 
 		//getCamera().update();

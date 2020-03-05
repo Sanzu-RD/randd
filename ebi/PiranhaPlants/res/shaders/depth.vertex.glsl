@@ -118,8 +118,8 @@ void main() {
 	#endif
 
 	#ifdef PackedDepthFlag
-		v_depth = pos.z * 0.5 + 0.5;
-		//v_depth = pos.z / pos.w * 0.5 + 0.5;
+		//v_depth = pos.z * 0.5 + 0.5; // convert [-1,1] coordinates to [0,1] texture plan 
+		v_depth = pos.z / pos.w * 0.5 + 0.5;
 	#endif //PackedDepthFlag
 
 	gl_Position = pos;

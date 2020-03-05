@@ -36,10 +36,10 @@ public class SapphireScreen extends LapisScreen {
 		//getShadowLight().direction.z = -0.5f;
 	}
 	
-	@Override
-	public Texture createBackground() {
-		return null;
-	}
+//	@Override
+//	public Texture createBackground() {
+//		return null;
+//	}
 	
 	@Override
 	public LineDrawing createLining(Camera cam, BoundingBox worldBB) {
@@ -69,11 +69,13 @@ public class SapphireScreen extends LapisScreen {
 	
 	@Override
 	public Viewport createViewport(Camera cam) {
+		// how many meters high is the screen (ex 1920/1080 = 28.4/16)
 		float viewportSize = 16; // getWorldCenter().x * 2; // acts as a zoom (lower number is closer zoom)
 		var viewport = new ExtendViewport(viewportSize * 16/9, viewportSize, cam);
 		//var viewport = new SapphireViewport(viewportSize * 16 / 9, viewportSize, cam);
 		//var viewport = new ScreenViewport(cam);
 		//viewport.setUnitsPerPixel(0.02f);
+		viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		return viewport;
 	}
 	
