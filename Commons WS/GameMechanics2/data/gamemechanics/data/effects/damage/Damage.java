@@ -164,7 +164,7 @@ public class Damage extends Effect {
 
 	@Override
 	public OnDmgEvent createAssociatedEvent(Entity caster, Cell target) {
-		return new OnDmgEvent(caster, target, this); // TODO ? si je veux modifier l'effet pour chaque target, je devrais copier l'effet ici
+		return new OnDmgEvent(caster, target, this); 
 	}
 
 	@Override

@@ -7,7 +7,6 @@ import gamemechanics.common.generic.Vector2;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.displacement.OnPushEvent;
 import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Creature;
 import gamemechanics.models.entities.Entity;
 
 /** Pushes a target creature by a set distance (stopped by no-passthrough cells) */
@@ -26,6 +25,7 @@ public class Push extends Effect {
 
 	@Override
 	public void prepareCaster(Entity caster, Cell aoeOrigin) {
+		// rien de possible à préparer ici
 	}
 
 	/** Calculate the displacement vector */

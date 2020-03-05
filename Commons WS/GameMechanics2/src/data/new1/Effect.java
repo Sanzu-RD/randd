@@ -25,21 +25,13 @@ public abstract class Effect {
 	/** 
 	 * aoe 
 	 */
-	public Aoe aoe; //int[] areaOfEffect;
+	public Aoe aoe; 
 	/** 
 	 * conditions to apply the effect to a target in the aoe 
 	 */
 	public TargetConditions targetConditions;
-	/** 
-	 * event associated with the effect that is created and published on every apply to seek interceptors, modifiers and reactors 
-	 */
-//	protected Event tempEvent;
-	
-	/**
-	 * Ctor
-	 */
-	public Effect(Aoe aoe, /* int[] areaOfEffect, */ TargetConditions targetConditions) {
-		//this.areaOfEffect = areaOfEffect;
+
+	public Effect(Aoe aoe, TargetConditions targetConditions) {
 		this.aoe = aoe;
 		this.targetConditions = targetConditions;
 	}
@@ -49,11 +41,6 @@ public abstract class Effect {
 	 */
 	public abstract Event createAssociatedEvent(Entity source, Cell target);
 
-//	public void applyAfter(Entity source, Cell target) {
-//		EffectPipeline p = null;
-//		var apply = p.insert(this);
-//		if(apply) this.apply(source, target);
-//	}
 	
 	/**
 	 * apply the effect to the aoe around the target cell
@@ -63,13 +50,12 @@ public abstract class Effect {
 	public void apply(Entity source, Cell cellTarget) { // , Effect parent);
 		var board = cellTarget.fight.board;
 
-		// handlers
+		// level 0 handlers 
 		var casterEvent = createAssociatedEvent(source, cellTarget);
-		interceptors(source, casterEvent);  // receive handlers have to check for event level >0 to not cancel entire effects like a outward interceptor
+		interceptors(source, casterEvent); 
 		modifiers(source, casterEvent);
 		prepareCaster(source, cellTarget);
 		if(casterEvent.intercepted) return;
-		
 		
 		// for all cells in the AOE
 		aoe.table.foreach((x, y) -> {
@@ -83,29 +69,28 @@ public abstract class Effect {
 			// un event différent par cell touchée (copy l'effet aussi)
 			var event = casterEvent.copy(); 
 			event.target = target;
-			
-			// handlers
-			interceptors(event.target, event); 	
-			modifiers(event.target, event);
-			prepareTarget(event.source, event.target);
-			if(event.intercepted) return;
-			
-			// apply
-			apply0(event.source, event.target);
-			
-			// handlers
-			reactors(event.source, event);
-			reactors(event.target, event);
+
+			// apply secondary effect
+			secondaryEffect(event);
 		});
+		
+		// level 0 reactor has access to all the copies of events & effects made in the Aoe
+		reactors(source, casterEvent); 
 	}
 
 	/**
-	 * 
-	 * @param event
+	 * Apply a copy of an effect event directly to a target without going through caster handlers. <br>
+	 * This can be used by handlers to apply other secondary/tertiary/.. effects. <br>
+	 * USE EFFECT.APPLY if you want to create a NEW effect.
+	 * @param event - A copy of the parent event with a new target : 
+	 * <pre> var e = event.copy(); 
+	 * e.target = target; 
+	 * Effect.secondaryeffect(e);
+	 *  </pre>
 	 */
 	public static void secondaryEffect(Event event) {
-		// handlers
-		interceptors(event.target, event); 
+		// level 1 handlers
+		interceptors(event.target, event); 	
 		modifiers(event.target, event);
 		if(event.intercepted) return;
 		
@@ -113,10 +98,10 @@ public abstract class Effect {
 		
 		// apply
 		event.effect.apply0(event.source, event.target);
-		
-		// handlers
+
+		// level 1 handlers
+		reactors(event.target, event); 
 		reactors(event.source, event);
-		reactors(event.target, event);
 	}
 	
 	private static void interceptors(Entity e, Event tempEvent) {
