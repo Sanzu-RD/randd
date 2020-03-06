@@ -11,8 +11,10 @@ import gamemechanics.models.entities.Entity;
 
 /** Pushes a target creature by a set distance (stopped by no-passthrough cells) */
 public class Push extends Effect {
+	
 	/** Preset distance */
 	public int distance;
+	
 	/** Calculated push vector */
 	public Vector2 vector;
 	/** Calculated destination cell */

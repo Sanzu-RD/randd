@@ -3,8 +3,8 @@ package gamemechanics.events.new1;
 import data.new1.timed.Status;
 import gamemechanics.events.new1.damage.OnDmgEvent;
 import gamemechanics.events.new1.damage.OnDmgEvent.OnDmgHandler;
-import gamemechanics.events.new1.status.OnStatusAdd;
-import gamemechanics.events.new1.status.OnStatusAdd.OnStatusAddHandler;
+import gamemechanics.events.new1.status.OnAddStatusEvent;
+import gamemechanics.events.new1.status.OnAddStatusEvent.OnStatusAddHandler;
 import gamemechanics.models.entities.Entity;
 
 public class ExShocked extends Status implements OnDmgHandler, OnStatusAddHandler {
@@ -24,7 +24,7 @@ public class ExShocked extends Status implements OnDmgHandler, OnStatusAddHandle
 	}
 	
 	@Override
-	public void onStatusAdd(OnStatusAdd event) {
+	public void onStatusAdd(OnAddStatusEvent event) {
 		// TODO Auto-generated method stub
 		
 	}

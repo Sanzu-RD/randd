@@ -1,10 +1,8 @@
 package gamemechanics.events.new1.displacement;
 
-import gamemechanics.data.effects.damage.Damage;
 import gamemechanics.data.effects.displacement.Push;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.Handler;
-import gamemechanics.events.new1.damage.OnDmgEvent;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Entity;
 

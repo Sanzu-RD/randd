@@ -19,6 +19,14 @@ import gamemechanics.models.entities.Entity;
  * 2. Implement its fusion() policy <br>
  * 3. Implement any event handler so it can react to events (ex : "implements OnCanCastActionHandler")
  * 
+ *
+ * FIXME : have flags to tell if this status is a terrain effect (glyph/trap..) or applies directly to creatures
+ * FIXME : have flags to tell what happens if this status is a terrain effect and a creature walks in/out/inside/through or is already in it on creation
+ * 			initial trigger : creature is already in the area when the terrain effect is created or removed
+ *  		trigger actions : creature walks or teleports : from inside to outside, inside to inside, outside to inside
+ *  		can this be placed on a hole/block/creature/terraineffect? what about the opposide?
+ *  		
+ *  
  * 
  * @author Souchy
  *
