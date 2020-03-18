@@ -154,19 +154,17 @@ float getShadow()
 	//			getShadowness(vec2(-pcfOffset, -pcfOffset))) * 0.25;
 				
 				
-    float bias = 0.005f;
+	int radius = 0;
     float shadowFactor = 0.0;
 	vec2 inc = 1.0 / textureSize(u_shadowTexture, 0);
-	for(int row = -1; row <= 1; ++row)
+	for(int row = -radius; row <= radius; ++row)
 	{
-	    for(int col = -1; col <= 1; ++col)
+	    for(int col = -radius; col <= radius; ++col)
 	    {
-	       	//float textDepth = texture(u_shadowTexture, v_shadowMapUv.xy + vec2(row, col) * inc).r; 
-	        //shadowFactor += v_shadowMapUv.z - bias > textDepth ? 0.0 : 1.0;        
 	        shadowFactor += getShadowness(vec2(row, col) * inc); 
 	    }    
 	}
-	shadowFactor /= 9.0;
+	shadowFactor /= ((radius * 2 + 1) * (radius * 2 + 1)); //9.0;
 	return shadowFactor;
 
 	//return (//getShadowness(vec2(0,0)) +
