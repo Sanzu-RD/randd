@@ -118,7 +118,7 @@ float getShadowness(vec2 offset)
 {
 	
     // EDIT
-    float bias = 0.004f;
+    float bias = 0.002f;
     
     const vec4 bitShifts = vec4(1.0, 1.0 / 255.0, 1.0 / 65025.0, 1.0 / 16581375.0);
 
@@ -154,7 +154,7 @@ float getShadow()
 	//			getShadowness(vec2(-pcfOffset, -pcfOffset))) * 0.25;
 				
 				
-	int radius = 0;
+	int radius = 1;
     float shadowFactor = 0.0;
 	vec2 inc = 1.0 / textureSize(u_shadowTexture, 0);
 	for(int row = -radius; row <= radius; ++row)
