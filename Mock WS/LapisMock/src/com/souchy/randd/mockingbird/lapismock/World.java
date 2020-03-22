@@ -95,6 +95,7 @@ public class World {
 			}
 		}
 		addInstance(createModel(Color.SKY), new Vector3(side/3, side/3, 2));
+		addInstance(createModel(Color.SKY), new Vector3(5, 5, 1));
 		addInstance(createModel(Color.SKY), new Vector3(0, 1, 1)); // Y
 		addInstance(createModel(Color.SKY), new Vector3(1, 0, 1)); // X
 		//ModelLoader a = new ObjLoader();

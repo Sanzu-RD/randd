@@ -416,7 +416,7 @@ public class MockScreen3 extends BaseScreen {
 					.tag(new Test2TagProvider(), "test2")
 					.tag(new AsdfTagProvider(), "asdf")
 					// Add custom skin
-					.skin(new Skin(Gdx.files.internal(internal+"ui/uiskin.json"))).build();
+					.skin(new Skin(Gdx.files.internal(internal+"ux/sapphire/main.json"))).build();//+"ui/uiskin.json"))).build();
 		}
 	}
 	
@@ -500,7 +500,7 @@ public class MockScreen3 extends BaseScreen {
 		String id = "highlight";
 		int renderType = GL20.GL_TRIANGLES;
 		// if(mat == null) mat = mat3;
-		MeshPart meshPart = new MeshPart("meshpart_" + id, mesh, 0, vertices.length, renderType);
+		MeshPart meshPart = new MeshPart("meshpart_" + id, mesh, 0, indices.length, renderType);
 		Node node = new Node();
 		node.id = "node_" + id;
 		node.parts.add(new NodePart(meshPart, mat));
@@ -545,7 +545,7 @@ public class MockScreen3 extends BaseScreen {
 			meshBorder.setIndices(indicesBorder);
 			
 			String idBorder = "border" + i + "_" + i2;
-			MeshPart meshPartBorder = new MeshPart("meshpart_" + idBorder, meshBorder, 0, vertices.length, renderType);
+			MeshPart meshPartBorder = new MeshPart("meshpart_" + idBorder, meshBorder, 0, indices.length, renderType);
 			Node nodeBorder = new Node();
 			nodeBorder.id = "node_" + idBorder;
 			nodeBorder.parts.add(new NodePart(meshPartBorder, borderMat));
