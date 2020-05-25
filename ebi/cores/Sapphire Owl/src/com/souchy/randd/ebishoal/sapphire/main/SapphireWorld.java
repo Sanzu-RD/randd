@@ -78,7 +78,7 @@ public class SapphireWorld extends World {
         
         // create instances
         String mapFolder = "res/maps/"; //"F:/Users/Souchy/Desktop/Robyn/eclipse-workspaces/hidden workspaces/r and d/Maps/data/maps/";
-        MapData data = MapData.read(Gdx.files.internal(mapFolder + "goulta8.map").path());
+        MapData data = MapData.read(Gdx.files.internal(mapFolder + "goulta7b.map").path());
         this.center = new Vector3(data.cellModels[0].length / 2f, data.cellModels.length / 2f, 0);
         
         if(true) {
@@ -114,10 +114,13 @@ public class SapphireWorld extends World {
 	    		generateModels.accept(data.layer2Models);
 	    		
     		}
-    		// water plane
-    		var water = waterplane();
-    		//water.transform.rotate(0, 0, 1, 45);
-    		instances.add(water);
+    		
+    		if(false) {
+        		// water plane
+        		var water = waterplane();
+        		//water.transform.rotate(0, 0, 1, 45);
+        		instances.add(water);
+    		}
         } 
         
         cache.begin();

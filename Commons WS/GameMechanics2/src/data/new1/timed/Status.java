@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.eventbus.Subscribe;
+import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
+import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 
 import data.new1.Effect;
 import gamemechanics.common.generic.Disposable;
-import gamemechanics.events.OnLifeDmgInstance;
-import gamemechanics.events.OnCanCastActionCheck.OnCanCastActionHandler;
+import gamemechanics.models.Fight;
 import gamemechanics.models.entities.Entity;
+import gamemechanics.models.entities.Entity.EntityRef;
 
 /**
  * 
@@ -20,22 +22,24 @@ import gamemechanics.models.entities.Entity;
  * 3. Implement any event handler so it can react to events (ex : "implements OnCanCastActionHandler")
  * 
  *
- * FIXME : have flags to tell if this status is a terrain effect (glyph/trap..) or applies directly to creatures
- * FIXME : have flags to tell what happens if this status is a terrain effect and a creature walks in/out/inside/through or is already in it on creation
- * 			initial trigger : creature is already in the area when the terrain effect is created or removed
- *  		trigger actions : creature walks or teleports : from inside to outside, inside to inside, outside to inside
- *  		can this be placed on a hole/block/creature/terraineffect? what about the opposide?
- *  		
+ * FIXME : have flags to tell if this status applies to cells (terrain effect (glyph/trap..)) or applies directly to creatures
+ * 
+ * FIXME : every terrain effect needs multiple handlers to react to OnWalk, OnEnter, OnLeave, and differences between walk/tp/dash/push
  *  
+ * FIXME : would need a common reactor on every cell for OnAddStatusEvent to apply new terrain effects (glyphs) to creatures that are in the aoe on apply
+ *  		
+ * FIXME : terrain effects need a texture to display on the ground (9 patch texture for every cell and a special texture for the center)
+ * 
+ * FIXME : statuses should have an icon and i18n for name + description
  * 
  * @author Souchy
  *
  */
-public abstract class Status /* extends TimedEffect */ implements Disposable {
+public abstract class Status /* extends TimedEffect */ implements Disposable, BBSerializer, BBDeserializer  {
 
 	public static abstract class Passive extends Status {
 		public Passive(Entity source) {
-			super(source, source);
+			super(source.ref(), source.ref());
 			this.canDebuff = false;
 			this.canRemove = false;
 		}
@@ -46,10 +50,18 @@ public abstract class Status /* extends TimedEffect */ implements Disposable {
 		}
 	}
 
-	public abstract int id();
+	/**
+	 * status model id
+	 */
+	public abstract int modelID();
+	/**
+	 * Create an instance of the status model implementation (ex Shocked, Burning) for deserialisation
+	 */
+	public abstract Status create(EntityRef source, EntityRef target);
 	
-	public Entity source;
-	public Entity target;
+	
+	public EntityRef source;
+	public EntityRef target;
 	public Effect parent;
 	
 	public int stacks;
@@ -59,12 +71,19 @@ public abstract class Status /* extends TimedEffect */ implements Disposable {
 	
 	/** this or a toString() / description() ? */
 	public List<Effect> tooltipEffects = new ArrayList<>();
+
 	
-	public Status(Entity source, Entity target) {
+	public Status(EntityRef source, EntityRef target) {
 		this.source = source;
 		this.target = target;
 		//source.fight.bus.register(this);
 	}
+//	public Status(Fight fight, int sourceid, int targetid) {
+//		this(new EntityRef(fight, sourceid), new EntityRef(fight, targetid));
+//	}
+//	public Status(Entity source, Entity target) {
+//		this(source.asRef(), target.asRef());
+//	}
 
 	/**
 	 * Fuse behaviour to affect stacks count, duration, both, or neither. 
@@ -81,8 +100,9 @@ public abstract class Status /* extends TimedEffect */ implements Disposable {
 	 */
 	public abstract void onLose();
 	
+	
 	public String getIconName() {
-		return Integer.toString(id());
+		return Integer.toString(this.modelID());
 	}
 
 	@Override

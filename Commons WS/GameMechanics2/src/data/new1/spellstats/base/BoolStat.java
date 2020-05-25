@@ -1,6 +1,12 @@
 package data.new1.spellstats.base;
 
-public class BoolStat {
+import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+
+import io.netty.buffer.ByteBuf;
+
+public class BoolStat implements BBSerializer, BBDeserializer {
 	
 	public boolean base;
 	public boolean replaced, replacement;
@@ -27,6 +33,22 @@ public class BoolStat {
 		s.replaced = replaced;
 		s.replacement = replacement;
 		return s;
+	}
+
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		out.writeBoolean(base);
+		out.writeBoolean(replaced);
+		out.writeBoolean(replacement);
+		return null;
+	}
+
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		this.base = in.readBoolean();
+		this.replaced = in.readBoolean();
+		this.replacement = in.readBoolean();
+		return null;
 	}
 	
 }

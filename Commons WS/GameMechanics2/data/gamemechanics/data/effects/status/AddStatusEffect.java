@@ -3,8 +3,9 @@ package gamemechanics.data.effects.status;
 import java.util.function.Supplier;
 
 import data.new1.Effect;
-import data.new1.spellstats.imp.TargetConditions;
+import data.new1.spellstats.imp.TargetConditionStat;
 import data.new1.timed.Status;
+import data.new1.timed.TerrainEffect;
 import gamemechanics.common.Aoe;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.Handler;
@@ -19,7 +20,7 @@ public class AddStatusEffect extends Effect {
 	/** status supplier to create a status instance on effect.apply */
 	private Supplier<Status> statusBuilder;
 	
-	public AddStatusEffect(Aoe aoe, TargetConditions targetConditions, Supplier<Status> statusBuilder) {
+	public AddStatusEffect(Aoe aoe, TargetConditionStat targetConditions, Supplier<Status> statusBuilder) {
 		super(aoe, targetConditions);
 		this.statusBuilder = statusBuilder;
 	}
@@ -43,8 +44,8 @@ public class AddStatusEffect extends Effect {
 	public void apply0(Entity source, Cell target) {
 		// create status instance
 		var status = statusBuilder.get();
-		status.source = source;
-		status.target = target;
+		status.source = source.ref();
+		status.target = target.ref();
 		status.parent = this;
 		
 		// Add status. StatusList manages fusion by itsef
@@ -52,9 +53,16 @@ public class AddStatusEffect extends Effect {
 		// FIXME adding a status to a cell should trigger reactors to apply statuses on creatures 
 		// FIXME aka all cells should have a reactor status that adds statuses to creatures on them (applicability determined by the status)
 		
-		target.getStatus().add(status);
-		// register in the eventpipeline if the status is either of interceptors/modifiers/reactors
-		target.handlers.register(status);
+		if(status instanceof TerrainEffect) {
+			target.getStatus().add(status);
+			// register in the eventpipeline if the status is either of interceptors/modifiers/reactors
+			target.handlers.register(status);
+		} else {
+			target.getCreatures().get(0).getStatus().add(status);
+			// register in the eventpipeline if the status is either of interceptors/modifiers/reactors
+			target.getCreatures().get(0).handlers.register(status);
+		}
+		
 	}
 	
 	@Override

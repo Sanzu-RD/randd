@@ -1,7 +1,7 @@
 package gamemechanics.data.effects.status;
 
 import data.new1.Effect;
-import data.new1.spellstats.imp.TargetConditions;
+import data.new1.spellstats.imp.TargetConditionStat;
 import gamemechanics.common.Aoe;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.status.OnModifyStatusEvent;
@@ -14,7 +14,7 @@ public class ModifyStatusEffect extends Effect {
 	// mods to add, but to which statuses if not all ? 
 	public int modStacks, modDuration;
 	
-	public ModifyStatusEffect(Aoe aoe, TargetConditions targetConditions, int modStacks, int modDuration) {
+	public ModifyStatusEffect(Aoe aoe, TargetConditionStat targetConditions, int modStacks, int modDuration) {
 		super(aoe, targetConditions);
 		this.modStacks = modStacks;
 		this.modDuration = modDuration;

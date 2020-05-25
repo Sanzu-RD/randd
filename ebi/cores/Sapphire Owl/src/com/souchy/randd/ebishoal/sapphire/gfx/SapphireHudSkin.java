@@ -15,10 +15,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.lapis.main.LapisResources;
+import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireDevConfig;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireResources;
+import com.souchy.randd.ebishoal.sapphire.main.AssetConfs;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireAssets;
 
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.Element;
@@ -36,17 +37,17 @@ public class SapphireHudSkin extends Skin {
 	public SapphireHudSkin(FileHandle file) {
 		super(file);
 
-		add("defaultTexture", new Texture(Gdx.files.absolute("G:/Assets/test/default.png"), true));
+		add("defaultTexture", new Texture(Gdx.files.internal("res/textures/default.png"), true)); //Gdx.files.absolute("G:/Assets/test/default.png"), true));
 		
 		//this.getAll(Texture.class).values().forEach(t -> t.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear));
 
 		// Link all textures
-		LapisResources.assets.getAssetNames().forEach(a -> {
+		LapisAssets.assets.getAssetNames().forEach(a -> {
 			if(SapphireDevConfig.conf.logSkinResources)
 				Log.info("hud skin asset : " + a);
 			if(a.contains("res/textures")) {
 				var str = a.substring(a.indexOf("textures"), a.lastIndexOf(".")).replace("/", "."); // enlève le res/, enlève l'extension, et remplace / par .
-				add(str, LapisResources.assets.get(a));
+				add(str, LapisAssets.assets.get(a));
 			}
 //			if(a.startsWith("i18n"))
 //				lml.addI18nBundle(a.substring(0, a.lastIndexOf("/")).replace("/", "."), SapphireResources.assets.get(a));
@@ -84,8 +85,8 @@ public class SapphireHudSkin extends Skin {
 //		lml.addI18nBundle(prefix + "I18N", SapphireResources.assets.get(i18nPath));
 		
 		// set creature avatar
-		var avatarPath = SapphireResources.getCreatureIconPath(model.getIconName());
-		lml.getDefaultSkin().add(prefix + "Avatar", new TextureRegionDrawable(new RoundTextureRegion(LapisResources.get(avatarPath))));
+		var avatarPath = SapphireAssets.getCreatureIconPath(model.getIconName());
+		lml.getDefaultSkin().add(prefix + "Avatar", new TextureRegionDrawable(new RoundTextureRegion(LapisAssets.get(avatarPath))));
 		
 		//Log.info("c.spellbook : " + c.spellbook);
 		// set spell icons
@@ -101,11 +102,15 @@ public class SapphireHudSkin extends Skin {
 				//Log.info("SapphireHudSkin spell asset path (creature type) : " + iconPath + ". For creature type : " + CreatureType.values()[typeid].name() + ". For Spell : " + s.getIconName());
 			//} else 
 			//if (creatureid > 0) {
-				String iconPath = SapphireResources.getSpellIconPath(s.getIconName()); //model.getStrID(), 
+				String iconPath = "missing";
+				var spellResource = AssetConfs.spells.get(s.id()); //Integer.toString(s.id());
+				if(spellResource != null) {
+					iconPath = SapphireAssets.getSpellIconPath(spellResource.icon); //model.getStrID(), 
+					lml.getDefaultSkin().add(prefix + "Spell" + i, LapisAssets.assets.get(iconPath));
+				}
 				//var str = iconPath.substring("res/".length(), iconPath.lastIndexOf(".")).replace("/", ".");
 				//Log.info("SapphireHudSkin spell asset path (creature) : " + iconPath + ". For creature : " + model.getStrID() + ". For Spell : " + s.getIconName());
 			//}
-			lml.getDefaultSkin().add(prefix + "Spell" + i, LapisResources.assets.get(iconPath));
 			i++;
 		}
 		
@@ -138,6 +143,7 @@ public class SapphireHudSkin extends Skin {
 				lml.addArgument(prefix + camel(ele.name(), "Resistance", "more"), val); // m.name()), val);
 			//}
 		}
+		
 		
 		try {
 			if(SapphireDevConfig.conf.logSkinResources)

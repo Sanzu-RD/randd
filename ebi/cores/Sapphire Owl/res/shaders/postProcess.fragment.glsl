@@ -11,7 +11,7 @@ varying vec2 v_texCoords;
 uniform sampler2D u_texture;
 
 //RADIUS of our vignette, where 0.5 results in a circle fitting the screen
-const float RADIUS = 0.95;
+const float RADIUS = 0.99;
 
 //softness of our vignette, between 0.0 and 1.0
 const float SOFTNESS = 0.8;

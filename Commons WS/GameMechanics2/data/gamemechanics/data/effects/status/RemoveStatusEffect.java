@@ -1,7 +1,7 @@
 package gamemechanics.data.effects.status;
 
 import data.new1.Effect;
-import data.new1.spellstats.imp.TargetConditions;
+import data.new1.spellstats.imp.TargetConditionStat;
 import data.new1.timed.Status;
 import gamemechanics.common.Aoe;
 import gamemechanics.events.new1.status.OnRemoveStatusEvent;
@@ -14,7 +14,7 @@ public class RemoveStatusEffect extends Effect {
 	// pourrait avoir des int pour duration/stacks?
 	private Status status; //Class<? extends Status> c;
 	
-	public RemoveStatusEffect(Aoe aoe, TargetConditions targetConditions, Status status) {
+	public RemoveStatusEffect(Aoe aoe, TargetConditionStat targetConditions, Status status) {
 		super(aoe, targetConditions);
 		this.status = status;
 	}

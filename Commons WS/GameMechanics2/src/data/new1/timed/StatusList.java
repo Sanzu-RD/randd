@@ -2,16 +2,30 @@ package data.new1.timed;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 
-public class StatusList {
+import gamemechanics.main.DiamondModels;
+import gamemechanics.models.Fight;
+import gamemechanics.models.FightObject;
+import gamemechanics.models.entities.Entity;
+import gamemechanics.models.entities.Entity.EntityRef;
+import gamemechanics.models.entities.Entity.Team;
+import io.netty.buffer.ByteBuf;
+
+
+public class StatusList extends FightObject implements BBSerializer, BBDeserializer {
 	
 	//private Map<Class<? extends Status>, Status> statuses;
 	private List<Status> statuses;
 	
-	public StatusList() {
+	public StatusList(Fight f) {
+		super(f);
 		//statuses = new HashMap<>();
 		statuses = new ArrayList<>();
 	}
@@ -92,6 +106,37 @@ public class StatusList {
 
 	public int size() {
 		return statuses.size();
+	}
+	
+	
+	
+
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		out.writeInt(statuses.size());
+		statuses.forEach(status -> {
+			out.writeInt(status.modelID());
+			status.serialize(out);
+		});
+		return null;
+	}
+
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		int statusesSize = in.readInt();
+		// deserialize tous les status
+		for(int i = 0; i < statusesSize; i++) {
+			int modelid = in.readInt();
+			int sourceid = in.readInt();
+			int targetid = in.readInt();
+			
+			var statusModel = DiamondModels.statuses.get(modelid);
+			var status = statusModel.create(new EntityRef(this.fight, sourceid), new EntityRef(this.fight, targetid)); //this.fight, sourceid, targetid);
+			status.deserialize(in);
+			
+			this.statuses.add(status);
+		}
+		return null;
 	}
 	
 }

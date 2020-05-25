@@ -14,17 +14,17 @@ public enum Elements implements Element, StatProperty {
 	
 	fire,
 	water,
+	earth,
 	nature,
 	air,
 	
 	light,
 	dark,
 
-	earth,
+	physical,
+	steel,
 	ghost,
 	ice,
-	steel,
-	physical,
 	psychic,
 	electricity,
 	toxin,

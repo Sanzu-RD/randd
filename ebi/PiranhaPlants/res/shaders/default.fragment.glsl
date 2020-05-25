@@ -5,14 +5,15 @@ uniform float u_time;
 
 bool activateCheckers = true;
 bool activateOutline = true;
-bool activateWater = true;
+bool activateWater = false;
 
-float shade = 0.25f; // shade difference for chess/checkers pattern
+float shade = 0.30f; // shade difference for chess/checkers pattern
 float outlineWidth = 0.02; // grid lines width
 vec4 outlineColor = vec4(0, 0, 0, 1); // color of grid lines
 float waterlevel = 0.3; // Z-level for the water plane
 
 #define NUM_OCTAVES 6
+
 
 	
 
@@ -370,7 +371,7 @@ void main() {
 	//gl_FragColor -= getShadow();
 
 	// outline shader
-	if(activateOutline && v_pos.z != waterlevel){
+	if(activateOutline && (!activateWater || v_pos.z != waterlevel)){
 		float dx = abs(floored.x - v_pos.x);
 		float dy = abs(floored.y - v_pos.y);
 		float dz = abs(floored.z - v_pos.z);
@@ -395,6 +396,12 @@ void main() {
 		//	gl_FragColor *= vec4(coeff, coeff, coeff, 1);
 		}
 	}
+	
+	// transparency fade out
+	if(true){
+		gl_FragColor = vec4(gl_FragColor.r, gl_FragColor.g, gl_FragColor.b, clamp(v_pos.z, 0, 1));
+	}
+	
 	
 	// water shader
 	if(activateWater){
@@ -448,6 +455,7 @@ void main() {
 	}
 	
 	// test shadows
+	#ifdef shadowMapFlag
 	if(false){
 		// depth of the current pixel
 		float currentDepth = v_shadowMapUv.z;
@@ -458,6 +466,7 @@ void main() {
 		shadowDepth = getShadow();
 		gl_FragColor = vec4(shadowDepth, shadowDepth, shadowDepth, 1);
 	}
+	#endif
 	
 
 }

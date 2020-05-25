@@ -96,8 +96,10 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 		// create environment lights
 		env = createEnvironment();
 		shadowLight = createShadowLight(viewport);
-		env.shadowMap = shadowLight;
-		env.add(shadowLight);
+		if(getShadowLight() != null) {
+			env.shadowMap = shadowLight;
+			env.add(shadowLight);
+		}
 
 		// create model batches
 		modelBatch = createWorldBatch();

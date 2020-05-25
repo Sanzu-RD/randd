@@ -6,9 +6,13 @@ import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 
 import io.netty.buffer.ByteBuf;
 
-@ID(id = 1)
+@ID(id = 10002)
 public class FightAction implements BBMessage {
 
+	public FightAction() {
+		
+	}
+	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 		return null;

@@ -5,14 +5,19 @@ import com.google.common.eventbus.Subscribe;
 import gamemechanics.data.effects.damage.Damage;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.Handler;
+import gamemechanics.events.new1.displacement.OnPushEvent;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Entity;
 
 public class OnDmgEvent extends Event {
 	
 	/** interface for statuses to implement */
-	public interface OnDmgHandler extends Handler<OnDmgEvent> {
-		public void handle(OnDmgEvent e);
+	public interface OnDmgHandler extends Handler { //<OnDmgEvent> {
+		@Subscribe
+		public default void handle0(OnDmgEvent event) {
+			if(check(event)) onDmg(event);
+		}
+		public void onDmg(OnDmgEvent e);
 	}
 	
 	public OnDmgEvent(Entity caster, Cell target, Damage effect) {

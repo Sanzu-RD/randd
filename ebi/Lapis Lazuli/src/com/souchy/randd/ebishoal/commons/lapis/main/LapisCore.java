@@ -31,6 +31,9 @@ public abstract class LapisCore extends EbiShoalCore {
 	public LapisCore(String[] args) throws Exception {
 		super(args);
 		init();
+	}
+	
+	public void start() {
 	    new LwjglApplication(game, config);
 	}
 

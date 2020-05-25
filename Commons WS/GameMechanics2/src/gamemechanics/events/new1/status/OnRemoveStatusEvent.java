@@ -13,8 +13,11 @@ import gamemechanics.models.entities.Entity;
 
 public class OnRemoveStatusEvent extends Event {
 
-	public interface OnRemoveStatusHandler extends Handler<OnRemoveStatusEvent> {
+	public interface OnRemoveStatusHandler extends Handler { //<OnRemoveStatusEvent> {
 		@Subscribe
+		public default void handle0(OnRemoveStatusEvent event) {
+			if(check(event)) onRemoveStatus(event);
+		}
 		public void onRemoveStatus(OnRemoveStatusEvent event);
 	}
 	

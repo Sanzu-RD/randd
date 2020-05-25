@@ -11,6 +11,7 @@ import com.google.gson.JsonSyntaxException;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
+import gamemechanics.models.Fight;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.statics.properties.Targetability;
 
@@ -82,7 +83,7 @@ public class MapData {
 	
 	// first half of this would be in a board generator class (cell creation)
 	// then sapphireowl would extend the generator class to add model generation
-	public void generate() {
+	public void generate(Fight f) {
 		
 		for (int i = 0; i < cellTypes.length; i++) {
 			int j = 0;
@@ -93,7 +94,7 @@ public class MapData {
 			CellData model = modelList[modelID];
 			
 			
-			var cell = new Cell(i, j);
+			var cell = new Cell(f, i, j);
 			for(int t = 0; t < Targetability.values().length; t++) {
 				cell.targeting.setCan(Targetability.values()[t], type.targetability[t]);
 			}

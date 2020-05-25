@@ -8,44 +8,48 @@ import java.util.function.BiPredicate;
 import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableList;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 
-import data.new1.SpellModel;
 import data.new1.spellstats.base.BoolStat;
 import data.new1.spellstats.base.IntStat;
 import data.new1.spellstats.base.ObjectStat;
-import data.new1.spellstats.imp.TargetConditions;
+import data.new1.spellstats.imp.TargetConditionStat;
 import data.new1.timed.Status;
 import gamemechanics.common.Aoe;
 import gamemechanics.common.AoeBuilders;
 import gamemechanics.data.effects.damage.Damage;
+import gamemechanics.models.Fight;
+import gamemechanics.models.SpellModel;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.models.entities.Entity;
+import gamemechanics.models.entities.Entity.EntityRef;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.properties.Resource;
+import io.netty.buffer.ByteBuf;
 
 public class SpellStats { //extends Entyty {
 	
 	// cast costs
-	public Map<Resource, IntStat> costs;
+	public Map<Resource, IntStat> costs = new HashMap<>();
 	
 	// cast ranges and pattern for the cast range
-	public IntStat minRangeRadius;
-	public IntStat maxRangeRadius;
-	public ObjectStat<Aoe> minRangePattern;
-	public ObjectStat<Aoe> maxRangePattern;
+	public IntStat minRangeRadius = new IntStat(0);
+	public IntStat maxRangeRadius = new IntStat(0);
+	public ObjectStat<Aoe> minRangePattern = new ObjectStat<Aoe>(AoeBuilders.single.get());
+	public ObjectStat<Aoe> maxRangePattern = new ObjectStat<Aoe>(AoeBuilders.single.get());
 	
 	// cast cooldowns
-	public IntStat cooldown;
-	public IntStat castPerTurn;
-	public IntStat castPerTarget;
+	public IntStat cooldown = new IntStat(0);
+	public IntStat castPerTurn = new IntStat(0);
+	public IntStat castPerTarget = new IntStat(0);
 	
 	// cast line of sight
-	public BoolStat lineOfSight;
+	public BoolStat lineOfSight = new BoolStat(true);
 	
 	// publicly modifiable aoes (spells create their aoes and place them here so that other classes can modify them without knowing the spell .class)
-	public List<ObjectStat<Aoe>> aoes;
+	public List<ObjectStat<Aoe>> aoes = new ArrayList<>();
 	
 
 //	public BiPredicate<Creature, SpellModel> predicate = (c, s) -> true;
@@ -96,7 +100,7 @@ public class SpellStats { //extends Entyty {
 			
 			// for all cells in the AOE
 			aoe.table.foreach((x, y) -> {
-				new Damage(shockPattern.base.get(), new TargetConditions(), new HashMap<>());
+				new Damage(shockPattern.base.get(), new TargetConditionStat(), new HashMap<>());
 			});
 		}
 		@Override
@@ -110,6 +114,7 @@ public class SpellStats { //extends Entyty {
 			return false;
 		}
 	}
+	
 	public static class Overcharge {
 		public void onGain(Creature c) {
 			for(var spell : c.spellbook) {
@@ -120,26 +125,6 @@ public class SpellStats { //extends Entyty {
 					//new IntStat(AoePattern.Square3.ordinal());
 				}
 			}
-		}
-	}
-	public static class Shocked extends Status {
-		public Shocked(Entity source, Entity target) {
-			super(source, target);
-		}
-		@Override
-		public int id() {
-			return 1;
-		}
-		@Override public boolean fuse(Status s) { 
-			return false; 
-		}
-		@Override
-		public void onAdd() {
-			target.getStats().resistance.get(Element.global).more += 0.2; //.addResistance(0.8, Element.global);
-		}
-		@Override
-		public void onLose() {
-			target.getStats().resistance.get(Element.global).more -= 0.2; //.addResistance(-0.8, Element.global);
 		}
 	}
 	

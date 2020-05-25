@@ -8,7 +8,7 @@ import gamemechanics.models.Fight;
 import io.netty.buffer.ByteBuf;
 
 @SuppressWarnings("exports")
-@ID(id = 3)
+@ID(id = 11002)
 public class Update implements BBMessage {
 
 	public Fight fight;
@@ -22,13 +22,11 @@ public class Update implements BBMessage {
 	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

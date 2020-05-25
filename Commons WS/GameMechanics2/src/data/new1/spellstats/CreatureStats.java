@@ -3,14 +3,18 @@ package data.new1.spellstats;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import data.new1.spellstats.base.BoolStat;
 import data.new1.spellstats.base.IntStat;
 import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.properties.Resource;
+import io.netty.buffer.ByteBuf;
 
-public class CreatureStats {
+public class CreatureStats implements BBSerializer, BBDeserializer {
 	
 	/** 
 	 * resources 
@@ -120,12 +124,39 @@ public class CreatureStats {
 		return (int) resources.get(res).fight;
 	}
 
-//	public Predicate<Creature> predicate = (c) -> true;
-//	public CreatureStats() {
-//		
-//	}
-//	public CreatureStats(Predicate<Creature> predicate) {
-//		this.predicate = predicate;
-//	}
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		resources.forEach((r, i) -> i.serialize(out));
+		shield.forEach((r, i) -> i.serialize(out));
+		
+		affinity.forEach((r, i) -> i.serialize(out));
+		resistance.forEach((r, i) -> i.serialize(out));
+		penetration.forEach((r, i) -> i.serialize(out));
+		
+		healingAffinity.serialize(out);
+		healingRes.serialize(out);
+		range.serialize(out);
+		summons.serialize(out);
+		visible.serialize(out);
+		return null;
+	}
+
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		resources.forEach((r, i) -> i.deserialize(in));
+		shield.forEach((r, i) -> i.deserialize(in));
+		
+		affinity.forEach((r, i) -> i.deserialize(in));
+		resistance.forEach((r, i) -> i.deserialize(in));
+		penetration.forEach((r, i) -> i.deserialize(in));
+		
+		this.healingAffinity.deserialize(in);
+		this.healingRes.deserialize(in);
+		this.range.deserialize(in);
+		this.summons.deserialize(in);
+		this.visible.deserialize(in);
+		return null;
+	}
+
 	
 }

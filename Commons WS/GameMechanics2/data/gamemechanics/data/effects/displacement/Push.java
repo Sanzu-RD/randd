@@ -1,7 +1,7 @@
 package gamemechanics.data.effects.displacement;
 
 import data.new1.Effect;
-import data.new1.spellstats.imp.TargetConditions;
+import data.new1.spellstats.imp.TargetConditionStat;
 import gamemechanics.common.Aoe;
 import gamemechanics.common.generic.Vector2;
 import gamemechanics.events.new1.Event;
@@ -9,29 +9,45 @@ import gamemechanics.events.new1.displacement.OnPushEvent;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Entity;
 
-/** Pushes a target creature by a set distance (stopped by no-passthrough cells) */
+/** 
+ * Pushes a target creature by a set distance (stopped by no-passthrough cells) 
+ */
 public class Push extends Effect {
 	
-	/** Preset distance */
+	/** 
+	 * Preset distance 
+	 */
 	public int distance;
 	
-	/** Calculated push vector */
+	/** 
+	 * Calculated push vector 
+	 */
 	public Vector2 vector;
-	/** Calculated destination cell */
+
+	/** 
+	 * Calculated destination cell 
+	 */
 	public Cell resultCell;
 	
-	public Push(Aoe aoe, TargetConditions targetConditions, int distance) {
+	/**
+	 * Ctor
+	 */
+	public Push(Aoe aoe, TargetConditionStat targetConditions, int distance) {
 		super(aoe, targetConditions);
 		this.distance = distance;
 	}
 
+	/**
+	 * rien de possible à préparer ici
+	 */
 	@Override
 	public void prepareCaster(Entity caster, Cell aoeOrigin) {
-		// rien de possible à préparer ici
 	}
 
-	/** Calculate the displacement vector */
-	/** Calculate the destination cell */
+	/** 
+	 * Calculate the displacement vector 
+	 * Calculate the destination cell 
+	 */
 	@Override
 	public void prepareTarget(Entity caster, Cell target) { 
 		if(!target.hasCreature()) return;
@@ -63,7 +79,9 @@ public class Push extends Effect {
 		}
 	}
 
-	/** Apply the push from the creature's cell to the resultCell */ 
+	/** 
+	 * Apply the push from the creature's cell to the resultCell 
+	 */ 
 	@Override
 	public void apply0(Entity caster, Cell target) {
 		if(!target.hasCreature()) return;

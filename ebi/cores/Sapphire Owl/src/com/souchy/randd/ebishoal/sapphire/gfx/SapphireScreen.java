@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 import com.souchy.randd.ebishoal.sapphire.controls.SapphireController;
@@ -31,9 +32,11 @@ public class SapphireScreen extends LapisScreen {
 		time += delta;
 		if(time >= period) time = 0;
 		double radian = ((period - time) / period) * 2 * Math.PI;
-		getShadowLight().direction.x = (float) (Math.sin(radian) / radius);
-		getShadowLight().direction.y = (float) (Math.cos(radian) / radius);
-		//getShadowLight().direction.z = -0.5f;
+		if(getShadowLight() != null) {
+			getShadowLight().direction.x = (float) (Math.sin(radian) / radius);
+			getShadowLight().direction.y = (float) (Math.cos(radian) / radius);
+			//getShadowLight().direction.z = -0.5f;
+		}
 	}
 	
 //	@Override
@@ -98,6 +101,11 @@ public class SapphireScreen extends LapisScreen {
 		getCamera().update();
 	}
 
+//	
+//	@Override
+//	public LapisDSL createShadowLight(Viewport viewport) {
+//		return null;
+//	}
 	
 	/**
 	 * Get the color to clear the screen with

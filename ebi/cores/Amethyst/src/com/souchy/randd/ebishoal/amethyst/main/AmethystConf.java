@@ -18,5 +18,6 @@ public class AmethystConf extends JsonConfig {
 	 */
 	//public Object currentTab;
 	
+	public String language = "en";
 	
 }

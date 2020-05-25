@@ -31,9 +31,9 @@
             <fileset dir="${dir.git}/r and d/Commons WS/TealWaters/bin"/>
             <fileset dir="${dir.git}/r and d/Commons WS/GameMechanics2/bin"/>
             <fileset dir="${dir.git}/r and d/Commons WS/Jade Models/bin"/>
+            <fileset dir="${dir.git}/r and d/Commons WS/DeathEbi-commons/bin"/> 
             <fileset dir="${dir.git}/r and d/ebi/EbiCore/bin"/>
             <fileset dir="${dir.git}/r and d/ebi/Lapis Lazuli/bin"/>
-            <fileset dir="${dir.workspace}/DeathEbiCommons/bin"/> 
         	<!-- add DeathEbiCommons, Moonstone-white and Moonstone-commons -->
         </jar>
 

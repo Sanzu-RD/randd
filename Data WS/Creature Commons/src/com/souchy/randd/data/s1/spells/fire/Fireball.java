@@ -3,10 +3,10 @@ package com.souchy.randd.data.s1.spells.fire;
 import com.google.common.collect.ImmutableList;
 import com.souchy.randd.data.s1.main.Elements;
 
-import data.new1.SpellModel;
 import data.new1.spellstats.SpellStats;
 import data.new1.spellstats.base.IntStat;
-import gamemechanics.data.effects.damage.DmgEffect;
+import gamemechanics.data.effects.damage.Damage;
+import gamemechanics.models.SpellModel;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.CreatureType;
@@ -15,7 +15,7 @@ import gamemechanics.statics.stats.properties.Resource;
 
 public class Fireball extends SpellModel {
 
-	public DmgEffect e1 = new DmgEffect();
+	public Damage e1 = new Damage(null, null, null);
 	
 	public Fireball() {
 		
@@ -23,7 +23,7 @@ public class Fireball extends SpellModel {
 	
 	@Override
 	public int id() {
-		return 0;
+		return 1;
 	}
 
 	@Override

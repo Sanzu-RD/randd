@@ -27,7 +27,7 @@ public abstract class Event {
 	/**
 	 * List of handlers that already touched this event. Every handler can only be applied once on a same event and its children (copied down)
 	 */
-	public List<Handler<?>> markedHandlers = new ArrayList<>();
+	public List<Handler> markedHandlers = new ArrayList<>();
 	/** 
 	 * Level of copy starts at 0 and goes deeper <p>
 	 * That way we know the caster handlers are at level 0 <br>

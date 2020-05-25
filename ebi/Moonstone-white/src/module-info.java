@@ -7,4 +7,5 @@ module com.souchy.randd.moonstone.white {
 	requires transitive com.souchy.randd.commons.TealWaters;
 	requires transitive com.souchy.randd.deathshadows.commons.SmoothRivers;
 	requires transitive com.souchy.randd.ebishoal.commons.EbiCore;
+	requires com.souchy.randd.moonstone.Commons;
 }

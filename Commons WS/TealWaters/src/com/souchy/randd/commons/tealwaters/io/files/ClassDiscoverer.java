@@ -34,66 +34,41 @@ public abstract class ClassDiscoverer<T> implements Discoverer<String, Class<?>,
 		public boolean identify(Class<?> subClass) {
 			return superClass != subClass && superClass.isAssignableFrom(subClass); // default impl. It's different for other impls.
 		}
+
+		@Override
+		public List<Class<T>> explore(String packageName) {
+			List<Class<T>> classes = new ArrayList<Class<T>>();
+			try {
+				Reflections reflections = new Reflections(packageName, new SubTypesScanner(false)); 
+				Set<Class<? extends T>> resourceList = reflections.getSubTypesOf(superClass);
+				for(var res : resourceList) {
+//					Log.info("ClassDiscoverer.explore : reflection res : " + res);
+					if(identify(res)) // the implementation of this makes sure the res is the correct class type
+						classes.add((Class<T>) res);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return classes;
+		}
+		
 	}
 	
 	
 	@Override
 	public List<Class<T>> explore(String packageName) {
-		//Log.info("ClassDiscoverer.explore : " + packageName);
 		List<Class<T>> classes = new ArrayList<Class<T>>();
-//		String pathname = packageName.replace('.', '/');
 		try {
-//			var resources = FilesManager.getResources(pathname);
-//			var dirs = new ArrayList<File>();
-//			while (resources.hasMoreElements()) {
-//				URL resource = resources.nextElement();
-//				Log.info("ClassDiscoverer.explore : resource = " + resource);
-//				
-//				//recursive(classes, resource);
-//				
-//				//recursiveFiles(classes, new File(resource.getFile().replace("%20", " ")));
-//				
-////				var sub = FilesManager.getResources(resource.toString());
-//				// System.out.println("resource : [" + resource.getFile() + "]");
-////				dirs.add(new File(resource.getFile().replace("%20", " ")));
-//			}
-//			for (File directory : dirs) {
-//				// System.out.println("for dir [" + directory + "]");
-//				classes.addAll(findClasses(directory, packageName, this::identify));
-//			}
-			//System.out.println("found [" + classes.size() + "] classes");
-//			try {
-//				ClassPath cp = ClassPath.from(Thread.currentThread().getContextClassLoader());
-//				for (ClassPath.ClassInfo info : cp.getTopLevelClassesRecursive(packageName)) {
-//					// Do stuff with classes here...
-//					Log.info("classpath info : " + info.getName());
-//				}
-//			} catch (Exception e) {
-//				Log.info("fail classpath");
-//			}
-			
-			Reflections reflections = new Reflections(packageName, new SubTypesScanner(false)); // new ResourcesScanner()); //
-			//reflections.getConfiguration().getScanners().add(new SubTypesScanner(false));
-//			Set<String> resourceList = reflections.getAllTypes(); //.getResources(x -> true);
+			Reflections reflections = new Reflections(packageName, new SubTypesScanner(false));
 			Set<Class<?>> resourceList = reflections.getSubTypesOf(Object.class);
-
-//			reflections = new Reflections(packageName, new ResourcesScanner());
-//			var resourceList2 = reflections.getResources(x -> true);
-//			for(var res : resourceList2) 
-//				Log.info("ClassDiscoverer.explore : reflection res 2 : " + res);
-			
-			
 			for(var res : resourceList) {
 //				Log.info("ClassDiscoverer.explore : reflection res : " + res);
 				if(identify(res)) // the implementation of this makes sure the res is the correct class type
 					classes.add((Class<T>) res);
 			}
-				//accept(classes, res);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		//Log.info("ClassDiscoverer.explore : classes = " + classes);
 		return classes;
 	}
 	

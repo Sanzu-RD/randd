@@ -6,10 +6,20 @@ import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 
 import io.netty.buffer.ByteBuf;
 
+/**
+ * When a player presses pass turn, send this to the server.
+ * 
+ * @author Blank
+ * @date 9 mai 2020
+ */
 @SuppressWarnings("exports")
-@ID(id = 2)
+@ID(id = 10003)
 public class PassTurn implements BBMessage {
 
+	public PassTurn() {
+		
+	}
+	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 		return null;
@@ -27,6 +37,6 @@ public class PassTurn implements BBMessage {
 
 	@Override
 	public int getBufferCapacity() {
-		return 10;
+		return 1;
 	}
 }

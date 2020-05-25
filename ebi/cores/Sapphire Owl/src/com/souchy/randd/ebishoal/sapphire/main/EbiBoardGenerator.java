@@ -4,14 +4,15 @@ import gamemechanics.common.BoardGenerator;
 import gamemechanics.ext.CellType;
 import gamemechanics.ext.MapData;
 import gamemechanics.models.Board;
+import gamemechanics.models.Fight;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.statics.properties.Targetability;
 
 public class EbiBoardGenerator extends BoardGenerator {
 	
 	@Override
-	public Board generate(MapData data) {
-		Board board = new Board();
+	public Board generate(Fight f, MapData data) {
+		Board board = new Board(f);
 		var types = data.cellTypes;
 
 		//data.models;
@@ -24,7 +25,7 @@ public class EbiBoardGenerator extends BoardGenerator {
 				//int model = data.cellModels[typeOrdinal];
 				//Model m = SapphireOwl.core.getGame().modelManager.loadSync(data.modelList[model]);
 				
-				Cell cell = new Cell(x, y); //EbiCell(x, y, new ModelInstance(m));
+				Cell cell = new Cell(f, x, y); //EbiCell(x, y, new ModelInstance(m));
 
 				for(int t = 0; t < Targetability.values().length; t++) 
 					cell.targeting.setCan(Targetability.values()[t], type.targetability[t]);

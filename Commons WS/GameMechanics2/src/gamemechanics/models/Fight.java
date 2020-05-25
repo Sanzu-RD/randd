@@ -2,6 +2,7 @@ package gamemechanics.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.eventbus.EventBus;
 
@@ -17,6 +18,11 @@ import gamemechanics.models.entities.Entity.Team;
 public class Fight {
 	
 	//public EventPipeline bus;
+	
+	/**
+	 * All entities (cells and creatures)
+	 */
+	public Map<Integer, Entity> entities;
 	
 	/**
 	 * Board
@@ -46,7 +52,7 @@ public class Fight {
 	public Fight() {
 		//bus = new EventPipeline();
 		
-		board = new Board();
+		board = new Board(this);
 		
 		timeline = new ArrayList<>();
 		teamA = new ArrayList<>();

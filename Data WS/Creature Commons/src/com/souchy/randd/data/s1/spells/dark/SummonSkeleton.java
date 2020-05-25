@@ -6,13 +6,12 @@ import com.google.common.collect.ImmutableList;
 import com.souchy.randd.annotationprocessor.ID;
 
 import data.new1.Effect;
-import data.new1.SpellModel;
 import data.new1.spellstats.SpellStats;
+import gamemechanics.models.SpellModel;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
-import gamemechanics.statics.stats.Stats;
 
 /**
  * These spells need to be registered to their creature type to be available to creatures of that type when the creature data is created
@@ -24,15 +23,14 @@ public class SummonSkeleton extends SpellModel { //implements EbiSpellData {
 
 	@Override
 	public int id() {
-		return 6;
+		return 7;
 	}
 
 	public List<Effect> previsualisation(Creature caster, Cell target) {
-		var stats = new Stats();
-		stats.compile(caster);
+		var stats = new SpellStats();
+//		stats..compile(caster);
 		return null;
 	}
-	
 	
 	@Override
 	protected SpellStats initBaseStats() {

@@ -3,13 +3,12 @@ package com.souchy.randd.data.s1.spells.light;
 import com.google.common.collect.ImmutableList;
 
 import data.new1.Effect;
-import data.new1.SpellModel;
 import data.new1.spellstats.SpellStats;
+import gamemechanics.models.SpellModel;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
-import gamemechanics.statics.stats.Stats;
 
 public class ShiningArmour extends SpellModel {
 

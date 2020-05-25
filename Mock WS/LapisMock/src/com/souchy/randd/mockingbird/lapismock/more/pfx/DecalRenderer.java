@@ -12,14 +12,14 @@ import com.badlogic.gdx.graphics.g3d.particles.batches.BillboardParticleBatch;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
 import com.badlogic.gdx.graphics.g3d.particles.renderers.BillboardControllerRenderData;
 import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer;
-import com.souchy.randd.ebishoal.commons.lapis.main.LapisResources;
+import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 
 public class DecalRenderer extends ParticleControllerRenderer<DecalControllerRenderData, DecalParticleBatch> {
 
 	@Override
 	public boolean isCompatible(ParticleBatch<?> batch) {
 		Camera cam = null;
-		Texture tex = LapisResources.get("");
+		Texture tex = LapisAssets.get("");
 		Decal a = Decal.newDecal(new TextureRegion(tex), true);
 		DecalBatch d = new DecalBatch(new CameraGroupStrategy(cam));
 		d.add(a);

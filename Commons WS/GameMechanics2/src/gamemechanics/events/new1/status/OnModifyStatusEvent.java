@@ -10,8 +10,11 @@ import gamemechanics.models.entities.Entity;
 
 public class OnModifyStatusEvent extends Event {
 
-	public interface OnModifyStatusHandler extends Handler<OnModifyStatusEvent> {
+	public interface OnModifyStatusHandler extends Handler { //<OnModifyStatusEvent> {
 		@Subscribe
+		public default void handle0(OnModifyStatusEvent event) {
+			if(check(event)) onModifyStatus(event);
+		}
 		public void onModifyStatus(OnModifyStatusEvent event);
 	}
 	

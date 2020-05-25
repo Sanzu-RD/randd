@@ -1,5 +1,7 @@
 package gamemechanics.events.new1.displacement;
 
+import com.google.common.eventbus.Subscribe;
+
 import gamemechanics.data.effects.displacement.Push;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.Handler;
@@ -9,8 +11,12 @@ import gamemechanics.models.entities.Entity;
 public class OnPushEvent extends Event {
 	
 	/** interface for statuses to implement */
-	public interface OnPushHandler extends Handler<OnPushEvent> {
-		public void handle(OnPushEvent e);
+	public interface OnPushHandler extends Handler { // <OnPushEvent> {
+		@Subscribe
+		public default void handle0(OnPushEvent event) {
+			if(check(event)) onPush(event);
+		}
+		public void onPush(OnPushEvent e);
 	}
 	
 	

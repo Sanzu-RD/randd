@@ -4,14 +4,18 @@ import com.google.common.eventbus.Subscribe;
 
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.Handler;
+import gamemechanics.events.new1.other.OnWalkEvent;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.models.entities.Entity;
 import gamemechanics.data.effects.status.AddStatusEffect;
 
 public class OnAddStatusEvent extends Event {
 	
-	public interface OnAddStatusHandler extends Handler<OnAddStatusEvent> {
+	public interface OnAddStatusHandler extends Handler { //<OnAddStatusEvent> {
 		@Subscribe
+		public default void handle0(OnAddStatusEvent event) {
+			if(check(event)) onAddStatus(event);
+		}
 		public void onAddStatus(OnAddStatusEvent event);
 	}
 	

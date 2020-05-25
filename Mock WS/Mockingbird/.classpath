@@ -32,7 +32,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/GameMechanics2">
+	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

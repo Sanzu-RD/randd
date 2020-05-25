@@ -2,7 +2,6 @@ package com.souchy.randd.data.s1.creatures;
 
 import data.new1.CreatureModel;
 import data.new1.spellstats.CreatureStats;
-import gamemechanics.statics.stats.Stats;
 
 public class Mesmer extends CreatureModel {
 
@@ -13,8 +12,8 @@ public class Mesmer extends CreatureModel {
 
 	@Override
 	protected CreatureStats initBaseStats() {
-		// TODO Auto-generated method stub
-		return null;
+		var stats = new CreatureStats();
+		return stats;
 	}
 	
 }

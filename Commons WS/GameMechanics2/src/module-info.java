@@ -5,7 +5,7 @@ module GameMechanics2 {
 	exports gamemechanics.data.effects.damage;
 	exports gamemechanics.data.effects.displacement;
 	exports gamemechanics.data.effects.other;
-	exports gamemechanics.events;
+//	exports gamemechanics.events;
 	exports gamemechanics.events.new1;
 	exports gamemechanics.ext;
 	exports gamemechanics.models;
@@ -23,7 +23,7 @@ module GameMechanics2 {
 	exports data.new1.spellstats;
 	exports data.new1.timed;
 	exports data.new1.spellstats.base;
-	exports data.modules;
+//	exports data.modules;
 	
 	requires transitive com.google.common;
 	requires com.souchy.randd.commons.TealWaters;

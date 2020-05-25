@@ -4,7 +4,7 @@ package data.new1;
 import java.util.List;
 
 import data.new1.spellstats.base.IntStat;
-import data.new1.spellstats.imp.TargetConditions;
+import data.new1.spellstats.imp.TargetConditionStat;
 import gamemechanics.common.Aoe;
 import gamemechanics.data.effects.damage.Damage;
 import gamemechanics.events.new1.Event;
@@ -29,9 +29,9 @@ public abstract class Effect {
 	/** 
 	 * conditions to apply the effect to a target in the aoe 
 	 */
-	public TargetConditions targetConditions;
+	public TargetConditionStat targetConditions;
 
-	public Effect(Aoe aoe, TargetConditions targetConditions) {
+	public Effect(Aoe aoe, TargetConditionStat targetConditions) {
 		this.aoe = aoe;
 		this.targetConditions = targetConditions;
 	}

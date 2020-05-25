@@ -3,6 +3,7 @@ package com.souchy.randd.data.s1.creaturetypes;
 import com.souchy.randd.data.s1.main.Elements;
 
 import data.new1.CreatureTypeModel;
+import data.new1.spellstats.base.IntStat;
 import gamemechanics.statics.stats.modifiers.eleMod;
 import gamemechanics.statics.stats.modifiers.mathMod;
 import gamemechanics.statics.stats.properties.Resource;
@@ -13,18 +14,18 @@ public final class KnightType extends CreatureTypeModel {
 	
 	private KnightType() {
 		// resources
-		stats.addResource(1000, Resource.life); 
-		stats.addResource(100, Resource.mana); 
-		stats.addResource(6, Resource.move); 
-		// affinities
-		stats.addAffinity(25, Elements.steel);
-		// res
-		stats.addResistance(25, Elements.steel);
-		stats.addResistance(25, Elements.physical);
+		stats.resources.put(Resource.life, new IntStat(300));
 		
-
-		// passive is flat resistance
-		stats.add(20, Elements.global, eleMod.res, mathMod.flat);
+		// affinities
+		stats.affinity.get(Elements.steel).inc = 10;
+		
+		// res
+		stats.resistance.get(Elements.steel).inc = 10;
+		stats.resistance.get(Elements.physical).inc = 10;
+		
+		
+		// passive is  global flat res
+		stats.resistance.get(Elements.global).baseflat = 20;
 	}
 	
 }

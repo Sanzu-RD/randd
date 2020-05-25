@@ -5,7 +5,7 @@ import java.util.Map;
 
 import data.new1.Effect;
 import data.new1.spellstats.base.IntStat;
-import data.new1.spellstats.imp.TargetConditions;
+import data.new1.spellstats.imp.TargetConditionStat;
 import gamemechanics.common.Aoe;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.damage.OnDmgEvent;
@@ -50,7 +50,7 @@ public class Damage extends Effect {
 	 * @param targetConditions - what kind of targets should be affected
 	 * @param formula - base ratios for elemental dmg
 	 */
-	public Damage(Aoe areaOfEffect, TargetConditions targetConditions, Map<Element, IntStat> formula) {
+	public Damage(Aoe areaOfEffect, TargetConditionStat targetConditions, Map<Element, IntStat> formula) {
 		super(areaOfEffect, targetConditions);
 		this.formula = formula;
 	}

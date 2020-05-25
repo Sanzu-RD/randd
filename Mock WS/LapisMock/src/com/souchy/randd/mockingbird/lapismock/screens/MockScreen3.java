@@ -72,7 +72,7 @@ import com.github.czyzby.lml.vis.util.VisLml;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
-import com.souchy.randd.ebishoal.commons.lapis.main.LapisResources;
+import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.mockingbird.lapismock.BaseScreen;
 import com.souchy.randd.mockingbird.lapismock.CustomGreedyMesh;
@@ -136,16 +136,16 @@ public class MockScreen3 extends BaseScreen {
 		var blender = "G:/Assets/myblender/";
 		var assettests = "G:/Assets/test/";
 		var pfxTestPath = "G:/Assets/pfx/test/";
-		LapisResources.loadModels(Gdx.files.internal(internal+"delete/"));
-		LapisResources.loadModels(Gdx.files.internal(internal+"models/"));
-		LapisResources.loadTextures(Gdx.files.internal(internal+"textures/"));
-		LapisResources.loadI18NBundles(Gdx.files.internal(internal+"i18n/"));
-		LapisResources.loadParticleEffects(Gdx.files.internal(internal+"fx/"), params);
-		LapisResources.loadParticleEffects(Gdx.files.absolute(pfxTestPath), params);
-		LapisResources.loadModels(Gdx.files.absolute(blender));
-		LapisResources.loadTextures(Gdx.files.absolute(assettests));
+		LapisAssets.loadModels(Gdx.files.internal(internal+"delete/"));
+		LapisAssets.loadModels(Gdx.files.internal(internal+"models/"));
+		LapisAssets.loadTextures(Gdx.files.internal(internal+"textures/"));
+		LapisAssets.loadI18NBundles(Gdx.files.internal(internal+"i18n/"));
+		LapisAssets.loadParticleEffects(Gdx.files.internal(internal+"fx/"), params);
+		LapisAssets.loadParticleEffects(Gdx.files.absolute(pfxTestPath), params);
+		LapisAssets.loadModels(Gdx.files.absolute(blender));
+		LapisAssets.loadTextures(Gdx.files.absolute(assettests));
 		
-		Log.info("assets : { " + String.join(", ", LapisResources.assets.getAssetNames()) + " }");
+		Log.info("assets : { " + String.join(", ", LapisAssets.assets.getAssetNames()) + " }");
 		
 		String vert = Gdx.files.internal(internal+"shaders/default.vertex.glsl").readString();
 		String frag = Gdx.files.internal(internal+"shaders/default.fragment.glsl").readString();
@@ -171,7 +171,7 @@ public class MockScreen3 extends BaseScreen {
 		// List<FileHandle> files =
 		// MockCore.core.getGame().modelDiscoverer.explore("models");
 		// MockCore.core.getGame().modelManager.loadSync(files);
-		Model spider = LapisResources.get(internal+"delete/Wasp.g3dj"); //LapisMock.core.getGame().modelManager.loadSync("models/Wasp.g3dj");
+		Model spider = LapisAssets.get(internal+"delete/Wasp.g3dj"); //LapisMock.core.getGame().modelManager.loadSync("models/Wasp.g3dj");
 		System.out.println("spider 1 = " + spider);
 //		Model spider = LapisResources.assets.get("res/delete/Wasp.g3dj", Model.class); //LapisMock.core.getGame().modelManager.get("Wasp");
 //		System.out.println("spider 2 = " + spider);
@@ -193,7 +193,7 @@ public class MockScreen3 extends BaseScreen {
 		// KUNAI MODEL :
 		//LapisMock.core.getGame().modelManager.loadSync(new FileHandle(blender + "kunai.g3dj"));
 		
-		Model kunai = LapisResources.get(blender + "kunai.g3dj"); //LapisMock.core.getGame().modelManager.get("kunai");
+		Model kunai = LapisAssets.get(blender + "kunai.g3dj"); //LapisMock.core.getGame().modelManager.get("kunai");
 		var kunaiInst = new ModelInstance(kunai);
 		kunaiInst.transform.scl(1f / 100f);
 		kunaiInst.transform.setTranslation(0, 0, 1);
@@ -202,7 +202,7 @@ public class MockScreen3 extends BaseScreen {
 
 		// CHIP MODEL :
 		//LapisMock.core.getGame().modelManager.loadSync(new FileHandle(blender + "kunai.g3dj"));
-		Model chip = LapisResources.get(blender + "chip.g3dj"); //LapisMock.core.getGame().modelManager.get("kunai");
+		Model chip = LapisAssets.get(blender + "chip.g3dj"); //LapisMock.core.getGame().modelManager.get("kunai");
 		var chipInst = new ModelInstance(chip);
 		chipInst.transform.scl(1f / 100f);
 		chipInst.transform.setTranslation(3, 3, 1);
@@ -212,8 +212,8 @@ public class MockScreen3 extends BaseScreen {
 //		LapisMock.core.getGame().assets.load("G:/Assets/test/grass137x137.png", Texture.class);
 //		LapisMock.core.getGame().assets.load("G:/Assets/test/blackborder.png", Texture.class);
 //		LapisMock.core.getGame().assets.finishLoading();
-		GlobalLML.getLmlParser().getData().getDefaultSkin().add("bg", LapisResources.get(assettests + "grass137x137.png")); //LapisMock.core.getGame().assets.get("G:/Assets/test/grass137x137.png"));
-		GlobalLML.getLmlParser().getData().getDefaultSkin().add("border", LapisResources.get(assettests + "blackborder.png")); //LapisMock.core.getGame().assets.get("G:/Assets/test/blackborder.png"));
+		GlobalLML.getLmlParser().getData().getDefaultSkin().add("bg", LapisAssets.get(assettests + "grass137x137.png")); //LapisMock.core.getGame().assets.get("G:/Assets/test/grass137x137.png"));
+		GlobalLML.getLmlParser().getData().getDefaultSkin().add("border", LapisAssets.get(assettests + "blackborder.png")); //LapisMock.core.getGame().assets.get("G:/Assets/test/blackborder.png"));
 		
 		// GUI :
 		//LmlApplicationListener a;
@@ -236,7 +236,7 @@ public class MockScreen3 extends BaseScreen {
 		// System.out.println("fx : " + fx);
 		
 		// laser effect
-		ParticleEffect laserFXo = LapisResources.get(fxPath);
+		ParticleEffect laserFXo = LapisAssets.get(fxPath);
 		// we cannot use the originalEffect, we must make a copy each time we create new
 		// particle effect
 		laserFX = laserFXo.copy();
@@ -247,7 +247,7 @@ public class MockScreen3 extends BaseScreen {
 		particleSystem.add(laserFX);
 		
 		// kunai effect
-		ParticleEffect kunaiFXo = LapisResources.get(kunaifxPath);
+		ParticleEffect kunaiFXo = LapisAssets.get(kunaifxPath);
 		// we cannot use the originalEffect, we must make a copy each time we create new
 		// particle effect
 		kunaiFX = kunaiFXo.copy();
