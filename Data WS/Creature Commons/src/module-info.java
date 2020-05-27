@@ -24,7 +24,7 @@ module CreatureCommons {
 	
 	
 	requires transitive GameMechanics2;
-	requires GameMechanics3;
+//	requires GameMechanics3;
 	requires com.google.common;
 	requires com.souchy.randd.AnnotationProcessor;
 	requires netty.all;

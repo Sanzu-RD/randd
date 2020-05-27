@@ -34,6 +34,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LML"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DB"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
-	<classpathentry kind="var" path="gitres/libs gdx/vis-ui-1.3.0.jar"/>
 	<classpathentry kind="output" path="bin/"/>
 </classpath>

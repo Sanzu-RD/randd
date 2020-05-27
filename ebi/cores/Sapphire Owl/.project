@@ -28,7 +28,13 @@
 		<link>
 			<name>assets</name>
 			<type>2</type>
-			<location>F:/Users/Souchy/Desktop/Robyn/Git/r and d/ebi/PiranhaPlants/res</location>
+			<locationURI>gitpiranha/randd/ebi/PiranhaPlants/res</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>gitpiranha</name>
+			<value>file:/C:/Users/Robyn%20Girardeau/Documents/GitPiranha</value>
+		</variable>
+	</variableList>
 </projectDescription>

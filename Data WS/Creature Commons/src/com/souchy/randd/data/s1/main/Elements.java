@@ -2,7 +2,7 @@ package com.souchy.randd.data.s1.main;
 
 import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.properties.StatProperty;
-import statics.IEElement;
+//import statics.IEElement;
 
 public enum Elements implements Element, StatProperty {
 	
