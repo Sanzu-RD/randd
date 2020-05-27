@@ -19,7 +19,6 @@ import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireDevConfig;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
 import com.souchy.randd.ebishoal.sapphire.main.AssetConfs;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireAssets;
 
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.Element;

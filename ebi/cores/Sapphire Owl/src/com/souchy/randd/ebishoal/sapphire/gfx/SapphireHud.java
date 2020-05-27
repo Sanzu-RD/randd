@@ -29,8 +29,8 @@ import com.souchy.randd.ebishoal.sapphire.ux.Timeline;
 
 public class SapphireHud extends LapisHud {
 
-	public static LmlParser parser;
 	public static SapphireHud single;
+	public static LmlParser parser;
 	public static SapphireHudSkin skin;
 	public static I18NBundle i18n;
 	
