@@ -11,6 +11,8 @@ import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 
+import gamemechanics.statics.stats.properties.Resource;
+
 public class SapphireController extends CameraInputController {
 
 	public Vector3 old = Vector3.Zero.cpy();
@@ -45,6 +47,10 @@ public class SapphireController extends CameraInputController {
 		}
 		if(keycode == Keys.E) {
 			SapphireHud.testCreatureSheet();
+		}
+		if(keycode == Keys.V) {
+			SapphireGame.fight.teamA.get(0).getStats().resources.get(Resource.life).fight += 10;
+			Log.info(SapphireGame.fight.teamA.get(0).getStats().resources.get(Resource.life).toString());
 		}
 		return super.keyDown(keycode);
 	}

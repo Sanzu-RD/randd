@@ -88,6 +88,7 @@ public class SapphireGame extends LapisGame {
 			inst.getStats().resources.get(Resource.life).fight = -150; //.addFightResource(-130, Resource.life);
 			inst.getStats().shield.get(Resource.life).fight = 600; //.addShield(600, Resource.life);
 			
+			
 			// fight
 			fight = new Fight();
 			fight.add(inst, Team.A);

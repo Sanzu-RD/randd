@@ -42,9 +42,9 @@ public class IntStat implements BBSerializer, BBDeserializer  { //implements Com
 	public int max() {
 		if(setter != null) return setter.value();
 		var val = baseflat;
-		val *= (100d + inc / 100d);
+		val *= (1.0 + inc / 100.0);
 		val += incflat;
-		val *= (100d + more / 100d);
+		val *= (1.0 + more / 100.0);
 		return (int) val;
 	}
 	
@@ -58,6 +58,11 @@ public class IntStat implements BBSerializer, BBDeserializer  { //implements Com
 		return s;
 	}
 
+	@Override
+		public String toString() {
+			return String.format("((%f + %f) * %f * %f) + %f = %d / %d", baseflat, inc, incflat, more, fight, value(), max());
+		}
+	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 		out.writeDouble(baseflat);
