@@ -16,6 +16,7 @@ import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.controls.DragAndResizeListener;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.LmlWidgets;
 
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.stats.properties.Resource;
@@ -133,6 +134,13 @@ public class CreatureSheet extends SapphireWidget {
 		moveShield.setText(getMoveShield());
 		moveCurrent.setText(getMoveCurrent());
 		moveMax.setText(getMoveMax());
+		
+		this.flowstatus.clearChildren();
+		creature.getStatus().forEach(s -> {
+			var icon = (StatusIcon) LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml");
+			icon.refresh(s);
+			this.flowstatus.addActor(icon);
+		});
 	}
 
 	@Override

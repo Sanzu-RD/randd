@@ -132,10 +132,9 @@ public class SapphireHud extends LapisHud {
 		CreatureSheet sheet = null;
 		SapphireHud.single.getStage().addActor(chat = LmlWidgets.createGroup("res/ux/sapphire/components/chat.lml"));
 		SapphireHud.single.getStage().addActor(playbar = LmlWidgets.createGroup("res/ux/sapphire/components/playbar.lml"));
-		if(SapphireGame.fight != null) SapphireHud.single.getStage().addActor(sheet = LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml"));
 		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/quickoptions.lml"));
 		
-
+		if(SapphireGame.fight != null) SapphireHud.single.getStage().addActor(sheet = LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml"));
 		var status = LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml");
 		for(int i = 0; i < 17; i++)
 			if(sheet != null) sheet.flowstatus.addActor(LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml"));
