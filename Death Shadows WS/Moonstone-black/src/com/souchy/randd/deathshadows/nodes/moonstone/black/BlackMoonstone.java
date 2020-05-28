@@ -13,7 +13,7 @@ public class BlackMoonstone extends DeathShadowCore {
 	
 	public BlackMoonstone(String[] args) throws Exception {
 		super(args);
-		int port = 443;
+		int port = 443; // port changeant pour chaque node instance
 		if(args.length > 0) port = Integer.parseInt(args[0]);
 		server = new DeathShadowTCP(port, this);
 		server.block();

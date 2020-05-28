@@ -7,32 +7,63 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.server.NettyServerBuilderHolder.NettyServerBuilderEncoder;
 import com.souchy.randd.commons.net.netty.server.NettyServerBuilderHolder.NettyServerBuilderPort;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
-import com.souchy.randd.deathshadows.commons.core.CoreServer;
+import com.souchy.randd.deathshadow.core.DeathShadowCore;
+//import com.souchy.randd.deathshadows.commons.core.CoreServer;
+import com.souchy.randd.deathshadow.core.DeathShadowTCP;
 
-public class Pearl extends CoreServer {
-
+/**
+ * 
+ * Server for managin/monitoring and messaging between server nodes
+ * 
+ * Not date of creation, but modernisation.
+ * 
+ * @author Blank
+ * @date 27 mai 2020
+ */
+public final class Pearl extends DeathShadowCore {
+	
 	public static Pearl core;
+	public final DeathShadowTCP server;
 	
 	public static void main(String[] args) throws Exception {
-		launch(core = new Pearl());
+		core = new Pearl(args);
+	}
+	
+	public Pearl(String[] args) throws Exception {
+		super(args);
+		int port = 1000;
+		if(args.length > 0) port = Integer.parseInt(args[0]);
+		
+		// start server
+		server = new DeathShadowTCP(port, this); 
+		server.block(); 
 	}
 
-	@Override
-	protected NettyServerBuilderEncoder initServer(NettyServerBuilderPort builder) {
-		return builder.port(10000).SSL(false);
-	}
-	
-	@Override
-	public void init() throws Exception {
-		super.init(); // init server 
-		var dir = new File("nodes/");
-		
-	}
-	
+
 	@Override
 	protected String[] getRootPackages() {
 		return new String[]{ "com.souchy.randd.deathshadows.nodes.pearl" };
 	}
+
+	
+	
+//	@Override
+//	protected NettyServerBuilderEncoder initServer(NettyServerBuilderPort builder) {
+//		return builder.port(10000).SSL(false);
+//	}
+//	
+//	@Override
+//	public void init() throws Exception {
+//		super.init(); // init server 
+//		var dir = new File("nodes/");
+//		
+//	}
+//	
+//	@Override
+//	protected String[] getRootPackages() {
+//		return new String[]{ "com.souchy.randd.deathshadows.nodes.pearl" };
+//	}
+		
 	
 	
 	/** pas sur de vouloir créer ça pcq faut ajouter le nom du type manuellement, malgré que NodeRep.getType() t'oblige à renvoyer un bon type 

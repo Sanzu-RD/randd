@@ -6,7 +6,9 @@ import com.souchy.randd.deathshadow.core.DeathShadowHTTP;
 
 /**
  * 
- * HTTP API Server, Used to authenticate users and access db data
+ * HTTP API Server.
+ * 
+ * Used to fetch db data and authenticate users 
  * 
  * @author Blank
  *
