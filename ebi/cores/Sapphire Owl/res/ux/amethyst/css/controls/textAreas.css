@@ -1,0 +1,16 @@
+
+/** Text area */
+.text-area  {
+  -fx-background-color: transparent;
+  -fx-border-color: lblColor1;
+}
+.text-area .content  {
+  -fx-background-color: transparent;
+}
+
+/** Text Field */
+.text-field {
+  -fx-background-color: transparent;
+  -fx-border-color: lblColor1;
+  -fx-text-fill: lblColor1;
+}

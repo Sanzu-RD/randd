@@ -1,0 +1,32 @@
+
+/* Titled Panes */
+.titled-pane {
+  -fx-border-width: 0;
+  -fx-border-color: lblColor2;
+  -fx-text-fill: lblColor2;
+}
+.titled-pane .title {
+  -fx-background-color: transparent;
+}
+.titled-pane>.title>.text {
+  //-fx-text-fill: red;
+}
+.titled-pane .title .arrow-button {
+  //-fx-background-color: -fx-focus-color;
+}
+.titled-pane .title .arrow-button .arrow {
+  //-fx-background-color: -fx-focus-color;
+  -fx-color: lblColor2;
+}
+.titled-pane:focused > .title {
+  -fx-color: -fx-focus-color;
+}
+.titled-pane > *.content {
+  -fx-background-color: transparent;
+  -fx-border-width: 0;
+  //-fx-border-color: transparent;
+  //-fx-box-border,
+  //linear-gradient(to bottom, derive(-fx-color,-02%), derive(-fx-color,65%) 12%,      derive(-fx-color,23%) 88%, derive(-fx-color,50%) 99%, -fx-box-border);
+  //-fx-background-insets: 0, 0 1 1 1;
+  //-fx-padding: 0.167em;
+}

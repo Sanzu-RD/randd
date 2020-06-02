@@ -1,0 +1,12 @@
+
+
+/* Split Panes */
+.split-pane {
+  -fx-background-color: transparent;
+}
+.split-pane:horizontal > .split-pane-divider {
+   -fx-background-color: black;
+}
+.split-pane:vertical > .split-pane-divider {
+   -fx-background-color: black;
+}

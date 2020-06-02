@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="711c9478-3b9c-4de5-9330-84df3ac55110" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/timeline.lml" beforeDir="false" afterPath="$PROJECT_DIR$/components/timeline.lml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>ring_frame</find>
+      <find>spell_frame</find>
+      <find>spell_bg</find>
+      <find>loop:index</find>
+      <find>stack</find>
+      <find>root</find>
+      <find>table</find>
+      <find>align</find>
+      <find>Hp</find>
+      <find>wid</find>
+      <find>window</find>
+      <find>resiz</find>
+      <find>resiza</find>
+      <find>small-font</find>
+      <find>main</find>
+      <find>debug</find>
+      <find>area</find>
+      <find>field</find>
+      <find>scroll</find>
+      <find>textfiel</find>
+      <find>focus</find>
+      <find>list</find>
+      <find>highli</find>
+      <find>textfield</find>
+      <find>lineh</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>textures.borders.ring_frame</replace>
+      <replace>textures.borders.spell_frame</replace>
+      <replace>textures.borders.spell_bg</replace>
+      <replace>creatureId</replace>
+      <replace>Mana</replace>
+      <replace>Move</replace>
+      <replace>Life</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
+  </component>
+  <component name="ProjectId" id="1clklrOnrpFTxLqvgRf4Wnk9nk7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1578239560145" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Users\Souchy\Desktop\Robyn\Git\r and d\ebi\PiranhaPlants\res\ux\sapphire\old" />
+      <recent name="F:\Users\Souchy\Desktop\Robyn\Git\r and d\ebi\PiranhaPlants\res\ux\sapphire" />
+      <recent name="F:\Users\Souchy\Desktop\Robyn\Git\r and d\ebi\PiranhaPlants\res\ux\sapphire\components" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Users\Souchy\Desktop\Robyn\Git\r and d\ebi\PiranhaPlants\res\ux\sapphire" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="711c9478-3b9c-4de5-9330-84df3ac55110" name="Default Changelist" comment="" />
+      <created>1574269641627</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1574269641627</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="731" y="278" width="477" height="560" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591111026476">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="731" y="278" width="477" height="560" key="#com.intellij.fileTypes.FileTypeChooser/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591111026476" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1591110829039">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1591110829039" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>12</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

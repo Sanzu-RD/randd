@@ -1,0 +1,18 @@
+
+
+// Menu bar
+.menu-bar {
+  -fx-background-color: bgColor1;
+}
+.menu { /* The File menu item */
+
+}
+.menu:showing { /* menu when it's being shown (activated) */
+
+}
+.menu .label { /* Styles the text on a menu item */
+  -fx-font-size: 15 px;
+}
+.menu:showing .label { /* Styles the text on a menu item when activated */
+
+}

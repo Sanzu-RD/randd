@@ -1,0 +1,14 @@
+
+/** Thumbnail */
+.thumbnail {
+  -fx-border-color: lblColor1;
+  -fx-cursor: hand;
+}
+.thumbnail:hover {
+  -fx-border-color: lblColor2;
+}
+.thumbnail .label {
+  -fx-padding: 0 0 0 10;
+  -fx-font-size: 17 px;
+  -fx-background-color:  rgba(0, 0, 0, 0.50);
+}

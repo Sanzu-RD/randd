@@ -1,0 +1,30 @@
+
+/* Check box */
+.check-box {
+  -fx-font-size: 14px;
+  -fx-text-fill: lblColor1;
+}
+.check-box .mark {
+  -fx-background-color: transparent;
+}
+.check-box .box {
+  -fx-background-color: transparent;
+  -fx-border-color: lblColor1;
+}
+.check-box:selected {
+  -fx-text-fill: lblColor1;
+}
+.check-box:selected .mark {
+  -fx-background-color: lblColor1;
+}
+.check-box:selected .box {
+}
+.check-box:hover {
+  -fx-text-fill: lblColor2;
+}
+.check-box:selected:hover .mark {
+  -fx-background-color: lblColor2;
+}
+.check-box:hover .box {
+  -fx-border-color: lblColor2;
+}

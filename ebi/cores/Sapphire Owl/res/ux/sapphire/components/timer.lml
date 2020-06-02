@@ -1,0 +1,9 @@
+
+<:macro alias="timer">
+
+    <!-- Timer -->
+    <container align="bottomright" padbottom="40" padright="70" debug="false">
+        <label value="25s" />
+    </container>
+
+</:macro>

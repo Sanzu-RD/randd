@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE :macro SYSTEM "lml.dtd">
+
+<:macro alias="statusbar">
+    <statusbar id="statusbar">
+        <table padright="35" padbottom="25" align="bottomright" debug="false" defaultpad="3" defaultpadleft="10">
+
+        </table>
+    </statusbar>
+</:macro>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chat SYSTEM "lml.dtd">
+
+<chat id="chat" align="bottomleft" x="20" y="15" width="400" height="200" debug="false" >
+    <visscrollpane id="scroll" grow="true" padbottom="8" style="list" >
+        <scrollabletextarea debug="false" id="area" style="textArea"
+                            value="Description. Lorem ipsum dolor sit amet,
+consectetur adipiscing consectetur adipiscing consectetur adipiscing elit,
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua asdkjfnka sdjfn
+kasjdnfkjsdanf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf"  />
+    </visscrollpane>
+    <:row/>
+    <textfield id="field" debug="false" growx="true" height="30" />
+</chat>

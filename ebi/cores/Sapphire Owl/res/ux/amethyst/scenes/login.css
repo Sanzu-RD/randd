@@ -1,0 +1,20 @@
+
+@import "./scenesCommons.css";
+
+/** login scene */
+.login {
+
+}
+.login .label {
+}
+.login .text-field {
+  -fx-font-size: 13px;
+}
+.login .button {
+}
+.login .link {
+  -fx-font-size: 15px;
+}
+.gameTitle {
+  -fx-font-size: 50px;
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE playbar SYSTEM "lml.dtd">
+
+<playbar id="playbar" align="bottom" defaultpad="5" x="0" y="15" debug="false" background="transparent">
+    <!-- Spells and stats for current playable character  -->
+    <!-- Portrait -->
+    <stack width="64" height="64">
+        <image id="playingCreatureAvatar" tooltip="Grim" style="playingCreatureAvatar"/>
+    </stack>
+
+    <!-- Resources -->
+    <table>
+        <label id="life" value="{playingCreatureLifeCurrent} / {playingCreatureLifeMax}"/>
+        <:row/>
+        <label id="mana" value="{playingCreatureManaCurrent} / {playingCreatureManaMax}"/>
+        <:row/>
+        <label id="move" value="{playingCreatureMoveCurrent} / {playingCreatureMoveMax}"/>
+    </table>
+
+    <!--<button id="pageDown" style="transparent" width="20" height="20">-->
+        <!--<image id="pageDownImage" style="textures.buttons.slider_down" scaling="fit"/>-->
+    <!--</button>-->
+
+    <!-- Page content (items, spells, affinities, resistances) -->
+    <table id="content" defaultpad="1">
+        <:loop times="8">
+            <stack width="55" height="55">
+                <image id="spellBg" style="textures.borders.spell_bg"/>
+                <image id="playingCreatureSpell0" tooltip="Desecrate" style="playingCreatureSpell{loop:index}"/>
+                <image id="spellBorder" style="textures.borders.spell_frame"/>
+            </stack>
+        </:loop>
+    </table>
+
+    <!-- Page control buttons -->
+    <table>
+        <button id="pageUp" style="transparent" width="20" height="20">
+            <image id="pageUpImage" style="textures.buttons.slider_up" scaling="fit"/>
+        </button>
+        <:row/>
+        <label id="pageLbl" value="1/3"/>
+        <:row/>
+        <button id="pageDown" style="transparent" width="20" height="20">
+            <image id="pageDownImage" style="textures.buttons.slider_down" scaling="fit"/>
+        </button>
+    </table>
+</playbar>

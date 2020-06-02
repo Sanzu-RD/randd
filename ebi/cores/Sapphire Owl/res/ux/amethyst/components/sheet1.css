@@ -1,0 +1,98 @@
+// Variables
+* {
+   bgColor2: #2e2e2e;
+   bgColor3: #3e3e3e;
+}
+
+/* .inventory .itembox {
+    -fx-border-width: 1;
+    -fx-border-color: lblColor1;
+} */
+
+.tabs {
+  -fx-font-size: 15px;
+  -fx-cursor: hand;
+}
+
+.progress-bar {
+  -fx-border-width: 0;
+  -fx-border-color: lblColor1;
+   //-fx-box-border: goldenrod;
+   -fx-accent: green;
+   -fx-background-color: transparent;
+}
+
+/* Parent tab panes */
+.tab-pane {
+    -fx-background-color: bgColor1;
+    -fx-border-width: 1;
+    -fx-border-color: lblColor1;
+}
+  /* tab bar offset */
+  .tab-pane .tab-header-area {
+      -fx-padding: 0 0 0 0;
+   }
+.tab {
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+    -fx-border-color: lblColor1;
+}
+  .tab .tab-label {
+    -fx-padding: 0 0 0 0;
+    -fx-font-size: 0 px;
+    -fx-text-fill: transparent;
+    -fx-font-family: "Lucida Bright";
+  }
+  .tab:selected {
+    -fx-border-width: 0;
+    -fx-border-color: lblColor2;
+  }
+  .tab:selected .tab-label {
+    -fx-text-fill: transparent; //lblColor2;
+  }
+  /* enlève la bordure de focus */
+  .tab:selected .focus-indicator {
+    -fx-border-width: 0;
+    -fx-border-color: lblColor2;
+  }
+  .tab:hover .tab-label {
+    -fx-text-fill: lblColor2;
+  }
+
+  .tab {
+
+  }
+
+/* Child tab panes */
+.tab-pane .tab-pane {
+
+}
+  /* tab bar offset */
+  .tab-pane .tab-pane .tab-header-area {
+      -fx-padding: 20 0 0 50;
+   }
+  .tab-pane .tab-pane .tab  .tab-label {
+    -fx-font-size: 20 px;
+    -fx-text-fill: lblColor1;
+    -fx-font-family: "Lucida Bright";
+  }
+  .tab-pane .tab-pane .tab:selected .tab-label {
+    -fx-text-fill: lblColor2;
+  }
+  .tab-pane .tab-pane .tab:hover .tab-label {
+    -fx-text-fill: lblColor2;
+  }
+
+/* other tab props */
+.tab-pane:top *.tab-header-area {
+  //  -fx-background-insets: 10, 10 10 10 10;
+  //  -fx-padding: 0.416667em 0.166667em 0.0em 0.833em; /* 5 2 0 10 */
+  //  -fx-padding: 25 0 0 30; /* overridden as 5 2 0 0 */
+}
+/* .tab-pane .tab-header-area .tab-header-background */
+.tab-header-background {
+  -fx-opacity: 0;
+}
