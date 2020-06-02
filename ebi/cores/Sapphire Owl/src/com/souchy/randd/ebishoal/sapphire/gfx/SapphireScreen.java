@@ -100,6 +100,11 @@ public class SapphireScreen extends LapisScreen {
 		getCamera().far = 120f;
 		getCamera().update();
 	}
+	
+	@Override
+	public Texture createBackground() {
+		return null;
+	}
 
 //	
 //	@Override

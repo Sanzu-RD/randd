@@ -8,7 +8,7 @@ module com.souchy.randd.commons.TealWaters {
 	requires transitive com.souchy.randd.AnnotationProcessor;
 	requires transitive java.sql;
 	requires transitive java.desktop;
-	requires transitive gson;
-	requires reflections;
-	requires com.google.common;
+	requires transitive com.google.gson;
+	requires transitive reflections;
+	requires transitive com.google.common;
 }

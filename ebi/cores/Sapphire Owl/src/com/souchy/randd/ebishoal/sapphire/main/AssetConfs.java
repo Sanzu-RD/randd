@@ -7,7 +7,6 @@ import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.souchy.randd.commons.tealwaters.logging.Log;
 
 /**
  * configurations for creatures, spells, status (i18n names/descriptions + icons/textures/models/fx)

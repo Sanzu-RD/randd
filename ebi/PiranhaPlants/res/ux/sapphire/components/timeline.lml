@@ -6,14 +6,16 @@
     <timeline id="timeline">
 
         <table id="table" padright="10" padbottom="25" align="bottomright" debug="false" defaultpad="3" defaultpadleft="10">
-            <!--<:loop times="$getCreatureCount">-->
-                <!--<container/>-->
-                <!--<stack width="42" height="42">-->
-                    <!--<roundImage id="portrait-{loop:index}" tooltip="$getCreatureName({loop:index})" style="$getCreatureIcon({loop:index})"/>-->
-                    <!--<image id="portraitBorder-{loop:index}" style="textures.borders.ring_frame"/>-->
-                <!--</stack>-->
-                <!--<:row/>-->
-            <!--</:loop>-->
+            
+            <:loop times="$getCreatureCount">
+                <container/>
+                <stack width="42" height="42">
+                    <roundImage id="portrait-{loop:index}" tooltip="$getCreatureName({loop:index})" style="$getCreatureIcon({loop:index})"/>
+                    <image id="portraitBorder-{loop:index}" style="textures.borders.ring_frame"/>
+                </stack>
+                <:row/>
+            </:loop>
+
         </table>
 
     </timeline>

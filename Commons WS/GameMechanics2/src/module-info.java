@@ -30,4 +30,5 @@ module GameMechanics2 {
 	requires com.google.guice;
 	requires com.souchy.randd.commons.Jade;
 	requires com.souchy.randd.pluginprototyping.Modules;
+	requires com.google.gson;
 }
