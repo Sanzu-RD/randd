@@ -11,20 +11,23 @@ public class SendSalt implements BBMessage {
 	
 	public String salt;
 	
-	private SendSalt() {}
+	public SendSalt() { }
 	public SendSalt(String salt) {
 		this.salt = salt;
 	}
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		writeString(out, salt);
+		out.writeBoolean(salt == null);
+		if(salt != null) 
+			writeString(out, salt);
 		return out;
 	}
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
-		salt = readString(in);
+		var nul = in.readBoolean();
+		if(!nul) salt = readString(in);
 		return this;
 	}
 

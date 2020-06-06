@@ -1,5 +1,6 @@
 package com.souchy.randd.ebishoal.amethyst.ui.components;
 
+import com.souchy.randd.commons.deathebi.UserUtil;
 import com.souchy.randd.commons.opal.IAuthentication;
 import com.souchy.randd.commons.opal.IAuthentication.RegistrationToken;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -60,10 +61,10 @@ public class RegisterForm { //extends VBox {
     	var password = passwordField.getText();
     	var email = emailField.getText();
     	Log.info("RegisterForm.signup : " + String.format("{ %s, %s, %s, %s }", pseudo, username, password, email));
-    	if(IAuthentication.validSignupInput(pseudo, username, password, email)) {
+    	if(UserUtil.validSignupInput(pseudo, username, password, email)) {
         	Log.info("RegisterForm.signup : valid input.");
-        	var salt = IAuthentication.generateSalt();
-        	var hashedPassword = IAuthentication.hashPassword(password, salt);
+        	var salt = UserUtil.generateSalt();
+        	var hashedPassword = UserUtil.hashPassword(password, salt);
         	var user = Opaline.auth.signup(new RegistrationToken(pseudo, username, hashedPassword, salt, email));
         	Log.info("RegisterForm.signup : user = "+user+".");
         	if(user != null) {

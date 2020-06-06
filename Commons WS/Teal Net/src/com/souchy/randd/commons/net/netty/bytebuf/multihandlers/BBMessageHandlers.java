@@ -18,16 +18,16 @@ public class BBMessageHandlers { // extends ResponsibilityManager<BBMessage, BBM
 	private final Map<Integer, BBMessageHandler<BBMessage>> handlers = new HashMap<>();
 
 	public boolean canHandle(BBMessage msg) {
-		Log.info("BBHandlerManager can handle ? " + msg.getClass() + " : " + msg);
+//		Log.info("BBMessageHandlers can handle ? " + msg.getClass() + " : " + msg);
 		return handlers.containsKey(msg.getID());
 	}
 
 	public void handle(ChannelHandlerContext ctx, BBMessage msg) {
 		if (canHandle(msg)) {
-			Log.info("BBHandlerManager handling message [" + msg + "] of ID [" + msg.getID() + "]");
+			Log.info("BBMessageHandlers handling message [" + msg + "] of ID [" + msg.getID() + "]");
 			handlers.get(msg.getID()).handle(ctx, msg);
 		} else {
-			Log.info("BBHandlerManager cant handle message [" + msg + "] of ID [" + msg.getID() + "]");
+			Log.error("BBMessageHandlers cant handle message [" + msg + "] of ID [" + msg.getID() + "]");
 		}
 	}
 

@@ -117,7 +117,7 @@ public class NettyClient {
 	};
 	
 	protected void initPipeline(ChannelPipeline pipe) {
-		pipe.addLast(new LoggingHandler(LogLevel.INFO));
+//		pipe.addLast(new LoggingHandler(LogLevel.INFO));
 		pipe.addLast(decoder); 
 		pipe.addLast(encoder); 
 		pipe.addLast(handler); 

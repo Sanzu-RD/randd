@@ -12,7 +12,7 @@ public class GetUser implements BBMessage {
 	public String username;
 	public String hashedPassword;
 	
-	private GetUser() {}
+	public GetUser() {}
 	public GetUser(String username, String hashedPassword) {
 		this.username = username;
 		this.hashedPassword = hashedPassword;

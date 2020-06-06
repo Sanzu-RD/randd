@@ -7,15 +7,15 @@ import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 import io.netty.buffer.ByteBuf;
 
 @ID(id = 11001)
-public class AuthResponse implements BBMessage {
+public class JoinFightResponse implements BBMessage {
 
 	public boolean accepted;
 	
-	public AuthResponse() {
+	public JoinFightResponse() {
 		
 	}
 	
-	public AuthResponse(boolean accepted) {
+	public JoinFightResponse(boolean accepted) {
 		this.accepted = accepted;
 	}
 	
@@ -32,7 +32,7 @@ public class AuthResponse implements BBMessage {
 
 	@Override
 	public Deserializer<ByteBuf, BBMessage> create() {
-		return new AuthResponse(false);
+		return new JoinFightResponse(false);
 	}
 
 	@Override

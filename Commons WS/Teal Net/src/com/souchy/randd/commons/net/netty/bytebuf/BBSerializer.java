@@ -10,6 +10,7 @@ import io.netty.buffer.ByteBuf;
 public interface BBSerializer extends Serializer<ByteBuf, ByteBuf> {
 	
 	public default ByteBuf writeString(ByteBuf out, String s) {
+		if(s == null) s = "";
 		out.writeInt(s.length());
 		out.writeBytes(s.getBytes());
 		return out;

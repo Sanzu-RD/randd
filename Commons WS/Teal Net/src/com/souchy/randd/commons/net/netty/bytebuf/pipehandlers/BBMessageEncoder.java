@@ -2,6 +2,7 @@ package com.souchy.randd.commons.net.netty.bytebuf.pipehandlers;
 
 
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler.Sharable;
@@ -27,8 +28,10 @@ public class BBMessageEncoder extends MessageToByteEncoder<BBMessage> {
 
 	@Override
 	protected void encode(ChannelHandlerContext arg0, BBMessage msg, ByteBuf out) throws Exception {
+		Log.info("encode msg : " + msg);
 		out.writeInt(msg.getID());
 		msg.serialize(out);
+		Log.info("encode msg done : " + msg);
 	}
 
 }

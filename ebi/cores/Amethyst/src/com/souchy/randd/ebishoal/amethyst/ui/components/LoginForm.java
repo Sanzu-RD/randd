@@ -3,6 +3,7 @@ package com.souchy.randd.ebishoal.amethyst.ui.components;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.souchy.randd.commons.deathebi.UserUtil;
 import com.souchy.randd.commons.opal.IAuthentication;
 import com.souchy.randd.commons.opal.IAuthentication.LoginToken;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -78,7 +79,7 @@ public class LoginForm { //extends VBox {
 		User user = null;
 		try {
 			var salt = Opaline.auth.getSalt(username);
-			var hashedPassword = IAuthentication.hashPassword(password, salt);
+			var hashedPassword = UserUtil.hashPassword(password, salt);
 			user = Opaline.auth.signin(new LoginToken(username, hashedPassword));
 		} catch(Exception e) {
 			Log.info("Amethyst.login form error : " + e);

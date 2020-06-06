@@ -9,6 +9,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.commons.Deserializer;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.util.AttributeKey;
@@ -105,26 +106,33 @@ public class User implements BBSerializer, BBDeserializer {
 	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
+//		Log.info("serialize user 1");
 		writeString(out, _id.toHexString());
+//		Log.info("serialize user 2");
 		out.writeByte(level.ordinal());
+//		Log.info("serialize user 3");
 		writeString(out, username);
 		writeString(out, password);
 		writeString(out, salt);
 		writeString(out, pseudo);
 		writeString(out, email);
 		writeString(out, phone);
+//		Log.info("serialize user 4");
 		out.writeBoolean(verifiedEmail);
 		out.writeBoolean(verifiedPhone);
+//		Log.info("serialize user 5");
 		out.writeInt(mmr);
 		out.writeInt(xp);
 		out.writeInt(gold);
 		out.writeInt(gems);
-		writeInt(out, gems);
+//		Log.info("serialize user 6");
 		writeListString(out, friends);
 		writeListString(out, decks);
 		writeListString(out, matchHistory);
+//		Log.info("serialize user 7");
 		writeListInt(out, unlockedCreatures);
 		writeListInt(out, unlockedSpells);
+//		Log.info("serialize user 8");
 		return out;
 	}
 	@Override

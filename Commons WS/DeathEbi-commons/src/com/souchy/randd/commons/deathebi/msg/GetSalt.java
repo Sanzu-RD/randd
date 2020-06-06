@@ -10,6 +10,13 @@ import io.netty.buffer.ByteBuf;
 public class GetSalt implements BBMessage {
 	
 	public String username;
+	
+	public GetSalt() {
+		
+	}
+	public GetSalt(String username) {
+		this.username = username;
+	}
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {

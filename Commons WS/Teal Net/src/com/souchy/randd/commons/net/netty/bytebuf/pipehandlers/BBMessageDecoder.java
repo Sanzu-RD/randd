@@ -22,32 +22,40 @@ public class BBMessageDecoder extends ByteToMessageDecoder  {
 
 	public BBMessageDecoder(BBMessageFactories factory) {
 		this.msgFactories = factory;
+		Log.info("new decoder");
 	}
 
 	@Override
 	protected void decode(ChannelHandlerContext arg0, ByteBuf in, List<Object> out) throws Exception {
+		Log.info("decoder rcv");
 		int packetid = -1;
 		String s = null;
 		try {
-			packetid = in.readInt();
-			//ByteBuf data = in.readBytes(in.readableBytes());
+			ByteBuf data = in.readBytes(in.readableBytes());
+			
+			packetid = data.readInt();
+			
 
 			if (msgFactories.has(packetid)) { // res.canHandle(packetid)){
-				BBMessage msg = msgFactories.get(packetid).create().deserialize(in);
+				var a = msgFactories.get(packetid).create();
+				BBMessage msg = a.deserialize(data);
 				
-				Log.info("BBMessageDecoder - " + msg);
+				Log.info("decode msg : " + msg);
 				
 				out.add(msg);
 				
 				// out.add(res.get(packetid).handle(data));
+			} else {
+				Log.error("Packet id [" + packetid + "] missing from msg factory");
 			}
-			var d = msgFactories.get(packetid).create();
-			d.deserialize(in);
+//			var d = msgFactories.get(packetid).create();
+//			d.deserialize(in);
 
 			//if(in.refCnt() > 0) in.release();
 			
 			//data.release();
 		} catch (Exception e) {
+			Log.error("packetid = " + packetid + ", data = " + s, e);
 			throw new Exception("packetid = " + packetid + ", data = " + s, e);
 		}
 	}

@@ -36,11 +36,10 @@ public class NettyHandler extends ChannelInboundHandlerAdapter {
         //ctx.write(msg);
       	*/
 		
-		//Log.info("NettyHandler : " + msg.toString());
+//		Log.info("NettyHandler : " + msg.toString());
 		var bb = (BBMessage) msg;
-		if (msgHandlers.canHandle(bb)) 
-			msgHandlers.handle(ctx, bb);
-		
+//		if (msgHandlers.canHandle(bb)) 
+		msgHandlers.handle(ctx, bb);
 		
 		// this would pass to the next handler, but the message is already handled here so no point firing an event when there's no other handler to take it 
 		//super.channelRead(ctx, msg);
