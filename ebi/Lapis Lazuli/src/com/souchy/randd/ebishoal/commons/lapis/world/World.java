@@ -10,7 +10,9 @@ import com.souchy.randd.commons.tealwaters.commons.Disposable;
 
 public class World implements Disposable {
 	
+	// static terrain
 	public ModelCache cache;
+	// dynamic instances (cursor, creatures, terrain effects like glyphs and traps, highlighting effects ..)
 	public List<ModelInstance> instances;
 	
 	protected Vector3 center = Vector3.Zero;
@@ -20,9 +22,6 @@ public class World implements Disposable {
 		instances = new ArrayList<>();
 	}
 	
-	public ModelInstance getCursor() {
-		return null;
-	}
 	
 	/**
 	 * This is WRONG and INVALID

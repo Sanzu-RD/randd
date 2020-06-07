@@ -177,8 +177,12 @@ interface LapisScreenRenderer extends Screen {
 //			modelBatch.render(inst, getEnvironment()); // world.cache, env);
 			//g1.meshes.forEach(m -> m.render(modelBatch.getShaderProvider().getShader(null), GL20.GL_TRIANGLES));
 //		else 
+		
+			// render the cache (static terrain)
 			getModelBatch().render(getWorld().cache, getEnvironment());
-			if(getWorld().getCursor() != null) getModelBatch().render(getWorld().getCursor());
+			// render dynamic instances (cursor, creatures, terrain effects like glyphs and traps, highlighting effects ..)
+			getModelBatch().render(getWorld().instances);
+			
 		// render highlight effects like traps, glyphs, etc (might or might not render with the environment var)
 //		modelBatch.render(cellHighlighterInst); // , new LShader());
 		// render characters

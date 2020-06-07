@@ -1,5 +1,6 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
+import java.util.ArrayList;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.Gdx;
@@ -44,25 +45,20 @@ public class SapphireWorld extends World {
 	 * 		Traps
 	 *		Highlighting area (ex: previsualising/targetting a spell aoe)
 	 */
-
-	public ModelInstance cursor;
 	
+	public ModelInstance cursor;
+
 	
 	public SapphireWorld() {
 		world = this;
 		
-//		var modelBuilder = new ModelBuilder();
-//		var mat = new Material();
-//		mat.set(ColorAttribute.createDiffuse(Color.RED));
-//		var cursorModel = modelBuilder.createRect(0, 0, 0,  1, 0, 0,  1, 1, 0,  0, 1, 0,  0, 0, 0, mat, Usage.Position | Usage.Normal | Usage.ColorPacked);
 		Model cursorModel = LapisAssets.assets.get("res/models/tileselector.g3dj");
-//		cursorModel.materials.clear();
-//		cursorModel.materials.add(mat);
 		cursor = new ModelInstance(cursorModel);
 		cursor.materials.get(0).set(ColorAttribute.createDiffuse(Color.CYAN));
-//		cursor.materials.get(1).set(ColorAttribute.createDiffuse(Color.TEAL));
 		var scale = 1f / 24f;
 		cursor.transform.setToTranslation(0, 0, 0).scale(scale, scale, scale).rotate(Vector3.X, 90);
+		this.instances.add(cursor);
+		
 		
 		/*
 		String devPath = "gdx/g3d/";
@@ -103,9 +99,11 @@ public class SapphireWorld extends World {
         this.center = new Vector3(data.cellModels[0].length / 2f, data.cellModels.length / 2f, 0);
         
         if(true) {
+            cache.begin();
+        	
         	// create greedy mesh for texture-type cells
             var greed = Meshing.greedy(data, cellSize, GL20.GL_TRIANGLES);
-    		instances.add(new ModelInstance(greed));
+    		cache.add(new ModelInstance(greed));
     		// add every other models as instances
 
     		// adds singular models
@@ -124,7 +122,7 @@ public class SapphireWorld extends World {
 	        					.translate(i * cellSize + cellSize * m.transform[0][0], j * cellSize + cellSize * m.transform[0][1], -cellSize + cellSize * m.transform[0][2])
 	        					.rotate(m.transform[1][0],  m.transform[1][1],  m.transform[1][2], 90)
 	        					.scale( m.transform[2][0],  m.transform[2][1],  m.transform[2][2]);
-	                    		instances.add(inst);
+	                    		cache.add(inst);
 	                    	}
 	                    }
 	                }
@@ -135,25 +133,18 @@ public class SapphireWorld extends World {
 	    		generateModels.accept(data.layer2Models);
 	    		
     		}
-    		if(false) {
+    		if(true) {
         		// water plane
         		var water = waterplane();
         		//water.transform.rotate(0, 0, 1, 45);
-        		instances.add(water);
+        		cache.add(water);
     		}
+
+            cache.end();
         } 
         
-        
-        // build the cache
-        cache.begin();
-        for(var instance : instances)
-            cache.add(instance);
-        cache.end();
 	}
 
-	public ModelInstance getCursor(){
-		return cursor;
-	}
 	
 	private ModelInstance waterplane() {
 		int renderType = GL20.GL_TRIANGLES;
