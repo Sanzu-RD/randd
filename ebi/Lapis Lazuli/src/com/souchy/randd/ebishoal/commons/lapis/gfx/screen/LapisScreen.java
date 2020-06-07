@@ -133,7 +133,7 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 //		getCamera().viewportWidth = viewportSize * 16 / 9;
 //		getCamera().viewportHeight = viewportSize ;
 		getCamera().direction.set(1, 1, -1.5f);
-		getCamera().up.set(1, 1, 1f);
+		getCamera().up.set(1, 1, 1f);	
 		getCamera().position.set(center.x, center.y, center.z); //bb.max.x * factor, bb.max.y * (1 - factor), 0); //bb.max.z * factor);
 		getCamera().near = -30f;
 		getCamera().far = 120f;
@@ -146,7 +146,8 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	 */
 	@Override
 	public void show() {
-		if(getInputProcessor() != null) Gdx.input.setInputProcessor(getInputProcessor());
+		if(getInputProcessor() != null) 
+			Gdx.input.setInputProcessor(getInputProcessor());
 	}
 	
 	public InputProcessor createInputProcessor() {
@@ -163,7 +164,8 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	@Override
 	public void render(float delta) {
 		// update input controller
-		if(getInputProcessor() != null && getInputProcessor() instanceof CameraInputController) ((CameraInputController) getInputProcessor()).update();
+		if(getInputProcessor() != null && getInputProcessor() instanceof CameraInputController) 
+			((CameraInputController) getInputProcessor()).update();
 		
 		// act
 		act(delta);

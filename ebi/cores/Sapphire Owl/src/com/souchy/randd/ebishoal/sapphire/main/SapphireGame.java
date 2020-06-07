@@ -105,8 +105,9 @@ public class SapphireGame extends LapisGame {
 	}
 
 	@Override
-	public Screen getStartScreen() {
+	public SapphireScreen getStartScreen() {
 		return gfx;
 	}
+	
 	
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.eventbus.EventBus;
+import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 
 import gamemechanics.common.Action;
 import gamemechanics.common.ActionPipeline;
@@ -15,9 +16,11 @@ import gamemechanics.models.entities.Entity;
 import gamemechanics.models.entities.Entity.Team;
 
 
-public class Fight {
+public class Fight implements Identifiable<Integer> {
 	
 	//public EventPipeline bus;
+	
+	public int id;
 	
 	/**
 	 * All entities (cells and creatures)
@@ -76,6 +79,12 @@ public class Fight {
 	public void postAll(Event event) {
 		List<Entity> entities = null;
 		entities.forEach(e -> e.handlers.post(e, event));
+	}
+
+
+	@Override
+	public Integer getID() {
+		return id;
 	}
 	
 	

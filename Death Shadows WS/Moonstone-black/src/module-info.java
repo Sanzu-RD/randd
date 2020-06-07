@@ -21,4 +21,5 @@ module com.souchy.randd.moonstone.Black {
 	requires transitive com.rabbitmq.client;
 	requires transitive com.google.common;
 	requires transitive com.google.gson;
+	requires GameMechanics2;
 }

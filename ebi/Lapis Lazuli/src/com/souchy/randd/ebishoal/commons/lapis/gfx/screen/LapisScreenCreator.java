@@ -43,7 +43,7 @@ interface LapisScreenCreator {
 	}
 	
 	public default Texture createBackground() {
-		return new Texture(Gdx.files.absolute("G:/Assets/pack/fantasy bundle/tcgcardspack/Tex_krakken.PNG"));
+		return new Texture(Gdx.files.internal("res/textures/Tex_krakken.PNG"));
 	}
 	
 	/**

@@ -9,7 +9,6 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireOwlConf;
-import com.souchy.randd.moonstone.commons.packets.c2s.Auth;
 import com.souchy.randd.moonstone.white.WhiteMoonstone;
 
 public class SapphireOwl extends LapisCore { 
@@ -26,8 +25,7 @@ public class SapphireOwl extends LapisCore {
 	 */
 	public static WhiteMoonstone moon;
 	
-
-	@SuppressWarnings("unused")
+	
 	public static void main(String[] args) throws Exception {
 		LapisCore.arguments(args);
 		
@@ -35,18 +33,19 @@ public class SapphireOwl extends LapisCore {
 		core = new SapphireOwl(args);
 		
 		// si active le net
-		if(false) {
-			// init le client
-			moon = new WhiteMoonstone("localhost", 443, core);
-			
-			// commence par authentifier et lance 
-			var auth = new Auth("username from args[]", "fight ID from args[]");
-			moon.write(auth);
-		} 
-		// pour test sans le net
-		else {
-			core.start();
+		if(args.length > 5) {
+			var ip = args[1]; // "localhost";
+			var port = Integer.parseInt(args[2]); // 443;
+			var username = args[3];
+			var pass = args[4];
+			var fightid = Integer.parseInt(args[5]);
+
+			// authentifie moonstone et join le fight 
+			moon = new WhiteMoonstone(ip, port, core); 
+			moon.auth(username, pass, fightid);
 		}
+		
+		core.start();
 	}
 
 	public SapphireOwl(String[] args) throws Exception {
@@ -77,7 +76,7 @@ public class SapphireOwl extends LapisCore {
 
 	@Override
 	protected String[] getRootPackages(){
-		return new String[] { "com.souchy.randd.ebishoal.sapphire", "com.souchy.randd.moonstone" };
+		return new String[] { "com.souchy.randd.commons.deathebi.msg", "com.souchy.randd.moonstone", "com.souchy.randd.moonstone.white", "com.souchy.randd.ebishoal.sapphire" };
 	}
 	
 	@Override

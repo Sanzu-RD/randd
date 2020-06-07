@@ -24,6 +24,8 @@ public class SapphireScreen extends LapisScreen {
 	private float period = 30; // period time in seconds
 	private double radius = 2; // circle radius
 	
+	private SapphireController controller;
+	
 	@Override
 	protected void act(float delta) {
 		// update title
@@ -37,16 +39,14 @@ public class SapphireScreen extends LapisScreen {
 			getShadowLight().direction.y = (float) (Math.cos(radian) / radius);
 			//getShadowLight().direction.z = -0.5f;
 		}
+		if(controller != null) controller.act(delta);
+		getCamera().update();
 	}
 	
-//	@Override
-//	public Texture createBackground() {
-//		return null;
-//	}
 	
 	@Override
 	public LineDrawing createLining(Camera cam, BoundingBox worldBB) {
-		return null;// super.createLining(cam, worldBB);
+		return null; //super.createLining(cam, worldBB);
 	}
 	
 	@Override
@@ -59,7 +59,7 @@ public class SapphireScreen extends LapisScreen {
 	public InputProcessor createInputProcessor() {
 		var multi = new InputMultiplexer();
 		if(getView() != null) multi.addProcessor(getView().getStage());
-		multi.addProcessor(new SapphireController(getCamera()));
+		multi.addProcessor(controller = new SapphireController(getCamera()));
 		return multi;
 	}
 	
@@ -102,9 +102,16 @@ public class SapphireScreen extends LapisScreen {
 	}
 	
 	@Override
-	public Texture createBackground() {
-		return null;
+	public void resetCamera() {
+//		super.resetCamera();
+		topView();
+		getCamera().rotate(45, getCamera().up.y, -getCamera().up.x, 0); 
 	}
+	
+//	@Override
+//	public Texture createBackground() {
+//		return null;
+//	}
 
 //	
 //	@Override

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="module-info.java|mockingbird/MockingMoonstone.java" kind="src" path="src"/>
-	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="src" output="data" path="datadata"/>
+	<classpathentry kind="src" output="res" path="assets"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Sapphire Owl"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Amethyst"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>

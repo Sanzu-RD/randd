@@ -14,7 +14,7 @@ public class MockingMoonstoneWhite extends EbiShoalCore {
 		// init le client
 		var moon = new WhiteMoonstone("localhost", 443, mooncore);
 		// commence par authentifier en demandant le sel, puis le user
-		moon.auth("souchy", "z");
+		moon.auth("souchy", "z", 1);
 		// ensuite on passe par SendSaltHandler (TealNet) et SendUserHandler (MoonstoneWhite) puis envoie le message auth fight
 	}
 

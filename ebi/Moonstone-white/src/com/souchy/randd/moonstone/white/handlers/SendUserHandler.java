@@ -18,10 +18,12 @@ public class SendUserHandler implements BBMessageHandler<SendUser> {
 		if(message.user == null) {
 			return;
 		}
+
+		var moon = client.channel().attr(WhiteMoonstone.attrKey).get();
 		
 		// deamande à rejoindre un combat
 		var join = new JoinFight("1"); // fight id from args[] sent by amethyst to sapphire
-		WhiteMoonstone.moon.write(join);
+		moon.write(join);
 	}
 
 	@Override

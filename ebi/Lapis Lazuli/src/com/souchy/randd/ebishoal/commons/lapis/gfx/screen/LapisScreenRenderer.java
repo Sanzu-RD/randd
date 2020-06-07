@@ -63,7 +63,7 @@ interface LapisScreenRenderer extends Screen {
 	
 	public static boolean onlyShadowMap = false;
 	public static boolean activatePP = true;
-	public static boolean renderBackground = false;
+	public static boolean renderBackground = true;
 	public static boolean renderUI = true;
 	public static boolean cullback = true; // déjà setté dans les shader classes DefaultShader.Config et DepthShader.Config
 	public static SpriteBatch cleanSpriteBatch = new SpriteBatch();

@@ -24,7 +24,6 @@ import com.souchy.randd.ebishoal.commons.lapis.world.World;
 
 import gamemechanics.ext.MapData;
 
-@SuppressWarnings("unused")
 public class SapphireWorld extends World {
 	private AssetManager assets = new AssetManager();
 	
