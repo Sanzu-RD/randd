@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
+import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 
 
@@ -43,7 +44,7 @@ interface LapisScreenCreator {
 	}
 	
 	public default Texture createBackground() {
-		return new Texture(Gdx.files.internal("res/textures/Tex_krakken.PNG"));
+		return LapisAssets.assets.get("res/textures/Tex_krakken.PNG"); //new Texture(Gdx.files.internal("res/textures/Tex_krakken.PNG"));
 	}
 	
 	/**

@@ -4,7 +4,7 @@ varying vec4 v_pos;
 uniform float u_time;
 
 bool activateCheckers = true;
-bool activateOutline = true;
+bool activateOutline = false;
 bool activateWater = false;
 
 float shade = 0.30f; // shade difference for chess/checkers pattern

@@ -20,6 +20,10 @@ public class World implements Disposable {
 		instances = new ArrayList<>();
 	}
 	
+	public ModelInstance getCursor() {
+		return null;
+	}
+	
 	/**
 	 * This is WRONG and INVALID
 	 * (only checks translation transform + we use greedy meshing so it doesnt get the correct values)

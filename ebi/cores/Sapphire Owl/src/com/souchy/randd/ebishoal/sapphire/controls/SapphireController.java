@@ -5,15 +5,29 @@ import static com.badlogic.gdx.Input.Keys.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Mesh;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
+import com.badlogic.gdx.graphics.g3d.Material;
+import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.decals.Decal;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
+import com.badlogic.gdx.graphics.g3d.utils.MeshBuilder;
+import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder.VertexInfo;
+import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.kotcrab.vis.ui.FocusManager;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 
 import gamemechanics.models.entities.Cell;
 import gamemechanics.statics.stats.properties.Resource;
@@ -50,20 +64,20 @@ public class SapphireController extends CameraInputController {
 		translation.set(0, 0, 0);
 		rotation.set(0, 0, 0);
 		
-//		if(Gdx.input.isKeyPressed(SHIFT_LEFT)) {
-//			// Translation XY
-//			if(Gdx.input.isKeyPressed(W)) translation.add( up.x,  up.y, 0);
-//			if(Gdx.input.isKeyPressed(S)) translation.add(-up.x, -up.y, 0);  
-//			if(Gdx.input.isKeyPressed(A)) translation.add(-up.y,  up.x, 0); 
-//			if(Gdx.input.isKeyPressed(D)) translation.add( up.y, -up.x, 0); 
-//		} else {
+		if(Gdx.input.isKeyPressed(ALT_LEFT)) {
+			// Translation XY
+			if(Gdx.input.isKeyPressed(W)) translation.add( up.x,  up.y, 0);
+			if(Gdx.input.isKeyPressed(S)) translation.add(-up.x, -up.y, 0);  
+			if(Gdx.input.isKeyPressed(A)) translation.add(-up.y,  up.x, 0); 
+			if(Gdx.input.isKeyPressed(D)) translation.add( up.y, -up.x, 0); 
+		} else {
 			// Rotation X
 			if(Gdx.input.isKeyPressed(W)) rotation.add(-up.y, up.x, 0); // look up
 			if(Gdx.input.isKeyPressed(S)) rotation.add( up.y, -up.x, 0); // look down
 			// Rotation Z
 			if(Gdx.input.isKeyPressed(A)) rotation.add(0, 0, -1f); // look left 
 			if(Gdx.input.isKeyPressed(D)) rotation.add(0, 0,  1f); // look right
-//		}
+		}
 		// Zoom
 		if(Gdx.input.isKeyPressed(CONTROL_LEFT) || Gdx.input.isKeyPressed(Q)) scrolledFloat(0.2f);
 		if(Gdx.input.isKeyPressed(SHIFT_LEFT) || Gdx.input.isKeyPressed(E)) scrolledFloat(-0.2f);
@@ -71,13 +85,12 @@ public class SapphireController extends CameraInputController {
 		// p = le point qu'on regarde avec la caméra
 		float scl = Math.abs(camera.position.z / dir.z);
 		Vector3 p = new Vector3(dir.x * scl + pos.x, dir.y * scl + pos.y, 0);
-
+		
 		float distance = translationSpeed * delta;
 		Vector3 movement = translation.scl(distance);
 		
 		float angle = rotationSpeed * delta;
 		
-//		Log.info("translation : " + translation + ". rotation : " + rotation);
 		camera.position.add(movement);
 		camera.rotateAround(p, rotation, angle);
 		
@@ -87,7 +100,7 @@ public class SapphireController extends CameraInputController {
 	@Override
 	public boolean scrolled(int amount) {
 		scrolledFloat(amount);
-		if(!activateBaseCamControl) return true; //super.scrolled(amount);
+		if(!activateBaseCamControl) return true;
 		return super.scrolled(amount);
 	}
 	private void scrolledFloat(float amount) {
@@ -103,8 +116,6 @@ public class SapphireController extends CameraInputController {
 	@SuppressWarnings("preview")
 	@Override
 	public boolean keyDown(int keycode) {
-		var center = SapphireGame.gfx.getWorldCenter(); //getWorldBB();
-		
 		if(keycode == Keys.SPACE) {
 			SapphireGame.gfx.resetCamera();
 			SapphireHud.refresh();
@@ -131,8 +142,6 @@ public class SapphireController extends CameraInputController {
 			case UP 	-> camera.rotate(45, -camera.up.y, camera.up.x, 0); 
 			case DOWN 	-> camera.rotate(45, camera.up.y, -camera.up.x, 0); 
 		}
-		
-		Log.info("axis xy : " + axisXY);
 		
 		if(!activateBaseCamControl) return true;
 		return super.keyDown(keycode);
@@ -173,78 +182,33 @@ public class SapphireController extends CameraInputController {
 	}
 
 	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
+	public boolean touchDragged(int x, int y, int pointer) {
+		SapphireWorld.world.cursor.transform.setTranslation(getCursorWorldPos(x, y));
+		
 		if(!activateBaseCamControl) return true;
-		return super.touchDragged(screenX, screenY, pointer);
+		return super.touchDragged(x, y, pointer);
 	}
 
 	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-	//	temp.x = screenX;
-	//	temp.y = screenY;
-		/*
-		SapphireGame.gfx.getCamera().unproject(temp);
- 
-		//CellInputEvent.postMove(null, target, old); //newX, newY); //listener.mouseMoved(newBox);
-		if(target.x != temp.x || target.y != temp.y){ 
-			//System.out.println("-------------------MOVE");
-			old.set(target);
-			target.set(temp);
-			CellInputEvent.postExit(old); 
-			CellInputEvent.postEnter(target); 
-		}
-		//System.out.println("moved 1 - "+"["+x+","+y+"] = "+test);
-		//GridController.mouseMoved(x, y);
-		return super.mouseMoved(event, x, y);
+	public boolean mouseMoved(int x, int y) {
+		SapphireWorld.world.cursor.transform.setTranslation(getCursorWorldPos(x, y));
 		
-		*/
-	
-//		//old.set(target);
-//		x = Gdx.input.getX();
-//		y = Gdx.input.getY();
-//		unproject(x, y, temp); //target); 
-//		//CellInputEvent.postMove(null, target, old); //newX, newY); //listener.mouseMoved(newBox);
-//		if(target.x != temp.x || target.y != temp.y){ 
-//			//System.out.println("-------------------MOVE");
-//			old.set(target);
-//			target.set(temp);
-//			CellInputEvent.postExit(old); 
-//			CellInputEvent.postEnter(target); 
-//		}
-//		//System.out.println("moved 1 - "+"["+x+","+y+"] = "+test);
-//		//GridController.mouseMoved(x, y);
-	
 		if(!activateBaseCamControl) return true;
-		return super.mouseMoved(screenX, screenY);
+		return super.mouseMoved(x, y);
 	}
+	
+	private Vector3 getCursorWorldPos(int x, int y) {
+		var floorHeight = 1f;
+		Ray ray = camera.getPickRay(x, y);
+		var distance = (floorHeight - ray.origin.z) / ray.direction.z;
+		Vector3 v = new Vector3();
+		v.set(ray.direction).scl(distance).add(ray.origin);
+//		Log.info("" + v);
+		v.x = (float) Math.floor(v.x) + 0.5f;
+		v.y = (float) Math.floor(v.y) + 0.5f;
+		v.z = floorHeight;
+		return v;
+	}
+	
 
-
-	/**
-	 * @param out - le vecteur dans lequel renvoyer le résultat
-	 * <p>
-	 * Converti une coordonée du plan de l'écran au coordonées du world
-	 */
-//	public Cell unproject(float x, float y, Vector3 out){
-//		Ray r = camera.getPickRay(x, y);
-//		//float scl = Math.abs(r.origin.z / r.direction.z);
-//		//out.set(r.direction).scl(scl).add(r.origin); // r.origin.cpy().add(r.direction.cpy().scl(scl));
-//		out.set(r.direction).scl(1).add(r.origin); // r.origin.cpy().add(r.direction.cpy().scl(scl));
-//		float near = 1;
-//		float far = 1000;
-//		for(float scl = near; ; scl += 0.1f){
-//			out.set(r.direction).scl(scl).add(r.origin);
-//			Cell c = GridMap.getPointedCell(out);
-//			if(c != null && Helper.isBetween(out.z, c.z-c.getBox().z, c.z)){ //Math.floor(c.z * 10) == Math.floor(out.z * 10)){ //arrondit à 1 décimale pour la collision en Z   //GridMap.toGridCoord(out.z)+1){
-//				out.z = c.z;
-//				//GridMap.toGridCoord(out);
-//				System.out.println("found " + out);
-//				return c;
-//			}
-//			if(scl > far){
-//				System.out.println("not");
-//				return null;
-//			}
-//		}
-//	}
-//	
 }

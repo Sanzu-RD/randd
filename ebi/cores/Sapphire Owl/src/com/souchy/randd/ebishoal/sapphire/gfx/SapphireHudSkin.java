@@ -16,9 +16,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
+import com.souchy.randd.ebishoal.sapphire.confs.AssetConfs;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireDevConfig;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
-import com.souchy.randd.ebishoal.sapphire.main.AssetConfs;
 
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.Element;

@@ -61,6 +61,7 @@ interface LapisScreenRenderer extends Screen {
 		clearScreen(color.r, color.g, color.b, color.a);
 	}
 	
+	public static boolean activateShadows = false;
 	public static boolean onlyShadowMap = false;
 	public static boolean activatePP = true;
 	public static boolean renderBackground = true;
@@ -71,8 +72,9 @@ interface LapisScreenRenderer extends Screen {
 	@Override
 	public default void render(float delta) {
 		if(cullback) Gdx.gl20.glCullFace(GL20.GL_FRONT);
+		
 		// render shadow map into its own fbo
-//		renderShadowsContainer();
+		if(activateShadows) renderShadowsContainer();
 
 		if(cullback) Gdx.gl.glCullFace(GL20.GL_BACK);
 		// render world and pfx in an FBO for later post-process
@@ -176,6 +178,7 @@ interface LapisScreenRenderer extends Screen {
 			//g1.meshes.forEach(m -> m.render(modelBatch.getShaderProvider().getShader(null), GL20.GL_TRIANGLES));
 //		else 
 			getModelBatch().render(getWorld().cache, getEnvironment());
+			if(getWorld().getCursor() != null) getModelBatch().render(getWorld().getCursor());
 		// render highlight effects like traps, glyphs, etc (might or might not render with the environment var)
 //		modelBatch.render(cellHighlighterInst); // , new LShader());
 		// render characters

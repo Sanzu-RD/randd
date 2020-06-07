@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttribute;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
@@ -19,12 +20,16 @@ import com.badlogic.gdx.graphics.g3d.model.NodePart;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.Meshing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 
 import gamemechanics.ext.MapData;
 
 public class SapphireWorld extends World {
+	
+	public static SapphireWorld world;
+	
 	private AssetManager assets = new AssetManager();
 	
 	private ModelBuilder modelBuilder = new ModelBuilder();
@@ -39,9 +44,26 @@ public class SapphireWorld extends World {
 	 * 		Traps
 	 *		Highlighting area (ex: previsualising/targetting a spell aoe)
 	 */
+
+	public ModelInstance cursor;
 	
 	
 	public SapphireWorld() {
+		world = this;
+		
+//		var modelBuilder = new ModelBuilder();
+//		var mat = new Material();
+//		mat.set(ColorAttribute.createDiffuse(Color.RED));
+//		var cursorModel = modelBuilder.createRect(0, 0, 0,  1, 0, 0,  1, 1, 0,  0, 1, 0,  0, 0, 0, mat, Usage.Position | Usage.Normal | Usage.ColorPacked);
+		Model cursorModel = LapisAssets.assets.get("res/models/tileselector.g3dj");
+//		cursorModel.materials.clear();
+//		cursorModel.materials.add(mat);
+		cursor = new ModelInstance(cursorModel);
+		cursor.materials.get(0).set(ColorAttribute.createDiffuse(Color.CYAN));
+//		cursor.materials.get(1).set(ColorAttribute.createDiffuse(Color.TEAL));
+		var scale = 1f / 24f;
+		cursor.transform.setToTranslation(0, 0, 0).scale(scale, scale, scale).rotate(Vector3.X, 90);
+		
 		/*
 		String devPath = "gdx/g3d/";
 		String deployPath = "res/" + devPath;
@@ -113,7 +135,6 @@ public class SapphireWorld extends World {
 	    		generateModels.accept(data.layer2Models);
 	    		
     		}
-    		
     		if(false) {
         		// water plane
         		var water = waterplane();
@@ -122,12 +143,17 @@ public class SapphireWorld extends World {
     		}
         } 
         
+        
+        // build the cache
         cache.begin();
         for(var instance : instances)
             cache.add(instance);
         cache.end();
 	}
-	
+
+	public ModelInstance getCursor(){
+		return cursor;
+	}
 	
 	private ModelInstance waterplane() {
 		int renderType = GL20.GL_TRIANGLES;

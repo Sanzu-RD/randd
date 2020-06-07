@@ -26,6 +26,10 @@ public class SapphireScreen extends LapisScreen {
 	
 	private SapphireController controller;
 	
+	public SapphireScreen() {
+//		activateShadows = false;
+	}
+	
 	@Override
 	protected void act(float delta) {
 		// update title
