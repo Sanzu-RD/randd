@@ -71,9 +71,14 @@ public class AssetConfs {
 		var spellmaptype = new TypeToken<List<SpellResource>>() {}.getType();
 		var statusmaptype = new TypeToken<List<StatusResource>>() {}.getType();
 		
+		
 		var creatureList = (List<CreatureResource>) new Gson().fromJson(creaturesFile.readString(), creaturemaptype);
 		var spellList = (List<SpellResource>) new Gson().fromJson(spellsFile.readString(), spellmaptype);
 		var statusList = (List<StatusResource>) new Gson().fromJson(statusesFile.readString(), statusmaptype);
+		
+//		var creatureList = (List<CreatureResource>) JsonConfig.gson.fromJson(creaturesFile.readString(), creaturemaptype);
+//		var spellList = (List<SpellResource>) JsonConfig.gson.fromJson(spellsFile.readString(), spellmaptype);
+//		var statusList = (List<StatusResource>) JsonConfig.gson.fromJson(statusesFile.readString(), statusmaptype);
 		
 		creatureList.forEach(c -> creatures.put(c.id, c));
 		spellList.forEach(c -> spells.put(c.id, c));

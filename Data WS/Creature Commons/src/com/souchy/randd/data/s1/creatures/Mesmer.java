@@ -1,7 +1,7 @@
 package com.souchy.randd.data.s1.creatures;
 
-import data.new1.CreatureModel;
 import data.new1.spellstats.CreatureStats;
+import gamemechanics.models.CreatureModel;
 
 public class Mesmer extends CreatureModel {
 

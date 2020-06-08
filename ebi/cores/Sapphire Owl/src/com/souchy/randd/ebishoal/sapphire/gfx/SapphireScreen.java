@@ -1,21 +1,31 @@
 package com.souchy.randd.ebishoal.sapphire.gfx;
 
+import java.util.stream.Collectors;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.collision.BoundingBox;
+import com.badlogic.gdx.utils.Collections;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
+import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
+import com.souchy.randd.ebishoal.sapphire.confs.AssetConfs;
 import com.souchy.randd.ebishoal.sapphire.controls.SapphireController;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
+
+import data.new1.ecs.Engine;
 
 public class SapphireScreen extends LapisScreen {
 	
@@ -45,6 +55,9 @@ public class SapphireScreen extends LapisScreen {
 		}
 		if(controller != null) controller.act(delta);
 		getCamera().update();
+		
+		// update all systems and entities
+		Engine.update(delta);
 	}
 	
 	
@@ -112,27 +125,17 @@ public class SapphireScreen extends LapisScreen {
 		getCamera().rotate(45, getCamera().up.y, -getCamera().up.x, 0); 
 	}
 	
-//	@Override
-//	public Texture createBackground() {
-//		return null;
-//	}
-
-//	
-//	@Override
-//	public LapisDSL createShadowLight(Viewport viewport) {
-//		return null;
-//	}
 	
-	/**
-	 * Get the color to clear the screen with
-	 */
-//	public Color getBackgroundColor() {
-//		return Color.PINK;
-//	}
-//	
-//	@Override
-//	public Texture createBackground() {
-//		return null; //super.createBackground();
-//	}
+	@Override
+	public void renderWorld() {
+		super.renderWorld();
+		// render dynamic instances (cursor, creatures, terrain effects like glyphs and traps, highlighting effects ..)
+		
+		SapphireEntitySystem.family.forEach(e -> {
+			var model = e.get(ModelInstance.class);
+			if(model != null) getModelBatch().render(model);
+		});
+		
+	}
 
 }

@@ -10,8 +10,8 @@ import io.netty.buffer.ByteBuf;
 
 public class Shocked extends Status {
 
-	public Shocked(EntityRef source, EntityRef target) {
-		super(source, target);
+	public Shocked(Fight f, EntityRef source, EntityRef target) {
+		super(f, source, target);
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class Shocked extends Status {
 
 	@Override
 	public Shocked create(EntityRef source, EntityRef target) {
-		return new Shocked(source, target); 
+		return new Shocked(source.fight, source, target); 
 	}
 	
 }

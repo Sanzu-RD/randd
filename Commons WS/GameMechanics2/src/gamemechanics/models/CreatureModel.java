@@ -1,8 +1,8 @@
-package data.new1;
+package gamemechanics.models;
 
 import data.new1.spellstats.CreatureStats;
 
-public abstract class CreatureModel {
+public abstract class CreatureModel extends data.new1.ecs.Entity {
 
 	/** 
 	 * return creature id in thousands (0000 #### 0000) 
@@ -22,6 +22,7 @@ public abstract class CreatureModel {
 	public final CreatureStats /*Stats*/ baseStats;
 	
 	public CreatureModel() {
+		super();
 //		elements = initAffinities();
 //		types = initTypes();
 		//initTags();

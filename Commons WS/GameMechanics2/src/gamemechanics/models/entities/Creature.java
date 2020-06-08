@@ -6,10 +6,11 @@ import java.util.List;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.jade.meta.JadeCreature;
 
-import data.new1.CreatureModel;
 import data.new1.spellstats.CreatureStats;
 import gamemechanics.common.generic.Vector2;
+import gamemechanics.components.Position;
 import gamemechanics.main.DiamondModels;
+import gamemechanics.models.CreatureModel;
 import gamemechanics.models.Fight;
 import gamemechanics.models.SpellModel;
 import gamemechanics.statics.Element;
@@ -43,7 +44,7 @@ public class Creature extends Entity {
 	/**
 	 * for initialisation
 	 */
-	public Creature(Fight f, CreatureModel model, JadeCreature jade, Vector2 pos) { // AzurCache dep, Vector2 pos) {
+	public Creature(Fight f, CreatureModel model, JadeCreature jade, Position pos) { // AzurCache dep, Vector2 pos) {
 		super(f);
 		this.model = model;
 		this.spellbook = new ArrayList<>();

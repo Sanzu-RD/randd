@@ -2,9 +2,9 @@ package com.souchy.randd.data.s1.creatures;
 
 import com.souchy.randd.data.s1.main.Elements;
 
-import data.new1.CreatureModel;
 import data.new1.spellstats.CreatureStats;
 import data.new1.spellstats.base.IntStat;
+import gamemechanics.models.CreatureModel;
 import gamemechanics.statics.stats.properties.Resource;
 
 public class Sungjin extends CreatureModel {

@@ -19,8 +19,8 @@ import io.netty.buffer.ByteBuf;
 
 public class BurningGlyph extends TerrainEffect implements OnWalkHandler, OnEnterCellHandler, OnLeaveCellHandler, OnTurnStartHandler {
 
-	public BurningGlyph(EntityRef source, EntityRef target) {
-		super(source, target);
+	public BurningGlyph(Fight fight, EntityRef source, EntityRef target) {
+		super(fight, source, target);
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class BurningGlyph extends TerrainEffect implements OnWalkHandler, OnEnte
 
 	@Override
 	public Status create(EntityRef source, EntityRef target) {
-		return new BurningGlyph(source, target);
+		return new BurningGlyph(source.fight, source, target);
 	}
 
 	

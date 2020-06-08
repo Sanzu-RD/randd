@@ -8,6 +8,7 @@ import data.new1.spellstats.CreatureStats;
 import data.new1.spellstats.Targetting;
 import data.new1.timed.StatusList;
 import gamemechanics.common.generic.Vector2;
+import gamemechanics.components.Position;
 import gamemechanics.events.new1.EventPipeline;
 import gamemechanics.main.DiamondModels;
 import gamemechanics.models.Fight;
@@ -49,7 +50,7 @@ public abstract class Entity extends FightObject implements BBSerializer, BBDese
 	public Team team;
 
 	/** board position */
-	public Vector2 pos;
+	public Position pos;
 	
 	/** filled and emptied by StatusAdd and StatusLose effects */
 	public EventPipeline handlers;
@@ -112,6 +113,22 @@ public abstract class Entity extends FightObject implements BBSerializer, BBDese
 		return statuses; //new StatusList();
 	}
 	
+//	public Vector2 pos() {
+//		return get(Position.class);
+//	}
+//	public void setPos(double x, double y) {
+//		add(new Position(x, y));
+//	}
+//	public void setPos(Position pos) {
+//		add(pos);
+//	}
+	@Override
+	public <T> T get(Class<T> c) {
+		if(c == Position.class)
+			return (T) this.pos;
+		return super.get(c);
+	}
+	
 	public Cell getCell() {
 		return fight.board.cells.get(pos.x, pos.y);
 	}
@@ -137,7 +154,7 @@ public abstract class Entity extends FightObject implements BBSerializer, BBDese
 		this.id = in.readInt();
 		double x = in.readDouble();
 		double y = in.readDouble();
-		this.pos = new Vector2(x, y);
+		this.pos = new Position(x, y);
 		this.team = Team.values()[in.readInt()];
 		this.statuses.deserialize(in);
 		return null;

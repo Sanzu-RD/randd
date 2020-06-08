@@ -54,11 +54,11 @@ public class AddStatusEffect extends Effect {
 		// FIXME aka all cells should have a reactor status that adds statuses to creatures on them (applicability determined by the status)
 		
 		if(status instanceof TerrainEffect) {
-			target.getStatus().add(status);
+			target.getStatus().addStatus(status);
 			// register in the eventpipeline if the status is either of interceptors/modifiers/reactors
 			target.handlers.register(status);
 		} else {
-			target.getCreatures().get(0).getStatus().add(status);
+			target.getCreatures().get(0).getStatus().addStatus(status);
 			// register in the eventpipeline if the status is either of interceptors/modifiers/reactors
 			target.getCreatures().get(0).handlers.register(status);
 		}

@@ -5,11 +5,16 @@ public class Vector2 {
 	public double x;
 	public double y;
 	
-	public Vector2(double x2, double y2) {
-		x = x2;
-		y = y2;
+	public Vector2(double x, double y) {
+		this.x = x;
+		this.y = y;
 	}
 
+	public Vector2 set(double x, double y) {
+		this.x = x;
+		this.y = y;
+		return this;
+	}
 
 	public Vector2 add(int i, int j) {
 		x += i;
@@ -55,6 +60,10 @@ public class Vector2 {
 		return v.x == y && v.y == y;
 	}
 
+	@Override
+	public String toString() {
+		return "(" + x + "," + y + ")";
+	}
 
 	
 }

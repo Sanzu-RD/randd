@@ -25,10 +25,13 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 
+import data.new1.ecs.Entity;
+import gamemechanics.components.Position;
 import gamemechanics.models.entities.Cell;
 import gamemechanics.statics.stats.properties.Resource;
 
@@ -47,6 +50,8 @@ public class SapphireController extends CameraInputController {
 	
 	private Vector3 axisZ = new Vector3(0, 0, 1);
 	private Vector3 axisXY = new Vector3(-1, 1, 0).nor();
+	
+	private Entity draggedEntity;
 
 	public SapphireController(Camera camera) {
 		super(camera);
@@ -147,7 +152,6 @@ public class SapphireController extends CameraInputController {
 		return super.keyDown(keycode);
 	}
 	
-	
 
 	@Override
 	public boolean keyUp(int keycode) {
@@ -171,19 +175,42 @@ public class SapphireController extends CameraInputController {
 			s.getView().getStage().unfocusAll();
 			s.getView().getStage().cancelTouchFocus();
 		}
+
+		
+		var cellpos = getCursorWorldPos(screenX, screenY);
+		Log.info("touchdown " + cellpos);
+		for(var e : SapphireEntitySystem.family) {
+			var epos = e.get(Position.class);
+			if(epos == null) continue;
+			Log.info("entity pos " + epos);
+			if(cellpos.x == epos.x && cellpos.y == epos.y) {
+				draggedEntity = e;
+				break;
+			}
+		}
+		
+//		var cell = SapphireGame.fight.board.cells.get((int) cellpos.x, (int) cellpos.y);
+//		cell.creatures.get(0);
+		
 		if(!activateBaseCamControl) return true;
 		return super.touchDown(screenX, screenY, pointer, button);
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		draggedEntity = null;
 		if(!activateBaseCamControl) return true;
 		return super.touchUp(screenX, screenY, pointer, button);
 	}
 
 	@Override
 	public boolean touchDragged(int x, int y, int pointer) {
-		SapphireWorld.world.cursor.transform.setTranslation(getCursorWorldPos(x, y));
+		var pos = getCursorWorldPos(x, y);
+		if(draggedEntity != null) {
+			var epos = draggedEntity.get(Position.class).set(pos.x, pos.y);
+			Log.info("dragged entity " + epos);
+		}
+		SapphireWorld.world.cursor.transform.setTranslation(pos.sub(0.5f, 0.5f, 0f));
 		
 		if(!activateBaseCamControl) return true;
 		return super.touchDragged(x, y, pointer);
@@ -191,7 +218,7 @@ public class SapphireController extends CameraInputController {
 
 	@Override
 	public boolean mouseMoved(int x, int y) {
-		SapphireWorld.world.cursor.transform.setTranslation(getCursorWorldPos(x, y));
+		SapphireWorld.world.cursor.transform.setTranslation(getCursorWorldPos(x, y).sub(0.5f, 0.5f, 0f));
 		
 		if(!activateBaseCamControl) return true;
 		return super.mouseMoved(x, y);
@@ -204,8 +231,8 @@ public class SapphireController extends CameraInputController {
 		Vector3 v = new Vector3();
 		v.set(ray.direction).scl(distance).add(ray.origin);
 //		Log.info("" + v);
-		v.x = (float) Math.floor(v.x) + 0.5f;
-		v.y = (float) Math.floor(v.y) + 0.5f;
+		v.x = (float) Math.floor(v.x) + 1f;
+		v.y = (float) Math.floor(v.y) + 1f;
 		v.z = floorHeight;
 		return v;
 	}

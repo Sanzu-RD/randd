@@ -30,7 +30,7 @@ public class StatusList extends FightObject implements BBSerializer, BBDeseriali
 		statuses = new ArrayList<>();
 	}
 	
-	public boolean has(Class<? extends Status> c) {
+	public boolean hasStatus(Class<? extends Status> c) {
 		//return statuses.containsKey(c);
 		for(var s : statuses)
 			if(s.getClass() == c)
@@ -46,9 +46,9 @@ public class StatusList extends FightObject implements BBSerializer, BBDeseriali
 		//return statuses.get(c);
 	}
 	
-	public void add(Status s) {
+	public void addStatus(Status s) {
 		boolean fused = false;
-		if(has(s.getClass())) {
+		if(hasStatus(s.getClass())) {
 			fused = getFirst(s.getClass()).fuse(s); //.stackAdd(s.stacks);
 		} 
 		if(!fused){
@@ -69,7 +69,7 @@ public class StatusList extends FightObject implements BBSerializer, BBDeseriali
 //	}
 
 	/** remove one status */
-	public void remove(Status s) {
+	public void removeStatus(Status s) {
 		//remove(s.getClass()); 
 		var removed = statuses.remove(s);
 		if(removed) {
@@ -89,7 +89,7 @@ public class StatusList extends FightObject implements BBSerializer, BBDeseriali
 		//statuses.removeIf(filter);
 	}
 	/** remove all instances of the status class */
-	public void remove(Class<? extends Status> c) {
+	public void removeStatus(Class<? extends Status> c) {
 		removeIf(s -> s.getClass() == c);
 	}
 	

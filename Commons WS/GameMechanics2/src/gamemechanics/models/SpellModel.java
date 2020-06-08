@@ -6,7 +6,6 @@ import java.util.List;
 import com.google.common.collect.ImmutableList;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 
-import data.new1.CreatureModel;
 import data.new1.Effect;
 import data.new1.spellstats.SpellStats;
 import gamemechanics.models.entities.Cell;
@@ -14,7 +13,7 @@ import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
 
-public abstract class SpellModel {
+public abstract class SpellModel extends data.new1.ecs.Entity {
 	
 	/**
 	 * Need to compile creature stats before compiling them into the spell stats
@@ -22,16 +21,18 @@ public abstract class SpellModel {
 	 * 
 	 * @author Blank
 	 */
-	public static class SpellInstance {
+	public static class SpellInstance extends data.new1.ecs.Entity {
 		public final SpellModel model;
 		public List<Element> elements; // can change elements
 		public SpellStats currStats;
 		
 		public SpellInstance(SpellModel model) {
+			super();
 			this.model = model;
 			currStats = new SpellStats();
 		}
 	}
+	
 	
 	public abstract int id();
 	
@@ -44,6 +45,7 @@ public abstract class SpellModel {
 	public List<Effect> tooltipEffects = new ArrayList<>();
 	
 	public SpellModel() {
+		super();
 		baseStats = initBaseStats();
 		taggedElements = initElements();
 		taggedCreatureTypes = initCreatureTypes();

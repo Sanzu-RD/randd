@@ -38,7 +38,7 @@ public class RemoveStatusEffect extends Effect {
 	public void apply0(Entity source, Cell target) {
 		// Remove status 
 		// FIXME : apply to cells and creatures and remove the whole aoe if the status is an aoe terrain effect (+ remove from all creatures in it)
-		target.getStatus().remove(status); //.remove(c);
+		target.getStatus().removeStatus(status); //.remove(c);
 		// unregister from the pipeline if the status is either of interceptors/modifiers/reactors 
 		target.handlers.unregister(status);
 	}

@@ -2,6 +2,8 @@ package com.souchy.randd.ebishoal.sapphire.main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.creatures.Sungjin;
@@ -14,10 +16,11 @@ import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHudSkin;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.jade.meta.JadeCreature;
 
-import data.new1.CreatureModel;
 import data.new1.spellstats.base.IntStat;
 import gamemechanics.common.generic.Vector2;
+import gamemechanics.components.Position;
 import gamemechanics.main.DiamondModels;
+import gamemechanics.models.CreatureModel;
 import gamemechanics.models.Fight;
 import gamemechanics.models.entities.Creature;
 import gamemechanics.models.entities.Entity.Team;
@@ -89,11 +92,15 @@ public class SapphireGame extends LapisGame {
 			// override model stats
 			model.baseStats.resources.put(Resource.life, new IntStat(30)); 
 			// instance
-			Creature inst = new Creature(fight, model, jade, new Vector2(0, 0));
+			Creature inst = new Creature(fight, model, jade, new Position(5, 5));
 			// test stats//.get(Resource.life).base = 30; //).addResource(30, Resource.life);
 			inst.getStats().resources.get(Resource.life).fight = -150; //.addFightResource(-130, Resource.life);
 			inst.getStats().shield.get(Resource.life).fight = 600; //.addShield(600, Resource.life);
 			
+			var modelinstance = new ModelInstance(LapisAssets.assets.<Model>get("res/models/decor/cube.g3dj"));
+			Log.info("creature 3d model : " + modelinstance);
+			inst.add(modelinstance);
+			SapphireEntitySystem.family.add(inst);
 			
 			// fight
 			fight = new Fight();

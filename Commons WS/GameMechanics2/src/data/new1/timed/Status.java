@@ -10,6 +10,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import data.new1.Effect;
 import gamemechanics.common.generic.Disposable;
 import gamemechanics.models.Fight;
+import gamemechanics.models.FightObject;
 import gamemechanics.models.entities.Entity;
 import gamemechanics.models.entities.Entity.EntityRef;
 
@@ -35,11 +36,11 @@ import gamemechanics.models.entities.Entity.EntityRef;
  * @author Souchy
  *
  */
-public abstract class Status /* extends TimedEffect */ implements Disposable, BBSerializer, BBDeserializer  {
+public abstract class Status extends FightObject /* extends TimedEffect */ implements Disposable, BBSerializer, BBDeserializer  {
 
 	public static abstract class Passive extends Status {
 		public Passive(Entity source) {
-			super(source.ref(), source.ref());
+			super(source.fight, source.ref(), source.ref());
 			this.canDebuff = false;
 			this.canRemove = false;
 		}
@@ -73,16 +74,18 @@ public abstract class Status /* extends TimedEffect */ implements Disposable, BB
 	public List<Effect> tooltipEffects = new ArrayList<>();
 
 	
-	public Status(EntityRef source, EntityRef target) {
+	public Status(Fight f, EntityRef source, EntityRef target) {
+		super(f);
 		this.source = source;
 		this.target = target;
 		//source.fight.bus.register(this);
 	}
+	
 //	public Status(Fight fight, int sourceid, int targetid) {
 //		this(new EntityRef(fight, sourceid), new EntityRef(fight, targetid));
 //	}
 //	public Status(Entity source, Entity target) {
-//		this(source.asRef(), target.asRef());
+//		this(source.ref(), target.ref());
 //	}
 
 	/**

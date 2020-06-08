@@ -16,7 +16,7 @@ import gamemechanics.models.entities.Entity;
 import gamemechanics.models.entities.Entity.Team;
 
 
-public class Fight implements Identifiable<Integer> {
+public class Fight extends data.new1.ecs.Entity implements Identifiable<Integer> {
 	
 	//public EventPipeline bus;
 	
@@ -53,6 +53,7 @@ public class Fight implements Identifiable<Integer> {
 	
 	
 	public Fight() {
+		super();
 		//bus = new EventPipeline();
 		
 		board = new Board(this);

@@ -9,8 +9,8 @@ import io.netty.buffer.ByteBuf;
 
 public class Burning extends Status {
 
-	public Burning(EntityRef source, EntityRef target) {
-		super(source, target);
+	public Burning(Fight f, EntityRef source, EntityRef target) {
+		super(f, source, target);
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class Burning extends Status {
 
 	@Override
 	public Status create(EntityRef source, EntityRef target) {
-		return new Burning(source, target);
+		return new Burning(source.fight, source, target);
 	}
 
 	@Override

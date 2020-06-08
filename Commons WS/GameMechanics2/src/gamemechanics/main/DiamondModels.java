@@ -7,8 +7,8 @@ import java.util.Map;
 import com.souchy.randd.commons.tealwaters.io.files.ClassDiscoverer.DefaultClassDiscoverer;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
-import data.new1.CreatureModel;
 import data.new1.timed.Status;
+import gamemechanics.models.CreatureModel;
 import gamemechanics.models.Fight;
 import gamemechanics.models.SpellModel;
 import gamemechanics.models.entities.Entity.EntityRef;
@@ -57,7 +57,7 @@ public class DiamondModels {
 		Log.info("Diamond status models " + statuslist);
 		statuslist.forEach(c -> {
 			try {
-				var model = c.getDeclaredConstructor(EntityRef.class, EntityRef.class).newInstance(null, null);
+				var model = c.getDeclaredConstructor(Fight.class, EntityRef.class, EntityRef.class).newInstance(null, null, null);
 				statuses.put(model.modelID(), model);
 				//Log.info("Diamond status model [" + model.id() + "] = " + model);
 			} catch (Exception e) {
