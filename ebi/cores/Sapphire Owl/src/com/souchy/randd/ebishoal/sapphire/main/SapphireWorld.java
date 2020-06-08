@@ -133,7 +133,7 @@ public class SapphireWorld extends World {
 	    		generateModels.accept(data.layer2Models);
 	    		
     		}
-    		if(true) {
+    		if(false) {
         		// water plane
         		var water = waterplane();
         		//water.transform.rotate(0, 0, 1, 45);

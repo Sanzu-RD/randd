@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.kotcrab.vis.ui.layout.HorizontalFlowGroup;
@@ -12,6 +13,7 @@ import com.kotcrab.vis.ui.widget.ScrollableTextArea;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.controls.DragAndResizeListener;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
@@ -122,6 +124,7 @@ public class CreatureSheet extends SapphireWidget {
 	
 	public void refresh() {
 		name.setText(getCreatureName());
+		areadesc.setText(getDescription());
 		
 		lifeShield.setText(getLifeShield());
 		lifeCurrent.setText(getLifeCurrent());
@@ -172,12 +175,18 @@ public class CreatureSheet extends SapphireWidget {
 
 	@LmlAction("getCreatureId")
 	public int getCreatureId() {
-		return 0; // TODO creature.id();
+		return creature.id;
 	}
 	
 	@LmlAction("getCreatureName")
 	public String getCreatureName() {
-		return "Sungjin";
+		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
+		return i18n.get("creature.1.name"); //"Sungjin";
+	}
+	@LmlAction("getDescription")
+	public String getDescription() {
+		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
+		return i18n.get("creature.1.description");
 	}
 
 	@LmlAction("getLife")

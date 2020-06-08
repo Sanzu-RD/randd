@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader;
+import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.creatures.Sungjin;
 import com.souchy.randd.data.s1.main.Elements;
@@ -92,24 +93,30 @@ public class SapphireGame extends LapisGame {
 			// override model stats
 			model.baseStats.resources.put(Resource.life, new IntStat(30)); 
 			// instance
-			Creature inst = new Creature(fight, model, jade, new Position(5, 5));
+			Creature creature = new Creature(fight, model, jade, new Position(5, 5));
 			// test stats//.get(Resource.life).base = 30; //).addResource(30, Resource.life);
-			inst.getStats().resources.get(Resource.life).fight = -150; //.addFightResource(-130, Resource.life);
-			inst.getStats().shield.get(Resource.life).fight = 600; //.addShield(600, Resource.life);
+			creature.getStats().resources.get(Resource.life).fight = -150; //.addFightResource(-130, Resource.life);
+			creature.getStats().shield.get(Resource.life).fight = 600; //.addShield(600, Resource.life);
+
 			
-			var modelinstance = new ModelInstance(LapisAssets.assets.<Model>get("res/models/decor/cube.g3dj"));
-			Log.info("creature 3d model : " + modelinstance);
-			inst.add(modelinstance);
-			SapphireEntitySystem.family.add(inst);
+			var modelpath = AssetConfs.creatures.get(creature.model.id()).models[0]; //"res/models/creatures/Marian.g3dj"
+			var model3d = LapisAssets.assets.<Model>get(modelpath);
+			var modelinstance = new ModelInstance(model3d);
+			modelinstance.transform.rotate(1, 0, 0, 90);
+			var animController = new AnimationController(modelinstance);
+			animController.setAnimation("CharacterArmature|Walk", -1);
+			creature.add(animController);
+			creature.add(modelinstance);
+//			Log.info("creature 3d model : " + modelinstance);
+			SapphireEntitySystem.family.add(creature);
 			
 			// fight
 			fight = new Fight();
-			fight.add(inst, Team.A);
-			fight.timeline.add(inst);
+			fight.add(creature, Team.A);
+			fight.timeline.add(creature);
 			
 			// player hud
-			SapphireHudSkin.play(inst);
-			
+			SapphireHudSkin.play(creature);
 		} catch (Exception e) {
 			Log.error("SapphireOwl creature error : ", e);
 			Gdx.app.exit();

@@ -73,7 +73,7 @@ public class LapisAssets {
 	}
 	
 	public static void loadI18NBundles(FileHandle dir) {
-		recurseFiles(dir, 
+		recurseDirectories(dir, 
 				d -> d.list((f, n) -> n.startsWith("bundle") && n.endsWith(".properties")).length > 0,
 				d -> assets.load(d.path() + "/bundle", I18NBundle.class)
 		);
@@ -106,16 +106,19 @@ public class LapisAssets {
 	}
 	
 
-//	private static void recurseDirectories(FileHandle dir, Predicate<FileHandle> filter, Consumer<FileHandle> action) {
-//		for (var d : dir.list()) {
-//			if(d.isDirectory()) {
-//				recurseDirectories(d, filter, action);
-//				if(filter.test(d)) {
-//					action.accept(d);
-//				}
-//			}
-//		}
-//	}
+	private static void recurseDirectories(FileHandle dir, Predicate<FileHandle> filter, Consumer<FileHandle> action) {
+//		Log.info("dirtype: " + dir.type().name() + ", dir path : " + dir.path());
+		for (var d : dir.list()) {
+			if(d.isDirectory()) {
+				if(filter.test(d)) {
+//					Log.info("dtype: " + d.type().name() + ", d path : " + d.path());
+					action.accept(d);
+				} else {
+					recurseDirectories(d, filter, action);
+				}
+			}
+		}
+	}
 	
 	private static void recurseFiles(FileHandle dir, Predicate<FileHandle> filter, Consumer<FileHandle> action) {
 //		Log.info("dirtype: " + dir.type().name() + ", dir path : " + dir.path());

@@ -2,7 +2,7 @@
 	{
 		"id": 1,
 		"comment": "Mesmer",
-		"models": [""],
+		"models": ["res/models/creatures/Marian.g3dj"],
 		"icon": ""
 	},
 	{

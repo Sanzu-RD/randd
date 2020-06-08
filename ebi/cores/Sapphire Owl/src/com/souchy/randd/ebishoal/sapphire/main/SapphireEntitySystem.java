@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
@@ -37,9 +38,14 @@ public class SapphireEntitySystem extends data.new1.ecs.System {
 //			Log.info("set sapphire entity model pos : " + pos + "; " + model);
 			model.transform.setTranslation(
 					(float) pos.x - 0.5f, 
-					(float) pos.y - 1f, 
-					1f + 0.5f
+					(float) pos.y - 0.5f, 
+					1f
 					);
+			
+			var anime = e.get(AnimationController.class);
+			if(anime != null) {
+				anime.update(delta);
+			}
 		});
 	}
 	

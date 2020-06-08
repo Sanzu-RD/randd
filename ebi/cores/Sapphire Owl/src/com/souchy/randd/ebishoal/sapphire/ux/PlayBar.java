@@ -21,6 +21,9 @@ public class PlayBar extends SapphireWidget {
 	@LmlActor("pageUp")
 	public Button pageUp;
 
+	@LmlActor("pageDown")
+	public Button pageDown;
+
 	@LmlActor("pageUpImage")
 	public Image pageUpImage;
 
@@ -42,18 +45,20 @@ public class PlayBar extends SapphireWidget {
 	}
 
 	private void createListeners() {
-		pageUp.addListener(new ClickListener() {
+		var btnShaderListener = new ClickListener() {
 			@Override
 			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
 				Log.info("enter");
 				var light = 1.3f;
-				//view.pageUpImage.setColor(light, light, light, view.pageUpImage.getColor().a);
+				var actor = event.getTarget();
+				actor.setColor(light, light, light, actor.getColor().a);
 				super.enter(event, x, y, pointer, fromActor);
 			}
 			@Override
 			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
 				Log.info("exit");
-				pageUpImage.setColor(1, 1, 1, pageUpImage.getColor().a);
+				var actor = event.getTarget();
+				actor.setColor(1, 1, 1, actor.getColor().a);
 				super.exit(event, x, y, pointer, toActor);
 			}
 			@Override
@@ -61,18 +66,23 @@ public class PlayBar extends SapphireWidget {
 				Log.info("touch down");
 				//view.pageUpImage.setDrawable(parser.getData().getDefaultSkin().getDrawable("down"));
 				var shade = 0.7f;
-				pageUpImage.setColor(shade, shade, shade, pageUpImage.getColor().a);
+				var actor = event.getTarget();
+				actor.setColor(shade, shade, shade, actor.getColor().a);
 				return super.touchDown(event, x, y, pointer, button);
 			}
 			@Override
 			public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
 				Log.info("touch up");
-				var light = 1.0f;
-				pageUpImage.setColor(light, light, light, pageUpImage.getColor().a);
+				var light = 1.3f;
+				var actor = event.getTarget();
+				actor.setColor(light, light, light, actor.getColor().a);
 				//view.pageUpImage.setDrawable(parser.getData().getDefaultSkin().getDrawable("up"));
 				super.touchUp(event, x, y, pointer, button);
 			}
-		});
+		};
+		
+		pageUp.addListener(btnShaderListener);
+		pageDown.addListener(btnShaderListener);
 	}
 	
 	
