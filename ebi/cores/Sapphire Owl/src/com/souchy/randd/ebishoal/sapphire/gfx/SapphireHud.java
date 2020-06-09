@@ -137,10 +137,16 @@ public class SapphireHud extends LapisHud {
 		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/quickoptions.lml"));
 		SapphireHud.single.getStage().addActor(timeline = LmlWidgets.createGroup("res/ux/sapphire/components/timeline.lml"));
 		
-		if(SapphireGame.fight != null) SapphireHud.single.getStage().addActor(sheet = LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml"));
+		/*
+		if(SapphireGame.fight != null) {
+			sheet = LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml");
+			sheet.refresh(SapphireGame.fight.timeline.get(0));
+			SapphireHud.single.getStage().addActor(sheet);
+		}
 		var status = LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml");
 		for(int i = 0; i < 17; i++)
 			if(sheet != null) sheet.flowstatus.addActor(LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml"));
+		*/
 		
 //		var field = new VisTextField("");
 //		//field.setSize(300, 30);

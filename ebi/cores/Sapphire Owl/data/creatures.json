@@ -8,8 +8,8 @@
 	{
 		"id": 2,
 		"comment": "Sungjin",
-		"models": [""],
-		"icon": ""
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "1000"
 	},
 	{
 		"id": 3,

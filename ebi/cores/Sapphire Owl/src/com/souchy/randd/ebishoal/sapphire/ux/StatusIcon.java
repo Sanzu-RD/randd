@@ -39,7 +39,6 @@ public class StatusIcon extends SapphireWidget { //Stack {
 
 	@Override
 	protected void init() {
-		// TODO Auto-generated method stub
 		refresh(null);
 	}
 

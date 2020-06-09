@@ -1,5 +1,6 @@
 package com.souchy.randd.ebishoal.sapphire.controls;
 
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import static com.badlogic.gdx.Input.Keys.*;
 
@@ -29,10 +30,13 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
+import com.souchy.randd.ebishoal.sapphire.ux.CreatureSheet;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.LmlWidgets;
 
 import data.new1.ecs.Entity;
 import gamemechanics.components.Position;
 import gamemechanics.models.entities.Cell;
+import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.stats.properties.Resource;
 
 public class SapphireController extends CameraInputController {
@@ -176,21 +180,29 @@ public class SapphireController extends CameraInputController {
 			s.getView().getStage().cancelTouchFocus();
 		}
 
-		
+		// get pos & creature 
 		var cellpos = getCursorWorldPos(screenX, screenY);
-		Log.info("touchdown " + cellpos);
-		for(var e : SapphireEntitySystem.family) {
+		Creature creature = null;
+		for (var e : SapphireEntitySystem.family) {
 			var epos = e.get(Position.class);
 			if(epos == null) continue;
-			Log.info("entity pos " + epos);
 			if(cellpos.x == epos.x && cellpos.y == epos.y) {
-				draggedEntity = e;
+				creature = (Creature) e;
+//				Log.info("found creature [" + epos.x + "," + epos.y+"] " + creature.model.id());
 				break;
 			}
 		}
-		
 //		var cell = SapphireGame.fight.board.cells.get((int) cellpos.x, (int) cellpos.y);
 //		cell.creatures.get(0);
+		
+		if(button == Buttons.RIGHT && creature != null) {
+			// toggle character sheet
+			CreatureSheet.toggle(creature);
+		} else if(button == Buttons.LEFT) {
+			// start drag
+			Log.info("touchdown " + cellpos);
+			draggedEntity = creature;
+		}
 		
 		if(!activateBaseCamControl) return true;
 		return super.touchDown(screenX, screenY, pointer, button);

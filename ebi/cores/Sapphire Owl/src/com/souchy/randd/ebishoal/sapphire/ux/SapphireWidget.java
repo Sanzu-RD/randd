@@ -29,11 +29,11 @@ public abstract class SapphireWidget extends Table implements ActionContainer {
 	}
 	
 	public FileHandle getTemplateFile() {
-		return Gdx.files.internal("res/ux/sapphire/" + getTemplateId() + ".lml");
+		return Gdx.files.internal("res/ux/sapphire/components/" + getTemplateId() + ".lml");
 	}
 	
 	public FileHandle getStyleFile() {
-		return Gdx.files.internal("res/ux/sapphire/" + getTemplateId() + ".json");
+		return Gdx.files.internal("res/ux/sapphire/components/" + getTemplateId() + ".json");
 	}
 	
 
@@ -41,9 +41,12 @@ public abstract class SapphireWidget extends Table implements ActionContainer {
 	 * Create widgets
 	 */
 	public static class LmlWidgets {
-		@SuppressWarnings("unchecked")
 		public static <T extends SapphireWidget> T createGroup(String path) {
-			var group = (T) SapphireHud.parser.parseTemplate(Gdx.files.internal(path)).first();
+			return createGroup(Gdx.files.internal(path));
+		}
+		@SuppressWarnings("unchecked")
+		public static <T extends SapphireWidget> T createGroup(FileHandle file) {
+			var group = (T) SapphireHud.parser.parseTemplate(file).first();
 			LmlInjector.inject(group);
 			return group;
 		}

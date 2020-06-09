@@ -1,9 +1,13 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -74,54 +78,89 @@ public class SapphireGame extends LapisGame {
 		// server should initiate the Fight object with all the characters already
 		var jadeteam1 = new JadeCreature[4];
 		var jadeteam2 = new JadeCreature[4];
+		
+		// jade customization
+		JadeCreature jade1 = new JadeCreature();
+		jade1.affinities = new int[Elements.values().length];
+		jade1.affinities[Elements.air.ordinal()] = 30; // personalized 30% air affinity
+		jade1.creatureModelID = 1; 
+		jade1.spellIDs = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		jadeteam1[0] = jade1;
+		
+		// jade customization
+		JadeCreature jade2 = new JadeCreature();
+		jade2.affinities = new int[Elements.values().length];
+		jade2.affinities[Elements.air.ordinal()] = 30; // personalized 30% air affinity
+		jade2.creatureModelID = 2; 
+		jade2.spellIDs = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		jadeteam2[0] = jade2;
+
+		var startPositions = new Position[] { new Position(2, 16), new Position(16, 2) };
+		
 		// then sapphire should just show these creatures from the deserialized Fight object (dont need to instantiate anything here)
 		
 		try {
 			Log.info("data.creatures : " + DiamondModels.creatures);
-			// create instances for players' creatures
-			int id = 1;
-			// jade customization
-			JadeCreature jade = new JadeCreature();
-			jade.affinities = new int[Elements.values().length];
-			jade.affinities[Elements.air.ordinal()] = 30; // personalized 30% air affinity
-			jade.creatureModelID = id; 
-			jade.spellIDs = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-//			for (int i = 0; i < jade.spellIDs.length; i++)
-//				jade.spellIDs[i] += jade.creatureModelID; //model.id();
-			// base model
-			CreatureModel model = DiamondModels.creatures.get(jade.creatureModelID);
-			// override model stats
-			model.baseStats.resources.put(Resource.life, new IntStat(30)); 
-			// instance
-			Creature creature = new Creature(fight, model, jade, new Position(5, 5));
-			// test stats//.get(Resource.life).base = 30; //).addResource(30, Resource.life);
-			creature.getStats().resources.get(Resource.life).fight = -150; //.addFightResource(-130, Resource.life);
-			creature.getStats().shield.get(Resource.life).fight = 600; //.addShield(600, Resource.life);
-
-			
-			var modelpath = AssetConfs.creatures.get(creature.model.id()).models[0]; //"res/models/creatures/Marian.g3dj"
-			var model3d = LapisAssets.assets.<Model>get(modelpath);
-			var modelinstance = new ModelInstance(model3d);
-			modelinstance.transform.rotate(1, 0, 0, 90);
-			var animController = new AnimationController(modelinstance);
-			animController.setAnimation("CharacterArmature|Walk", -1);
-			creature.add(animController);
-			creature.add(modelinstance);
-//			Log.info("creature 3d model : " + modelinstance);
-			SapphireEntitySystem.family.add(creature);
 			
 			// fight
 			fight = new Fight();
-			fight.add(creature, Team.A);
-//			fight.timeline.add(creature); // fight.add already adds the creature to the timeline
+			// create teams A & B
+			for(var jade : jadeteam1)
+				if(jade != null) // wouldnt need this in the final product
+				fight.add(testCreateCreature(jade), Team.A);
+			for(var jade : jadeteam2)
+				if(jade != null)
+				fight.add(testCreateCreature(jade), Team.B);
+			for(int i = 0; i < startPositions.length; i++)
+				fight.timeline.get(i).pos = startPositions[i];
+			
+//			for(var c : fight.timeline) {
+//				Log.info("timeline creature " + c + " " + c.model.id() + " " + c.pos + " " + c.team);
+//			}
 			
 			// player hud
-			SapphireHudSkin.play(creature);
+			SapphireHudSkin.play(fight.teamA.get(0));
 		} catch (Exception e) {
 			Log.error("SapphireOwl creature error : ", e);
 			Gdx.app.exit();
 			System.exit(0);
 		}
+	}
+	
+	
+	private Creature testCreateCreature(JadeCreature jade) {
+		// base model
+		CreatureModel model = DiamondModels.creatures.get(jade.creatureModelID);
+		// override model stats
+		model.baseStats.resources.put(Resource.life, new IntStat(30)); 
+		// instance
+		Creature creature = new Creature(fight, model, jade, new Position(5, 5));
+		creature.getStats().resources.get(Resource.life).fight = -150; 
+		creature.getStats().shield.get(Resource.life).fight = 600; 
+		// 3d instance & controller
+		var modelpath = AssetConfs.creatures.get(creature.model.id()).models[0]; 
+		var model3d = LapisAssets.assets.<Model>get(modelpath);
+		var modelinstance = new ModelInstance(model3d);
+		modelinstance.transform.rotate(1, 0, 0, 90);
+		var animController = new AnimationController(modelinstance);
+		animController.setAnimation("CharacterArmature|Walk", -1);
+		creature.add(animController);
+		creature.add(modelinstance);
+		SapphireEntitySystem.family.add(creature);
+		
+		var rnd = new Random();
+		var baseColor = new Color(rnd.nextFloat(), rnd.nextFloat(), rnd.nextFloat(), 1f);
+				
+		// clothes
+		modelinstance.materials.get(1).set(ColorAttribute.createDiffuse(baseColor));
+		// hat
+		modelinstance.materials.get(4).set(ColorAttribute.createDiffuse(baseColor));
+		// hair
+		modelinstance.materials.get(5).set(ColorAttribute.createDiffuse(baseColor.add(10, 10, 10, 0)));
+		
+		//rnd.nextFloat() * 255f, rnd.nextFloat() * 255f, rnd.nextFloat() * 255f, 1f));
+		
+		return creature;
 	}
 
 	@Override

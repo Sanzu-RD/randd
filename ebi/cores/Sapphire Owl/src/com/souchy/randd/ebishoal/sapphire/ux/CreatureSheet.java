@@ -1,5 +1,7 @@
 package com.souchy.randd.ebishoal.sapphire.ux;
 
+import java.util.HashMap;
+
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -71,6 +73,23 @@ public class CreatureSheet extends SapphireWidget {
 	public Array<StatusIcon> icons;
 	
 	
+	private static final HashMap<Creature, CreatureSheet> openedSheets = new HashMap<>();
+	public static void toggle(Creature c) {
+		// si sheet déjà ouverte, delete de la map et du stage
+		if(openedSheets.containsKey(c)) {
+			openedSheets.get(c).remove();
+//			SapphireHud.single.getStage().getActors().removeValue(openedSheets.get(c), true);
+			openedSheets.remove(c);
+			return;
+		}
+		// sinon créé la sheet et ajoute à la map et au stage
+		CreatureSheet sheet = LmlWidgets.createGroup(new CreatureSheet().getTemplateFile());
+		sheet.refresh(c);
+		openedSheets.put(c, sheet);
+		SapphireHud.single.getStage().addActor(sheet);
+	}
+	
+	
 	@Override
 	protected void init() {
 		creature = SapphireGame.fight.teamA.get(0);
@@ -122,6 +141,10 @@ public class CreatureSheet extends SapphireWidget {
 		refresh();
 	}
 	
+	public void refresh(Creature creature) {
+		this.creature = creature;
+		refresh();
+	}
 	public void refresh() {
 		name.setText(getCreatureName());
 		areadesc.setText(getDescription());
@@ -181,12 +204,14 @@ public class CreatureSheet extends SapphireWidget {
 	@LmlAction("getCreatureName")
 	public String getCreatureName() {
 		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
-		return i18n.get("creature.1.name"); //"Sungjin";
+		var name = i18n.get("creature." + creature.model.id() + ".name");;
+		Log.info("getCreatureName " + creature.model.id() + " = " + name);
+		return name; 
 	}
 	@LmlAction("getDescription")
 	public String getDescription() {
 		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
-		return i18n.get("creature.1.description");
+		return i18n.get("creature."+creature.model.id()+".description");
 	}
 
 	@LmlAction("getLife")
