@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Source;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.Target;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.github.czyzby.lml.annotation.LmlActor;
 import com.github.czyzby.lml.parser.LmlParser;
 import com.github.czyzby.lml.vis.util.VisLml;
 import com.kotcrab.vis.ui.VisUI;
@@ -42,8 +43,8 @@ public class SapphireHud extends LapisHud {
 	public static PlayBar playbar;
 //	@LmlActor("statusbar")
 //	public StatusBar statusBar;
-//	@LmlActor("timeline")
-//	public Timeline timeline;
+	@LmlActor("timeline")
+	public static Timeline timeline;
 //	@LmlActor("timer")
 //	public Timer timer;
 	
@@ -103,6 +104,7 @@ public class SapphireHud extends LapisHud {
 //				.attribute(new MovableLmlAttribute(), "movable")
 //				.attribute(new ResizeableLmlAttribute(), "resizeable", "resizable")
 //				.attribute(new ResizeBorderLmlAttribute(), "resizeBorder", "border")
+				.actions("timeline", Timeline.class)
 //				.actions("creaturesheet", CreatureSheet.class)
 //				.actions("quickoptions", QuickOptions.class)
 				//.macro(new SapphireWidgetTagProvider<>(Chat.class), ":chat")
@@ -133,6 +135,7 @@ public class SapphireHud extends LapisHud {
 		SapphireHud.single.getStage().addActor(chat = LmlWidgets.createGroup("res/ux/sapphire/components/chat.lml"));
 		SapphireHud.single.getStage().addActor(playbar = LmlWidgets.createGroup("res/ux/sapphire/components/playbar.lml"));
 		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/quickoptions.lml"));
+		SapphireHud.single.getStage().addActor(timeline = LmlWidgets.createGroup("res/ux/sapphire/components/timeline.lml"));
 		
 		if(SapphireGame.fight != null) SapphireHud.single.getStage().addActor(sheet = LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml"));
 		var status = LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml");

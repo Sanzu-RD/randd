@@ -5,7 +5,7 @@
     <!-- Spells and stats for current playable character  -->
     <!-- Portrait -->
     <stack width="64" height="64">
-        <image id="playingCreatureAvatar" tooltip="Grim" style="playingCreatureAvatar"/>
+        <roundImage id="playingCreatureAvatar" tooltip="Grim" style="playingCreatureAvatar"/>
     </stack>
 
     <!-- Resources -->
@@ -25,9 +25,9 @@
     <table id="content" defaultpad="1">
         <:loop times="8">
             <stack width="55" height="55">
-                <image id="spellBg" style="textures.borders.spell_bg"/>
-                <image id="playingCreatureSpell0" tooltip="Desecrate" style="playingCreatureSpell{loop:index}"/>
-                <image id="spellBorder" style="textures.borders.spell_frame"/>
+                <roundImage id="spellBg" style="textures.borders.spell_bg_round"/>
+                <roundImage id="playingCreatureSpell{loop:index}" tooltip="Desecrate" style="playingCreatureSpell{loop:index}"/>
+                <image id="spellBorder" style="textures.borders.ring_frame"/>
             </stack>
         </:loop>
     </table>

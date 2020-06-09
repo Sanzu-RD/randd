@@ -34,6 +34,7 @@ public class SapphireScreen extends LapisScreen {
 	private float period = 30; // period time in seconds
 	private double radius = 2; // circle radius
 	
+	public SapphireHud hud;
 	private SapphireController controller;
 	
 	public SapphireScreen() {
@@ -68,9 +69,9 @@ public class SapphireScreen extends LapisScreen {
 	
 	@Override
 	public LapisHud createUI() {
-		var view = new SapphireHud();
+		hud = new SapphireHud();
 		//Log.info("life : " + view.life.getColor() + ", " + view.life.getStyle().fontColor);
-		return view;
+		return hud;
 	}
 	
 	public InputProcessor createInputProcessor() {

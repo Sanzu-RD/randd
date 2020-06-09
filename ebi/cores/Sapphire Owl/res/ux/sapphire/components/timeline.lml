@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE :macro SYSTEM "lml.dtd">
+<!DOCTYPE timeline SYSTEM "lml.dtd">
 
 
-<:macro alias="timeline">
-    <timeline id="timeline">
+<timeline id="timeline" align="bottomright" x="20" y="100">
 
-        <table id="table" padright="10" padbottom="25" align="bottomright" debug="false" defaultpad="3" defaultpadleft="10">
-            
-            <:loop times="$getCreatureCount">
-                <container/>
-                <stack width="42" height="42">
-                    <roundImage id="portrait-{loop:index}" tooltip="$getCreatureName({loop:index})" style="$getCreatureIcon({loop:index})"/>
-                    <image id="portraitBorder-{loop:index}" style="textures.borders.ring_frame"/>
-                </stack>
-                <:row/>
-            </:loop>
+    <table id="table" debug="false" defaultpad="3" defaultpadleft="10">
 
-        </table>
+        <:loop times="$getCreatureCount">
+            <!--<container/>-->
+            <stack width="42" height="42">
+                <roundImage id="{loop:index}" />
+                <!--tooltip="$getCreatureName" style="$getCreatureIcon"/>-->
+                <image id="portraitBorder-{loop:index}" style="textures.borders.ring_frame"/>
+            </stack>
 
-    </timeline>
-</:macro>
+            <!-- active ou désative row selon qu'on veuille la timeline verticale ou horizontale-->
+            <:row/>
+        </:loop>
+
+    </table>
+
+</timeline>

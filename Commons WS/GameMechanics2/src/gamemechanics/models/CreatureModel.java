@@ -44,9 +44,9 @@ public abstract class CreatureModel extends data.new1.ecs.Entity {
 	// i18n : name, description : in res/creatures/creatureID/i18n/bundle_*.properties
 	// 
 	
-	public String getIconName() {
-		return Integer.toString(id());
-		//return "avatar"; //"res/creatures/" + getStrID() + "/gfx/avatar.png";
-	}
+//	public String getIconName() {
+//		return Integer.toString(id());
+//		//return "avatar"; //"res/creatures/" + getStrID() + "/gfx/avatar.png";
+//	}
 	
 }

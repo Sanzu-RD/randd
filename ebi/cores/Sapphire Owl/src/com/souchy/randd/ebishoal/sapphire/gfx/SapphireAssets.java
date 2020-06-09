@@ -19,6 +19,10 @@ public class SapphireAssets {
 		//return Environment.fromRoot("/res/textures/spells/" + iconName + ".png").toString().replace("\\",  "/");
 	}
 	
+	public static String getSkinPath(String texturepath) {
+		return texturepath.substring(texturepath.indexOf("textures"), texturepath.lastIndexOf(".")).replace("/", ".");
+	}
+	
 /*
 	public static String getI18nPath(I18nCategory cat) {
 		return "res/i18n/" + cat.name() + "/bundle";

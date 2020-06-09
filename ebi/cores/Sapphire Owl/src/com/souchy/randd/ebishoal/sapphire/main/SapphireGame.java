@@ -113,7 +113,7 @@ public class SapphireGame extends LapisGame {
 			// fight
 			fight = new Fight();
 			fight.add(creature, Team.A);
-			fight.timeline.add(creature);
+//			fight.timeline.add(creature); // fight.add already adds the creature to the timeline
 			
 			// player hud
 			SapphireHudSkin.play(creature);

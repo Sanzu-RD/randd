@@ -14,11 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.confs.AssetConfs;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireDevConfig;
+import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 
 import gamemechanics.models.entities.Creature;
 import gamemechanics.statics.Element;
@@ -47,6 +50,7 @@ public class SapphireHudSkin extends Skin {
 			if(a.contains("res/textures")) {
 				var str = a.substring(a.indexOf("textures"), a.lastIndexOf(".")).replace("/", "."); // enlève le res/, enlève l'extension, et remplace / par .
 				add(str, LapisAssets.assets.get(a));
+				add(str + "_round", new TextureRegionDrawable(new RoundTextureRegion(LapisAssets.assets.get(a))));
 			}
 //			if(a.startsWith("i18n"))
 //				lml.addI18nBundle(a.substring(0, a.lastIndexOf("/")).replace("/", "."), SapphireResources.assets.get(a));
@@ -84,8 +88,11 @@ public class SapphireHudSkin extends Skin {
 //		lml.addI18nBundle(prefix + "I18N", SapphireResources.assets.get(i18nPath));
 		
 		// set creature avatar
-		var avatarPath = SapphireAssets.getCreatureIconPath(model.getIconName());
-		lml.getDefaultSkin().add(prefix + "Avatar", new TextureRegionDrawable(new RoundTextureRegion(LapisAssets.get(avatarPath))));
+		var iconpath = AssetConfs.creatures.get(model.id()).icon;
+		var avatarPath = SapphireAssets.getCreatureIconPath(iconpath);
+		avatarPath = SapphireAssets.getSkinPath(avatarPath) + "_round";
+		var avatar = VisUI.getSkin().getDrawable(avatarPath);
+		lml.getDefaultSkin().add(prefix + "Avatar", avatar); //new TextureRegionDrawable(new RoundTextureRegion(LapisAssets.get(avatarPath))));
 		
 		//Log.info("c.spellbook : " + c.spellbook);
 		// set spell icons
@@ -105,7 +112,12 @@ public class SapphireHudSkin extends Skin {
 				var spellResource = AssetConfs.spells.get(s.id()); //Integer.toString(s.id());
 				if(spellResource != null) {
 					iconPath = SapphireAssets.getSpellIconPath(spellResource.icon); //model.getStrID(), 
-					lml.getDefaultSkin().add(prefix + "Spell" + i, LapisAssets.assets.get(iconPath));
+					iconPath = SapphireAssets.getSkinPath(iconPath) + "_round";
+					var img = VisUI.getSkin().getDrawable(iconPath);
+//					Texture texture = LapisAssets.assets.get(iconPath + "_round");
+//					var icon = new TextureRegionDrawable(new RoundTextureRegion(texture));
+//					SapphireGame.gfx.hud.skin.get("iconPath", RoundImage.class);
+					lml.getDefaultSkin().add(prefix + "Spell" + i, img);
 				}
 				//var str = iconPath.substring("res/".length(), iconPath.lastIndexOf(".")).replace("/", ".");
 				//Log.info("SapphireHudSkin spell asset path (creature) : " + iconPath + ". For creature : " + model.getStrID() + ". For Spell : " + s.getIconName());
