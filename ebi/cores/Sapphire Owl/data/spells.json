@@ -54,6 +54,22 @@
 		"casterAnim": "1",
 		"casterFx": "myeffect.pfx",
 		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 8,
+		"comment": "Bubble",
+		"icon":  "bubble",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 9,
+		"comment": "ShiningArmour",
+		"icon":  "iceshield",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
 	}
 
 ]

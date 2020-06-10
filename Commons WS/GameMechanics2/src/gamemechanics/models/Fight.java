@@ -7,25 +7,32 @@ import java.util.Map;
 import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 
+import data.new1.ecs.Engine;
+import data.new1.ecs.Entity;
 import gamemechanics.common.Action;
 import gamemechanics.common.ActionPipeline;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.EventPipeline;
-import gamemechanics.models.entities.Creature;
-import gamemechanics.models.entities.Entity;
-import gamemechanics.models.entities.Entity.Team;
+import gamemechanics.models.Creature.Team;
+import gamemechanics.systems.CellSystem;
+import gamemechanics.systems.CreatureSystem;
+import gamemechanics.systems.SpellSystem;
+import gamemechanics.systems.StatusSystem;
 
 
-public class Fight extends data.new1.ecs.Entity implements Identifiable<Integer> {
+public class Fight extends Engine implements Identifiable<Integer> {
 	
 	//public EventPipeline bus;
 	
+	/**
+	 * need a fight id for fight instances on blackmoonstone servers and for clients to join the right fight
+	 */
 	public int id;
 	
 	/**
 	 * All entities (cells and creatures)
 	 */
-	public Map<Integer, Entity> entities;
+//	public Map<Integer, Entity> entities;
 	
 	/**
 	 * Board
@@ -39,7 +46,7 @@ public class Fight extends data.new1.ecs.Entity implements Identifiable<Integer>
 	
 	public List<Creature> teamA;
 	public List<Creature> teamB;
-	public List<Creature> teamC;
+//	public List<Creature> teamC;
 	
 	/**
 	 * action pipeline : actions currently on the stack
@@ -51,17 +58,32 @@ public class Fight extends data.new1.ecs.Entity implements Identifiable<Integer>
 	 */
 	public List<Action> history; 
 	
+	/**
+	 * Status event handlers
+	 */
+	public EventPipeline handlers;
+	
+	public CreatureSystem creatures;
+	public CellSystem cells;
+	public SpellSystem spells;
+	public StatusSystem status;
 	
 	public Fight() {
 		super();
-		//bus = new EventPipeline();
+		
+		this.creatures = new CreatureSystem(this);
+		this.cells = new CellSystem(this);
+		this.spells = new SpellSystem(this);
+		this.status = new StatusSystem(this);
 		
 		board = new Board(this);
 		
 		timeline = new ArrayList<>();
 		teamA = new ArrayList<>();
 		teamB = new ArrayList<>();
-		teamC = new ArrayList<>();
+//		teamC = new ArrayList<>();
+		
+		handlers = new EventPipeline();
 		
 		pipe = new ActionPipeline();
 		history = new ArrayList<>();
@@ -73,14 +95,14 @@ public class Fight extends data.new1.ecs.Entity implements Identifiable<Integer>
 		switch(team) {
 			case A -> teamA.add(c);
 			case B -> teamB.add(c);
-			case C -> teamC.add(c);
+//			case C -> teamC.add(c);
 		}
 	}
 	
-	public void postAll(Event event) {
-		List<Entity> entities = null;
-		entities.forEach(e -> e.handlers.post(e, event));
-	}
+//	public void postAll(Event event) {
+//		List<Entity> entities = null;
+//		entities.forEach(e -> e.handlers.post(e, event));
+//	}
 
 
 	@Override

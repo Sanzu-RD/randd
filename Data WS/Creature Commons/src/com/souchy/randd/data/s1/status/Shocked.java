@@ -4,13 +4,11 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 
 import data.new1.timed.Status;
 import gamemechanics.models.Fight;
-import gamemechanics.models.entities.Entity;
-import gamemechanics.models.entities.Entity.EntityRef;
 import io.netty.buffer.ByteBuf;
 
 public class Shocked extends Status {
 
-	public Shocked(Fight f, EntityRef source, EntityRef target) {
+	public Shocked(Fight f, int source, int target) {
 		super(f, source, target);
 	}
 
@@ -58,8 +56,8 @@ public class Shocked extends Status {
 //	}
 
 	@Override
-	public Shocked create(EntityRef source, EntityRef target) {
-		return new Shocked(source.fight, source, target); 
+	public Shocked create(Fight fight, int source, int target) {
+		return new Shocked(fight, source, target); 
 	}
 	
 }

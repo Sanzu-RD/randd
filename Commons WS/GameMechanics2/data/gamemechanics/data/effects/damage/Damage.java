@@ -4,14 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import data.new1.Effect;
+import data.new1.ecs.Entity;
 import data.new1.spellstats.base.IntStat;
 import data.new1.spellstats.imp.TargetConditionStat;
 import gamemechanics.common.Aoe;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.damage.OnDmgEvent;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Creature;
-import gamemechanics.models.entities.Entity;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
+import gamemechanics.models.Fight;
 import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.properties.Resource;
 
@@ -50,8 +51,8 @@ public class Damage extends Effect {
 	 * @param targetConditions - what kind of targets should be affected
 	 * @param formula - base ratios for elemental dmg
 	 */
-	public Damage(Aoe areaOfEffect, TargetConditionStat targetConditions, Map<Element, IntStat> formula) {
-		super(areaOfEffect, targetConditions);
+	public Damage(Fight fight, Aoe areaOfEffect, TargetConditionStat targetConditions, Map<Element, IntStat> formula) {
+		super(fight, areaOfEffect, targetConditions);
 		this.formula = formula;
 	}
 	
@@ -76,11 +77,11 @@ public class Damage extends Effect {
 	/**
 	 * Calcule les dégâts pré-mitigation du caster 
 	 */
-	public void prepareCaster(Entity caster, Cell aoeOrigin) {
+	public void prepareCaster(Creature caster, Cell aoeOrigin) {
 		var crea = (Creature) caster;
 		
-		var casterAffinity = crea.getStats().affinity;
-		var globalAffinity = crea.getStats().affinity.get(Element.global);
+		var casterAffinity = crea.stats.affinity;
+		var globalAffinity = crea.stats.affinity.get(Element.global);
 		
 		// ajoute les stats du caster aux lignes de dégâts, puis calcule la value pour l'ajouter au totaldmg
 		for(var ele : formula.keySet()) {
@@ -100,15 +101,15 @@ public class Damage extends Effect {
 	/**
 	 * Calcule les dégâts post-mitigation du target
 	 */
-	public void prepareTarget(Entity caster, Cell cell) {
+	public void prepareTarget(Creature caster, Cell cell) {
 		var crea = (Creature) caster;
 		var target = cell.hasCreature() ? cell.getCreatures().get(0) : null;
 		if(target == null) return;
 		
-		var casterPen = crea.getStats().penetration;
-		var targetRes = target.getStats().resistance;
-		var globalPen = crea.getStats().penetration.get(Element.global);
-		var globalResistance = crea.getStats().resistance.get(Element.global);
+		var casterPen = crea.stats.penetration;
+		var targetRes = target.stats.resistance;
+		var globalPen = crea.stats.penetration.get(Element.global);
+		var globalResistance = crea.stats.resistance.get(Element.global);
 		
 		// dmg = (baseflat + casterflat) * (1 + baseinc * casterinc) * (1 + basemore * castermore)
 		
@@ -133,7 +134,7 @@ public class Damage extends Effect {
 	 * Mitigate then apply damage to a target
 	 */
 	@Override
-	public void apply0(Entity caster, Cell cell) {
+	public void apply0(Creature caster, Cell cell) {
 		var target = cell.hasCreature() ? cell.getCreatures().get(0) : null;
 		if(target == null) return;
 		
@@ -145,8 +146,8 @@ public class Damage extends Effect {
 		}
 		
 		// Applique les dégâts
-		var life =  target.getStats().resources.get(Resource.life);
-		var shield =  target.getStats().shield.get(Resource.life);
+		var life =  target.stats.resources.get(Resource.life);
+		var shield =  target.stats.shield.get(Resource.life);
 		
 		if(shield.fight >= totalDmg) {
 			shield.fight -= totalDmg;
@@ -163,13 +164,13 @@ public class Damage extends Effect {
 	}
 
 	@Override
-	public OnDmgEvent createAssociatedEvent(Entity caster, Cell target) {
+	public OnDmgEvent createAssociatedEvent(Creature caster, Cell target) {
 		return new OnDmgEvent(caster, target, this); 
 	}
 
 	@Override
 	public Damage copy() {
-		var effect = new Damage(aoe, targetConditions, formula);
+		var effect = new Damage(get(Fight.class), aoe, targetConditions, formula);
 		this.sourceDmg.forEach((ele, stat) -> effect.sourceDmg.put(ele, stat.copy()));
 		this.targetDmg.forEach((ele, stat) -> effect.targetDmg.put(ele, stat.copy()));
 		return effect;

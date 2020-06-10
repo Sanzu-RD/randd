@@ -4,8 +4,8 @@ import gamemechanics.common.BoardGenerator;
 import gamemechanics.ext.CellType;
 import gamemechanics.ext.MapData;
 import gamemechanics.models.Board;
+import gamemechanics.models.Cell;
 import gamemechanics.models.Fight;
-import gamemechanics.models.entities.Cell;
 import gamemechanics.statics.properties.Targetability;
 
 public class EbiBoardGenerator extends BoardGenerator {

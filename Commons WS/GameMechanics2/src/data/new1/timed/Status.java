@@ -5,14 +5,14 @@ import java.util.List;
 
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 
 import data.new1.Effect;
+import data.new1.ecs.Entity;
 import gamemechanics.common.generic.Disposable;
 import gamemechanics.models.Fight;
-import gamemechanics.models.FightObject;
-import gamemechanics.models.entities.Entity;
-import gamemechanics.models.entities.Entity.EntityRef;
+import io.netty.buffer.ByteBuf;
 
 /**
  * 
@@ -36,21 +36,26 @@ import gamemechanics.models.entities.Entity.EntityRef;
  * @author Souchy
  *
  */
-public abstract class Status extends FightObject /* extends TimedEffect */ implements Disposable, BBSerializer, BBDeserializer  {
+public abstract class Status extends Entity implements BBSerializer, BBDeserializer {
 
-	public static abstract class Passive extends Status {
-		public Passive(Entity source) {
-			super(source.fight, source.ref(), source.ref());
-			this.canDebuff = false;
-			this.canRemove = false;
-		}
-		@Override 
-		public boolean fuse(Status s) {
-			// no fusion
-			return false;
-		}
-	}
+//	public static abstract class Passive extends Status {
+//		public Passive(Entity source) {
+//			super(source.fight, source.ref(), source.ref());
+//			this.canDebuff = false;
+//			this.canRemove = false;
+//		}
+//		@Override 
+//		public boolean fuse(Status s) {
+//			// no fusion
+//			return false;
+//		}
+//	}
 
+	
+	/**
+	 * status instance id
+	 */
+	public int id;
 	/**
 	 * status model id
 	 */
@@ -58,26 +63,28 @@ public abstract class Status extends FightObject /* extends TimedEffect */ imple
 	/**
 	 * Create an instance of the status model implementation (ex Shocked, Burning) for deserialisation
 	 */
-	public abstract Status create(EntityRef source, EntityRef target);
+	public abstract Status create(Fight fight, int source, int target);
 	
 	
-	public EntityRef source;
-	public EntityRef target;
-	public Effect parent;
+	public int sourceEntityId;
+	public int targetEntityId;
+	public int parentEffectId; //Effect parent;
 	
 	public int stacks;
 	public int duration;
 	public boolean canRemove;
 	public boolean canDebuff;
 	
+	
 	/** this or a toString() / description() ? */
-	public List<Effect> tooltipEffects = new ArrayList<>();
+//	public List<Effect> tooltipEffects = new ArrayList<>();
+	public List<Integer> effects = new ArrayList<>();
 
 	
-	public Status(Fight f, EntityRef source, EntityRef target) {
+	public Status(Fight f, int sourceEntityId, int targetEntityId) { // EntityRef source, EntityRef target
 		super(f);
-		this.source = source;
-		this.target = target;
+		this.sourceEntityId = sourceEntityId;
+		this.targetEntityId = targetEntityId;
 		//source.fight.bus.register(this);
 	}
 	
@@ -103,15 +110,31 @@ public abstract class Status extends FightObject /* extends TimedEffect */ imple
 	 */
 	public abstract void onLose();
 	
-	
-	public String getIconName() {
-		return Integer.toString(this.modelID());
+	/** create an instance of this status */
+	public abstract Status copy(Fight fight);
+
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void dispose() {
-		source = null;
-		target = null;
-		parent = null;
+	public BBMessage deserialize(ByteBuf in) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
+//	public String getIconName() {
+//		return Integer.toString(this.modelID());
+//	}
+
+//	@Override
+//	public void dispose() {
+//		super.dispose();
+//		source = null;
+//		target = null;
+//		parentEffectId = null;
+//	}
+	
 }

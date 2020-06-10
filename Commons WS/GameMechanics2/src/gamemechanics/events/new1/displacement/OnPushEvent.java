@@ -5,8 +5,8 @@ import com.google.common.eventbus.Subscribe;
 import gamemechanics.data.effects.displacement.Push;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.Handler;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Entity;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
 
 public class OnPushEvent extends Event {
 	
@@ -20,7 +20,7 @@ public class OnPushEvent extends Event {
 	}
 	
 	
-	public OnPushEvent(Entity caster, Cell target, Push effect) {
+	public OnPushEvent(Creature caster, Cell target, Push effect) {
 		super(caster, target, effect);
 	}
 

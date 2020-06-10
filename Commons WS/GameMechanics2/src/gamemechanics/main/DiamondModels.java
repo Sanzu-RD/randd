@@ -1,6 +1,5 @@
 package gamemechanics.main;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,8 +9,8 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import data.new1.timed.Status;
 import gamemechanics.models.CreatureModel;
 import gamemechanics.models.Fight;
-import gamemechanics.models.SpellModel;
-import gamemechanics.models.entities.Entity.EntityRef;
+import gamemechanics.models.Spell;
+import gamemechanics.systems.StatusSystem;
 
 /**
  * Class models for creatures, spells, and perhaps statuses
@@ -23,7 +22,7 @@ public class DiamondModels {
 	
 
 	public static final Map<Integer, CreatureModel> creatures = new HashMap<>();
-	public static final Map<Integer, SpellModel> spells = new HashMap<>();
+	public static final Map<Integer, Spell> spells = new HashMap<>();
 	public static final Map<Integer, Status> statuses = new HashMap<>();
 
 	/**
@@ -41,13 +40,13 @@ public class DiamondModels {
 			}
 		});
 
-		var spelllist = new DefaultClassDiscoverer<SpellModel>(SpellModel.class).explore(packag);
+		var spelllist = new DefaultClassDiscoverer<Spell>(Spell.class).explore(packag);
 		Log.info("Diamond spell models " + spelllist);
 		spelllist.forEach(c -> {
 			try {
-				var model = c.getDeclaredConstructor().newInstance();
-				spells.put(model.id(), model);
-				//Log.info("Diamond spell model [" + model.id() + "] = " + model);
+				var model = c.getDeclaredConstructor(Fight.class).newInstance(new Object[] {null});
+				spells.put(model.modelid(), model);
+//				Log.info("Diamond spell model [" + model.modelid() + "] = " + model);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -57,13 +56,14 @@ public class DiamondModels {
 		Log.info("Diamond status models " + statuslist);
 		statuslist.forEach(c -> {
 			try {
-				var model = c.getDeclaredConstructor(Fight.class, EntityRef.class, EntityRef.class).newInstance(null, null, null);
+				var model = c.getDeclaredConstructor(Fight.class, Integer.TYPE, Integer.TYPE).newInstance(null, 0, 0);
 				statuses.put(model.modelID(), model);
 				//Log.info("Diamond status model [" + model.id() + "] = " + model);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
+//		StatusSystem.family.clear(); // enlève les models de status du système d'instances
 	}
 	
 }

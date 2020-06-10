@@ -1,27 +1,32 @@
 package com.souchy.randd.data.s1.spells.light;
 
 import com.google.common.collect.ImmutableList;
+import com.souchy.randd.data.s1.spells.water.Bubble;
 
 import data.new1.Effect;
 import data.new1.spellstats.SpellStats;
-import gamemechanics.models.SpellModel;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Creature;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
+import gamemechanics.models.Fight;
+import gamemechanics.models.Spell;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
 
-public class ShiningArmour extends SpellModel {
+public class ShiningArmour extends Spell {
+
+	public ShiningArmour(Fight f) {
+		super(f);
+	}
 
 	@Override
-	public int id() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int modelid() {
+		return 9;
 	}
 
 	@Override
 	protected SpellStats initBaseStats() {
-		// TODO Auto-generated method stub
-		return null;
+		var stats = new SpellStats();
+		return stats;
 	}
 
 	@Override
@@ -54,5 +59,11 @@ public class ShiningArmour extends SpellModel {
 		return false;
 	}
 
+	@Override
+	public Spell copy(Fight fight) {
+		var s = new ShiningArmour(fight);
+		s.stats = stats.copy();
+		return s;
+	}
 	
 }

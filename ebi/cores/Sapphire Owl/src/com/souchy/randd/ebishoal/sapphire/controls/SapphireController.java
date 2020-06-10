@@ -35,8 +35,8 @@ import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.LmlWidgets;
 
 import data.new1.ecs.Entity;
 import gamemechanics.components.Position;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Creature;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
 import gamemechanics.statics.stats.properties.Resource;
 
 public class SapphireController extends CameraInputController {
@@ -140,8 +140,8 @@ public class SapphireController extends CameraInputController {
 			SapphireHud.testCreatureSheet();
 		}
 		if(keycode == Keys.V) {
-			SapphireGame.fight.teamA.get(0).getStats().resources.get(Resource.life).fight += 10;
-			Log.info(SapphireGame.fight.teamA.get(0).getStats().resources.get(Resource.life).toString());
+			SapphireGame.fight.teamA.get(0).stats.resources.get(Resource.life).fight += 10;
+			Log.info(SapphireGame.fight.teamA.get(0).stats.resources.get(Resource.life).toString());
 			SapphireHud.refresh();
 		}
 		

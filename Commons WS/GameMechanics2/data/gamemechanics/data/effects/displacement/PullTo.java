@@ -4,37 +4,38 @@ import data.new1.Effect;
 import data.new1.spellstats.imp.TargetConditionStat;
 import gamemechanics.common.Aoe;
 import gamemechanics.events.new1.Event;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Entity;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
+import gamemechanics.models.Fight;
 
 /** Pull the first creature in line to the target cell (stopped by no-passthrough cells) */
 public class PullTo extends Effect {
 
-	public PullTo(Aoe aoe, TargetConditionStat targetConditions) {
-		super(aoe, targetConditions);
+	public PullTo(Fight f, Aoe aoe, TargetConditionStat targetConditions) {
+		super(f, aoe, targetConditions);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Event createAssociatedEvent(Entity source, Cell target) {
+	public Event createAssociatedEvent(Creature source, Cell target) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void prepareCaster(Entity caster, Cell aoeOrigin) {
+	public void prepareCaster(Creature caster, Cell aoeOrigin) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void prepareTarget(Entity caster, Cell target) {
+	public void prepareTarget(Creature caster, Cell target) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void apply0(Entity caster, Cell target) {
+	public void apply0(Creature caster, Cell target) {
 		// TODO Auto-generated method stub
 		
 	}

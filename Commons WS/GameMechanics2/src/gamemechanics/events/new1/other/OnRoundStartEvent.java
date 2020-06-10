@@ -5,8 +5,8 @@ import com.google.common.eventbus.Subscribe;
 import data.new1.Effect;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.Handler;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Entity;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
 
 public class OnRoundStartEvent extends Event {
 
@@ -18,7 +18,7 @@ public class OnRoundStartEvent extends Event {
 		public void onRoundStart(OnRoundStartEvent event);
 	}
 	
-	public OnRoundStartEvent(Entity source, Cell target, Effect effect) {
+	public OnRoundStartEvent(Creature source, Cell target, Effect effect) {
 		super(source, target, effect);
 	}
 	

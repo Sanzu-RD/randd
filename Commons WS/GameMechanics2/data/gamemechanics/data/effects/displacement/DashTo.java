@@ -4,43 +4,44 @@ import data.new1.Effect;
 import data.new1.spellstats.imp.TargetConditionStat;
 import gamemechanics.common.Aoe;
 import gamemechanics.events.new1.Event;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Entity;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
+import gamemechanics.models.Fight;
 
 /** Dash to the target cell (stopped by no-passthrough cells) */
 public class DashTo extends Effect {
 
-	public DashTo(Aoe aoe, TargetConditionStat targetConditions) {
-		super(aoe, targetConditions);
+	public DashTo(Fight f, Aoe aoe, TargetConditionStat targetConditions) {
+		super(f, aoe, targetConditions);
 	}
 
 	@Override
-	public Event createAssociatedEvent(Entity source, Cell target) {
+	public Event createAssociatedEvent(Creature source, Cell target) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void prepareCaster(Entity caster, Cell aoeOrigin) {
+	public void prepareCaster(Creature caster, Cell aoeOrigin) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void prepareTarget(Entity caster, Cell target) {
+	public void prepareTarget(Creature caster, Cell target) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void apply0(Entity caster, Cell target) {
+	public void apply0(Creature caster, Cell target) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public Effect copy() {
-		return new DashTo(this.aoe, this.targetConditions);
+		return new DashTo(get(Fight.class), this.aoe, this.targetConditions);
 	}
 	
 	/*

@@ -6,8 +6,9 @@ import gamemechanics.common.Aoe;
 import gamemechanics.common.generic.Vector2;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.displacement.OnPushEvent;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Entity;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
+import gamemechanics.models.Fight;
 
 /** 
  * Pushes a target creature by a set distance (stopped by no-passthrough cells) 
@@ -32,8 +33,8 @@ public class Push extends Effect {
 	/**
 	 * Ctor
 	 */
-	public Push(Aoe aoe, TargetConditionStat targetConditions, int distance) {
-		super(aoe, targetConditions);
+	public Push(Fight f, Aoe aoe, TargetConditionStat targetConditions, int distance) {
+		super(f, aoe, targetConditions);
 		this.distance = distance;
 	}
 
@@ -41,7 +42,7 @@ public class Push extends Effect {
 	 * rien de possible à préparer ici
 	 */
 	@Override
-	public void prepareCaster(Entity caster, Cell aoeOrigin) {
+	public void prepareCaster(Creature caster, Cell aoeOrigin) {
 	}
 
 	/** 
@@ -49,7 +50,7 @@ public class Push extends Effect {
 	 * Calculate the destination cell 
 	 */
 	@Override
-	public void prepareTarget(Entity caster, Cell target) { 
+	public void prepareTarget(Creature caster, Cell target) { 
 		if(!target.hasCreature()) return;
 		vector = target.pos.copy().sub(caster.pos);
 		var absx = Math.abs(vector.x);
@@ -69,11 +70,11 @@ public class Push extends Effect {
 		// start from the min distance, then go outwards as much as possible
 		for (int i = 0; i > distance; i++) {
 			var targetPos = vector.copy().mult(distance);
-			var cell = target.fight.board.cells.get(targetPos.x, targetPos.y);
+			var cell = target.get(Fight.class).board.cells.get(targetPos.x, targetPos.y);
 			// if the cell exists and can be walked on by the pushed entity
-			if(cell != null && e.canWalkOn(cell)) {
+			if(cell != null && e.targeting.canWalkOn(cell)) {
 				resultCell = cell;
-			} else if(!e.canWalkThrough(cell)) {
+			} else if(!e.targeting.canWalkThrough(cell)) {
 				return; // stop there if we hit an insurmountable object
 			}
 		}
@@ -83,21 +84,23 @@ public class Push extends Effect {
 	 * Apply the push from the creature's cell to the resultCell 
 	 */ 
 	@Override
-	public void apply0(Entity caster, Cell target) {
+	public void apply0(Creature caster, Cell target) {
 		if(!target.hasCreature()) return;
 		var e = target.getCreatures().get(0);
-		e.getCell().creatures.remove(e);
+		var cell = get(Fight.class).board.cells.get(e.pos.x, e.pos.y);
+		if(cell != null) cell.creatures.remove(e);
+//		e.getCell().creatures.remove(e);
 		e.pos = resultCell.pos;
 		resultCell.creatures.add(e);
 	}
 	
 	@Override
 	public Push copy() {
-		return new Push(aoe, targetConditions, distance);
+		return new Push(get(Fight.class), aoe, targetConditions, distance);
 	}
 
 	@Override
-	public Event createAssociatedEvent(Entity source, Cell target) {
+	public Event createAssociatedEvent(Creature source, Cell target) {
 		return new OnPushEvent(source, target, this);
 	}
 	

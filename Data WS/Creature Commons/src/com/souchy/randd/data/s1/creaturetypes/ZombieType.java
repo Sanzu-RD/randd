@@ -1,15 +1,6 @@
 package com.souchy.randd.data.s1.creaturetypes;
 
-import com.souchy.randd.data.s1.main.Elements;
-
 import data.new1.CreatureTypeModel;
-import data.new1.timed.Status.Passive;
-//import gamemechanics.events.OnEleDmgInstance;
-//import gamemechanics.events.OnEleDmgInstance.OnEleDmgInstanceHandler;
-import gamemechanics.models.entities.Entity;
-import gamemechanics.statics.stats.modifiers.eleMod;
-import gamemechanics.statics.stats.modifiers.mathMod;
-import gamemechanics.statics.stats.properties.Resource;
 
 public class ZombieType extends CreatureTypeModel {
 

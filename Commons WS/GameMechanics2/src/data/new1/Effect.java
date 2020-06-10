@@ -3,13 +3,15 @@ package data.new1;
 
 import java.util.List;
 
+import data.new1.ecs.Entity;
 import data.new1.spellstats.base.IntStat;
 import data.new1.spellstats.imp.TargetConditionStat;
 import gamemechanics.common.Aoe;
 import gamemechanics.data.effects.damage.Damage;
 import gamemechanics.events.new1.Event;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Entity;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
+import gamemechanics.models.Fight;
 
 /**
  * 
@@ -20,8 +22,11 @@ import gamemechanics.models.entities.Entity;
  * @author Blank
  *
  */
-public abstract class Effect {
+public abstract class Effect extends Entity {
 
+	public int id;
+	public int modelid; // ? not sure
+	
 	/** 
 	 * aoe 
 	 */
@@ -31,7 +36,8 @@ public abstract class Effect {
 	 */
 	public TargetConditionStat targetConditions;
 
-	public Effect(Aoe aoe, TargetConditionStat targetConditions) {
+	public Effect(Fight f, Aoe aoe, TargetConditionStat targetConditions) {
+		super(f);
 		this.aoe = aoe;
 		this.targetConditions = targetConditions;
 	}
@@ -39,7 +45,7 @@ public abstract class Effect {
 	/**
 	 * Create an event associated with this effect for each application of it
 	 */
-	public abstract Event createAssociatedEvent(Entity source, Cell target);
+	public abstract Event createAssociatedEvent(Creature source, Cell target);
 
 	
 	/**
@@ -47,8 +53,8 @@ public abstract class Effect {
 	 * @param source
 	 * @param cellTarget
 	 */
-	public void apply(Entity source, Cell cellTarget) { // , Effect parent);
-		var board = cellTarget.fight.board;
+	public void apply(Creature source, Cell cellTarget) { // , Effect parent);
+		var board = cellTarget.get(Fight.class).board;
 
 		// level 0 handlers 
 		var casterEvent = createAssociatedEvent(source, cellTarget);
@@ -106,29 +112,29 @@ public abstract class Effect {
 	
 	private static void interceptors(Entity e, Event tempEvent) {
 		if(tempEvent.intercepted) return;
-		e.handlers.interceptors.post(tempEvent);
+		e.get(Fight.class).handlers.interceptors.post(tempEvent);
 	}
 	private static void modifiers(Entity e, Event tempEvent) {
 		if(tempEvent.intercepted) return;
-		e.handlers.modifiers.post(tempEvent);
+		e.get(Fight.class).handlers.modifiers.post(tempEvent);
 	}
 	private static void reactors(Entity e, Event tempEvent) {
 		if(tempEvent.intercepted) return;
-		e.handlers.reactors.post(tempEvent);
+		e.get(Fight.class).handlers.reactors.post(tempEvent);
 	}
 	
 	/**
 	 * Pre-calculation for the caster. Cell target is the origin of the aoe
 	 */
-	public abstract void prepareCaster(Entity caster, Cell aoeOrigin);
+	public abstract void prepareCaster(Creature caster, Cell aoeOrigin);
 	/**
 	 * Pre-calculation for the target. Cell target is any cell in the aoe.
 	 */
-	public abstract void prepareTarget(Entity caster, Cell target);
+	public abstract void prepareTarget(Creature caster, Cell target);
 	/**
 	 * Apply the effect to a single target cell (this is called for each cell in the aoe)
 	 */
-	public abstract void apply0(Entity caster, Cell target);
+	public abstract void apply0(Creature caster, Cell target);
 	/**
 	 * Copy an effect so it can be modified independantly for each target
 	 */

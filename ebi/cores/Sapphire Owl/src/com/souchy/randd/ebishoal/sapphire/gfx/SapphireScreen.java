@@ -58,7 +58,7 @@ public class SapphireScreen extends LapisScreen {
 		getCamera().update();
 		
 		// update all systems and entities
-		Engine.update(delta);
+		SapphireGame.fight.update(delta);
 	}
 	
 	

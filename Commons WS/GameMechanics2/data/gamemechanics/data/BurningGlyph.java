@@ -13,40 +13,17 @@ import gamemechanics.events.new1.other.OnTurnStartEvent.OnTurnStartHandler;
 import gamemechanics.events.new1.other.OnWalkEvent;
 import gamemechanics.events.new1.other.OnWalkEvent.OnWalkHandler;
 import gamemechanics.models.Fight;
-import gamemechanics.models.entities.Entity;
-import gamemechanics.models.entities.Entity.EntityRef;
 import io.netty.buffer.ByteBuf;
 
 public class BurningGlyph extends TerrainEffect implements OnWalkHandler, OnEnterCellHandler, OnLeaveCellHandler, OnTurnStartHandler {
 
-	public BurningGlyph(Fight fight, EntityRef source, EntityRef target) {
-		super(fight, source, target);
+	public BurningGlyph(Fight fight, int entitySourceId, int entityTargetId) {
+		super(fight, entitySourceId, entityTargetId);
 	}
 
 	@Override
 	public int modelID() {
 		return 0;
-	}
-
-	@Override
-	public boolean fuse(Status s) {
-		return false;
-	}
-
-	@Override
-	public void onAdd() {}
-
-	@Override
-	public void onLose() {}
-
-	@Override
-	public String texture9Patch() {
-		return null;
-	}
-
-	@Override
-	public String textureCenter() {
-		return null;
 	}
 
 	@Override
@@ -79,20 +56,8 @@ public class BurningGlyph extends TerrainEffect implements OnWalkHandler, OnEnte
 	}
 
 	@Override
-	public ByteBuf serialize(ByteBuf out) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BBMessage deserialize(ByteBuf in) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Status create(EntityRef source, EntityRef target) {
-		return new BurningGlyph(source.fight, source, target);
+	public BurningGlyph create(Fight f, int entitySourceId, int entityTargetId) {
+		return new BurningGlyph(f, entitySourceId, entityTargetId);
 	}
 
 	

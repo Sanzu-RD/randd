@@ -11,8 +11,8 @@ import com.google.gson.JsonSyntaxException;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
+import gamemechanics.models.Cell;
 import gamemechanics.models.Fight;
-import gamemechanics.models.entities.Cell;
 import gamemechanics.statics.properties.Targetability;
 
 public class MapData {

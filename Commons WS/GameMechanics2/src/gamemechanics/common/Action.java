@@ -1,6 +1,6 @@
 package gamemechanics.common;
 
-import gamemechanics.models.entities.Entity;
+import gamemechanics.models.Creature;
 
 public abstract class Action {
 	
@@ -9,7 +9,7 @@ public abstract class Action {
 	/**
 	 * the action's caster / source
 	 */
-	public Entity caster;
+	public Creature caster;
 	/**
 	 * action id. 0 = walk (Action.MoveActionID), {1-...} = spells ids
 	 */

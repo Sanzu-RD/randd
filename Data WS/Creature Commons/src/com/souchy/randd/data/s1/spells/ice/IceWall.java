@@ -1,25 +1,31 @@
 package com.souchy.randd.data.s1.spells.ice;
 
 import com.google.common.collect.ImmutableList;
+import com.souchy.randd.data.s1.spells.water.Bubble;
 
 import data.new1.spellstats.SpellStats;
-import gamemechanics.models.SpellModel;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Creature;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
+import gamemechanics.models.Fight;
+import gamemechanics.models.Spell;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
 
-public class IceWall extends SpellModel {
+public class IceWall extends Spell {
+
+	public IceWall(Fight f) {
+		super(f);
+	}
 
 	@Override
-	public int id() {
+	public int modelid() {
 		return 6;
 	}
 
 	@Override
 	protected SpellStats initBaseStats() {
-		// TODO Auto-generated method stub
-		return null;
+		var stats = new SpellStats();
+		return stats;
 	}
 
 	@Override
@@ -51,5 +57,13 @@ public class IceWall extends SpellModel {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public Spell copy(Fight fight) {
+		var s = new IceWall(fight);
+		s.stats = stats.copy();
+		return s;
+	}
+	
 	
 }

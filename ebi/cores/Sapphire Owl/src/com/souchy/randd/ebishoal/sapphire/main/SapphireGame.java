@@ -25,10 +25,10 @@ import data.new1.spellstats.base.IntStat;
 import gamemechanics.common.generic.Vector2;
 import gamemechanics.components.Position;
 import gamemechanics.main.DiamondModels;
+import gamemechanics.models.Creature;
+import gamemechanics.models.Creature.Team;
 import gamemechanics.models.CreatureModel;
 import gamemechanics.models.Fight;
-import gamemechanics.models.entities.Creature;
-import gamemechanics.models.entities.Entity.Team;
 import gamemechanics.statics.stats.properties.Resource;
 
 public class SapphireGame extends LapisGame {
@@ -75,6 +75,7 @@ public class SapphireGame extends LapisGame {
 		// ...
 		
 		
+		
 		// server should initiate the Fight object with all the characters already
 		var jadeteam1 = new JadeCreature[4];
 		var jadeteam2 = new JadeCreature[4];
@@ -98,12 +99,14 @@ public class SapphireGame extends LapisGame {
 		var startPositions = new Position[] { new Position(2, 16), new Position(16, 2) };
 		
 		// then sapphire should just show these creatures from the deserialized Fight object (dont need to instantiate anything here)
-		
 		try {
 			Log.info("data.creatures : " + DiamondModels.creatures);
 			
 			// fight
 			fight = new Fight();
+			// systems
+			new SapphireEntitySystem(fight);
+			
 			// create teams A & B
 			for(var jade : jadeteam1)
 				if(jade != null) // wouldnt need this in the final product
@@ -117,6 +120,11 @@ public class SapphireGame extends LapisGame {
 //			for(var c : fight.timeline) {
 //				Log.info("timeline creature " + c + " " + c.model.id() + " " + c.pos + " " + c.team);
 //			}
+
+			Log.info("cells intances " + fight.cells.family.size());
+			Log.info("creatures intances " + fight.creatures.family.size());
+			Log.info("spells intances " + fight.spells.family.size());
+			Log.info("status intances " + fight.status.family.size());
 			
 			// player hud
 			SapphireHudSkin.play(fight.teamA.get(0));
@@ -135,10 +143,10 @@ public class SapphireGame extends LapisGame {
 		model.baseStats.resources.put(Resource.life, new IntStat(30)); 
 		// instance
 		Creature creature = new Creature(fight, model, jade, new Position(5, 5));
-		creature.getStats().resources.get(Resource.life).fight = -150; 
-		creature.getStats().shield.get(Resource.life).fight = 600; 
+		creature.stats.resources.get(Resource.life).fight = -150; 
+		creature.stats.shield.get(Resource.life).fight = 600; 
 		// 3d instance & controller
-		var modelpath = AssetConfs.creatures.get(creature.model.id()).models[0]; 
+		var modelpath = AssetConfs.creatures.get(creature.modelid).models[0]; 
 		var model3d = LapisAssets.assets.<Model>get(modelpath);
 		var modelinstance = new ModelInstance(model3d);
 		modelinstance.transform.rotate(1, 0, 0, 90);
@@ -156,7 +164,8 @@ public class SapphireGame extends LapisGame {
 		// hat
 		modelinstance.materials.get(4).set(ColorAttribute.createDiffuse(baseColor));
 		// hair
-		modelinstance.materials.get(5).set(ColorAttribute.createDiffuse(baseColor.add(10, 10, 10, 0)));
+		float ratio = 1f /  2f;
+		modelinstance.materials.get(5).set(ColorAttribute.createDiffuse(baseColor.mul(ratio, ratio, ratio, 1f)));
 		
 		//rnd.nextFloat() * 255f, rnd.nextFloat() * 255f, rnd.nextFloat() * 255f, 1f));
 		

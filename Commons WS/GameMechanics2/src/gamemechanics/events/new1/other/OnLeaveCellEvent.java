@@ -5,8 +5,8 @@ import com.google.common.eventbus.Subscribe;
 import data.new1.Effect;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.Handler;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Entity;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
 
 public class OnLeaveCellEvent extends Event {
 
@@ -18,7 +18,7 @@ public class OnLeaveCellEvent extends Event {
 		public void onLeaveCell(OnLeaveCellEvent event);
 	}
 	
-	public OnLeaveCellEvent(Entity source, Cell target, Effect effect) {
+	public OnLeaveCellEvent(Creature source, Cell target, Effect effect) {
 		super(source, target, effect);
 	}
 	

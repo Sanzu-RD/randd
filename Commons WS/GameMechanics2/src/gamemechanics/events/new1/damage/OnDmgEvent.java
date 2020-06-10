@@ -5,9 +5,8 @@ import com.google.common.eventbus.Subscribe;
 import gamemechanics.data.effects.damage.Damage;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.Handler;
-import gamemechanics.events.new1.displacement.OnPushEvent;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Entity;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
 
 public class OnDmgEvent extends Event {
 	
@@ -20,7 +19,7 @@ public class OnDmgEvent extends Event {
 		public void onDmg(OnDmgEvent e);
 	}
 	
-	public OnDmgEvent(Entity caster, Cell target, Damage effect) {
+	public OnDmgEvent(Creature caster, Cell target, Damage effect) {
 		super(caster, target, effect);
 	}
 

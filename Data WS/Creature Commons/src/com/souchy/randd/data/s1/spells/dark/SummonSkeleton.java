@@ -4,12 +4,14 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.souchy.randd.annotationprocessor.ID;
+import com.souchy.randd.data.s1.spells.water.Bubble;
 
 import data.new1.Effect;
 import data.new1.spellstats.SpellStats;
-import gamemechanics.models.SpellModel;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Creature;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
+import gamemechanics.models.Fight;
+import gamemechanics.models.Spell;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
 
@@ -19,10 +21,14 @@ import gamemechanics.statics.Element;
  * @author Blank
  *
  */
-public class SummonSkeleton extends SpellModel { //implements EbiSpellData {
+public class SummonSkeleton extends Spell { //implements EbiSpellData {
+
+	public SummonSkeleton(Fight f) {
+		super(f);
+	}
 
 	@Override
-	public int id() {
+	public int modelid() {
 		return 7;
 	}
 
@@ -34,8 +40,8 @@ public class SummonSkeleton extends SpellModel { //implements EbiSpellData {
 	
 	@Override
 	protected SpellStats initBaseStats() {
-		// TODO Auto-generated method stub
-		return null;
+		var stats = new SpellStats();
+		return stats;
 	}
 
 	@Override
@@ -67,6 +73,12 @@ public class SummonSkeleton extends SpellModel { //implements EbiSpellData {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	@Override
+	public Spell copy(Fight fight) {
+		var s = new SummonSkeleton(fight);
+		s.stats = stats.copy();
+		return s;
+	}
 	
 }

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.new1.Effect;
-import gamemechanics.data.effects.damage.Damage;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Entity;
+import data.new1.ecs.Entity;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
 
 /**
  * Effect event.
@@ -21,7 +21,7 @@ public abstract class Event {
 	
 	// public final boolean canBeIntercepted;
 	public boolean intercepted;
-	public Entity source;
+	public Creature source;
 	public Cell target;
 	public Effect effect;
 	/**
@@ -41,7 +41,7 @@ public abstract class Event {
 	 */
 	public List<Event> children = new ArrayList<>();
 	
-	public Event(Entity source, Cell target, Effect effect) {
+	public Event(Creature source, Cell target, Effect effect) {
 		this.effect = effect;
 		this.source = source;
 		this.target = target;

@@ -2,27 +2,29 @@ package com.souchy.randd.data.s1.spells.fire;
 
 import com.google.common.collect.ImmutableList;
 import com.souchy.randd.data.s1.main.Elements;
+import com.souchy.randd.data.s1.spells.water.Bubble;
 
 import data.new1.spellstats.SpellStats;
 import data.new1.spellstats.base.IntStat;
 import gamemechanics.data.effects.damage.Damage;
-import gamemechanics.models.SpellModel;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Creature;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
+import gamemechanics.models.Fight;
+import gamemechanics.models.Spell;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.properties.Resource;
 
-public class Fireball extends SpellModel {
+public class Fireball extends Spell {
 
-	public Damage e1 = new Damage(null, null, null);
+	public Damage e1 = new Damage(null, null, null, null);
 	
-	public Fireball() {
-		
+	public Fireball(Fight f) {
+		super(f);
 	}
 	
 	@Override
-	public int id() {
+	public int modelid() {
 		return 1;
 	}
 
@@ -57,6 +59,13 @@ public class Fireball extends SpellModel {
 	@Override
 	public boolean canTarget(Creature caster, Cell target) {
 		return false;
+	}
+	
+	@Override
+	public Spell copy(Fight fight) {
+		var s = new Fireball(fight);
+		s.stats = stats.copy();
+		return s;
 	}
 	
 }

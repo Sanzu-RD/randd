@@ -3,24 +3,28 @@ package com.souchy.randd.data.s1.spells.water;
 import com.google.common.collect.ImmutableList;
 
 import data.new1.spellstats.SpellStats;
-import gamemechanics.models.SpellModel;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Creature;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
+import gamemechanics.models.Fight;
+import gamemechanics.models.Spell;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
 
-public class Bubble extends SpellModel {
+public class Bubble extends Spell {
+
+	public Bubble(Fight f) {
+		super(f);
+	}
 
 	@Override
-	public int id() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int modelid() {
+		return 8;
 	}
 
 	@Override
 	protected SpellStats initBaseStats() {
-		// TODO Auto-generated method stub
-		return null;
+		var stats = new SpellStats();
+		return stats;
 	}
 
 	@Override
@@ -51,6 +55,13 @@ public class Bubble extends SpellModel {
 	public boolean canTarget(Creature caster, Cell target) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Spell copy(Fight fight) {
+		var s = new Bubble(fight);
+		s.stats = stats.copy();
+		return s;
 	}
 	
 }

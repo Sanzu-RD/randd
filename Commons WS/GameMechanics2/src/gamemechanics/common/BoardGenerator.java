@@ -2,8 +2,8 @@ package gamemechanics.common;
 
 import gamemechanics.ext.MapData;
 import gamemechanics.models.Board;
+import gamemechanics.models.Cell;
 import gamemechanics.models.Fight;
-import gamemechanics.models.entities.Cell;
 
 public class BoardGenerator {
 	

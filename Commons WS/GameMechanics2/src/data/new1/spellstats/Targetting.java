@@ -3,8 +3,8 @@ package data.new1.spellstats;
 import java.util.HashMap;
 import java.util.Map;
 
+import data.new1.ecs.Entity;
 import data.new1.spellstats.base.BoolStat;
-import gamemechanics.models.entities.Entity;
 import gamemechanics.statics.properties.Targetability;
 
 public class Targetting {
@@ -74,25 +74,29 @@ public class Targetting {
 	 * If this entity can cast through an entity
 	 */
 	public boolean canCastThrough(Entity e) {
-		return can(Targetability.CanCastThroughBlocks) || e.targeting.can(Targetability.CanBeCastedThrough);
+		var targetTargetting = e.get(Targetting.class);
+		return can(Targetability.CanCastThroughBlocks) || targetTargetting.can(Targetability.CanBeCastedThrough);
 	}
 	/**
 	 * If this entity can target cast on an entity
 	 */
 	public boolean canCastOn(Entity e) {
-		return can(Targetability.CanCastOnBlocks) || e.targeting.can(Targetability.CanBeCastedOn);
+		var targetTargetting = e.get(Targetting.class);
+		return can(Targetability.CanCastOnBlocks) || targetTargetting.can(Targetability.CanBeCastedOn);
 	}
 	/**
 	 * If this entity can walk through an entity (without stopping on it)
 	 */
 	public boolean canWalkThrough(Entity e) {
-		return can(Targetability.CanWalkThroughBlocks) || e.targeting.can(Targetability.CanBeWalkedThrough);
+		var targetTargetting = e.get(Targetting.class);
+		return can(Targetability.CanWalkThroughBlocks) || targetTargetting.can(Targetability.CanBeWalkedThrough);
 	}
 	/**
 	 * If this entity can target walk and stop on an entity
 	 */
 	public boolean canWalkOn(Entity e) {
-		return can(Targetability.CanWalkOnBlocks) || e.targeting.can(Targetability.CanBeWalkedOn);
+		var targetTargetting = e.get(Targetting.class);
+		return can(Targetability.CanWalkOnBlocks) || targetTargetting.can(Targetability.CanBeWalkedOn);
 	}
 	
 	

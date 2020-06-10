@@ -9,7 +9,7 @@ module GameMechanics2 {
 	exports gamemechanics.events.new1;
 	exports gamemechanics.ext;
 	exports gamemechanics.models;
-	exports gamemechanics.models.entities;
+//	exports gamemechanics.models.entities;
 	//exports gamemechanics.statics.creatures;
 	exports gamemechanics.statics;
 	exports gamemechanics.statics.filters;
@@ -25,10 +25,16 @@ module GameMechanics2 {
 	exports data.new1.spellstats.base;
 //	exports data.modules;
 	
+	exports data.new1.spellstats.imp;
+	exports data.new1.ecs;
+	exports gamemechanics.systems;
+	exports gamemechanics.components;
+	
 	requires transitive com.google.common;
-	requires com.souchy.randd.commons.TealWaters;
-	requires com.google.guice;
-	requires com.souchy.randd.commons.Jade;
-	requires com.souchy.randd.pluginprototyping.Modules;
-	requires com.google.gson;
+	requires transitive com.souchy.randd.commons.TealWaters;
+	requires transitive com.google.guice;
+	requires transitive com.souchy.randd.commons.Jade;
+	requires transitive com.souchy.randd.pluginprototyping.Modules;
+	requires transitive com.google.gson;
+	requires transitive com.souchy.randd.commons.TealNet;
 }

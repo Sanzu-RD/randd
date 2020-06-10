@@ -13,19 +13,14 @@ import data.new1.ecs.Entity;
 import data.new1.timed.Status;
 import data.new1.timed.TerrainEffect;
 import gamemechanics.components.Position;
-import gamemechanics.models.entities.Creature;
+import gamemechanics.models.Creature;
 
 public class SapphireEntitySystem extends data.new1.ecs.System {
 	
 	public static List<Entity> family = new ArrayList<>();
 	
-	static {
-		new SapphireEntitySystem();
-	}
-	
-	public void dispose() {
-		family.clear();
-		Engine.remove(this);
+	public SapphireEntitySystem(Engine engine) {
+		super(engine);
 	}
 	
 	@Override
@@ -49,6 +44,10 @@ public class SapphireEntitySystem extends data.new1.ecs.System {
 		});
 	}
 	
+	public void dispose() {
+		super.dispose();
+		family.clear();
+	}
 	
 	@Subscribe
 	public void onAddedEntity(Entity e) {

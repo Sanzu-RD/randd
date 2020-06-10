@@ -192,7 +192,7 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	
 	
 	@Override public void resize(int width, int height) {
-		Log.info("resize : " + width + ", " + height);
+//		Log.info("resize : " + width + ", " + height);
 		// resize le FBO
 		if(fbo != null) fbo = createFBO();
 		// resize la sprite batch du fbo / post processing

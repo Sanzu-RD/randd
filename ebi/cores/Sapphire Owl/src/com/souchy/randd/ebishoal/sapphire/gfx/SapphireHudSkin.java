@@ -23,7 +23,8 @@ import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 
-import gamemechanics.models.entities.Creature;
+import gamemechanics.main.DiamondModels;
+import gamemechanics.models.Creature;
 import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.modifiers.eleMod;
 import gamemechanics.statics.stats.modifiers.mathMod;
@@ -79,7 +80,7 @@ public class SapphireHudSkin extends Skin {
 	 */
 	private static void set(String prefix, Creature c) {
 		var lml = SapphireHud.parser.getData();
-		var model = c.model;
+		var model = c.getModel();
 		int i = 0;
 		int val = 0;
 		
@@ -109,7 +110,7 @@ public class SapphireHudSkin extends Skin {
 			//} else 
 			//if (creatureid > 0) {
 				String iconPath = "missing";
-				var spellResource = AssetConfs.spells.get(s.id()); //Integer.toString(s.id());
+				var spellResource = AssetConfs.spells.get(s.modelid()); //Integer.toString(s.id());
 				if(spellResource != null) {
 					iconPath = SapphireAssets.getSpellIconPath(spellResource.icon); //model.getStrID(), 
 					iconPath = SapphireAssets.getSkinPath(iconPath) + "_round";
@@ -117,6 +118,8 @@ public class SapphireHudSkin extends Skin {
 //					Texture texture = LapisAssets.assets.get(iconPath + "_round");
 //					var icon = new TextureRegionDrawable(new RoundTextureRegion(texture));
 //					SapphireGame.gfx.hud.skin.get("iconPath", RoundImage.class);
+					
+//					Log.info("spell icon : " + spellResource.icon + " -> " + iconpath + " -> " + img);
 					lml.getDefaultSkin().add(prefix + "Spell" + i, img);
 				}
 				//var str = iconPath.substring("res/".length(), iconPath.lastIndexOf(".")).replace("/", ".");
@@ -128,22 +131,22 @@ public class SapphireHudSkin extends Skin {
 		
 		// set all resources (current, max and shields)
 		for (var r : Resource.values()) {
-			val = c.getStats().resources.get(r).value();
+			val = c.stats.resources.get(r).value();
 			lml.addArgument(prefix + camel(r.name(), "Current"), val);
 
-			val = c.getStats().shield.get(r).value();
+			val = c.stats.shield.get(r).value();
 			lml.addArgument(prefix + camel(r.name(), "Current", "Shield"), val);
 			
-			val = c.getStats().resources.get(r).max(); 
+			val = c.stats.resources.get(r).max(); 
 			lml.addArgument(prefix + camel(r.name()) + "Max", val);
 			
-//			c.getStats().getResourceMax(r);
+//			c.stats.getResourceMax(r);
 		}
 		
 		// set all resistances
 		for (var ele : Element.values) {
 			//for (var m : mathMod.values()) {
-				var res = c.getStats().resistance.get(ele);
+				var res = c.stats.resistance.get(ele);
 				val = (int) res.baseflat; //.getEle(e, m, eleMod.res);
 				lml.addArgument(prefix + camel(ele.name(), "Resistance", "flat"), val); // m.name()), val);
 

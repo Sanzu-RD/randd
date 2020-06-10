@@ -10,16 +10,13 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 
+import data.new1.ecs.Entity;
 import gamemechanics.main.DiamondModels;
 import gamemechanics.models.Fight;
-import gamemechanics.models.FightObject;
-import gamemechanics.models.entities.Entity;
-import gamemechanics.models.entities.Entity.EntityRef;
-import gamemechanics.models.entities.Entity.Team;
 import io.netty.buffer.ByteBuf;
 
 
-public class StatusList extends FightObject implements BBSerializer, BBDeserializer {
+public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 	
 	//private Map<Class<? extends Status>, Status> statuses;
 	private List<Status> statuses;
@@ -131,7 +128,7 @@ public class StatusList extends FightObject implements BBSerializer, BBDeseriali
 			int targetid = in.readInt();
 			
 			var statusModel = DiamondModels.statuses.get(modelid);
-			var status = statusModel.create(new EntityRef(this.fight, sourceid), new EntityRef(this.fight, targetid)); //this.fight, sourceid, targetid);
+			var status = statusModel.create(get(Fight.class), sourceid, targetid); //new EntityRef(this.fight, sourceid), new EntityRef(this.fight, targetid)); //this.fight, sourceid, targetid);
 			status.deserialize(in);
 			
 			this.statuses.add(status);

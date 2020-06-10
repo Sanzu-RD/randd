@@ -1,0 +1,47 @@
+package gamemechanics.systems;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.common.eventbus.Subscribe;
+
+import data.new1.ecs.Engine;
+import data.new1.ecs.Engine.AddEntityEvent;
+import data.new1.ecs.Engine.RemoveEntityEvent;
+import data.new1.ecs.Entity;
+import gamemechanics.models.Cell;
+
+public class CellSystem extends data.new1.ecs.System {
+
+	public List<Cell> family = new ArrayList<>();
+	
+	public CellSystem(Engine engine) {
+		super(engine);
+	}
+	
+	public void dispose() {
+		super.dispose();
+		family.clear();
+	}
+	
+	@Override
+	public void update(float delta) {
+//		Log.info("diamond cell system update");
+		family.forEach(e -> {
+			
+		});
+	}
+	
+	@Subscribe
+	public void onAddedEntity(AddEntityEvent event) {
+		if(event.entity instanceof Cell)
+			family.add((Cell) event.entity);
+	}
+	@Subscribe
+	public void onRemovedEntity(RemoveEntityEvent event) {
+		if(event.entity instanceof Cell)
+			family.remove(event.entity);
+	}
+	
+	
+}

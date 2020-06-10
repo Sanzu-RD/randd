@@ -7,14 +7,14 @@ import com.google.common.base.Predicate;
 
 import gamemechanics.common.generic.Vector2;
 import gamemechanics.models.Board;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Entity;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
 import gamemechanics.statics.properties.Orientation;
 
 public class Pathfinding {
 	
 	
-	public List<Cell> aStar(Board board, Entity caster, Cell source, Cell target){
+	public List<Cell> aStar(Board board, Creature caster, Cell source, Cell target){
 		List<Node> closed = new ArrayList<>();
 		List<Node> open = new ArrayList<>();
 		
@@ -82,7 +82,7 @@ public class Pathfinding {
 					n.h = manhattan(n.pos, target.pos);
 					n.f = n.g + n.h;
 					
-					if(caster.canWalkThrough(neighbor)) {
+					if(caster.targeting.canWalkThrough(neighbor)) {
 						open.add(n);
 					} else {
 						closed.add(n);
@@ -224,14 +224,14 @@ public class Pathfinding {
 	}
 	
 	
-	public Cell getNearestAdjacent(Board b, Entity caster, Vector2 target, Vector2 goal, PathingMethod method) {
+	public Cell getNearestAdjacent(Board b, Creature caster, Vector2 target, Vector2 goal, PathingMethod method) {
 		Cell nearest = null;
 		int dist = Integer.MAX_VALUE;
 		for(var o : Orientation.values()) {
 			var p = o.getPositionByDirection(target);
 			var c = b.cells.get(p.x, p.y);
-			var walk = method == PathingMethod.Walk && caster.canWalkThrough(c);
-			var cast = method == PathingMethod.Cast && caster.canCastThrough(c);
+			var walk = method == PathingMethod.Walk && caster.targeting.canWalkThrough(c);
+			var cast = method == PathingMethod.Cast && caster.targeting.canCastThrough(c);
 			// if needs to walk and can walk || if needs to cast and can cast
 			if(walk || cast) {
 				int d = manhattan(p, goal);
@@ -279,7 +279,7 @@ public class Pathfinding {
 		NodeDofus parent;
 	}
 	
-	public static List<Orientation> asdf(Board b, Entity caster, Cell begin, Cell end, Object... params) {
+	public static List<Orientation> asdf(Board b, Creature caster, Cell begin, Cell end, Object... params) {
 		boolean done = false;
 		
 		List<NodeDofus> nodes = new ArrayList<>();
@@ -309,7 +309,7 @@ public class Pathfinding {
 				var pos = getPositionByDirection(current.pos, o);
 				var c = b.cells.get(pos.x, pos.y);
 				
-				var loc24 = c == end && caster.canWalkOn(c); // canWalkThroughEntity
+				var loc24 = c == end && caster.targeting.canWalkOn(c); // canWalkThroughEntity
 				
 				
 			}

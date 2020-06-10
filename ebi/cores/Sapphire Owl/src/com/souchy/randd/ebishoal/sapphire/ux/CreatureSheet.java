@@ -22,7 +22,7 @@ import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.LmlWidgets;
 
-import gamemechanics.models.entities.Creature;
+import gamemechanics.models.Creature;
 import gamemechanics.statics.stats.properties.Resource;
 
 public class CreatureSheet extends SapphireWidget {
@@ -162,7 +162,7 @@ public class CreatureSheet extends SapphireWidget {
 		moveMax.setText(getMoveMax());
 		
 		this.flowstatus.clearChildren();
-		creature.getStatus().forEach(s -> {
+		creature.statuses.forEach(s -> {
 			var icon = (StatusIcon) LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml");
 			icon.refresh(s);
 			this.flowstatus.addActor(icon);
@@ -188,12 +188,12 @@ public class CreatureSheet extends SapphireWidget {
 
 	@LmlAction("getStatusCount")
 	public int getStatusCount() {
-		return creature.getStatus().size();
+		return creature.statuses.size();
 	}
 
 	@LmlAction("getCreatureModelId")
 	public int getCreatureModelId() {
-		return creature.model.id();
+		return creature.modelid;
 	}
 
 	@LmlAction("getCreatureId")
@@ -204,53 +204,53 @@ public class CreatureSheet extends SapphireWidget {
 	@LmlAction("getCreatureName")
 	public String getCreatureName() {
 		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
-		var name = i18n.get("creature." + creature.model.id() + ".name");;
-		Log.info("getCreatureName " + creature.model.id() + " = " + name);
+		var name = i18n.get("creature." + creature.modelid + ".name");;
+		Log.info("getCreatureName " + creature.modelid + " = " + name);
 		return name; 
 	}
 	@LmlAction("getDescription")
 	public String getDescription() {
 		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
-		return i18n.get("creature."+creature.model.id()+".description");
+		return i18n.get("creature."+creature.modelid+".description");
 	}
 
 	@LmlAction("getLife")
 	public int getLifeCurrent() {
-		return creature.getStats().resources.get(Resource.life).value(); //.getResourceCurrent(Resource.life, false);
+		return creature.stats.resources.get(Resource.life).value(); //.getResourceCurrent(Resource.life, false);
 	}
 	@LmlAction("getLifeShield")
 	public int getLifeShield() {
-		return creature.getStats().shield.get(Resource.life).value(); //getResourceCurrent(Resource.life, true);
+		return creature.stats.shield.get(Resource.life).value(); //getResourceCurrent(Resource.life, true);
 	}
 	@LmlAction("getLifeMax")
 	public int getLifeMax() {
-		return creature.getStats().resources.get(Resource.life).max(); //getResourceMax(Resource.life);
+		return creature.stats.resources.get(Resource.life).max(); //getResourceMax(Resource.life);
 	}
 
 	@LmlAction("getMana")
 	public int getManaCurrent() {
-		return creature.getStats().resources.get(Resource.mana).value(); //getResourceCurrent(Resource.mana, false);
+		return creature.stats.resources.get(Resource.mana).value(); //getResourceCurrent(Resource.mana, false);
 	}
 	@LmlAction("getManaShield")
 	public int getManaShield() {
-		return creature.getStats().shield.get(Resource.mana).value(); //getResourceCurrent(Resource.mana, true);
+		return creature.stats.shield.get(Resource.mana).value(); //getResourceCurrent(Resource.mana, true);
 	}
 	@LmlAction("getManaMax")
 	public int getManaMax() {
-		return creature.getStats().resources.get(Resource.mana).max(); //getResourceMax(Resource.mana);
+		return creature.stats.resources.get(Resource.mana).max(); //getResourceMax(Resource.mana);
 	}
 
 	@LmlAction("getMove")
 	public int getMoveCurrent() {
-		return creature.getStats().resources.get(Resource.move).value(); //getResourceCurrent(Resource.move, false);
+		return creature.stats.resources.get(Resource.move).value(); //getResourceCurrent(Resource.move, false);
 	}
 	@LmlAction("getMoveShield")
 	public int getMoveShield() {
-		return creature.getStats().shield.get(Resource.move).value(); //getResourceCurrent(Resource.move, true);
+		return creature.stats.shield.get(Resource.move).value(); //getResourceCurrent(Resource.move, true);
 	}
 	@LmlAction("getMoveMax")
 	public int getMoveMax() {
-		return creature.getStats().resources.get(Resource.move).max(); //getResourceMax(Resource.move);
+		return creature.stats.resources.get(Resource.move).max(); //getResourceMax(Resource.move);
 	}
 	
 }

@@ -12,14 +12,14 @@ import gamemechanics.components.Position;
 import gamemechanics.events.new1.EventPipeline;
 import gamemechanics.main.DiamondModels;
 import gamemechanics.models.Fight;
-import gamemechanics.models.FightObject;
+import gamemechanics.models.FightEntity;
 //import gamemechanics.statics.properties.Targeting;
 import gamemechanics.statics.properties.Targetability;
 import io.netty.buffer.ByteBuf;
 
-public abstract class Entity extends FightObject implements BBSerializer, BBDeserializer {
+public abstract class Entity extends FightEntity implements BBSerializer, BBDeserializer {
 	
-	public static class EntityRef extends FightObject {
+	public static class EntityRef extends FightEntity {
 		public int id;
 		public EntityRef(Fight f, Entity e) {
 			super(f);
@@ -45,15 +45,13 @@ public abstract class Entity extends FightObject implements BBSerializer, BBDese
 	 * entity id for identification and mostly retrival during deserialization
 	 */
 	public int id;
-	
-	/** Team appartenance */
-	public Team team;
 
-	/** board position */
-	public Position pos;
 	
 	/** filled and emptied by StatusAdd and StatusLose effects */
 	public EventPipeline handlers;
+	
+	/** board position */
+	public Position pos;
 
 	/** Statuses */
 	private StatusList statuses;

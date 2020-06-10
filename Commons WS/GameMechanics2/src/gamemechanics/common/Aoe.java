@@ -6,7 +6,6 @@ import gamemechanics.common.generic.Vector2;
 /** Aoe suppliers / functions */
 public class Aoe {
 	
-	
 	/** targeted cell from where the aoe expands */
 	public Vector2 source;
 	
@@ -40,6 +39,13 @@ public class Aoe {
 	@Override
 	public String toString() {
 		return table.toString();
+	}
+
+	public Aoe copy() {
+		Aoe a = new Aoe(table.width(), table.height());
+		if(source != null) a.source = source.copy();
+		table.copyTo(a.table);
+		return a;
 	}
 	
 }

@@ -2,25 +2,32 @@ package data.new1.ecs;
 
 import java.util.HashMap;
 
+/**
+ * 
+ * 
+ * @author Blank
+ * @date 10 juin 2020
+ */
 public class Entity {
 	
-	//public HashMap<Class<? extends Component>, Component> components;
 	public final HashMap<Class<?>, Object> components = new HashMap<>();
 	
-	public Entity() {
-		Engine.add(this);
-		Engine.bus.register(this);
+	public Entity(Engine engine) {
+		if(engine == null) return; // for models cases like Spell, Status
+		this.add(engine);
+		engine.add(this);
+		engine.bus.register(this);
 	}
 	
 	public void dispose() {
 		components.clear();
-		Engine.remove(this);
+		get(Engine.class).remove(this);
 	}
 	
 	public void update(float delta) {
-		
+		// could update all components here if we wanted an update function on them
 	}
-
+	
 	public void add(Object c) {
 		if(c != null)
 			components.put(c.getClass(), c);
@@ -28,7 +35,6 @@ public class Entity {
 	
 	@SuppressWarnings("unchecked")
 	public <T> T get(Class<T> c) {
-//		if(!has(c)) return null;
 		return (T) components.get(c);
 	}
 
@@ -45,26 +51,21 @@ public class Entity {
 	public boolean has(Class<?> c) {
 		return components.containsKey(c);
 	}
-	/*
-	public void add(Component c) {
-		components.put(c.getClass(), c);
-	}
 	
-	@SuppressWarnings("unchecked")
-	public <T extends Component> T get(Class<T> c) {
-		if(!has(c)) return null;
-		return (T) components.get(c);
-	}
 
-	public Component remove(Class<? extends Component> c) {
-		return components.remove(c);
-	}
+//	/** fired after a component is added to the entity */
+//	public static class AddComponentEvent {
+//		public Component c;
+//		public AddComponentEvent(Component c) {
+//			this.c = c;
+//		}
+//	}
+//	/** fired after a component is removed from the entity */
+//	public static class RemoveComponentEvent {
+//		public Component c;
+//		public RemoveComponentEvent(Component c) {
+//			this.c = c;
+//		}
+//	}
 	
-	public boolean remove(Component c) {
-		return components.remove(c.getClass(), c);
-	}
-	
-	public boolean has(Class<? extends Component> c) {
-		return components.containsKey(c);
-	}*/
 }

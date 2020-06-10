@@ -5,8 +5,8 @@ import com.google.common.eventbus.Subscribe;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.Handler;
 import gamemechanics.events.new1.other.OnWalkEvent;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Entity;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
 import gamemechanics.data.effects.status.AddStatusEffect;
 
 public class OnAddStatusEvent extends Event {
@@ -19,7 +19,7 @@ public class OnAddStatusEvent extends Event {
 		public void onAddStatus(OnAddStatusEvent event);
 	}
 	
-	public OnAddStatusEvent(Entity source, Cell target, AddStatusEffect effect) {
+	public OnAddStatusEvent(Creature source, Cell target, AddStatusEffect effect) {
 		super(source, target, effect);
 	}
 

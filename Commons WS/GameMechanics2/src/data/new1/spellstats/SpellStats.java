@@ -4,30 +4,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiPredicate;
 import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableList;
-import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
-
 import data.new1.spellstats.base.BoolStat;
 import data.new1.spellstats.base.IntStat;
 import data.new1.spellstats.base.ObjectStat;
 import data.new1.spellstats.imp.TargetConditionStat;
-import data.new1.timed.Status;
 import gamemechanics.common.Aoe;
 import gamemechanics.common.AoeBuilders;
 import gamemechanics.data.effects.damage.Damage;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
 import gamemechanics.models.Fight;
-import gamemechanics.models.SpellModel;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Creature;
-import gamemechanics.models.entities.Entity;
-import gamemechanics.models.entities.Entity.EntityRef;
+import gamemechanics.models.Spell;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.properties.Resource;
-import io.netty.buffer.ByteBuf;
 
 public class SpellStats { //extends Entyty {
 	
@@ -61,7 +54,10 @@ public class SpellStats { //extends Entyty {
 //	}
 	
 	
-	public static class Shockbomb extends SpellModel {
+	public static class Shockbomb extends Spell {
+		public Shockbomb(Fight f) {
+			super(f);
+		}
 		// this doesnt apply to the cast, it applies to an effect so it's specific to this spell so it's here
 		// aoe pattern for the shock;
 		//public IntStat shockPattern;
@@ -73,14 +69,14 @@ public class SpellStats { //extends Entyty {
 		});
 		
 		@Override
-		public int id() {
+		public int modelid() {
 			// TODO Auto-generated method stub
 			return 0;
 		}
 		@Override
 		protected SpellStats initBaseStats() {
-			// TODO Auto-generated method stub
-			return null;
+			var stats = new SpellStats();
+			return stats;
 		}
 		@Override
 		protected ImmutableList<Element> initElements() {
@@ -94,13 +90,14 @@ public class SpellStats { //extends Entyty {
 		}
 		@Override
 		public void onCast(Creature caster, Cell target) {
+			var fight = caster.get(Fight.class);
+			var board = fight.board;
 			
 			var aoe = shockPattern.base.get();
-			var board = target.fight.board;
 			
 			// for all cells in the AOE
 			aoe.table.foreach((x, y) -> {
-				new Damage(shockPattern.base.get(), new TargetConditionStat(), new HashMap<>());
+				new Damage(fight, shockPattern.base.get(), new TargetConditionStat(), new HashMap<>());
 			});
 		}
 		@Override
@@ -113,16 +110,26 @@ public class SpellStats { //extends Entyty {
 			// TODO Auto-generated method stub
 			return false;
 		}
+		@Override
+		public Spell copy(Fight fight) {
+			var s = new Shockbomb(fight);
+			s.stats = stats.copy();
+			return s;
+		}
 	}
 	
 	public static class Overcharge {
 		public void onGain(Creature c) {
 			for(var spell : c.spellbook) {
-				if(spell.id() == 0) {
-					var s = ((Shockbomb)spell);
-					s.shockPattern.setter = () -> AoeBuilders.circle.apply(s.shockRadiusMax.value())
-													.sub(AoeBuilders.circle.apply(s.shockRadiusMin.value()));
-					//new IntStat(AoePattern.Square3.ordinal());
+				if(spell.modelid() == 0) {
+					var s = ((Shockbomb) spell.getModel());
+					
+					spell.stats.aoes.get(0).setter = 
+							AoeBuilders.circle.apply(s.shockRadiusMax.value())
+							.sub(AoeBuilders.circle.apply(s.shockRadiusMin.value()));
+					
+//					s.shockPattern.setter = () -> AoeBuilders.circle.apply(s.shockRadiusMax.value())
+//													.sub(AoeBuilders.circle.apply(s.shockRadiusMin.value()));
 				}
 			}
 		}
@@ -137,6 +144,32 @@ public class SpellStats { //extends Entyty {
 				});
 			}
 		}
+	}
+
+	public SpellStats copy() {
+		final var s = new SpellStats();
+		
+		costs.forEach((r, i) -> s.costs.put(r, i.copy()));
+		aoes.forEach((a) -> {
+			var o = new ObjectStat<Aoe>(a.base.copy());
+			if(a.setter != null) o.setter = a.setter.copy();
+			s.aoes.add(o);
+		});
+		
+		s.minRangeRadius = minRangeRadius.copy();
+		s.maxRangeRadius = maxRangeRadius.copy();
+		s.minRangePattern = new ObjectStat<Aoe>(minRangePattern.base.copy());
+		if(minRangePattern.setter != null) s.minRangePattern.setter = minRangePattern.setter.copy();
+		s.maxRangePattern = new ObjectStat<Aoe>(maxRangePattern.base.copy());
+		if(maxRangePattern.setter != null) s.maxRangePattern.setter = maxRangePattern.setter.copy();
+
+		s.cooldown = cooldown.copy();
+		s.castPerTurn = castPerTurn.copy();
+		s.castPerTarget = castPerTarget.copy();
+		
+		s.lineOfSight = lineOfSight.copy();
+		
+		return s;
 	}
 	
 	

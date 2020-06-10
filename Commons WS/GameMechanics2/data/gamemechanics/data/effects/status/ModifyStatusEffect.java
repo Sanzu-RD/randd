@@ -3,10 +3,10 @@ package gamemechanics.data.effects.status;
 import data.new1.Effect;
 import data.new1.spellstats.imp.TargetConditionStat;
 import gamemechanics.common.Aoe;
-import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.status.OnModifyStatusEvent;
-import gamemechanics.models.entities.Cell;
-import gamemechanics.models.entities.Entity;
+import gamemechanics.models.Cell;
+import gamemechanics.models.Creature;
+import gamemechanics.models.Fight;
 
 /** One-shot effect */
 public class ModifyStatusEffect extends Effect {
@@ -14,35 +14,35 @@ public class ModifyStatusEffect extends Effect {
 	// mods to add, but to which statuses if not all ? 
 	public int modStacks, modDuration;
 	
-	public ModifyStatusEffect(Aoe aoe, TargetConditionStat targetConditions, int modStacks, int modDuration) {
-		super(aoe, targetConditions);
+	public ModifyStatusEffect(Fight f, Aoe aoe, TargetConditionStat targetConditions, int modStacks, int modDuration) {
+		super(f, aoe, targetConditions);
 		this.modStacks = modStacks;
 		this.modDuration = modDuration;
 	}
 
 	@Override
-	public OnModifyStatusEvent createAssociatedEvent(Entity source, Cell target) {
+	public OnModifyStatusEvent createAssociatedEvent(Creature source, Cell target) {
 		return new OnModifyStatusEvent(source, target, this);
 	}
 
 	@Override
-	public void prepareCaster(Entity caster, Cell aoeOrigin) {
+	public void prepareCaster(Creature caster, Cell aoeOrigin) {
 		
 	}
 
 	@Override
-	public void prepareTarget(Entity caster, Cell target) {
+	public void prepareTarget(Creature caster, Cell target) {
 		
 	}
 
 	@Override
-	public void apply0(Entity caster, Cell target) {
+	public void apply0(Creature caster, Cell target) {
 		
 	}
 
 	@Override
 	public ModifyStatusEffect copy() {
-		return new ModifyStatusEffect(aoe, targetConditions, modStacks, modDuration);
+		return new ModifyStatusEffect(get(Fight.class), aoe, targetConditions, modStacks, modDuration);
 	}
 
 

@@ -1,5 +1,7 @@
 package data.new1.spellstats.base;
 
+import gamemechanics.common.Aoe;
+
 public class ObjectStat<T> {
 	public T base;
 	public T setter;
@@ -12,5 +14,6 @@ public class ObjectStat<T> {
 		if(setter != null) return setter;
 		return base;
 	}
+
 	
 }

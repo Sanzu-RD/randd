@@ -37,7 +37,7 @@ public class QuickOptions extends SapphireWidget {
 	@Override
 	protected void init() {
 		//var c = imgIsoTop.getColor();
-		Log.info("Quick options init " + lblIsoTop);
+//		Log.info("Quick options init " + lblIsoTop);
 		LapisUtil.onClick(btnIsoTop, this::clickIsoTop);
 		LapisUtil.onClick(imgFlag, this::clickFlag);
 		LapisUtil.onClick(imgRotate, this::clickRotate);

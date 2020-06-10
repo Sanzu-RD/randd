@@ -2,10 +2,10 @@ package gamemechanics.events.new1;
 
 import com.google.common.eventbus.EventBus;
 
+import data.new1.ecs.Entity;
 import data.new1.timed.Status;
-import gamemechanics.events.new1.Handler.HandlerType;
-import gamemechanics.models.entities.Entity;
 
+@SuppressWarnings("preview")
 public class EventPipeline {
 	
 	
