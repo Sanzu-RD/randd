@@ -30,7 +30,8 @@ module GameMechanics2 {
 	exports gamemechanics.systems;
 	exports gamemechanics.components;
 	exports gamemechanics.main;
-	
+
+	requires transitive netty.all;
 	requires transitive com.google.common;
 	requires transitive com.souchy.randd.commons.TealWaters;
 	requires transitive com.google.guice;

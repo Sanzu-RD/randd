@@ -1,5 +1,7 @@
 package data.new1.ecs;
 
+import com.souchy.randd.commons.tealwaters.logging.Log;
+
 /**
  * 
  * 
@@ -12,6 +14,7 @@ public abstract class System {
 	protected Engine engine;
 	
 	public System(Engine engine) {
+		Log.info("System " + this + " register to " + engine);
 		this.engine = engine;
 		engine.add(this);
 		engine.bus.register(this);

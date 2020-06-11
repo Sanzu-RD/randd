@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.eventbus.Subscribe;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import data.new1.ecs.Engine;
 import data.new1.ecs.Engine.AddEntityEvent;
@@ -34,8 +35,10 @@ public class CellSystem extends data.new1.ecs.System {
 	
 	@Subscribe
 	public void onAddedEntity(AddEntityEvent event) {
-		if(event.entity instanceof Cell)
+		if(event.entity instanceof Cell) {
+//			Log.info("add entity event cell " + event.entity);
 			family.add((Cell) event.entity);
+		}
 	}
 	@Subscribe
 	public void onRemovedEntity(RemoveEntityEvent event) {

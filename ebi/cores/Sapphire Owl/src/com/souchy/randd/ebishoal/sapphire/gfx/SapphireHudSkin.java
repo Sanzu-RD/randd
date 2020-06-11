@@ -22,6 +22,7 @@ import com.souchy.randd.ebishoal.sapphire.confs.SapphireDevConfig;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
+import com.souchy.randd.moonstone.white.Moonstone;
 
 import gamemechanics.main.DiamondModels;
 import gamemechanics.models.Creature;
@@ -98,33 +99,17 @@ public class SapphireHudSkin extends Skin {
 		//Log.info("c.spellbook : " + c.spellbook);
 		// set spell icons
 		
-		for(var s : c.spellbook) {
-			//int typeid = s.id() / 1000000 * 1000000;
-			//int creatureid = s.id() / 1000 * 1000;
-			//int sid = s.id() - typeid - creatureid;
-			//String iconPath = "";
-			//Log.info("SapphireHudSkin spell ids : " + typeid + ", " + creatureid + ", " + sid);
-			//if(typeid > 0) {
-				//iconPath = SapphireResources.getCreatureTypeGfx(CreatureType.getName(typeid), s.getIconName());
-				//Log.info("SapphireHudSkin spell asset path (creature type) : " + iconPath + ". For creature type : " + CreatureType.values()[typeid].name() + ". For Spell : " + s.getIconName());
-			//} else 
-			//if (creatureid > 0) {
-				String iconPath = "missing";
-				var spellResource = AssetConfs.spells.get(s.modelid()); //Integer.toString(s.id());
-				if(spellResource != null) {
-					iconPath = SapphireAssets.getSpellIconPath(spellResource.icon); //model.getStrID(), 
-					iconPath = SapphireAssets.getSkinPath(iconPath) + "_round";
-					var img = VisUI.getSkin().getDrawable(iconPath);
-//					Texture texture = LapisAssets.assets.get(iconPath + "_round");
-//					var icon = new TextureRegionDrawable(new RoundTextureRegion(texture));
-//					SapphireGame.gfx.hud.skin.get("iconPath", RoundImage.class);
-					
-//					Log.info("spell icon : " + spellResource.icon + " -> " + iconpath + " -> " + img);
-					lml.getDefaultSkin().add(prefix + "Spell" + i, img);
-				}
-				//var str = iconPath.substring("res/".length(), iconPath.lastIndexOf(".")).replace("/", ".");
-				//Log.info("SapphireHudSkin spell asset path (creature) : " + iconPath + ". For creature : " + model.getStrID() + ". For Spell : " + s.getIconName());
-			//}
+		for (var s : c.spellbook) {
+			String iconPath = "missing";
+			var spell = Moonstone.fight.spells.get(s);
+			var spellResource = AssetConfs.spells.get(spell.modelid()); 
+			if (spellResource != null) {
+				iconPath = SapphireAssets.getSpellIconPath(spellResource.icon);
+				iconPath = SapphireAssets.getSkinPath(iconPath) + "_round";
+				var img = VisUI.getSkin().getDrawable(iconPath);
+//				Log.info("spell icon : " + spellResource.icon + " -> " + iconpath + " -> " + img);
+				lml.getDefaultSkin().add(prefix + "Spell" + i, img);
+			}
 			i++;
 		}
 		

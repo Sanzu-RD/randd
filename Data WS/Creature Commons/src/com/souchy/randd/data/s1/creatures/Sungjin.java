@@ -1,5 +1,6 @@
 package com.souchy.randd.data.s1.creatures;
 
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 
 import data.new1.spellstats.CreatureStats;

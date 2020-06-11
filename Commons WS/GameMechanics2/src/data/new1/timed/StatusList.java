@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import data.new1.ecs.Entity;
 import gamemechanics.main.DiamondModels;
@@ -111,6 +112,7 @@ public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 		out.writeInt(statuses.size());
+//		Log.info("write status size " + statuses.size());
 		statuses.forEach(status -> {
 			out.writeInt(status.modelID());
 			status.serialize(out);
@@ -121,6 +123,7 @@ public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
 		int statusesSize = in.readInt();
+//		Log.info("read status size " + statusesSize);
 		// deserialize tous les status
 		for(int i = 0; i < statusesSize; i++) {
 			int modelid = in.readInt();
@@ -128,7 +131,7 @@ public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 			int targetid = in.readInt();
 			
 			var statusModel = DiamondModels.statuses.get(modelid);
-			var status = statusModel.create(get(Fight.class), sourceid, targetid); //new EntityRef(this.fight, sourceid), new EntityRef(this.fight, targetid)); //this.fight, sourceid, targetid);
+			var status = statusModel.create(null, sourceid, targetid); //new EntityRef(this.fight, sourceid), new EntityRef(this.fight, targetid)); //this.fight, sourceid, targetid);
 			status.deserialize(in);
 			
 			this.statuses.add(status);

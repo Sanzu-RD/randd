@@ -20,8 +20,10 @@ public class CreateFightHandler implements BBMessageHandler<CreateFight> {
 		if(true) { // if the client is coral matchmaking server, then the request is authorized
 			var fight = new Fight();
 			id = fight.id;
-			BlackMoonstone.moon.fights.add(fight);
+			BlackMoonstone.moon.fights.put(id, fight);
 		}
+		
+		// return l'id à coral
 		// reply so the client knows if the request was authorized (0 means not) and what's the fight ID so coral can tell the players what fight to join
 //		client.writeAndFlush(new CreateFightResponse(id));
 	}

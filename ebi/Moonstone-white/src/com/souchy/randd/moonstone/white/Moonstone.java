@@ -12,30 +12,20 @@ import io.netty.util.AttributeKey;
 
 public class Moonstone extends EbiShoalTCP { 
 	
-	// attribute key for this tcpclient so it can be retrieved later from the client channel
-//	public static final AttributeKey<Moonstone> moonKey = AttributeKey.newInstance("moonstone.white");
 	public static final AttributeKey<String[]> authKey = AttributeKey.newInstance("moonstone.white.auth");
 	
 	public static Moonstone moon;
 	public static Fight fight;
 	
-	// temp data for authentication and joining a fight
-//	public String username;
-//	public String password;
-//	public int fightid;
-	
 	
 	public Moonstone(String ip, int port, EbiShoalCore core) throws Exception {
 		super(ip, port, core);
 		moon = this;
-//		this.channel.attr(moonKey).set(this);
+//		fight = new Fight();
 	}
 	
 	public void auth(String username, String password, int fightid) {
-//		this.username = username;
-//		this.password = password;
-//		this.fightid = fightid;
-		this.channel.attr(authKey).set(new String[]{ username, password, fightid + "" });
+//		this.channel.attr(authKey).set(new String[]{ username, password, fightid + "" });
 		write(new GetSalt(username));
 	}
 	

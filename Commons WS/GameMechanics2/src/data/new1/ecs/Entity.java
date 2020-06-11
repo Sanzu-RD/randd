@@ -13,10 +13,14 @@ public class Entity {
 	public final HashMap<Class<?>, Object> components = new HashMap<>();
 	
 	public Entity(Engine engine) {
+		register(engine);
+	}
+	
+	public void register(Engine engine) {
 		if(engine == null) return; // for models cases like Spell, Status
 		this.add(engine);
-		engine.add(this);
 		engine.bus.register(this);
+		engine.add(this);
 	}
 	
 	public void dispose() {

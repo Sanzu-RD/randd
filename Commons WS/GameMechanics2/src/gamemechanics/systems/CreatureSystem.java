@@ -37,8 +37,8 @@ public class CreatureSystem extends data.new1.ecs.System {
 	
 	@Subscribe
 	public void onAddedEntity(AddEntityEvent event) {
-		if(event.entity instanceof Creature) {
-//			Log.info("creature system onAddedEntity " + event.entity);
+		if (event.entity instanceof Creature) {
+			Log.info("creature system " + this + " add " + event.entity);
 			family.add((Creature) event.entity);
 		}
 	}

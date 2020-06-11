@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
+import com.souchy.randd.commons.deathebi.msg.GetSalt;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.creatures.Sungjin;
 import com.souchy.randd.data.s1.main.Elements;
@@ -20,6 +21,7 @@ import com.souchy.randd.ebishoal.sapphire.confs.AssetConfs;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHudSkin;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.jade.meta.JadeCreature;
+import com.souchy.randd.moonstone.white.Moonstone;
 
 import data.new1.spellstats.base.IntStat;
 import gamemechanics.common.generic.Vector2;
@@ -59,75 +61,24 @@ public class SapphireGame extends LapisGame {
 		// screen
 		gfx = new SapphireScreen();
 		
+		// pfx
 		ParticleEffectLoader.ParticleEffectLoadParameter params = new ParticleEffectLoader.ParticleEffectLoadParameter(gfx.getPfxSystem().getBatches());
 		LapisAssets.loadParticleEffects(Gdx.files.internal("res/fx/"), params);
 		
 		Log.info("LapisResources : { " + String.join(", ", LapisAssets.assets.getAssetNames()) + " }");
-		
-		
-		// load creature and creature spells assets (creature i18n bundle, creature avatar, spells icons)
-//		SapphireOwl.data.creatures.values().forEach(model -> {
-//			SapphireResources.loadResources(model);
-//		});
-		
-		
-		// need to load items resources and random spells resources (spells should already be loaded through creatures th)
-		// ...
-		
-		
-		
-		// server should initiate the Fight object with all the characters already
-		var jadeteam1 = new JadeCreature[4];
-		var jadeteam2 = new JadeCreature[4];
-		
-		// jade customization
-		JadeCreature jade1 = new JadeCreature();
-		jade1.affinities = new int[Elements.values().length];
-		jade1.affinities[Elements.air.ordinal()] = 30; // personalized 30% air affinity
-		jade1.creatureModelID = 1; 
-		jade1.spellIDs = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		jadeteam1[0] = jade1;
-		
-		// jade customization
-		JadeCreature jade2 = new JadeCreature();
-		jade2.affinities = new int[Elements.values().length];
-		jade2.affinities[Elements.air.ordinal()] = 30; // personalized 30% air affinity
-		jade2.creatureModelID = 2; 
-		jade2.spellIDs = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		jadeteam2[0] = jade2;
 
-		var startPositions = new Position[] { new Position(2, 16), new Position(16, 2) };
 		
-		// then sapphire should just show these creatures from the deserialized Fight object (dont need to instantiate anything here)
 		try {
 			Log.info("data.creatures : " + DiamondModels.creatures);
-			
-			// fight
-			fight = new Fight();
-			// systems
-			new SapphireEntitySystem(fight);
-			
-			// create teams A & B
-			for(var jade : jadeteam1)
-				if(jade != null) // wouldnt need this in the final product
-				fight.add(testCreateCreature(jade), Team.A);
-			for(var jade : jadeteam2)
-				if(jade != null)
-				fight.add(testCreateCreature(jade), Team.B);
-			for(int i = 0; i < startPositions.length; i++)
-				fight.timeline.get(i).pos = startPositions[i];
-			
-//			for(var c : fight.timeline) {
-//				Log.info("timeline creature " + c + " " + c.model.id() + " " + c.pos + " " + c.team);
-//			}
 
-			Log.info("cells intances " + fight.cells.family.size());
-			Log.info("creatures intances " + fight.creatures.family.size());
-			Log.info("spells intances " + fight.spells.family.size());
-			Log.info("status intances " + fight.status.family.size());
+			SapphireGame.fight = Moonstone.fight = new Fight();
+			new SapphireEntitySystem(Moonstone.fight);
+
+			Moonstone.write(new GetSalt());
 			
 			// player hud
-			SapphireHudSkin.play(fight.teamA.get(0));
+//			SapphireHudSkin.play(fight.teamA.get(0));
+
 		} catch (Exception e) {
 			Log.error("SapphireOwl creature error : ", e);
 			Gdx.app.exit();
@@ -166,8 +117,6 @@ public class SapphireGame extends LapisGame {
 		// hair darker
 		float ratio = 1f /  2f;
 		modelinstance.materials.get(5).set(ColorAttribute.createDiffuse(baseColor.mul(ratio, ratio, ratio, 1f)));
-		
-		//rnd.nextFloat() * 255f, rnd.nextFloat() * 255f, rnd.nextFloat() * 255f, 1f));
 		
 		return creature;
 	}

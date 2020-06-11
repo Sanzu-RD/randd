@@ -92,7 +92,7 @@ public class CreatureSheet extends SapphireWidget {
 	
 	@Override
 	protected void init() {
-		creature = SapphireGame.fight.teamA.get(0);
+//		creature = SapphireGame.fight.teamA.get(0);
 
 		this.addListener(new DragAndResizeListener(this));
 		
@@ -162,6 +162,7 @@ public class CreatureSheet extends SapphireWidget {
 		moveMax.setText(getMoveMax());
 		
 		this.flowstatus.clearChildren();
+		if(creature != null)
 		creature.statuses.forEach(s -> {
 			var icon = (StatusIcon) LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml");
 			icon.refresh(s);
@@ -188,21 +189,25 @@ public class CreatureSheet extends SapphireWidget {
 
 	@LmlAction("getStatusCount")
 	public int getStatusCount() {
+		if(creature == null) return 0;
 		return creature.statuses.size();
 	}
 
 	@LmlAction("getCreatureModelId")
 	public int getCreatureModelId() {
+		if(creature == null) return 0;
 		return creature.modelid;
 	}
 
 	@LmlAction("getCreatureId")
 	public int getCreatureId() {
+		if(creature == null) return 0;
 		return creature.id;
 	}
 	
 	@LmlAction("getCreatureName")
 	public String getCreatureName() {
+		if(creature == null) return "null";
 		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
 		var name = i18n.get("creature." + creature.modelid + ".name");;
 		Log.info("getCreatureName " + creature.modelid + " = " + name);
@@ -210,46 +215,56 @@ public class CreatureSheet extends SapphireWidget {
 	}
 	@LmlAction("getDescription")
 	public String getDescription() {
+		if(creature == null) return "null";
 		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
 		return i18n.get("creature."+creature.modelid+".description");
 	}
 
 	@LmlAction("getLife")
 	public int getLifeCurrent() {
+		if(creature == null) return 0;
 		return creature.stats.resources.get(Resource.life).value(); //.getResourceCurrent(Resource.life, false);
 	}
 	@LmlAction("getLifeShield")
 	public int getLifeShield() {
+		if(creature == null) return 0;
 		return creature.stats.shield.get(Resource.life).value(); //getResourceCurrent(Resource.life, true);
 	}
 	@LmlAction("getLifeMax")
 	public int getLifeMax() {
+		if(creature == null) return 0;
 		return creature.stats.resources.get(Resource.life).max(); //getResourceMax(Resource.life);
 	}
 
 	@LmlAction("getMana")
 	public int getManaCurrent() {
+		if(creature == null) return 0;
 		return creature.stats.resources.get(Resource.mana).value(); //getResourceCurrent(Resource.mana, false);
 	}
 	@LmlAction("getManaShield")
 	public int getManaShield() {
+		if(creature == null) return 0;
 		return creature.stats.shield.get(Resource.mana).value(); //getResourceCurrent(Resource.mana, true);
 	}
 	@LmlAction("getManaMax")
 	public int getManaMax() {
+		if(creature == null) return 0;
 		return creature.stats.resources.get(Resource.mana).max(); //getResourceMax(Resource.mana);
 	}
 
 	@LmlAction("getMove")
 	public int getMoveCurrent() {
+		if(creature == null) return 0;
 		return creature.stats.resources.get(Resource.move).value(); //getResourceCurrent(Resource.move, false);
 	}
 	@LmlAction("getMoveShield")
 	public int getMoveShield() {
+		if(creature == null) return 0;
 		return creature.stats.shield.get(Resource.move).value(); //getResourceCurrent(Resource.move, true);
 	}
 	@LmlAction("getMoveMax")
 	public int getMoveMax() {
+		if(creature == null) return 0;
 		return creature.stats.resources.get(Resource.move).max(); //getResourceMax(Resource.move);
 	}
 	

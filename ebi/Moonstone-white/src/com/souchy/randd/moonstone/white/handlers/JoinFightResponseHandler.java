@@ -6,6 +6,7 @@ import com.souchy.randd.moonstone.commons.packets.s2c.JoinFightResponse;
 import com.souchy.randd.moonstone.commons.packets.s2c.Update;
 import com.souchy.randd.moonstone.white.Moonstone;
 
+import gamemechanics.models.Fight;
 import io.netty.channel.ChannelHandlerContext;
 
 public class JoinFightResponseHandler implements BBMessageHandler<JoinFightResponse> {
@@ -15,8 +16,9 @@ public class JoinFightResponseHandler implements BBMessageHandler<JoinFightRespo
 		// 
 		Log.info("Moonstone White handle JoinFightResponse");
 		
-		// data update might be better than swap to keep references
-		Moonstone.fight.creatures.family = message.creatures;
+		// close sapphire if not accepted
+		if(!message.accepted) 
+			System.exit(0);
 	}
 
 	@Override

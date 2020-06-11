@@ -131,10 +131,11 @@ public class SapphireScreen extends LapisScreen {
 	public void renderWorld() {
 		super.renderWorld();
 		// render dynamic instances (cursor, creatures, terrain effects like glyphs and traps, highlighting effects ..)
-		
+
 		SapphireEntitySystem.family.forEach(e -> {
 			var model = e.get(ModelInstance.class);
-			if(model != null) getModelBatch().render(model);
+			if (model != null)
+				getModelBatch().render(model);
 		});
 		
 	}

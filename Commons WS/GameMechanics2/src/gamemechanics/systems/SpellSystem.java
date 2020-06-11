@@ -35,6 +35,13 @@ public class SpellSystem extends data.new1.ecs.System {
 		});
 	}
 	
+	public Spell get(int instanceid) {
+		for(var spell : family)
+			if(spell.id == instanceid)
+				return spell;
+		return null;
+	}
+	
 	@Subscribe
 	public void onAddedEntity(AddEntityEvent event) {
 		if(event.entity instanceof Spell && event.entity.get(Fight.class) != null) // models have no fight component and we dont want them

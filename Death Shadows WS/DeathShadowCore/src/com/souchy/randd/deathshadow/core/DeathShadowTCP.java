@@ -20,7 +20,9 @@ import io.netty.channel.ChannelPipeline;
  */
 public class DeathShadowTCP extends NettyServer {
 
-	private Map<User, Channel> users;
+
+	private AuthenticationFilter auth = new AuthenticationFilter();
+	private Map<User, Channel> users = auth.userChannels;
 	
 	/**
 	 * Create & Start the server. Should call .block() after to wait for server closure before exiting the application <br>
@@ -37,12 +39,13 @@ public class DeathShadowTCP extends NettyServer {
 	
 	@Override
 	public void initPipeline(ChannelPipeline pipe) {
-		var auth = new AuthenticationFilter();
-		users = auth.userChannels;
-		
 		pipe.addLast(connectionHandler);
-		pipe.addLast(decoder.create()); 
+		
+		pipe.addLast(lengthEncoder); 
 		pipe.addLast(encoder); 
+
+		pipe.addLast(lengthDecoder); 
+		pipe.addLast(decoder.create()); 
 		pipe.addLast(auth); // auth avant le packet handler
 		pipe.addLast(handler); 
 	}

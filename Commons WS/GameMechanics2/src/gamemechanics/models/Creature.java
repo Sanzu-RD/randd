@@ -6,6 +6,7 @@ import java.util.List;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.meta.JadeCreature;
 
 import data.new1.ecs.Entity;
@@ -43,8 +44,8 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 	/** compiled stats (includes model, jade and statuses stats) */
 	public CreatureStats stats; 
 	
-	/** spells instances */
-	public List<Spell> spellbook;
+	/** spells instances ids */
+	public List<Integer> spellbook;
 
 	/** Statuses */
 	public StatusList statuses;
@@ -80,7 +81,8 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		// copy chosen spells
 		for(int i : jade.spellIDs) {
 			var s = DiamondModels.spells.get(i);
-			if(s != null) spellbook.add(s.copy(fight)); //new SpellInstance(f, s)); // TODO create spell instances
+			if(s != null) 
+				spellbook.add(s.copy(fight).id); //new SpellInstance(f, s)); // TODO create spell instances
 //			var s = dep.spells.get(i);
 //			if(s != null) spellbook.add(s);
 		}
@@ -105,9 +107,19 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		out.writeDouble(this.pos.x);
 		out.writeDouble(this.pos.y);
 		out.writeInt(this.team.ordinal());
-		this.statuses.serialize(out);
+		
+		// stats
 		this.stats.serialize(out);
-		// TODO serialize spellbook, targeting...
+		
+		// spells
+		out.writeInt(spellbook.size());
+		spellbook.forEach(s -> out.writeInt(s));
+//		Log.info("write spellbook " + spellbook.size());
+
+		// status 
+		this.statuses.serialize(out);
+		
+		// TODO serialize targeting...
 		return null;
 	}
 
@@ -117,9 +129,26 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		this.modelid = in.readInt();
 		this.pos = new Position(in.readDouble(), in.readDouble());
 		this.team = Team.values()[in.readInt()];
-		this.statuses.deserialize(in);
+		
+		// stats
+		this.stats = new CreatureStats();
 		this.stats.deserialize(in);
-		// TODO deserialize spellbook, targeting...
+
+		// spells
+		this.spellbook = new ArrayList<>();
+		int spellcount = in.readInt();
+		for(int i = 0; i < spellcount; i++) {
+			int spellid = in.readInt();
+			spellbook.add(spellid);
+		}
+//		Log.info("read spellbook " + spellbook.size());
+		
+		// status
+		this.statuses = new StatusList(null);
+		this.statuses.deserialize(in);
+		
+		
+		// TODO deserialize targeting...
 		return null;
 	}
 	

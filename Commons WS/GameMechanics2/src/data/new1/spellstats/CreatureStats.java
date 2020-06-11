@@ -146,9 +146,9 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		resources.forEach((r, i) -> i.deserialize(in));
 		shield.forEach((r, i) -> i.deserialize(in));
 		
-		affinity.forEach((r, i) -> i.deserialize(in));
-		resistance.forEach((r, i) -> i.deserialize(in));
-		penetration.forEach((r, i) -> i.deserialize(in));
+		affinity.forEach((e, i) -> i.deserialize(in));
+		resistance.forEach((e, i) -> i.deserialize(in));
+		penetration.forEach((e, i) -> i.deserialize(in));
 		
 		this.healingAffinity.deserialize(in);
 		this.healingRes.deserialize(in);

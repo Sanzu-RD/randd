@@ -10,13 +10,13 @@ import io.netty.buffer.ByteBuf;
 public class JoinFight implements BBMessage {
 
 //	public String userID;
-	public String fightID;
+	public int fightID;
 	
 	public JoinFight() {
 		
 	}
 	
-	public JoinFight(String fightID) {
+	public JoinFight(int fightID) {
 //		this.userID = userID;
 		this.fightID = fightID;
 	}
@@ -24,14 +24,16 @@ public class JoinFight implements BBMessage {
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 //		writeString(out, userID);
-		writeString(out, fightID);
+//		writeString(out, fightID);
+		out.writeInt(fightID);
 		return out;
 	}
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
 //		userID = readString(in);
-		fightID = readString(in);
+//		fightID = readString(in);
+		fightID = in.readInt();
 		return this;
 	}
 

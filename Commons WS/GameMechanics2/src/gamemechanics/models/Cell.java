@@ -72,14 +72,18 @@ public class Cell extends Entity implements BBSerializer, BBDeserializer {
 		out.writeInt(id);
 		out.writeDouble(pos.x);
 		out.writeDouble(pos.y);
-		// TODO Auto-generated method stub
-		return null;
+		
+		// TODO serialize status ids, creatures ids, targeting
+		return out;
 	}
 
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
-		// TODO Auto-generated method stub
+		id = in.readInt();
+		pos = new Position(in.readDouble(), in.readDouble());
+
+		// TODO deserialize status ids, creatures ids, targeting
 		return null;
 	}
 	

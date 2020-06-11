@@ -35,7 +35,6 @@ public class BBMessageDecoder extends ByteToMessageDecoder  {
 			
 			packetid = data.readInt();
 			
-
 			if (msgFactories.has(packetid)) { // res.canHandle(packetid)){
 				var a = msgFactories.get(packetid).create();
 				BBMessage msg = a.deserialize(data);

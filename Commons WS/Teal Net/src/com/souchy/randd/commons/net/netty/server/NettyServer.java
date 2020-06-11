@@ -22,6 +22,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.ByteToMessageDecoder;
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
+import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.codec.MessageToByteEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
@@ -117,13 +119,20 @@ public class NettyServer {
 		}
 	};
 	
+	protected LengthFieldPrepender lengthEncoder = new LengthFieldPrepender(2);
+	protected LengthFieldBasedFrameDecoder lengthDecoder = new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 2, 0, 2);
+	
 	/**
 	 * Initialize the ChannelPipeline any new client
 	 */
 	public void initPipeline(ChannelPipeline pipe) {
 		pipe.addLast(connectionHandler);
-		pipe.addLast(decoder.create()); 
+		
+		pipe.addLast(lengthEncoder);
 		pipe.addLast(encoder); 
+		
+		pipe.addLast(lengthDecoder);
+		pipe.addLast(decoder.create()); 
 		pipe.addLast(handler); 
 	}
 

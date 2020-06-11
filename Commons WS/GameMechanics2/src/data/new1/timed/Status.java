@@ -123,6 +123,7 @@ public abstract class Status extends Entity implements BBSerializer, BBDeseriali
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
+		this.id = in.readInt();
 		// TODO Auto-generated method stub
 		return null;
 	}

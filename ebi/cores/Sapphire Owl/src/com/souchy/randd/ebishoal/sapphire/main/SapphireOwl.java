@@ -4,12 +4,15 @@ import java.io.File;
 
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.souchy.randd.commons.deathebi.msg.GetSalt;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireOwlConf;
 import com.souchy.randd.moonstone.white.Moonstone;
+
+import gamemechanics.models.Fight;
 
 public class SapphireOwl extends LapisCore { 
 
@@ -37,12 +40,14 @@ public class SapphireOwl extends LapisCore {
 			var ip = args[1]; // "localhost";
 			var port = Integer.parseInt(args[2]); // 443;
 			var username = args[3];
-			var pass = args[4];
+			var password = args[4];
 			var fightid = Integer.parseInt(args[5]);
 
 			// authentifie moonstone et join le fight 
 			moon = new Moonstone(ip, port, core); 
-			moon.auth(username, pass, fightid);
+			moon.channel.attr(Moonstone.authKey).set(new String[]{ username, password, fightid + "" });
+			
+			Log.info("******************************************************************************");
 		}
 		
 		core.start();
