@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.eventbus.EventBus;
+import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 
 import data.new1.ecs.Engine;
@@ -18,16 +21,17 @@ import gamemechanics.systems.CellSystem;
 import gamemechanics.systems.CreatureSystem;
 import gamemechanics.systems.SpellSystem;
 import gamemechanics.systems.StatusSystem;
+import io.netty.buffer.ByteBuf;
 
 
-public class Fight extends Engine implements Identifiable<Integer> {
+public class Fight extends Engine implements Identifiable<Integer>, BBSerializer, BBDeserializer {
 	
 	//public EventPipeline bus;
 	
 	/**
 	 * need a fight id for fight instances on blackmoonstone servers and for clients to join the right fight
 	 */
-	public int id;
+	public final int id = ++engineIdCounter;
 	
 	/**
 	 * All entities (cells and creatures)
@@ -42,11 +46,10 @@ public class Fight extends Engine implements Identifiable<Integer> {
 	/**
 	 * Creature timeline / turn order
 	 */
-	public List<Creature> timeline;
+	public List<Creature> timeline; // this should just be creature IDS, or at least EntityRefs
 	
-	public List<Creature> teamA;
-	public List<Creature> teamB;
-//	public List<Creature> teamC;
+	public List<Creature> teamA; // this should just be creature IDS 
+	public List<Creature> teamB; // this should just be creature IDS 
 	
 	/**
 	 * action pipeline : actions currently on the stack
@@ -63,10 +66,13 @@ public class Fight extends Engine implements Identifiable<Integer> {
 	 */
 	public EventPipeline handlers;
 	
+	// systems hold and manage instances, theyre cool guys
+	// might want a system for Effects and have effect models with ids the same way as status/spells
 	public CreatureSystem creatures;
 	public CellSystem cells;
 	public SpellSystem spells;
 	public StatusSystem status;
+	
 	
 	public Fight() {
 		super();
@@ -108,6 +114,20 @@ public class Fight extends Engine implements Identifiable<Integer> {
 	@Override
 	public Integer getID() {
 		return id;
+	}
+
+
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

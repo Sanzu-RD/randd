@@ -1,6 +1,12 @@
 package gamemechanics.common.generic;
 
-public class Vector2 {
+import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+
+import io.netty.buffer.ByteBuf;
+
+public class Vector2 implements BBSerializer, BBDeserializer {
 	
 	public double x;
 	public double y;
@@ -63,6 +69,20 @@ public class Vector2 {
 	@Override
 	public String toString() {
 		return "(" + x + "," + y + ")";
+	}
+
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		out.writeDouble(x);
+		out.writeDouble(y);
+		return out;
+	}
+
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		x = in.readDouble();
+		y = in.readDouble();
+		return null;
 	}
 
 	

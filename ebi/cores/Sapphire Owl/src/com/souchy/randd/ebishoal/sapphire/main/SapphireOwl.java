@@ -9,7 +9,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireOwlConf;
-import com.souchy.randd.moonstone.white.WhiteMoonstone;
+import com.souchy.randd.moonstone.white.Moonstone;
 
 public class SapphireOwl extends LapisCore { 
 
@@ -23,7 +23,7 @@ public class SapphireOwl extends LapisCore {
 	/**
 	 * net comm
 	 */
-	public static WhiteMoonstone moon;
+	public static Moonstone moon;
 	
 	
 	public static void main(String[] args) throws Exception {
@@ -41,7 +41,7 @@ public class SapphireOwl extends LapisCore {
 			var fightid = Integer.parseInt(args[5]);
 
 			// authentifie moonstone et join le fight 
-			moon = new WhiteMoonstone(ip, port, core); 
+			moon = new Moonstone(ip, port, core); 
 			moon.auth(username, pass, fightid);
 		}
 		

@@ -115,6 +115,8 @@ public abstract class Status extends Entity implements BBSerializer, BBDeseriali
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
+		out.writeInt(modelID());
+		out.writeInt(id);
 		// TODO Auto-generated method stub
 		return null;
 	}

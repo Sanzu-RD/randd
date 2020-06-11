@@ -35,7 +35,7 @@ public class SapphireGame extends LapisGame {
 	
 	public static SapphireScreen gfx;
 
-	public static Fight fight;
+	public static Fight fight; // FIXME replace this with Moonstone.fight or use the reference for now i guess
 	
 	@Override
 	public void init() {
@@ -163,7 +163,7 @@ public class SapphireGame extends LapisGame {
 		modelinstance.materials.get(1).set(ColorAttribute.createDiffuse(baseColor));
 		// hat
 		modelinstance.materials.get(4).set(ColorAttribute.createDiffuse(baseColor));
-		// hair
+		// hair darker
 		float ratio = 1f /  2f;
 		modelinstance.materials.get(5).set(ColorAttribute.createDiffuse(baseColor.mul(ratio, ratio, ratio, 1f)));
 		

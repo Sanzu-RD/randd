@@ -102,9 +102,9 @@ public class NettyClient {
 	}
 	
 	
-	public void write(BBMessage msg) {
-		channel.writeAndFlush(msg);
-	}
+//	public void write(BBMessage msg) {
+//		channel.writeAndFlush(msg);
+//	}
 
 	private ChannelInitializer<SocketChannel> channelInit = new ChannelInitializer<>() {
 		@Override

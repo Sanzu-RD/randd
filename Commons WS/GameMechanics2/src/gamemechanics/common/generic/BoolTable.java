@@ -2,6 +2,7 @@ package gamemechanics.common.generic;
 
 
 public class BoolTable extends Table<Boolean> {
+	
 	public BoolTable(int width, int height) {
 		super(width, height, false);
 	}

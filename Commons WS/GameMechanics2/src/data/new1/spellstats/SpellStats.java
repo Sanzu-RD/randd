@@ -7,6 +7,10 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableList;
+import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+
 import data.new1.spellstats.base.BoolStat;
 import data.new1.spellstats.base.IntStat;
 import data.new1.spellstats.base.ObjectStat;
@@ -21,8 +25,9 @@ import gamemechanics.models.Spell;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.properties.Resource;
+import io.netty.buffer.ByteBuf;
 
-public class SpellStats { //extends Entyty {
+public class SpellStats implements BBSerializer, BBDeserializer { //extends Entyty {
 	
 	// cast costs
 	public Map<Resource, IntStat> costs = new HashMap<>();
@@ -44,107 +49,6 @@ public class SpellStats { //extends Entyty {
 	// publicly modifiable aoes (spells create their aoes and place them here so that other classes can modify them without knowing the spell .class)
 	public List<ObjectStat<Aoe>> aoes = new ArrayList<>();
 	
-
-//	public BiPredicate<Creature, SpellModel> predicate = (c, s) -> true;
-//	public SpellStats() {
-//		
-//	}
-//	public SpellStats(BiPredicate<Creature, SpellModel> predicate) {
-//		this.predicate = predicate;
-//	}
-	
-	
-	public static class Shockbomb extends Spell {
-		public Shockbomb(Fight f) {
-			super(f);
-		}
-		// this doesnt apply to the cast, it applies to an effect so it's specific to this spell so it's here
-		// aoe pattern for the shock;
-		//public IntStat shockPattern;
-		public IntStat shockRadiusMin;
-		public IntStat shockRadiusMax;
-		public ObjectStat<Supplier<Aoe>> shockPattern = new ObjectStat<>(() -> {
-			return AoeBuilders.circle.apply(shockRadiusMax.value())
-			       .sub(AoeBuilders.circle.apply(shockRadiusMin.value()));
-		});
-		
-		@Override
-		public int modelid() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-		@Override
-		protected SpellStats initBaseStats() {
-			var stats = new SpellStats();
-			return stats;
-		}
-		@Override
-		protected ImmutableList<Element> initElements() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		@Override
-		protected ImmutableList<CreatureType> initCreatureTypes() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		@Override
-		public void onCast(Creature caster, Cell target) {
-			var fight = caster.get(Fight.class);
-			var board = fight.board;
-			
-			var aoe = shockPattern.base.get();
-			
-			// for all cells in the AOE
-			aoe.table.foreach((x, y) -> {
-				new Damage(fight, shockPattern.base.get(), new TargetConditionStat(), new HashMap<>());
-			});
-		}
-		@Override
-		public boolean canCast(Creature caster) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-		@Override
-		public boolean canTarget(Creature caster, Cell target) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-		@Override
-		public Spell copy(Fight fight) {
-			var s = new Shockbomb(fight);
-			s.stats = stats.copy();
-			return s;
-		}
-	}
-	
-	public static class Overcharge {
-		public void onGain(Creature c) {
-			for(var spell : c.spellbook) {
-				if(spell.modelid() == 0) {
-					var s = ((Shockbomb) spell.getModel());
-					
-					spell.stats.aoes.get(0).setter = 
-							AoeBuilders.circle.apply(s.shockRadiusMax.value())
-							.sub(AoeBuilders.circle.apply(s.shockRadiusMin.value()));
-					
-//					s.shockPattern.setter = () -> AoeBuilders.circle.apply(s.shockRadiusMax.value())
-//													.sub(AoeBuilders.circle.apply(s.shockRadiusMin.value()));
-				}
-			}
-		}
-	}
-	
-	public static class BarrageSupport {
-		public void onGain(Creature c) {
-			for(var spell : c.spellbook) {
-				var aoes = new ArrayList<ObjectStat<Aoe>>(); // spell.aoes;
-				aoes.forEach(a -> {
-					a.setter = AoeBuilders.single.get(); //new IntStat(AoePattern.Single.ordinal());
-				});
-			}
-		}
-	}
 
 	public SpellStats copy() {
 		final var s = new SpellStats();
@@ -171,7 +75,103 @@ public class SpellStats { //extends Entyty {
 		
 		return s;
 	}
+
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		
+		minRangeRadius.serialize(out);
+		maxRangeRadius.serialize(out);
+		
+		cooldown.serialize(out);
+		castPerTurn.serialize(out);
+		castPerTarget.serialize(out);
+		
+		lineOfSight.serialize(out);
+
+		// costs
+		out.writeInt(costs.size());
+		costs.forEach((r, i) -> {
+			out.writeInt(r.ordinal());
+			i.serialize(out);
+		});
+		
+		// aoes
+		out.writeInt(aoes.size());
+		aoes.forEach((a) -> a.serialize(out));
+		
+		// range patterns
+		minRangePattern.serialize(out);
+		maxRangePattern.serialize(out);
+		
+		return out;
+	}
 	
+	
+
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		
+		minRangeRadius.deserialize(in);
+		maxRangeRadius.deserialize(in);
+
+		cooldown.deserialize(in);
+		castPerTurn.deserialize(in);
+		castPerTarget.deserialize(in);
+		
+		lineOfSight.deserialize(in);
+
+		// costs
+		int costcount = in.readInt();
+		for(int i = 0; i < costcount; i++) {
+			int ordinal = in.readInt();
+			var val = new IntStat(0);
+			val.deserialize(in);
+			this.costs.put(Resource.values()[ordinal], val);
+		}
+		
+		// aoes
+		int aoecount = in.readInt();
+		for(int i = 0; i < aoecount; i++) {
+			boolean hasbase = in.readBoolean();
+			boolean hassetter = in.readBoolean();
+			var val = new ObjectStat<Aoe>(null);
+			if(hasbase) {
+				val.base = new Aoe(0, 0);
+				val.base.deserialize(in);
+			}
+			if(hassetter) {
+				val.setter = new Aoe(0, 0);
+				val.setter.deserialize(in);
+			}
+			this.aoes.add(val);
+		}
+		
+		// min range pattern
+		boolean hasbase = in.readBoolean();
+		boolean hassetter = in.readBoolean();
+		if(hasbase) {
+			minRangePattern.base = new Aoe(0, 0);
+			minRangePattern.base.deserialize(in);
+		}
+		if(hassetter) {
+			minRangePattern.setter = new Aoe(0, 0);
+			minRangePattern.setter.deserialize(in);
+		}
+		
+		// max range pattern
+		hasbase = in.readBoolean();
+		hassetter = in.readBoolean();
+		if(hasbase) {
+			maxRangePattern.base = new Aoe(0, 0);
+			maxRangePattern.base.deserialize(in);
+		}
+		if(hassetter) {
+			maxRangePattern.setter = new Aoe(0, 0);
+			maxRangePattern.setter.deserialize(in);
+		}
+		
+		return null;
+	}
 	
 	/*
 	 * Snapshop effect : onGain : add  /  onLose : substract

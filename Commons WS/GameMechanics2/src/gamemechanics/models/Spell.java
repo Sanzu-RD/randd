@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
+import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 
 import data.new1.Effect;
@@ -12,6 +15,7 @@ import data.new1.spellstats.SpellStats;
 import gamemechanics.main.DiamondModels;
 import gamemechanics.statics.CreatureType;
 import gamemechanics.statics.Element;
+import io.netty.buffer.ByteBuf;
 
 /**
  * model and instance in one, like statuses and probably effects too.
@@ -22,7 +26,7 @@ import gamemechanics.statics.Element;
  * @author Blank
  * @date 10 juin 2020
  */
-public abstract class Spell extends Entity {
+public abstract class Spell extends Entity implements BBSerializer, BBDeserializer {
 	
 	/**
 	 * Need to compile creature stats before compiling them into the spell stats
@@ -69,8 +73,7 @@ public abstract class Spell extends Entity {
 	public final ImmutableList<Element> taggedElements;
 	
 	public SpellStats stats;
-	// public final Effect[] effects;
-	public List<Effect> tooltipEffects = new ArrayList<>();
+	public List<Effect> effects = new ArrayList<>();
 	
 	public Spell(Fight f) {
 		super(f);
@@ -114,10 +117,23 @@ public abstract class Spell extends Entity {
 	 */
 	public abstract Spell copy(Fight fight);
 	
-//	public Spell copy() {
-//		var s = new Spell(get(Fight.class));
-//		s.baseStats = baseStats.copy();
-//		return s;
-//	}
-
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		out.writeInt(modelid()); // written in here but deserialize outside (in update packets) because we creaate the spell by copying a model so we need the modelid before deserializing the spell instance
+		
+		out.writeInt(id);
+		this.stats.serialize(out);
+		// serialize effects
+		return out;
+	}
+	
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		this.id = in.readInt();
+		this.stats.deserialize(in);
+		// deserialize effects
+		return null;
+	}
+	
+	
 }

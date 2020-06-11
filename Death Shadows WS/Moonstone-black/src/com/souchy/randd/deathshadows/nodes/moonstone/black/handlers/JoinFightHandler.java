@@ -13,7 +13,7 @@ public class JoinFightHandler implements BBMessageHandler<JoinFight> {
 	public void handle(ChannelHandlerContext client, JoinFight message) {
 		// check if account id is indeed in the fight specified by fight id
 		Log.info("Moonstone Black handle JoinFight");
-		client.writeAndFlush(new JoinFightResponse(true));
+		client.writeAndFlush(new JoinFightResponse(true, null));
 	}
 
 	@Override

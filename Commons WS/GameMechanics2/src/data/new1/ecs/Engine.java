@@ -13,6 +13,8 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
  * @date 10 juin 2020
  */
 public class Engine {
+	
+	protected static int engineIdCounter = 0;
 
 	public final List<System> systems = new ArrayList<>();
 	public final List<Entity> entities = new ArrayList<>();

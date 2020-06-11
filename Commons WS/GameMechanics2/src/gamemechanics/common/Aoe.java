@@ -1,10 +1,15 @@
 package gamemechanics.common;
 
+import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+
 import gamemechanics.common.generic.BoolTable;
 import gamemechanics.common.generic.Vector2;
+import io.netty.buffer.ByteBuf;
 
 /** Aoe suppliers / functions */
-public class Aoe {
+public class Aoe implements BBSerializer, BBDeserializer {
 	
 	/** targeted cell from where the aoe expands */
 	public Vector2 source;
@@ -46,6 +51,32 @@ public class Aoe {
 		if(source != null) a.source = source.copy();
 		table.copyTo(a.table);
 		return a;
+	}
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		out.writeBoolean(source != null);
+		if(source != null) source.serialize(out);
+		out.writeInt(table.width());
+		out.writeInt(table.height());
+		table.foreach((x, y) -> {
+			out.writeBoolean(table.get(x, y));
+		});
+		return null;
+	}
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		boolean hassource = in.readBoolean();
+		if(hassource) {
+			source = new Vector2(0, 0);
+			source.deserialize(in);
+		}
+		int width = in.readInt();
+		int height = in.readInt();
+		table = new BoolTable(width, height);
+		table.foreach((x, y) -> {
+			table.put(x, y, in.readBoolean());
+		});
+		return null;
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.function.BiConsumer;
 
 public class Table<V> {
+	
 	private HashMap<Integer, HashMap<Integer, V>> map;
 	private V defaul;
 	

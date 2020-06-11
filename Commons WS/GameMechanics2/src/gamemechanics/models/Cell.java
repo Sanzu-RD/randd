@@ -69,6 +69,9 @@ public class Cell extends Entity implements BBSerializer, BBDeserializer {
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
+		out.writeInt(id);
+		out.writeDouble(pos.x);
+		out.writeDouble(pos.y);
 		// TODO Auto-generated method stub
 		return null;
 	}

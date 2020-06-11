@@ -195,13 +195,14 @@ public class SapphireController extends CameraInputController {
 //		var cell = SapphireGame.fight.board.cells.get((int) cellpos.x, (int) cellpos.y);
 //		cell.creatures.get(0);
 		
-		if(button == Buttons.RIGHT && creature != null) {
-			// toggle character sheet
-			CreatureSheet.toggle(creature);
-		} else if(button == Buttons.LEFT) {
-			// start drag
+		// start drag
+		if(button == Buttons.LEFT) {
 			Log.info("touchdown " + cellpos);
 			draggedEntity = creature;
+		} else
+		// toggle character sheet
+		if(button == Buttons.RIGHT && creature != null) {
+			CreatureSheet.toggle(creature);
 		}
 		
 		if(!activateBaseCamControl) return true;

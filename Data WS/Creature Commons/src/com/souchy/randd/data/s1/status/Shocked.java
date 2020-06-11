@@ -59,5 +59,11 @@ public class Shocked extends Status {
 	public Shocked create(Fight fight, int source, int target) {
 		return new Shocked(fight, source, target); 
 	}
+
+	@Override
+	public Status copy(Fight fight) {
+		var s = new Shocked(fight, sourceEntityId, targetEntityId);
+		return s;
+	}
 	
 }

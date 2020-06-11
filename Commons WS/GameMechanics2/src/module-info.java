@@ -29,6 +29,7 @@ module GameMechanics2 {
 	exports data.new1.ecs;
 	exports gamemechanics.systems;
 	exports gamemechanics.components;
+	exports gamemechanics.main;
 	
 	requires transitive com.google.common;
 	requires transitive com.souchy.randd.commons.TealWaters;
