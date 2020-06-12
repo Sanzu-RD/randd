@@ -1,15 +1,5 @@
 package com.souchy.randd.commons.opal;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.util.Arrays;
-import java.util.Base64;
-
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-
-import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.meta.User;
 
 public interface IAuthentication {

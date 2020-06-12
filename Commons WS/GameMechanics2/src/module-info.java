@@ -36,7 +36,6 @@ module GameMechanics2 {
 	requires transitive com.souchy.randd.commons.TealWaters;
 	requires transitive com.google.guice;
 	requires transitive com.souchy.randd.commons.Jade;
-	requires transitive com.souchy.randd.pluginprototyping.Modules;
 	requires transitive com.google.gson;
 	requires transitive com.souchy.randd.commons.TealNet;
 }

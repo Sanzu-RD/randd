@@ -5,12 +5,10 @@ import java.util.List;
 import java.util.Locale;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Mesh;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.g3d.Environment;
@@ -40,7 +38,6 @@ import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.DepthShaderProvider;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
@@ -50,18 +47,15 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Stack;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.bitfire.postprocessing.PostProcessor;
-import com.bitfire.postprocessing.effects.Bloom;
-import com.bitfire.utils.ShaderLoader;
+//import com.bitfire.postprocessing.PostProcessor;
+//import com.bitfire.postprocessing.effects.Bloom;
+//import com.bitfire.utils.ShaderLoader;
 import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.github.czyzby.lml.parser.LmlParser;
 import com.github.czyzby.lml.parser.action.ActionContainer;
 import com.github.czyzby.lml.parser.impl.AbstractLmlView;
-import com.github.czyzby.lml.parser.impl.tag.AbstractActorLmlTag;
 import com.github.czyzby.lml.parser.impl.tag.AbstractGroupLmlTag;
 import com.github.czyzby.lml.parser.tag.LmlActorBuilder;
 import com.github.czyzby.lml.parser.tag.LmlTag;
@@ -70,14 +64,11 @@ import com.github.czyzby.lml.util.LmlApplicationListener;
 import com.github.czyzby.lml.util.LmlUtilities;
 import com.github.czyzby.lml.vis.util.VisLml;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
-import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.mockingbird.lapismock.BaseScreen;
 import com.souchy.randd.mockingbird.lapismock.CustomGreedyMesh;
 import com.souchy.randd.mockingbird.lapismock.GreedyMeshMaker;
-import com.souchy.randd.mockingbird.lapismock.LapisMock;
 import com.souchy.randd.mockingbird.lapismock.World;
 import com.souchy.randd.mockingbird.lapismock.shaders.PostProcessingFBO;
 
@@ -615,16 +606,16 @@ public class MockScreen3 extends BaseScreen {
 	private double walkRadius = 7; // circle radius
 
 	private FrameBuffer fbo;
-	private PostProcessor pp;
+//	private PostProcessor pp;
 	{
 		fbo = new FrameBuffer(Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true, true);
 		
-		ShaderLoader.BasePath = internal+"shaders/manuelbua_shaders/";
-		pp = new PostProcessor(false, false, true);
-		Bloom bloom = new Bloom((int) (Gdx.graphics.getWidth() * 0.25f), (int) (Gdx.graphics.getHeight() * 0.25f));
-		bloom.enableBlending(1, 1);
-		bloom.setBlurAmount(5);
-		pp.addEffect(bloom);
+//		ShaderLoader.BasePath = internal+"shaders/manuelbua_shaders/";
+//		pp = new PostProcessor(false, false, true);
+//		Bloom bloom = new Bloom((int) (Gdx.graphics.getWidth() * 0.25f), (int) (Gdx.graphics.getHeight() * 0.25f));
+//		bloom.enableBlending(1, 1);
+//		bloom.setBlurAmount(5);
+//		pp.addEffect(bloom);
 	}
 	
 

@@ -5,7 +5,6 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadows.nodes.moonstone.black.BlackMoonstone;
 import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.moonstone.commons.packets.c2s.JoinFight;
-import com.souchy.randd.moonstone.commons.packets.s2c.FullUpdate;
 import com.souchy.randd.moonstone.commons.packets.s2c.JoinFightResponse;
 
 import gamemechanics.models.Fight;
@@ -23,11 +22,12 @@ public class JoinFightHandler implements BBMessageHandler<JoinFight> {
 		Log.info("BlackMoonstone fights " + BlackMoonstone.moon.fights);
 		Log.info("Moonstone Black handle JoinFight ["+message.fightID+"] " + fight + " from " + user);
 		
-
 		var accepted = user != null && fight != null;
 		client.writeAndFlush(new JoinFightResponse(accepted));
-		if(accepted)
-			client.writeAndFlush(new FullUpdate(fight));
+		if(accepted) {
+			client.channel().attr(Fight.attrkey).set(fight);
+//			client.writeAndFlush(new FullUpdate(fight)); // wait till sapphiregame has loaded its assets to ask for a fullupdate
+		}
 	}
 
 	@Override

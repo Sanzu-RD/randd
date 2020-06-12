@@ -1,12 +1,8 @@
 package data.new1.spellstats.base;
 
-import java.lang.reflect.InvocationTargetException;
-
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
-import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 
-import gamemechanics.common.Aoe;
 import io.netty.buffer.ByteBuf;
 
 public class ObjectStat<T extends BBSerializer & BBDeserializer> implements BBSerializer { //, BBDeserializer  {

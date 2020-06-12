@@ -1,7 +1,6 @@
 package com.souchy.randd.commons.tealwaters.logging;
 
 import java.time.ZonedDateTime;
-import java.util.List;
 
 public class Log {
 	

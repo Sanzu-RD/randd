@@ -2,7 +2,6 @@ package com.souchy.randd.data.s1.spells.fire;
 
 import com.google.common.collect.ImmutableList;
 import com.souchy.randd.data.s1.main.Elements;
-import com.souchy.randd.data.s1.spells.water.Bubble;
 
 import data.new1.spellstats.SpellStats;
 import data.new1.spellstats.base.IntStat;

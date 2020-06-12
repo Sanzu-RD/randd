@@ -18,7 +18,6 @@ module com.souchy.randd.ebishoal.Amethyst {
 	requires transitive javafx.controls;
 	requires transitive javafx.fxml;
 	requires transitive javafx.graphics;
-	requires transitive com.souchy.randd.pluginprototyping.Modules;
-	requires com.souchy.randd.commons.deathebi;
+	requires transitive com.souchy.randd.commons.deathebi;
 	
 }

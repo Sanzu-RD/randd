@@ -6,7 +6,6 @@ import java.util.Map;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
-import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import data.new1.spellstats.base.BoolStat;
 import data.new1.spellstats.base.IntStat;

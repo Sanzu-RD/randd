@@ -2,14 +2,12 @@ package data.new1.timed;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
-import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import data.new1.ecs.Entity;
 import gamemechanics.main.DiamondModels;

@@ -19,16 +19,11 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.confs.AssetConfs;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireDevConfig;
-import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.moonstone.white.Moonstone;
 
-import gamemechanics.main.DiamondModels;
 import gamemechanics.models.Creature;
 import gamemechanics.statics.Element;
-import gamemechanics.statics.stats.modifiers.eleMod;
-import gamemechanics.statics.stats.modifiers.mathMod;
 import gamemechanics.statics.stats.properties.Resource;
 
 /**

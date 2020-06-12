@@ -22,7 +22,7 @@ public class SendSaltHandler implements BBMessageHandler<SendSalt> {
 		var password = authCredentials[1];
 		
 		var getuser = new GetUser(username, UserUtil.hashPassword(password, message.salt));
-		Moonstone.write(getuser);
+		Moonstone.moon.write(getuser);
 	}
 
 	@Override

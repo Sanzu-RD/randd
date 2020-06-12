@@ -8,8 +8,6 @@ import org.bson.types.ObjectId;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
-import com.souchy.randd.commons.tealwaters.commons.Deserializer;
-import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.util.AttributeKey;

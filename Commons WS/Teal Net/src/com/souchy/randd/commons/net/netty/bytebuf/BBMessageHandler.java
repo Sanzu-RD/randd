@@ -7,6 +7,6 @@ import io.netty.channel.ChannelHandlerContext;
 public interface BBMessageHandler<T extends BBMessage> extends MessageHandler<ChannelHandlerContext, T> { // Responsibility<T> {
 
 	@Override
-	public void handle(ChannelHandlerContext ctx, T message);
+	public void handle(ChannelHandlerContext client, T message);
 	
 }

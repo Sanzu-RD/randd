@@ -6,7 +6,6 @@ import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 
 import io.netty.buffer.ByteBuf;
 
-@SuppressWarnings("exports")
 @ID(id = 1002)
 public class AskAvailable implements BBMessage {
 

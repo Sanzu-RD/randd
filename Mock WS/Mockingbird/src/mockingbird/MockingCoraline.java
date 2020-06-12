@@ -1,7 +1,6 @@
 package mockingbird;
 
 import com.souchy.randd.ebishoal.amethyst.main.Amethyst;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 
 public class MockingCoraline {
 

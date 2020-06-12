@@ -3,32 +3,26 @@ package com.souchy.randd.ebishoal.sapphire.main;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
-import com.souchy.randd.commons.deathebi.msg.GetSalt;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.data.s1.creatures.Sungjin;
 import com.souchy.randd.data.s1.main.Elements;
-import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.confs.AssetConfs;
-import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHudSkin;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.jade.meta.JadeCreature;
+import com.souchy.randd.moonstone.commons.packets.c2s.GetUpdate;
 import com.souchy.randd.moonstone.white.Moonstone;
 
 import data.new1.spellstats.base.IntStat;
-import gamemechanics.common.generic.Vector2;
 import gamemechanics.components.Position;
 import gamemechanics.main.DiamondModels;
 import gamemechanics.models.Creature;
-import gamemechanics.models.Creature.Team;
 import gamemechanics.models.CreatureModel;
 import gamemechanics.models.Fight;
 import gamemechanics.statics.stats.properties.Resource;
@@ -73,8 +67,9 @@ public class SapphireGame extends LapisGame {
 
 			SapphireGame.fight = Moonstone.fight = new Fight();
 			new SapphireEntitySystem(Moonstone.fight);
-
-			Moonstone.write(new GetSalt());
+			
+			// ask for fight data after assets have been loaded
+			Moonstone.moon.write(new GetUpdate());
 			
 			// player hud
 //			SapphireHudSkin.play(fight.teamA.get(0));

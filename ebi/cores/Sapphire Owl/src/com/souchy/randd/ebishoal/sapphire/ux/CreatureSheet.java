@@ -19,7 +19,6 @@ import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.controls.DragAndResizeListener;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.LmlWidgets;
 
 import gamemechanics.models.Creature;

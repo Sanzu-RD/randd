@@ -1,7 +1,6 @@
 package com.souchy.randd.ebishoal.amethyst.ui.components;
 
 import com.souchy.randd.commons.deathebi.UserUtil;
-import com.souchy.randd.commons.opal.IAuthentication;
 import com.souchy.randd.commons.opal.IAuthentication.RegistrationToken;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.opaline.api.Opaline;

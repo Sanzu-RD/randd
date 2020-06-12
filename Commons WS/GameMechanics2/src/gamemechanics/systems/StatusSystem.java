@@ -8,7 +8,6 @@ import com.google.common.eventbus.Subscribe;
 import data.new1.ecs.Engine;
 import data.new1.ecs.Engine.AddEntityEvent;
 import data.new1.ecs.Engine.RemoveEntityEvent;
-import data.new1.ecs.Entity;
 import data.new1.timed.Status;
 import gamemechanics.models.Fight;
 

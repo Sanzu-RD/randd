@@ -1,7 +1,6 @@
 package com.souchy.randd.data.s1.spells.ice;
 
 import com.google.common.collect.ImmutableList;
-import com.souchy.randd.data.s1.spells.water.Bubble;
 
 import data.new1.spellstats.SpellStats;
 import gamemechanics.models.Cell;

@@ -1,4 +1,4 @@
-package com.souchy.randd.deathshadows.nodes.pearl.messaging;
+package com.souchy.randd.moonstone.commons.packets.c2s;
 
 import com.souchy.randd.annotationprocessor.ID;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
@@ -6,31 +6,27 @@ import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 
 import io.netty.buffer.ByteBuf;
 
-@ID(id = 1003)
-public class AskCreate implements BBMessage {
+@ID(id = 10004)
+public class GetUpdate implements BBMessage {
 
-	public String coreName;
-	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		writeString(out, coreName);
 		return out;
 	}
 
 	@Override
-	public BBMessage deserialize(ByteBuf in) {
-		coreName = readString(in);
+	public GetUpdate deserialize(ByteBuf in) {
 		return this;
 	}
 
 	@Override
 	public Deserializer<ByteBuf, BBMessage> create() {
-		return new AskCreate();
+		return new GetUpdate();
 	}
 
 	@Override
 	public int getBufferCapacity() {
 		return 0;
 	}
-
+	
 }

@@ -1,7 +1,6 @@
 package gamemechanics.statics.stats.properties.spells;
 
 import gamemechanics.statics.stats.properties.StatProperty;
-import gamemechanics.statics.stats.properties.StatProperty.StatPropertyID;
 
 /** 
  * which kind of target the spell/caster can hit <br>

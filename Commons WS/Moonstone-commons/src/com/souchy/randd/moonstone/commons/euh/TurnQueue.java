@@ -57,7 +57,7 @@ public class TurnQueue {
 
 		
 		timer.cancel(false);
-		// send end turn packet pour stop le timer ? ou arrête avec le timer qui est côté client
+		// send end turn packet pour stop le timer ? ou arrï¿½te avec le timer qui est cï¿½tï¿½ client
 		
 		// trigger event onEndTurn(previous/index/.get());   ->  trigger des effets ex. glyphe, buff/debuff
 		

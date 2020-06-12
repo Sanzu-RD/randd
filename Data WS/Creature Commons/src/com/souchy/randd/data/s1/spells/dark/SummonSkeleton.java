@@ -3,8 +3,6 @@ package com.souchy.randd.data.s1.spells.dark;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
-import com.souchy.randd.annotationprocessor.ID;
-import com.souchy.randd.data.s1.spells.water.Bubble;
 
 import data.new1.Effect;
 import data.new1.spellstats.SpellStats;

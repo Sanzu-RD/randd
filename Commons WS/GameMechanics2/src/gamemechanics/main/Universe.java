@@ -1,6 +1,5 @@
 package gamemechanics.main;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 public class Universe {

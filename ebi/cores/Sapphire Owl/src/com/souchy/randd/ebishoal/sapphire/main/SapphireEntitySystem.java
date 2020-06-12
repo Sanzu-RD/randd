@@ -15,10 +15,9 @@ import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.confs.AssetConfs;
 
 import data.new1.ecs.Engine;
-import data.new1.ecs.Entity;
 import data.new1.ecs.Engine.AddEntityEvent;
 import data.new1.ecs.Engine.RemoveEntityEvent;
-import data.new1.timed.Status;
+import data.new1.ecs.Entity;
 import data.new1.timed.TerrainEffect;
 import gamemechanics.components.Position;
 import gamemechanics.models.Creature;

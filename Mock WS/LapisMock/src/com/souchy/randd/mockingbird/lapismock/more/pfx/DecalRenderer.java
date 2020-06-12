@@ -6,11 +6,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.decals.CameraGroupStrategy;
 import com.badlogic.gdx.graphics.g3d.decals.Decal;
 import com.badlogic.gdx.graphics.g3d.decals.DecalBatch;
-import com.badlogic.gdx.graphics.g3d.decals.DecalMaterial;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleControllerComponent;
-import com.badlogic.gdx.graphics.g3d.particles.batches.BillboardParticleBatch;
 import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
-import com.badlogic.gdx.graphics.g3d.particles.renderers.BillboardControllerRenderData;
 import com.badlogic.gdx.graphics.g3d.particles.renderers.ParticleControllerRenderer;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 

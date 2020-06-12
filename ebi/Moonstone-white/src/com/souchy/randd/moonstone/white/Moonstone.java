@@ -2,8 +2,6 @@ package com.souchy.randd.moonstone.white;
 
 
 import com.souchy.randd.commons.deathebi.msg.GetSalt;
-import com.souchy.randd.commons.deathebi.msg.GetUser;
-import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
 
@@ -29,9 +27,9 @@ public class Moonstone extends EbiShoalTCP {
 		write(new GetSalt(username));
 	}
 	
-	public static void write(BBMessage msg) {
-		moon.channel.writeAndFlush(msg);
-	}
+//	public static void write(BBMessage msg) {
+//		moon.channel.writeAndFlush(msg);
+//	}
 	
 	// add fight object to here as fieldmember or ecs component ? 
 	// but the fight object is already an engine

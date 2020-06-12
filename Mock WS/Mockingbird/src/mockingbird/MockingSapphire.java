@@ -1,21 +1,8 @@
 package mockingbird;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
-import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
-import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.deathshadows.nodes.moonstone.black.BlackMoonstone;
-import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
-import com.souchy.randd.ebishoal.sapphire.confs.AssetConfs;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.jade.meta.JadeCreature;
 
@@ -23,9 +10,9 @@ import data.new1.spellstats.base.IntStat;
 import gamemechanics.components.Position;
 import gamemechanics.main.DiamondModels;
 import gamemechanics.models.Creature;
+import gamemechanics.models.Creature.Team;
 import gamemechanics.models.CreatureModel;
 import gamemechanics.models.Fight;
-import gamemechanics.models.Creature.Team;
 import gamemechanics.statics.stats.properties.Resource;
 
 public class MockingSapphire {

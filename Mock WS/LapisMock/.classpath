@@ -16,11 +16,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX2"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Sapphire Owl"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Cache"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/libgdx-contribs-postprocessing"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/libgdx-contribs-utils"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/PiranhaPlants"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>

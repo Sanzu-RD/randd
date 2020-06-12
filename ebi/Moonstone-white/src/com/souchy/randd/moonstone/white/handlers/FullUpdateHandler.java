@@ -13,10 +13,18 @@ public class FullUpdateHandler implements BBMessageHandler<FullUpdate> {
 	public void handle(ChannelHandlerContext ctx, FullUpdate message) {
 		
 		// clear families before adding the updated ones
-		Moonstone.fight.cells.family.clear();
-		Moonstone.fight.creatures.family.clear();
-		Moonstone.fight.status.family.clear();
-		Moonstone.fight.spells.family.clear();
+		synchronized (Moonstone.fight.cells.family) {
+			Moonstone.fight.cells.family.clear();
+		}
+		synchronized (Moonstone.fight.creatures.family) {
+			Moonstone.fight.creatures.family.clear();
+		}
+		synchronized (Moonstone.fight.status.family) {
+			Moonstone.fight.status.family.clear();
+		}
+		synchronized (Moonstone.fight.spells.family) {
+			Moonstone.fight.spells.family.clear();
+		}
 		
 //		Log.info("FullUpdate cells previous intances " + Moonstone.fight.cells.family.size());
 //		Log.info("FullUpdate creatures previous intances " + Moonstone.fight.creatures.family.size());

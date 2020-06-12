@@ -4,11 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import data.new1.Effect;
-import data.new1.ecs.Entity;
 import data.new1.spellstats.base.IntStat;
 import data.new1.spellstats.imp.TargetConditionStat;
 import gamemechanics.common.Aoe;
-import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.damage.OnDmgEvent;
 import gamemechanics.models.Cell;
 import gamemechanics.models.Creature;

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.new1.Effect;
-import data.new1.ecs.Entity;
 import gamemechanics.models.Cell;
 import gamemechanics.models.Creature;
 

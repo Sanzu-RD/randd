@@ -2,12 +2,11 @@ package gamemechanics.events.new1.status;
 
 import com.google.common.eventbus.Subscribe;
 
+import gamemechanics.data.effects.status.AddStatusEffect;
 import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.Handler;
-import gamemechanics.events.new1.other.OnWalkEvent;
 import gamemechanics.models.Cell;
 import gamemechanics.models.Creature;
-import gamemechanics.data.effects.status.AddStatusEffect;
 
 public class OnAddStatusEvent extends Event {
 	

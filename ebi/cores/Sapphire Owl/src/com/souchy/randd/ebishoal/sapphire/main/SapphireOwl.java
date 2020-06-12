@@ -1,7 +1,5 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
-import java.io.File;
-
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.souchy.randd.commons.deathebi.msg.GetSalt;
@@ -11,8 +9,6 @@ import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireOwlConf;
 import com.souchy.randd.moonstone.white.Moonstone;
-
-import gamemechanics.models.Fight;
 
 public class SapphireOwl extends LapisCore { 
 
@@ -46,6 +42,7 @@ public class SapphireOwl extends LapisCore {
 			// authentifie moonstone et join le fight 
 			moon = new Moonstone(ip, port, core); 
 			moon.channel.attr(Moonstone.authKey).set(new String[]{ username, password, fightid + "" });
+			Moonstone.moon.write(new GetSalt());
 			
 			Log.info("******************************************************************************");
 		}

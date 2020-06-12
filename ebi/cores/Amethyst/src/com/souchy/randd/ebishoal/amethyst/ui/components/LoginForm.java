@@ -4,7 +4,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import com.souchy.randd.commons.deathebi.UserUtil;
-import com.souchy.randd.commons.opal.IAuthentication;
 import com.souchy.randd.commons.opal.IAuthentication.LoginToken;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.amethyst.main.AmethystApp;

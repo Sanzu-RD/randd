@@ -1,7 +1,7 @@
 package com.souchy.randd.deathshadow.core.handlers;
 
+import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +24,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //implements NettyMessageFilter { 
 	
 	public final Map<User, Channel> userChannels = new HashMap<>();
-
+	
 	/** 
 	 * Filter messages so only channels with a User attribute can go through 
 	 */
@@ -42,7 +42,10 @@ public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //imple
 		// sinon c'est qu'il doit déjà avoir un user attribute
 		if(ctx.channel().hasAttr(User.attrkey)) 
 			super.channelRead(ctx, msg); // if ctx has user attr, pass the message to the next handlers
-	}
+		else
+			// sinon c'est qu'il n'a pas été accepté donc close le channel
+			ctx.channel().close();
+	} 
 	
 	
 	/** remove disconnecting users */

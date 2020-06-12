@@ -10,7 +10,6 @@ import data.new1.timed.Status;
 import gamemechanics.models.CreatureModel;
 import gamemechanics.models.Fight;
 import gamemechanics.models.Spell;
-import gamemechanics.systems.StatusSystem;
 
 /**
  * Class models for creatures, spells, and perhaps statuses

@@ -8,13 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.amethyst.ui.components.TeamSelector;
 import com.souchy.randd.ebishoal.opaline.api.Opaline;
 import com.souchy.randd.jade.meta.New;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;

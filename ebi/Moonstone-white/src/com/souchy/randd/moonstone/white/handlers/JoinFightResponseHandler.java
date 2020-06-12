@@ -3,10 +3,7 @@ package com.souchy.randd.moonstone.white.handlers;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.moonstone.commons.packets.s2c.JoinFightResponse;
-import com.souchy.randd.moonstone.commons.packets.s2c.Update;
-import com.souchy.randd.moonstone.white.Moonstone;
 
-import gamemechanics.models.Fight;
 import io.netty.channel.ChannelHandlerContext;
 
 public class JoinFightResponseHandler implements BBMessageHandler<JoinFightResponse> {

@@ -1,29 +1,28 @@
 package com.souchy.randd.ebishoal.sapphire.controls;
 
-import com.badlogic.gdx.Input.Buttons;
-import com.badlogic.gdx.Input.Keys;
-import static com.badlogic.gdx.Input.Keys.*;
+import static com.badlogic.gdx.Input.Keys.A;
+import static com.badlogic.gdx.Input.Keys.ALT_LEFT;
+import static com.badlogic.gdx.Input.Keys.CONTROL_LEFT;
+import static com.badlogic.gdx.Input.Keys.D;
+import static com.badlogic.gdx.Input.Keys.DOWN;
+import static com.badlogic.gdx.Input.Keys.E;
+import static com.badlogic.gdx.Input.Keys.LEFT;
+import static com.badlogic.gdx.Input.Keys.Q;
+import static com.badlogic.gdx.Input.Keys.RIGHT;
+import static com.badlogic.gdx.Input.Keys.S;
+import static com.badlogic.gdx.Input.Keys.SHIFT_LEFT;
+import static com.badlogic.gdx.Input.Keys.UP;
+import static com.badlogic.gdx.Input.Keys.W;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Mesh;
-import com.badlogic.gdx.graphics.VertexAttributes.Usage;
-import com.badlogic.gdx.graphics.g3d.Material;
-import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
-import com.badlogic.gdx.graphics.g3d.decals.Decal;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
-import com.badlogic.gdx.graphics.g3d.utils.MeshBuilder;
-import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder.VertexInfo;
-import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.kotcrab.vis.ui.FocusManager;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
@@ -31,11 +30,9 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 import com.souchy.randd.ebishoal.sapphire.ux.CreatureSheet;
-import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.LmlWidgets;
 
 import data.new1.ecs.Entity;
 import gamemechanics.components.Position;
-import gamemechanics.models.Cell;
 import gamemechanics.models.Creature;
 import gamemechanics.statics.stats.properties.Resource;
 

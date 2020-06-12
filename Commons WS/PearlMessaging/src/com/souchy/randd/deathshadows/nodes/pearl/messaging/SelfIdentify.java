@@ -7,29 +7,33 @@ import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 import io.netty.buffer.ByteBuf;
 
 @ID(id = 1001)
-@SuppressWarnings("exports")
 public class SelfIdentify implements BBMessage {
+	
+	public int nodeid;
+	
+	public SelfIdentify(int nodeid) {
+		this.nodeid = nodeid;
+	}
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		// TODO Auto-generated method stub
-		return null;
+		out.writeInt(nodeid);
+		return out;
 	}
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
-		// TODO Auto-generated method stub
-		return null;
+		nodeid = in.readInt();
+		return this;
 	}
 
 	@Override
 	public Deserializer<ByteBuf, BBMessage> create() {
-		return new SelfIdentify();
+		return new SelfIdentify(0);
 	}
 
 	@Override
 	public int getBufferCapacity() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

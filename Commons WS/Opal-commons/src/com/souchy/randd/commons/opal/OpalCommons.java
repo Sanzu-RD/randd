@@ -1,7 +1,5 @@
 package com.souchy.randd.commons.opal;
 
-import com.souchy.randd.commons.tealwaters.commons.Namespace.HttpNamespace;
-
 public class OpalCommons {
 	
 	// can't use non-constant expressions for path annotations :(

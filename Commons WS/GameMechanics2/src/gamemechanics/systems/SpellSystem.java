@@ -8,8 +8,6 @@ import com.google.common.eventbus.Subscribe;
 import data.new1.ecs.Engine;
 import data.new1.ecs.Engine.AddEntityEvent;
 import data.new1.ecs.Engine.RemoveEntityEvent;
-import data.new1.ecs.Entity;
-import gamemechanics.models.Cell;
 import gamemechanics.models.Fight;
 import gamemechanics.models.Spell;
 

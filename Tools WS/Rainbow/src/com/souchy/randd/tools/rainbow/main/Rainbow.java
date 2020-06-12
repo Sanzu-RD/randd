@@ -1,22 +1,37 @@
 package com.souchy.randd.tools.rainbow.main;
 
-import java.util.concurrent.Executors;
+import com.souchy.randd.ebishoal.commons.EbiShoalCore;
+import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
 
-import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
-import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.EbiCoreClient;
-
-import javafx.application.Application;
-
-public class Rainbow extends EbiCoreClient {
+/**
+ * hey rainbow should have a http version of the client
+ * web client would connect to Opal that would then talk to Pearl
+ * 
+ * @author Blank
+ * @date 11 juin 2020
+ */
+public class Rainbow extends EbiShoalCore {
 
 	public static Rainbow core;
 	public static RainbowApp app;
 	public static RainbowConf conf;
+	public static EbiShoalTCP client;
 	
 	public static void main(String[] args) throws Exception {
-		launch(core = new Rainbow());
+		core = new Rainbow(args);
 	}
+	
+	public Rainbow(String[] args) throws Exception {
+		super(args);
+		client = new EbiShoalTCP("127.0.0.1", 1000, this);
+	}
+	
+	@Override
+	protected String[] getRootPackages() {
+		return new String[] { "com.souchy.randd.tools.rainbow", "com.souchy.randd.deathshadows.nodes.pearl.messaging" };
+	}
+	
+	/*
 	
 	@Override
 	public void init() throws Exception {
@@ -55,5 +70,6 @@ public class Rainbow extends EbiCoreClient {
 	protected boolean getSsl() {
 		return false;
 	}
+	*/
 	
 }

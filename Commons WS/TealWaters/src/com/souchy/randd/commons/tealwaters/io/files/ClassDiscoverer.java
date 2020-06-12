@@ -9,10 +9,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
 import org.reflections.scanners.SubTypesScanner;
 
-import com.google.common.reflect.ClassPath;
 import com.souchy.randd.commons.tealwaters.commons.Discoverer;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 

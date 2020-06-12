@@ -17,7 +17,6 @@ import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImageLmlTagProvider;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.ux.Chat;
 import com.souchy.randd.ebishoal.sapphire.ux.CreatureSheet;
 import com.souchy.randd.ebishoal.sapphire.ux.PlayBar;

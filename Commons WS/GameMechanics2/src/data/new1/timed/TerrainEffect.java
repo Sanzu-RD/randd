@@ -8,7 +8,6 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 
 import data.new1.ecs.Entity;
-import gamemechanics.data.BurningGlyph;
 import gamemechanics.models.Cell;
 import gamemechanics.models.Fight;
 import io.netty.buffer.ByteBuf;

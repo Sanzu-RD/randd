@@ -1,9 +1,6 @@
 package com.souchy.randd.commons.net.netty.bytebuf;
 
 import com.souchy.randd.commons.net.Message;
-import com.souchy.randd.commons.tealwaters.commons.Deserializer;
-import com.souchy.randd.commons.tealwaters.commons.Factory;
-import com.souchy.randd.commons.tealwaters.commons.Serializer;
 
 import io.netty.buffer.ByteBuf;
 

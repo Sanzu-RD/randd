@@ -3,8 +3,6 @@ package gamemechanics.statics.stats.properties;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.souchy.randd.commons.tealwaters.io.files.ClassDiscoverer;
-
 public interface StatProperty {
 	
 	public static class StatPropertyID {

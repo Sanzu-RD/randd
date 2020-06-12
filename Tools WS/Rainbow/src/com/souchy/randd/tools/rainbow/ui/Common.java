@@ -18,7 +18,6 @@ public abstract class Common {
 
     private double dragX = 0;
     private double drawY = 0;
-
     
 	@FXML
 	public HBox decorations;
@@ -58,7 +57,7 @@ public abstract class Common {
 	public void exit(MouseEvent event) {
 		if(RainbowApp.stage.getScene() == RainbowApp.loginScene) {
 			Platform.exit(); // System.exit(0);
-			Rainbow.core.client.stop();
+			Rainbow.client.close(); //.stop();
 		} else {
 			RainbowApp.stage.setScene(RainbowApp.loginScene);
 		}
@@ -78,6 +77,7 @@ public abstract class Common {
 		});
 	}
 	
-	@FXML
-	public abstract void openSettings(MouseEvent event);
+//	@FXML
+//	public abstract void openSettings(MouseEvent event);
+	
 }

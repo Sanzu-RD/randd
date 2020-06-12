@@ -20,9 +20,9 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
-import com.bitfire.postprocessing.PostProcessor;
-import com.bitfire.postprocessing.effects.Bloom;
-import com.bitfire.utils.ShaderLoader;
+//import com.bitfire.postprocessing.PostProcessor;
+//import com.bitfire.postprocessing.effects.Bloom;
+//import com.bitfire.utils.ShaderLoader;
 
 public abstract class BaseScreen implements Screen {
 
@@ -117,8 +117,8 @@ public abstract class BaseScreen implements Screen {
 	private FrameBuffer fbo;
 	private SpriteBatch batch;
 	private TextureRegion fboRegion;
-	private PostProcessor pp;
-	private PostProcessor pfxPp;
+//	private PostProcessor pp;
+//	private PostProcessor pfxPp;
 	private Texture slider;
 	private Boolean fbob = true;
 	private boolean ppb = false; //!fbob;
@@ -127,12 +127,12 @@ public abstract class BaseScreen implements Screen {
 		batch = new SpriteBatch(1000, new ShaderProgram(Gdx.files.internal("data/shaders/postProcess.vertex.glsl"), Gdx.files.internal("data/shaders/postProcess.fragment.glsl")));
 		slider = new Texture(Gdx.files.internal("data/textures/slider.png"));
 		
-		ShaderLoader.BasePath = "data/shaders/manuelbua_shaders/";
-		pp = new PostProcessor(true, true, true);
-		pfxPp = new PostProcessor(true, true, true);
-		
-		float f = 0.25f;
-		Bloom bloom = new Bloom((int) (Gdx.graphics.getWidth() * f), (int) (Gdx.graphics.getHeight() * f));
+//		ShaderLoader.BasePath = "data/shaders/manuelbua_shaders/";
+//		pp = new PostProcessor(true, true, true);
+//		pfxPp = new PostProcessor(true, true, true);
+//		
+//		float f = 0.25f;
+//		Bloom bloom = new Bloom((int) (Gdx.graphics.getWidth() * f), (int) (Gdx.graphics.getHeight() * f));
 		/*bloom.setBaseIntesity(1);
 		bloom.setBloomSaturation(1);
 		//bloom.enableBlending(1, 1);
@@ -141,7 +141,7 @@ public abstract class BaseScreen implements Screen {
 		bloom.setBlurPasses(1);*/
 		//bloom.setEnabled(false);
 		//pp.addEffect(bloom);
-		pp.addEffect(bloom);
+//		pp.addEffect(bloom);
 	}
 	@Override
 	public void render(float delta) {
@@ -155,7 +155,7 @@ public abstract class BaseScreen implements Screen {
         renderShadows(world);
 
 		if(fbob) fbo.begin();
-		if(ppb) pp.capture();
+//		if(ppb) pp.capture();
 		
 		{
 			clearScreen();
@@ -173,7 +173,7 @@ public abstract class BaseScreen implements Screen {
         renderContext.end();
         */
 		
-        if(ppb) pp.render();
+//        if(ppb) pp.render();
         if(fbob) {
     		//Gdx.gl.glDisable(GL20.GL_SCISSOR_TEST);
     		fbo.end();

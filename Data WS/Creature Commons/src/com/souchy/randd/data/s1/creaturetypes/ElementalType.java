@@ -3,10 +3,6 @@ package com.souchy.randd.data.s1.creaturetypes;
 import com.souchy.randd.data.s1.main.Elements;
 
 import data.new1.CreatureTypeModel;
-import data.new1.spellstats.base.IntStat;
-import gamemechanics.statics.stats.modifiers.eleMod;
-import gamemechanics.statics.stats.modifiers.mathMod;
-import gamemechanics.statics.stats.properties.Resource;
 
 public final class ElementalType extends CreatureTypeModel {
 	

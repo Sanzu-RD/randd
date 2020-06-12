@@ -1,13 +1,9 @@
 package data.new1;
 
 
-import java.util.List;
-
 import data.new1.ecs.Entity;
-import data.new1.spellstats.base.IntStat;
 import data.new1.spellstats.imp.TargetConditionStat;
 import gamemechanics.common.Aoe;
-import gamemechanics.data.effects.damage.Damage;
 import gamemechanics.events.new1.Event;
 import gamemechanics.models.Cell;
 import gamemechanics.models.Creature;

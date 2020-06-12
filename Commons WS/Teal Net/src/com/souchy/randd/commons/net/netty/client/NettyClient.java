@@ -17,8 +17,6 @@ import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.codec.MessageToByteEncoder;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
@@ -104,9 +102,9 @@ public class NettyClient {
 	}
 	
 	
-//	public void write(BBMessage msg) {
-//		channel.writeAndFlush(msg);
-//	}
+	public void write(BBMessage msg) {
+		channel.writeAndFlush(msg);
+	}
 
 	private ChannelInitializer<SocketChannel> channelInit = new ChannelInitializer<>() {
 		@Override

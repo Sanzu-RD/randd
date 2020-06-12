@@ -1,7 +1,5 @@
 package com.souchy.randd.deathshadows.nodes.pearl.messaging;
 
-import java.nio.charset.Charset;
-
 import com.souchy.randd.annotationprocessor.ID;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.commons.Deserializer;

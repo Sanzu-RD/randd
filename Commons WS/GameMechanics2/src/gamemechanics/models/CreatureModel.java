@@ -1,6 +1,5 @@
 package gamemechanics.models;
 
-import data.new1.ecs.Entity;
 import data.new1.spellstats.CreatureStats;
 
 /**

@@ -15,7 +15,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.czyzby.lml.parser.impl.AbstractLmlView;
-import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;

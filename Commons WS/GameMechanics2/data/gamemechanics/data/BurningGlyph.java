@@ -1,8 +1,5 @@
 package gamemechanics.data;
 
-import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
-
-import data.new1.timed.Status;
 import data.new1.timed.TerrainEffect;
 import gamemechanics.events.new1.other.OnEnterCellEvent;
 import gamemechanics.events.new1.other.OnEnterCellEvent.OnEnterCellHandler;
@@ -13,7 +10,6 @@ import gamemechanics.events.new1.other.OnTurnStartEvent.OnTurnStartHandler;
 import gamemechanics.events.new1.other.OnWalkEvent;
 import gamemechanics.events.new1.other.OnWalkEvent.OnWalkHandler;
 import gamemechanics.models.Fight;
-import io.netty.buffer.ByteBuf;
 
 public class BurningGlyph extends TerrainEffect implements OnWalkHandler, OnEnterCellHandler, OnLeaveCellHandler, OnTurnStartHandler {
 

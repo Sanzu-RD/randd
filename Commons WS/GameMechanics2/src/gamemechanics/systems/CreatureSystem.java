@@ -7,11 +7,8 @@ import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import data.new1.ecs.Engine;
-import data.new1.ecs.Entity;
 import data.new1.ecs.Engine.AddEntityEvent;
 import data.new1.ecs.Engine.RemoveEntityEvent;
-import data.new1.timed.Status;
-import gamemechanics.models.Cell;
 import gamemechanics.models.Creature;
 
 public class CreatureSystem extends data.new1.ecs.System {

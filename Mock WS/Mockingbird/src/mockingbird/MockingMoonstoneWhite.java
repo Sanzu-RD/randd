@@ -1,8 +1,5 @@
 package mockingbird;
 
-import com.souchy.randd.commons.deathebi.msg.GetSalt;
-import com.souchy.randd.commons.deathebi.msg.GetUser;
-import com.souchy.randd.deathshadows.nodes.moonstone.black.BlackMoonstone;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.moonstone.white.Moonstone;
 

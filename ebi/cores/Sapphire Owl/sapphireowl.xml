@@ -5,8 +5,10 @@
     <!--define folder properties-->
     <property name="dir.buildfile" value="."/>
     <property name="dir.workspace" value="F:/Users/Souchy/Desktop/Robyn/eclipse-workspaces/hidden workspaces/r and d"/>
-    <property name="dir.jarfile" value="G:/www/ebishoal"/>
-	<property name="dir.git" value="F:/Users/Souchy/Desktop/Robyn/Git"/>
+	<property name="dir.git" value="F:/Users/Souchy/Desktop/Robyn/GitPiranha/"/>
+	<property name="dir.gitres" value="F:/Users/Souchy/Desktop/Robyn/Git/res"/>
+    <!-- <property name="dir.jarfile" value="G:/www/ebishoal"/> -->
+    <property name="dir.jarfile" value="${dir.git}/release/ebishoal"/>
 	<property name="dir.lib" value="${dir.jarfile}/lib/"/>
 	<property name="dir.res" value="${dir.jarfile}/res"/>
 	<property name="dir.natives" value="${dir.jarfile}/natives"/>
@@ -26,7 +28,7 @@
 				<include name="module-info.class"/>
 			</fileset>
         	
-            <fileset dir="${dir.git}/r and d/Plugin Prototyping WS/Modules/bin"/>
+           	<!-- <fileset dir="${dir.git}/r and d/Plugin Prototyping WS/Modules/bin"/> -->
             <fileset dir="${dir.git}/r and d/Commons WS/Teal Net/bin"/>
             <fileset dir="${dir.git}/r and d/Commons WS/TealWaters/bin"/>
             <fileset dir="${dir.git}/r and d/Commons WS/GameMechanics2/bin"/>
@@ -58,51 +60,51 @@
         	
     	
     	<!-- libs -->
-        <copy file="${dir.git}/res/libs other/jaxrs-ri-2.28/ext/javassist-3.22.0-GA.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs other/guava-26.0-jre.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs other/guice-4.2.0-no_aop.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs other/gson-gson-parent-2.8.5/gson/target/gson-2.8.5.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs other/reflections-0.9.11.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/ashley-1.7.0.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-1.9.6.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/box2dlights-1.4.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-box2d-1.9.6.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-box2d-platform-1.9.6-natives-desktop.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-ai-1.8.0.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-backend-headless-1.9.6.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-backend-lwjgl-1.9.6.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-bullet-1.9.6.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-bullet-platform-1.9.6-natives-desktop.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-controllers-1.9.6.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-controllers-desktop-1.9.6.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-controllers-platform-1.9.6-natives-desktop.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-dialogs-core-1.2.0.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-dialogs-desktop-1.2.0.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-facebook-core-1.3.0.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-facebook-desktop-1.3.0.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-freetype-1.9.6.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-freetype-platform-1.9.6-natives-desktop.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-kiwi-1.9.1.9.6.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-lml-1.9.1.9.6.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-lml-vis-1.9.1.9.6.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-platform-1.9.6-natives-desktop.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/gdx-tools-1.9.6.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/jinput-2.0.5.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/jinput-platform-2.0.5-natives-linux.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/jinput-platform-2.0.5-natives-osx.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/jinput-platform-2.0.5-natives-windows.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/jlayer-1.0.1-gdx.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/jorbis-0.0.17.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/jutils-1.0.0.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/libgdx-utils-0.13.4.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/lwjgl_util-2.9.2.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/lwjgl-2.9.2.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/lwjgl-platform-2.9.2-natives-linux.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/lwjgl-platform-2.9.2-natives-osx.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/lwjgl-platform-2.9.2-natives-windows.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/overlap2d-runtime-libgdx-0.1.0.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs gdx/vis-ui-1.3.0.jar" todir="${dir.lib}"/>
-        <copy file="${dir.git}/res/libs other/net/netty-all-4.1.19.Final.jar" todir="${dir.lib}"/>
         <copy file="${dir.git}/r and d/annotationprocessor.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs other/jaxrs-ri-2.28/ext/javassist-3.22.0-GA.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs other/guava-26.0-jre.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs other/guice-4.2.0-no_aop.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs other/gson-gson-parent-2.8.5/gson/target/gson-2.8.5.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs other/reflections-0.9.11.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/ashley-1.7.0.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-1.9.6.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/box2dlights-1.4.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-box2d-1.9.6.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-box2d-platform-1.9.6-natives-desktop.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-ai-1.8.0.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-backend-headless-1.9.6.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-backend-lwjgl-1.9.6.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-bullet-1.9.6.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-bullet-platform-1.9.6-natives-desktop.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-controllers-1.9.6.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-controllers-desktop-1.9.6.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-controllers-platform-1.9.6-natives-desktop.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-dialogs-core-1.2.0.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-dialogs-desktop-1.2.0.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-facebook-core-1.3.0.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-facebook-desktop-1.3.0.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-freetype-1.9.6.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-freetype-platform-1.9.6-natives-desktop.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-kiwi-1.9.1.9.6.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-lml-1.9.1.9.6.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-lml-vis-1.9.1.9.6.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-platform-1.9.6-natives-desktop.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/gdx-tools-1.9.6.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/jinput-2.0.5.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/jinput-platform-2.0.5-natives-linux.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/jinput-platform-2.0.5-natives-osx.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/jinput-platform-2.0.5-natives-windows.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/jlayer-1.0.1-gdx.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/jorbis-0.0.17.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/jutils-1.0.0.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/libgdx-utils-0.13.4.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/lwjgl_util-2.9.2.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/lwjgl-2.9.2.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/lwjgl-platform-2.9.2-natives-linux.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/lwjgl-platform-2.9.2-natives-osx.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/lwjgl-platform-2.9.2-natives-windows.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/overlap2d-runtime-libgdx-0.1.0.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs gdx/vis-ui-1.3.0.jar" todir="${dir.lib}"/>
+        <copy file="${dir.gitres}/libs other/net/netty-all-4.1.19.Final.jar" todir="${dir.lib}"/>
     </target>
 </project>

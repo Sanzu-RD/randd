@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
-import com.google.common.collect.ImmutableList;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
@@ -14,16 +12,8 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import data.new1.spellstats.base.BoolStat;
 import data.new1.spellstats.base.IntStat;
 import data.new1.spellstats.base.ObjectStat;
-import data.new1.spellstats.imp.TargetConditionStat;
 import gamemechanics.common.Aoe;
 import gamemechanics.common.AoeBuilders;
-import gamemechanics.data.effects.damage.Damage;
-import gamemechanics.models.Cell;
-import gamemechanics.models.Creature;
-import gamemechanics.models.Fight;
-import gamemechanics.models.Spell;
-import gamemechanics.statics.CreatureType;
-import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.properties.Resource;
 import io.netty.buffer.ByteBuf;
 

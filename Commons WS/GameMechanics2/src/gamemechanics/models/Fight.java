@@ -2,19 +2,15 @@ package gamemechanics.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 
 import data.new1.ecs.Engine;
-import data.new1.ecs.Entity;
 import gamemechanics.common.Action;
 import gamemechanics.common.ActionPipeline;
-import gamemechanics.events.new1.Event;
 import gamemechanics.events.new1.EventPipeline;
 import gamemechanics.models.Creature.Team;
 import gamemechanics.systems.CellSystem;
@@ -22,9 +18,12 @@ import gamemechanics.systems.CreatureSystem;
 import gamemechanics.systems.SpellSystem;
 import gamemechanics.systems.StatusSystem;
 import io.netty.buffer.ByteBuf;
+import io.netty.util.AttributeKey;
 
 
 public class Fight extends Engine implements Identifiable<Integer>, BBSerializer, BBDeserializer {
+
+	public static final AttributeKey<Fight> attrkey = AttributeKey.newInstance("fight");
 	
 	//public EventPipeline bus;
 	
