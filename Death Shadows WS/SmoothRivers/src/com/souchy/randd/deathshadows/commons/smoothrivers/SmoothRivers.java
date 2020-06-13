@@ -19,8 +19,8 @@ import io.netty.buffer.Unpooled;
 public class SmoothRivers {
 	
 	private static String pearl_queue = "pearl";
-	private Connection connection;
-	private Channel channel;
+	public Connection connection;
+	public Channel channel;
 
 	
 	// pearl register/listen to queue "pearl"
@@ -40,8 +40,7 @@ public class SmoothRivers {
 	// pearl should have an update loop that checks every node's last heartbeat timemillis in their NodeInfo object
 	
 	
-	public SmoothRivers() {
-		
+	public SmoothRivers() throws IOException, TimeoutException {
 	}
 	
 	public void connect() throws IOException, TimeoutException {

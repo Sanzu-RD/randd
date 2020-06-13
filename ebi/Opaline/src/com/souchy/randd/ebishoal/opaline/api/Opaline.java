@@ -50,7 +50,8 @@ public class Opaline { //extends EbiShoalHTTP { //extends EbiCore {
 	}
 	
 	static WebTarget target(String path){
-		return Opaline.inst.target(conf.getTarget()).path(path);
+//		Log.info("root vs conf.getTarget() : " + inst.root + ", " + conf.getTarget() + ", path : " + path);
+		return Opaline.inst.client.target(conf.getTarget()).path(path);
 	}
 	
 	

@@ -5,6 +5,7 @@ import static com.mongodb.client.model.Filters.eq;
 
 import java.util.Map;
 
+import javax.annotation.Priority;
 import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
@@ -12,6 +13,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Priorities;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Cookie;
@@ -29,9 +31,8 @@ import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 import com.souchy.randd.jade.meta.User;
 
 @Path(OpalCommons.authentication)
-@XmlType(name="")
+//@XmlType(name="")
 public class Authentication implements IAuthentication {
-	
 	
 	// Note: you could even inject this as a method parameter
 	@Context public HttpServletRequest request;
@@ -44,14 +45,14 @@ public class Authentication implements IAuthentication {
 		if(ui != null) {
 		    MultivaluedMap<String, String> queryParams = ui.getQueryParameters();
 		    MultivaluedMap<String, String> pathParams = ui.getPathParameters();
-			Log.info("Opal.News.get : queryParams = " + queryParams);
-			Log.info("Opal.News.get : pathParams = " + pathParams);
+			Log.info("Opal.Authentication : queryParams = " + queryParams);
+			Log.info("Opal.Authentication : pathParams = " + pathParams);
 		}
 		if(hh != null) {
 		    MultivaluedMap<String, String> headerParams = hh.getRequestHeaders();
 		    Map<String, Cookie> pathParams2 = hh.getCookies();
-			Log.info("Opal.News.get : headerParams = " + headerParams);
-			Log.info("Opal.News.get : pathParams2 = " + pathParams2);
+			Log.info("Opal.Authentication : headerParams = " + headerParams);
+			Log.info("Opal.Authentication : pathParams2 = " + pathParams2);
 		}
 	}
 	
@@ -64,7 +65,7 @@ public class Authentication implements IAuthentication {
 	@Override
 	public User signin(LoginToken token) {
 		Log.info("Opal.signin : token = " + token);
-		return getUserEmerald(token.username, token.password);
+		return getUserEmerald(token.username, token.hashedPassword);
 	}
 	
 	@POST
@@ -81,10 +82,10 @@ public class Authentication implements IAuthentication {
 	    MultivaluedMap<String, String> pathParams = ui.getPathParameters();
 	    MultivaluedMap<String, String> headerParams = hh.getRequestHeaders();
 	    Map<String, Cookie> pathParams2 = hh.getCookies();
-		Log.info("Opal.News.get : queryParams = " + queryParams);
-		Log.info("Opal.News.get : pathParams = " + pathParams);
-		Log.info("Opal.News.get : headerParams = " + headerParams);
-		Log.info("Opal.News.get : pathParams2 = " + pathParams2);
+		Log.info("Opal.signup : queryParams = " + queryParams);
+		Log.info("Opal.signup : pathParams = " + pathParams);
+		Log.info("Opal.signup : headerParams = " + headerParams);
+		Log.info("Opal.signup : pathParams2 = " + pathParams2);
 		
 		// user already exists
 		if(getUserEmerald(token.username, token.password) != null) {
@@ -115,6 +116,7 @@ public class Authentication implements IAuthentication {
 	@PermitAll
 	@Override
 	public String getSalt(@PathParam("username") String username) {
+		Log.info("Opal.getSalt : username = " + username);
 		User user = Emerald.users().find(eq(User.name_username, username)).first();
 		if(user != null) {
 			return user.salt;
@@ -142,11 +144,11 @@ public class Authentication implements IAuthentication {
 		
 	}
 	
-	private User getUserEmerald(String username, String password) {
+	private User getUserEmerald(String username, String hashedPassword) {
 		return Emerald.users().find(
 				and(
 					eq(User.name_username, username), 
-					eq(User.name_password, password)
+					eq(User.name_password, hashedPassword)
 				)
 			).first();
 	}

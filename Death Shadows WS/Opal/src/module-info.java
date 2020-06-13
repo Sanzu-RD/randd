@@ -1,8 +1,11 @@
 module com.souchy.randd.deathshadows.opal {
 	exports com.souchy.randd.deathshadows.opal;
 	exports com.souchy.randd.deathshadows.opal.api;
+	exports com.souchy.randd.deathshadows.opal.api.data;
 
 	opens com.souchy.randd.deathshadows.opal.api;
+
+	
 	
 	requires transitive com.souchy.randd.commons.Jade;
 	requires transitive com.souchy.randd.deathshadows.iolite;

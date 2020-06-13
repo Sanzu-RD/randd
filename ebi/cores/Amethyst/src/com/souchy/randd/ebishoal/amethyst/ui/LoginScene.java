@@ -34,7 +34,7 @@ public class LoginScene extends Common {
     }
     
     @FXML
-    public  void switchForm(MouseEvent event) {
+    public void switchForm(MouseEvent event) {
     	loginFormController.root.setVisible(!loginFormController.root.isVisible());
     	registerFormController.root.setVisible(!registerFormController.root.isVisible());
     	if(switchFormBtn.getText().equals(registerStr)) {

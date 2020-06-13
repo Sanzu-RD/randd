@@ -44,7 +44,7 @@ public class DeathShadowTCP extends NettyServer {
 		pipe.addLast(lengthEncoder); 
 		pipe.addLast(encoder); 
 
-		pipe.addLast(lengthDecoder); 
+		pipe.addLast(lengthDecoder.create()); 
 		pipe.addLast(decoder.create()); 
 		pipe.addLast(auth); // auth avant le packet handler
 		pipe.addLast(handler); 

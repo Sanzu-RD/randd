@@ -34,7 +34,7 @@ public abstract class Core {
 	/**
 	 * Core communication service
 	 */
-	protected SmoothRivers rivers;
+//	protected SmoothRivers rivers;
 	
 	/**
 	 * Message factories used by both netty and rabbitmq communication
@@ -58,7 +58,7 @@ public abstract class Core {
 		Logging.registerLogModule(this.getClass());
 		discoverMesssages();
 		this.bus = new EventBus();
-		this.rivers = new SmoothRivers();
+//		this.rivers = new SmoothRivers();
 	}
 	
 

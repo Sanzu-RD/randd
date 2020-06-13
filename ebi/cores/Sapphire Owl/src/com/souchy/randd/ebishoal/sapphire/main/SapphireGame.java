@@ -69,7 +69,7 @@ public class SapphireGame extends LapisGame {
 			new SapphireEntitySystem(Moonstone.fight);
 			
 			// ask for fight data after assets have been loaded
-			Moonstone.moon.write(new GetUpdate());
+			if(Moonstone.moon != null) Moonstone.moon.write(new GetUpdate());
 			
 			// player hud
 //			SapphireHudSkin.play(fight.teamA.get(0));
@@ -81,40 +81,6 @@ public class SapphireGame extends LapisGame {
 		}
 	}
 	
-	
-	private Creature testCreateCreature(JadeCreature jade) {
-		// base model
-		CreatureModel model = DiamondModels.creatures.get(jade.creatureModelID);
-		// override model stats
-		model.baseStats.resources.put(Resource.life, new IntStat(30)); 
-		// instance
-		Creature creature = new Creature(fight, model, jade, new Position(5, 5));
-		creature.stats.resources.get(Resource.life).fight = -150; 
-		creature.stats.shield.get(Resource.life).fight = 600; 
-		// 3d instance & controller
-		var modelpath = AssetConfs.creatures.get(creature.modelid).models[0]; 
-		var model3d = LapisAssets.assets.<Model>get(modelpath);
-		var modelinstance = new ModelInstance(model3d);
-		modelinstance.transform.rotate(1, 0, 0, 90);
-		var animController = new AnimationController(modelinstance);
-		animController.setAnimation("CharacterArmature|Walk", -1);
-		creature.add(animController);
-		creature.add(modelinstance);
-		SapphireEntitySystem.family.add(creature);
-		
-		var rnd = new Random();
-		var baseColor = new Color(rnd.nextFloat(), rnd.nextFloat(), rnd.nextFloat(), 1f);
-				
-		// clothes
-		modelinstance.materials.get(1).set(ColorAttribute.createDiffuse(baseColor));
-		// hat
-		modelinstance.materials.get(4).set(ColorAttribute.createDiffuse(baseColor));
-		// hair darker
-		float ratio = 1f /  2f;
-		modelinstance.materials.get(5).set(ColorAttribute.createDiffuse(baseColor.mul(ratio, ratio, ratio, 1f)));
-		
-		return creature;
-	}
 
 	@Override
 	public SapphireScreen getStartScreen() {

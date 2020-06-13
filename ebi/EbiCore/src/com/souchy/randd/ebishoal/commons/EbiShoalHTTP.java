@@ -16,7 +16,7 @@ public class EbiShoalHTTP {
 
 	public final Client client = ClientBuilder.newClient();
 	
-	private String root;
+	public String root;
 	
 	/**
 	 * 

@@ -47,7 +47,10 @@ public final class Pearl extends DeathShadowCore {
 		if(args.length > 1) root = args[1];
 		
 		getCoreJars();
-		create("blackmoonstone");
+//		create("blackmoonstone");
+		
+		
+		rivers.connect();
 		
 		// start server
 		server = new DeathShadowTCP(port, this); 
@@ -65,8 +68,8 @@ public final class Pearl extends DeathShadowCore {
 		Environment.root = Paths.get(root);
 		var deathShadowCoreList = new DefaultClassDiscoverer<DeathShadowCore>(DeathShadowCore.class).explore("com.souchy.randd.deathshadows");
 		for(var core : deathShadowCoreList) {
-			var file = Environment.fromRoot("release/deathshadows/" + core.getSimpleName().toLowerCase() + ".jar").toFile();
-			if(file.exists()) {
+			var file = Environment.fromRoot("deathshadows/" + core.getSimpleName().toLowerCase() + ".jar").toFile();
+			if(file.exists() && file.getName().endsWith(".jar")) {
 				Log.info("death shadow core : " + file.getName());
 				jars.add(file);
 			}

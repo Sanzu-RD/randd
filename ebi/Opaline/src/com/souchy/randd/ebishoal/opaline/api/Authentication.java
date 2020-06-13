@@ -19,18 +19,23 @@ public class Authentication implements IAuthentication {
 	public User signup(RegistrationToken token) { 
 		Log.info("Opaline.Authentication.signup : token = " + token);
 		var user = Opaline.post(target.path("signup"), Entity.entity(token, MediaType.APPLICATION_JSON), User.class, MediaType.APPLICATION_JSON_TYPE);
+		Log.info("Opaline.Authentication.signup : " + user);
 		return user;
 	}
 	@Override
 	public User signin(LoginToken token) { 
 		Log.info("Opaline.Authentication.signin : token = " + token);
 		var user = Opaline.post(target.path("signin"), Entity.entity(token, MediaType.APPLICATION_JSON), User.class, MediaType.APPLICATION_JSON_TYPE);
+		Log.info("Opaline.Authentication.signin : " + user);
 		return user;
 	}
 	
 	@Override
 	public String getSalt(String username) {
-		return Opaline.get(target.path("salt/" + username), String.class);
+		Log.info("Opaline.Authentication.getSalt : username = " + username);
+		var salt = Opaline.get(target.path("salt/" + username), String.class);;
+		Log.info("Opaline.Authentication.getSalt : " + salt);
+		return salt;
 	}
 	@Override
 	public void forgotAccountFromEmail(String email) {

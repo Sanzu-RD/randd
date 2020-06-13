@@ -91,7 +91,7 @@ public class SapphireEntitySystem extends data.new1.ecs.System {
 	public void onRemovedEntity(RemoveEntityEvent event) {
 		if(event.entity instanceof Creature || event.entity instanceof TerrainEffect) {
 			synchronized (SapphireEntitySystem.family) {
-				family.remove(event);
+				family.remove(event.entity);
 			}
 		}
 	}

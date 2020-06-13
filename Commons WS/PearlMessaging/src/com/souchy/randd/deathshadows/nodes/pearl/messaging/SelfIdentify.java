@@ -9,8 +9,9 @@ import io.netty.buffer.ByteBuf;
 @ID(id = 1001)
 public class SelfIdentify implements BBMessage {
 	
-	public int nodeid;
+	public int nodeid = 0;
 	
+	public SelfIdentify() {}
 	public SelfIdentify(int nodeid) {
 		this.nodeid = nodeid;
 	}
@@ -29,7 +30,7 @@ public class SelfIdentify implements BBMessage {
 
 	@Override
 	public Deserializer<ByteBuf, BBMessage> create() {
-		return new SelfIdentify(0);
+		return new SelfIdentify();
 	}
 
 	@Override

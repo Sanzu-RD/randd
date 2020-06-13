@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="SmoothRivers">
+    <property environment="env"/>
+    <property name="gitspace" value="../../"/>
+    <property name="Amethyst.location" value="../../ebi/cores/Amethyst"/>
+    <property name="Coral.location" value="../Coral"/>
+    <property name="Coral-commons.location" value="../../Commons WS/Coral-commons"/>
+    <property name="Coraline.location" value="../../ebi/Coraline"/>
+    <property name="DeathEbi-commons.location" value="../../Commons WS/DeathEbi-commons"/>
+    <property name="DeathShadowCore.location" value="../DeathShadowCore"/>
+    <property name="EbiShoalCore.location" value="../../ebi/EbiCore"/>
+    <property name="Lapis Lazuli.location" value="../../ebi/Lapis Lazuli"/>
+    <property name="Mockingbird.location" value="../../Mock WS/Mockingbird"/>
+    <property name="Moonstone-black.location" value="../Moonstone-black"/>
+    <property name="Moonstone-white.location" value="../../ebi/Moonstone-white"/>
+    <property name="Opal.location" value="../Opal"/>
+    <property name="Pearl.location" value="../Pearl"/>
+    <property name="Sapphire Owl.location" value="../../ebi/cores/Sapphire Owl"/>
+    <property name="Teal Waters.location" value="../../Commons WS/TealWaters"/>
+    <property name="Teal Net.location" value="../../Commons WS/Teal Net"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="12"/>
+    <property name="source" value="12"/>
+    <path id="Google.userclasspath">
+        <pathelement location="../../../../Git/res/libs other/guava-26.0-jre.jar"/>
+        <pathelement location="../../../../Git/res/libs other/guice-4.2.0-no_aop.jar"/>
+        <pathelement location="../../../../Git/res/libs other/reflections-0.9.11.jar"/>
+        <pathelement location="../../../../Git/res/libs other/javassist.jar"/>
+        <pathelement location="../../../../Git/res/libs other/gson-2.8.6.jar"/>
+    </path>
+    <path id="Teal Waters.classpath">
+        <pathelement location="${Teal Waters.location}/bin"/>
+        <pathelement location="${gitspace}/annotationprocessor.jar"/>
+        <path refid="Google.userclasspath"/>
+    </path>
+    <path id="Netty.userclasspath">
+        <pathelement location="../../../../Git/res/libs other/net/netty-all-4.1.19.Final.jar"/>
+        <pathelement location="../../annotationprocessor.jar"/>
+    </path>
+    <path id="Jersey.userclasspath">
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/api/jakarta.ws.rs-api-2.1.5.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.annotation-api-1.3.4.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/aopalliance-repackaged-2.5.0.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/hk2-api-2.5.0.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/hk2-locator-2.5.0.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/hk2-utils-2.5.0.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.activation-api-1.2.1.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.inject-2.5.0.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.json.bind-api-1.0.1.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.json-1.1.5.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.json-api-1.1.5.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.persistence-api-2.2.2.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.servlet-api-4.0.2.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.xml.bind-api-2.3.2.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/javassist-3.22.0-GA.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/org.osgi.core-4.2.0.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/osgi-resource-locator-1.0.1.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/validation-api-2.0.1.Final.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/ext/yasson-1.0.3.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/lib/jersey-client.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/lib/jersey-common.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/lib/jersey-container-servlet.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/lib/jersey-container-servlet-core.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/lib/jersey-hk2.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/lib/jersey-media-jaxb.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/lib/jersey-media-json-binding.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/lib/jersey-media-sse.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/lib/jersey-server.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/jersey-netty-connector-2.28.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/jersey-container-netty-http-2.28.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/jersey-mvc-2.28.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/jersey-mvc-freemarker-2.28.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/netty-all-4.1.19.Final.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/freemarker-2.3.28.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/jersey-grizzly-1.19.4.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/jersey-grizzly-connector-2.28.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/jersey-container-grizzly2-http-2.28.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/grizzly-http-2.4.4.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/grizzly-http-server-2.4.4.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/grizzly-http-servlet-2.4.4.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/grizzly-framework-2.4.4.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/grizzly-websockets-2.4.4.jar"/>
+        <pathelement location="../../../../Git/res/libs other/jaxrs-ri-2.28/connection-pool-2.4.4.jar"/>
+    </path>
+    <path id="Teal Net.classpath">
+        <pathelement location="${Teal Net.location}/bin"/>
+        <path refid="Teal Waters.classpath"/>
+        <path refid="Netty.userclasspath"/>
+        <path refid="Jersey.userclasspath"/>
+    </path>
+    <path id="RabbitMQ.userclasspath">
+        <pathelement location="../../../../Git/res/libs other/amqp-client-5.1.2.jar"/>
+        <pathelement location="../../../../Git/res/libs other/slf4j-jdk14-1.6.4.jar"/>
+        <pathelement location="../../../../Git/res/libs other/slf4j-api-1.7.12.jar"/>
+    </path>
+    <path id="SmoothRivers.classpath">
+        <pathelement location="bin"/>
+        <path refid="Teal Net.classpath"/>
+        <path refid="Teal Waters.classpath"/>
+        <path refid="Netty.userclasspath"/>
+        <path refid="RabbitMQ.userclasspath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall">
+        <ant antfile="build.xml" dir="${Teal Waters.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Teal Net.location}" inheritAll="false" target="clean"/>
+    </target>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects">
+        <ant antfile="build.xml" dir="${Teal Waters.location}" inheritAll="false" target="build-project"/>
+        <ant antfile="build.xml" dir="${Teal Net.location}" inheritAll="false" target="build-project"/>
+    </target>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="SmoothRivers.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects">
+        <ant antfile="build.xml" dir="${Amethyst.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Amethyst.location}" inheritAll="false" target="build"/>
+        <ant antfile="build.xml" dir="${Coral.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Coral.location}" inheritAll="false" target="build"/>
+        <ant antfile="build.xml" dir="${Coral-commons.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Coral-commons.location}" inheritAll="false" target="build"/>
+        <ant antfile="build.xml" dir="${Coraline.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Coraline.location}" inheritAll="false" target="build"/>
+        <ant antfile="build.xml" dir="${DeathEbi-commons.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${DeathEbi-commons.location}" inheritAll="false" target="build"/>
+        <ant antfile="build.xml" dir="${DeathShadowCore.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${DeathShadowCore.location}" inheritAll="false" target="build"/>
+        <ant antfile="build.xml" dir="${EbiShoalCore.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${EbiShoalCore.location}" inheritAll="false" target="build"/>
+        <ant antfile="build.xml" dir="${Lapis Lazuli.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Lapis Lazuli.location}" inheritAll="false" target="build"/>
+        <ant antfile="build.xml" dir="${Mockingbird.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Mockingbird.location}" inheritAll="false" target="build"/>
+        <ant antfile="build.xml" dir="${Moonstone-black.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Moonstone-black.location}" inheritAll="false" target="build"/>
+        <ant antfile="build.xml" dir="${Moonstone-white.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Moonstone-white.location}" inheritAll="false" target="build"/>
+        <ant antfile="build.xml" dir="${Opal.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Opal.location}" inheritAll="false" target="build"/>
+        <ant antfile="build.xml" dir="${Pearl.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Pearl.location}" inheritAll="false" target="build"/>
+        <ant antfile="build.xml" dir="${Sapphire Owl.location}" inheritAll="false" target="clean"/>
+        <ant antfile="build.xml" dir="${Sapphire Owl.location}" inheritAll="false" target="build"/>
+    </target>
+</project>

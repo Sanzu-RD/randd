@@ -6,13 +6,14 @@ public interface IAuthentication {
 	
 	public static class LoginToken {
 		public String username;
-		public String password;
+		public String hashedPassword;
+		public LoginToken() { }
 		public LoginToken(String username, String hashedPassword) {
-			this.username = username; this.password = hashedPassword;
+			this.username = username; this.hashedPassword = hashedPassword;
 		}
 		@Override
 		public String toString() {
-			return String.format("{%s, %s}", username, password);
+			return String.format("{%s, %s}", username, hashedPassword);
 		}
 	}
 	
@@ -22,6 +23,7 @@ public interface IAuthentication {
 		public String password;
 		public String salt;
 		public String email;
+		public RegistrationToken() { }
 		public RegistrationToken(String pseudo, String username, String hashedPassword, String salt, String email) {
 			this.pseudo = pseudo; this.username = username; this.password = hashedPassword; this.salt = salt; this.email = email;
 		}

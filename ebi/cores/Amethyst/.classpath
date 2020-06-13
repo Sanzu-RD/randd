@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="com/souchy/randd/ebishoal/amethyst/main/AmethystModule.java" kind="src" path="src"/>
-	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="src" path="assets" output="res"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Opaline">
 		<attributes>
 			<attribute name="module" value="true"/>

@@ -53,21 +53,21 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 			Log.info("AuthenticationFilter.filter : restricted.");
 			String authHeader = ctx.getHeaderString(HttpHeaders.AUTHORIZATION); // (1)
 			if(authHeader == null || authHeader.trim().isEmpty()) {
-				//Log.info("AuthenticationFilter.filter : no authotization header.");
+				Log.info("AuthenticationFilter.filter : no authotization header.");
 				ctx.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("Invalid authorization header.").build());
 				return;
 			}
 			
 			// Read headers
 			String authzHeader = ctx.getHeaderString(HttpHeaders.AUTHORIZATION); // (1)
-	        //Log.info("authzHeader : " + authzHeader);
+	        Log.info("authzHeader : " + authzHeader);
 	        String decoded = Base64.decodeAsString(authzHeader);
-	        //Log.info("authzHeader decoded : " + decoded);
+	        Log.info("authzHeader decoded : " + decoded);
 	        
 	        String[] split = decoded.split(":");
 	        String username = split[0];
 	        String password = split[1];
-	        //Log.info("user : " + username + ", pass : " + password);
+	        Log.info("user : " + username + ", pass : " + password);
 			User user = Emerald.users().find(and(eq(User.name_username, username), eq(User.name_password, password))).first(); // (2)
 
 			if(user == null) { // (3)
@@ -113,6 +113,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
 		   @Override
 		   public boolean isUserInRole(String role) {
+			   if(user == null) return false;
 		       return user.level.ordinal() >= UserLevel.valueOf(role).ordinal(); //.getRoles().contains(role);
 		   }
 		}

@@ -1,5 +1,7 @@
 package com.souchy.randd.commons.net.netty.server;
 
+import java.util.function.Supplier;
+
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.server.NettyServerBuilderHolder.NettyServerBuilder;
 import com.souchy.randd.commons.net.netty.server.NettyServerBuilderHolder.NettyServerBuilderPort;
@@ -116,7 +118,7 @@ public class NettyServer {
 	};
 	
 	protected LengthFieldPrepender lengthEncoder = new LengthFieldPrepender(2);
-	protected LengthFieldBasedFrameDecoder lengthDecoder = new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 2, 0, 2);
+	protected Factory<LengthFieldBasedFrameDecoder> lengthDecoder = () -> new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 2, 0, 2);
 	
 	/**
 	 * Initialize the ChannelPipeline any new client
@@ -127,7 +129,7 @@ public class NettyServer {
 		pipe.addLast(lengthEncoder);
 		pipe.addLast(encoder); 
 		
-		pipe.addLast(lengthDecoder);
+		pipe.addLast(lengthDecoder.create());
 		pipe.addLast(decoder.create()); 
 		pipe.addLast(handler); 
 	}
