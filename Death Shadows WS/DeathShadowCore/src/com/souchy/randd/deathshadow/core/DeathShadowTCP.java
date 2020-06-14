@@ -2,6 +2,7 @@ package com.souchy.randd.deathshadow.core;
 
 import java.util.Map;
 
+import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.net.netty.bytebuf.pipehandlers.BBMessageDecoder;
 import com.souchy.randd.commons.net.netty.bytebuf.pipehandlers.BBMessageEncoder;
 import com.souchy.randd.commons.net.netty.server.NettyHandler;
@@ -21,8 +22,8 @@ import io.netty.channel.ChannelPipeline;
 public class DeathShadowTCP extends NettyServer {
 
 
-	private AuthenticationFilter auth = new AuthenticationFilter();
-	private Map<User, Channel> users = auth.userChannels;
+	public final AuthenticationFilter auth = new AuthenticationFilter();
+	public final Map<User, Channel> users = auth.userChannels;
 	
 	/**
 	 * Create & Start the server. Should call .block() after to wait for server closure before exiting the application <br>

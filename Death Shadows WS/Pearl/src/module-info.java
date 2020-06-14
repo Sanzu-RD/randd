@@ -1,7 +1,6 @@
 module com.souchy.randd.deathshadows.Pearl {
-	exports com.souchy.randd.deathshadows.nodes.pearl.main;
-	exports com.souchy.randd.deathshadows.nodes.pearl.handlers;
-	
+	exports com.souchy.randd.deathshadows.pearl.main;
+	exports com.souchy.randd.deathshadows.pearl.handlers;
 	
 	
 	requires transitive com.souchy.randd.deathshadows.opal;

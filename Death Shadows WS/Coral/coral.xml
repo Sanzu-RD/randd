@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project Coral">
+    <!--this file was created by Eclipse Runnable JAR file Export Wizard-->
+    <!--ANT 1.7 is required-->
+    <!--define folder properties-->
+    
+    <property name="dir.buildfile" value="./"/>
+    <property name="dir.workspace" value="F:/Users/Souchy/Desktop/Robyn/eclipse-workspaces/hidden workspaces/r and d/"/>
+	<property name="dir.git" value="../../../"/> <!--this is /GitPiranha/ -->
+	<property name="dir.gitres" value="${dir.git}/../Git/res/"/>
+	
+    <property name="dir.jarfile" value="${dir.git}/release/deathshadows/"/>
+	<property name="dir.lib" value="${dir.jarfile}/lib/"/>
+	<property name="dir.res" value="${dir.jarfile}/res/"/>
+	<property name="dir.natives" value="${dir.jarfile}/natives/"/>
+	<property name="dir.modules" value="${dir.jarfile}/modules/"/>
+
+	<path id="build.classpath">
+		<fileset dir="${dir.lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<!-- convert classpath to a flat list/string for use in manifest task -->
+	<pathconvert property="mf.classpath" pathsep=" ">
+		<path refid="build.classpath" />
+		<mapper>
+			<chainedmapper>
+				<flattenmapper />
+				<globmapper from="*.jar" to="./lib/*.jar" />
+			</chainedmapper>
+		</mapper>
+	</pathconvert>
+
+	
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/coral.jar">
+            <manifest>
+                <attribute name="Main-Class" value="com.souchy.randd.deathshadows.coral.main.Coral"/>
+                <attribute name="Class-Path" value=". ./lib/ ./res/ ${mf.classpath}"/>
+            </manifest>
+            
+        	<fileset dir="${dir.buildfile}/bin">
+				<include name="com/**"/>
+				<include name="module-info.class"/>
+			</fileset>
+            
+            <fileset dir="${dir.git}/r and d/Commons WS/TealWaters/bin"/>
+            <fileset dir="${dir.git}/r and d/Commons WS/Teal Net/bin"/>
+            <fileset dir="${dir.git}/r and d/Commons WS/DeathEbi-commons/bin"/>
+            <fileset dir="${dir.git}/r and d/Death Shadows WS/DeathShadowCore/bin"/>
+        	
+            <fileset dir="${dir.git}/r and d/Commons WS/Jade Models/bin"/>
+            <fileset dir="${dir.git}/r and d/Commons WS/GameMechanics2/bin"/>
+        	
+            <fileset dir="${dir.git}/r and d/Commons WS/Coral-commons/bin"/>
+        	
+            <fileset dir="${dir.git}/r and d/Commons WS/PearlMessaging/bin"/>
+            <fileset dir="${dir.git}/r and d/Death Shadows WS/SmoothRivers/bin"/>
+            <fileset dir="${dir.git}/r and d/Death Shadows WS/Iolite/bin"/>
+            <fileset dir="${dir.git}/r and d/Data WS/Creature Commons/bin"/>
+        </jar>
+        
+            
+	    <copy file="${dir.git}/r and d/annotationprocessor.jar" todir="${dir.lib}"/>
+	    <copy file="${dir.gitres}/libs other/net/netty-all-4.1.19.Final.jar" todir="${dir.lib}"/>
+	    <copy file="${dir.gitres}/libs other/amqp-client-5.1.2.jar" todir="${dir.lib}"/>
+	    <copy file="${dir.gitres}/libs other/slf4j-jdk14-1.6.4.jar" todir="${dir.lib}"/>
+	    <copy file="${dir.gitres}/libs other/slf4j-api-1.7.12.jar" todir="${dir.lib}"/>
+	    <copy file="${dir.gitres}/libs other/jedis-2.9.0.jar" todir="${dir.lib}"/>
+	    <copy file="${dir.gitres}/libs other/mongodb-driver-sync-3.10.1.jar" todir="${dir.lib}"/>
+	    <copy file="${dir.gitres}/libs other/bson-3.10.1.jar" todir="${dir.lib}"/>
+	    <copy file="${dir.gitres}/libs other/mongodb-driver-core-3.10.1.jar" todir="${dir.lib}"/>
+	    <copy file="${dir.gitres}/libs other/guava-26.0-jre.jar" todir="${dir.lib}"/>
+	    <copy file="${dir.gitres}/libs other/guice-4.2.0-no_aop.jar" todir="${dir.lib}"/>
+	    <copy file="${dir.gitres}/libs other/reflections-0.9.11.jar" todir="${dir.lib}"/>
+	    <copy file="${dir.gitres}/libs other/javassist.jar" todir="${dir.lib}"/>
+	    <copy file="${dir.gitres}/libs other/gson-2.8.6.jar" todir="${dir.lib}"/>
+	    
+	    
+    </target>
+</project>

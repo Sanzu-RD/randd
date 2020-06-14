@@ -3,7 +3,7 @@ package com.souchy.randd.deathshadows.coral.handlers;
 import com.souchy.randd.commons.coral.in.Enqueue;
 import com.souchy.randd.commons.coral.out.EnqueueAck;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
-import com.souchy.randd.deathshadows.coral.Coral;
+import com.souchy.randd.deathshadows.coral.main.Coral;
 import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.jade.mm.Queuee;

@@ -28,17 +28,17 @@ public abstract class Common {
 		stage.setIconified(true);
 	}
 	
-	// @FXML
-	// public void openSettings(MouseEvent event) {
-	// var current = mainTabs.getSelectionModel().getSelectedItem();
-	// if(current != settingsTab) {
-	// tabBeforeSettings = current;
-	// mainTabs.getSelectionModel().select(settingsTab);
-	// } else if(tabBeforeSettings != null) {
-	// mainTabs.getSelectionModel().select(tabBeforeSettings);
-	// tabBeforeSettings = null;
-	// }
-	// }
+	@FXML
+	public void openSettings(MouseEvent event) {
+//		var current = mainTabs.getSelectionModel().getSelectedItem();
+//		if(current != settingsTab) {
+//			tabBeforeSettings = current;
+//			mainTabs.getSelectionModel().select(settingsTab);
+//		} else if(tabBeforeSettings != null) {
+//			mainTabs.getSelectionModel().select(tabBeforeSettings);
+//			tabBeforeSettings = null;
+//		}
+	}
 
     @FXML
     public void onPress(MouseEvent event) {

@@ -6,7 +6,7 @@ import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 
 import io.netty.buffer.ByteBuf;
 
-@ID(id = 1002)
+@ID(id = 0004)
 public class GetUser implements BBMessage {
 	
 	public String username;

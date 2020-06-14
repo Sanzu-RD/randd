@@ -2,9 +2,9 @@ module com.souchy.randd.tools.Rainbow {
 	exports com.souchy.randd.tools.rainbow.main;
 	exports com.souchy.randd.tools.rainbow.ui;
 	exports com.souchy.randd.tools.rainbow.handlers;
-	exports com.souchy.randd.tools.rainbow.acknowledgers;
+//	exports com.souchy.randd.tools.rainbow.acknowledgers;
 
-	opens com.souchy.randd.tools.rainbow;
+	opens com.souchy.randd.tools.rainbow.main;
 	opens com.souchy.randd.tools.rainbow.ui;
 	
 	requires transitive com.souchy.randd.deathshadows.nodes.pearl.PearlMessaging;
@@ -16,4 +16,6 @@ module com.souchy.randd.tools.Rainbow {
 	requires transitive javafx.controls;
 	requires transitive javafx.fxml;
 	requires transitive javafx.graphics;
+	requires com.souchy.randd.commons.deathebi;
+	requires com.google.common;
 }

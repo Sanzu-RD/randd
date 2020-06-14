@@ -1,5 +1,5 @@
 module com.souchy.randd.deathshadows.coral {
-	exports com.souchy.randd.deathshadows.coral;
+	exports com.souchy.randd.deathshadows.coral.main;
 	exports com.souchy.randd.deathshadows.coral.handlers;
 	
 	requires transitive com.souchy.randd.commons.Jade;

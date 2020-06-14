@@ -42,7 +42,7 @@ public class NettyHandler extends ChannelInboundHandlerAdapter {
 		msgHandlers.handle(ctx, bb);
 		
 		// this would pass to the next handler, but the message is already handled here so no point firing an event when there's no other handler to take it 
-		//super.channelRead(ctx, msg);
+//		super.channelRead(ctx, msg);
     }
 	
 

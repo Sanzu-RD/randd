@@ -1,5 +1,6 @@
 package com.souchy.randd.deathshadows.opal.api;
 
+import javax.annotation.security.PermitAll;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -12,6 +13,7 @@ public class Ping {
 	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
+	@PermitAll
 	public String ping() {
 		//Log.info("pingpong");
 		return pong;

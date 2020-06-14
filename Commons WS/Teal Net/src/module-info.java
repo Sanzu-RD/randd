@@ -13,4 +13,5 @@ module com.souchy.randd.commons.TealNet {
 	requires com.souchy.randd.AnnotationProcessor;
 	requires jersey.container.netty.http;
 	requires jersey.server;
+	requires com.google.common;
 }

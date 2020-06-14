@@ -35,8 +35,8 @@
     <target name="create_run_jar">
         <jar destfile="${dir.jarfile}/pearl.jar">
             <manifest>
-                <attribute name="Main-Class" value="com.souchy.randd.deathshadows.nodes.pearl.main.Pearl"/>
-                <attribute name="Class-Path" value=". ./lib/ ./res/ ${mf.classpath}"/>
+                <attribute name="Main-Class" value="com.souchy.randd.deathshadows.pearl.main.Pearl"/>
+                <attribute name="Class-Path" value=". ./lib/ ${mf.classpath}"/>
             </manifest>
             
         	<fileset dir="${dir.buildfile}/bin">

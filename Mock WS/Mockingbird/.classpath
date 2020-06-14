@@ -23,7 +23,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/Opal-commons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Opaline"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Pearl"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/PearlMessaging"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Pearl-commons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/PiranhaPlants"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SmoothRivers"/>

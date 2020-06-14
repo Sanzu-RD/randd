@@ -13,6 +13,7 @@ import com.souchy.randd.commons.deathebi.msg.SendUser;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 import com.souchy.randd.jade.meta.User;
+import com.souchy.randd.jade.meta.UserLevel;
 
 //import com.souchy.randd.commons.nettyauth.Authentication;
 import io.netty.channel.Channel;
@@ -24,6 +25,10 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //implements NettyMessageFilter { 
 	
 	public final Map<User, Channel> userChannels = new HashMap<>();
+	/**
+	 * Minimum user level to be authorized to go through.
+	 */
+	public UserLevel minLevel = UserLevel.User;
 	
 	/** 
 	 * Filter messages so only channels with a User attribute can go through 
@@ -76,13 +81,15 @@ public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //imple
 		// + set l'attribute dans le channel 
 		// + ajoute le channel aux users connectés
 		var user = Emerald.users().find(and(eq(User.name_username, msg.username), eq(User.name_password, msg.hashedPassword))).first();
-		if(user != null) {
+		if(user != null && user.level.ordinal() >= minLevel.ordinal()) {
 			ctx.channel().attr(User.attrkey).set(user);
 			userChannels.put(user, ctx.channel());
 			ctx.writeAndFlush(new SendUser(user));
 		}
-		else 
-			ctx.writeAndFlush(new SendUser(null)); //SendUserNull()); // username + password miscombination
+		else {
+			ctx.writeAndFlush(new SendUser(null)); // username + password miscombination not unauthorized user level
+			ctx.channel().close(); 
+		}
 	}
 	
 	

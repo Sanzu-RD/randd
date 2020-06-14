@@ -1,6 +1,6 @@
 package mockingbird;
 
-import com.souchy.randd.deathshadows.nodes.moonstone.black.BlackMoonstone;
+import com.souchy.randd.deathshadows.blackmoonstone.main.BlackMoonstone;
 
 public class MockingMoonstoneBlack {
 

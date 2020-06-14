@@ -21,6 +21,11 @@ public class Log {
 		this.date = ZonedDateTime.now(); // Instant.now(Clock.system(ZoneId.));
 	}
 	
+	@Override
+	public String toString() {
+		return "[" + date + "]\t[" + module + "]\t[" + importance + "] : " + details;
+	}
+	
 	public static void log(LogImportance importance, String details) {
 		Logging.log(new Log(importance, details));
 	}

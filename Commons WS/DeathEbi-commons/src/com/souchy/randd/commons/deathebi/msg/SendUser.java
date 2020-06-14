@@ -7,7 +7,7 @@ import com.souchy.randd.jade.meta.User;
 
 import io.netty.buffer.ByteBuf;
 
-@ID(id = 1102)
+@ID(id = 0005)
 public class SendUser implements BBMessage {
 	
 	public User user;

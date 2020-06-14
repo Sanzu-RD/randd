@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -17,6 +18,16 @@ public class BBMessageHandlers { // extends ResponsibilityManager<BBMessage, BBM
 
 	private final Map<Integer, BBMessageHandler<BBMessage>> handlers = new HashMap<>();
 
+	/**
+	 * Core events like packets which classes can listen to without being a full blown BBMessageHandler class
+	 * Useful for UI updates for example
+	 */
+	private final EventBus bus;
+	
+	public BBMessageHandlers(EventBus bus) {
+		this.bus = bus;
+	}
+	
 	public boolean canHandle(BBMessage msg) {
 //		Log.info("BBMessageHandlers can handle ? " + msg.getClass() + " : " + msg);
 		return handlers.containsKey(msg.getID());
@@ -29,6 +40,8 @@ public class BBMessageHandlers { // extends ResponsibilityManager<BBMessage, BBM
 		} else {
 			Log.error("BBMessageHandlers cant handle message [" + msg + "] of ID [" + msg.getID() + "]");
 		}
+		// post message as event for stuff like UI, it's easier to handle through a disconnected event/handler and simple method registration
+		bus.post(msg);
 	}
 
 	public void add(BBMessageHandler handler) {

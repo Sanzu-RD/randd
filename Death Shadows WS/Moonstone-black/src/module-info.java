@@ -6,8 +6,8 @@
  *
  */
 module com.souchy.randd.moonstone.Black {
-	exports com.souchy.randd.deathshadows.nodes.moonstone.black;
-	exports com.souchy.randd.deathshadows.nodes.moonstone.black.handlers;
+	exports com.souchy.randd.deathshadows.blackmoonstone.main;
+	exports com.souchy.randd.deathshadows.blackmoonstone.handlers;
 
 	requires transitive com.souchy.randd.moonstone.Commons;
 

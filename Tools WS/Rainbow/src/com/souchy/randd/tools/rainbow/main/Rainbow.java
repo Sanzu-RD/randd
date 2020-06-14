@@ -1,11 +1,16 @@
 package com.souchy.randd.tools.rainbow.main;
 
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
 
+import javafx.application.Application;
+
+
 /**
- * hey rainbow should have a http version of the client
+ * hey we should have a web version of rainbow 
  * web client would connect to Opal that would then talk to Pearl
+ * so we could monitor servers from a browser
  * 
  * @author Blank
  * @date 11 juin 2020
@@ -18,58 +23,24 @@ public class Rainbow extends EbiShoalCore {
 	public static EbiShoalTCP client;
 	
 	public static void main(String[] args) throws Exception {
-		core = new Rainbow(args);
+		new Rainbow(args);
 	}
 	
 	public Rainbow(String[] args) throws Exception {
 		super(args);
+		core = this;
 		client = new EbiShoalTCP("127.0.0.1", 1000, this);
+
+		Log.info("Rainbow start.");
+		Application.launch(RainbowApp.class);
+		Log.info("Rainbow stopped.");
+//		Platform.runLater(() -> RainbowApp.stage.setScene(RainbowApp.mainScene));
 	}
 	
 	@Override
 	protected String[] getRootPackages() {
-		return new String[] { "com.souchy.randd.tools.rainbow", "com.souchy.randd.deathshadows.nodes.pearl.messaging" };
+		return new String[] { "com.souchy.randd.commons.deathebi", "com.souchy.randd.tools.rainbow", "com.souchy.randd.tools.rainbow.handlers", "com.souchy.randd.deathshadows.nodes.pearl.messaging" };
 	}
 	
-	/*
-	
-	@Override
-	public void init() throws Exception {
-		super.init();
-		conf = JsonConfig.readExternal(RainbowConf.class); 
-	}
-
-	@Override
-	public void start() {
-		try {
-			Executors.newSingleThreadExecutor().execute(() -> Application.launch(RainbowApp.class));
-			super.start();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Log.info("client started");
-	}
-	
-	
-	@Override
-	protected String[] getRootPackages() {
-		return new String[] { "com.souchy.randd.tools.rainbow", "com.souchy.randd.deathshadows.nodes.pearl.messaging" };
-	}
-
-	@Override
-	protected String getIp() {
-		return "localhost";
-	}
-
-	@Override
-	protected int getPort() {
-		return 10000;
-	}
-
-	@Override
-	protected boolean getSsl() {
-		return false;
-	}
-	*/
 	
 }

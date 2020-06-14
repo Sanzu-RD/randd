@@ -63,7 +63,7 @@ public final class Logging {
 	private static void createSysoutStream() {
 		/** Sysout output stream */
 		streams.add(l -> {
-			var msg = "["+l.date+"]\t["+rootModule+"]\t[" + l.importance + "] : " + l.details;
+			var msg = l.toString(); //"["+l.date+"]\t["+rootModule+"]\t[" + l.importance + "] : " + l.details;
 			if(l.importance.ordinal() < LogImportance.Error.ordinal()) System.out.println(msg);
 			else System.err.println(msg);
 		});

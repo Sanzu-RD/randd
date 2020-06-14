@@ -2,7 +2,7 @@ package mockingbird;
 
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
-import com.souchy.randd.deathshadows.nodes.moonstone.black.BlackMoonstone;
+import com.souchy.randd.deathshadows.blackmoonstone.main.BlackMoonstone;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.jade.meta.JadeCreature;
 

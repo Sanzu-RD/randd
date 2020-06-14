@@ -35,7 +35,7 @@
     <target name="create_run_jar">
         <jar destfile="${dir.jarfile}/blackmoonstone.jar">
             <manifest>
-                <attribute name="Main-Class" value="com.souchy.randd.deathshadows.nodes.moonstone.black.BlackMoonstone"/>
+                <attribute name="Main-Class" value="com.souchy.randd.deathshadows.blackmoonstone.main.BlackMoonstone"/>
                 <attribute name="Class-Path" value=". ./lib/ ./res/ ${mf.classpath}"/>
             </manifest>
             

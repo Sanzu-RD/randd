@@ -30,7 +30,7 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 	/**
 	 * need a fight id for fight instances on blackmoonstone servers and for clients to join the right fight
 	 */
-	public final int id = ++engineIdCounter;
+	public int id = ++engineIdCounter;
 	
 	/**
 	 * All entities (cells and creatures)

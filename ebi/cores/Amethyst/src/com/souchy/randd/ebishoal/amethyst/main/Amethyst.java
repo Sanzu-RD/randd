@@ -31,7 +31,7 @@ public class Amethyst extends EbiShoalCore {
 
 	public Amethyst(String[] args) throws Exception {
 		super(args);
-		conf = JsonConfig.readExternal(AmethystConf.class, "./modules/");
+		conf = JsonConfig.readExternal(AmethystConf.class, "./");
 		//Opaline.isOnline();
 		Log.info("Amethyst start.");
 		Application.launch(AmethystApp.class);

@@ -6,7 +6,7 @@
  *
  */
 module com.souchy.randd.deathshadows.commons.SmoothRivers {
-	exports com.souchy.randd.deathshadows.commons.smoothrivers;
+	exports com.souchy.randd.deathshadows.smoothrivers;
 
 	requires transitive com.souchy.randd.commons.TealWaters;
 	requires transitive com.rabbitmq.client;

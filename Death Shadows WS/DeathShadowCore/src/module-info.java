@@ -8,4 +8,5 @@ module com.souchy.randd.deathshadow.core {
 	requires transitive com.souchy.randd.commons.deathebi;
 	requires transitive com.souchy.randd.deathshadows.iolite;
 	requires com.souchy.randd.commons.TealWaters;
+	requires com.google.common;
 }

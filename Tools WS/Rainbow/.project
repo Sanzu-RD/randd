@@ -16,7 +16,7 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/anbuilder.launch</value>
+					<value>&lt;project&gt;/.externalToolBuilders/rainbow_builder.launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
@@ -24,4 +24,17 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>plants</name>
+			<type>2</type>
+			<location>F:/Users/Souchy/Desktop/Robyn/GitPiranha/r and d/ebi/PiranhaPlants/res</location>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>gitpiranha</name>
+			<value>$%7BPARENT-3-PROJECT_LOC%7D</value>
+		</variable>
+	</variableList>
 </projectDescription>

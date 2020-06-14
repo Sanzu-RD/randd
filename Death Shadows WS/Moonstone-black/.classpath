@@ -86,7 +86,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/PearlMessaging">
+	<classpathentry combineaccessrules="false" kind="src" path="/Pearl-commons">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

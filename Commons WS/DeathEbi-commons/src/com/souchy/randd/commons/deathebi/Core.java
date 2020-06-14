@@ -13,7 +13,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.reflect.BBMessageHandlerDiscov
 import com.souchy.randd.commons.tealwaters.commons.ClassInstanciator;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.commons.tealwaters.logging.Logging;
-import com.souchy.randd.deathshadows.commons.smoothrivers.SmoothRivers;
+import com.souchy.randd.deathshadows.smoothrivers.SmoothRivers;
 
 /**
  * A core is an application
@@ -25,7 +25,11 @@ import com.souchy.randd.deathshadows.commons.smoothrivers.SmoothRivers;
  */
 public abstract class Core {
 	
-	public final EventBus bus;
+	/**
+	 * Core events like packets which classes can listen to without being a full blown BBMessageHandler class
+	 * Useful for UI updates for example
+	 */
+	public final EventBus bus = new EventBus();
 	
 	// this doesnt work because some are clients some are servers. Could have List<MicroserviceClient> and List<MicroserviceServer> tho
 	// would need a better name
@@ -43,7 +47,7 @@ public abstract class Core {
 	/**
 	 * Message handlers contains both netty handlers and rabbitmq handlers
 	 */
-	protected BBMessageHandlers msgHandlers = new BBMessageHandlers();
+	protected BBMessageHandlers msgHandlers = new BBMessageHandlers(bus);
 	
 
 	/**
@@ -57,7 +61,7 @@ public abstract class Core {
 		
 		Logging.registerLogModule(this.getClass());
 		discoverMesssages();
-		this.bus = new EventBus();
+//		this.bus = new EventBus();
 //		this.rivers = new SmoothRivers();
 	}
 	
@@ -75,7 +79,7 @@ public abstract class Core {
 	private void discoverMesssages() {
 		// Init msg factories and handlers
 		msgFactories = new BBMessageFactories();
-		msgHandlers = new BBMessageHandlers();
+		msgHandlers = new BBMessageHandlers(bus);
 		
 		// Search for Message and MessageHandler classes
 		List<Class<BBMessage>> msgClasses = new ArrayList<>();
