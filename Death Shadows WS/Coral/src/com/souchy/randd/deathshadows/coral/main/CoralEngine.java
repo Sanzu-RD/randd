@@ -65,8 +65,8 @@ public class CoralEngine {
 					itor2.close();
 					
 					Lobby lobby = new Lobby();
-					lobby.players.add(p1.userid);
-					lobby.players.add(p2.userid);
+					lobby.users.add(p1.userid);
+					lobby.users.add(p2.userid);
 					
 					
 					// sendMessageMatch(lobby);

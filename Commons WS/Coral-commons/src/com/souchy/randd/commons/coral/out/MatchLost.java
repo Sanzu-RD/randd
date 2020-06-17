@@ -21,12 +21,12 @@ public class MatchLost implements BBMessage {
 	}
 
 	@Override
-	public BBMessage deserialize(ByteBuf in) {
+	public MatchLost deserialize(ByteBuf in) {
 		return this;
 	}
 
 	@Override
-	public Deserializer<ByteBuf, BBMessage> create() {
+	public MatchLost create() {
 		return new MatchLost();
 	}
 

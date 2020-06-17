@@ -25,63 +25,71 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	/** draft / blind / mock */
 	public GameQueue type; 
 	
-	/** players IDs in the lobby */
-	public List<ObjectId> players = new ArrayList<>();
+	/** user IDs in the lobby */
+	public List<ObjectId> users = new ArrayList<>();
+
+	/** team for each players */
+	public Map<ObjectId, Integer> teams = new HashMap<>(); // instead of using Team enum, use 0-1 for A and B team
 	
 	/** jadeteam for each players */
 	public Map<ObjectId, JadeCreature[]> jadeteams = new HashMap<>();
 	
 	/** queue answer for each player */
-	public Map<ObjectId, QueueAnswer> answers = new HashMap<>();
+//	public Map<ObjectId, QueueAnswer> answers = new HashMap<>();
 	
 	/** game server info */
 	public String moonstoneInfo;
 	
 	public static final String name_type = "type";
-	public static final String name_clients = "players";
+	public static final String name_users = "users";
+	public static final String name_teams = "teams";
 	public static final String name_jadeteams = "jadeteams";
-	public static final String name_answers = "answers";
+//	public static final String name_answers = "answers";
 	public static final String name_moonstoneInfo = "moonstoneInfo";
 	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 		// type and player count
 		out.writeByte(type.ordinal());
-		out.writeByte(players.size()); 
-		for(var id : players) {
+		out.writeByte(users.size());
+		for(var id : users) {
 			// player id
 			writeString(out, id.toHexString());
+			out.writeInt(teams.get(id));
 			// creatures
 			var team = jadeteams.get(id);
 			out.writeByte(team.length);
 			for(var creature : team)
 				creature.serialize(out);
 			// answer
-			out.writeByte(answers.get(id).ordinal());
+//			out.writeByte(answers.get(id).ordinal());
 		}
 		return out;
 	}
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
-		players = new ArrayList<>();
+		users = new ArrayList<>();
 		jadeteams = new HashMap<>();
-		answers = new HashMap<>();
+//		answers = new HashMap<>();
 		// type and player count
 		type = GameQueue.values()[in.readByte()];
 		byte playercount = in.readByte();
 		for(int i = 0; i < playercount; i++) {
 			// player id
 			var id = new ObjectId(readString(in));
-			players.add(id);
+			users.add(id);
+			// player team
+			int team = in.readInt();
+			teams.put(id, team);
 			// creatures
 			byte creaturecount = in.readByte();
-			var team = new JadeCreature[creaturecount];
+			var creatures = new JadeCreature[creaturecount];
 			for(int j = 0; j < creaturecount; j++)
-				team[0] = new JadeCreature().deserialize(in);
-			jadeteams.put(id, team);
+				creatures[j] = new JadeCreature().deserialize(in);
+			jadeteams.put(id, creatures);
 			// answer
-			answers.put(id, QueueAnswer.values()[in.readByte()]);
+//			answers.put(id, QueueAnswer.values()[in.readByte()]);
 		}
 		return null;
 	}

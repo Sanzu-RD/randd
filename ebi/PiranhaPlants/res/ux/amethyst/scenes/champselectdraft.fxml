@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="998.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../css/commons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="44.0" layoutY="98.0" prefHeight="366.0" prefWidth="132.0" style="-fx-background-color: white;" />
-      <VBox layoutX="802.0" layoutY="98.0" prefHeight="366.0" prefWidth="132.0" style="-fx-background-color: white;" />
-      <FlowPane layoutX="276.0" layoutY="98.0" prefHeight="366.0" prefWidth="452.0" style="-fx-background-color: white;" />
-      <Button layoutX="454.0" layoutY="525.0" mnemonicParsing="false" text="%play" />
+      <VBox fx:id="teamA" fillWidth="false" layoutX="33.0" layoutY="118.0" prefHeight="537.0" prefWidth="273.0" style="-fx-background-color: lightblue;" />
+      <FlowPane fx:id="creatueList" layoutX="436.0" layoutY="53.0" prefHeight="635.0" prefWidth="780.0" style="-fx-background-color: white;" />
+      <VBox fx:id="teamB" fillWidth="false" layoutX="1298.0" layoutY="118.0" prefHeight="537.0" prefWidth="273.0" style="-fx-background-color: coral;" />
+      <Button fx:id="btnSelect" layoutX="759.0" layoutY="779.0" mnemonicParsing="false" text="%select" />
+      <Label fx:id="lblTime" layoutX="774.0" layoutY="722.0" text="Time" />
+      <TextField layoutX="14.0" layoutY="858.0" prefHeight="25.0" prefWidth="310.0" />
+      <TextArea layoutX="14.0" layoutY="714.0" prefHeight="133.0" prefWidth="310.0" />
+      <HBox fx:id="bansA" layoutX="33.0" layoutY="21.0" prefHeight="72.0" prefWidth="273.0" style="-fx-background-color: lightblue;" />
+      <HBox fx:id="bansB" layoutX="1298.0" layoutY="21.0" prefHeight="72.0" prefWidth="273.0" style="-fx-background-color: coral;" />
    </children>
 </AnchorPane>

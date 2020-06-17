@@ -1,39 +1,33 @@
-package com.souchy.randd.commons.coral.out;
+package com.souchy.randd.commons.coral.in;
 
 import com.souchy.randd.annotationprocessor.ID;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.commons.Deserializer;
-import com.souchy.randd.jade.mm.Lobby;
 
 import io.netty.buffer.ByteBuf;
 
 /**
- * When a match is found
+ * To get out of a queue / cancel queue
  * 
  * @author Blank
  * @date 16 juin 2020
  */
-@ID(id = 7012)
-public class MatchFound implements BBMessage {
-	
-	public Lobby lobby;
-	
+@ID(id = 7002)
+public class Dequeue implements BBMessage {
+
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		lobby.serialize(out);
 		return out;
 	}
 
 	@Override
-	public BBMessage deserialize(ByteBuf in) {
-		lobby = new Lobby();
-		lobby.deserialize(in);
-		return this;
+	public Dequeue deserialize(ByteBuf in) {
+		return null;
 	}
 
 	@Override
-	public MatchFound create() {
-		return new MatchFound();
+	public Dequeue create() {
+		return new Dequeue();
 	}
 
 	@Override

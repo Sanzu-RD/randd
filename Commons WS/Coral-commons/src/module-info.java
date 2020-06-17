@@ -7,4 +7,5 @@ module com.souchy.randd.commons.coral {
 	requires transitive netty.all;
 	requires transitive com.souchy.randd.commons.Jade;
 	requires GameMechanics2;
+	requires com.souchy.randd.AnnotationProcessor;
 }
