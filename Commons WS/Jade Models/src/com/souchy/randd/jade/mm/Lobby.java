@@ -29,7 +29,7 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	public List<ObjectId> users = new ArrayList<>();
 
 	/** team for each players */
-	public Map<ObjectId, Integer> teams = new HashMap<>(); // instead of using Team enum, use 0-1 for A and B team
+	public Map<ObjectId, Team> teams = new HashMap<>(); // instead of using Team enum, use 0-1 for A and B team
 	
 	/** jadeteam for each players */
 	public Map<ObjectId, JadeCreature[]> jadeteams = new HashMap<>();
@@ -39,6 +39,7 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	
 	/** game server info */
 	public String moonstoneInfo;
+	
 	
 	public static final String name_type = "type";
 	public static final String name_users = "users";
@@ -55,7 +56,7 @@ public class Lobby implements BBSerializer, BBDeserializer {
 		for(var id : users) {
 			// player id
 			writeString(out, id.toHexString());
-			out.writeInt(teams.get(id));
+			out.writeInt(teams.get(id).ordinal());
 			// creatures
 			var team = jadeteams.get(id);
 			out.writeByte(team.length);
@@ -80,8 +81,8 @@ public class Lobby implements BBSerializer, BBDeserializer {
 			var id = new ObjectId(readString(in));
 			users.add(id);
 			// player team
-			int team = in.readInt();
-			teams.put(id, team);
+			int teamordinal = in.readInt();
+			teams.put(id, Team.values()[teamordinal]);
 			// creatures
 			byte creaturecount = in.readByte();
 			var creatures = new JadeCreature[creaturecount];

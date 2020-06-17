@@ -7,12 +7,12 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
+import com.souchy.randd.jade.mm.Team;
 
 import data.new1.ecs.Engine;
 import gamemechanics.common.Action;
 import gamemechanics.common.ActionPipeline;
 import gamemechanics.events.new1.EventPipeline;
-import gamemechanics.models.Creature.Team;
 import gamemechanics.systems.CellSystem;
 import gamemechanics.systems.CreatureSystem;
 import gamemechanics.systems.SpellSystem;

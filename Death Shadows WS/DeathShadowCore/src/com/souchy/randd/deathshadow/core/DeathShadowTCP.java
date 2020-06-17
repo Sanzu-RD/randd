@@ -1,5 +1,6 @@
 package com.souchy.randd.deathshadow.core;
 
+import org.bson.types.ObjectId;
 import java.util.Map;
 
 import com.google.common.eventbus.EventBus;
@@ -23,7 +24,7 @@ public class DeathShadowTCP extends NettyServer {
 
 
 	public final AuthenticationFilter auth = new AuthenticationFilter();
-	public final Map<User, Channel> users = auth.userChannels;
+	public final Map<ObjectId, Channel> users = auth.userChannels;
 	
 	/**
 	 * Create & Start the server. Should call .block() after to wait for server closure before exiting the application <br>
@@ -51,8 +52,8 @@ public class DeathShadowTCP extends NettyServer {
 		pipe.addLast(handler); 
 	}
 
-	public Map<User, Channel> users(){
-		return users;
-	}
+//	public Map<ObjectId, Channel> users(){
+//		return users;
+//	}
 	
 }

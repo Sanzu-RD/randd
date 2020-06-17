@@ -1,5 +1,6 @@
 package com.souchy.randd.deathshadow.core.handlers;
 
+import org.bson.types.ObjectId;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 
@@ -24,7 +25,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 @Sharable
 public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //implements NettyMessageFilter { 
 	
-	public final Map<User, Channel> userChannels = new HashMap<>();
+	public final Map<ObjectId, Channel> userChannels = new HashMap<>();
 	/**
 	 * Minimum user level to be authorized to go through.
 	 */
@@ -57,8 +58,9 @@ public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //imple
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 //		Log.info("AuthenticationFilter inactive");
-		if(ctx.channel().hasAttr(User.attrkey))
-			userChannels.remove(ctx.channel().attr(User.attrkey).get());
+		var user = ctx.channel().attr(User.attrkey).get();
+		if(user != null)
+			userChannels.remove(user._id);
 		super.channelInactive(ctx);
 	}
 	
@@ -83,7 +85,7 @@ public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //imple
 		var user = Emerald.users().find(and(eq(User.name_username, msg.username), eq(User.name_password, msg.hashedPassword))).first();
 		if(user != null && user.level.ordinal() >= minLevel.ordinal()) {
 			ctx.channel().attr(User.attrkey).set(user);
-			userChannels.put(user, ctx.channel());
+			userChannels.put(user._id, ctx.channel());
 			ctx.writeAndFlush(new SendUser(user));
 		}
 		else {

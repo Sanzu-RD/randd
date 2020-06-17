@@ -5,10 +5,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import com.mongodb.client.FindIterable;
+import com.souchy.randd.commons.coral.out.MatchFound;
 import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 import com.souchy.randd.jade.mm.GameQueue;
 import com.souchy.randd.jade.mm.Lobby;
 import com.souchy.randd.jade.mm.Queuee;
+import com.souchy.randd.jade.mm.Team;
 
 /**
  * This does the matching between queued people
@@ -64,12 +66,27 @@ public class CoralEngine {
 					itor1.close();
 					itor2.close();
 					
-					Lobby lobby = new Lobby();
-					lobby.users.add(p1.userid);
-					lobby.users.add(p2.userid);
+					var channel1 = Coral.coral.server.users.get(p1.userid);
+					var channel2 = Coral.coral.server.users.get(p2.userid);
 					
+					if(channel1 != null && channel2 != null) {
+						Lobby lobby = new Lobby();
+						lobby.type = GameQueue.draft;
+						lobby.users.add(p1.userid);
+						lobby.users.add(p2.userid);
+						lobby.teams.put(p1.userid, Team.A);
+						lobby.teams.put(p2.userid, Team.B);
+						lobby.moonstoneInfo = "127.0.0.1:443";
+						
+						var msg = new MatchFound();
+						msg.lobby = lobby;
+						
+						channel1.writeAndFlush(msg);
+						
+						// sendMessageMatch(lobby);
+						
+					}
 					
-					// sendMessageMatch(lobby);
 					return;
 				}
 			}

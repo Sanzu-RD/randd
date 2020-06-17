@@ -15,6 +15,8 @@ import com.souchy.randd.jade.mm.Queuee;
  * @date 25 déc. 2019
  */
 public final class Coral extends DeathShadowCore { //extends Core { //extends DeathShadowCoreServer {
+	
+	public static Coral coral;
 
 	public final DeathShadowTCP server;
 	
@@ -22,8 +24,9 @@ public final class Coral extends DeathShadowCore { //extends Core { //extends De
 		new Coral(args);
 	}
 	
-	public Coral(String[] args) throws Exception {
+	private Coral(String[] args) throws Exception {
 		super(args);
+		coral = this;
 		int port = 7000;
 		if(args.length > 0) port = Integer.parseInt(args[0]);
 		

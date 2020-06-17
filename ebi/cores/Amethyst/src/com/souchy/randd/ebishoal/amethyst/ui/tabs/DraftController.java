@@ -22,4 +22,5 @@ public class DraftController {
 	// <- start timer / change turn
 	// -> jadecreature array (affinity customization)
 	
+	
 }

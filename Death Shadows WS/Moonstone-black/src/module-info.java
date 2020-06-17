@@ -24,5 +24,6 @@ module com.souchy.randd.moonstone.Black {
 	requires GameMechanics2;
 	requires com.souchy.randd.deathshadows.nodes.pearl.PearlMessaging;
 	requires CreatureCommons;
+	requires com.souchy.randd.commons.Jade;
 //	requires com.souchy.randd.deathshadows.commons.deathrivers;
 }

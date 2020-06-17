@@ -4,15 +4,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.SelfIdentify;
-import com.souchy.randd.deathshadows.smoothrivers.SmoothRivers;
 
-import gamemechanics.main.DiamondModels;
 import gamemechanics.models.Fight;
-import gamemechanics.models.Creature.Team;
 
 public class BlackMoonstone extends DeathShadowCore {
 	

@@ -7,6 +7,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.jade.meta.JadeCreature;
+import com.souchy.randd.jade.mm.Team;
 
 import data.new1.ecs.Entity;
 import data.new1.spellstats.CreatureStats;
@@ -18,13 +19,6 @@ import gamemechanics.statics.Element;
 import io.netty.buffer.ByteBuf;
 
 public class Creature extends Entity implements BBSerializer, BBDeserializer {
-
-	public static enum Team {
-		A,
-		B,
-		/** C is Neutral */
-//		C,
-	}
 
 	/** entity id for identification and mostly retrival during deserialization */
 	public int id;

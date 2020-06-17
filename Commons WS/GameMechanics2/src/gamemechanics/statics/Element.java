@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gamemechanics.statics.stats.properties.StatProperty;
+import gamemechanics.statics.stats.properties.StatProperty.StatPropertyID;
 
 public interface Element extends StatProperty {
 	

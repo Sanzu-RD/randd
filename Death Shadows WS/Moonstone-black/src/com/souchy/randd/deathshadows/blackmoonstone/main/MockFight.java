@@ -3,6 +3,7 @@ package com.souchy.randd.deathshadows.blackmoonstone.main;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.jade.meta.JadeCreature;
+import com.souchy.randd.jade.mm.Team;
 
 import data.new1.spellstats.base.IntStat;
 import gamemechanics.components.Position;
@@ -10,7 +11,6 @@ import gamemechanics.main.DiamondModels;
 import gamemechanics.models.Creature;
 import gamemechanics.models.CreatureModel;
 import gamemechanics.models.Fight;
-import gamemechanics.models.Creature.Team;
 import gamemechanics.statics.stats.properties.Resource;
 
 public class MockFight {
