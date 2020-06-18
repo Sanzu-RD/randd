@@ -1,8 +1,9 @@
-package com.souchy.randd.ebishoal.sapphire.controls;
+package com.souchy.randd.ebishoal.commons.lapis.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -31,7 +32,10 @@ public class DragAndResizeListener extends InputListener {
 		//y -= table.getY();
 		float border = resizeBorder / 2f;
 		float width = table.getWidth(), height = table.getHeight();
-		float padTop = table.getPadTop(), padLeft = table.getPadLeft(), padBottom = table.getPadBottom(), padRight = table.getPadRight();
+		float padTop = table.getPadTop(), 
+				padLeft = table.getPadLeft(), 
+				padBottom = table.getPadBottom(), 
+				padRight = table.getPadRight();
 		float left = padLeft, 
 				right = width - padRight, 
 				bottom = padBottom,

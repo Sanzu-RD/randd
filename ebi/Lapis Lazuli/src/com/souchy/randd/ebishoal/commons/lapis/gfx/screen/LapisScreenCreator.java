@@ -18,6 +18,8 @@ import com.badlogic.gdx.graphics.g3d.utils.DepthShaderProvider;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.collision.BoundingBox;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
@@ -81,7 +83,7 @@ interface LapisScreenCreator {
 	}
 
 	public default Viewport createViewport(Camera cam) {
-		return null; // new ExtendViewport(16, 9, cam);
+		return new ScreenViewport(); // new ExtendViewport(16, 9, cam);
 	}
 	
 	/**

@@ -64,7 +64,8 @@ public class SapphireScreen extends LapisScreen {
 		//Log.info("life : " + view.life.getColor() + ", " + view.life.getStyle().fontColor);
 		return hud;
 	}
-	
+
+	@Override
 	public InputProcessor createInputProcessor() {
 		var multi = new InputMultiplexer();
 		if(getView() != null) multi.addProcessor(getView().getStage());

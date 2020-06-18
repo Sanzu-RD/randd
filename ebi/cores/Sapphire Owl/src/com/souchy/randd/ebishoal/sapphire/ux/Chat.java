@@ -7,8 +7,8 @@ import com.kotcrab.vis.ui.widget.ScrollableTextArea;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
+import com.souchy.randd.ebishoal.commons.lapis.util.DragAndResizeListener;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
-import com.souchy.randd.ebishoal.sapphire.controls.DragAndResizeListener;
 
 public class Chat extends SapphireWidget {
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE table SYSTEM "lml.dtd">
+
+
+<table defaultpad="5" debug="false" y="0" x="0" fillparent="true" >
+
+    <label width="200">Hello</label>
+
+    <multisplitpane>
+
+
+        <!-- Layouts & Actors list -->
+        <container>
+            <list id="actorsList">
+            </list>
+        </container>
+
+        <!-- Content -->
+        <container id="contentContainer">
+        </container>
+
+
+        <!-- Properties list -->
+        <container>
+            <listview id="propertiesList">
+            </listview>
+        </container>
+
+
+
+    </multisplitpane>
+
+
+</table>
