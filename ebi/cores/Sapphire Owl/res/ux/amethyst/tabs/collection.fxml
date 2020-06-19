@@ -1,82 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="collectionPane" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../css/commons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.ebishoal.amethyst.ui.tabs.Collection">
    <children>
-      <HBox fx:id="filters" layoutX="36.0" layoutY="70.0" spacing="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <VBox layoutX="12.0" layoutY="-61.0" spacing="15.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
-            <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Spells">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </CheckBox>
-            <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Items">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </CheckBox>
-            <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Creatures">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </CheckBox>
-            <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Owned">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </CheckBox>
-            <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Unowned">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </CheckBox>
-            <TextField promptText="Search" />
+            <HBox fx:id="filters" spacing="20.0">
+               <children>
+                  <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Spells">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Items">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Creatures">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Owned">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox mnemonicParsing="false" selected="true" style="-fx-text-fill: white;" text="Unowned">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </CheckBox>
+                  <TextField promptText="Search" />
+               </children>
+            </HBox>
+            <HBox spacing="50.0">
+               <children>
+                  <FlowPane fx:id="items" hgap="20.0" prefHeight="836.0" prefWidth="1884.0" vgap="20.0">
+                     <children>
+                        <AnchorPane maxHeight="128.0" maxWidth="128.0" minHeight="128.0" minWidth="128.0" prefHeight="128.0" prefWidth="128.0" styleClass="thumbnail">
+                           <children>
+                              <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:/G:/Assets/pack/fantasy bundle/mobsavataricons/Mobs_crystal_golem_01.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane maxHeight="128.0" maxWidth="128.0" minHeight="128.0" minWidth="128.0" prefHeight="128.0" prefWidth="128.0" styleClass="thumbnail">
+                           <children>
+                              <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:/G:/Assets/pack/fantasy bundle/mobsavataricons/Mobs_crystal_golem_01.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane maxHeight="128.0" maxWidth="128.0" minHeight="128.0" minWidth="128.0" prefHeight="128.0" prefWidth="128.0" styleClass="thumbnail">
+                           <children>
+                              <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="file:/G:/Assets/pack/fantasy bundle/mobsavataricons/Mobs_crystal_golem_01.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </FlowPane>
+                  <VBox fx:id="presets" minWidth="400.0" prefWidth="400.0" spacing="10.0" style="-fx-background-color: lightblue; -fx-border-color: gray;">
+                     <children>
+                        <AnchorPane fx:id="build1" prefHeight="120.0" prefWidth="398.0" style="-fx-border-color: gray; -fx-border-width: 0 0 1 0;">
+                           <children>
+                              <Label fx:id="title" text="My Megorya build" />
+                              <GridPane fx:id="spells" hgap="5.0" layoutY="48.0" prefHeight="32.0" prefWidth="347.0" style="-fx-border-color: gray;" AnchorPane.bottomAnchor="40.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </GridPane>
+                              <Button fx:id="page" layoutX="337.0" layoutY="43.0" mnemonicParsing="false" text="1/3" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
-      </HBox>
-      <FlowPane hgap="20.0" layoutX="64.0" layoutY="144.0" prefHeight="384.0" prefWidth="900.0" vgap="20.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
-         <children>
-            <AnchorPane maxHeight="128.0" maxWidth="128.0" minHeight="128.0" minWidth="128.0" prefHeight="128.0" prefWidth="128.0" styleClass="thumbnail">
-               <children>
-                  <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:/G:/Assets/pack/fantasy bundle/mobsavataricons/Mobs_crystal_golem_01.png" />
-                     </image>
-                  </ImageView>
-                  <Label text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane maxHeight="128.0" maxWidth="128.0" minHeight="128.0" minWidth="128.0" prefHeight="128.0" prefWidth="128.0" styleClass="thumbnail">
-               <children>
-                  <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:/G:/Assets/pack/fantasy bundle/mobsavataricons/Mobs_crystal_golem_01.png" />
-                     </image>
-                  </ImageView>
-                  <Label text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane maxHeight="128.0" maxWidth="128.0" minHeight="128.0" minWidth="128.0" prefHeight="128.0" prefWidth="128.0" styleClass="thumbnail">
-               <children>
-                  <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="file:/G:/Assets/pack/fantasy bundle/mobsavataricons/Mobs_crystal_golem_01.png" />
-                     </image>
-                  </ImageView>
-                  <Label text="Label" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-               </children>
-            </AnchorPane>
-         </children>
-      </FlowPane>
+      </VBox>
    </children>
    <padding>
       <Insets left="60.0" top="40.0" />

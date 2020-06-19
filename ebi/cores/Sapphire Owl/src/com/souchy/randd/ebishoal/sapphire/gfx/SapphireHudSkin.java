@@ -17,11 +17,11 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
-import com.souchy.randd.ebishoal.sapphire.confs.AssetConfs;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireDevConfig;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
 import com.souchy.randd.moonstone.white.Moonstone;
 
+import gamemechanics.ext.AssetData;
 import gamemechanics.models.Creature;
 import gamemechanics.statics.Element;
 import gamemechanics.statics.stats.properties.Resource;
@@ -85,7 +85,7 @@ public class SapphireHudSkin extends Skin {
 //		lml.addI18nBundle(prefix + "I18N", SapphireResources.assets.get(i18nPath));
 		
 		// set creature avatar
-		var iconpath = AssetConfs.creatures.get(model.id()).icon;
+		var iconpath = AssetData.creatures.get(model.id()).icon;
 		var avatarPath = SapphireAssets.getCreatureIconPath(iconpath);
 		avatarPath = SapphireAssets.getSkinPath(avatarPath) + "_round";
 		var avatar = VisUI.getSkin().getDrawable(avatarPath);
@@ -97,7 +97,7 @@ public class SapphireHudSkin extends Skin {
 		for (var s : c.spellbook) {
 			String iconPath = "missing";
 			var spell = Moonstone.fight.spells.get(s);
-			var spellResource = AssetConfs.spells.get(spell.modelid()); 
+			var spellResource = AssetData.spells.get(spell.modelid()); 
 			if (spellResource != null) {
 				iconPath = SapphireAssets.getSpellIconPath(spellResource.icon);
 				iconPath = SapphireAssets.getSkinPath(iconPath) + "_round";

@@ -13,7 +13,6 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
-import com.souchy.randd.ebishoal.sapphire.confs.AssetConfs;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.jade.meta.JadeCreature;
 import com.souchy.randd.moonstone.commons.packets.c2s.GetUpdate;
@@ -21,6 +20,7 @@ import com.souchy.randd.moonstone.white.Moonstone;
 
 import data.new1.spellstats.base.IntStat;
 import gamemechanics.components.Position;
+import gamemechanics.ext.AssetData;
 import gamemechanics.main.DiamondModels;
 import gamemechanics.models.Creature;
 import gamemechanics.models.CreatureModel;
@@ -37,9 +37,10 @@ public class SapphireGame extends LapisGame {
 	public void init() {
 		// init elements
 		Elements.values(); 
-		
 		// models configurations (creatures, spells, statuses)
-		AssetConfs.loadResources();
+		AssetData.loadResources();
+		// init creatures & spells models
+		DiamondModels.instantiate("com.souchy.randd.data.s1");
 
 		// load asssets
 		//LapisResources.loadResources(SapphireOwl.data);
@@ -49,8 +50,6 @@ public class SapphireGame extends LapisGame {
 		LapisAssets.loadSounds(Gdx.files.internal("res/sounds/"));
 		LapisAssets.loadI18NBundles(Gdx.files.internal("res/i18n/"));
 		
-		// init creatures & spells models
-		DiamondModels.instantiate("com.souchy.randd.data.s1");
 		
 		// screen
 		gfx = new SapphireScreen();

@@ -2,8 +2,11 @@ package com.souchy.randd.ebishoal.amethyst.main;
 
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 
+import gamemechanics.ext.AssetData;
+import gamemechanics.main.DiamondModels;
 import javafx.application.Application;
 
 
@@ -33,6 +36,13 @@ public class Amethyst extends EbiShoalCore {
 		super(args);
 		conf = JsonConfig.readExternal(AmethystConf.class, "./");
 		//Opaline.isOnline();
+		// init elements
+		Elements.values(); 
+		// models configurations (creatures, spells, statuses)
+		AssetData.loadResources();
+		// init creatures & spells models
+		DiamondModels.instantiate("com.souchy.randd.data.s1");
+		
 		Log.info("Amethyst start.");
 		Application.launch(AmethystApp.class);
 		Log.info("Amethyst stopped.");

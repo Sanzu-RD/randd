@@ -1,6 +1,8 @@
 package com.souchy.randd.ebishoal.amethyst.ui;
 
+import com.souchy.randd.ebishoal.amethyst.main.AmethystApp;
 import com.souchy.randd.ebishoal.amethyst.ui.tabs.Collection;
+import com.souchy.randd.ebishoal.amethyst.ui.tabs.DraftSelect;
 import com.souchy.randd.ebishoal.amethyst.ui.tabs.Home;
 import com.souchy.randd.ebishoal.amethyst.ui.tabs.Profile;
 import com.souchy.randd.ebishoal.amethyst.ui.tabs.Settings;
@@ -18,24 +20,37 @@ import javafx.scene.input.MouseEvent;
 
 public class MainScene extends Common {
 
-	
     @FXML public ListView<?> chatHistory;
     @FXML public TextField chatField;
+    
     @FXML public TabPane mainTabs;
+    @FXML public Tab homeTab;
+    @FXML public Tab profileTab;
+    @FXML public Tab teamsTab;
+    @FXML public Tab collectionTab;
+    @FXML public Tab shopTab;
     @FXML public Tab settingsTab;
+    @FXML public Tab draftTab;
     
     
-    @FXML Home homeController;
-    @FXML Profile profileController;
-    @FXML Teams teamsController;
-    //@FXML TeamEditor teamEditorController;
-    @FXML Collection collectionController;
-    @FXML Shop shopController;
-    @FXML Settings settingsController;
+    @FXML public Home homeController;
+    @FXML public Profile profileController;
+    @FXML public Teams teamsController;
+    @FXML public Collection collectionController;
+    @FXML public Shop shopController;
+    @FXML public Settings settingsController;
+    @FXML public DraftSelect draftController;
     
-
-    /** garde en mémoire le tab sur lequel on était avant d'ouvrir les settings pour pouvoir le rouvrir par après */
+    /** 
+     * garde en mémoire le tab sur lequel on était avant d'ouvrir les settings pour pouvoir le rouvrir par après 
+     */
     private Tab tabBeforeSettings;
+    
+    @FXML
+    public void initialize() {
+    	super.initialize();
+    	AmethystApp.mainController = this;
+    }
 
     @Override
     public void openSettings(MouseEvent event) {

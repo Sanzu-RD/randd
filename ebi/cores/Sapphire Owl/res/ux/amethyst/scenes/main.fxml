@@ -45,6 +45,11 @@
             <fx:include fx:id="shop" source="../tabs/shop.fxml" />
           </content>
         </Tab>
+        <Tab id="tabSettings" fx:id="draftTab" closable="false" text="Draft">
+          <content>
+            <fx:include fx:id="draft" source="../tabs/champselectdraft.fxml" />
+          </content>
+        </Tab>
         <Tab id="tabSettings" fx:id="settingsTab" closable="false" disable="true">
           <content>
             <fx:include fx:id="settings" source="../tabs/settings.fxml" />

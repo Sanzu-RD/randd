@@ -10,10 +10,11 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.util.DragAndResizeListener;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
-import com.souchy.randd.ebishoal.sapphire.confs.AssetConfs;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
+
+import gamemechanics.ext.AssetData;
 
 public class Timeline extends SapphireWidget {
 
@@ -94,7 +95,7 @@ public class Timeline extends SapphireWidget {
 		String icon = "";
 		if(SapphireGame.fight != null) {
 			var creature = SapphireGame.fight.timeline.get(index);
-			icon = AssetConfs.creatures.get(creature.modelid).icon;
+			icon = AssetData.creatures.get(creature.modelid).icon;
 			icon = SapphireAssets.getCreatureIconPath(icon);
 			icon = SapphireAssets.getSkinPath(icon) + "_round";
 //			var icon = iconpath.substring(iconpath.indexOf("textures"), iconpath.lastIndexOf(".")).replace("/", ".");

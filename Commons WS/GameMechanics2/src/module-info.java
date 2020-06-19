@@ -18,7 +18,7 @@ module GameMechanics2 {
 	exports gamemechanics.statics.stats.properties;
 	exports gamemechanics.statics.stats.modifiers;
 	//exports gamemechanics.status;
-	//exports data;
+//	exports data;
 	exports data.new1;
 	exports data.new1.spellstats;
 	exports data.new1.timed;

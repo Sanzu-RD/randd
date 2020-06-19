@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.amethyst.main.AmethystApp;
 import com.souchy.randd.ebishoal.opaline.api.Opaline;
 import com.souchy.randd.jade.meta.New;
 
@@ -57,6 +58,7 @@ public class Home {
     public void play(MouseEvent event) {
 		// 
 		// Coraline.enqueue(GameMode.blind...)
+		AmethystApp.mainController.mainTabs.getSelectionModel().select(AmethystApp.mainController.draftTab);
 	}
 	
 	/** when pressing the deck button to select a team */

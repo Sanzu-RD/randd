@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
-import com.souchy.randd.ebishoal.sapphire.confs.AssetConfs;
 
 import data.new1.ecs.Engine;
 import data.new1.ecs.Engine.AddEntityEvent;
@@ -20,6 +19,7 @@ import data.new1.ecs.Engine.RemoveEntityEvent;
 import data.new1.ecs.Entity;
 import data.new1.timed.TerrainEffect;
 import gamemechanics.components.Position;
+import gamemechanics.ext.AssetData;
 import gamemechanics.models.Creature;
 
 public class SapphireEntitySystem extends data.new1.ecs.System {
@@ -60,7 +60,7 @@ public class SapphireEntitySystem extends data.new1.ecs.System {
 //		Log.info("Sapphire Entity System on add");
 		if(event.entity instanceof Creature) {
 			Log.info("Sapphire Entity System on add " + event);
-			var modelpath = AssetConfs.creatures.get(((Creature) event.entity).modelid).models[0]; 
+			var modelpath = AssetData.creatures.get(((Creature) event.entity).modelid).models[0]; 
 			var model3d = LapisAssets.assets.<Model>get(modelpath);
 			var modelinstance = new ModelInstance(model3d);
 			modelinstance.transform.rotate(1, 0, 0, 90);

@@ -2,6 +2,8 @@ package com.souchy.randd.ebishoal.amethyst.main;
 
 import com.souchy.randd.commons.tealwaters.io.files.FilesManager;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.amethyst.ui.LoginScene;
+import com.souchy.randd.ebishoal.amethyst.ui.MainScene;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +19,9 @@ public class AmethystApp extends Application {
 	
 	public static Stage stage;
 	public static Scene loginScene;
+	public static LoginScene loginController;
 	public static Scene mainScene;
+	public static MainScene mainController;
 	
 	@Override
 	public void init() throws Exception {

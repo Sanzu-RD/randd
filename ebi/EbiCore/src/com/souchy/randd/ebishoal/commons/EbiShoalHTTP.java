@@ -37,7 +37,7 @@ public class EbiShoalHTTP {
 			//Log.info("target : " + t.getUri());
 			return t.request().get() != null;
 		} catch(ProcessingException e) {
-			Log.info("EbiShoalHTTP.isOnline : false", e);
+			Log.info("EbiShoalHTTP.isOnline : false"); //, e);
 			return false;
 		}
 	}

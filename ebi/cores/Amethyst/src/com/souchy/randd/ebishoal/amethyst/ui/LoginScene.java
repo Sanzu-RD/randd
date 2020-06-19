@@ -1,5 +1,6 @@
 package com.souchy.randd.ebishoal.amethyst.ui;
 
+import com.souchy.randd.ebishoal.amethyst.main.AmethystApp;
 import com.souchy.randd.ebishoal.amethyst.ui.components.LoginForm;
 import com.souchy.randd.ebishoal.amethyst.ui.components.RegisterForm;
 
@@ -25,6 +26,7 @@ public class LoginScene extends Common {
     @Override
     public void initialize() {
     	super.initialize();
+    	AmethystApp.loginController = this;
     	if(registerFormController != null) registerFormController.root.setVisible(false);
     }
     
