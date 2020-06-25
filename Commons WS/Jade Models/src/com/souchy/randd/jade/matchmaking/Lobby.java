@@ -1,4 +1,4 @@
-package com.souchy.randd.jade.mm;
+package com.souchy.randd.jade.matchmaking;
 
 import java.util.ArrayList;
 import java.util.HashMap;

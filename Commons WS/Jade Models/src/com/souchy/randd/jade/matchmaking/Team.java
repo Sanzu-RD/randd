@@ -1,4 +1,4 @@
-package com.souchy.randd.jade.mm;
+package com.souchy.randd.jade.matchmaking;
 
 public enum Team {
 	A,

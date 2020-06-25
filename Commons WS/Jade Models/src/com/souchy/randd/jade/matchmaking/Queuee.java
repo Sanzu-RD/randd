@@ -1,4 +1,4 @@
-package com.souchy.randd.jade.mm;
+package com.souchy.randd.jade.matchmaking;
 
 import org.bson.types.ObjectId;
 
@@ -8,7 +8,7 @@ import org.bson.types.ObjectId;
  * @author Blank
  * @date 24 déc. 2019
  */
-public class Queuee {
+public abstract class Queuee {
 	/**
 	 * Client id
 	 */
@@ -24,11 +24,11 @@ public class Queuee {
 	/**
 	 * Queue type
 	 */
-	public GameQueue queue;
+//	public GameQueue queue;
 	
 
 	public static final String name_userid = "userid";
 	public static final String name_mmr = "mmr";
 	public static final String name_timeQueued = "timeQueued";
-	public static final String name_queue = "queue";
+//	public static final String name_queue = "queue";
 }

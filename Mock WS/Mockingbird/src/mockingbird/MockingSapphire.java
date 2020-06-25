@@ -4,8 +4,8 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.deathshadows.blackmoonstone.main.BlackMoonstone;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
+import com.souchy.randd.jade.matchmaking.Team;
 import com.souchy.randd.jade.meta.JadeCreature;
-import com.souchy.randd.jade.mm.Team;
 
 import data.new1.spellstats.base.IntStat;
 import gamemechanics.components.Position;

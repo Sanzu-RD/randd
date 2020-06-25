@@ -5,8 +5,8 @@ import com.souchy.randd.commons.coral.out.EnqueueAck;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 import com.souchy.randd.deathshadows.coral.main.Coral;
 import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
+import com.souchy.randd.jade.matchmaking.Queuee;
 import com.souchy.randd.jade.meta.User;
-import com.souchy.randd.jade.mm.Queuee;
 
 import io.netty.channel.ChannelHandlerContext;
 

@@ -7,6 +7,7 @@ import static com.mongodb.client.model.Filters.eq;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.deathebi.msg.GetSalt;
 import com.souchy.randd.commons.deathebi.msg.GetUser;
 import com.souchy.randd.commons.deathebi.msg.SendSalt;
@@ -24,6 +25,12 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 @Sharable
 public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //implements NettyMessageFilter { 
+
+	/**
+	 * Notifies of newly authenticated users and disconnected users
+	 */
+	public final EventBus bus = new EventBus();
+	
 	
 	public final Map<ObjectId, Channel> userChannels = new HashMap<>();
 	/**
@@ -58,9 +65,17 @@ public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //imple
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
 //		Log.info("AuthenticationFilter inactive");
+		
 		var user = ctx.channel().attr(User.attrkey).get();
 		if(user != null)
 			userChannels.remove(user._id);
+
+		// send out an event 
+		var event = new UserInactiveEvent();
+		event.ctx = ctx;
+		event.user = user;
+		bus.post(event);
+		
 		super.channelInactive(ctx);
 	}
 	
@@ -84,8 +99,16 @@ public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //imple
 		// + ajoute le channel aux users connectés
 		var user = Emerald.users().find(and(eq(User.name_username, msg.username), eq(User.name_password, msg.hashedPassword))).first();
 		if(user != null && user.level.ordinal() >= minLevel.ordinal()) {
+			// set the user attribute on the channel
 			ctx.channel().attr(User.attrkey).set(user);
+			// add the channel to the list
 			userChannels.put(user._id, ctx.channel());
+			// send out an event 
+			var event = new UserActiveEvent();
+			event.ctx = ctx;
+			event.user = user;
+			bus.post(event);
+			// send the user object to the client
 			ctx.writeAndFlush(new SendUser(user));
 		}
 		else {
@@ -93,6 +116,25 @@ public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //imple
 			ctx.channel().close(); 
 		}
 	}
+
+	/**
+	 * Event for when a new user is authenticated
+	 * @author Blank
+	 * @date 25 juin 2019
+	 */
+	public static final class UserActiveEvent {
+		public ChannelHandlerContext ctx;
+		public User user;
+	}
+	/**
+	 * Event for when a user disconnected
+	 * @author Blank
+	 * @date 25 juin 2019
+	 */
+	public static final class UserInactiveEvent {
+		public ChannelHandlerContext ctx;
+		public User user;
+	}
 	
-	
+
 }

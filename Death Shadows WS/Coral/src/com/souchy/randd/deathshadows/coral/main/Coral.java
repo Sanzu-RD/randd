@@ -1,12 +1,8 @@
 package com.souchy.randd.deathshadows.coral.main;
 
-import static com.mongodb.client.model.Filters.eq;
-
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
-import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
-import com.souchy.randd.jade.meta.User;
-import com.souchy.randd.jade.mm.Queuee;
+import com.souchy.randd.jade.matchmaking.GameQueue;
 
 /**
  * Coral is the match making server
@@ -19,6 +15,8 @@ public final class Coral extends DeathShadowCore { //extends Core { //extends De
 	public static Coral coral;
 
 	public final DeathShadowTCP server;
+	public GameQueue queue;
+	
 	
 	public static void main(String[] args) throws Exception {
 		new Coral(args);
@@ -28,12 +26,17 @@ public final class Coral extends DeathShadowCore { //extends Core { //extends De
 		super(args);
 		coral = this;
 		int port = 7000;
+		queue = GameQueue.draft;
 		if(args.length > 0) port = Integer.parseInt(args[0]);
+		if(args.length > 1) queue = GameQueue.valueOf(args[1]);
 		
 		// start match making thread loops
-		new CoralEngine();
+		var engine = new CoralEngine();
+		
 		// start server
-		server = new DeathShadowTCP(port, this); 
+		server = new DeathShadowTCP(port, this);
+		// register the engine on the authenticationfilter handler bus to receive new/terminated client connections
+		server.auth.bus.register(engine);
 		server.block(); 
 	} 
 	
@@ -41,14 +44,7 @@ public final class Coral extends DeathShadowCore { //extends Core { //extends De
 	protected String[] getRootPackages() {
 		return new String[]{ "com.souchy.randd.deathshadows.coral" };
 	}
-
-
-	public static final Queuee getDraftQueuee(User client) {
-		return Emerald.queue_simple_draft().find(eq(Queuee.name_userid, client)).first();
-	}
-	public static final Queuee getBlindQueuee(User client) {
-		return Emerald.queue_simple_blind().find(eq(Queuee.name_userid, client)).first();
-	}
-
+	
+	
 	
 }
