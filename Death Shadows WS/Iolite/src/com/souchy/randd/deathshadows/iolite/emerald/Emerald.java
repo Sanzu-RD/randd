@@ -3,6 +3,8 @@ package com.souchy.randd.deathshadows.iolite.emerald;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bson.BsonReader;
 import org.bson.BsonWriter;
@@ -38,7 +40,8 @@ public final class Emerald {
 //	private static int port = 27017;
 //	private static String user = "";
 //	private static String pass = "";
-	private static MongoClient client; 
+	//private
+	static MongoClient client; 
 	
 	private static final String root = "hidden_piranha";
 	private static final MongoNamespace logs = new MongoNamespace(root, "logs");
@@ -46,7 +49,7 @@ public final class Emerald {
 	private static final MongoNamespace decks = new MongoNamespace(root, "decks");
 	private static final MongoNamespace matches = new MongoNamespace(root, "matches");
 	private static final MongoNamespace news = new MongoNamespace(root, "news");
-	private static final MongoNamespace queue_simple_blind = new MongoNamespace(root, "queue_simple_blind");
+	private static final MongoNamespace queue_simple_blind = new MongoNamespace(root, "queue_simple_blind"); // blind is premade teams
 	private static final MongoNamespace queue_simple_draft = new MongoNamespace(root, "queue_simple_draft");
 	private static final MongoNamespace lobbies = new MongoNamespace(root, "lobbies");
 	
@@ -97,38 +100,54 @@ public final class Emerald {
 	private static <T> MongoCollection<T> get(MongoNamespace space, Class<T> clazz) {
 		return client.getDatabase(space.db).<T>getCollection(space.collection, clazz);
 	}
+	
+
+	// -------------------------------------------------------------------  meta 
 
 	public static MongoCollection<Log> logs() {
-		return get(logs, Log.class);
+		return collection(Log.class); // get(logs, Log.class);
 	}
 	public static MongoCollection<User> users() {
-		return get(users, User.class);
+		return collection(User.class); // get(users, User.class);
 	}
 	
 	public static MongoCollection<Deck> decks() {
-		return get(decks, Deck.class);
+		return collection(Deck.class); // get(decks, Deck.class);
 	}
 	
 	public static MongoCollection<Match> matchs() {
-		return get(matches, Match.class);
+		return collection(Match.class); // get(matches, Match.class);
 	}
 	public static MongoCollection<New> news() {
-		return get(news, New.class);
+		return collection(New.class); // get(news, New.class);
 	}
-//	public static MongoCollection<QueuedUser> queue_simple_unranked() {
-//		return get(queue_simple_unranked, QueuedUser.class);
-//	}
-//	public static MongoCollection<QueuedUser> queue_simple_ranked() {
-//		return get(queue_simple_ranked, QueuedUser.class);
-//	}
+	
+	// -------------------------------------------------------------------  matchmaking 
+	
+	/**
+	 *  blind is premade teams
+	 * @return
+	 */
 	public static MongoCollection<Queuee> queue_simple_blind() {
-		return get(queue_simple_blind, Queuee.class);
+		return collection(Queuee.class); // get(queue_simple_blind, Queuee.class);
 	}
 	public static MongoCollection<Queuee> queue_simple_draft() {
-		return get(queue_simple_draft, Queuee.class);
+		return collection(Queuee.class); // get(queue_simple_draft, Queuee.class);
 	}
 	public static MongoCollection<Lobby> lobbies(){
-		return get(lobbies, Lobby.class);
+		return collection(Lobby.class); // get(lobbies, Lobby.class);
 	}
+	
+	
+	
+	static <T> MongoCollection<T> collection(Class<T> clazz){
+		var fullpackage = clazz.getPackageName();
+		var lastpackage = fullpackage.substring(fullpackage.lastIndexOf('.'));
+		
+		var db = root + ":" + lastpackage;
+		var collection = clazz.getSimpleName();
+		return client.getDatabase(db).<T>getCollection(collection, clazz);
+	}
+	
 	
 }
