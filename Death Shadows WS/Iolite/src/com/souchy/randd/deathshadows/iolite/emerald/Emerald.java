@@ -19,12 +19,13 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.souchy.randd.commons.tealwaters.commons.Namespace.MongoNamespace;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.jade.matchmaking.Lobby;
+import com.souchy.randd.jade.matchmaking.QueueeBlind;
+import com.souchy.randd.jade.matchmaking.QueueeDraft;
 import com.souchy.randd.jade.meta.Deck;
 import com.souchy.randd.jade.meta.Match;
 import com.souchy.randd.jade.meta.New;
 import com.souchy.randd.jade.meta.User;
-import com.souchy.randd.jade.mm.Lobby;
-import com.souchy.randd.jade.mm.Queuee;
 
 /**
  * MongoDB access
@@ -121,14 +122,22 @@ public final class Emerald {
 //	public static MongoCollection<QueuedUser> queue_simple_ranked() {
 //		return get(queue_simple_ranked, QueuedUser.class);
 //	}
-	public static MongoCollection<Queuee> queue_simple_blind() {
-		return get(queue_simple_blind, Queuee.class);
+	public static MongoCollection<QueueeBlind> queue_simple_blind() {
+		return get(queue_simple_blind, QueueeBlind.class);
 	}
-	public static MongoCollection<Queuee> queue_simple_draft() {
-		return get(queue_simple_draft, Queuee.class);
+	public static MongoCollection<QueueeDraft> queue_simple_draft() {
+		return get(queue_simple_draft, QueueeDraft.class);
 	}
 	public static MongoCollection<Lobby> lobbies(){
 		return get(lobbies, Lobby.class);
+	}
+	
+	
+	public static <T> MongoCollection<T> collection(Class<T> clazz) {
+		var fullpackag = clazz.getPackageName();
+		var packag = fullpackag.substring(fullpackag.lastIndexOf('.'));
+		var collection = clazz.getSimpleName();
+		return client.getDatabase(root + ":" + packag).getCollection(collection, clazz);
 	}
 	
 }

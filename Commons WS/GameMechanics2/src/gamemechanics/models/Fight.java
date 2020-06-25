@@ -7,7 +7,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
-import com.souchy.randd.jade.mm.Team;
+import com.souchy.randd.jade.matchmaking.Team;
 
 import data.new1.ecs.Engine;
 import gamemechanics.common.Action;

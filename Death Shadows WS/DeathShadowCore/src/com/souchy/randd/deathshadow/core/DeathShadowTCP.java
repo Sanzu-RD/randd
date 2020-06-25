@@ -23,7 +23,7 @@ import io.netty.channel.ChannelPipeline;
 public class DeathShadowTCP extends NettyServer {
 
 
-	public final AuthenticationFilter auth = new AuthenticationFilter();
+	public AuthenticationFilter auth = new AuthenticationFilter();
 	public final Map<ObjectId, Channel> users = auth.userChannels;
 	
 	/**
