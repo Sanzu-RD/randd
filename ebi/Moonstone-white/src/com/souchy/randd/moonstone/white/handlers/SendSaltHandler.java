@@ -16,12 +16,13 @@ public class SendSaltHandler implements BBMessageHandler<SendSalt> {
 		// 
 		Log.info("Moonstone White handle SendSalt reception");
 		
-//		var moon = client.channel().attr(Moonstone.moonKey).get();
 		var authCredentials = client.channel().attr(Moonstone.authKey).get();
+		
 		var username = authCredentials[0];
 		var password = authCredentials[1];
+		var hashedPassword = UserUtil.hashPassword(password, message.salt);
 		
-		var getuser = new GetUser(username, UserUtil.hashPassword(password, message.salt));
+		var getuser = new GetUser(username, hashedPassword);
 		Moonstone.moon.write(getuser);
 	}
 

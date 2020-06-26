@@ -21,5 +21,7 @@ module com.souchy.randd.ebishoal.Amethyst {
 	requires transitive com.souchy.randd.commons.deathebi;
 	requires transitive CreatureCommons;
 	requires transitive GameMechanics2;
+	requires com.souchy.randd.commons.coral;
+	requires com.souchy.randd.ebishoal.coraline;
 	
 }

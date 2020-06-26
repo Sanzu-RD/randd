@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.coraline;
+package com.souchy.randd.ebishoal.coraline.handlers.matchmaking;
 
 import com.souchy.randd.commons.coral.out.MatchLost;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;

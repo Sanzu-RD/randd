@@ -2,7 +2,7 @@ package com.souchy.randd.ebishoal.amethyst.ui;
 
 import com.souchy.randd.ebishoal.amethyst.main.AmethystApp;
 import com.souchy.randd.ebishoal.amethyst.ui.tabs.Collection;
-import com.souchy.randd.ebishoal.amethyst.ui.tabs.DraftSelect;
+import com.souchy.randd.ebishoal.amethyst.ui.tabs.DraftController;
 import com.souchy.randd.ebishoal.amethyst.ui.tabs.Home;
 import com.souchy.randd.ebishoal.amethyst.ui.tabs.Profile;
 import com.souchy.randd.ebishoal.amethyst.ui.tabs.Settings;
@@ -39,7 +39,7 @@ public class MainScene extends Common {
     @FXML public Collection collectionController;
     @FXML public Shop shopController;
     @FXML public Settings settingsController;
-    @FXML public DraftSelect draftController;
+    @FXML public DraftController draftController;
     
     /** 
      * garde en mémoire le tab sur lequel on était avant d'ouvrir les settings pour pouvoir le rouvrir par après 

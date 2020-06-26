@@ -2,6 +2,7 @@ package com.souchy.randd.ebishoal.amethyst.ui;
 
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.amethyst.main.AmethystApp;
+import com.souchy.randd.ebishoal.coraline.Coraline;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -61,6 +62,8 @@ public abstract class Common {
     @FXML
     public void exit(MouseEvent event) {
     	Log.info("on exit");
+		Coraline.credentials = new String[2];
+		
     	if(AmethystApp.stage.getScene() == AmethystApp.loginScene) {
     		Platform.exit(); 
     		//System.exit(0);

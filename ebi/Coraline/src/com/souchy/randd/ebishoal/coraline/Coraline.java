@@ -1,7 +1,10 @@
 package com.souchy.randd.ebishoal.coraline;
 
+import com.souchy.randd.commons.deathebi.msg.GetSalt;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
+import com.souchy.randd.jade.matchmaking.GameQueue;
 
 /**
  * Coraline is the match making client
@@ -9,56 +12,53 @@ import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
  * @author Blank
  * @date 25 déc. 2019
  */
-public class Coraline extends EbiShoalTCP { 
-	
-	public Coraline(String ip, int port, EbiShoalCore core) throws Exception {
-		super(ip, port, core);
-	}
-
-
-	// extends EbiShoalCore {
-	
-	/*
-	public final EbiShoalTCP client;
-	
-	public Coraline(String[] args) throws Exception {
-		super(args);
-		String ip = "localhost";
-		int port = 7000;
-		if(args.length > 0) ip = args[0];
-		if(args.length > 1) port = Integer.parseInt(args[0]);
-		client = new EbiShoalTCP(ip, port, this);
-		//client.block(); // not here
-	}
-
-	@Override
-	public String[] getRootPackages() {
-		return new String[] { "com.souchy.randd.ebishoal.coraline" };
-	}
-	*/
+public class Coraline { 
 	
 	/**
-	 * 
-	 * @param username
-	 * @param hashedpassword - Get this from IAuthentication.hashPassword(password, Opaline.getSalt(username))
+	 * Core is Amethyst set by itself on launch
 	 */
-	public static void auth(String username, String hashedpassword) {
-		
-	}
-	
-	
-	public static String getSalt(String username) {
-		return "";
-	}
+	public static EbiShoalCore core;
+	/**
+	 * User credentials set by Amethyst on signin { username, clearpassword } <p>
+	 * <b>Could be a token instead since we get it from Opaline and we'd skip the whole salt part</b>
+	 */
+	public static String[] credentials = new String[2];
+	/**
+	 * Internal Coraline tcp client
+	 */
+	private static EbiShoalTCP tcp;
 
-	public void enqueue() {
-		
+	
+	/**
+	 * Connects, auths and enqueue automatically to a matchmaking server
+	 */
+	public static void enqueue(GameQueue queue) {
+		try {
+			dequeue();
+			tcp = new EbiShoalTCP("127.0.0.1", 7000 + queue.ordinal(), core);
+			
+			// auth
+			var username = credentials[0];
+			write(new GetSalt(username));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	public void updateTeam() {
-		
+	
+	/**
+	 * Disconnects from a matchmaking server, therefore dequeueing
+	 */
+	public static void dequeue() {
+		if(tcp != null) {
+			tcp.close();
+			tcp = null;
+		}
 	}
-	public void matchFoundAnswer() {
-		
+	
+	public static void write(BBMessage msg) {
+		if(tcp != null)
+			tcp.write(msg);
 	}
+	
 	
 }

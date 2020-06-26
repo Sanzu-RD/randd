@@ -22,13 +22,13 @@ public class SelectCreature implements BBMessage {
 	public int modelid;
 	
 	/**
-	 * To what team should the creature be added
+	 * To what team should the creature be added.
 	 * This is only for mocking purposes to manually select creatures on both teams 
 	 * Normal draft/blind players can only select for themselves
-	 * Coraline will have to always set the correct team
+	 * 
 	 * Coral will ignore the team if the user is not Creator level
 	 */
-	public Team team = null;
+	public Team team = Team.A;
 	
 
 	@Override

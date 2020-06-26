@@ -12,12 +12,11 @@ public class AmethystConf extends JsonConfig {
 	 * - 
 	 */
 	public boolean advancedMode = false;
+
 	
 	/**
-	 * Save current tab to reopen it when starting the application
+	 * 
 	 */
-	//public Object currentTab;
-	
 	public String language = "en";
 	
 }

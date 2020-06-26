@@ -4,6 +4,7 @@ import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
+import com.souchy.randd.ebishoal.coraline.Coraline;
 
 import gamemechanics.ext.AssetData;
 import gamemechanics.main.DiamondModels;
@@ -29,13 +30,18 @@ public class Amethyst extends EbiShoalCore {
 	
 	
 	public static void main(String[] args) throws Exception {
-		core = new Amethyst(args);
+		new Amethyst(args);
 	}
 
 	public Amethyst(String[] args) throws Exception {
 		super(args);
-		conf = JsonConfig.readExternal(AmethystConf.class, "./");
+		
 		//Opaline.isOnline();
+		core = this;
+		Coraline.core = this;
+		
+		conf = JsonConfig.readExternal(AmethystConf.class, "./");
+		
 		// init elements
 		Elements.values(); 
 		// models configurations (creatures, spells, statuses)
@@ -51,7 +57,7 @@ public class Amethyst extends EbiShoalCore {
 
 	@Override
 	protected String[] getRootPackages() {
-		return new String[] { "com.souchy.randd.ebishoal.amethyst" };
+		return new String[] { "com.souchy.randd.ebishoal.amethyst", "com.souchy.randd.ebishoal.coraline" };
 	}
 
 }

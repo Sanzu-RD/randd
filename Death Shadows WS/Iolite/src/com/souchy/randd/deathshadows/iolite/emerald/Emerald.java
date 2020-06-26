@@ -129,10 +129,10 @@ public final class Emerald {
 //		return get(queue_simple_ranked, QueuedUser.class);
 //	}
 	public static MongoCollection<QueueeBlind> queue_simple_blind() {
-		return collection(Queuee.class); // get(queue_simple_blind, QueueeBlind.class);
+		return collection(QueueeBlind.class); // get(queue_simple_blind, QueueeBlind.class);
 	}
 	public static MongoCollection<QueueeDraft> queue_simple_draft() {
-		return collection(Queuee.class); // get(queue_simple_draft, QueueeDraft.class);
+		return collection(QueueeDraft.class); // get(queue_simple_draft, QueueeDraft.class);
 	}
 	public static MongoCollection<Lobby> lobbies(){
 		return collection(Lobby.class); // get(lobbies, Lobby.class);

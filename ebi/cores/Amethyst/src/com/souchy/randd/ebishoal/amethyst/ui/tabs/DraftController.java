@@ -2,8 +2,10 @@ package com.souchy.randd.ebishoal.amethyst.ui.tabs;
 
 import java.io.File;
 
+import com.souchy.randd.commons.coral.draft.SelectCreature;
 import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.coraline.Coraline;
 
 import gamemechanics.ext.AssetData;
 import gamemechanics.main.DiamondModels;
@@ -17,8 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
-public class DraftSelect {
-	
+public class DraftController {
 	
 	// creature list flowpane
 	// team A - modifiable affinities
@@ -67,6 +68,12 @@ public class DraftSelect {
 				Log.info("Error creating image : ", e);
 			}
 		}
+	}
+	
+	public void select() {
+		var msg = new SelectCreature();
+		msg.modelid = 1;
+		Coraline.write(msg);
 	}
 	
 	

@@ -1,0 +1,33 @@
+[
+	{
+		"id": 1,
+		"comment": "Mesmer",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "mesmer"
+	},
+	{
+		"id": 2,
+		"comment": "Sungjin",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "1000"
+	},
+	{
+		"id": 3,
+		"comment": "Megorya",
+		"models": [""],
+		"icon": ""
+	},
+	{
+		"id": 4,
+		"comment": "Lilian",
+		"models": [""],
+		"icon": ""
+	},
+	{
+		"id": 5,
+		"comment": "Marian",
+		"models": [""],
+		"icon": ""
+	}
+
+]

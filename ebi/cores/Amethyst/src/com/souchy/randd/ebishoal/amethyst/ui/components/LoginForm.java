@@ -7,6 +7,7 @@ import com.souchy.randd.commons.deathebi.UserUtil;
 import com.souchy.randd.commons.opal.IAuthentication.LoginToken;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.amethyst.main.AmethystApp;
+import com.souchy.randd.ebishoal.coraline.Coraline;
 import com.souchy.randd.ebishoal.opaline.api.Opaline;
 import com.souchy.randd.jade.meta.User;
 
@@ -85,6 +86,7 @@ public class LoginForm { //extends VBox {
 		}
 		
 		if(user != null) {
+			Coraline.credentials = new String[] { username, password };
 			AmethystApp.stage.setScene(AmethystApp.mainScene);
 		} else {
 			// show tooltip for wrong username/password combination
