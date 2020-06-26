@@ -54,9 +54,9 @@ public final class Pearl extends DeathShadowCore {
 	public Pearl(String[] args) throws Exception {
 		super(args);
 		core = this;
-		int port = 1000;
-		// GitPiranha root path which contains 'r and d' and 'release' repositories
-		String root = "../../../";
+		
+		var port = 1000;
+		var root = "../../../"; // GitPiranha root path which contains 'r and d' and 'release' repositories
 		if(args.length > 0) port = Integer.parseInt(args[0]);
 		if(args.length > 1) root = args[1];
 

@@ -29,9 +29,14 @@ public class Rainbow extends EbiShoalCore {
 	public Rainbow(String[] args) throws Exception {
 		super(args);
 		core = this;
-		client = new EbiShoalTCP("127.0.0.1", 1000, this);
+		
+		var host = "127.0.0.1";
+		var port = 1000;
+		if(args.length > 0) host = args[0];
+		if(args.length > 1) port = Integer.parseInt(args[1]);
+		client = new EbiShoalTCP(host, port, this);
 
-		Log.info("Rainbow start.");
+		Log.info("Rainbow start " + host + ":" + port);
 		Application.launch(RainbowApp.class);
 		Log.info("Rainbow stopped.");
 //		Platform.runLater(() -> RainbowApp.stage.setScene(RainbowApp.mainScene));

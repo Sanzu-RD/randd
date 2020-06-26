@@ -45,14 +45,14 @@ public final class Emerald {
 	static MongoClient client;
 
 	private static final String root = "hidden_piranha";
-	private static final MongoNamespace logs = new MongoNamespace(root, "logs");
-	private static final MongoNamespace users = new MongoNamespace(root, "users");
-	private static final MongoNamespace decks = new MongoNamespace(root, "decks");
-	private static final MongoNamespace matches = new MongoNamespace(root, "matches");
-	private static final MongoNamespace news = new MongoNamespace(root, "news");
-	private static final MongoNamespace queue_simple_blind = new MongoNamespace(root, "queue_simple_blind"); // blind is premade teams
-	private static final MongoNamespace queue_simple_draft = new MongoNamespace(root, "queue_simple_draft");
-	private static final MongoNamespace lobbies = new MongoNamespace(root, "lobbies");
+//	private static final MongoNamespace logs = new MongoNamespace(root, "logs");
+//	private static final MongoNamespace users = new MongoNamespace(root, "users");
+//	private static final MongoNamespace decks = new MongoNamespace(root, "decks");
+//	private static final MongoNamespace matches = new MongoNamespace(root, "matches");
+//	private static final MongoNamespace news = new MongoNamespace(root, "news");
+//	private static final MongoNamespace queue_simple_blind = new MongoNamespace(root, "queue_simple_blind"); // blind is premade teams
+//	private static final MongoNamespace queue_simple_draft = new MongoNamespace(root, "queue_simple_draft");
+//	private static final MongoNamespace lobbies = new MongoNamespace(root, "lobbies");
 
 	static {
 		init("localhost", 27017, "", "");
@@ -141,9 +141,10 @@ public final class Emerald {
 
 	public static <T> MongoCollection<T> collection(Class<T> clazz) {
 		var fullpackag = clazz.getPackageName();
-		var packag = fullpackag.substring(fullpackag.lastIndexOf('.'));
+		var packag = fullpackag.substring(fullpackag.lastIndexOf('.') + 1);
 		var collection = clazz.getSimpleName();
-		return client.getDatabase(root + ":" + packag).getCollection(collection, clazz);
+		
+		return client.getDatabase(root + "#" + packag).getCollection(collection, clazz);
 	}
 
 }
