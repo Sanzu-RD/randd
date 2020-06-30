@@ -11,8 +11,10 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.jade.meta.JadeCreature;
+import com.souchy.randd.jade.meta.User;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.util.AttributeKey;
 
 /**
  * Information about a lobby's players and the game server hosting them
@@ -21,12 +23,20 @@ import io.netty.buffer.ByteBuf;
  * @date 24 déc. 2019
  */
 public class Lobby implements BBSerializer, BBDeserializer {
+
+	public static final AttributeKey<Lobby> attrkey = AttributeKey.newInstance("jade.matchmaking.lobby");
+	
+	public enum LobbyPhase {
+		ban,
+		pick,
+		customize;
+	}
 	
 	/** draft / blind / mock */
 	public GameQueue type; 
 	
 	/** user IDs in the lobby */
-	public List<ObjectId> users = new ArrayList<>();
+//	public List<ObjectId> users = new ArrayList<>();
 
 	/** team for each players */
 	public Map<ObjectId, Team> teams = new HashMap<>(); // instead of using Team enum, use 0-1 for A and B team
@@ -40,6 +50,8 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	/** game server info */
 	public String moonstoneInfo;
 	
+	public LobbyPhase phase;
+	
 	
 	public static final String name_type = "type";
 	public static final String name_users = "users";
@@ -50,10 +62,12 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		// type and player count
+		// type and phase
 		out.writeByte(type.ordinal());
-		out.writeByte(users.size());
-		for(var id : users) {
+		out.writeInt(phase.ordinal());
+		// player count
+		out.writeByte(teams.size());
+		for(var id : teams.keySet()) {
 			// player id
 			writeString(out, id.toHexString());
 			out.writeInt(teams.get(id).ordinal());
@@ -70,16 +84,17 @@ public class Lobby implements BBSerializer, BBDeserializer {
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
-		users = new ArrayList<>();
-		jadeteams = new HashMap<>();
-//		answers = new HashMap<>();
-		// type and player count
+		
+		// type and phase
 		type = GameQueue.values()[in.readByte()];
+		phase = LobbyPhase.values()[in.readByte()];
+		
+		// player count
 		byte playercount = in.readByte();
 		for(int i = 0; i < playercount; i++) {
 			// player id
 			var id = new ObjectId(readString(in));
-			users.add(id);
+//			users.add(id);
 			// player team
 			int teamordinal = in.readInt();
 			teams.put(id, Team.values()[teamordinal]);

@@ -41,11 +41,11 @@ public class CoralEngine {
 		if(user == null) 
 			event.ctx.channel().close();
 		
-		for(var queue : GameQueue.values()) {
-			Emerald.collection(queue.getQueueeClass()).deleteOne(Filters.eq(user._id));
-		}
-		var q = Coral.coral.queue;
+//		for(var queue : GameQueue.values()) {
+//			Emerald.collection(queue.getQueueeClass()).deleteOne(Filters.eq(user._id));
+//		}
 		
+		var q = Coral.coral.queue;
 		var queuee = q.createQueuee();
 		queuee.userid = user._id;
 		queuee.mmr = user.mmr;
@@ -57,13 +57,17 @@ public class CoralEngine {
 	 * When a client's connection is lost : Dequeue
 	 */
 	public void channelInactive(UserInactiveEvent event) throws Exception {
-		// remove the user from any queue
-		var user = event.user;
-		if(user == null) 
-			event.ctx.channel().close();
+		// remove the user from the queue
+		Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(event.user._id));
 		
-		for(var queue : GameQueue.values()) {
-			Emerald.collection(queue.getQueueeClass()).deleteOne(Filters.eq(user._id));
+		// if the client was in a lobby, close every participant's channel in the lobby
+		var lobby = event.ctx.channel().attr(Lobby.attrkey).get();
+		if(lobby != null) {
+			for(var userid : lobby.teams.keySet()) {
+				var channel = Coral.coral.server.users.get(userid);
+				if(channel != null) 
+					channel.close();
+			}
 		}
 	}
 	
@@ -82,7 +86,7 @@ public class CoralEngine {
 			
 			Lobby lobby = new Lobby();
 			lobby.type = GameQueue.draft;
-			lobby.users.add(p1.userid);
+//			lobby.users.add(p1.userid);
 			//lobby.users.add(p2.userid);
 			lobby.teams.put(p1.userid, Team.A);
 			//lobby.teams.put(p2.userid, Team.B);
@@ -114,29 +118,42 @@ public class CoralEngine {
 				
 				// if match
 				if(canMatch(p1, p2)) {
-					itor1.remove();
-					itor2.remove();
+//					itor1.remove();
+//					itor2.remove();
 					itor1.close();
 					itor2.close();
 					
 					var channel1 = Coral.coral.server.users.get(p1.userid);
 					var channel2 = Coral.coral.server.users.get(p2.userid);
 					
+					if(channel1 == null) {
+						Coral.coral.server.users.remove(p1.userid);
+						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p1.userid));
+					}
+					if(channel2 == null) {
+						Coral.coral.server.users.remove(p2.userid);
+						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p2.userid));
+					}
 					if(channel1 != null && channel2 != null) {
 						Lobby lobby = new Lobby();
 						lobby.type = GameQueue.draft;
-						lobby.users.add(p1.userid);
-						lobby.users.add(p2.userid);
+//						lobby.users.add(p1.userid);
+//						lobby.users.add(p2.userid);
 						lobby.teams.put(p1.userid, Team.A);
 						lobby.teams.put(p2.userid, Team.B);
 						lobby.moonstoneInfo = "127.0.0.1:443";
 						
+						// dequeue
+						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p1.userid));
+						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p2.userid));
+						
 						var msg = new MatchFound();
 						msg.lobby = lobby;
 						
+						channel1.attr(Lobby.attrkey).set(lobby);
+						channel2.attr(Lobby.attrkey).set(lobby);
 						channel1.writeAndFlush(msg);
-						
-						// sendMessageMatch(lobby);
+						channel2.writeAndFlush(msg);
 					}
 					
 					return;

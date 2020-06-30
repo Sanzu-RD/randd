@@ -60,15 +60,13 @@ public class MainController extends Common {
 	@FXML private Label heartbeatTime;
 	@FXML private Button btnKill;
 	
-	
 	public MainController() {
 		RainbowApp.mainController = this;
 		Rainbow.core.bus.register(this);
-		
 	}
 
 	/**
-	 * AskNodes packet event handler
+	 * EventHandler for AskNodes packet 
 	 */
 	@Subscribe
 	public void handleAskNodes(AskNodes nodes) {

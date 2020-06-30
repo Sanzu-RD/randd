@@ -1,6 +1,8 @@
 package gamemechanics.ext;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -37,8 +39,22 @@ public class AssetData {
 		public String[] models;
 		public String icon;
 
-		public Path getIcon() {
+		/** idk which method to keep, all good options */
+		public Path getIconPath() {
 			return Environment.fromRoot("res/textures/creatures/" + icon + ".png"); 
+		}
+		/** idk which method to keep, all good options */
+		public File getIcon() {
+			return getIconPath().toFile();
+		}
+		/** idk which method to keep, all good options */
+		public URL getIconURL() {
+			try {
+				return getIconPath().toUri().toURL();
+			} catch (MalformedURLException e) {
+				Log.error("", e);
+				return null;
+			}
 		}
 		public Path getModel(int modelId) {
 			return Environment.fromRoot("res/models/creatures/" + models[modelId] + ".g3dj");

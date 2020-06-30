@@ -10,7 +10,7 @@ import com.souchy.randd.jade.matchmaking.GameQueue;
  * @author Blank
  * @date 25 déc. 2019
  */
-public final class Coral extends DeathShadowCore { //extends Core { //extends DeathShadowCoreServer {
+public final class Coral extends DeathShadowCore {
 	
 	public static Coral coral;
 

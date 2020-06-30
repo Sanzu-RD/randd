@@ -15,8 +15,8 @@ import io.netty.util.AttributeKey;
 
 public class User implements BBSerializer, BBDeserializer {
 
-	public static final AttributeKey<User> attrkey = AttributeKey.newInstance("jade.user");
-	public static final AttributeKey<Integer> triesKey = AttributeKey.newInstance("jade.user.tries");
+	public static final AttributeKey<User> attrkey = AttributeKey.newInstance("jade.meta.user");
+	public static final AttributeKey<Integer> triesKey = AttributeKey.newInstance("jade.meta.user.tries");
 
 
 	public ObjectId _id;
