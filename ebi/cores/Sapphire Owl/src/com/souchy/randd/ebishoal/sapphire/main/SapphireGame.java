@@ -3,12 +3,14 @@ package com.souchy.randd.ebishoal.sapphire.main;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
+import com.badlogic.gdx.utils.Array;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
@@ -33,6 +35,8 @@ public class SapphireGame extends LapisGame {
 
 	public static Fight fight; // FIXME replace this with Moonstone.fight or use the reference for now i guess
 	
+	public static MusicPlayer music;
+	
 	@Override
 	public void init() {
 		// init elements
@@ -46,10 +50,11 @@ public class SapphireGame extends LapisGame {
 		//LapisResources.loadResources(SapphireOwl.data);
 		LapisAssets.loadTextures(Gdx.files.internal("res/textures/"));
 		LapisAssets.loadModels(Gdx.files.internal("res/models/"));
-		LapisAssets.loadMusics(Gdx.files.internal("res/musics/"));
+		LapisAssets.loadMusics(Gdx.files.internal("res/music/"));
 		LapisAssets.loadSounds(Gdx.files.internal("res/sounds/"));
 		LapisAssets.loadI18NBundles(Gdx.files.internal("res/i18n/"));
-		
+
+		music = new MusicPlayer();
 		
 		// screen
 		gfx = new SapphireScreen();
