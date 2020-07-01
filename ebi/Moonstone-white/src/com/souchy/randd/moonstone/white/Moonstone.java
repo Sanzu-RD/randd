@@ -1,6 +1,7 @@
 package com.souchy.randd.moonstone.white;
 
 
+import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.deathebi.msg.GetSalt;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
@@ -14,11 +15,12 @@ public class Moonstone extends EbiShoalTCP {
 	
 	public static Moonstone moon;
 	public static Fight fight;
-	
+	public static EventBus bus;
 	
 	public Moonstone(String ip, int port, EbiShoalCore core) throws Exception {
 		super(ip, port, core);
 		moon = this;
+		bus = new EventBus();
 //		fight = new Fight();
 	}
 	

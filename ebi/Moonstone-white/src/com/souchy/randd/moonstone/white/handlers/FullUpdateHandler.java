@@ -47,8 +47,8 @@ public class FullUpdateHandler implements BBMessageHandler<FullUpdate> {
 		Log.info("FullUpdate spells intances " + Moonstone.fight.spells.family.size());
 		Log.info("FullUpdate status intances " + Moonstone.fight.status.family.size());
 
-		// player hud
-//		SapphireHudSkin.play(fight.teamA.get(0));
+		// propagate event
+		Moonstone.bus.post(message);
 	}
 
 	@Override

@@ -61,7 +61,7 @@ interface LapisScreenRenderer extends Screen {
 		clearScreen(color.r, color.g, color.b, color.a);
 	}
 	
-	public static boolean activateShadows = false;
+	public static boolean activateShadows = true;
 	public static boolean onlyShadowMap = false;
 	public static boolean activatePP = true;
 	public static boolean renderBackground = true;

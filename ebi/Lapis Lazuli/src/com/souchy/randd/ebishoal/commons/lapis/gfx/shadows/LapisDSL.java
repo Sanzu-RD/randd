@@ -43,7 +43,6 @@ public class LapisDSL extends DirectionalLight implements ShadowMap, Disposable 
 
 		// update viewport and create fbo
 		update(shadowMapWidth, shadowMapHeight);
-//		fbo = new FrameBuffer(Format.RGBA8888, shadowMapWidth, shadowMapHeight, true);
 		
 		halfDepth = shadowNear + 0.5f * (shadowFar - shadowNear);
 		textureDesc = new TextureDescriptor();
@@ -121,17 +120,30 @@ public class LapisDSL extends DirectionalLight implements ShadowMap, Disposable 
 		fbo = null;
 	}
 
-	public void update(int width, int height) {
+	public void update(int screenWidth, int screenHeight) {
 		// resize viewport
-		getViewport().update(width, height, false);
+		getViewport().update(screenWidth, screenHeight, false);
 		// calc half of world height
 		halfHeight = viewport.getWorldHeight() * 0.5f;
 		// resize framebuffer
-		createFbo(width, height);
+		createFbo(screenWidth, screenHeight);
 	}
 	
 	private void createFbo(int shadowMapWidth, int shadowMapHeight) {
 		//if(fbo == null)
 		fbo = new FrameBuffer(Format.RGBA8888, shadowMapWidth, shadowMapHeight, true);
 	}
+
+	/**
+	 * @param shadowViewportWidth world units
+	 * @param shadowViewportHeight world units
+	 */
+	public void zoom(float shadowViewportWidth, float shadowViewportHeight) {
+		this.viewport.setWorldSize(shadowViewportWidth, shadowViewportHeight);
+		this.cam.viewportWidth = shadowViewportWidth;
+		this.cam.viewportHeight = shadowViewportHeight;
+		this.cam.update();
+	}
+	
+	
 }

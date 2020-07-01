@@ -27,9 +27,12 @@ public class StatusSystem extends data.new1.ecs.System {
 	@Override
 	public void update(float delta) {
 //		Log.info("diamond status system update");
-		family.forEach(e -> {
-			
-		});
+
+		synchronized (family) {
+			family.forEach(e -> {
+				
+			});
+		}
 	}
 	
 	@Subscribe

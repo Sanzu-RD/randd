@@ -110,10 +110,27 @@ public class SapphireController extends CameraInputController {
 		return super.scrolled(amount);
 	}
 	private void scrolledFloat(float amount) {
-		var ratio = SapphireGame.gfx.getCamera().viewportWidth / SapphireGame.gfx.getCamera().viewportHeight;
-		SapphireGame.gfx.getCamera().viewportWidth += amount;
-		SapphireGame.gfx.getCamera().viewportHeight = SapphireGame.gfx.getCamera().viewportWidth / ratio;
-		if (autoUpdate) camera.update();
+		var viewport = SapphireGame.gfx.getViewport();
+		var cam = SapphireGame.gfx.getCamera();
+//		var ratio = viewport.getWorldWidth() / viewport.getWorldHeight(); 
+//		viewport.setWorldWidth(viewport.getWorldWidth() + amount);
+//		viewport.setWorldHeight( viewport.getWorldWidth() / ratio);
+//		Log.info("viewport 1 : " + viewport.getWorldWidth() + "; " + viewport.getWorldHeight());
+//		Log.info("cam 1 : " + cam.viewportWidth + "; " + cam.viewportHeight);
+		
+		var ratio = cam.viewportWidth / cam.viewportHeight;
+		cam.viewportWidth += amount;
+		cam.viewportHeight = cam.viewportWidth / ratio;
+		if (autoUpdate) 
+			camera.update();
+		
+//		Log.info("viewport 2 : " + viewport.getWorldWidth() + "; " + viewport.getWorldHeight());
+//		Log.info("cam 2 : " + cam.viewportWidth + "; " + cam.viewportHeight);
+		
+
+		// resize le viewport de la shadowlight pour sa shadowmap
+		if(SapphireGame.gfx.getShadowLight() != null) 
+			SapphireGame.gfx.getShadowLight().zoom(cam.viewportWidth, cam.viewportHeight);
 	}
 
 	/**

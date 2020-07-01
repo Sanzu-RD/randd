@@ -100,12 +100,12 @@ interface LapisScreenCreator {
 	
 	public default LapisDSL createShadowLight(Viewport viewport) {
 		Log.info("viewport world w " + viewport.getWorldWidth());
-		var shadowMapWidth = Gdx.graphics.getWidth() * 2; //1024 * 2;// * 2 * 2;
-		var shadowMapHeight = Gdx.graphics.getHeight() * 2; //shadowMapWidth;
-		var shadowViewportWidth = viewport.getWorldWidth(); //26f; // * 16f/9f;
-		var shadowViewportHeight = viewport.getWorldHeight(); // shadowViewportWidth; //20f;
+		int shadowMapWidth = Gdx.graphics.getWidth();
+		int shadowMapHeight = Gdx.graphics.getHeight(); 
+		float shadowViewportWidth = viewport.getWorldWidth(); 
+		float shadowViewportHeight = viewport.getWorldHeight(); 
 		float shadowNear = 0.01f;
-		float shadowFar = 60f;
+		float shadowFar = 30f;
 		float intensity = 0.6f;
 		
 		var shadowLight = new LapisDSL(shadowMapWidth, shadowMapHeight, shadowViewportWidth, shadowViewportHeight, shadowNear, shadowFar);

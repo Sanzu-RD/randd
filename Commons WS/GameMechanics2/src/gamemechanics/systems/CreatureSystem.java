@@ -27,9 +27,12 @@ public class CreatureSystem extends data.new1.ecs.System {
 	@Override
 	public void update(float delta) {
 //		Log.info("diamond creature system update");
-		family.forEach(e -> {
-			
-		});
+
+		synchronized (family) {
+			family.forEach(e -> {
+				
+			});
+		}
 	}
 	
 	@Subscribe

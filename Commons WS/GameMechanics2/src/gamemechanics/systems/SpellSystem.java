@@ -28,9 +28,12 @@ public class SpellSystem extends data.new1.ecs.System {
 	@Override
 	public void update(float delta) {
 //		Log.info("diamond cell system update");
-		family.forEach(e -> {
-			
-		});
+
+		synchronized (family) {
+			family.forEach(e -> {
+				
+			});
+		}
 	}
 	
 	public Spell get(int instanceid) {

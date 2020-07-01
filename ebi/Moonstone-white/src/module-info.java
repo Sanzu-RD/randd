@@ -9,4 +9,5 @@ module com.souchy.randd.moonstone.white {
 	requires transitive com.souchy.randd.ebishoal.commons.EbiCore;
 	requires com.souchy.randd.moonstone.Commons;
 	requires GameMechanics2;
+	requires com.google.common;
 }

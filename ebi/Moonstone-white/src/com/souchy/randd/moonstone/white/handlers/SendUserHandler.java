@@ -26,7 +26,7 @@ public class SendUserHandler implements BBMessageHandler<SendUser> {
 		var auth = client.channel().attr(Moonstone.authKey).get();
 		var fightid = auth[2];
 		
-		// deamande à rejoindre un combat
+		// demande à rejoindre un combat
 		var join = new JoinFight(Integer.parseInt(fightid)); 
 		Moonstone.moon.write(join);
 	}

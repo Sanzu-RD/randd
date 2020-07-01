@@ -6,7 +6,10 @@ import java.util.Map;
 
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
+import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.SelfIdentify;
+import com.souchy.randd.jade.meta.User;
+import com.souchy.randd.jade.meta.UserLevel;
 
 import gamemechanics.models.Fight;
 
@@ -39,7 +42,7 @@ public class BlackMoonstone extends DeathShadowCore {
 		// register node on pearl
 		// rivers.consume("idmaker" () -> {
 			int nodeid = 0; // get nodeid from idmaker queue
-			rivers.send("pearl", new SelfIdentify(nodeid));
+	//		rivers.send("pearl", new SelfIdentify(nodeid));
 		//});
 		
 		// block here to not just exit the program
@@ -49,7 +52,13 @@ public class BlackMoonstone extends DeathShadowCore {
 
 	@Override
 	protected String[] getRootPackages() {
-		return new String[]{ "com.souchy.randd.commons.deathebi.msg", "com.souchy.randd.moonstone", "com.souchy.randd.deathshadows.nodes.moonstone.black"  };
+		return new String[]{ 
+				"com.souchy.randd.commons.deathebi.msg", 
+				"com.souchy.randd.moonstone", 
+				"com.souchy.randd.deathshadows.nodes.moonstone.black",
+				"com.souchy.randd.deathshadows.blackmoonstone.handlers",
+				"com.souchy.randd.deathshadows.blackmoonstone.riverhandlers"
+				};
 	}
 
 }

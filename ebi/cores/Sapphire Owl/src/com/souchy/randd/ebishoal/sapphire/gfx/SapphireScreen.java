@@ -83,11 +83,8 @@ public class SapphireScreen extends LapisScreen {
 	@Override
 	public Viewport createViewport(Camera cam) {
 		// how many meters high is the screen (ex 1920/1080 = 28.4/16)
-		float viewportSize = 16; // getWorldCenter().x * 2; // acts as a zoom (lower number is closer zoom)
+		float viewportSize = 16;  // acts as a zoom (lower number is closer zoom)
 		var viewport = new ExtendViewport(viewportSize * 16/9, viewportSize, cam);
-		//var viewport = new SapphireViewport(viewportSize * 16 / 9, viewportSize, cam);
-		//var viewport = new ScreenViewport(cam);
-		//viewport.setUnitsPerPixel(0.02f);
 		viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		return viewport;
 	}
@@ -124,11 +121,13 @@ public class SapphireScreen extends LapisScreen {
 		super.renderWorld();
 		// render dynamic instances (cursor, creatures, terrain effects like glyphs and traps, highlighting effects ..)
 
-		SapphireEntitySystem.family.forEach(e -> {
-			var model = e.get(ModelInstance.class);
-			if (model != null)
-				getModelBatch().render(model);
-		});
+		synchronized(SapphireEntitySystem.family){
+			SapphireEntitySystem.family.forEach(e -> {
+				var model = e.get(ModelInstance.class);
+				if (model != null)
+					getModelBatch().render(model);
+			});
+		}
 		
 	}
 

@@ -11,13 +11,16 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.badlogic.gdx.utils.Array;
+import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
+import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHudSkin;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.jade.meta.JadeCreature;
 import com.souchy.randd.moonstone.commons.packets.c2s.GetUpdate;
+import com.souchy.randd.moonstone.commons.packets.s2c.FullUpdate;
 import com.souchy.randd.moonstone.white.Moonstone;
 
 import data.new1.spellstats.base.IntStat;
@@ -73,11 +76,14 @@ public class SapphireGame extends LapisGame {
 			new SapphireEntitySystem(Moonstone.fight);
 			
 			// ask for fight data after assets have been loaded
-			if(Moonstone.moon != null) Moonstone.moon.write(new GetUpdate());
+			if(Moonstone.moon != null) {
+				Moonstone.bus.register(this);
+				Moonstone.moon.write(new GetUpdate());
+			}
 			
 			// player hud
-//			SapphireHudSkin.play(fight.teamA.get(0));
-
+			// SapphireHudSkin.play(fight.teamA.get(0));
+			
 		} catch (Exception e) {
 			Log.error("SapphireOwl creature error : ", e);
 			Gdx.app.exit();
@@ -89,6 +95,12 @@ public class SapphireGame extends LapisGame {
 	@Override
 	public SapphireScreen getStartScreen() {
 		return gfx;
+	}
+	
+	@Subscribe
+	public void fullUpdateHandler(FullUpdate msg) {
+		// player hud
+		SapphireHudSkin.play(fight.creatures.family.get(0)); // fight.teamA.get(0));
 	}
 	
 	

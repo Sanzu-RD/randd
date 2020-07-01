@@ -33,21 +33,23 @@ public class SapphireEntitySystem extends data.new1.ecs.System {
 	@Override
 	public void update(float delta) {
 //		Log.info("sapphire entity system update");
-		family.forEach(e -> {
-			var model = e.get(ModelInstance.class);
-			var pos = e.get(Position.class);
-			if(model == null || pos == null) return;
-//			Log.info("set sapphire entity model pos : " + pos + "; " + model);
-			model.transform.setTranslation(
-					(float) pos.x - 0.5f, 
-					(float) pos.y - 0.5f, 
-					1f
-					);
-			var anime = e.get(AnimationController.class);
-			if(anime != null) {
-				anime.update(delta);
-			}
-		});
+		synchronized (family) {
+			family.forEach(e -> {
+				var model = e.get(ModelInstance.class);
+				var pos = e.get(Position.class);
+				if(model == null || pos == null) return;
+	//			Log.info("set sapphire entity model pos : " + pos + "; " + model);
+				model.transform.setTranslation(
+						(float) pos.x - 0.5f, 
+						(float) pos.y - 0.5f, 
+						1f
+						);
+				var anime = e.get(AnimationController.class);
+				if(anime != null) {
+					anime.update(delta);
+				}
+			});
+		}
 	}
 	
 	public void dispose() {
