@@ -27,6 +27,10 @@ import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 
+import particles.EffekseerManager;
+import particles.OnAnimationComplete;
+import particles.ParticleEffekseer;
+
 
 @SuppressWarnings({ "deprecation", "unused" })
 interface LapisScreenCreator {
@@ -105,7 +109,7 @@ interface LapisScreenCreator {
 		float shadowViewportWidth = viewport.getWorldWidth(); 
 		float shadowViewportHeight = viewport.getWorldHeight(); 
 		float shadowNear = 0.01f;
-		float shadowFar = 30f;
+		float shadowFar = 40f;
 		float intensity = 0.6f;
 		
 		var shadowLight = new LapisDSL(shadowMapWidth, shadowMapHeight, shadowViewportWidth, shadowViewportHeight, shadowNear, shadowFar);
@@ -174,6 +178,16 @@ interface LapisScreenCreator {
 		String vert = Gdx.files.internal("res/shaders/default.vertex.glsl").readString();
 		String frag = Gdx.files.internal("res/shaders/default.fragment.glsl").readString();
 		return new ModelBatch(new DefaultShaderProvider(vert, frag)); 
+	}
+	
+	/**
+	 * Create Effekseer particle system
+	 */
+	public default EffekseerManager createEffekseer(Camera camera, Viewport viewport) {
+		EffekseerManager.InitializeEffekseer();
+		var manager = new EffekseerManager(camera);
+		manager.setViewport(viewport);
+		return manager;
 	}
 	
 }

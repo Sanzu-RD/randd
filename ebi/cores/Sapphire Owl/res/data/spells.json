@@ -1,0 +1,75 @@
+[
+	{
+		"id": 1,
+		"comment": "Fireball",
+		"icon":  "fireball",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 2,
+		"comment": "Hail",
+		"icon":  "hail",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 3,
+		"comment": "Ice Shield",
+		"icon":  "iceshield",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 4,
+		"comment": "Ice Comet",
+		"icon":  "icecomet",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 5,
+		"comment": "Ice Spear",
+		"icon":  "icespear",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 6,
+		"comment": "Ice Wall",
+		"icon":  "icewall",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 7,
+		"comment": "Summon Skeleton",
+		"icon":  "skeleton",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 8,
+		"comment": "Bubble",
+		"icon":  "bubble",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 9,
+		"comment": "ShiningArmour",
+		"icon":  "iceshield",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	}
+
+]

@@ -23,6 +23,8 @@ import com.souchy.randd.moonstone.commons.packets.c2s.GetUpdate;
 import com.souchy.randd.moonstone.commons.packets.s2c.FullUpdate;
 import com.souchy.randd.moonstone.white.Moonstone;
 
+import Effekseer.swig.EffekseerBackendCore;
+import Effekseer.swig.EffekseerManagerCore;
 import data.new1.spellstats.base.IntStat;
 import gamemechanics.components.Position;
 import gamemechanics.ext.AssetData;
@@ -80,7 +82,7 @@ public class SapphireGame extends LapisGame {
 				Moonstone.bus.register(this);
 				Moonstone.moon.write(new GetUpdate());
 			}
-			
+
 			// player hud
 			// SapphireHudSkin.play(fight.teamA.get(0));
 			

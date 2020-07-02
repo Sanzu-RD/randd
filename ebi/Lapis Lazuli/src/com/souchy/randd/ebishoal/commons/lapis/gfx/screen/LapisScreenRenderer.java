@@ -20,6 +20,8 @@ import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 
+import particles.EffekseerManager;
+
 @SuppressWarnings("deprecation")
 interface LapisScreenRenderer extends Screen {
 
@@ -45,6 +47,8 @@ interface LapisScreenRenderer extends Screen {
 	public InputProcessor getInputProcessor();
 	public Environment getEnvironment();
 	public LapisDSL getShadowLight();
+	public EffekseerManager getEffekseer();
+	
 	
 	public default void clearScreen(float r, float g, float b, float a) {
 		//Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -71,12 +75,11 @@ interface LapisScreenRenderer extends Screen {
 	
 	@Override
 	public default void render(float delta) {
+		// cull shadows and render shadow map into its own fbo
 		if(cullback) Gdx.gl20.glCullFace(GL20.GL_FRONT);
-		
-		// render shadow map into its own fbo
 		if(activateShadows) renderShadowsContainer();
-
 		if(cullback) Gdx.gl.glCullFace(GL20.GL_BACK);
+		
 		// render world and pfx in an FBO for later post-process
 		getFBO().begin();
 		{
@@ -86,6 +89,8 @@ interface LapisScreenRenderer extends Screen {
 			renderWorldContainer();
 			// particle effects
 			renderParticleEffectsContainer();
+			// particle effects effekseer... either i get fbo or transparency.... even the fire has straight lines at the bottom of particles and we dont have distortion in the shader
+			renderEffekseer();
 		}
 		getFBO().end();
 
@@ -115,7 +120,16 @@ interface LapisScreenRenderer extends Screen {
 		if(getLining() != null) getLining().renderLines();
 		
 		// render UI
-		if(renderUI) renderView(delta);
+//		if(renderUI) renderView(delta);
+	}
+	
+	public default void renderEffekseer() {
+//		getEffekseer().SetViewProjectionMatrixWithSimpleWindow(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+//		getEffekseer().Update(Gdx.graphics.getDeltaTime() / (1.0f / 60.0f));
+//		getEffekseer().DrawBack();
+//		getEffekseer().DrawFront();
+
+		getEffekseer().draw(Gdx.graphics.getDeltaTime());
 	}
 	
 	/**
@@ -177,12 +191,11 @@ interface LapisScreenRenderer extends Screen {
 //			modelBatch.render(inst, getEnvironment()); // world.cache, env);
 			//g1.meshes.forEach(m -> m.render(modelBatch.getShaderProvider().getShader(null), GL20.GL_TRIANGLES));
 //		else 
-		
 			// render the cache (static terrain)
 			getModelBatch().render(getWorld().cache, getEnvironment());
 			// render dynamic instances (cursor, creatures, terrain effects like glyphs and traps, highlighting effects ..)
 			getModelBatch().render(getWorld().instances);
-			
+
 		// render highlight effects like traps, glyphs, etc (might or might not render with the environment var)
 //		modelBatch.render(cellHighlighterInst); // , new LShader());
 		// render characters

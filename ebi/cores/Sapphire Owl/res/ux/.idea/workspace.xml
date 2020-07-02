@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5fde4df8-f00d-4ace-8f34-b0ed776ce5f4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../EbiCore/src/com/souchy/randd/ebishoal/commons/EbiShoalHTTP.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../EbiCore/src/com/souchy/randd/ebishoal/commons/EbiShoalHTTP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amethyst/scenes/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/amethyst/scenes/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amethyst/tabs/champselectdraft.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/amethyst/tabs/champselectdraft.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amethyst/tabs/collection.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/amethyst/tabs/collection.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/main/AmethystApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/main/AmethystApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/LoginScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/LoginScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/MainScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/MainScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/tabs/DraftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/tabs/DraftSelect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/tabs/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/tabs/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/src/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/amethyst/scenes/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/amethyst/scenes/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/amethyst/tabs/collection.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/amethyst/tabs/collection.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/confs/AssetConfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/data/AssetConfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHudSkin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHudSkin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireEntitySystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireEntitySystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/Timeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/Timeline.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/amethyst/scenes/main.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="38" column="19" lean-forward="true" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/amethyst/tabs/champselectdraft.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="697">
+              <caret line="119" column="14" lean-forward="true" selection-start-line="119" selection-start-column="14" selection-end-line="119" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>draf</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/amethyst/scenes/main.fxml" />
+        <option value="$PROJECT_DIR$/amethyst/tabs/champselectdraft.fxml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="381" />
+    <option name="y" value="-16" />
+    <option name="width" value="1458" />
+    <option name="height" value="962" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ux" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ux" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ux" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ux" type="462c0819:PsiDirectoryNode" />
+              <item name="amethyst" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ux" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ux" type="462c0819:PsiDirectoryNode" />
+              <item name="amethyst" type="462c0819:PsiDirectoryNode" />
+              <item name="scenes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ux" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ux" type="462c0819:PsiDirectoryNode" />
+              <item name="amethyst" type="462c0819:PsiDirectoryNode" />
+              <item name="tabs" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5fde4df8-f00d-4ace-8f34-b0ed776ce5f4" name="Default Changelist" comment="" />
+      <created>1592527633685</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592527633685</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="UI Designer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18603411" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Maven" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/amethyst/scenes/main.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="38" column="19" lean-forward="true" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/amethyst/tabs/champselectdraft.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="119" column="14" lean-forward="true" selection-start-line="119" selection-start-column="14" selection-end-line="119" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>12</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

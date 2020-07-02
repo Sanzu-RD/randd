@@ -17,5 +17,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SmoothRivers"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Effekseer 2"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

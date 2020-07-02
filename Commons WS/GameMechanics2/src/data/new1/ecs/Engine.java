@@ -40,8 +40,12 @@ public class Engine {
 	}
 
 	public void update(float delta) {
-		systems.forEach(s -> s.update(delta));
-		entities.forEach(e -> e.update(delta));
+		synchronized(systems) {
+			systems.forEach(s -> s.update(delta));
+		}
+		synchronized(entities) {
+			 entities.forEach(e -> e.update(delta));
+		}
 	}
 
 	/** fired after an entity is added to the engine */

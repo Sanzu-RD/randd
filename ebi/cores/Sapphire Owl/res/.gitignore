@@ -1,5 +1,3 @@
-/data/
-/shaders/
-/textures/
-/ux/
-/music/
+/fx/
+/src.dll
+/effekseer.dll

@@ -158,7 +158,16 @@ public class SapphireController extends CameraInputController {
 			Log.info(SapphireGame.fight.teamA.get(0).stats.resources.get(Resource.life).toString());
 			SapphireHud.refresh();
 		}
-		
+		if(keycode == Keys.P) {
+        	SapphireScreen.effect.play();
+		}
+		if(keycode == Keys.M) {
+			if(SapphireGame.music.music.isPlaying()) {
+				SapphireGame.music.pause();
+			} else {
+				SapphireGame.music.play();
+			}
+		}
 		switch(keycode) {
 			case RIGHT 	-> camera.rotate(45, 0, 0, 1);
 			case LEFT 	-> camera.rotate(45, 0, 0, -1);

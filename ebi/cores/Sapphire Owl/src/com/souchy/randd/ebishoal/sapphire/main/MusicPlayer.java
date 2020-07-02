@@ -21,7 +21,7 @@ public class MusicPlayer {
 	public MusicPlayer() {
 		loadTrackList();
 		currentIndex = 0;
-		play();
+		music = tracks.get(currentIndex);
 	}
 	
 	public void loadTrackList() {

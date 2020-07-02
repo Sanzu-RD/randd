@@ -1,34 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="module-info.java|mockingbird/MockingMoonstone.java" kind="src" path="src"/>
+	<classpathentry excluding="module-info.java|mockingbird/MockingMoonstone.java|mockingbird/MockingEffekseer.java" kind="src" path="src"/>
+	<classpathentry kind="src" path="effekseer"/>
 	<classpathentry kind="src" output="data" path="datadata"/>
 	<classpathentry kind="src" output="res" path="assets"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Sapphire Owl"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Amethyst"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Coral"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Coral-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Coraline"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DeathShadowCore"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Iolite"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-black"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-white"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Opal"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Opal-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Opaline"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Pearl"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Pearl-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/PiranhaPlants"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SmoothRivers"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -42,5 +17,32 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LML"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SmoothRivers"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PiranhaPlants"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Pearl-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Pearl"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Opaline"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Opal-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Opal"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-white"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-black"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Iolite"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DeathShadowCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Coraline"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Coral-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Coral"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Amethyst"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Sapphire Owl"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Effekseer 2"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

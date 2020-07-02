@@ -19,6 +19,8 @@ import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 
+import particles.EffekseerManager;
+
 @SuppressWarnings("deprecation")
 public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRenderer {
 
@@ -66,7 +68,11 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	private LapisHud view;
 	private LineDrawing lining;
 	private Texture background;
-	
+
+	// ----------------------------------------
+	// EFFEKSEER PARTICLE EFFECTS -------------
+	// ----------------------------------------
+	private EffekseerManager effekseerManagerCore;
 
 
 	/**
@@ -107,6 +113,7 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 		// create particle effects system
 		pfxSystem = createPfxSystem(getCamera());
 		pfxBatch = createPfxBatch();
+		effekseerManagerCore = createEffekseer(getCamera(), getViewport());
 		
 		// create FBO and its sprite batch renderer for post process
 		fbo = createFBO();
@@ -301,6 +308,11 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	@Override
 	public ParticleSystem getPfxSystem() {
 		return pfxSystem;
+	}
+	
+	@Override
+	public EffekseerManager getEffekseer() {
+		return effekseerManagerCore;
 	}
 	
 }
