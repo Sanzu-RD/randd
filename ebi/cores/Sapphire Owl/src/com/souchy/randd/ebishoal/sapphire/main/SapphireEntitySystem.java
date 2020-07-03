@@ -68,8 +68,6 @@ public class SapphireEntitySystem extends data.new1.ecs.System {
 			modelinstance.transform.rotate(1, 0, 0, 90);
 			var animController = new AnimationController(modelinstance);
 			animController.setAnimation("CharacterArmature|Walk", -1);
-			event.entity.add(animController);
-			event.entity.add(modelinstance);
 
 			var rnd = new Random();
 			var baseColor = new Color(rnd.nextFloat(), rnd.nextFloat(), rnd.nextFloat(), 1f);
@@ -82,10 +80,15 @@ public class SapphireEntitySystem extends data.new1.ecs.System {
 			float ratio = 1f /  2f;
 			modelinstance.materials.get(5).set(ColorAttribute.createDiffuse(baseColor.mul(ratio, ratio, ratio, 1f)));
 
+			// add model and animation to entity as components
+			event.entity.add(animController);
+			event.entity.add(modelinstance);
+			
 			synchronized (SapphireEntitySystem.family) {
 				family.add(event.entity);
 			}
-		} else if(event.entity instanceof TerrainEffect) {
+		} else 
+		if(event.entity instanceof TerrainEffect) {
 			
 		}
 	}

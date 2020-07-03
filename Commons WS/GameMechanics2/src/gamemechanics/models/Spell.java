@@ -63,6 +63,8 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 		}
 	}
 	*/
+	private static int idCounter = 0;
+	
 	
 	public int id;
 	public abstract int modelid();
@@ -76,6 +78,7 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	
 	public Spell(Fight f) {
 		super(f);
+		id = idCounter++;
 		stats = initBaseStats();
 		taggedElements = initElements();
 		taggedCreatureTypes = initCreatureTypes();

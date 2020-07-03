@@ -48,7 +48,6 @@ public class World implements Disposable {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		instances.clear();
 		cache.dispose();
 	}

@@ -75,6 +75,9 @@ interface LapisScreenRenderer extends Screen {
 	
 	@Override
 	public default void render(float delta) {
+//		Gdx.gl.glEnable(GL20.GL_BLEND);
+//		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+		
 		// cull shadows and render shadow map into its own fbo
 		if(cullback) Gdx.gl20.glCullFace(GL20.GL_FRONT);
 		if(activateShadows) renderShadowsContainer();
@@ -120,7 +123,7 @@ interface LapisScreenRenderer extends Screen {
 		if(getLining() != null) getLining().renderLines();
 		
 		// render UI
-//		if(renderUI) renderView(delta);
+		if(renderUI) renderView(delta);
 	}
 	
 	public default void renderEffekseer() {
@@ -166,6 +169,7 @@ interface LapisScreenRenderer extends Screen {
 		//else 
 			// TODO create shadows *only for characters and z>0 blocks* then project *only onto blocks z=0*
 			getShadowBatch().render(getWorld().cache, getEnvironment()); 
+			getShadowBatch().render(getWorld().instances, getEnvironment()); 
 		// dont render shadows on highlight effects like traps, glyphs, etc
 		// shadowBatch.render(cellHighlighterInst);
 		//if(creatures) shadowBatch.render(characters, getEnvironment());
@@ -194,7 +198,7 @@ interface LapisScreenRenderer extends Screen {
 			// render the cache (static terrain)
 			getModelBatch().render(getWorld().cache, getEnvironment());
 			// render dynamic instances (cursor, creatures, terrain effects like glyphs and traps, highlighting effects ..)
-			getModelBatch().render(getWorld().instances);
+			getModelBatch().render(getWorld().instances, getEnvironment());
 
 		// render highlight effects like traps, glyphs, etc (might or might not render with the environment var)
 //		modelBatch.render(cellHighlighterInst); // , new LShader());

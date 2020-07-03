@@ -341,11 +341,15 @@ void main() {
 			if (gl_FragColor.a <= v_alphaTest)
 				discard;
 		#endif
+		//gl_FragColor.a = v_opacity;
 	#else
 		gl_FragColor.a = 1.0;
 	#endif
 
 
+	if(true){
+		return;
+	}
 
 	vec4 floored = floor(v_pos);
 
@@ -397,8 +401,9 @@ void main() {
 		}
 	}
 	
-	// transparency fade out
-	if(true){
+	
+	// transparency fade out on the main terrain blocks
+	if(true && v_pos.z >= 0 && v_pos.z <= 1){
 		gl_FragColor = vec4(gl_FragColor.r, gl_FragColor.g, gl_FragColor.b, clamp(v_pos.z, 0, 1));
 	}
 	

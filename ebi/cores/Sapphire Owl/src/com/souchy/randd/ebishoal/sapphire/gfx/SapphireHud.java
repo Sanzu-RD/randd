@@ -15,6 +15,7 @@ import com.github.czyzby.lml.parser.LmlParser;
 import com.github.czyzby.lml.vis.util.VisLml;
 import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.LapisShader;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImageLmlTagProvider;
 import com.souchy.randd.ebishoal.sapphire.ux.Chat;
@@ -62,9 +63,9 @@ public class SapphireHud extends LapisHud {
 		var viewport = new ScreenViewport();
 
 		// Batch(shader)
-		var vert = Gdx.files.internal("res/shaders/ui.vertex.glsl"); //Gdx.files.internal("res/gdx/shaders/postProcess.vertex.glsl");
-		var frag = Gdx.files.internal("res/shaders/ui.fragment.glsl"); //Gdx.files.internal("res/gdx/shaders/postProcess.fragment.glsl");
-		var shader = new ShaderProgram(vert, frag);
+//		var vert = Gdx.files.internal("res/shaders/ui.vertex.glsl"); 
+//		var frag = Gdx.files.internal("res/shaders/ui.fragment.glsl"); 
+		var shader = new ShaderProgram(LapisShader.getVertexShader("ui"), LapisShader.getFragmentShader("ui"));
 		batch.setShader(shader);
 
 		this.setStage(new Stage(viewport, batch));

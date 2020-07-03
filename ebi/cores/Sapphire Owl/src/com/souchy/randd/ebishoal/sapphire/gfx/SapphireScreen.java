@@ -53,23 +53,15 @@ public class SapphireScreen extends LapisScreen {
 	}
 	private void startPfx() {
 		timeStart = System.currentTimeMillis();
-		
-//		String effectPath = "fx/Sample/02_Tktk03/ToonWater.efkefc";
-		String effectPath = "fx/Sample/01_Pierre02/Sword_Ember.efkefc";
-//		effekseerEffectCore = loadEffect(effectPath, 50.0f);
-//		if(effekseerEffectCore == null) {
-//			System.out.print("Failed to load.");
-//			System.exit(0);
-//		}
-//		int efkhandle = getEffekseer().Play(effekseerEffectCore);
-//		getEffekseer().SetEffectPosition(efkhandle, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight() / 2.0f, 3.0f);
 
         effect = new ParticleEffekseer(getEffekseer());
         effect.setMagnification(0.3f);
         try {
-        	effect.load("fx/Sample/01_Pierre02/Sword_Ember.efkefc", true);
+        	effect.load("fx/Sample/01_Pierre02/CosmicMist.efk", true);
+//        	effect.load("fx/Sample/01_Pierre02/Sword_Ember.efkefc", true);
 //        	effect.load("fx/Sample/02_Tktk03/ToonWater.efkefc", true);
-        	effect.setLocation(9.5f, 1.5f, -9.5f);
+//        	effect.load("fx/tremble.efkefc", true);
+        	effect.setLocation(9.5f, 2.5f, -9.5f);
         	effect.play();
         } catch (Exception e) {
             e.printStackTrace();
@@ -167,19 +159,29 @@ public class SapphireScreen extends LapisScreen {
 	@Override
 	public void renderWorld() {
 		super.renderWorld();
-		// render dynamic instances (cursor, creatures, terrain effects like glyphs and traps, highlighting effects ..)
-
+		// render dynamic instances (creatures, terrain effects like glyphs and traps, highlighting effects ..)
 		synchronized(SapphireEntitySystem.family){
-			SapphireEntitySystem.family.forEach(e -> {
+			for(var e : SapphireEntitySystem.family) {
 				var model = e.get(ModelInstance.class);
 				if (model != null)
-					getModelBatch().render(model);
-			});
+					getModelBatch().render(model, getEnvironment());
+			}
 		}
-		
+//		getModelBatch().render(SapphireWorld.world.cursor, getEnvironment());
 	}
 
-	
+	@Override
+	public void renderShadows() {
+		super.renderShadows();
+		synchronized(SapphireEntitySystem.family){
+			for(var e : SapphireEntitySystem.family) {
+				var model = e.get(ModelInstance.class);
+				if(model != null) {
+					getModelBatch().render(model, getEnvironment());
+				}
+			}
+		}
+	}
 
 //	@Override
 //	public void render(float delta) {

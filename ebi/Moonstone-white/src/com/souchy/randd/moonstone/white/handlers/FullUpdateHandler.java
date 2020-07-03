@@ -1,5 +1,7 @@
 package com.souchy.randd.moonstone.white.handlers;
 
+import java.util.stream.Collectors;
+
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.moonstone.commons.packets.s2c.FullUpdate;
@@ -25,7 +27,11 @@ public class FullUpdateHandler implements BBMessageHandler<FullUpdate> {
 		synchronized (Moonstone.fight.creatures.family) {
 //			Moonstone.fight.entities.removeIf(e -> e instanceof Creature);
 			Moonstone.fight.creatures.family.clear();
-			message.creatures.forEach(c -> c.register(Moonstone.fight));
+			message.creatures.forEach(c -> {
+				c.register(Moonstone.fight);
+				Log.info("Creature received : " + c);
+				Log.info("Creature received spells : " + String.join(",", c.spellbook.stream().map(i -> String.valueOf(i)).collect(Collectors.toList())) );
+			});
 		}
 		synchronized (Moonstone.fight.status.family) {
 //			Moonstone.fight.entities.removeIf(e -> e instanceof Status);

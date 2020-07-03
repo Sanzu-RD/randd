@@ -15,6 +15,8 @@ import io.netty.buffer.ByteBuf;
 
 public class Cell extends Entity implements BBSerializer, BBDeserializer {
 
+	private static int idCounter = 0;
+	
 	/**
 	 * entity id for identification and mostly retrival during deserialization
 	 */
@@ -38,6 +40,7 @@ public class Cell extends Entity implements BBSerializer, BBDeserializer {
 	
 	public Cell(Fight f, int x, int y) {
 		super(f);
+		this.id = idCounter++;
 		this.pos = new Position(x, y);
 		this.creatures = new ArrayList<Creature>();
 		this.targeting = new Targetting();

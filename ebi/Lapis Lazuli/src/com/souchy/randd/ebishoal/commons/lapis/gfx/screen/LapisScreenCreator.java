@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.LapisShader;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
@@ -110,7 +111,7 @@ interface LapisScreenCreator {
 		float shadowViewportHeight = viewport.getWorldHeight(); 
 		float shadowNear = 0.01f;
 		float shadowFar = 40f;
-		float intensity = 0.6f;
+		float intensity = 0.65f;
 		
 		var shadowLight = new LapisDSL(shadowMapWidth, shadowMapHeight, shadowViewportWidth, shadowViewportHeight, shadowNear, shadowFar);
 		shadowLight.set(intensity, intensity, intensity, -1f, -1f, -0.5f);
@@ -125,22 +126,23 @@ interface LapisScreenCreator {
 		return new World();
 	}
 	
+	
 	/**
 	 * Create a model batch for the world
 	 */
 	public default ModelBatch createWorldBatch() {
-		String vert = Gdx.files.internal("res/shaders/default.vertex.glsl").readString();
-		String frag = Gdx.files.internal("res/shaders/default.fragment.glsl").readString();
-		return new ModelBatch(new DefaultShaderProvider(vert, frag)); 
+//		String vert = Gdx.files.internal("res/shaders/default.vertex.glsl").readString();
+//		String frag = Gdx.files.internal("res/shaders/default.fragment.glsl").readString();
+		return new ModelBatch(new DefaultShaderProvider(LapisShader.getVertexShader("base"), LapisShader.getFragmentShader("base"))); 
 	}
 
 	/**
 	 * Create a shadow model batch for the world
 	 */
 	public default ModelBatch createWorldShadowBatch() {
-		String vert = Gdx.files.internal("res/shaders/depth.vertex.glsl").readString();
-		String frag = Gdx.files.internal("res/shaders/depth.fragment.glsl").readString();
-		return new ModelBatch(new DepthShaderProvider(vert, frag)); 
+//		String vert = Gdx.files.internal("res/shaders/depth.vertex.glsl").readString();
+//		String frag = Gdx.files.internal("res/shaders/depth.fragment.glsl").readString();
+		return new ModelBatch(new DepthShaderProvider(LapisShader.getVertexShader("depth"), LapisShader.getFragmentShader("depth"))); 
 	}
 
 	/**
@@ -154,9 +156,9 @@ interface LapisScreenCreator {
 	 * Create a sprite batch for post process
 	 */
 	public default SpriteBatch createSpriteBatch() {
-		var vert = Gdx.files.internal("res/shaders/postProcess.vertex.glsl");
-		var frag = Gdx.files.internal("res/shaders/postProcess.fragment.glsl");
-		return new SpriteBatch(1000, new ShaderProgram(vert, frag));
+//		var vert = Gdx.files.internal("res/shaders/postProcess.vertex.glsl");
+//		var frag = Gdx.files.internal("res/shaders/postProcess.fragment.glsl");
+		return new SpriteBatch(1000, new ShaderProgram(LapisShader.getVertexShader("postProcess"), LapisShader.getFragmentShader("postProcess")));
 	}
 
 	public default ParticleSystem createPfxSystem(Camera cam) {
@@ -175,9 +177,9 @@ interface LapisScreenCreator {
 	 * Create a model batch to render the whole Particle Effects System
 	 */
 	public default ModelBatch createPfxBatch() {
-		String vert = Gdx.files.internal("res/shaders/default.vertex.glsl").readString();
-		String frag = Gdx.files.internal("res/shaders/default.fragment.glsl").readString();
-		return new ModelBatch(new DefaultShaderProvider(vert, frag)); 
+//		String vert = Gdx.files.internal("res/shaders/default.vertex.glsl").readString();
+//		String frag = Gdx.files.internal("res/shaders/default.fragment.glsl").readString();
+		return new ModelBatch(new DefaultShaderProvider(LapisShader.getVertexShader("base"), LapisShader.getFragmentShader("base"))); 
 	}
 	
 	/**
