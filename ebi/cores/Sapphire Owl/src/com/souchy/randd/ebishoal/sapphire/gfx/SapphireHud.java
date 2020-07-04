@@ -65,6 +65,7 @@ public class SapphireHud extends LapisHud {
 		// Batch(shader)
 //		var vert = Gdx.files.internal("res/shaders/ui.vertex.glsl"); 
 //		var frag = Gdx.files.internal("res/shaders/ui.fragment.glsl"); 
+//		var shader = new ShaderProgram(vert, frag);
 		var shader = new ShaderProgram(LapisShader.getVertexShader("ui"), LapisShader.getFragmentShader("ui"));
 		batch.setShader(shader);
 

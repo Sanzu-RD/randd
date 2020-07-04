@@ -52,12 +52,14 @@ public class SapphireWorld extends World {
 		world = this;
 		
 		// Cursor
-		Model cursorModel = LapisAssets.assets.get("res/models/decor/pinetree.g3dj");
+		Model cursorModel = LapisAssets.assets.get("res/models/tileselector.g3dj");  // res/models/creatures/Marian.g3dj");
 		cursor = new ModelInstance(cursorModel);
-		cursor.materials.get(0).set(ColorAttribute.createDiffuse(Color.CYAN));
+		cursor.materials.get(0).set(ColorAttribute.createDiffuse(Color.TEAL));
 		var scale = 1f / 24f;
 		cursor.transform.setToTranslation(0, 0, 0).scale(scale, scale, scale).rotate(Vector3.X, 90);
 		this.instances.add(cursor);
+		
+		
         
         // World map
         String mapFolder = "res/maps/"; //"F:/Users/Souchy/Desktop/Robyn/eclipse-workspaces/hidden workspaces/r and d/Maps/data/maps/";

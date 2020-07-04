@@ -250,8 +250,6 @@ vec3 rgb2hsv(vec3 c)
 
 
 
-
-
 void main() {
 	#if defined(normalFlag)
 		vec3 normal = v_normal;
@@ -347,15 +345,11 @@ void main() {
 	#endif
 
 
-	if(true){
-		return;
-	}
-
 	vec4 floored = floor(v_pos);
 
 	// checkers shader
 	if(activateCheckers){
-		if(v_pos.z <= 1){ // && (!activateWater || (activateWater && v_pos.z > waterlevel)) ) {
+		if(v_pos.z == 1){ // && (!activateWater || (activateWater && v_pos.z > waterlevel)) ) {
 			float m = mod(floored.x + floored.y, 2);
 			m *= shade;
 			m += (1 - shade);

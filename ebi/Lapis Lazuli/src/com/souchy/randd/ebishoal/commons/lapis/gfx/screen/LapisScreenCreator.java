@@ -133,6 +133,7 @@ interface LapisScreenCreator {
 	public default ModelBatch createWorldBatch() {
 //		String vert = Gdx.files.internal("res/shaders/default.vertex.glsl").readString();
 //		String frag = Gdx.files.internal("res/shaders/default.fragment.glsl").readString();
+//		return new ModelBatch(new DefaultShaderProvider(vert, frag));
 		return new ModelBatch(new DefaultShaderProvider(LapisShader.getVertexShader("base"), LapisShader.getFragmentShader("base"))); 
 	}
 
@@ -142,6 +143,7 @@ interface LapisScreenCreator {
 	public default ModelBatch createWorldShadowBatch() {
 //		String vert = Gdx.files.internal("res/shaders/depth.vertex.glsl").readString();
 //		String frag = Gdx.files.internal("res/shaders/depth.fragment.glsl").readString();
+//		return new ModelBatch(new DepthShaderProvider(vert, frag)); 
 		return new ModelBatch(new DepthShaderProvider(LapisShader.getVertexShader("depth"), LapisShader.getFragmentShader("depth"))); 
 	}
 
@@ -158,6 +160,7 @@ interface LapisScreenCreator {
 	public default SpriteBatch createSpriteBatch() {
 //		var vert = Gdx.files.internal("res/shaders/postProcess.vertex.glsl");
 //		var frag = Gdx.files.internal("res/shaders/postProcess.fragment.glsl");
+//		return new SpriteBatch(1000, new ShaderProgram(vert, frag));
 		return new SpriteBatch(1000, new ShaderProgram(LapisShader.getVertexShader("postProcess"), LapisShader.getFragmentShader("postProcess")));
 	}
 
@@ -179,6 +182,7 @@ interface LapisScreenCreator {
 	public default ModelBatch createPfxBatch() {
 //		String vert = Gdx.files.internal("res/shaders/default.vertex.glsl").readString();
 //		String frag = Gdx.files.internal("res/shaders/default.fragment.glsl").readString();
+//		return new ModelBatch(new DefaultShaderProvider(vert, frag)); 
 		return new ModelBatch(new DefaultShaderProvider(LapisShader.getVertexShader("base"), LapisShader.getFragmentShader("base"))); 
 	}
 	

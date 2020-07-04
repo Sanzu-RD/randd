@@ -169,7 +169,8 @@ interface LapisScreenRenderer extends Screen {
 		//else 
 			// TODO create shadows *only for characters and z>0 blocks* then project *only onto blocks z=0*
 			getShadowBatch().render(getWorld().cache, getEnvironment()); 
-			getShadowBatch().render(getWorld().instances, getEnvironment()); 
+//			getShadowBatch().render(getWorld().instances, getEnvironment()); 
+			
 		// dont render shadows on highlight effects like traps, glyphs, etc
 		// shadowBatch.render(cellHighlighterInst);
 		//if(creatures) shadowBatch.render(characters, getEnvironment());
