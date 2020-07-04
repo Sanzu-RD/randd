@@ -84,7 +84,7 @@ public class SapphireScreen extends LapisScreen {
 		if(controller != null) controller.act(delta);
 		getCamera().update();
 		
-		// update all systems and entities
+		// update all engine's systems 	 //and entities
 		SapphireGame.fight.update(delta);
 		
 		if(System.currentTimeMillis() - timeStart > 5000) {
@@ -160,27 +160,38 @@ public class SapphireScreen extends LapisScreen {
 	public void renderWorld() {
 		super.renderWorld();
 		// render dynamic instances (creatures, terrain effects like glyphs and traps, highlighting effects ..)
-		synchronized(SapphireEntitySystem.family){
-			for(var e : SapphireEntitySystem.family) {
-				var model = e.get(ModelInstance.class);
-				if (model != null)
-					getModelBatch().render(model, getEnvironment());
-			}
-		}
+//		synchronized(SapphireEntitySystem.family){
+//			for(var e : SapphireEntitySystem.family) {
+//				var model = e.get(ModelInstance.class);
+//				if (model != null)
+//					getModelBatch().render(model, getEnvironment());
+//			}
+//		}
+		SapphireGame.renderableEntitySystem.foreach(e -> {
+			var model = e.get(ModelInstance.class);
+//			Log.info("render entity " + e + " model " + model);
+			if (model != null)
+				getModelBatch().render(model, getEnvironment());
+		});
 //		getModelBatch().render(SapphireWorld.world.cursor, getEnvironment());
 	}
 
 	@Override
 	public void renderShadows() {
 		super.renderShadows();
-		synchronized(SapphireEntitySystem.family){
-			for(var e : SapphireEntitySystem.family) {
-				var model = e.get(ModelInstance.class);
-				if(model != null) {
-					getModelBatch().render(model, getEnvironment());
-				}
-			}
-		}
+//		synchronized(SapphireEntitySystem.family){
+//			for(var e : SapphireEntitySystem.family) {
+//				var model = e.get(ModelInstance.class);
+//				if(model != null) {
+//					getModelBatch().render(model, getEnvironment());
+//				}
+//			}
+//		}
+		SapphireGame.renderableEntitySystem.foreach(e -> {
+			var model = e.get(ModelInstance.class);
+			if (model != null)
+				getModelBatch().render(model, getEnvironment());
+		});
 	}
 
 //	@Override

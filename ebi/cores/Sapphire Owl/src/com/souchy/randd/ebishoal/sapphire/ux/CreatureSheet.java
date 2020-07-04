@@ -2,6 +2,7 @@ package com.souchy.randd.ebishoal.sapphire.ux;
 
 import java.util.HashMap;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -18,9 +19,11 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.util.DragAndResizeListener;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
+import com.souchy.randd.ebishoal.sapphire.gfx.SapphireAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.LmlWidgets;
 
+import gamemechanics.ext.AssetData;
 import gamemechanics.models.Creature;
 import gamemechanics.statics.stats.properties.Resource;
 
@@ -31,10 +34,10 @@ public class CreatureSheet extends SapphireWidget {
 	@LmlActor("closeBtn")
 	public Button closeBtn;
 	
-	@LmlActor("scrolldesc")
-	public VisScrollPane scrolldesc;
-	@LmlActor("areadesc")
-	public ScrollableTextArea areadesc;
+//	@LmlActor("scrolldesc")
+//	public VisScrollPane scrolldesc;
+//	@LmlActor("areadesc")
+//	public ScrollableTextArea areadesc;
 	
 	@LmlActor("scrollstatus")
 	public VisScrollPane scrollstatus;
@@ -73,6 +76,11 @@ public class CreatureSheet extends SapphireWidget {
 	
 	
 	private static final HashMap<Creature, CreatureSheet> openedSheets = new HashMap<>();
+	
+	/**
+	 * Je pense que toutes les sheets devraient être créées d'avance et juste refreshed on toggle
+	 * @param c
+	 */
 	public static void toggle(Creature c) {
 		// si sheet déjà ouverte, delete de la map et du stage
 		if(openedSheets.containsKey(c)) {
@@ -84,6 +92,7 @@ public class CreatureSheet extends SapphireWidget {
 		// sinon créé la sheet et ajoute à la map et au stage
 		CreatureSheet sheet = LmlWidgets.createGroup(new CreatureSheet().getTemplateFile());
 		sheet.refresh(c);
+		sheet.setPosition(Gdx.input.getX(), Gdx.input.getY());
 		openedSheets.put(c, sheet);
 		SapphireHud.single.getStage().addActor(sheet);
 	}
@@ -97,12 +106,12 @@ public class CreatureSheet extends SapphireWidget {
 		
 		LapisUtil.onClick(closeBtn, this::close);
 		
-		scrolldesc.setOverscroll(false, false);
-		scrolldesc.setFlickScroll(false);
-		scrolldesc.setFadeScrollBars(false);
-		scrolldesc.setScrollbarsOnTop(false);
-		scrolldesc.setScrollingDisabled(true, false);
-		scrolldesc.setScrollBarPositions(true, false);
+//		scrolldesc.setOverscroll(false, false);
+//		scrolldesc.setFlickScroll(false);
+//		scrolldesc.setFadeScrollBars(false);
+//		scrolldesc.setScrollbarsOnTop(false);
+//		scrolldesc.setScrollingDisabled(true, false);
+//		scrolldesc.setScrollBarPositions(true, false);
 
 		scrollstatus.setOverscroll(false, false);
 		scrollstatus.setFlickScroll(false);
@@ -111,29 +120,29 @@ public class CreatureSheet extends SapphireWidget {
 		scrollstatus.setScrollingDisabled(true, false);
 		scrollstatus.setScrollBarPositions(true, false);
 
-		areadesc.clearListeners();
+//		areadesc.clearListeners();
 		//flowstatus.clearListeners();
 		//scrollstatus.clearListeners();
 		
 		Lambda focusStatus = () -> getStage().setScrollFocus(scrollstatus);
-		Lambda unfocusDesc = () -> {
-			if(!areadesc.hasKeyboardFocus()) getStage().setScrollFocus(null);
-		};
-		Lambda focusDesc = () -> getStage().setScrollFocus(scrolldesc);
+//		Lambda unfocusDesc = () -> {
+//			if(!areadesc.hasKeyboardFocus()) getStage().setScrollFocus(null);
+//		};
+//		Lambda focusDesc = () -> getStage().setScrollFocus(scrolldesc);
 		Lambda unfocusStatus = () -> getStage().setScrollFocus(null);
-		LapisUtil.onHover(scrolldesc, focusDesc, unfocusDesc);
+//		LapisUtil.onHover(scrolldesc, focusDesc, unfocusDesc);
 		LapisUtil.onHover(scrollstatus, focusStatus, unfocusStatus);
-		LapisUtil.onClick(areadesc, focusDesc);
-		areadesc.addListener(areadesc.new ScrollTextAreaListener() {
-			@Override
-			public boolean keyTyped(InputEvent event, char character) {
-				return true;
-			}
-			@Override
-			public boolean keyDown(InputEvent event, int keycode) {
-				return true;
-			}
-		});
+//		LapisUtil.onClick(areadesc, focusDesc);
+//		areadesc.addListener(areadesc.new ScrollTextAreaListener() {
+//			@Override
+//			public boolean keyTyped(InputEvent event, char character) {
+//				return true;
+//			}
+//			@Override
+//			public boolean keyDown(InputEvent event, int keycode) {
+//				return true;
+//			}
+//		});
 		
 
 		
@@ -146,7 +155,8 @@ public class CreatureSheet extends SapphireWidget {
 	}
 	public void refresh() {
 		name.setText(getCreatureName());
-		areadesc.setText(getDescription());
+//		areadesc.setText(getDescription());
+		icon.setDrawable(LapisUtil.getImage(getCreatureModelIcon()));
 		
 		lifeShield.setText(getLifeShield());
 		lifeCurrent.setText(getLifeCurrent());
@@ -192,10 +202,20 @@ public class CreatureSheet extends SapphireWidget {
 		return creature.statuses.size();
 	}
 
-	@LmlAction("getCreatureModelId")
-	public int getCreatureModelId() {
-		if(creature == null) return 0;
-		return creature.modelid;
+//	@LmlAction("getCreatureModelId")
+//	public int getCreatureModelId() {
+//		if(creature == null) return 0;
+//		return creature.modelid;
+//	}
+
+//	@LmlAction("getCreatureModelIcon")
+	public String getCreatureModelIcon() { //Object actor) {
+		if(creature == null) return "";
+		var icon = AssetData.creatures.get(creature.modelid).icon;
+		icon = SapphireAssets.getCreatureIconPath(icon);
+//		icon = SapphireAssets.getSkinPath(icon);
+		Log.info("UI CreatureSheet getCreatureModelIcon " + creature.modelid + " " + icon);
+		return icon;
 	}
 
 	@LmlAction("getCreatureId")

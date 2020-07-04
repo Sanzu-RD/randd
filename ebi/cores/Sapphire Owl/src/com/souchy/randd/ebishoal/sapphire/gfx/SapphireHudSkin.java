@@ -63,13 +63,13 @@ public class SapphireHudSkin extends Skin {
 		set(prefix, c);
 	}
 	
-	/**
+	/* *
 	 * When selecting a creature on the board to show its sheet. Sets all the esources for the selected creature ()
 	 */
-	public static void select(Creature c) {
-		String prefix = "selectedCreature";
-		set(prefix, c);
-	}
+//	public static void select(Creature c) {
+//		String prefix = "selectedCreature";
+//		set(prefix, c);
+//	}
 	
 	/**
 	 * Take resources from the AssetManager and sets them into the hud skin to be displayed (textures like creature avatar, spell icons and data like resistances)
@@ -86,28 +86,27 @@ public class SapphireHudSkin extends Skin {
 		
 		// set creature avatar
 		var iconpath = AssetData.creatures.get(model.id()).icon;
-		var avatarPath = SapphireAssets.getCreatureIconPath(iconpath);
-		avatarPath = SapphireAssets.getSkinPath(avatarPath) + "_round";
+		var avatarPath = SapphireAssets.getCreatureIconPath(iconpath) + "_round";
+//		avatarPath = SapphireAssets.getSkinPath(avatarPath) + "_round";
 		var avatar = VisUI.getSkin().getDrawable(avatarPath);
 		lml.getDefaultSkin().add(prefix + "Avatar", avatar); //new TextureRegionDrawable(new RoundTextureRegion(LapisAssets.get(avatarPath))));
 		
 		//Log.info("c.spellbook : " + c.spellbook);
+
 		// set spell icons
-		
 		for (var s : c.spellbook) {
 			String iconPath = "missing";
 			var spell = Moonstone.fight.spells.get(s);
 			var spellResource = AssetData.spells.get(spell.modelid()); 
 			if (spellResource != null) {
-				iconPath = SapphireAssets.getSpellIconPath(spellResource.icon);
-				iconPath = SapphireAssets.getSkinPath(iconPath) + "_round";
+				iconPath = SapphireAssets.getSpellIconPath(spellResource.icon) + "_round";
+//				iconPath = SapphireAssets.getSkinPath(iconPath) + "_round";
 				var img = VisUI.getSkin().getDrawable(iconPath);
 //				Log.info("spell icon : " + spellResource.icon + " -> " + iconpath + " -> " + img);
 				lml.getDefaultSkin().add(prefix + "Spell" + i, img);
 			}
 			i++;
 		}
-		
 		
 		// set all resources (current, max and shields)
 		for (var r : Resource.values()) {
@@ -119,51 +118,28 @@ public class SapphireHudSkin extends Skin {
 			
 			val = c.stats.resources.get(r).max(); 
 			lml.addArgument(prefix + camel(r.name()) + "Max", val);
-			
-//			c.stats.getResourceMax(r);
 		}
 		
 		// set all resistances
 		for (var ele : Element.values) {
-			//for (var m : mathMod.values()) {
-				var res = c.stats.resistance.get(ele);
-				val = (int) res.baseflat; //.getEle(e, m, eleMod.res);
-				lml.addArgument(prefix + camel(ele.name(), "Resistance", "flat"), val); // m.name()), val);
-
-				val = (int) res.inc; //.getEle(e, m, eleMod.res);
-				lml.addArgument(prefix + camel(ele.name(), "Resistance", "scl"), val); // m.name()), val);
-
-				val = (int) res.more; //.getEle(e, m, eleMod.res);
-				lml.addArgument(prefix + camel(ele.name(), "Resistance", "more"), val); // m.name()), val);
-			//}
+			var res = c.stats.resistance.get(ele);
+			val = (int) res.baseflat; 
+			lml.addArgument(prefix + camel(ele.name(), "Resistance", "flat"), val);
+			
+			val = (int) res.inc; 
+			lml.addArgument(prefix + camel(ele.name(), "Resistance", "scl"), val);
+			
+			val = (int) res.more; 
+			lml.addArgument(prefix + camel(ele.name(), "Resistance", "more"), val);
 		}
 		
+		// log
+		if(SapphireDevConfig.conf.logSkinResources)
+			lml.getDefaultSkin().getAll(TextureRegionDrawable.class).keys().forEach(s -> Log.info("TextureRegionDrawable : " + s));
+		if(SapphireDevConfig.conf.logSkinResources) 
+			lml.getDefaultSkin().getAll(Texture.class).keys().forEach(s -> Log.info("Texture : " + s));
 		
-		try {
-			if(SapphireDevConfig.conf.logSkinResources)
-				lml.getDefaultSkin().getAll(TextureRegionDrawable.class).keys().forEach(s -> Log.info("TextureRegionDrawable : " + s));
-		} catch (Exception e) {
-			Log.error("", e);
-		}
-		try {
-			if(SapphireDevConfig.conf.logSkinResources)
-				lml.getDefaultSkin().getAll(Texture.class).keys().forEach(s -> Log.info("Texture : " + s));
-		} catch (Exception e) {
-			Log.error("", e);
-		}
-
-//		try {
-//			//textures.forEach(t -> t.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear));
-//			lml.getDefaultSkin().getAll(Texture.class).values().forEach(t -> 
-//				t.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear)
-//			);
-//			lml.getDefaultSkin().getAll(TextureRegionDrawable.class).values().forEach(t -> 
-//				t.getRegion().getTexture().setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear)
-//			);
-//		} catch(Exception e) {
-//			Log.error("", e);
-//		}
-		
+		// refresh hud
 		SapphireHud.refresh();
 	}
 

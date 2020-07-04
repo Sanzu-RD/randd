@@ -28,13 +28,15 @@ public class MockingSapphire {
 		var c2 = testCreateCreature(fight, 2);
 		c1.team = Team.A;
 		c2.team = Team.B;
+		fight.timeline.add(c1.id);
+		fight.timeline.add(c2.id);
 		c1.pos.set(2, 16);
 		c2.pos.set(16, 2);
 		
-		Log.info("Cells family " + fight.cells.family.size());
-		Log.info("Creatures family " + fight.creatures.family.size());
-		Log.info("Status family " + fight.status.family.size());
-		Log.info("Spells family " + fight.spells.family.size());
+		Log.info("Cells family " + fight.cells.size());
+		Log.info("Creatures family " + fight.creatures.size());
+		Log.info("Status family " + fight.status.size());
+		Log.info("Spells family " + fight.spells.size());
 		
 		// init black moonstone and adds fight to its pool
 		String[] blackargs = new String[] { "443", "async" };

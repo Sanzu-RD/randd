@@ -1,51 +1,38 @@
 package gamemechanics.systems;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import data.new1.ecs.Engine;
+import data.new1.ecs.Family;
 import data.new1.ecs.Engine.AddEntityEvent;
-import data.new1.ecs.Engine.RemoveEntityEvent;
 import gamemechanics.models.Creature;
+import gamemechanics.models.Fight;
 
-public class CreatureSystem extends data.new1.ecs.System {
-
-	public List<Creature> family = new ArrayList<>();
+public class CreatureSystem extends Family<Creature> {
 	
 	public CreatureSystem(Engine engine) {
-		super(engine);
-	}
-
-	public void dispose() {
-		super.dispose();
-		family.clear();
+		super(engine, Creature.class);
 	}
 	
 	@Override
 	public void update(float delta) {
-//		Log.info("diamond creature system update");
-
-		synchronized (family) {
-			family.forEach(e -> {
-				
-			});
-		}
+		// Log.info("diamond creature system update");
+		foreach(c -> {
+			
+		});
 	}
 	
-	@Subscribe
-	public void onAddedEntity(AddEntityEvent event) {
-		if (event.entity instanceof Creature) {
-			Log.info("creature system " + this + " add " + event.entity);
-			family.add((Creature) event.entity);
-		}
-	}
-	@Subscribe
-	public void onRemovedEntity(RemoveEntityEvent event) {
-		if(event.entity instanceof Creature)
-			family.remove(event.entity);
-	}
+	/**
+	 * 
+	 */
+//	@Subscribe
+//	@Override
+//	public void onAddedEntity(AddEntityEvent event) {
+//		if(event.entity instanceof Creature) {
+//			add((Creature) event.entity);
+//			((Fight) engine).add(event.entity);
+//		}
+//	}
 	
 }

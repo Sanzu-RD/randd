@@ -348,7 +348,7 @@ void main() {
 
 
 	if(true){
-		return;
+	//	return;
 	}
 
 	vec4 floored = floor(v_pos);

@@ -104,6 +104,7 @@ public class SapphireHud extends LapisHud {
 //				.attribute(new MovableLmlAttribute(), "movable")
 //				.attribute(new ResizeableLmlAttribute(), "resizeable", "resizable")
 //				.attribute(new ResizeBorderLmlAttribute(), "resizeBorder", "border")
+				.actions("sheet", CreatureSheet.class)
 				.actions("timeline", Timeline.class)
 //				.actions("creaturesheet", CreatureSheet.class)
 //				.actions("quickoptions", QuickOptions.class)
@@ -127,52 +128,26 @@ public class SapphireHud extends LapisHud {
 		//SapphireHud.parser.fillStage(SapphireHud.single.getStage(), SapphireHud.single.getTemplateFile());
 		parser.createView(single, SapphireHud.single.getTemplateFile());
 
-		//testCreatureSheet();
-//		var chat = LmlWidgets.createGroup("res/ux/sapphire/components/chat.lml");
-//		chat.setSize(200, 200);
-//		chat.setPosition(20, 15);
-		CreatureSheet sheet = null;
-		SapphireHud.single.getStage().addActor(chat = LmlWidgets.createGroup("res/ux/sapphire/components/chat.lml"));
-		SapphireHud.single.getStage().addActor(playbar = LmlWidgets.createGroup("res/ux/sapphire/components/playbar.lml"));
+		refreshChat();
+		refreshPlaybar();
+		refreshTimeline();
 		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/quickoptions.lml"));
-		SapphireHud.single.getStage().addActor(timeline = LmlWidgets.createGroup("res/ux/sapphire/components/timeline.lml"));
 		
 		/*
-		if(SapphireGame.fight != null) {
-			sheet = LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml");
-			sheet.refresh(SapphireGame.fight.timeline.get(0));
-			SapphireHud.single.getStage().addActor(sheet);
-		}
 		var status = LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml");
 		for(int i = 0; i < 17; i++)
 			if(sheet != null) sheet.flowstatus.addActor(LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml"));
 		*/
-		
-//		var field = new VisTextField("");
-//		//field.setSize(300, 30);
-//		field.setText("size : " + field.getWidth() + ", " + field.getHeight());
-//		var area = new ScrollableTextArea("Description. Lorem ipsum dolor sit amet, \r\n" + 
-//				"                  consectetur adipiscing consectetur adipiscing consectetur adipiscing elit, sed do eiusmod tempor \r\n" + 
-//				"                  incididunt ut labore et dolore magna aliqua asdkjfnka.sdjfn kasjdnfkjsdanf ksajdbnfkjasbdf k");
-//		var scroll = new ScrollPane(area);
-//		scroll.setScrollbarsVisible(true);
-//		var group = new Table(skin);
-//		group.add(scroll).grow().padBottom(8);
-//		group.row();
-//		group.add(field).height(30).growX();
-//		group.setSize(450, 200);
-//		group.setPosition(400, 450);
-//		SapphireHud.single.getStage().addActor(group);
-		
-		
-		//SapphireHud.single.getStage().addActor(textfield);
-		
-//		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/chat.lml"));
-//		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timer.lml"));
-//		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/timeline.lml"));
-//		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/statusbar.lml"));
-//		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/playbar.lml"));
-//		SapphireHud.parser.fillStage(SapphireHud.single.getStage(), Gdx.files.internal("res/ux/sapphire/creaturesheet.lml"));
+	}
+	
+	public static void refreshChat() {
+		SapphireHud.single.getStage().addActor(chat = LmlWidgets.createGroup("res/ux/sapphire/components/chat.lml"));
+	}
+	public static void refreshPlaybar() {
+		SapphireHud.single.getStage().addActor(playbar = LmlWidgets.createGroup("res/ux/sapphire/components/playbar.lml"));
+	}
+	public static void refreshTimeline() {
+		SapphireHud.single.getStage().addActor(timeline = LmlWidgets.createGroup("res/ux/sapphire/components/timeline.lml"));
 	}
 	
 	public static void testCreatureSheet() {

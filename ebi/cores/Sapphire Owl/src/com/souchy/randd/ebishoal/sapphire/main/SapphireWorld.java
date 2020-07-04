@@ -65,7 +65,10 @@ public class SapphireWorld extends World {
         this.center = new Vector3(data.cellModels[0].length / 2f, data.cellModels.length / 2f, 0);
         
         if(true) {
-        	var shine = ColorAttribute.createSpecular(1f, 1f, 1f, 1f); // fonctionne, mais jsais pas si le shine fit avec mon environnement
+        	// fonctionne, mais jsais pas si le shine fit avec mon environnement
+        	var shiny = 0f;
+        	var shine = ColorAttribute.createSpecular(shiny, shiny, shiny, shiny); 
+        	
         	
             cache.begin();
         	

@@ -135,10 +135,11 @@ public class LapisUtil {
 	public static Drawable getImage(String key) {
 		return VisUI.getSkin().getDrawable(key);
 	}
-	public static void setImage(Image img, String imgid) {
-		if(img == null) return;
-		var drawable = VisUI.getSkin().getDrawable(imgid);
+	public static Image setImage(Image img, String imgid) {
+		if(img == null) return img;
+		var drawable = getImage(imgid);
 		img.setDrawable(drawable);
+		return img;
 	}
 	
 	public static void setText(Label lbl, String text) {
