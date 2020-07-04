@@ -2,10 +2,12 @@ package gamemechanics.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.matchmaking.Team;
 import com.souchy.randd.jade.meta.JadeCreature;
 
@@ -19,6 +21,8 @@ import gamemechanics.statics.Element;
 import io.netty.buffer.ByteBuf;
 
 public class Creature extends Entity implements BBSerializer, BBDeserializer {
+
+	private static int idCounter = 0;
 
 	/** entity id for identification and mostly retrival during deserialization */
 	public int id;
@@ -56,6 +60,7 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 	 */
 	public Creature(Fight fight, CreatureModel model, JadeCreature jade, Position pos) { // AzurCache dep, Vector2 pos) {
 		super(fight);
+		this.id = idCounter++;
 		this.modelid = model.id();
 		this.pos = pos;
 		this.targeting = new Targetting();
@@ -106,6 +111,7 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		out.writeInt(spellbook.size());
 		spellbook.forEach(s -> out.writeInt(s));
 //		Log.info("write spellbook " + spellbook.size());
+		Log.info("Creature serialize spells : " + String.join(",", spellbook.stream().map(i -> String.valueOf(i)).collect(Collectors.toList())) );
 
 		// status 
 		this.statuses.serialize(out);
@@ -133,6 +139,7 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 			spellbook.add(spellid);
 		}
 //		Log.info("read spellbook " + spellbook.size());
+		Log.info("Creature deserialize spells : " + String.join(",", spellbook.stream().map(i -> String.valueOf(i)).collect(Collectors.toList())) );
 		
 		// status
 		this.statuses = new StatusList(null);

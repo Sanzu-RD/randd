@@ -48,6 +48,7 @@ public abstract class Status extends Entity implements BBSerializer, BBDeseriali
 //		}
 //	}
 
+	private static int idCounter = 0;
 	
 	/**
 	 * status instance id
@@ -80,6 +81,7 @@ public abstract class Status extends Entity implements BBSerializer, BBDeseriali
 	
 	public Status(Fight f, int sourceEntityId, int targetEntityId) { // EntityRef source, EntityRef target
 		super(f);
+		this.id = idCounter++;
 		this.sourceEntityId = sourceEntityId;
 		this.targetEntityId = targetEntityId;
 		//source.fight.bus.register(this);

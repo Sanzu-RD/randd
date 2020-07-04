@@ -5,23 +5,22 @@ import com.badlogic.gdx.Gdx;
 public class SapphireAssets {
 
 	public static String getCreatureIconPath(String iconName) {
-		return Gdx.files.internal("res/textures/creatures/" + iconName + ".png").path().toString().replace("\\",  "/");
-		//return Environment.fromRoot("/res/textures/creatures/" + iconName + ".png").toString().replace("\\",  "/"); //.root + "/res/textures/creatures/" + iconName + ".png";
+		return getSkinPath(Gdx.files.internal("res/textures/creatures/" + iconName + ".png").path().toString().replace("\\",  "/"));
 	}
 
-	public static String getCreatureModelPath(String modelName) {
-		return Gdx.files.internal("res/models/creatures/" + modelName + ".g3dj").path().toString().replace("\\",  "/");
-		//return Environment.fromRoot("/res/models/creatures/" + modelName + ".g3dj").toString().replace("\\",  "/");
-	}
+//	public static String getCreatureModelPath(String modelName) {
+//		return Gdx.files.internal("res/models/creatures/" + modelName + ".g3dj").path().toString().replace("\\",  "/");
+//	}
 	
 	public static String getSpellIconPath(String iconName) {
-		return Gdx.files.internal("res/textures/spells/" + iconName + ".png").path().toString().replace("\\",  "/");
-		//return Environment.fromRoot("/res/textures/spells/" + iconName + ".png").toString().replace("\\",  "/");
+		return getSkinPath(Gdx.files.internal("res/textures/spells/" + iconName + ".png").path().toString().replace("\\",  "/"));
 	}
 	
-	public static String getSkinPath(String texturepath) {
+	private static String getSkinPath(String texturepath) {
 		return texturepath.substring(texturepath.indexOf("textures"), texturepath.lastIndexOf(".")).replace("/", ".");
 	}
+	
+	
 	
 /*
 	public static String getI18nPath(I18nCategory cat) {

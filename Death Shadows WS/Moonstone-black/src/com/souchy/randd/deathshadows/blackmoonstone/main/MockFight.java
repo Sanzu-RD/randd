@@ -28,6 +28,9 @@ public class MockFight {
 		c2.team = Team.B;
 		c1.pos.set(2, 16);
 		c2.pos.set(16, 2);
+		
+		fight.timeline.add(c1.id);
+		fight.timeline.add(c2.id);
 		return fight;
 	}
 

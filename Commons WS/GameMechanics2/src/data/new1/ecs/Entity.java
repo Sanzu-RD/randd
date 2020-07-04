@@ -32,28 +32,43 @@ public class Entity {
 		// could update all components here if we wanted an update function on them
 	}
 	
-	public void add(Object c) {
-		if(c != null)
-			components.put(c.getClass(), c);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public <T> T get(Class<T> c) {
-		return (T) components.get(c);
+	/**
+	 * set a component
+	 */
+	public void add(Object component) {
+		if(component != null)
+			components.put(component.getClass(), component);
 	}
 
+	/**
+	 * get a component type or null
+	 */
 	@SuppressWarnings("unchecked")
-	public <T> T remove(Class<T> c) {
-		return (T) components.remove(c);
+	public <T> T get(Class<T> componentClass) {
+		return (T) components.get(componentClass);
 	}
-	
-	public boolean remove(Object c) {
-		if(c == null) return false;
-		return components.remove(c.getClass(), c);
+
+	/**
+	 * remove a component type
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> T remove(Class<T> componentClass) {
+		return (T) components.remove(componentClass);
 	}
-	
-	public boolean has(Class<?> c) {
-		return components.containsKey(c);
+
+	/**
+	 * remove a component
+	 */
+	public boolean remove(Object component) {
+		if(component == null) return false;
+		return components.remove(component.getClass(), component);
+	}
+
+	/**
+	 * has a component type
+	 */
+	public boolean has(Class<?> componentClass) {
+		return components.containsKey(componentClass);
 	}
 	
 

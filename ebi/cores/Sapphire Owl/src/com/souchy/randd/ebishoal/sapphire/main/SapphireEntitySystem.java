@@ -17,47 +17,58 @@ import data.new1.ecs.Engine;
 import data.new1.ecs.Engine.AddEntityEvent;
 import data.new1.ecs.Engine.RemoveEntityEvent;
 import data.new1.ecs.Entity;
+import data.new1.ecs.Family;
 import data.new1.timed.TerrainEffect;
 import gamemechanics.components.Position;
 import gamemechanics.ext.AssetData;
 import gamemechanics.models.Creature;
 
-public class SapphireEntitySystem extends data.new1.ecs.System {
-	
-	public static List<Entity> family = new ArrayList<>();
+/**
+ * Stores all renderables
+ * 
+ * Creates their model and animation controller on new.
+ * 
+ * Updates their position on the board and updates their animation on update;
+ * 
+ * @author Blank
+ * @date 4 juill. 2020 - date was way before, maybe 1-2 month
+ */
+public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.System {
 	
 	public SapphireEntitySystem(Engine engine) {
-		super(engine);
+		super(engine, Entity.class);
 	}
 	
 	@Override
 	public void update(float delta) {
-//		Log.info("sapphire entity system update");
-		synchronized (family) {
-			family.forEach(e -> {
-				var model = e.get(ModelInstance.class);
-				var pos = e.get(Position.class);
-				if(model == null || pos == null) return;
-	//			Log.info("set sapphire entity model pos : " + pos + "; " + model);
-				model.transform.setTranslation(
-						(float) pos.x - 0.5f, 
-						(float) pos.y - 0.5f, 
-						1f
-						);
-				var anime = e.get(AnimationController.class);
-				if(anime != null) {
-					anime.update(delta);
-				}
-			});
-		}
+		// Log.info("sapphire entity system update");
+		foreach(e -> {
+			var model = e.get(ModelInstance.class);
+			var pos = e.get(Position.class);
+			if(model == null || pos == null) return;
+			// Log.info("set sapphire entity model pos : " + pos + "; " + model);
+			model.transform.setTranslation(
+					(float) pos.x - 0.5f, 
+					(float) pos.y - 0.5f, 
+					1f
+			);
+			var anime = e.get(AnimationController.class);
+			if(anime != null) {
+				anime.update(delta);
+			}
+		});
 	}
 	
 	public void dispose() {
 		super.dispose();
-		family.clear();
+		clear();
 	}
 
+	/**
+	 * this actually overrides the event handler from Family
+	 */
 	@Subscribe
+	@Override
 	public void onAddedEntity(AddEntityEvent event) {
 //		Log.info("Sapphire Entity System on add");
 		if(event.entity instanceof Creature) {
@@ -68,8 +79,6 @@ public class SapphireEntitySystem extends data.new1.ecs.System {
 			modelinstance.transform.rotate(1, 0, 0, 90);
 			var animController = new AnimationController(modelinstance);
 			animController.setAnimation("CharacterArmature|Walk", -1);
-			event.entity.add(animController);
-			event.entity.add(modelinstance);
 
 			var rnd = new Random();
 			var baseColor = new Color(rnd.nextFloat(), rnd.nextFloat(), rnd.nextFloat(), 1f);
@@ -82,20 +91,27 @@ public class SapphireEntitySystem extends data.new1.ecs.System {
 			float ratio = 1f /  2f;
 			modelinstance.materials.get(5).set(ColorAttribute.createDiffuse(baseColor.mul(ratio, ratio, ratio, 1f)));
 
-			synchronized (SapphireEntitySystem.family) {
-				family.add(event.entity);
-			}
-		} else if(event.entity instanceof TerrainEffect) {
+			// add model and animation to entity as components
+			event.entity.add(animController);
+			event.entity.add(modelinstance);
 			
+			add(event.entity);
+//			synchronized (SapphireEntitySystem.family) {
+//				family.add(event.entity);
+//			}
+		} else 
+		if(event.entity instanceof TerrainEffect) {
+			add(event.entity);
 		}
 	}
-	@Subscribe
-	public void onRemovedEntity(RemoveEntityEvent event) {
-		if(event.entity instanceof Creature || event.entity instanceof TerrainEffect) {
-			synchronized (SapphireEntitySystem.family) {
-				family.remove(event.entity);
-			}
-		}
-	}
+	
+//	@Subscribe
+//	public void onRemovedEntity(RemoveEntityEvent event) {
+//		if(event.entity instanceof Creature || event.entity instanceof TerrainEffect) {
+//			synchronized (SapphireEntitySystem.family) {
+//				family.remove(event.entity);
+//			}
+//		}
+//	}
 	
 }

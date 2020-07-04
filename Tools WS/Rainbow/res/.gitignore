@@ -1,15 +1,10 @@
-/data/
-/delete/
-/fonts/
 /fx/
 /i18n/
 /maps/
 /models/
 /music/
 /shaders/
+/src.dll
 /textures/
 /ux/
 /sounds/
-/effekseer/
-/src.dll
-/effekseer.dll

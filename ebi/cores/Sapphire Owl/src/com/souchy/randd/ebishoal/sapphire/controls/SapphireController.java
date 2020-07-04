@@ -154,8 +154,10 @@ public class SapphireController extends CameraInputController {
 			SapphireHud.testCreatureSheet();
 		}
 		if(keycode == Keys.V) {
-			SapphireGame.fight.teamA.get(0).stats.resources.get(Resource.life).fight += 10;
-			Log.info(SapphireGame.fight.teamA.get(0).stats.resources.get(Resource.life).toString());
+//			var creature = SapphireGame.fight.teamA.get(0)
+			var creature = SapphireGame.fight.creatures.first();
+			creature.stats.resources.get(Resource.life).fight += 10;
+			Log.info(creature.stats.resources.get(Resource.life).toString());
 			SapphireHud.refresh();
 		}
 		if(keycode == Keys.P) {
@@ -206,15 +208,20 @@ public class SapphireController extends CameraInputController {
 		// get pos & creature 
 		var cellpos = getCursorWorldPos(screenX, screenY);
 		Creature creature = null;
-		for (var e : SapphireEntitySystem.family) {
+//		for (var e : SapphireEntitySystem.family) {
+//			var epos = e.get(Position.class);
+//			if(epos == null) continue;
+//			if(cellpos.x == epos.x && cellpos.y == epos.y) {
+//				creature = (Creature) e;
+////				Log.info("found creature [" + epos.x + "," + epos.y+"] " + creature.model.id());
+//				break;
+//			}
+//		}
+		creature = SapphireGame.fight.creatures.first(e -> {
 			var epos = e.get(Position.class);
-			if(epos == null) continue;
-			if(cellpos.x == epos.x && cellpos.y == epos.y) {
-				creature = (Creature) e;
-//				Log.info("found creature [" + epos.x + "," + epos.y+"] " + creature.model.id());
-				break;
-			}
-		}
+			if(epos == null) return false;
+			return (cellpos.x == epos.x && cellpos.y == epos.y);
+		});
 //		var cell = SapphireGame.fight.board.cells.get((int) cellpos.x, (int) cellpos.y);
 //		cell.creatures.get(0);
 		

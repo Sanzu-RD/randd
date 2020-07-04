@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE creaturesheet SYSTEM "lml.dtd">
 
-<creaturesheet id="creaturesheet" align="left" defaultpad="5" width="225" height="350"  x="20" y="0" background="window-bg" debug="false">
+<creaturesheet id="creaturesheet" align="left" defaultpad="5" width="225" height="250"  x="20" y="0" background="window-bg" debug="false">
 
     <!-- Icon + Resources row-->
     <table align="topleft" height="100" fill="true" debug="false">
@@ -13,7 +13,7 @@
         <:row/>
         <!-- Icon -->
         <stack width="64" height="64">
-            <image id="icon" style="textures.creatures.$getCreatureModelId"/>
+            <image id="icon" /> <!-- style="$getCreatureModelIcon"/> <!- - textures.creatures.$getCreatureModelId -->
             <image id="border" style="textures.borders.blackborder"/>
         </stack>
         <!-- Main Stats -->
@@ -38,18 +38,19 @@
         </table>
     </table>
 
-
     <:row expandx="true"/>
 
     <!-- Description / Passive row -->
-    <visscrollpane id="scrolldesc" align="topleft" height="100" style="list" growx="true" debug="true">
+    <!--
+    <visscrollpane id="scrolldesc" align="topleft" height="100" style="list" growx="true" debug="false">
         <scrollabletextarea id="areadesc" style="textArea" value="Description. Lorem ipsum dolor sit amet, consectetur adipiscing consectetur adipiscing consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua asdkjfnka.sdjfn kasjdnfkjsdanf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf"/>
     </visscrollpane>
 
     <:row/>
+    -->
 
     <!-- Status list -->
-    <table align="topleft" grow="true" debug="true" >
+    <table align="topleft" grow="true" debug="false" >
         <visscrollpane id="scrollstatus" grow="true" style="list" >
             <horizontalflow id="flowstatus">
 

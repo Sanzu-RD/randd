@@ -24,19 +24,20 @@ import io.netty.buffer.ByteBuf;
 @ID(id = 11004)
 public class FullUpdate implements BBMessage {
 
-//	public Fight fight;
 	public List<Cell> cells = new ArrayList<>();
 	public List<Creature> creatures = new ArrayList<>();
 	public List<Status> status = new ArrayList<>();
 	public List<Spell> spells = new ArrayList<>();
+	public List<Integer> timeline = new ArrayList<>();
 	
 	public FullUpdate() { }
 	public FullUpdate(Fight fight) {
 		if(fight != null) {
-			this.cells = fight.cells.family;
-			this.creatures = fight.creatures.family;
-			this.status = fight.status.family;
-			this.spells = fight.spells.family;
+			this.cells = fight.cells.copy();
+			this.creatures = fight.creatures.copy();
+			this.status = fight.status.copy();
+			this.spells = fight.spells.copy();
+			this.timeline = fight.timeline;
 		}
 	}
 	
@@ -46,13 +47,15 @@ public class FullUpdate implements BBMessage {
 		out.writeInt(creatures.size());
 		out.writeInt(status.size());
 		out.writeInt(spells.size());
+		out.writeInt(timeline.size());
 		
-		Log.info("FullUpdate write : " + String.join(", ", cells.size()+"", creatures.size()+"", status.size()+"", spells.size()+""));
+		Log.info("FullUpdate write : " + String.join(", ", cells.size()+"", creatures.size()+"", status.size()+"", spells.size()+"", timeline.size()+""));
 		
 		cells.forEach(c -> c.serialize(out));
 		creatures.forEach(c -> c.serialize(out));
 		status.forEach(c -> c.serialize(out));
 		spells.forEach(c -> c.serialize(out));
+		timeline.forEach(c -> out.writeInt(c));
 		
 		return out;
 	}
@@ -63,8 +66,9 @@ public class FullUpdate implements BBMessage {
 		int creaturecount = in.readInt();
 		int statuscount = in.readInt();
 		int spellcount = in.readInt();
+		int timelinecount = in.readInt();
 		
-		Log.info("FullUpdate read : " + String.join(", ", cellcount+"", creaturecount+"", statuscount+"", spellcount+""));
+		Log.info("FullUpdate read : " + String.join(", ", cellcount+"", creaturecount+"", statuscount+"", spellcount+"", timelinecount+""));
 		
 		for(int i = 0; i < cellcount; i++) {
 			var c = new Cell(null, 0, 0); // we dont have the fight object yet here... will need to set fight + register the entity in the engine later
@@ -89,6 +93,9 @@ public class FullUpdate implements BBMessage {
 			var s = model.copy(null);
 			s.deserialize(in);
 			spells.add(s);
+		}
+		for(int i = 0; i < timelinecount; i++) {
+			timeline.add(in.readInt());
 		}
 		return this;
 	}

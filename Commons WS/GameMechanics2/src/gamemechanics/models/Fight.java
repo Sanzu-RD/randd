@@ -43,12 +43,18 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 	public Board board;
 	
 	/**
-	 * Creature timeline / turn order
+	 * Creature timeline / turn order by creature ID.
+	 * Timeline has to be populated manually on the server when a new creature (normal or summon) is created.
+	 * Client just copies it in FullUpdateHandler
 	 */
-	public List<Creature> timeline; // this should just be creature IDS, or at least EntityRefs
+	public List<Integer> timeline; 
 	
-	public List<Creature> teamA; // this should just be creature IDS 
-	public List<Creature> teamB; // this should just be creature IDS 
+	public List<Creature> teamA(){
+		return creatures.where(c -> c.team == Team.A);
+	}
+	public List<Creature> teamB(){
+		return creatures.where(c -> c.team == Team.B);
+	}
 	
 	/**
 	 * action pipeline : actions currently on the stack
@@ -84,8 +90,8 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 		board = new Board(this);
 		
 		timeline = new ArrayList<>();
-		teamA = new ArrayList<>();
-		teamB = new ArrayList<>();
+//		teamA = new ArrayList<>();
+//		teamB = new ArrayList<>();
 //		teamC = new ArrayList<>();
 		
 		handlers = new EventPipeline();
@@ -95,14 +101,17 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 	}
 	
 	
-	public void add(Creature c, Team team) {
-		timeline.add(c);
-		switch(team) {
-			case A -> teamA.add(c);
-			case B -> teamB.add(c);
-//			case C -> teamC.add(c);
-		}
-	}
+	/* *
+	 * add creature to timeline and teams
+	 */
+//	public void add(Creature c) { //, Team team) {
+//		timeline.add(c.id);
+//		switch(c.team) {
+//			case A -> teamA.add(c.id);
+//			case B -> teamB.add(c.id);
+////			case C -> teamC.add(c);
+//		}
+//	}
 	
 //	public void postAll(Event event) {
 //		List<Entity> entities = null;

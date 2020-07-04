@@ -1,5 +1,6 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
+import java.util.Random;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.Gdx;
@@ -50,60 +51,35 @@ public class SapphireWorld extends World {
 	public SapphireWorld() {
 		world = this;
 		
-		Model cursorModel = LapisAssets.assets.get("res/models/tileselector.g3dj");
+		// Cursor
+		Model cursorModel = LapisAssets.assets.get("res/models/tileselector.g3dj");  // res/models/creatures/Marian.g3dj");
 		cursor = new ModelInstance(cursorModel);
-		cursor.materials.get(0).set(ColorAttribute.createDiffuse(Color.CYAN));
+		cursor.materials.get(0).set(ColorAttribute.createDiffuse(Color.TEAL));
 		var scale = 1f / 24f;
 		cursor.transform.setToTranslation(0, 0, 0).scale(scale, scale, scale).rotate(Vector3.X, 90);
 		this.instances.add(cursor);
 		
 		
-		/*
-		String devPath = "gdx/g3d/";
-		String deployPath = "res/" + devPath;
-		String path = new File(devPath).exists() ? devPath : deployPath;
-
-		// model files
-		String cubeFile = path + "board/cell_models/cube.obj"; // roundedCube05
-		String treeFile = path + "object_models/pinetree.obj";
-
-		// load models
-		assets.load(cubeFile, Model.class);
-		assets.load(treeFile, Model.class);
-        assets.finishLoading();
-        var names = assets.getAssetNames();
-        Log.info("loaded assets :" + names);
         
-        var normalColor = Color.WHITE;
-        var shading = 0.15f;
-        
-        // models
-       
-        var cube = assets.get(cubeFile, Model.class);
-        var pineTree = assets.get(treeFile, Model.class);
-        
-        var cubeNormal1 = createModel(normalColor); 
-        var cubeNormal2 = createModel(new Color(normalColor.r-shading, normalColor.g-shading, normalColor.b-shading, 1f)); 
-        cubeNormal2.materials.get(0).set(ColorAttribute.createDiffuse(0.5f, 0.5f, 0.5f, 1f));
-        var cubeBlock = createModel(Color.SKY);
-        var cubeFloor = createModel(Color.SKY);
-        var cubePink = createModel(Color.PINK);
-        */
-        
-        
-        // create instances
+        // World map
         String mapFolder = "res/maps/"; //"F:/Users/Souchy/Desktop/Robyn/eclipse-workspaces/hidden workspaces/r and d/Maps/data/maps/";
         MapData data = MapData.read(Gdx.files.internal(mapFolder + "goulta7b.map").path());
         this.center = new Vector3(data.cellModels[0].length / 2f, data.cellModels.length / 2f, 0);
         
         if(true) {
+        	// fonctionne, mais jsais pas si le shine fit avec mon environnement
+        	var shiny = 0f;
+        	var shine = ColorAttribute.createSpecular(shiny, shiny, shiny, shiny); 
+        	
+        	
             cache.begin();
         	
         	// create greedy mesh for texture-type cells
             var greed = Meshing.greedy(data, cellSize, GL20.GL_TRIANGLES);
+            greed.materials.forEach(m -> m.set(shine));
     		cache.add(new ModelInstance(greed));
     		// add every other models as instances
-
+    		
     		// adds singular models
     		if(true) {
 	    		Consumer<int[][]> generateModels = layer -> {
@@ -115,6 +91,9 @@ public class SapphireWorld extends World {
 	                    		assets.finishLoading();
 	                    		var model = assets.get(m.model, Model.class);
 	                    		model.materials.get(0).set(ColorAttribute.createDiffuse(Color.valueOf(m.colorAttributes[0])));
+//	                    		model.materials.get(0).set(new BlendingAttribute(0.4f)); // fonctionne
+//	                    		model.materials.get(0).set(ColorAttribute.createReflection(1, 1, 1, 1)); //  fontionne pas
+	                    		model.materials.get(0).set(shine); 
 	                    		var inst = new ModelInstance(model);
 	                    		inst.transform
 	        					.translate(i * cellSize + cellSize * m.transform[0][0], j * cellSize + cellSize * m.transform[0][1], -cellSize + cellSize * m.transform[0][2])

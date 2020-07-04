@@ -250,8 +250,6 @@ vec3 rgb2hsv(vec3 c)
 
 
 
-
-
 void main() {
 	#if defined(normalFlag)
 		vec3 normal = v_normal;
@@ -341,17 +339,17 @@ void main() {
 			if (gl_FragColor.a <= v_alphaTest)
 				discard;
 		#endif
+		//gl_FragColor.a = v_opacity;
 	#else
 		gl_FragColor.a = 1.0;
 	#endif
-
 
 
 	vec4 floored = floor(v_pos);
 
 	// checkers shader
 	if(activateCheckers){
-		if(v_pos.z <= 1){ // && (!activateWater || (activateWater && v_pos.z > waterlevel)) ) {
+		if(v_pos.z == 1){ // && (!activateWater || (activateWater && v_pos.z > waterlevel)) ) {
 			float m = mod(floored.x + floored.y, 2);
 			m *= shade;
 			m += (1 - shade);
@@ -397,8 +395,9 @@ void main() {
 		}
 	}
 	
-	// transparency fade out
-	if(true){
+	
+	// transparency fade out on the main terrain blocks
+	if(true && v_pos.z >= 0 && v_pos.z <= 1){
 		gl_FragColor = vec4(gl_FragColor.r, gl_FragColor.g, gl_FragColor.b, clamp(v_pos.z, 0, 1));
 	}
 	
