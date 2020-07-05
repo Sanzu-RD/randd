@@ -75,9 +75,6 @@ interface LapisScreenRenderer extends Screen {
 	
 	@Override
 	public default void render(float delta) {
-//		Gdx.gl.glEnable(GL20.GL_BLEND);
-//		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-		
 		// cull shadows and render shadow map into its own fbo
 		if(cullback) Gdx.gl20.glCullFace(GL20.GL_FRONT);
 		if(activateShadows) renderShadowsContainer();

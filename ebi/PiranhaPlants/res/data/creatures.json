@@ -14,20 +14,56 @@
 	{
 		"id": 3,
 		"comment": "Megorya",
-		"models": [""],
-		"icon": ""
-	},
-	{
-		"id": 4,
-		"comment": "Lilian",
-		"models": [""],
-		"icon": ""
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "megorya"
 	},
 	{
 		"id": 5,
+		"comment": "Fiera",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "fiera"
+	},
+	{
+		"id": 6,
+		"comment": "Flora",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "flora"
+	},
+	{
+		"id": 7,
+		"comment": "Naia",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "naia"
+	},
+	{
+		"id": 9,
+		"comment": "Aurelia",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "aurelia"
+	},
+	{
+		"id": 13,
+		"comment": "Luna",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "luna"
+	},
+	{
+		"id": 39,
+		"comment": "Lilian",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "lilian"
+	},
+	{
+		"id": 40,
 		"comment": "Marian",
-		"models": [""],
-		"icon": ""
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "marian"
+	},
+	{
+		"id": 44,
+		"comment": "Klaust",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "klaust"
 	}
 
 ]

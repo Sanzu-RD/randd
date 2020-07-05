@@ -117,7 +117,7 @@ public class Home {
 					List<HashMap<String, String>> news = Opaline.news.get();
 					//Log.info("Amethyst.Home.initialize news : " + news);
 					if(news != null && news.size() >= 3) {
-						System.out.println("a");
+//						System.out.println("a");
 						new1.setOnMouseClicked(e -> browse(news.get(0).get(New.name_url)));
 						new1_thumbnail.setImage(new Image(news.get(0).get(New.name_thumbnailUrl)));
 						new1_title.setText(news.get(0).get(New.name_title));

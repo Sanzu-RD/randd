@@ -71,21 +71,37 @@ public class DraftController {
 		Coraline.core.bus.register(this);
 		
 		for (var model : DiamondModels.creatures.values()) {
-			Log.info("draft init model " + model);
+			Log.info("DraftController init model " + model);
+			String url = "";
 			try {
 				// select btn
 				btnSelect.setOnMouseClicked(this::select);
 				
 				// creature pool
 				var data = AssetData.creatures.get(model.id());
-				var img = new ImageView(data.getIconURL().toString());
+				Log.info("DraftController path 1 : " + data.getIconURL().toString());
+				Log.info("DraftController path 2 : " + data.getIcon().getAbsolutePath());
+				Log.info("DraftController path 3 : " + data.getIconPath().toString());
+				url = data.getIconURL().toString();
+//				url = data.getIcon().getAbsolutePath();
+//				url = data.getIconPath().toString();
+//				url = "res/textures/creatures/luna.png";
+				Log.info("DraftController . img url " + url);
+				
+				
+				var img = new ImageView(url);
+				img.setPreserveRatio(true);
+				img.setSmooth(true);
+				img.setFitWidth(48);
+				img.setFitHeight(48);
 				img.getProperties().put(CreatureModel.class, model);
 				creatureList.getChildren().add(img);
 				
 				creatureList.setOnMouseClicked(e -> {
-					Log.info("target " + e.getTarget());
+					Log.info("DraftController target " + e.getTarget());
 					Log.info("" + e.getPickResult());
 					if(e.getTarget() == null) return;
+					if(e.getTarget() instanceof ImageView == false) return;
 					
 					if(selected != null) selected.setEffect(null);
 					var imgtarget = (ImageView) e.getTarget();
@@ -100,7 +116,7 @@ public class DraftController {
 				bansB.getChildren().clear();
 				
 			} catch (Exception e) {
-				Log.info("Error creating image : ", e);
+				Log.info("DraftController Error creating image : " +  url); //, e);
 			}
 		}
 	}
@@ -111,7 +127,9 @@ public class DraftController {
 	 */
 	public void select(MouseEvent e) {
 		// remove selected creature
-		var img = creatureList.getChildren().filtered(i -> i.getEffect() != null).get(0);
+		var filtered = creatureList.getChildren().filtered(i -> i.getEffect() != null);
+		if(filtered.size() == 0) return;
+		var img = filtered.get(0);
 		var model = (CreatureModel) img.getProperties().get(CreatureModel.class);
 		img.setEffect(null);
 		selected = null;

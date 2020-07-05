@@ -48,7 +48,6 @@ public class SapphireScreen extends LapisScreen {
 	public static ParticleEffekseer effect;
 	
 	public SapphireScreen() {
-//		activateShadows = false;
 		startPfx();
 	}
 	private void startPfx() {
@@ -58,9 +57,6 @@ public class SapphireScreen extends LapisScreen {
         effect.setMagnification(0.3f);
         try {
         	effect.load("fx/Sample/01_Pierre02/CosmicMist.efk", true);
-//        	effect.load("fx/Sample/01_Pierre02/Sword_Ember.efkefc", true);
-//        	effect.load("fx/Sample/02_Tktk03/ToonWater.efkefc", true);
-//        	effect.load("fx/tremble.efkefc", true);
         	effect.setLocation(9.5f, 2.5f, -9.5f);
         	effect.play();
         } catch (Exception e) {
