@@ -161,7 +161,8 @@ public class SapphireController extends CameraInputController {
 			SapphireHud.refresh();
 		}
 		if(keycode == Keys.P) {
-        	SapphireScreen.effect.play();
+//        	SapphireScreen.effect.play();
+			SapphireGame.gfx.startPfx(null);
 		}
 		if(keycode == Keys.M) {
 			if(SapphireGame.music.music.isPlaying()) {
@@ -169,6 +170,9 @@ public class SapphireController extends CameraInputController {
 			} else {
 				SapphireGame.music.play();
 			}
+		}
+		if(keycode == Keys.ESCAPE) {
+			SapphireHud.parameters.setVisible(!SapphireHud.parameters.isVisible());
 		}
 		switch(keycode) {
 			case RIGHT 	-> camera.rotate(45, 0, 0, 1);

@@ -23,7 +23,8 @@ public class SelectedCreatureHandler implements BBMessageHandler<SelectCreature>
 			Lobby lobby = client.channel().attr(Lobby.attrkey).get();
 			
 			// fix team unless it's a mocking lobby
-			if(lobby.type != GameQueue.mock) message.team = lobby.teams.get(user._id);
+			if(lobby.type != GameQueue.mock) 
+				message.team = lobby.teams.get(user._id);
 			
 			// broadcast select to all lobby participants
 			for (var id : lobby.teams.keySet()) {

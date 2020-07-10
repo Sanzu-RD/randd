@@ -1,6 +1,7 @@
 package com.souchy.randd.ebishoal.sapphire.gfx;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -20,6 +21,7 @@ import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImageLmlTagProvider;
 import com.souchy.randd.ebishoal.sapphire.ux.Chat;
 import com.souchy.randd.ebishoal.sapphire.ux.CreatureSheet;
+import com.souchy.randd.ebishoal.sapphire.ux.Parameters;
 import com.souchy.randd.ebishoal.sapphire.ux.PlayBar;
 import com.souchy.randd.ebishoal.sapphire.ux.QuickOptions;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.LmlWidgets;
@@ -47,6 +49,8 @@ public class SapphireHud extends LapisHud {
 	public static Timeline timeline;
 //	@LmlActor("timer")
 //	public Timer timer;
+	@LmlActor("parameters")
+	public static Parameters parameters;
 	
 	
 	public SapphireHud() {
@@ -86,7 +90,13 @@ public class SapphireHud extends LapisHud {
 	}
 	
 	public static LmlParser createParser() {
+		Preferences prefs = Gdx.app.getPreferences("sapphire.pref");
+		prefs.putString("sound.general", "2");
+		prefs.putBoolean("render.postprocess", true);
+		prefs.flush();
+		
 		var parser = VisLml.parser()
+				.preferences(prefs)
 				// Registering global action container:
 				.actions("global", GlobalLMLActions.class)
 				// Adding localization support:
@@ -102,6 +112,7 @@ public class SapphireHud extends LapisHud {
 				.tag(new SapphireWidgetTagProvider<>(Timeline.class), "timeline")
 				.tag(new SapphireWidgetTagProvider<>(CreatureSheet.class), "creaturesheet")
 				.tag(new SapphireWidgetTagProvider<>(QuickOptions.class), "quickoptions")
+				.tag(new SapphireWidgetTagProvider<>(Parameters.class), "parameters")
 //				.attribute(new MovableLmlAttribute(), "movable")
 //				.attribute(new ResizeableLmlAttribute(), "resizeable", "resizable")
 //				.attribute(new ResizeBorderLmlAttribute(), "resizeBorder", "border")
@@ -132,6 +143,8 @@ public class SapphireHud extends LapisHud {
 		refreshChat();
 		refreshPlaybar();
 		refreshTimeline();
+		refreshParameters();
+		parameters.setVisible(false);
 		SapphireHud.single.getStage().addActor(LmlWidgets.createGroup("res/ux/sapphire/components/quickoptions.lml"));
 		
 		/*
@@ -150,6 +163,10 @@ public class SapphireHud extends LapisHud {
 	public static void refreshTimeline() {
 		SapphireHud.single.getStage().addActor(timeline = LmlWidgets.createGroup("res/ux/sapphire/components/timeline.lml"));
 	}
+	public static void refreshParameters() {
+		SapphireHud.single.getStage().addActor(parameters = LmlWidgets.createGroup("res/ux/sapphire/components/parameters.lml"));
+	}
+	
 	
 	public static void testCreatureSheet() {
 		var widget = LmlWidgets.createGroup("res/ux/sapphire/components/creaturesheet.lml");

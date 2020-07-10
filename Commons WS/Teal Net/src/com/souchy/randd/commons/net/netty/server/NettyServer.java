@@ -14,6 +14,7 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.group.ChannelGroup;
@@ -80,6 +81,9 @@ public class NettyServer {
 		ServerBootstrap b = new ServerBootstrap();
 		b.group(bossGroup, workerGroup)
 			.channel(NioServerSocketChannel.class)
+//			.childOption(ChannelOption.SO_KEEPALIVE, true)
+//			.option(ChannelOption.SO_TIMEOUT, 1000)
+//			.option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 1000)
 //			.option(ChannelOption.SO_BACKLOG, 100)
 //			.handler(new LoggingHandler(LogLevel.INFO))
 			.childHandler(channelInit);

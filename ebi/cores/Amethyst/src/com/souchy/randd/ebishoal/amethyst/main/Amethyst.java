@@ -57,7 +57,11 @@ public class Amethyst extends EbiShoalCore {
 
 	@Override
 	protected String[] getRootPackages() {
-		return new String[] { "com.souchy.randd.ebishoal.amethyst", "com.souchy.randd.ebishoal.coraline" };
+		return new String[] { 
+				"com.souchy.randd.commons.deathebi.msg", 
+				"com.souchy.randd.ebishoal.amethyst", 
+				"com.souchy.randd.ebishoal.coraline"
+		};
 	}
 
 }

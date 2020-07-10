@@ -4,14 +4,22 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 
+import com.google.common.eventbus.Subscribe;
+import com.souchy.randd.commons.coral.out.MatchFound;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.amethyst.main.AmethystApp;
+import com.souchy.randd.ebishoal.coraline.Coraline;
 import com.souchy.randd.ebishoal.opaline.api.Opaline;
+import com.souchy.randd.jade.matchmaking.GameQueue;
 import com.souchy.randd.jade.meta.New;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
@@ -24,6 +32,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class Home {
 
@@ -51,13 +60,39 @@ public class Home {
     @FXML public VBox teamBtn;
     @FXML public ImageView teamImg;
     @FXML public Label teamLbl;
-    
+
+    @FXML public Label playLbl;
+    @FXML public Label timer;
 	
+    
+    private Timeline timeline;
+    
 	/** enter queue for matchmaking */
 	@FXML
     public void play(MouseEvent event) {
-		// 
-		// Coraline.enqueue(GameMode.blind...)
+		Log.info("UI Home playlbl text : " + playLbl.getText());
+		if(playLbl.getText().contentEquals("Play")) {
+			Coraline.enqueue(GameQueue.mock); // TODO select gamme mode
+			timeline.play();
+			timer.setVisible(true);
+			
+			this.playLbl.setText("Dequeue");
+		} else {
+			Coraline.dequeue();
+			timeline.stop();
+			timer.setText("00:00");
+			timer.setVisible(false);
+			this.playLbl.setText("Play");
+		}
+//		timer.textProperty().bind(observable);
+//		AmethystApp.mainController.mainTabs.getSelectionModel().select(AmethystApp.mainController.draftTab);
+	}
+	
+	/**
+	 * Message handler
+	 */
+	@Subscribe
+	public void onMathFoundMsg(MatchFound msg) {
 		AmethystApp.mainController.mainTabs.getSelectionModel().select(AmethystApp.mainController.draftTab);
 	}
 	
@@ -82,6 +117,18 @@ public class Home {
 	@FXML
 	public void initialize() {
 		try {
+			// queue timer
+			{
+				DecimalFormat df = new DecimalFormat("##");
+				var keyframe = new KeyFrame(Duration.seconds(1), ae -> {
+					var key = (KeyFrame) ae.getSource();
+					var minutes = Math.floor(key.getTime().toMinutes());
+					var seconds = Math.floor(key.getTime().toSeconds() - minutes * 60);
+					timer.setText(df.format(minutes) + ":" + df.format(seconds));
+				});
+				timeline = new Timeline(keyframe);
+				timeline.setCycleCount(Timeline.INDEFINITE);
+			}
 	    	// Play btn
 	    	{
 	        	// set a clip to apply rounded border to the original image.

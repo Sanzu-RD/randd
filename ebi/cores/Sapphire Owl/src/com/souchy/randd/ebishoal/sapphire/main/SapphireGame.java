@@ -108,6 +108,7 @@ public class SapphireGame extends LapisGame {
 		SapphireHudSkin.play(fight.creatures.first()); //.family.get(0)); // fight.teamA.get(0));
 //		SapphireHud.timeline.refresh();
 		SapphireHud.refreshTimeline();
+//		gfx.startPfx(fight.creatures.first());
 	}
 	
 	

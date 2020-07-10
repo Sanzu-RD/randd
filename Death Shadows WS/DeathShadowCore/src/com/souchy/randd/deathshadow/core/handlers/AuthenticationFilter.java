@@ -64,7 +64,7 @@ public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //imple
 	/** remove disconnecting users */
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-//		Log.info("AuthenticationFilter inactive");
+		Log.info("AuthenticationFilter inactive");
 		
 		var user = ctx.channel().attr(User.attrkey).get();
 		if(user != null)
@@ -93,11 +93,11 @@ public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //imple
 	
 	/** get and send a user */
 	public void getUser(ChannelHandlerContext ctx, GetUser msg) {
-		Log.info("AuthenticationFilter getUser");
 		// trouve un user avec le username + hashedpassword et renvoi le 
 		// + set l'attribute dans le channel 
 		// + ajoute le channel aux users connectés
 		var user = Emerald.users().find(and(eq(User.name_username, msg.username), eq(User.name_password, msg.hashedPassword))).first();
+		Log.info("AuthenticationFilter getUser ("+msg.username+", " +msg.hashedPassword+ ") " + user + " level " + (user == null ? "null" : user.level));
 		if(user != null && user.level.ordinal() >= minLevel.ordinal()) {
 			// set the user attribute on the channel
 			ctx.channel().attr(User.attrkey).set(user);
@@ -110,8 +110,7 @@ public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //imple
 			bus.post(event);
 			// send the user object to the client
 			ctx.writeAndFlush(new SendUser(user));
-		}
-		else {
+		} else {
 			ctx.writeAndFlush(new SendUser(null)); // username + password miscombination not unauthorized user level
 			ctx.channel().close(); 
 		}

@@ -54,6 +54,8 @@ public class BlackMoonstone extends DeathShadowCore {
 	protected String[] getRootPackages() {
 		return new String[]{ 
 				"com.souchy.randd.commons.deathebi.msg", 
+				"com.souchy.randd.deathshadows.nodes.pearl.messaging",
+				"com.souchy.randd.deathshadows.nodes.pearl.messaging.moonstone",
 				"com.souchy.randd.moonstone", 
 				"com.souchy.randd.deathshadows.nodes.moonstone.black",
 				"com.souchy.randd.deathshadows.blackmoonstone.handlers",

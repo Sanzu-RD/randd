@@ -2,6 +2,7 @@ package com.souchy.randd.ebishoal.coraline;
 
 import com.souchy.randd.commons.deathebi.msg.GetSalt;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
 import com.souchy.randd.jade.matchmaking.GameQueue;
@@ -26,14 +27,16 @@ public class Coraline {
 	/**
 	 * Internal Coraline tcp client
 	 */
-	private static EbiShoalTCP tcp;
+	public static EbiShoalTCP tcp;
 
 	
 	/**
 	 * Connects, auths and enqueue automatically to a matchmaking server
 	 */
 	public static void enqueue(GameQueue queue) {
+		Log.info("Coraline . enqueue");
 		try {
+			// start by dequeueing
 			dequeue();
 			tcp = new EbiShoalTCP("127.0.0.1", 7000 + queue.ordinal(), core);
 			
@@ -49,6 +52,7 @@ public class Coraline {
 	 * Disconnects from a matchmaking server, therefore dequeueing
 	 */
 	public static void dequeue() {
+		Log.info("Coraline . dequeue");
 		if(tcp != null) {
 			tcp.close();
 			tcp = null;

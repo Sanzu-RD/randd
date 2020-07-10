@@ -88,7 +88,7 @@ public class EffekseerJohn extends ApplicationAdapter implements InputProcessor 
 		controller = new CameraInputController(perspectiveCamera);
 		
 		manager = new EffekseerManager(perspectiveCamera);
-		manager.setViewport(viewport);
+//		manager.setViewport(viewport);
 		
 		effekseer = new ParticleEffekseer(manager);
 		effekseer.setMagnification(20f);

@@ -3,14 +3,19 @@ package com.souchy.randd.deathshadows.coral.main;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import org.bson.types.ObjectId;
+
+import com.google.common.eventbus.Subscribe;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.souchy.randd.commons.coral.out.MatchFound;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserActiveEvent;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserInactiveEvent;
 import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 import com.souchy.randd.jade.matchmaking.GameQueue;
 import com.souchy.randd.jade.matchmaking.Lobby;
+import com.souchy.randd.jade.matchmaking.Lobby.LobbyPhase;
 import com.souchy.randd.jade.matchmaking.Queuee;
 import com.souchy.randd.jade.matchmaking.Team;
 
@@ -35,30 +40,41 @@ public class CoralEngine {
 	/**
 	 * When a new client is connected to the server : Enqueue
 	 */
+	@Subscribe
 	public void channelActive(UserActiveEvent event) throws Exception {
-		// start by removing the user from any queue
-		var user = event.user;
-		if(user == null) 
-			event.ctx.channel().close();
+		Log.info("CoralEngine channel active " + event.user);
 		
+		var user = event.user;
+		if(user == null) {
+			Log.info("CoralEngine channel active closing because no user");
+			event.ctx.channel().close();
+		}
+		
+		// start by removing the user from any queue
 //		for(var queue : GameQueue.values()) {
 //			Emerald.collection(queue.getQueueeClass()).deleteOne(Filters.eq(user._id));
 //		}
 		
 		var q = Coral.coral.queue;
 		var queuee = q.createQueuee();
-		queuee.userid = user._id;
+//		queuee.userid = user._id;
+		queuee._id = user._id;
 		queuee.mmr = user.mmr;
 		queuee.timeQueued = System.currentTimeMillis();
-		Emerald.collection(q.getQueueeClass()).insertOne(null);
+		Emerald.collection(q.getQueueeClass()).insertOne(queuee);
 	}
 
 	/**
 	 * When a client's connection is lost : Dequeue
 	 */
+	@Subscribe
 	public void channelInactive(UserInactiveEvent event) throws Exception {
+		var filter = Filters.eq(event.user._id);
+		Log.info("CoralEngine " + Coral.coral.queue.getQueueeClass() + " channel inactive " + filter);
+		
 		// remove the user from the queue
-		Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(event.user._id));
+		dequeue(event.user._id);
+//		Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(filter);
 		
 		// if the client was in a lobby, close every participant's channel in the lobby
 		var lobby = event.ctx.channel().attr(Lobby.attrkey).get();
@@ -69,6 +85,10 @@ public class CoralEngine {
 					channel.close();
 			}
 		}
+	}
+	
+	private void dequeue(ObjectId userid) {
+		Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(userid));
 	}
 	
 	/**
@@ -82,19 +102,25 @@ public class CoralEngine {
 		while(itor1.hasNext()) {
 			var p1 = itor1.next();
 
-			var channel1 = Coral.coral.server.users.get(p1.userid);
+			var channel1 = Coral.coral.server.users.get(p1._id);
 			
 			Lobby lobby = new Lobby();
-			lobby.type = GameQueue.draft;
-//			lobby.users.add(p1.userid);
-			//lobby.users.add(p2.userid);
-			lobby.teams.put(p1.userid, Team.A);
-			//lobby.teams.put(p2.userid, Team.B);
+			lobby.type = GameQueue.mock;
+//			lobby.users.add(p1._id);
+			//lobby.users.add(p2._id);
+			lobby.teams.put(p1._id, Team.A);
+			//lobby.teams.put(p2._id, Team.B);
 			lobby.moonstoneInfo = "127.0.0.1:443";
+			lobby.playerTurn = p1._id;
+			lobby.time = System.currentTimeMillis();
+			lobby.phase = LobbyPhase.pick;
 			
 			var msg = new MatchFound();
 			msg.lobby = lobby;
 			
+			dequeue(p1._id);
+
+			channel1.attr(Lobby.attrkey).set(lobby);
 			channel1.writeAndFlush(msg);
 			return;
 		}
@@ -123,29 +149,36 @@ public class CoralEngine {
 					itor1.close();
 					itor2.close();
 					
-					var channel1 = Coral.coral.server.users.get(p1.userid);
-					var channel2 = Coral.coral.server.users.get(p2.userid);
+					var channel1 = Coral.coral.server.users.get(p1._id);
+					var channel2 = Coral.coral.server.users.get(p2._id);
 					
 					if(channel1 == null) {
-						Coral.coral.server.users.remove(p1.userid);
-						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p1.userid));
+						Coral.coral.server.users.remove(p1._id);
+//						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p1._id));
+						dequeue(p1._id);
 					}
 					if(channel2 == null) {
-						Coral.coral.server.users.remove(p2.userid);
-						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p2.userid));
+						Coral.coral.server.users.remove(p2._id);
+//						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p2._id));
+						dequeue(p2._id);
 					}
 					if(channel1 != null && channel2 != null) {
 						Lobby lobby = new Lobby();
 						lobby.type = GameQueue.draft;
-//						lobby.users.add(p1.userid);
-//						lobby.users.add(p2.userid);
-						lobby.teams.put(p1.userid, Team.A);
-						lobby.teams.put(p2.userid, Team.B);
+//						lobby.users.add(p1._id);
+//						lobby.users.add(p2._id);
+						lobby.teams.put(p1._id, Team.A);
+						lobby.teams.put(p2._id, Team.B);
 						lobby.moonstoneInfo = "127.0.0.1:443";
+						lobby.playerTurn = p1._id;
+						lobby.time = System.currentTimeMillis();
+						lobby.phase = LobbyPhase.ban;
 						
 						// dequeue
-						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p1.userid));
-						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p2.userid));
+						dequeue(p1._id);
+						dequeue(p2._id);
+//						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p1._id));
+//						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p2._id));
 						
 						var msg = new MatchFound();
 						msg.lobby = lobby;

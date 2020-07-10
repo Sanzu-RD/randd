@@ -141,10 +141,12 @@ public class LapisDSL extends DirectionalLight implements ShadowMap, Disposable 
 	public void zoom(float shadowViewportWidth, float shadowViewportHeight) {
 		if(shadowViewportWidth > 30 || shadowViewportHeight > 20) return;
 		
+//		this.viewport.update(shadowViewportWidth, shadowViewportHeight);
 		this.viewport.setWorldSize(shadowViewportWidth, shadowViewportHeight);
-		this.cam.viewportWidth = shadowViewportWidth;
-		this.cam.viewportHeight = shadowViewportHeight;
-		this.cam.update();
+		this.viewport.apply();
+//		this.cam.viewportWidth = shadowViewportWidth;
+//		this.cam.viewportHeight = shadowViewportHeight;
+//		this.cam.update();
 	}
 	
 	

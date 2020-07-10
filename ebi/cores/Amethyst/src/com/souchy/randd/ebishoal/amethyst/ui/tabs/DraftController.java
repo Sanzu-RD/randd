@@ -4,10 +4,13 @@ import java.io.File;
 import java.util.Timer;
 
 import com.google.common.eventbus.Subscribe;
+import com.souchy.randd.commons.coral.draft.ChangeTurn;
 import com.souchy.randd.commons.coral.draft.SelectCreature;
 import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.amethyst.ui.components.DraftRow;
 import com.souchy.randd.ebishoal.coraline.Coraline;
+import com.souchy.randd.jade.matchmaking.GameQueue;
 import com.souchy.randd.jade.matchmaking.Team;
 
 import gamemechanics.ext.AssetData;
@@ -70,23 +73,31 @@ public class DraftController {
 	public void initialize() {
 		Coraline.core.bus.register(this);
 		
+		// clear everything else
+		teamA.getChildren().clear();
+		bansA.getChildren().clear();
+		teamB.getChildren().clear();
+		bansB.getChildren().clear();
+		
+		// select btn
+		btnSelect.setOnMouseClicked(this::select);
+				
+		// fill creature list with images + click handler
 		for (var model : DiamondModels.creatures.values()) {
-			Log.info("DraftController init model " + model);
 			String url = "";
 			try {
-				// select btn
-				btnSelect.setOnMouseClicked(this::select);
 				
 				// creature pool
 				var data = AssetData.creatures.get(model.id());
-				Log.info("DraftController path 1 : " + data.getIconURL().toString());
-				Log.info("DraftController path 2 : " + data.getIcon().getAbsolutePath());
-				Log.info("DraftController path 3 : " + data.getIconPath().toString());
+//				Log.info("DraftController init model " + model + " data " + data);
+//				Log.info("DraftController path 1 : " + data.getIconURL().toString());
+//				Log.info("DraftController path 2 : " + data.getIcon().getAbsolutePath());
+//				Log.info("DraftController path 3 : " + data.getIconPath().toString());
 				url = data.getIconURL().toString();
 //				url = data.getIcon().getAbsolutePath();
 //				url = data.getIconPath().toString();
 //				url = "res/textures/creatures/luna.png";
-				Log.info("DraftController . img url " + url);
+//				Log.info("DraftController . img url " + url);
 				
 				
 				var img = new ImageView(url);
@@ -94,12 +105,15 @@ public class DraftController {
 				img.setSmooth(true);
 				img.setFitWidth(48);
 				img.setFitHeight(48);
-				img.getProperties().put(CreatureModel.class, model);
 				creatureList.getChildren().add(img);
 				
+				// identification property
+				img.getProperties().put(CreatureModel.class, model);
+				
+				// click select effect
 				creatureList.setOnMouseClicked(e -> {
-					Log.info("DraftController target " + e.getTarget());
-					Log.info("" + e.getPickResult());
+//					Log.info("DraftController target " + e.getTarget());
+//					Log.info("" + e.getPickResult());
 					if(e.getTarget() == null) return;
 					if(e.getTarget() instanceof ImageView == false) return;
 					
@@ -108,15 +122,8 @@ public class DraftController {
 					imgtarget.setEffect(new Shadow(5, Color.ALICEBLUE));
 					selected = imgtarget;
 				});
-				
-				// clear everything else
-				teamA.getChildren().clear();
-				bansA.getChildren().clear();
-				teamB.getChildren().clear();
-				bansB.getChildren().clear();
-				
 			} catch (Exception e) {
-				Log.info("DraftController Error creating image : " +  url); //, e);
+				Log.info("DraftController Error creating image : " +  url, e);
 			}
 		}
 	}
@@ -125,14 +132,23 @@ public class DraftController {
 	 * Called on btn select click
 	 * @param e
 	 */
-	public void select(MouseEvent e) {
-		// remove selected creature
+	public void select(MouseEvent e) { 
+		Log.info("select");
+		// get selected creature
 		var filtered = creatureList.getChildren().filtered(i -> i.getEffect() != null);
+		// be sure that a creature is selected
 		if(filtered.size() == 0) return;
+		// get creature model
 		var img = filtered.get(0);
 		var model = (CreatureModel) img.getProperties().get(CreatureModel.class);
+		// unselect
+		
+//		var filtered = creatureList.getChildren().filtered(i -> i.getProperties().get(CreatureModel.class) == model);
+//		var img = filtered.get(0);
 		img.setEffect(null);
 		selected = null;
+		
+		Log.info("select " + model);
 		
 		// send SelectCreature message
 		var msg = new SelectCreature();
@@ -145,14 +161,15 @@ public class DraftController {
 	 */
 	@Subscribe
 	public void receiveSelectMsg(SelectCreature msg) {
+		Log.info("DraftController . onSelectCreature msg handler");
 		Platform.runLater(() -> {
-			var icon = AssetData.creatures.get(msg.modelid).getIcon();
-			var img = new ImageView(icon.getAbsolutePath());
+//			var icon = AssetData.creatures.get(msg.modelid).getIcon();
+//			var node = new ImageView(icon.getAbsolutePath());
+			var node = new DraftRow(msg.modelid);
 			switch (msg.team) {
-				case A -> teamA.add(img, 0, teamA.getChildren().size());
-				case B -> teamB.add(img, 0, teamB.getChildren().size());
+				case A -> teamA.add(node, 0, teamA.getChildren().size());
+				case B -> teamB.add(node, 0, teamB.getChildren().size());
 			}
-			
 		});
 	}
 
@@ -160,7 +177,10 @@ public class DraftController {
 	 * Event handler for timer/turnstate message 
 	 */
 	@Subscribe
-	public void receiveTimerMsg(Object msg) {
+	public void receiveTimerMsg(ChangeTurn msg) {
+		if(msg.team == Team.A) {
+			teamA.getCssMetaData().add(null);
+		}
 		var keyframe = new KeyFrame(Duration.seconds(1), ae -> {
 			var key = (KeyFrame) ae.getSource();
 			lblTime.setText(key.getTime().toSeconds() + "");
@@ -169,5 +189,6 @@ public class DraftController {
 		timeline = new Timeline(keyframe);
 		timeline.play();
 	}
+	
 	
 }

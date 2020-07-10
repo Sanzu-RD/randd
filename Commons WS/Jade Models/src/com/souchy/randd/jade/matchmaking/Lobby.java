@@ -50,8 +50,18 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	/** game server info */
 	public String moonstoneInfo;
 	
+	/**
+	 * ban, pick, customisation
+	 */
 	public LobbyPhase phase;
-	
+	/**
+	 * 
+	 */
+	public ObjectId playerTurn;
+	/**
+	 * 
+	 */
+	public long time;
 	
 	public static final String name_type = "type";
 	public static final String name_users = "users";

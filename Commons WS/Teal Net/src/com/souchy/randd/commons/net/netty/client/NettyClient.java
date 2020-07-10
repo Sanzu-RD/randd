@@ -2,6 +2,7 @@ package com.souchy.randd.commons.net.netty.client;
 
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.server.NettyHandler;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -98,6 +99,7 @@ public class NettyClient {
 	}
 
 	public void close() {
+		Log.info("NETTY CLOSE");
 		channel.close();
 	}
 	

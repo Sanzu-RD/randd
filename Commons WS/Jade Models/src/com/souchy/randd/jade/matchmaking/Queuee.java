@@ -12,7 +12,8 @@ public abstract class Queuee {
 	/**
 	 * Client id
 	 */
-	public ObjectId userid;
+//	public ObjectId userid;
+	public ObjectId _id;
 	/**
 	 * Rating
 	 */

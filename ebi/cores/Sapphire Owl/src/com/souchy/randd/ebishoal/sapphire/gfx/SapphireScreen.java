@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.data.s1.status.Shocked;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
@@ -29,6 +30,10 @@ import Effekseer.swig.EffekseerBackendCore;
 import Effekseer.swig.EffekseerEffectCore;
 import Effekseer.swig.EffekseerManagerCore;
 import Effekseer.swig.EffekseerTextureType;
+import data.new1.timed.Status;
+import gamemechanics.components.Position;
+import gamemechanics.main.DiamondModels;
+import gamemechanics.models.Creature;
 import particles.ParticleEffekseer;
 
 public class SapphireScreen extends LapisScreen {
@@ -45,20 +50,39 @@ public class SapphireScreen extends LapisScreen {
 	
 	private long timeStart = 0;
 	
-	public static ParticleEffekseer effect;
+//	public static ParticleEffekseer effect;
 	
 	public SapphireScreen() {
-		startPfx();
+//		startPfx(null);
 	}
-	private void startPfx() {
-		timeStart = System.currentTimeMillis();
+	
+	@Override
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+		super.resize(width, height);
+	}
+	
+	public void startPfx(Creature c) {
+//		c = new Creature(null);
+//		c.pos = new Position(5, 0);
+//		timeStart = System.currentTimeMillis();
+		var pos  = new Position(5, 0);
 
-        effect = new ParticleEffekseer(getEffekseer());
+        var effect = new ParticleEffekseer(getEffekseer());
         effect.setMagnification(0.3f);
         try {
-        	effect.load("fx/Sample/01_Pierre02/CosmicMist.efk", true);
-        	effect.setLocation(9.5f, 2.5f, -9.5f);
+//        	effect.load("fx/Sample/01_Pierre02/CosmicMist.efk", true);
+        	effect.load("fx/bleed/bleed.efk", true);
+//        	effect.load("fx/shock/shock.efk", true);
+//        	effect.setLocation(9.5f, 1.5f, -9.5f);
+        	effect.setLocation((float) pos.x + 0.5f, 1.5f, (float) -pos.y - 0.5f);
+//        	getEffekseer().addParticleEffekseer(effect);
         	effect.play();
+        	
+        	c = SapphireGame.fight.creatures.first();
+        	var status = DiamondModels.statuses.get(1).copy(SapphireGame.fight);
+        	status.add(effect);
+        	c.add(status);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,9 +107,9 @@ public class SapphireScreen extends LapisScreen {
 		// update all engine's systems 	 //and entities
 		SapphireGame.fight.update(delta);
 		
-		if(System.currentTimeMillis() - timeStart > 5000) {
-//			startPfx();
-		}
+//		if(System.currentTimeMillis() - timeStart > 5000) {
+////			startPfx();
+//		}
 	}
 	
 	@Override

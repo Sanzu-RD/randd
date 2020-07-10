@@ -150,8 +150,8 @@ interface LapisScreenCreator {
 	/**
 	 * Create an FBO for post process
 	 */
-	public default FrameBuffer createFBO() {
-		return new FrameBuffer(Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true, false); // 1024 * 2 * 2
+	public default FrameBuffer createFBO(int width, int height) {
+		return new FrameBuffer(Format.RGBA8888, width, height, true, false); // 1024 * 2 * 2
 	}
 	
 	/**
@@ -192,7 +192,7 @@ interface LapisScreenCreator {
 	public default EffekseerManager createEffekseer(Camera camera, Viewport viewport) {
 		EffekseerManager.InitializeEffekseer();
 		var manager = new EffekseerManager(camera);
-		manager.setViewport(viewport);
+//		manager.setViewport(viewport);
 		return manager;
 	}
 	

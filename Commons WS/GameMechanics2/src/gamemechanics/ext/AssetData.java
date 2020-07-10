@@ -29,6 +29,9 @@ public class AssetData {
 	// loads resource/property text files from i18n
 	// ex : /fr/status.resources :
 	//				1 : { name: "", description: "", icon: "", patch10:"", center:"" }
+	
+	
+	public static URL defaultIconURL;
 
 	public static class CreatureResource {
 		public int id;
@@ -53,7 +56,7 @@ public class AssetData {
 				return getIconPath().toUri().toURL();
 			} catch (MalformedURLException e) {
 				Log.error("", e);
-				return null;
+				return defaultIconURL;
 			}
 		}
 		public Path getModel(int modelId) {
@@ -70,8 +73,17 @@ public class AssetData {
 		public String casterFx;
 		public String targetFx;
 		
-		public Path getIcon() {
+		public Path getIconPath() {
 			return Environment.fromRoot("res/textures/spells/" + icon + ".png"); 
+		}
+		/** idk which method to keep, all good options */
+		public URL getIconURL() {
+			try {
+				return getIconPath().toUri().toURL();
+			} catch (MalformedURLException e) {
+				Log.error("", e);
+				return defaultIconURL;
+			}
 		}
 	}
 	
@@ -83,8 +95,17 @@ public class AssetData {
 		public String patch10;
 		public String centerTexture;
 		
-		public Path getIcon() {
+		public Path getIconPath() {
 			return Environment.fromRoot("res/textures/statuses/" + icon + ".png"); 
+		}
+		/** idk which method to keep, all good options */
+		public URL getIconURL() {
+			try {
+				return getIconPath().toUri().toURL();
+			} catch (MalformedURLException e) {
+				Log.error("", e);
+				return defaultIconURL;
+			}
 		}
 	}
 	
@@ -98,6 +119,8 @@ public class AssetData {
 	@SuppressWarnings("unchecked")
 	public static void loadResources() {
 		try {
+			defaultIconURL = Environment.fromRoot("res/textures/default.png").toUri().toURL();
+			
 	//		var dir = Gdx.files.internal("data/");
 			Log.info("thing 1 : " + Environment.fromRoot("res/data/creatures.json"));
 			

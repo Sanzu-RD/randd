@@ -18,7 +18,9 @@ public class User implements BBSerializer, BBDeserializer {
 	public static final AttributeKey<User> attrkey = AttributeKey.newInstance("jade.meta.user");
 	public static final AttributeKey<Integer> triesKey = AttributeKey.newInstance("jade.meta.user.tries");
 
-
+	/**
+	 * mongo id
+	 */
 	public ObjectId _id;
 	
 	/**

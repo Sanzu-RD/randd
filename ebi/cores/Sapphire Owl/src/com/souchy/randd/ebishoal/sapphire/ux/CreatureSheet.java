@@ -228,7 +228,7 @@ public class CreatureSheet extends SapphireWidget {
 	public String getCreatureName() {
 		if(creature == null) return "null";
 		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
-		var name = i18n.get("creature." + creature.modelid + ".name");;
+		var name = i18n.get("creature." + creature.modelid + ".name");
 		Log.info("getCreatureName " + creature.modelid + " = " + name);
 		return name; 
 	}

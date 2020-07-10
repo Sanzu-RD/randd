@@ -24,10 +24,10 @@ public class Moonstone extends EbiShoalTCP {
 //		fight = new Fight();
 	}
 	
-	public void auth(String username, String password, int fightid) {
-//		this.channel.attr(authKey).set(new String[]{ username, password, fightid + "" });
-		write(new GetSalt(username));
-	}
+//	public void auth(String username, String password, int fightid) {
+////		this.channel.attr(authKey).set(new String[]{ username, password, fightid + "" });
+//		write(new GetSalt(username));
+//	}
 	
 //	public static void write(BBMessage msg) {
 //		moon.channel.writeAndFlush(msg);

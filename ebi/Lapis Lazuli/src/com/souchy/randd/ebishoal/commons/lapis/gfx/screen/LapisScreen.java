@@ -116,7 +116,7 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 		effekseerManagerCore = createEffekseer(getCamera(), getViewport());
 		
 		// create FBO and its sprite batch renderer for post process
-		fbo = createFBO();
+		fbo = createFBO(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		ppBatch = createSpriteBatch();
 		
 		// create UI
@@ -200,7 +200,7 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	@Override public void resize(int width, int height) {
 //		Log.info("resize : " + width + ", " + height);
 		// resize le FBO
-		if(fbo != null) fbo = createFBO();
+		if(fbo != null) fbo = createFBO(width, height);
 		// resize la sprite batch du fbo / post processing
 		if(getSpriteBatch() != null) getSpriteBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
 		// resize le viewport du world
@@ -212,9 +212,9 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 		
 		// resize la sprite batch qui n'a pas de post processing
 		cleanSpriteBatch.getProjectionMatrix().setToOrtho2D(0, 0, width, height);
-		//var center = getWorldCenter();
-		//getCamera().position.set(center.x, center.y, center.z); 
-		//getCamera().update();
+//		var center = getWorldCenter();
+//		getCamera().position.set(center.x, center.y, center.z); 
+//		getCamera().update();
 	}
 	@Override public void pause() { }
 	@Override public void resume() { }

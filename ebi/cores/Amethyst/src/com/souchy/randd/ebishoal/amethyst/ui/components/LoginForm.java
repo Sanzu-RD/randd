@@ -64,11 +64,11 @@ public class LoginForm { //extends VBox {
 	
 	@FXML
 	public void login(MouseEvent event) {
-		if(event == null) {
-			Log.error("Amethyst.LoginForm.login : event is null");
-			return;
-		}
-		if(event.getButton() == MouseButton.SECONDARY) {
+//		if(event == null) {
+//			Log.error("Amethyst.LoginForm.login : event is null");
+//			return;
+//		}
+		if(event != null && event.getButton() == MouseButton.SECONDARY) {
 			AmethystApp.stage.setScene(AmethystApp.mainScene);
 			return;
 		}
@@ -95,8 +95,8 @@ public class LoginForm { //extends VBox {
 				Executors.newScheduledThreadPool(1).schedule(() -> Platform.runLater(() -> tip.hide())
 				, 5000, TimeUnit.MILLISECONDS);
 			}
-			tip.setAnchorX(event.getScreenX());
-			tip.setAnchorY(event.getScreenY());
+			tip.setAnchorX(loginBtn.getLayoutX()); //event.getScreenX());
+			tip.setAnchorY(loginBtn.getLayoutY()); //event.getScreenY());
 		}
 	}
 	
@@ -108,6 +108,9 @@ public class LoginForm { //extends VBox {
 		assert rememberMeChk != null : "fx:id=\"rememberMeChk\" was not injected: check your FXML file 'loginForm.fxml'.";
 
 		tip.setStyle("-fx-text-fill: red; -fx-font-size: 15px;");
+		
+		usernameField.setText("souchy");
+		passwordField.setText("z");
 	}
 	
 }

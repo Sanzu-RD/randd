@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.data.s1.status.Shocked;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 
 import data.new1.ecs.Engine;
@@ -18,10 +19,12 @@ import data.new1.ecs.Engine.AddEntityEvent;
 import data.new1.ecs.Engine.RemoveEntityEvent;
 import data.new1.ecs.Entity;
 import data.new1.ecs.Family;
+import data.new1.timed.Status;
 import data.new1.timed.TerrainEffect;
 import gamemechanics.components.Position;
 import gamemechanics.ext.AssetData;
 import gamemechanics.models.Creature;
+import particles.ParticleEffekseer;
 
 /**
  * Stores all renderables
@@ -55,6 +58,13 @@ public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.Syste
 			var anime = e.get(AnimationController.class);
 			if(anime != null) {
 				anime.update(delta);
+			}
+			var status = e.get(Shocked.class);
+			if(status != null) {
+				ParticleEffekseer effect = status.get(ParticleEffekseer.class);
+				if(effect != null) {
+		        	effect.setLocation((float) pos.x - 0.5f, 1.5f, (float) -pos.y + 0.5f);
+				}
 			}
 		});
 	}

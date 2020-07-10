@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../css/commons.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.ebishoal.amethyst.ui.tabs.DraftController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.ebishoal.amethyst.ui.tabs.DraftController">
    <children>
       <GridPane hgap="20.0" layoutX="24.0" layoutY="24.0" prefHeight="622.0" prefWidth="1556.0" vgap="20.0" AnchorPane.leftAnchor="22.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="22.0">
          <columnConstraints>
@@ -36,10 +36,10 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <fx:include fx:id="creatureA1" source="../components/teamCreatureRow.fxml" />
-                  <fx:include fx:id="creatureA2" source="../components/teamCreatureRow.fxml" GridPane.rowIndex="1" />
-                  <fx:include fx:id="creatureA3" source="../components/teamCreatureRow.fxml" GridPane.rowIndex="2" />
-                  <fx:include fx:id="creatureA4" source="../components/teamCreatureRow.fxml" GridPane.rowIndex="3" />
+                  <fx:include fx:id="creatureA1" source="../components/draftrow.fxml" />
+                  <fx:include fx:id="creatureA2" source="../components/draftrow.fxml" GridPane.rowIndex="1" />
+                  <fx:include fx:id="creatureA3" source="../components/draftrow.fxml" GridPane.rowIndex="2" />
+                  <fx:include fx:id="creatureA4" source="../components/draftrow.fxml" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <GridPane fx:id="bansA">
@@ -80,10 +80,10 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <fx:include fx:id="creatureA11" source="../components/teamCreatureRow.fxml" />
-                  <fx:include fx:id="creatureA21" source="../components/teamCreatureRow.fxml" />
-                  <fx:include fx:id="creatureA31" source="../components/teamCreatureRow.fxml" />
-                  <fx:include fx:id="creatureA41" source="../components/teamCreatureRow.fxml" />
+                  <fx:include fx:id="creatureA11" source="../components/draftrow.fxml" />
+                  <fx:include fx:id="creatureA21" source="../components/draftrow.fxml" />
+                  <fx:include fx:id="creatureA31" source="../components/draftrow.fxml" />
+                  <fx:include fx:id="creatureA41" source="../components/draftrow.fxml" />
                </children>
             </GridPane>
             <GridPane fx:id="bansB" prefHeight="40.0" prefWidth="273.0" GridPane.columnIndex="2">
@@ -115,7 +115,7 @@
             </GridPane>
          </children>
       </GridPane>
-      <Button fx:id="btnSelect" layoutX="759.0" layoutY="779.0" mnemonicParsing="false" text="select" />
-      <Label fx:id="lblTime" layoutX="774.0" layoutY="722.0" text="Time" />
+      <Button fx:id="btnSelect" layoutX="766.0" layoutY="779.0" mnemonicParsing="false" text="select" />
+      <Label fx:id="lblTimer" layoutX="774.0" layoutY="722.0" styleClass="fdsa" text="Time" />
    </children>
 </AnchorPane>
