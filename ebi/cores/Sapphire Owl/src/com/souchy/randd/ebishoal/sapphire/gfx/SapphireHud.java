@@ -16,6 +16,7 @@ import com.github.czyzby.lml.parser.LmlParser;
 import com.github.czyzby.lml.vis.util.VisLml;
 import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
+import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.LapisShader;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImageLmlTagProvider;
@@ -76,7 +77,8 @@ public class SapphireHud extends LapisHud {
 		this.setStage(new Stage(viewport, batch));
 
 		// Parser(actions, i18n, skin, tags)
-		//i18n = I18NBundle.createBundle(Gdx.files.internal("res/i18n/ui/bundle"));
+//		i18n = I18NBundle.createBundle(Gdx.files.internal("res/i18n/ux/bundle"));
+		i18n = LapisAssets.assets.get("res/i18n/ux/bundle", I18NBundle.class);
 		skin = new SapphireHudSkin(getSkinFile());
 
 		VisUI.dispose(true);
@@ -100,7 +102,7 @@ public class SapphireHud extends LapisHud {
 				// Registering global action container:
 				.actions("global", GlobalLMLActions.class)
 				// Adding localization support:
-				//.i18nBundle(i18n)
+				.i18nBundle(i18n)
 				// Set default skin
 				.skin(skin) 
 				// Tags

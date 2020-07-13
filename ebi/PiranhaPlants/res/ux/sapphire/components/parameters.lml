@@ -34,12 +34,12 @@
     <table>
         <label id="life" value="{playingCreatureLifeCurrent} / {playingCreatureLifeMax}"/>
 
-        <label id="pageLbl" value="#sound.general"/>
+        <label id="pageLbl" value="sound.general"/>
 
-        <label id="pageLbl" value="@sound.music"/>
-        <label id="pageLbl" value="@sound.ambiance"/>
-        <label id="pageLbl" value="@sound.fx"/>
-        <label id="pageLbl" value="@sound.ui"/>
+        <label id="pageLbl" value="sound.music"/>
+        <label id="pageLbl" value="sound.ambiance"/>
+        <label id="pageLbl" value="sound.fx"/>
+        <label id="pageLbl" value="sound.ui"/>
 
 
         <:row/>

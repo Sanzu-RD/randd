@@ -2,49 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5fde4df8-f00d-4ace-8f34-b0ed776ce5f4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/sapphire/components/parameters.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/gamemechanics/ext/AssetData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/gamemechanics/ext/AssetData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/matchmaking/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/matchmaking/Lobby.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/matchmaking/Queuee.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/matchmaking/Queuee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/meta/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/Jade Models/src/com/souchy/randd/jade/meta/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/client/NettyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/client/NettyClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/server/NettyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/Teal Net/src/com/souchy/randd/commons/net/netty/server/NettyServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Death Shadows WS/Coral/.project" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Death Shadows WS/Coral/.project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Death Shadows WS/Coral/src/com/souchy/randd/deathshadows/coral/handlers/SelectedCreatureHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Death Shadows WS/Coral/src/com/souchy/randd/deathshadows/coral/handlers/SelectedCreatureHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Death Shadows WS/Coral/src/com/souchy/randd/deathshadows/coral/main/Coral.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Death Shadows WS/Coral/src/com/souchy/randd/deathshadows/coral/main/Coral.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Death Shadows WS/Coral/src/com/souchy/randd/deathshadows/coral/main/CoralEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Death Shadows WS/Coral/src/com/souchy/randd/deathshadows/coral/main/CoralEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Death Shadows WS/DeathShadowCore/src/com/souchy/randd/deathshadow/core/handlers/AuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Death Shadows WS/DeathShadowCore/src/com/souchy/randd/deathshadow/core/handlers/AuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Death Shadows WS/Moonstone-black/src/com/souchy/randd/deathshadows/blackmoonstone/main/BlackMoonstone.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Death Shadows WS/Moonstone-black/src/com/souchy/randd/deathshadows/blackmoonstone/main/BlackMoonstone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Mock WS/Mockingbird/src/mockingbird/EffekseerJohn.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Mock WS/Mockingbird/src/mockingbird/EffekseerJohn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Mock WS/Mockingbird/src/mockingbird/MockingMoonstoneWhite.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Mock WS/Mockingbird/src/mockingbird/MockingMoonstoneWhite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Tools WS/Rainbow/res/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Tools WS/Rainbow/res/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Coraline/src/com/souchy/randd/ebishoal/coraline/Coraline.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Coraline/src/com/souchy/randd/ebishoal/coraline/Coraline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Coraline/src/com/souchy/randd/ebishoal/coraline/handlers/auth/SaltHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Coraline/src/com/souchy/randd/ebishoal/coraline/handlers/auth/SaltHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Coraline/src/com/souchy/randd/ebishoal/coraline/handlers/matchmaking/MatchFoundHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Coraline/src/com/souchy/randd/ebishoal/coraline/handlers/matchmaking/MatchFoundHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisScreenCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisScreenCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/shadows/LapisDSL.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/shadows/LapisDSL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Moonstone-white/src/com/souchy/randd/moonstone/white/Moonstone.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Moonstone-white/src/com/souchy/randd/moonstone/white/Moonstone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amethyst/components/teamCreatureRow.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/amethyst/tabs/champselectdraft.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/amethyst/tabs/champselectdraft.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amethyst/tabs/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/amethyst/tabs/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amethyst/tabs/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/amethyst/tabs/home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/main/Amethyst.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/main/Amethyst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/components/LoginForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/components/LoginForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/tabs/DraftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/tabs/DraftController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/tabs/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/tabs/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/amethyst/components/teamCreatureRow.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/amethyst/tabs/champselectdraft.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/amethyst/tabs/champselectdraft.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/amethyst/tabs/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/amethyst/tabs/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/amethyst/tabs/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/amethyst/tabs/home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/confs/SapphireOwlConf.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/confs/SapphireOwlConf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/controls/SapphireController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/controls/SapphireController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireEntitySystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireEntitySystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/main/SapphireGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/CreatureSheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/CreatureSheet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../shaders/postProcess/fragment/postProcess.fragment.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/../shaders/postProcess/fragment/postProcess.fragment.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sapphire/components/parameters.lml" beforeDir="false" afterPath="$PROJECT_DIR$/sapphire/components/parameters.lml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireHud.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +18,7 @@
         <entry file="file://$PROJECT_DIR$/sapphire/components/parameters.lml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -67,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/sapphire/components/playbar.lml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="11" column="11" lean-forward="true" selection-start-line="11" selection-start-column="11" selection-end-line="12" selection-end-column="90" />
+              <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="12" selection-end-column="90" />
             </state>
           </provider>
         </entry>
@@ -98,7 +58,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="-355" />
     <option name="y" value="-11" />
     <option name="width" value="1936" />
@@ -166,10 +126,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-355" y="-11" width="1936" height="1055" extended-state="1" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14232409" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14392324" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -285,17 +244,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sapphire/components/playbar.lml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="11" lean-forward="true" selection-start-line="11" selection-start-column="11" selection-end-line="12" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sapphire/components/parameters.lml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sapphire/components/playbar.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="12" selection-end-column="90" />
         </state>
       </provider>
     </entry>
