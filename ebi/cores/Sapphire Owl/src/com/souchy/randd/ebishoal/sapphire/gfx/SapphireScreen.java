@@ -62,6 +62,9 @@ public class SapphireScreen extends LapisScreen {
 		super.resize(width, height);
 	}
 	
+	public void startPfx() {
+		startPfx(null);
+	}
 	public void startPfx(Creature c) {
 //		c = new Creature(null);
 //		c.pos = new Position(5, 0);

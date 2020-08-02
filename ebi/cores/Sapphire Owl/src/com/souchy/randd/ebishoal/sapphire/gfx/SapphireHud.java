@@ -1,7 +1,13 @@
 package com.souchy.randd.ebishoal.sapphire.gfx;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.backends.lwjgl.LwjglFileHandle;
+import com.badlogic.gdx.backends.lwjgl.LwjglPreferences;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -17,9 +23,11 @@ import com.github.czyzby.lml.vis.util.VisLml;
 import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.GlobalLML.GlobalLMLActions;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.LapisShader;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImageLmlTagProvider;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.ux.Chat;
 import com.souchy.randd.ebishoal.sapphire.ux.CreatureSheet;
 import com.souchy.randd.ebishoal.sapphire.ux.Parameters;
@@ -92,10 +100,32 @@ public class SapphireHud extends LapisHud {
 	}
 	
 	public static LmlParser createParser() {
-		Preferences prefs = Gdx.app.getPreferences("sapphire.pref");
-		prefs.putString("sound.general", "2");
-		prefs.putBoolean("render.postprocess", true);
-		prefs.flush();
+//		var file = new File("", "sapphire");
+		
+//		FileHandle fileh = Gdx.files.getFileHandle(SapphireOwl.core.getProperties().preferencesDirectory.get() + "/sapphire.prefs", 
+//													SapphireOwl.core.getProperties().preferencesFileType.get());
+		var fileh = new LwjglFileHandle(new File(SapphireOwl.core.getProperties().preferencesDirectory.get() , "sapphire"), 
+								SapphireOwl.core.getProperties().preferencesFileType.get());
+//		var fileh = new LwjglFileHandle(file, SapphireOwl.core.getProperties().preferencesFileType.get());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		for(var field : SapphireOwl.conf.getClass().getFields()) {
+			try {
+				map.put(field.getName(), field.get(SapphireOwl.conf));
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		var prefs = new LwjglPreferences(fileh);
+		prefs.put(map);
+		
+//		Preferences prefs = ; //Gdx.app.getPreferences("sapphire");
+//		prefs.putString("sound.general", "2");
+//		prefs.putBoolean("render.postprocess", true);
+//		prefs.flush();
+		prefs.get().forEach((k, v) -> Log.info("{ " + k + " : " + v + " }"));
 		
 		var parser = VisLml.parser()
 				.preferences(prefs)

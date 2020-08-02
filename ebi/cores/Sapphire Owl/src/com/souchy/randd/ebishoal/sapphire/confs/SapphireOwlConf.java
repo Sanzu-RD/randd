@@ -27,5 +27,6 @@ public class SapphireOwlConf extends JsonConfig {
 	public byte render_postProcess_blur = 3;
 	public boolean render_postProcess_stencil = true;
 	
+	public int sound_general = 2;
 	
 }

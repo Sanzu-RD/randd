@@ -34,6 +34,10 @@ public class MusicPlayer {
 		tracks.forEach(m -> m.setOnCompletionListener(this::onTrackComplete));
 	}
 	
+	public void togglePlayPause() {
+		if(music.isPlaying()) pause();
+		else play();
+	}
 	public void play() {
 		music = tracks.get(currentIndex);
 		music.setVolume(volume);

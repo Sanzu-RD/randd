@@ -8,7 +8,8 @@
 module com.souchy.randd.moonstone.Black {
 	exports com.souchy.randd.deathshadows.blackmoonstone.main;
 	exports com.souchy.randd.deathshadows.blackmoonstone.handlers;
-
+	exports com.souchy.randd.deathshadows.blackmoonstone.riverhandlers;
+	
 	requires transitive com.souchy.randd.moonstone.Commons;
 
 	requires transitive com.souchy.randd.commons.TealNet;
