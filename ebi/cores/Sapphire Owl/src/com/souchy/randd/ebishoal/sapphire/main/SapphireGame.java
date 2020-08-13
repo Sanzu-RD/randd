@@ -24,8 +24,8 @@ import com.souchy.randd.moonstone.commons.packets.c2s.GetUpdate;
 import com.souchy.randd.moonstone.commons.packets.s2c.FullUpdate;
 import com.souchy.randd.moonstone.white.Moonstone;
 
-import Effekseer.swig.EffekseerBackendCore;
-import Effekseer.swig.EffekseerManagerCore;
+//import Effekseer.swig.EffekseerBackendCore;
+//import Effekseer.swig.EffekseerManagerCore;
 import data.new1.spellstats.base.IntStat;
 import gamemechanics.components.Position;
 import gamemechanics.ext.AssetData;
@@ -37,10 +37,10 @@ import gamemechanics.statics.stats.properties.Resource;
 
 public class SapphireGame extends LapisGame {
 	
-	public static SapphireScreen gfx;
-
 	public static Fight fight; // FIXME replace this with Moonstone.fight or use the reference for now i guess
 	
+	public static SapphireScreen gfx;
+
 	public static MusicPlayer music;
 	
 	public static SapphireEntitySystem renderableEntitySystem;

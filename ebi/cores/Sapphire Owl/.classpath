@@ -17,7 +17,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DB"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Effekseer"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-white"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>

@@ -324,7 +324,7 @@ public class SapphireController extends CameraInputController {
 		var pos = getCursorWorldPos(x, y);
 		if(draggedEntity != null) {
 			var epos = draggedEntity.get(Position.class).set(pos.x, pos.y);
-			Log.info("dragged entity " + epos);
+			//Log.info("dragged entity " + epos);
 		}
 		SapphireWorld.world.cursor.transform.setTranslation(pos.sub(0.5f, 0.5f, 0f));
 		

@@ -104,8 +104,10 @@ public class SapphireHud extends LapisHud {
 		
 //		FileHandle fileh = Gdx.files.getFileHandle(SapphireOwl.core.getProperties().preferencesDirectory.get() + "/sapphire.prefs", 
 //													SapphireOwl.core.getProperties().preferencesFileType.get());
-		var fileh = new LwjglFileHandle(new File(SapphireOwl.core.getProperties().preferencesDirectory.get() , "sapphire"), 
-								SapphireOwl.core.getProperties().preferencesFileType.get());
+		var fileh = new LwjglFileHandle(
+						new File(SapphireOwl.core.getProperties().preferencesDirectory.get() , "sapphire"), 
+						SapphireOwl.core.getProperties().preferencesFileType.get()
+					);
 //		var fileh = new LwjglFileHandle(file, SapphireOwl.core.getProperties().preferencesFileType.get());
 		
 		Map<String, Object> map = new HashMap<String, Object>();

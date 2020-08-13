@@ -26,10 +26,10 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 
-import Effekseer.swig.EffekseerBackendCore;
-import Effekseer.swig.EffekseerEffectCore;
-import Effekseer.swig.EffekseerManagerCore;
-import Effekseer.swig.EffekseerTextureType;
+//import Effekseer.swig.EffekseerBackendCore;
+//import Effekseer.swig.EffekseerEffectCore;
+//import Effekseer.swig.EffekseerManagerCore;
+//import Effekseer.swig.EffekseerTextureType;
 import data.new1.timed.Status;
 import gamemechanics.components.Position;
 import gamemechanics.main.DiamondModels;

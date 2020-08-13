@@ -1,4 +1,6 @@
+/data/
 /delete/
+/ux/
 /fonts/
 /fx/
 /i18n/
@@ -8,5 +10,4 @@
 /shaders/
 /src.dll
 /textures/
-/ux/
 /sounds/
