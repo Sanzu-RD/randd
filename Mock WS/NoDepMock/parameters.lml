@@ -10,7 +10,6 @@
 				<label id="general" value="@i18n.general" colspan="2" align="center"/>
 				<:row/>
 				
-				
 				<label id="general.locale" value="@i18n.general.locale" growx="true"/>
 				<selectbox id="general.locale.value" selected="#prefs.general.locale" onChange="$onChangeVal" growx="true"/>
 				<:row/>
@@ -58,83 +57,10 @@
 				<label id="sound.fx" value="@i18n.sound.fx"/>
 				<slider id="sound.fx.value" value="#prefs.sound.fx" onChange="$onChangeVal" min="0" max="10" stepSize="1" />
 				<:row/>
-				
 				<label id="sound.ui" value="@i18n.sound.ui"/>
 				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
 				<:row/>
 				
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
-				<label id="sound.ui" value="@i18n.sound.ui"/>
-				<slider id="sound.ui.value" value="#prefs.sound.ui" onChange="$onChangeVal" min="0" max="10" />
-				<:row/>
 			</table>
 
 		</table>
