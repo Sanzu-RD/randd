@@ -53,6 +53,7 @@ public class SapphireHud extends LapisHud {
 	public Timeline timeline;
 	public Parameters parameters;
 	
+	public boolean isLoaded = false;
 	
 	public SapphireHud() {
 		// SpriteBatch, Viewport, Shader, Stage
@@ -67,15 +68,16 @@ public class SapphireHud extends LapisHud {
 		this.getStage().clear();
 		SapphireLmlParser.parser.createView(this, getTemplateFile());
 		
-		chat = new Chat(getStage());
-		playbar = new PlayBar(getStage());
-		timeline = new Timeline(getStage());
-		new QuickOptions(getStage());
+		chat = new Chat();
+		playbar = new PlayBar();
+		timeline = new Timeline();
+		new QuickOptions();
 		
-		parameters = new Parameters(getStage());
+		parameters = new Parameters();
 		parameters.setVisible(false);
 		
 //		getStage().setDebugAll(true);
+		isLoaded = true;
 	}
 	
 	@Override

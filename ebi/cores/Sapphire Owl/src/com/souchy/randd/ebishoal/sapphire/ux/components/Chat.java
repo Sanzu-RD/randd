@@ -23,10 +23,6 @@ public class Chat extends SapphireComponent {
 	@LmlActor("field")
 	public VisTextField field;
 
-	public Chat(Stage stage) {
-		super(stage);
-	}
-
 	@Override
 	protected void onInit() {
 		area.layout();

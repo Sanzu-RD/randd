@@ -6,14 +6,17 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.github.czyzby.lml.parser.action.ActionContainer;
 import com.kotcrab.vis.ui.VisUI;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 
 public abstract class SapphireComponent extends Table implements ActionContainer {
 
-	public SapphireComponent() {
-		super(VisUI.getSkin());
+
+	public SapphireComponent() { 
+		this(SapphireGame.gfx.hud.getStage());
 	}
+	
 	public SapphireComponent(Stage stage) {
-		this();
+		super(VisUI.getSkin());
 		this.setStage(stage);
 		init();
 	}

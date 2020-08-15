@@ -28,10 +28,6 @@ public class PlayBar extends SapphireComponent {
 	@LmlActor("pageDownImage")
 	public Image pageDownImage;
 	
-	public PlayBar(Stage stage) {
-		super(stage);
-	}
-
 	@Override
 	protected void onInit() {
 		createListeners();

@@ -24,11 +24,6 @@ public class Timeline extends SapphireComponent {
 	public Table table;
 	
 	
-	public Timeline(Stage stage) {
-		super(stage);
-	}
-
-
 	@Override
 	public String getTemplateId() {
 		return "timeline";

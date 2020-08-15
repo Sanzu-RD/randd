@@ -31,10 +31,6 @@ public class QuickOptions extends SapphireComponent {
 	@LmlActor("imgCenterline")
 	public Image imgCenterline;
 	
-	public QuickOptions(Stage stage) {
-		super(stage);
-	}
-
 	@Override
 	protected void onInit() {
 		//var c = imgIsoTop.getColor();

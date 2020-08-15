@@ -90,17 +90,13 @@ public class CreatureSheet extends SapphireComponent {
 		}
 		// sinon créé la sheet et ajoute à la map et au stage
 //		CreatureSheet sheet = LmlWidgets.createGroup(new CreatureSheet().getTemplateFile());
-		var sheet = new CreatureSheet(SapphireGame.gfx.hud.getStage());
+		var sheet = new CreatureSheet();
 		sheet.refresh(c);
 		sheet.setPosition(Gdx.input.getX(), Gdx.input.getY());
 		openedSheets.put(c, sheet);
 		SapphireGame.gfx.hud.getStage().addActor(sheet);
 	}
 	
-	
-	public CreatureSheet(Stage stage) {
-		super(stage);
-	}
 	
 	@Override
 	protected void onInit() {

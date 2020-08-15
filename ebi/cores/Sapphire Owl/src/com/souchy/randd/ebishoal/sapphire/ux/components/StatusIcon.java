@@ -26,7 +26,7 @@ public class StatusIcon extends SapphireComponent { //Stack {
 	@LmlActor("duration")
 	public Label duration;
 	
-	public StatusIcon() {
+//	public StatusIcon() {
 //		status = s;
 //		this.add(icon = new Image(LapisUtil.getImage("textures.statuses." + status.getIconName())));
 //		this.add(border = new Image(LapisUtil.getImage("textures.borders.blackborder")));
@@ -36,7 +36,7 @@ public class StatusIcon extends SapphireComponent { //Stack {
 //		this.add(duration = new Label("", VisUI.getSkin()));
 
 //		refresh(s);
-	}
+//	}
 
 	@Override
 	protected void onInit() {

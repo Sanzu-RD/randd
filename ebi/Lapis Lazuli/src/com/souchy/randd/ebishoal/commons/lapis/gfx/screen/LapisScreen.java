@@ -83,7 +83,7 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	 * Default CTOR
 	 */
 	public LapisScreen() {
-		init();
+//		init();
 	}
 	
 

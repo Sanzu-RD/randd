@@ -7,13 +7,13 @@ import gamemechanics.models.Spell;
 
 public class StatusTooltip extends Tooltip {
 	
-	public StatusTooltip(Status s) {
-		
-	}
-
-	public StatusTooltip(Spell s) {
-		
-	}
-	
+//	public StatusTooltip(Status s) {
+//		
+//	}
+//
+//	public StatusTooltip(Spell s) {
+//		
+//	}
+//	
 	
 }

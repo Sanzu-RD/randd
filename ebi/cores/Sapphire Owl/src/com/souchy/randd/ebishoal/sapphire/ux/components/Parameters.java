@@ -45,10 +45,6 @@ public class Parameters extends SapphireComponent {
 	@LmlActor("general.locale.value")
 	public SelectBox<String> localeSelectBox;
 	
-	public Parameters(Stage stage) {
-		super(stage);
-	}
-	
 	@Override
 	protected void onInit() {
 		this.align(Align.center);

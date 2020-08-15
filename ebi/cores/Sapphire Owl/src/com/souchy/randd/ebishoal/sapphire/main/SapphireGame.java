@@ -66,6 +66,7 @@ public class SapphireGame extends LapisGame {
 		
 		// screen
 		gfx = new SapphireScreen();
+		gfx.init();
 		
 		// pfx
 		ParticleEffectLoader.ParticleEffectLoadParameter params = new ParticleEffectLoader.ParticleEffectLoadParameter(gfx.getPfxSystem().getBatches());
@@ -101,7 +102,7 @@ public class SapphireGame extends LapisGame {
 		// render 3D
 		if (screen != null) screen.render(Gdx.graphics.getDeltaTime());
 		// render UI
-		if(gfx.renderUI) gfx.renderView(Gdx.graphics.getDeltaTime());
+		if(gfx.renderUI && gfx.hud.isLoaded) gfx.renderView(Gdx.graphics.getDeltaTime());
 	}
 	
 
