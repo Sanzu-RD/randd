@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.gfx;
+package com.souchy.randd.ebishoal.sapphire.ux;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -18,7 +18,9 @@ import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireDevConfig;
+import com.souchy.randd.ebishoal.sapphire.gfx.SapphireAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.moonstone.white.Moonstone;
 
 import gamemechanics.ext.AssetData;
@@ -75,7 +77,7 @@ public class SapphireHudSkin extends Skin {
 	 * Take resources from the AssetManager and sets them into the hud skin to be displayed (textures like creature avatar, spell icons and data like resistances)
 	 */
 	private static void set(String prefix, Creature c) {
-		var lml = SapphireHud.parser.getData();
+		var lml = SapphireLmlParser.parser.getData();
 		var model = c.getModel();
 		int i = 0;
 		int val = 0;
@@ -140,7 +142,7 @@ public class SapphireHudSkin extends Skin {
 			lml.getDefaultSkin().getAll(Texture.class).keys().forEach(s -> Log.info("Texture : " + s));
 		
 		// refresh hud
-		SapphireHud.refresh();
+		SapphireGame.gfx.hud.reload(); // SapphireHud.refresh();
 	}
 
 	private static String camel(String... args) {

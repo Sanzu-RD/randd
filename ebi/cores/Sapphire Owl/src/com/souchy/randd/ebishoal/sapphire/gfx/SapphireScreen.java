@@ -15,8 +15,6 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.data.s1.status.Shocked;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
@@ -25,12 +23,9 @@ import com.souchy.randd.ebishoal.sapphire.controls.SapphireController;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireLmlParser;
 
-//import Effekseer.swig.EffekseerBackendCore;
-//import Effekseer.swig.EffekseerEffectCore;
-//import Effekseer.swig.EffekseerManagerCore;
-//import Effekseer.swig.EffekseerTextureType;
-import data.new1.timed.Status;
 import gamemechanics.components.Position;
 import gamemechanics.main.DiamondModels;
 import gamemechanics.models.Creature;
@@ -58,7 +53,6 @@ public class SapphireScreen extends LapisScreen {
 	
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
 		super.resize(width, height);
 	}
 	
@@ -123,7 +117,9 @@ public class SapphireScreen extends LapisScreen {
 	
 	@Override
 	public LapisHud createUI() {
+		SapphireLmlParser.init();
 		hud = new SapphireHud();
+		hud.reload();
 		//Log.info("life : " + view.life.getColor() + ", " + view.life.getStyle().fontColor);
 		return hud;
 	}

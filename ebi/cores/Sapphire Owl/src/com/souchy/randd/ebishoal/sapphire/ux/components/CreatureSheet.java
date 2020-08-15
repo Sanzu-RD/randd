@@ -1,9 +1,9 @@
-package com.souchy.randd.ebishoal.sapphire.ux;
+package com.souchy.randd.ebishoal.sapphire.ux.components;
 
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.kotcrab.vis.ui.layout.HorizontalFlowGroup;
-import com.kotcrab.vis.ui.widget.ScrollableTextArea;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -20,14 +19,15 @@ import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.util.DragAndResizeListener;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireAssets;
-import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
-import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.LmlWidgets;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 
 import gamemechanics.ext.AssetData;
 import gamemechanics.models.Creature;
 import gamemechanics.statics.stats.properties.Resource;
 
-public class CreatureSheet extends SapphireWidget {
+public class CreatureSheet extends SapphireComponent {
 
 	public Creature creature;
 	
@@ -74,7 +74,6 @@ public class CreatureSheet extends SapphireWidget {
 	//@LmlActor("")
 	public Array<StatusIcon> icons;
 	
-	
 	private static final HashMap<Creature, CreatureSheet> openedSheets = new HashMap<>();
 	
 	/**
@@ -90,16 +89,21 @@ public class CreatureSheet extends SapphireWidget {
 			return;
 		}
 		// sinon créé la sheet et ajoute à la map et au stage
-		CreatureSheet sheet = LmlWidgets.createGroup(new CreatureSheet().getTemplateFile());
+//		CreatureSheet sheet = LmlWidgets.createGroup(new CreatureSheet().getTemplateFile());
+		var sheet = new CreatureSheet(SapphireGame.gfx.hud.getStage());
 		sheet.refresh(c);
 		sheet.setPosition(Gdx.input.getX(), Gdx.input.getY());
 		openedSheets.put(c, sheet);
-		SapphireHud.single.getStage().addActor(sheet);
+		SapphireGame.gfx.hud.getStage().addActor(sheet);
 	}
 	
 	
+	public CreatureSheet(Stage stage) {
+		super(stage);
+	}
+	
 	@Override
-	protected void init() {
+	protected void onInit() {
 //		creature = SapphireGame.fight.teamA.get(0);
 
 		this.addListener(new DragAndResizeListener(this));
@@ -143,12 +147,10 @@ public class CreatureSheet extends SapphireWidget {
 //				return true;
 //			}
 //		});
-		
 
 		
 		refresh();
 	}
-	
 	public void refresh(Creature creature) {
 		this.creature = creature;
 		refresh();
@@ -173,7 +175,8 @@ public class CreatureSheet extends SapphireWidget {
 		this.flowstatus.clearChildren();
 		if(creature != null)
 		creature.statuses.forEach(s -> {
-			var icon = (StatusIcon) LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml");
+//			var icon = (StatusIcon) LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml");
+			var icon = new StatusIcon();
 			icon.refresh(s);
 			this.flowstatus.addActor(icon);
 		});
@@ -187,9 +190,9 @@ public class CreatureSheet extends SapphireWidget {
 	@LmlAction("close")
 	public void close() {
 		try {
-			Log.info("stage " + SapphireHud.single.getStage());
+			Log.info("stage " + SapphireGame.gfx.hud.getStage());
 			//Log.info("actors " + SapphireHud.single.getStage().getActors());
-			SapphireHud.single.getStage().getActors().removeValue(this, false);
+			SapphireGame.gfx.hud.getStage().getActors().removeValue(this, false);
 			//this.setVisible(false);
 		} catch (Exception e) {
 			Log.info("", e);
@@ -286,5 +289,14 @@ public class CreatureSheet extends SapphireWidget {
 		if(creature == null) return 0;
 		return creature.stats.resources.get(Resource.move).max(); //getResourceMax(Resource.move);
 	}
+
+
+	@Override
+	public void resizeScreen(int w, int h, boolean centerCam) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	
 }

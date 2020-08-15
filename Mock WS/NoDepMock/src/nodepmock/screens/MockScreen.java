@@ -11,7 +11,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 
 public class MockScreen extends ScreenAdapter {
 
-	public AbstractLmlView view;
+	public static AbstractLmlView view;
 
 	@Override
 	public void show() {

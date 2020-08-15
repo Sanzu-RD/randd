@@ -16,9 +16,9 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
-import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
-import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHudSkin;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireHudSkin;
 import com.souchy.randd.jade.meta.JadeCreature;
 import com.souchy.randd.moonstone.commons.packets.c2s.GetUpdate;
 import com.souchy.randd.moonstone.commons.packets.s2c.FullUpdate;
@@ -96,6 +96,14 @@ public class SapphireGame extends LapisGame {
 		}
 	}
 	
+	@Override
+	public void render() {
+		// render 3D
+		if (screen != null) screen.render(Gdx.graphics.getDeltaTime());
+		// render UI
+		if(gfx.renderUI) gfx.renderView(Gdx.graphics.getDeltaTime());
+	}
+	
 
 	@Override
 	public SapphireScreen getStartScreen() {
@@ -107,7 +115,8 @@ public class SapphireGame extends LapisGame {
 		// player hud
 		SapphireHudSkin.play(fight.creatures.first()); //.family.get(0)); // fight.teamA.get(0));
 //		SapphireHud.timeline.refresh();
-		SapphireHud.refreshTimeline();
+//		SapphireHud.refreshTimeline();
+//		gfx.hud.timeline.init();
 //		gfx.startPfx(fight.creatures.first());
 	}
 	

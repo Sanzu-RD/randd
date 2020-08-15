@@ -1,8 +1,7 @@
-package com.souchy.randd.ebishoal.sapphire.ux;
-
-import java.util.ArrayList;
+package com.souchy.randd.ebishoal.sapphire.ux.components;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -15,24 +14,21 @@ import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 
 import gamemechanics.ext.AssetData;
 
-public class Timeline extends SapphireWidget {
-
-	//@LmlActor() ?
-	//public Array<TimelineIcon> creatures;
-//	
-//	public Timeline(Skin skin) {
-//		super(skin);
-//		// TODO Auto-generated constructor stub
-//	}
-
+public class Timeline extends SapphireComponent {
 
 	@LmlActor("table")
 	public Table table;
 	
 	
+	public Timeline(Stage stage) {
+		super(stage);
+	}
+
+
 	@Override
 	public String getTemplateId() {
 		return "timeline";
@@ -40,7 +36,7 @@ public class Timeline extends SapphireWidget {
 
 
 	@Override
-	protected void init() {
+	protected void onInit() {
 //		Log.info("Timeline.init()");
 		this.addListener(new DragAndResizeListener(this));
 		refresh();
@@ -118,6 +114,13 @@ public class Timeline extends SapphireWidget {
 		}
 //		Log.info("Timeline.getCreatureIcon("+index+") = " + icon);
 		return icon;
+	}
+
+
+	@Override
+	public void resizeScreen(int w, int h, boolean centerCam) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 //	

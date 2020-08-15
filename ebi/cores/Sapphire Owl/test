@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="gfx.shadows">true</entry>
+<entry key="gfx.background">true</entry>
+<entry key="sound.music">0</entry>
+<entry key="sound.general">0</entry>
+<entry key="functionality.centerline">false</entry>
+<entry key="gfx.blur">true</entry>
+<entry key="sound.ui">0</entry>
+<entry key="sound.ambiance">0</entry>
+<entry key="sound.fx">0</entry>
+<entry key="functionality.grid">false</entry>
+<entry key="general.locale">en</entry>
+<entry key="functionality.lineofsight">false</entry>
+<entry key="gfx.postProcess">true</entry>
+<entry key="gfx.stencil">true</entry>
+<entry key="functionality.ruler">false</entry>
+<entry key="gfx.backgroundnPath"></entry>
+</properties>

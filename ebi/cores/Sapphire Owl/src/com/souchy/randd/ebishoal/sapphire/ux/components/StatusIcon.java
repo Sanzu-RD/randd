@@ -1,13 +1,14 @@
-package com.souchy.randd.ebishoal.sapphire.ux;
+package com.souchy.randd.ebishoal.sapphire.ux.components;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 
 import data.new1.timed.Status;
 
-public class StatusIcon extends SapphireWidget { //Stack {
+public class StatusIcon extends SapphireComponent { //Stack {
 //
 //	public StatusIcon(Skin skin) {
 //		super(skin);
@@ -38,7 +39,7 @@ public class StatusIcon extends SapphireWidget { //Stack {
 	}
 
 	@Override
-	protected void init() {
+	protected void onInit() {
 		refresh(null);
 	}
 
@@ -61,6 +62,12 @@ public class StatusIcon extends SapphireWidget { //Stack {
 	@Override
 	public String getTemplateId() {
 		return "statusicon";
+	}
+
+	@Override
+	public void resizeScreen(int w, int h, boolean centerCam) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

@@ -66,6 +66,10 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	// UI -------------------------------------
 	// ----------------------------------------
 	private LapisHud view;
+	
+	// ----------------------------------------
+	// OTHER -------------------------------------
+	// ----------------------------------------
 	private LineDrawing lining;
 	private Texture background;
 

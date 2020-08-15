@@ -2,7 +2,7 @@
 <!DOCTYPE parameters SYSTEM "lml.dtd">
 
 
-<table id="parameters" fillparent="true" defaultpad="5" debug="false">
+<root id="root" fillparent="true" defaultpad="5" debug="false">
 	<scrollpane id="scrollpane" debug="false" align="center" scrollingDisabledX="true" forceScrollY="true" fadeScrollbars="false" flickScroll="false">
 		<table debug="true" defaultpad="10">
 			<!-- General -->
@@ -15,7 +15,6 @@
 				<selectbox id="general.locale.value" selected="#prefs.general.locale" onChange="$onChangeVal" growx="true"/>
 				<:row/>
 			</table>
-
 
 			
 			<!-- UI -->
@@ -140,4 +139,4 @@
 
 		</table>
 	</scrollpane>
-</table>
+</root>

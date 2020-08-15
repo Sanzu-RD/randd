@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.ux;
+package com.souchy.randd.ebishoal.sapphire.ux.components;
 
 import com.kotcrab.vis.ui.widget.Tooltip;
 

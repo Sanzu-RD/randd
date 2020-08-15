@@ -1,6 +1,7 @@
-package com.souchy.randd.ebishoal.sapphire.ux;
+package com.souchy.randd.ebishoal.sapphire.ux.components;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
@@ -9,8 +10,9 @@ import com.github.czyzby.lml.annotation.LmlActor;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 
-public class QuickOptions extends SapphireWidget {
+public class QuickOptions extends SapphireComponent {
 
 	@LmlActor("btnIsoTop")
 	public Stack btnIsoTop;
@@ -29,13 +31,12 @@ public class QuickOptions extends SapphireWidget {
 	@LmlActor("imgCenterline")
 	public Image imgCenterline;
 	
-	@Override
-	public String getTemplateId() {
-		return "quickoptions";
+	public QuickOptions(Stage stage) {
+		super(stage);
 	}
 
 	@Override
-	protected void init() {
+	protected void onInit() {
 		//var c = imgIsoTop.getColor();
 //		Log.info("Quick options init " + lblIsoTop);
 		LapisUtil.onClick(btnIsoTop, this::clickIsoTop);
@@ -48,6 +49,11 @@ public class QuickOptions extends SapphireWidget {
 		//LapisUtil.setColor(this, new Color(1, 1, 1, 0.5f));
 		LapisUtil.onHover(btnIsoTop, Color.RED);
 		LapisUtil.onHover(imgRuler, Color.RED);
+	}
+
+	@Override
+	public String getTemplateId() {
+		return "quickoptions";
 	}
 	
 	/**
@@ -86,23 +92,26 @@ public class QuickOptions extends SapphireWidget {
 	 */
 	@LmlAction("clickGrid")
 	public void clickGrid() {
-		SapphireOwl.conf.activateCenterline = !SapphireOwl.conf.activateGrid;
-		
+		SapphireOwl.conf.functionality.grid = !SapphireOwl.conf.functionality.grid;
 	}
 	/**
 	 * Show the ruler (letters on one side and numbers on the other side, as in chess)
 	 */
 	@LmlAction("clickRuler")
 	public void clickRuler() {
-		SapphireOwl.conf.activateCenterline = !SapphireOwl.conf.activateRuler;
-		
+		SapphireOwl.conf.functionality.ruler = !SapphireOwl.conf.functionality.ruler;
 	}
 	/**
 	 * Activate centerline highliting (highlights the row and column of the currently hovered cell)
 	 */
 	@LmlAction("clickCenterline")
 	public void clickCenterline() {
-		SapphireOwl.conf.activateCenterline = !SapphireOwl.conf.activateCenterline;
+		SapphireOwl.conf.functionality.centerline = !SapphireOwl.conf.functionality.centerline;
+	}
+
+	@Override
+	public void resizeScreen(int w, int h, boolean centerCam) {
+		// TODO Auto-generated method stub
 		
 	}
 	

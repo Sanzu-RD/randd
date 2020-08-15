@@ -1,7 +1,8 @@
-package com.souchy.randd.ebishoal.sapphire.ux;
+package com.souchy.randd.ebishoal.sapphire.ux.components;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.kotcrab.vis.ui.widget.ScrollableTextArea;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
@@ -9,8 +10,9 @@ import com.kotcrab.vis.ui.widget.VisTextField;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.ebishoal.commons.lapis.util.DragAndResizeListener;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 
-public class Chat extends SapphireWidget {
+public class Chat extends SapphireComponent {
 
 	@LmlActor("scroll")
 	public VisScrollPane scroll;
@@ -21,23 +23,12 @@ public class Chat extends SapphireWidget {
 	@LmlActor("field")
 	public VisTextField field;
 
-	
-	@Override
-	public String getTemplateId() {
-		return "chat";
+	public Chat(Stage stage) {
+		super(stage);
 	}
-    
-//	public Chat(Skin skin) {
-//		super(skin);
-//		Log.info("ctor chat");
-//	}
 
 	@Override
-	protected void init() {
-		refresh();
-	}
-	
-	public void refresh() {
+	protected void onInit() {
 		area.layout();
 		area.appendText("\n");
 		area.appendText("x : " + this.getX());
@@ -97,6 +88,18 @@ public class Chat extends SapphireWidget {
 		
 		this.addListener(new DragAndResizeListener(this));
 	}
+	
+	@Override
+	public String getTemplateId() {
+		return "chat";
+	}
+
+	@Override
+	public void resizeScreen(int w, int h, boolean centerCam) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 	
 }
