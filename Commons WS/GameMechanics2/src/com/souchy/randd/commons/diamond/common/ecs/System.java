@@ -11,7 +11,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 public abstract class System {
 
 	// secret hack
-	protected Engine engine;
+	private final Engine engine;
 	
 	public System(Engine engine) {
 		Log.info("System " + this + " register to " + engine);

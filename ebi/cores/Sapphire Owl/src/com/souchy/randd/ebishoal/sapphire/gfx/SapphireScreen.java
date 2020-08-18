@@ -29,6 +29,8 @@ import com.souchy.randd.ebishoal.sapphire.controls.SapphireController;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireLmlParser;
 
 import Effekseer.swig.EffekseerBackendCore;
 import Effekseer.swig.EffekseerEffectCore;
@@ -37,31 +39,30 @@ import Effekseer.swig.EffekseerTextureType;
 import particles.ParticleEffekseer;
 
 public class SapphireScreen extends LapisScreen {
-	
+
 	// light cycle
 	private float time = 0; // current time
 	private float period = 30; // period time in seconds
 	private double radius = 2; // circle radius
-	
+
 	public SapphireHud hud;
 	private SapphireController controller;
 
 //	private EffekseerEffectCore effekseerEffectCore;
-	
+
 	private long timeStart = 0;
-	
+
 //	public static ParticleEffekseer effect;
-	
+
 	public SapphireScreen() {
 //		startPfx(null);
 	}
-	
+
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
 		super.resize(width, height);
 	}
-	
+
 	public void startPfx() {
 		startPfx(null);
 	}
@@ -81,7 +82,7 @@ public class SapphireScreen extends LapisScreen {
         	effect.setLocation((float) pos.x + 0.5f, 1.5f, (float) -pos.y - 0.5f);
 //        	getEffekseer().addParticleEffekseer(effect);
         	effect.play();
-        	
+
         	c = SapphireGame.fight.creatures.first();
         	var status = DiamondModels.statuses.get(1).copy(SapphireGame.fight);
         	status.add(effect);
@@ -90,7 +91,7 @@ public class SapphireScreen extends LapisScreen {
             e.printStackTrace();
         }
 	}
-	
+
 	@Override
 	protected void act(float delta) {
 		// update title
@@ -106,24 +107,26 @@ public class SapphireScreen extends LapisScreen {
 		}
 		if(controller != null) controller.act(delta);
 		getCamera().update();
-		
+
 		// update all engine's systems 	 //and entities
 		SapphireGame.fight.update(delta);
-		
+
 //		if(System.currentTimeMillis() - timeStart > 5000) {
 ////			startPfx();
 //		}
 	}
-	
+
 	@Override
 	public LineDrawing createLining(Camera cam, BoundingBox worldBB) {
 //		return super.createLining(cam, worldBB);
-		return null; 
+		return null;
 	}
-	
+
 	@Override
 	public LapisHud createUI() {
+		SapphireLmlParser.init();
 		hud = new SapphireHud();
+		hud.reload();
 		//Log.info("life : " + view.life.getColor() + ", " + view.life.getStyle().fontColor);
 		return hud;
 	}
@@ -135,14 +138,14 @@ public class SapphireScreen extends LapisScreen {
 		multi.addProcessor(controller = new SapphireController(getCamera()));
 		return multi;
 	}
-	
+
 	@Override
 	public Camera createCam(boolean useOrtho) {
 //		float viewportSize = 17; // acts as a zoom (lower number is closer zoom)
 //		var cam = new OrthographicCamera(viewportSize * 16 / 9, viewportSize);
 		return new OrthographicCamera();
 	}
-	
+
 	@Override
 	public Viewport createViewport(Camera cam) {
 		// how many meters high is the screen (ex 1920/1080 = 28.4/16)
@@ -151,7 +154,7 @@ public class SapphireScreen extends LapisScreen {
 		viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		return viewport;
 	}
-	
+
 	@Override
 	public World createWorld() {
 		return new SapphireWorld();
@@ -170,15 +173,15 @@ public class SapphireScreen extends LapisScreen {
 		getCamera().far = 120f;
 		getCamera().update();
 	}
-	
+
 	@Override
 	public void resetCamera() {
 //		super.resetCamera();
 		topView();
-		getCamera().rotate(45, getCamera().up.y, -getCamera().up.x, 0); 
+		getCamera().rotate(45, getCamera().up.y, -getCamera().up.x, 0);
 	}
-	
-	
+
+
 	@Override
 	public void renderWorld() {
 		super.renderWorld();

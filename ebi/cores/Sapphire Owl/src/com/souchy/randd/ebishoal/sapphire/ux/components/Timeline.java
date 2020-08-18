@@ -1,8 +1,7 @@
-package com.souchy.randd.ebishoal.sapphire.ux;
-
-import java.util.ArrayList;
+package com.souchy.randd.ebishoal.sapphire.ux.components;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.I18NBundle;
@@ -16,22 +15,14 @@ import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 
 public class Timeline extends SapphireWidget {
 
-	//@LmlActor() ?
-	//public Array<TimelineIcon> creatures;
-//	
-//	public Timeline(Skin skin) {
-//		super(skin);
-//		// TODO Auto-generated constructor stub
-//	}
-
-
 	@LmlActor("table")
 	public Table table;
-	
-	
+
+
 	@Override
 	public String getTemplateId() {
 		return "timeline";
@@ -39,18 +30,18 @@ public class Timeline extends SapphireWidget {
 
 
 	@Override
-	protected void init() {
+	protected void onInit() {
 //		Log.info("Timeline.init()");
 		this.addListener(new DragAndResizeListener(this));
 		refresh();
 	}
-	
+
 	public void refresh() {
 		Log.info("UI Timeline refresh");
 		table.getChildren().forEach(a -> {
 			var stack = (Stack) a;
 			var img = (RoundImage) stack.getChild(0);
-			LapisUtil.setImage(img, getCreatureIcon(img)); 
+			LapisUtil.setImage(img, getCreatureIcon(img));
 		});
 //		table.clear();
 //		if(SapphireGame.fight == null) return;
@@ -64,7 +55,7 @@ public class Timeline extends SapphireWidget {
 //			this.table.row();
 //		});
 	}
-	
+
 	@LmlAction("getCreatureCount")
 	public int getCreatureCount() {
 		int count = 0;
@@ -74,7 +65,7 @@ public class Timeline extends SapphireWidget {
 //		Log.info("Timeline.getCreatureCount() = " + count);
 		return count;
 	}
-	
+
 	@LmlAction("getCreatureName")
 	public String getCreatureName(Object actor) {
 		if(actor == null) {
@@ -95,7 +86,7 @@ public class Timeline extends SapphireWidget {
 //		Log.info("Timeline.getCreatureName("+index+") = " + name);
 		return name; // "Sungjin";
 	}
-	
+
 	@LmlAction("getCreatureIcon")
 	public String getCreatureIcon(Object actor) {
 		if(actor == null) {
@@ -118,11 +109,18 @@ public class Timeline extends SapphireWidget {
 //		Log.info("Timeline.getCreatureIcon("+index+") = " + icon);
 		return icon;
 	}
-	
-//	
+
+
+	@Override
+	public void resizeScreen(int w, int h, boolean centerCam) {
+		// TODO Auto-generated method stub
+
+	}
+
+//
 //	@LmlAction("onselect")
 //	public void onSelect(TimelineIcon source) {
 //		// update status bar with new status icons
 //	}
-	
+
 }

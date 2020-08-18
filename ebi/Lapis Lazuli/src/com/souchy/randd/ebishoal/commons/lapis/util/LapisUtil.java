@@ -29,7 +29,7 @@ public class LapisUtil {
 		if((table.getAlign() & Align.right) != 0) x = table.getStage().getWidth() - table.getX(); // right
 		else if((table.getAlign() & Align.left) != 0) x = table.getX(); // left
 		else x = table.getStage().getWidth() / 2f - table.getX(); // center
-		
+
 		table.setPosition(x, y, table.getAlign());
 	}
 	

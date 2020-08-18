@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="com/souchy/randd/ebishoal/sapphire/models/EbiCell.java|com/souchy/randd/ebishoal/sapphire/ui_old/|com/souchy/randd/ebishoal/sapphire/data/EbiBoard.java|com/souchy/randd/ebishoal/sapphire/data/EbiCell.java|com/souchy/randd/ebishoal/sapphire/data/EbiCharacter.java|com/souchy/randd/ebishoal/sapphire/ui/SapphireViewport.java|com/souchy/randd/ebishoal/sapphire/data/|com/souchy/randd/ebishoal/sapphire/main/SapphireModule.java|com/souchy/randd/ebishoal/sapphire/ux/SapphireUX.java|com/souchy/randd/ebishoal/sapphire/net/AuthResponseHandler.java|com/souchy/randd/ebishoal/sapphire/controls/CellInputEvent.java|com/souchy/randd/ebishoal/sapphire/controls/CellInputEventType.java|com/souchy/randd/ebishoal/sapphire/controls/CellInputListener.java|com/souchy/randd/ebishoal/sapphire/ux/Chatlist.java" kind="src" path="src">
+	<classpathentry excluding="com/souchy/randd/ebishoal/sapphire/models/EbiCell.java|com/souchy/randd/ebishoal/sapphire/ui_old/|com/souchy/randd/ebishoal/sapphire/data/EbiBoard.java|com/souchy/randd/ebishoal/sapphire/data/EbiCell.java|com/souchy/randd/ebishoal/sapphire/data/EbiCharacter.java|com/souchy/randd/ebishoal/sapphire/ui/SapphireViewport.java|com/souchy/randd/ebishoal/sapphire/data/|com/souchy/randd/ebishoal/sapphire/main/SapphireModule.java|com/souchy/randd/ebishoal/sapphire/ux/SapphireUX.java|com/souchy/randd/ebishoal/sapphire/net/AuthResponseHandler.java|com/souchy/randd/ebishoal/sapphire/controls/CellInputEvent.java|com/souchy/randd/ebishoal/sapphire/controls/CellInputEventType.java|com/souchy/randd/ebishoal/sapphire/controls/CellInputListener.java|com/souchy/randd/ebishoal/sapphire/ux/Chatlist.java|com/souchy/randd/ebishoal/sapphire/ux/SapphireWidget.java" kind="src" path="src">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="F:/Users/Souchy/Desktop/Robyn/Git/res/libs gdx/natives"/>
 		</attributes>
@@ -17,19 +17,18 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DB"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Effekseer"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-white"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SmoothRivers"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SmoothRivers"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-white"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Effekseer 2"/>
 	<classpathentry kind="output" path="bin/"/>
 </classpath>

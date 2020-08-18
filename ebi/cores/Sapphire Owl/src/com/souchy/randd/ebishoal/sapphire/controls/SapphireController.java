@@ -31,13 +31,13 @@ import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
-import com.souchy.randd.ebishoal.sapphire.ux.CreatureSheet;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
+import com.souchy.randd.ebishoal.sapphire.ux.components.CreatureSheet;
 
 public class SapphireController extends CameraInputController {
 
@@ -75,10 +75,10 @@ public class SapphireController extends CameraInputController {
 	public SapphireController(Camera camera) {
 		super(camera);
 
-		addOnKeyDown(Keys.ESCAPE, () -> SapphireHud.parameters.toggleVisibility());
+		addOnKeyDown(Keys.ESCAPE, () -> SapphireGame.gfx.hud.parameters.toggleVisibility());
 		addOnKeyDown(Keys.SPACE, () -> {
 			SapphireGame.gfx.resetCamera();
-			SapphireHud.refresh();
+			SapphireGame.gfx.hud.reload(); //.refresh();
 			//GlobalLML.lml().reloadViews();
 		});
 
@@ -87,7 +87,6 @@ public class SapphireController extends CameraInputController {
 		addOnKeyDown(UP, () -> camera.rotate(45, -camera.up.y, camera.up.x, 0));
 		addOnKeyDown(DOWN, () -> camera.rotate(45, camera.up.y, -camera.up.x, 0));
 		
-		addOnKeyDown(Keys.E, SapphireHud::testCreatureSheet);
 		addOnKeyDown(Keys.R, () -> SapphireGame.gfx.resetCamera());
 		addOnKeyDown(Keys.T, () -> SapphireGame.gfx.topView());
 		addOnKeyDown(Keys.P, () -> SapphireGame.gfx.startPfx());
@@ -98,7 +97,7 @@ public class SapphireController extends CameraInputController {
 			var creature = SapphireGame.fight.creatures.first();
 			creature.stats.resources.get(Resource.life).fight += 10;
 			Log.info(creature.stats.resources.get(Resource.life).toString());
-			SapphireHud.refresh();
+			SapphireGame.gfx.hud.reload(); // SapphireHud.refresh();
 		});
 		
 
@@ -323,7 +322,7 @@ public class SapphireController extends CameraInputController {
 		var pos = getCursorWorldPos(x, y);
 		if(draggedEntity != null) {
 			var epos = draggedEntity.get(Position.class).set(pos.x, pos.y);
-			Log.info("dragged entity " + epos);
+			//Log.info("dragged entity " + epos);
 		}
 		SapphireWorld.world.cursor.transform.setTranslation(pos.sub(0.5f, 0.5f, 0f));
 		

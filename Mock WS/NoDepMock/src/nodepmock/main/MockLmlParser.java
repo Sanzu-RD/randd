@@ -50,7 +50,8 @@ public class MockLmlParser {
 		Log.info("MockLmlParser test sound.general : " + i18n.get("sound.general") + " = " + prefs.getInteger("sound.general"));
 		
 
-		parser = VisLml.parser()
+		parser = new SapphireLmlParserBuilder() // VisLml.parser()
+				.tag(new RootTagProvider(), "root")
 				.actions("", new MockLmlGlobalActions())
 				.preferences("prefs", prefs)
 				.i18nBundle("i18n", i18n)

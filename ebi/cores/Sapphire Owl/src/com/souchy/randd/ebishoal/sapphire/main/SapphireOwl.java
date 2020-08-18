@@ -38,14 +38,17 @@ public class SapphireOwl extends LapisCore {
 			var username = args[3];
 			var password = args[4];
 			var fightid = Integer.parseInt(args[5]);
-
-			// authentifie moonstone et join le fight 
-			moon = new Moonstone(ip, port, core); 
-			moon.channel.attr(Moonstone.authKey).set(new String[]{ username, password, fightid + "" });
-			Moonstone.moon.write(new GetSalt());
 			
-			Log.info("******************************************************************************");
+			try {
+				// authentifie moonstone et join le fight
+				moon = new Moonstone(ip, port, core);
+				moon.channel.attr(Moonstone.authKey).set(new String[] { username, password, fightid + "" });
+				Moonstone.moon.write(new GetSalt());
+			} catch (Exception e) {
+				moon = null;
+			}
 		}
+		Log.info("******************************************************************************");
 		
 		core.start();
 	}

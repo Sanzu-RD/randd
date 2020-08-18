@@ -17,7 +17,7 @@ import nodepmock.main.DrawableGenerator;
 
 public class MockScreen extends ScreenAdapter {
 
-	public AbstractLmlView view;
+	public static AbstractLmlView view;
 
 	public ModelBatch batch = new ModelBatch();
 	

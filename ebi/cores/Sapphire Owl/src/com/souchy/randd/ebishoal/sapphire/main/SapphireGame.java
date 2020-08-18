@@ -24,9 +24,9 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
-import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
-import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHudSkin;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireHudSkin;
 import com.souchy.randd.jade.meta.JadeCreature;
 import com.souchy.randd.moonstone.commons.packets.c2s.GetUpdate;
 import com.souchy.randd.moonstone.commons.packets.s2c.FullUpdate;
@@ -36,19 +36,19 @@ import Effekseer.swig.EffekseerBackendCore;
 import Effekseer.swig.EffekseerManagerCore;
 
 public class SapphireGame extends LapisGame {
-	
-	public static SapphireScreen gfx;
 
 	public static Fight fight; // FIXME replace this with Moonstone.fight or use the reference for now i guess
-	
+
+	public static SapphireScreen gfx;
+
 	public static MusicPlayer music;
-	
+
 	public static SapphireEntitySystem renderableEntitySystem;
-	
+
 	@Override
 	public void init() {
 		// init elements
-		Elements.values(); 
+		Elements.values();
 		// models configurations (creatures, spells, statuses)
 		AssetData.loadResources();
 		// init creatures & spells models
@@ -63,23 +63,24 @@ public class SapphireGame extends LapisGame {
 		LapisAssets.loadI18NBundles(Gdx.files.internal("res/i18n/"));
 
 		music = new MusicPlayer();
-		
+
 		// screen
 		gfx = new SapphireScreen();
-		
+		gfx.init();
+
 		// pfx
 		ParticleEffectLoader.ParticleEffectLoadParameter params = new ParticleEffectLoader.ParticleEffectLoadParameter(gfx.getPfxSystem().getBatches());
 		LapisAssets.loadParticleEffects(Gdx.files.internal("res/fx/"), params);
-		
+
 		Log.info("LapisResources : { " + String.join(", ", LapisAssets.assets.getAssetNames()) + " }");
 
-		
+
 		try {
 			Log.info("data.creatures : " + DiamondModels.creatures);
 
 			SapphireGame.fight = Moonstone.fight = new Fight();
 			renderableEntitySystem = new SapphireEntitySystem(Moonstone.fight);
-			
+
 			// ask for fight data after assets have been loaded
 			if(Moonstone.moon != null) {
 				Moonstone.bus.register(this);
@@ -88,28 +89,37 @@ public class SapphireGame extends LapisGame {
 
 			// player hud
 			// SapphireHudSkin.play(fight.teamA.get(0));
-			
+
 		} catch (Exception e) {
 			Log.error("SapphireOwl creature error : ", e);
 			Gdx.app.exit();
 			System.exit(0);
 		}
 	}
-	
+
+	@Override
+	public void render() {
+		// render 3D
+		if (screen != null) screen.render(Gdx.graphics.getDeltaTime());
+		// render UI
+		if(gfx.renderUI && gfx.hud.isLoaded) gfx.renderView(Gdx.graphics.getDeltaTime());
+	}
+
 
 	@Override
 	public SapphireScreen getStartScreen() {
 		return gfx;
 	}
-	
+
 	@Subscribe
 	public void fullUpdateHandler(FullUpdate msg) {
 		// player hud
 		SapphireHudSkin.play(fight.creatures.first()); //.family.get(0)); // fight.teamA.get(0));
 //		SapphireHud.timeline.refresh();
-		SapphireHud.refreshTimeline();
+//		SapphireHud.refreshTimeline();
+//		gfx.hud.timeline.init();
 //		gfx.startPfx(fight.creatures.first());
 	}
-	
-	
+
+
 }

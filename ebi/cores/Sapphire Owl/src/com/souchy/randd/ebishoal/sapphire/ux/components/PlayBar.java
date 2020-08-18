@@ -1,19 +1,17 @@
-package com.souchy.randd.ebishoal.sapphire.ux;
+package com.souchy.randd.ebishoal.sapphire.ux.components;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 
-public class PlayBar extends SapphireWidget {
-
-//	public PlayBar(Skin skin) {
-//		super(skin);
-//	}
+public class PlayBar extends SapphireComponent {
 
 	@LmlActor("life")
 	public Label life;
@@ -31,12 +29,7 @@ public class PlayBar extends SapphireWidget {
 	public Image pageDownImage;
 	
 	@Override
-	public String getTemplateId() {
-		return "playbar";
-	}
-
-	@Override
-	protected void init() {
+	protected void onInit() {
 		createListeners();
 //		if(this.getX() == -1) 
 //			this.setX(this.getStage().getWidth() / 2 - this.getWidth() / 2);
@@ -44,6 +37,11 @@ public class PlayBar extends SapphireWidget {
 //			this.setY(15);
 	}
 
+	@Override
+	public String getTemplateId() {
+		return "playbar";
+	}
+	
 	private void createListeners() {
 		var btnShaderListener = new ClickListener() {
 			@Override
@@ -83,6 +81,12 @@ public class PlayBar extends SapphireWidget {
 		
 		pageUp.addListener(btnShaderListener);
 		pageDown.addListener(btnShaderListener);
+	}
+
+	@Override
+	public void resizeScreen(int w, int h, boolean centerCam) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

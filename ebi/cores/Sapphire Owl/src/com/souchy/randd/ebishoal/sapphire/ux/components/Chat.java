@@ -1,7 +1,8 @@
-package com.souchy.randd.ebishoal.sapphire.ux;
+package com.souchy.randd.ebishoal.sapphire.ux.components;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.google.common.eventbus.Subscribe;
 import com.kotcrab.vis.ui.widget.ScrollableTextArea;
@@ -11,35 +12,21 @@ import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.ebishoal.commons.lapis.util.DragAndResizeListener;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.moonstone.commons.packets.ICM;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 
-public class Chat extends SapphireWidget {
+public class Chat extends SapphireComponent {
 
 	@LmlActor("scroll")
 	public VisScrollPane scroll;
-	
+
 	@LmlActor("area")
 	public ScrollableTextArea area; /// HighlightTextArea
 
 	@LmlActor("field")
 	public VisTextField field;
 
-	
 	@Override
-	public String getTemplateId() {
-		return "chat";
-	}
-    
-//	public Chat(Skin skin) {
-//		super(skin);
-//		Log.info("ctor chat");
-//	}
-
-	@Override
-	protected void init() {
-		refresh();
-	}
-	
-	public void refresh() {
+	protected void onInit() {
 		area.layout();
 		area.appendText("\n");
 		area.appendText("x : " + this.getX());
@@ -49,7 +36,7 @@ public class Chat extends SapphireWidget {
 		area.appendText("h " + area.getHeight() + ", " + scroll.getHeight());
 //		area.appendText("bug.3style : " + area.getStyle());
 //		field.setText("w :" + field.getWidth());
-		
+
 		scroll.setOverscroll(false, false);
 		scroll.setFlickScroll(false);
 		scroll.setFadeScrollBars(false);
@@ -68,7 +55,7 @@ public class Chat extends SapphireWidget {
 				getStage().setScrollFocus(null);
 			}
 		};
-		
+
 		// remove area listeners
 		area.clearListeners();
 		// focus on hover
@@ -86,23 +73,35 @@ public class Chat extends SapphireWidget {
 				return true;
 			}
 		});
-		
-		
+
+
 		//LapisUtil.onHover(field, focus, unfocus);
 		//LapisUtil.onClick(field, focus);
 		//unfocus.call();
-		
+
 		// make chat transparent when not hovering
 		var out = new Color(1, 1, 1, 0.5f);
-		LapisUtil.onHover(this, Color.WHITE, out);  //should prob do the focus lambda thing from here as well and make the background=drawable("transparent") on exit 
+		LapisUtil.onHover(this, Color.WHITE, out);  //should prob do the focus lambda thing from here as well and make the background=drawable("transparent") on exit
 		LapisUtil.setColor(this, out);
-		
+
 		this.addListener(new DragAndResizeListener(this));
 	}
+
+	@Override
+	public String getTemplateId() {
+		return "chat";
+	}
+
+	@Override
+	public void resizeScreen(int w, int h, boolean centerCam) {
+		// TODO Auto-generated method stub
+
+	}
+
 
 	@Subscribe
 	public void onMsg(ICM icm) {
 		area.appendText("\n" + icm.author + ": " + icm.content);
 	}
-	
+
 }

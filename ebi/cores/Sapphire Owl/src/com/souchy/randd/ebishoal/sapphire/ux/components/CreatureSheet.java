@@ -1,9 +1,9 @@
-package com.souchy.randd.ebishoal.sapphire.ux;
+package com.souchy.randd.ebishoal.sapphire.ux.components;
 
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -12,7 +12,6 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.kotcrab.vis.ui.layout.HorizontalFlowGroup;
-import com.kotcrab.vis.ui.widget.ScrollableTextArea;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.models.Creature;
@@ -23,32 +22,33 @@ import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.util.DragAndResizeListener;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireAssets;
-import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
-import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.LmlWidgets;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 
 public class CreatureSheet extends SapphireWidget {
 
 	public Creature creature;
-	
+
 	@LmlActor("closeBtn")
 	public Button closeBtn;
-	
+
 //	@LmlActor("scrolldesc")
 //	public VisScrollPane scrolldesc;
 //	@LmlActor("areadesc")
 //	public ScrollableTextArea areadesc;
-	
+
 	@LmlActor("scrollstatus")
 	public VisScrollPane scrollstatus;
 	@LmlActor("flowstatus")
 	public HorizontalFlowGroup flowstatus;
 
-	
+
 	@LmlActor("name")
 	public Label name;
 	@LmlActor("icon")
 	public Image icon;
-	
+
 	@LmlActor("lifeShield")
 	public Label lifeShield;
 	@LmlActor("lifeCurrent")
@@ -72,10 +72,9 @@ public class CreatureSheet extends SapphireWidget {
 
 	//@LmlActor("")
 	public Array<StatusIcon> icons;
-	
-	
+
 	private static final HashMap<Creature, CreatureSheet> openedSheets = new HashMap<>();
-	
+
 	/**
 	 * Je pense que toutes les sheets devraient être créées d'avance et juste refreshed on toggle
 	 * @param c
@@ -89,22 +88,23 @@ public class CreatureSheet extends SapphireWidget {
 			return;
 		}
 		// sinon créé la sheet et ajoute à la map et au stage
-		CreatureSheet sheet = LmlWidgets.createGroup(new CreatureSheet().getTemplateFile());
+//		CreatureSheet sheet = LmlWidgets.createGroup(new CreatureSheet().getTemplateFile());
+		var sheet = new CreatureSheet();
 		sheet.refresh(c);
 		sheet.setPosition(Gdx.input.getX(), Gdx.input.getY());
 		openedSheets.put(c, sheet);
-		SapphireHud.single.getStage().addActor(sheet);
+		SapphireGame.gfx.hud.getStage().addActor(sheet);
 	}
-	
-	
+
+
 	@Override
-	protected void init() {
+	protected void onInit() {
 //		creature = SapphireGame.fight.teamA.get(0);
 
 		this.addListener(new DragAndResizeListener(this));
-		
+
 		LapisUtil.onClick(closeBtn, this::close);
-		
+
 //		scrolldesc.setOverscroll(false, false);
 //		scrolldesc.setFlickScroll(false);
 //		scrolldesc.setFadeScrollBars(false);
@@ -122,7 +122,7 @@ public class CreatureSheet extends SapphireWidget {
 //		areadesc.clearListeners();
 		//flowstatus.clearListeners();
 		//scrollstatus.clearListeners();
-		
+
 		Lambda focusStatus = () -> getStage().setScrollFocus(scrollstatus);
 //		Lambda unfocusDesc = () -> {
 //			if(!areadesc.hasKeyboardFocus()) getStage().setScrollFocus(null);
@@ -142,12 +142,10 @@ public class CreatureSheet extends SapphireWidget {
 //				return true;
 //			}
 //		});
-		
 
-		
+
 		refresh();
 	}
-	
 	public void refresh(Creature creature) {
 		this.creature = creature;
 		refresh();
@@ -156,23 +154,24 @@ public class CreatureSheet extends SapphireWidget {
 		name.setText(getCreatureName());
 //		areadesc.setText(getDescription());
 		icon.setDrawable(LapisUtil.getImage(getCreatureModelIcon()));
-		
+
 		lifeShield.setText(getLifeShield());
 		lifeCurrent.setText(getLifeCurrent());
 		lifeMax.setText(getLifeMax());
-		
+
 		manaShield.setText(getManaShield());
 		manaCurrent.setText(getManaCurrent());
 		manaMax.setText(getManaMax());
-		
+
 		moveShield.setText(getMoveShield());
 		moveCurrent.setText(getMoveCurrent());
 		moveMax.setText(getMoveMax());
-		
+
 		this.flowstatus.clearChildren();
 		if(creature != null)
 		creature.statuses.forEach(s -> {
-			var icon = (StatusIcon) LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml");
+//			var icon = (StatusIcon) LmlWidgets.createGroup("res/ux/sapphire/components/statusicon.lml");
+			var icon = new StatusIcon();
 			icon.refresh(s);
 			this.flowstatus.addActor(icon);
 		});
@@ -186,9 +185,9 @@ public class CreatureSheet extends SapphireWidget {
 	@LmlAction("close")
 	public void close() {
 		try {
-			Log.info("stage " + SapphireHud.single.getStage());
+			Log.info("stage " + SapphireGame.gfx.hud.getStage());
 			//Log.info("actors " + SapphireHud.single.getStage().getActors());
-			SapphireHud.single.getStage().getActors().removeValue(this, false);
+			SapphireGame.gfx.hud.getStage().getActors().removeValue(this, false);
 			//this.setVisible(false);
 		} catch (Exception e) {
 			Log.info("", e);
@@ -222,14 +221,14 @@ public class CreatureSheet extends SapphireWidget {
 		if(creature == null) return 0;
 		return creature.id;
 	}
-	
+
 	@LmlAction("getCreatureName")
 	public String getCreatureName() {
 		if(creature == null) return "null";
 		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
 		var name = i18n.get("creature." + creature.modelid + ".name");
 		Log.info("getCreatureName " + creature.modelid + " = " + name);
-		return name; 
+		return name;
 	}
 	@LmlAction("getDescription")
 	public String getDescription() {
@@ -285,5 +284,14 @@ public class CreatureSheet extends SapphireWidget {
 		if(creature == null) return 0;
 		return creature.stats.resources.get(Resource.move).max(); //getResourceMax(Resource.move);
 	}
-	
+
+
+	@Override
+	public void resizeScreen(int w, int h, boolean centerCam) {
+		// TODO Auto-generated method stub
+
+	}
+
+
+
 }
