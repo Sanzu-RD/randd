@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
 import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
@@ -12,13 +13,16 @@ import com.souchy.randd.deathshadows.nodes.pearl.messaging.SelfIdentify;
 import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.jade.meta.UserLevel;
 
+import io.netty.channel.Channel;
 
 public class BlackMoonstone extends DeathShadowCore {
 	
 	public static BlackMoonstone moon;
 	
 	public final DeathShadowTCP server;
+	
 	public Map<Integer, Fight> fights;
+	
 	
 	public static void main(String[] args) throws Exception {
 		new BlackMoonstone(args);
@@ -37,6 +41,7 @@ public class BlackMoonstone extends DeathShadowCore {
 		if(Arrays.asList(args).contains("mock")) {
 			var mock = MockFight.createFight();
 			fights.put(mock.id, mock);
+			new FightClientSystem(mock);
 		}
 		
 		// register node on pearl
@@ -49,6 +54,7 @@ public class BlackMoonstone extends DeathShadowCore {
 		if(!Arrays.asList(args).contains("async"))
 			server.block();
 	}
+
 
 	@Override
 	protected String[] getRootPackages() {

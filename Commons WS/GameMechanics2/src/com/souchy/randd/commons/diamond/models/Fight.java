@@ -16,6 +16,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 import com.souchy.randd.jade.matchmaking.Team;
+import com.souchy.randd.jade.meta.User;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.util.AttributeKey;

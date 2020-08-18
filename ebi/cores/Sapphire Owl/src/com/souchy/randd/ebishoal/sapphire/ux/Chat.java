@@ -3,12 +3,14 @@ package com.souchy.randd.ebishoal.sapphire.ux;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.github.czyzby.lml.annotation.LmlActor;
+import com.google.common.eventbus.Subscribe;
 import com.kotcrab.vis.ui.widget.ScrollableTextArea;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.ebishoal.commons.lapis.util.DragAndResizeListener;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
+import com.souchy.randd.moonstone.commons.packets.ICM;
 
 public class Chat extends SapphireWidget {
 
@@ -98,5 +100,9 @@ public class Chat extends SapphireWidget {
 		this.addListener(new DragAndResizeListener(this));
 	}
 
+	@Subscribe
+	public void onMsg(ICM icm) {
+		area.appendText("\n" + icm.author + ": " + icm.content);
+	}
 	
 }
