@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
 import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
@@ -11,7 +12,6 @@ import com.souchy.randd.deathshadows.nodes.pearl.messaging.SelfIdentify;
 import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.jade.meta.UserLevel;
 
-import gamemechanics.models.Fight;
 
 public class BlackMoonstone extends DeathShadowCore {
 	

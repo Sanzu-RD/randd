@@ -1,11 +1,11 @@
 package com.souchy.randd.deathshadows.blackmoonstone.riverhandlers;
 
+import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadows.blackmoonstone.main.BlackMoonstone;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.moonstone.CreateFight;
 
-import gamemechanics.models.Fight;
 import io.netty.channel.ChannelHandlerContext;
 
 public class CreateFightHandler implements BBMessageHandler<CreateFight> {

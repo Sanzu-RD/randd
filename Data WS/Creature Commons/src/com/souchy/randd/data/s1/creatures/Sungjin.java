@@ -1,11 +1,10 @@
 package com.souchy.randd.data.s1.creatures;
 
+import com.souchy.randd.commons.diamond.models.CreatureModel;
+import com.souchy.randd.commons.diamond.models.stats.CreatureStats;
+import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.data.s1.main.Elements;
-
-import data.new1.spellstats.CreatureStats;
-import data.new1.spellstats.base.IntStat;
-import gamemechanics.models.CreatureModel;
-import gamemechanics.statics.stats.properties.Resource;
 
 public class Sungjin extends CreatureModel {
 

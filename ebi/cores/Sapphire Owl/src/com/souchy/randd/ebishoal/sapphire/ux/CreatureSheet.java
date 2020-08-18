@@ -14,6 +14,9 @@ import com.github.czyzby.lml.annotation.LmlActor;
 import com.kotcrab.vis.ui.layout.HorizontalFlowGroup;
 import com.kotcrab.vis.ui.widget.ScrollableTextArea;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
+import com.souchy.randd.commons.diamond.ext.AssetData;
+import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
@@ -22,10 +25,6 @@ import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireWidget.LmlWidgets;
-
-import gamemechanics.ext.AssetData;
-import gamemechanics.models.Creature;
-import gamemechanics.statics.stats.properties.Resource;
 
 public class CreatureSheet extends SapphireWidget {
 

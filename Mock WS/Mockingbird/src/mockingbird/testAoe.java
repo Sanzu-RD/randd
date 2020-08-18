@@ -1,8 +1,7 @@
 package mockingbird;
 
+import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-
-import gamemechanics.common.AoeBuilders;
 
 public class testAoe {
 	

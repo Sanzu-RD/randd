@@ -1,12 +1,12 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
-import gamemechanics.common.BoardGenerator;
-import gamemechanics.ext.CellType;
-import gamemechanics.ext.MapData;
-import gamemechanics.models.Board;
-import gamemechanics.models.Cell;
-import gamemechanics.models.Fight;
-import gamemechanics.statics.properties.Targetability;
+import com.souchy.randd.commons.diamond.common.BoardGenerator;
+import com.souchy.randd.commons.diamond.ext.CellType;
+import com.souchy.randd.commons.diamond.ext.MapData;
+import com.souchy.randd.commons.diamond.models.Board;
+import com.souchy.randd.commons.diamond.models.Cell;
+import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.diamond.statics.properties.Targetability;
 
 public class EbiBoardGenerator extends BoardGenerator {
 	

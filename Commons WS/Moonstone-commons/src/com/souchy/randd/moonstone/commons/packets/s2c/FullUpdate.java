@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.souchy.randd.annotationprocessor.ID;
+import com.souchy.randd.commons.diamond.main.DiamondModels;
+import com.souchy.randd.commons.diamond.models.Cell;
+import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.diamond.models.Spell;
+import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
-import data.new1.timed.Status;
-import gamemechanics.main.DiamondModels;
-import gamemechanics.models.Cell;
-import gamemechanics.models.Creature;
-import gamemechanics.models.Fight;
-import gamemechanics.models.Spell;
 import io.netty.buffer.ByteBuf;
 
 /**

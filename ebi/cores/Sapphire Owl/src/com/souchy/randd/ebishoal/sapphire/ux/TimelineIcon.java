@@ -1,6 +1,6 @@
 package com.souchy.randd.ebishoal.sapphire.ux;
 
-import gamemechanics.models.Creature;
+import com.souchy.randd.commons.diamond.models.Creature;
 
 /**
  * Icon of a character in the timeline

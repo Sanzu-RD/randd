@@ -1,13 +1,13 @@
 package com.souchy.randd.ebishoal.amethyst.main;
 
+import com.souchy.randd.commons.diamond.ext.AssetData;
+import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.coraline.Coraline;
 
-import gamemechanics.ext.AssetData;
-import gamemechanics.main.DiamondModels;
 import javafx.application.Application;
 
 

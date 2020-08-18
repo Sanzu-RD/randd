@@ -1,9 +1,9 @@
 package com.souchy.randd.data.s1.status;
 
+import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 
-import data.new1.timed.Status;
-import gamemechanics.models.Fight;
 import io.netty.buffer.ByteBuf;
 
 public class Burning extends Status {

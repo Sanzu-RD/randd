@@ -1,5 +1,6 @@
 package com.souchy.randd.deathshadows.blackmoonstone.handlers;
 
+import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadows.blackmoonstone.main.BlackMoonstone;
@@ -7,7 +8,6 @@ import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.moonstone.commons.packets.c2s.JoinFight;
 import com.souchy.randd.moonstone.commons.packets.s2c.JoinFightResponse;
 
-import gamemechanics.models.Fight;
 import io.netty.channel.ChannelHandlerContext;
 
 public class JoinFightHandler implements BBMessageHandler<JoinFight> {

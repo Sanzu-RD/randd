@@ -1,10 +1,9 @@
 package com.souchy.randd.data.s1.creaturetypes;
 
+import com.souchy.randd.commons.diamond.models.CreatureTypeModel;
+import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.data.s1.main.Elements;
-
-import data.new1.CreatureTypeModel;
-import data.new1.spellstats.base.IntStat;
-import gamemechanics.statics.stats.properties.Resource;
 
 public final class KnightType extends CreatureTypeModel {
 	

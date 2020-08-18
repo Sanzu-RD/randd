@@ -1,19 +1,18 @@
 package mockingbird;
 
+import com.souchy.randd.commons.diamond.main.DiamondModels;
+import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.CreatureModel;
+import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.diamond.models.components.Position;
+import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.deathshadows.blackmoonstone.main.BlackMoonstone;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.jade.matchmaking.Team;
 import com.souchy.randd.jade.meta.JadeCreature;
-
-import data.new1.spellstats.base.IntStat;
-import gamemechanics.components.Position;
-import gamemechanics.main.DiamondModels;
-import gamemechanics.models.Creature;
-import gamemechanics.models.CreatureModel;
-import gamemechanics.models.Fight;
-import gamemechanics.statics.stats.properties.Resource;
 
 public class MockingSapphire {
 	

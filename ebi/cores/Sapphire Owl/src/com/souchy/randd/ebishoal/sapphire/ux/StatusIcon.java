@@ -3,9 +3,8 @@ package com.souchy.randd.ebishoal.sapphire.ux;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.github.czyzby.lml.annotation.LmlActor;
+import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
-
-import data.new1.timed.Status;
 
 public class StatusIcon extends SapphireWidget { //Stack {
 //

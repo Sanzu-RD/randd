@@ -15,6 +15,10 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.souchy.randd.commons.diamond.main.DiamondModels;
+import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.Status;
+import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.status.Shocked;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
@@ -30,10 +34,6 @@ import Effekseer.swig.EffekseerBackendCore;
 import Effekseer.swig.EffekseerEffectCore;
 import Effekseer.swig.EffekseerManagerCore;
 import Effekseer.swig.EffekseerTextureType;
-import data.new1.timed.Status;
-import gamemechanics.components.Position;
-import gamemechanics.main.DiamondModels;
-import gamemechanics.models.Creature;
 import particles.ParticleEffekseer;
 
 public class SapphireScreen extends LapisScreen {

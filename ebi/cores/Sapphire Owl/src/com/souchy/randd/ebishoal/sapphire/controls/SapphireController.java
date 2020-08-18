@@ -25,6 +25,10 @@ import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.kotcrab.vis.ui.FocusManager;
+import com.souchy.randd.commons.diamond.common.ecs.Entity;
+import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.components.Position;
+import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
@@ -34,11 +38,6 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 import com.souchy.randd.ebishoal.sapphire.ux.CreatureSheet;
-
-import data.new1.ecs.Entity;
-import gamemechanics.components.Position;
-import gamemechanics.models.Creature;
-import gamemechanics.statics.stats.properties.Resource;
 
 public class SapphireController extends CameraInputController {
 
