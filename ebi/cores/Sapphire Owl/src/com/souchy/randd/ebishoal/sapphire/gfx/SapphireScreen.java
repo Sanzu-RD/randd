@@ -1,41 +1,27 @@
 package com.souchy.randd.ebishoal.sapphire.gfx;
 
-import java.io.File;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Creature;
-import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.diamond.models.components.Position;
-import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.data.s1.status.Shocked;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 import com.souchy.randd.ebishoal.sapphire.controls.SapphireController;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireLmlParser;
 
-import Effekseer.swig.EffekseerBackendCore;
-import Effekseer.swig.EffekseerEffectCore;
-import Effekseer.swig.EffekseerManagerCore;
-import Effekseer.swig.EffekseerTextureType;
 import particles.ParticleEffekseer;
 
 public class SapphireScreen extends LapisScreen {

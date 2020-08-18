@@ -1,25 +1,11 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
-import java.util.Random;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g3d.Model;
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader;
-import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
-import com.badlogic.gdx.utils.Array;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
-import com.souchy.randd.commons.diamond.models.Creature;
-import com.souchy.randd.commons.diamond.models.CreatureModel;
 import com.souchy.randd.commons.diamond.models.Fight;
-import com.souchy.randd.commons.diamond.models.components.Position;
-import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
-import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
@@ -27,13 +13,9 @@ import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHudSkin;
-import com.souchy.randd.jade.meta.JadeCreature;
 import com.souchy.randd.moonstone.commons.packets.c2s.GetUpdate;
 import com.souchy.randd.moonstone.commons.packets.s2c.FullUpdate;
 import com.souchy.randd.moonstone.white.Moonstone;
-
-import Effekseer.swig.EffekseerBackendCore;
-import Effekseer.swig.EffekseerManagerCore;
 
 public class SapphireGame extends LapisGame {
 

@@ -8,13 +8,7 @@ import com.souchy.randd.commons.diamond.models.Creature;
  * @author Blank
  * @date 22 nov. 2019
  */
-public class TimelineIcon extends SapphireWidget {
-
-//	public TimelineIcon(Skin skin) {
-//		super(skin);
-//		// TODO Auto-generated constructor stub
-//	}
-
+public class TimelineIcon extends SapphireComponent {
 
 	public Creature c;
 	
@@ -25,7 +19,13 @@ public class TimelineIcon extends SapphireWidget {
 
 
 	@Override
-	protected void init() {
+	protected void onInit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resizeScreen(int w, int h, boolean centerCam) {
 		// TODO Auto-generated method stub
 		
 	}

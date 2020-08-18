@@ -7,7 +7,7 @@ import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 
-public class StatusIcon extends SapphireWidget { //Stack {
+public class StatusIcon extends SapphireComponent { //Stack {
 //
 //	public StatusIcon(Skin skin) {
 //		super(skin);

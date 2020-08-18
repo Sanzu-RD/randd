@@ -2,6 +2,7 @@ package com.souchy.randd.moonstone.commons.packets;
 
 import java.util.Date;
 
+import com.souchy.randd.annotationprocessor.ID;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 
@@ -12,6 +13,7 @@ import io.netty.buffer.ByteBuf;
  * @author Robyn Girardeau
  * @date 18 août 2020
  */
+@ID(id = 12001)
 public class ICM implements BBMessage {
 	
 	public Date date;

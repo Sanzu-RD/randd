@@ -17,7 +17,7 @@ import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 
-public class Timeline extends SapphireWidget {
+public class Timeline extends SapphireComponent {
 
 	@LmlActor("table")
 	public Table table;

@@ -26,7 +26,7 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 
-public class CreatureSheet extends SapphireWidget {
+public class CreatureSheet extends SapphireComponent {
 
 	public Creature creature;
 
@@ -166,7 +166,7 @@ public class CreatureSheet extends SapphireWidget {
 		moveShield.setText(getMoveShield());
 		moveCurrent.setText(getMoveCurrent());
 		moveMax.setText(getMoveMax());
-
+		
 		this.flowstatus.clearChildren();
 		if(creature != null)
 		creature.statuses.forEach(s -> {
