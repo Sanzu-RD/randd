@@ -1,15 +1,16 @@
 package gamemechanics.data;
 
-import data.new1.timed.TerrainEffect;
-import gamemechanics.events.new1.other.OnEnterCellEvent;
-import gamemechanics.events.new1.other.OnEnterCellEvent.OnEnterCellHandler;
-import gamemechanics.events.new1.other.OnLeaveCellEvent;
-import gamemechanics.events.new1.other.OnLeaveCellEvent.OnLeaveCellHandler;
-import gamemechanics.events.new1.other.OnTurnStartEvent;
-import gamemechanics.events.new1.other.OnTurnStartEvent.OnTurnStartHandler;
-import gamemechanics.events.new1.other.OnWalkEvent;
-import gamemechanics.events.new1.other.OnWalkEvent.OnWalkHandler;
-import gamemechanics.models.Fight;
+import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.diamond.models.TerrainEffect;
+import com.souchy.randd.commons.diamond.statusevents.Handler.HandlerType;
+import com.souchy.randd.commons.diamond.statusevents.other.OnEnterCellEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.OnLeaveCellEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.OnTurnStartEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.OnWalkEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.OnEnterCellEvent.OnEnterCellHandler;
+import com.souchy.randd.commons.diamond.statusevents.other.OnLeaveCellEvent.OnLeaveCellHandler;
+import com.souchy.randd.commons.diamond.statusevents.other.OnTurnStartEvent.OnTurnStartHandler;
+import com.souchy.randd.commons.diamond.statusevents.other.OnWalkEvent.OnWalkHandler;
 
 public class BurningGlyph extends TerrainEffect implements OnWalkHandler, OnEnterCellHandler, OnLeaveCellHandler, OnTurnStartHandler {
 

@@ -3,15 +3,14 @@ package com.souchy.randd.data.s1.spells.dark;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
-
-import data.new1.Effect;
-import data.new1.spellstats.SpellStats;
-import gamemechanics.models.Cell;
-import gamemechanics.models.Creature;
-import gamemechanics.models.Fight;
-import gamemechanics.models.Spell;
-import gamemechanics.statics.CreatureType;
-import gamemechanics.statics.Element;
+import com.souchy.randd.commons.diamond.models.Cell;
+import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.Effect;
+import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.diamond.models.Spell;
+import com.souchy.randd.commons.diamond.models.stats.SpellStats;
+import com.souchy.randd.commons.diamond.statics.CreatureType;
+import com.souchy.randd.commons.diamond.statics.Element;
 
 /**
  * These spells need to be registered to their creature type to be available to creatures of that type when the creature data is created

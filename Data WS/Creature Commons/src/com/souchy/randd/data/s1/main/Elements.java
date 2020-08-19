@@ -1,8 +1,7 @@
 package com.souchy.randd.data.s1.main;
 
-import gamemechanics.statics.Element;
-import gamemechanics.statics.stats.properties.StatProperty;
-//import statics.IEElement;
+import com.souchy.randd.commons.diamond.statics.Element;
+import com.souchy.randd.commons.diamond.statics.stats.properties.StatProperty;
 
 public enum Elements implements Element, StatProperty {
 	

@@ -13,6 +13,9 @@ import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.kotcrab.vis.ui.layout.HorizontalFlowGroup;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
+import com.souchy.randd.commons.diamond.ext.AssetData;
+import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
@@ -23,33 +26,29 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 
-import gamemechanics.ext.AssetData;
-import gamemechanics.models.Creature;
-import gamemechanics.statics.stats.properties.Resource;
-
 public class CreatureSheet extends SapphireComponent {
 
 	public Creature creature;
-	
+
 	@LmlActor("closeBtn")
 	public Button closeBtn;
-	
+
 //	@LmlActor("scrolldesc")
 //	public VisScrollPane scrolldesc;
 //	@LmlActor("areadesc")
 //	public ScrollableTextArea areadesc;
-	
+
 	@LmlActor("scrollstatus")
 	public VisScrollPane scrollstatus;
 	@LmlActor("flowstatus")
 	public HorizontalFlowGroup flowstatus;
 
-	
+
 	@LmlActor("name")
 	public Label name;
 	@LmlActor("icon")
 	public Image icon;
-	
+
 	@LmlActor("lifeShield")
 	public Label lifeShield;
 	@LmlActor("lifeCurrent")
@@ -73,9 +72,9 @@ public class CreatureSheet extends SapphireComponent {
 
 	//@LmlActor("")
 	public Array<StatusIcon> icons;
-	
+
 	private static final HashMap<Creature, CreatureSheet> openedSheets = new HashMap<>();
-	
+
 	/**
 	 * Je pense que toutes les sheets devraient être créées d'avance et juste refreshed on toggle
 	 * @param c
@@ -96,16 +95,16 @@ public class CreatureSheet extends SapphireComponent {
 		openedSheets.put(c, sheet);
 		SapphireGame.gfx.hud.getStage().addActor(sheet);
 	}
-	
-	
+
+
 	@Override
 	protected void onInit() {
 //		creature = SapphireGame.fight.teamA.get(0);
 
 		this.addListener(new DragAndResizeListener(this));
-		
+
 		LapisUtil.onClick(closeBtn, this::close);
-		
+
 //		scrolldesc.setOverscroll(false, false);
 //		scrolldesc.setFlickScroll(false);
 //		scrolldesc.setFadeScrollBars(false);
@@ -123,7 +122,7 @@ public class CreatureSheet extends SapphireComponent {
 //		areadesc.clearListeners();
 		//flowstatus.clearListeners();
 		//scrollstatus.clearListeners();
-		
+
 		Lambda focusStatus = () -> getStage().setScrollFocus(scrollstatus);
 //		Lambda unfocusDesc = () -> {
 //			if(!areadesc.hasKeyboardFocus()) getStage().setScrollFocus(null);
@@ -144,7 +143,7 @@ public class CreatureSheet extends SapphireComponent {
 //			}
 //		});
 
-		
+
 		refresh();
 	}
 	public void refresh(Creature creature) {
@@ -155,15 +154,15 @@ public class CreatureSheet extends SapphireComponent {
 		name.setText(getCreatureName());
 //		areadesc.setText(getDescription());
 		icon.setDrawable(LapisUtil.getImage(getCreatureModelIcon()));
-		
+
 		lifeShield.setText(getLifeShield());
 		lifeCurrent.setText(getLifeCurrent());
 		lifeMax.setText(getLifeMax());
-		
+
 		manaShield.setText(getManaShield());
 		manaCurrent.setText(getManaCurrent());
 		manaMax.setText(getManaMax());
-		
+
 		moveShield.setText(getMoveShield());
 		moveCurrent.setText(getMoveCurrent());
 		moveMax.setText(getMoveMax());
@@ -222,14 +221,14 @@ public class CreatureSheet extends SapphireComponent {
 		if(creature == null) return 0;
 		return creature.id;
 	}
-	
+
 	@LmlAction("getCreatureName")
 	public String getCreatureName() {
 		if(creature == null) return "null";
 		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
 		var name = i18n.get("creature." + creature.modelid + ".name");
 		Log.info("getCreatureName " + creature.modelid + " = " + name);
-		return name; 
+		return name;
 	}
 	@LmlAction("getDescription")
 	public String getDescription() {
@@ -290,9 +289,9 @@ public class CreatureSheet extends SapphireComponent {
 	@Override
 	public void resizeScreen(int w, int h, boolean centerCam) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
-	
+
 }

@@ -12,7 +12,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RabbitMQ"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
-	<classpathentry kind="lib" path="F:/Users/Souchy/Desktop/Robyn/Git/res/libs gdx/ashley-1.7.0.jar" sourcepath="F:/Users/Souchy/Desktop/Robyn/Git/res/libs src/ashley-1.7.0-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX2"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Sapphire Owl"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>

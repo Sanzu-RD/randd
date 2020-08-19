@@ -1,6 +1,6 @@
 package com.souchy.randd.data.s1.creaturetypes;
 
-import data.new1.CreatureTypeModel;
+import com.souchy.randd.commons.diamond.models.CreatureTypeModel;
 
 public class SkeletonType extends CreatureTypeModel {
 

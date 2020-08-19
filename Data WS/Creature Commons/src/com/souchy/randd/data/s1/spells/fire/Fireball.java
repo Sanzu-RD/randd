@@ -1,18 +1,17 @@
 package com.souchy.randd.data.s1.spells.fire;
 
 import com.google.common.collect.ImmutableList;
+import com.souchy.randd.commons.diamond.effects.damage.Damage;
+import com.souchy.randd.commons.diamond.models.Cell;
+import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.diamond.models.Spell;
+import com.souchy.randd.commons.diamond.models.stats.SpellStats;
+import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.statics.CreatureType;
+import com.souchy.randd.commons.diamond.statics.Element;
+import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.data.s1.main.Elements;
-
-import data.new1.spellstats.SpellStats;
-import data.new1.spellstats.base.IntStat;
-import gamemechanics.data.effects.damage.Damage;
-import gamemechanics.models.Cell;
-import gamemechanics.models.Creature;
-import gamemechanics.models.Fight;
-import gamemechanics.models.Spell;
-import gamemechanics.statics.CreatureType;
-import gamemechanics.statics.Element;
-import gamemechanics.statics.stats.properties.Resource;
 
 public class Fireball extends Spell {
 

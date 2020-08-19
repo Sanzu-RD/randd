@@ -3,6 +3,9 @@ package com.souchy.randd.ebishoal.amethyst.ui.components;
 import java.net.MalformedURLException;
 import java.util.ResourceBundle;
 
+import com.souchy.randd.commons.diamond.ext.AssetData;
+import com.souchy.randd.commons.diamond.main.DiamondModels;
+import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.meta.JadeCreature;
 
@@ -12,9 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import gamemechanics.ext.AssetData;
-import gamemechanics.main.DiamondModels;
-import gamemechanics.statics.Element;
 
 public class DraftRow extends GridPane {
 

@@ -14,9 +14,8 @@ import com.badlogic.gdx.graphics.g3d.model.MeshPart;
 import com.badlogic.gdx.graphics.g3d.model.Node;
 import com.badlogic.gdx.graphics.g3d.model.NodePart;
 import com.badlogic.gdx.math.Vector3;
-
-import gamemechanics.ext.CellData;
-import gamemechanics.ext.MapData;
+import com.souchy.randd.commons.diamond.ext.CellData;
+import com.souchy.randd.commons.diamond.ext.MapData;
 
 /**
  * References :

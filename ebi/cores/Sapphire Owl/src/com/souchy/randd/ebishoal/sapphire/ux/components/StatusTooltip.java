@@ -1,9 +1,8 @@
 package com.souchy.randd.ebishoal.sapphire.ux.components;
 
 import com.kotcrab.vis.ui.widget.Tooltip;
-
-import data.new1.timed.Status;
-import gamemechanics.models.Spell;
+import com.souchy.randd.commons.diamond.models.Spell;
+import com.souchy.randd.commons.diamond.models.Status;
 
 public class StatusTooltip extends Tooltip {
 	

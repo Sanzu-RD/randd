@@ -1,61 +1,54 @@
 package com.souchy.randd.ebishoal.sapphire.gfx;
 
-import java.io.File;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.souchy.randd.commons.diamond.main.DiamondModels;
+import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 import com.souchy.randd.ebishoal.sapphire.controls.SapphireController;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireLmlParser;
 
-import gamemechanics.components.Position;
-import gamemechanics.main.DiamondModels;
-import gamemechanics.models.Creature;
 import particles.ParticleEffekseer;
 
 public class SapphireScreen extends LapisScreen {
-	
+
 	// light cycle
 	private float time = 0; // current time
 	private float period = 30; // period time in seconds
 	private double radius = 2; // circle radius
-	
+
 	public SapphireHud hud;
 	private SapphireController controller;
 
 //	private EffekseerEffectCore effekseerEffectCore;
-	
+
 	private long timeStart = 0;
-	
+
 //	public static ParticleEffekseer effect;
-	
+
 	public SapphireScreen() {
 //		startPfx(null);
 	}
-	
+
 	@Override
 	public void resize(int width, int height) {
 		super.resize(width, height);
 	}
-	
+
 	public void startPfx() {
 		startPfx(null);
 	}
@@ -75,7 +68,7 @@ public class SapphireScreen extends LapisScreen {
         	effect.setLocation((float) pos.x + 0.5f, 1.5f, (float) -pos.y - 0.5f);
 //        	getEffekseer().addParticleEffekseer(effect);
         	effect.play();
-        	
+
         	c = SapphireGame.fight.creatures.first();
         	var status = DiamondModels.statuses.get(1).copy(SapphireGame.fight);
         	status.add(effect);
@@ -84,7 +77,7 @@ public class SapphireScreen extends LapisScreen {
             e.printStackTrace();
         }
 	}
-	
+
 	@Override
 	protected void act(float delta) {
 		// update title
@@ -100,21 +93,21 @@ public class SapphireScreen extends LapisScreen {
 		}
 		if(controller != null) controller.act(delta);
 		getCamera().update();
-		
+
 		// update all engine's systems 	 //and entities
 		SapphireGame.fight.update(delta);
-		
+
 //		if(System.currentTimeMillis() - timeStart > 5000) {
 ////			startPfx();
 //		}
 	}
-	
+
 	@Override
 	public LineDrawing createLining(Camera cam, BoundingBox worldBB) {
 //		return super.createLining(cam, worldBB);
-		return null; 
+		return null;
 	}
-	
+
 	@Override
 	public LapisHud createUI() {
 		SapphireLmlParser.init();
@@ -131,14 +124,14 @@ public class SapphireScreen extends LapisScreen {
 		multi.addProcessor(controller = new SapphireController(getCamera()));
 		return multi;
 	}
-	
+
 	@Override
 	public Camera createCam(boolean useOrtho) {
 //		float viewportSize = 17; // acts as a zoom (lower number is closer zoom)
 //		var cam = new OrthographicCamera(viewportSize * 16 / 9, viewportSize);
 		return new OrthographicCamera();
 	}
-	
+
 	@Override
 	public Viewport createViewport(Camera cam) {
 		// how many meters high is the screen (ex 1920/1080 = 28.4/16)
@@ -147,7 +140,7 @@ public class SapphireScreen extends LapisScreen {
 		viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		return viewport;
 	}
-	
+
 	@Override
 	public World createWorld() {
 		return new SapphireWorld();
@@ -166,15 +159,15 @@ public class SapphireScreen extends LapisScreen {
 		getCamera().far = 120f;
 		getCamera().update();
 	}
-	
+
 	@Override
 	public void resetCamera() {
 //		super.resetCamera();
 		topView();
-		getCamera().rotate(45, getCamera().up.y, -getCamera().up.x, 0); 
+		getCamera().rotate(45, getCamera().up.y, -getCamera().up.x, 0);
 	}
-	
-	
+
+
 	@Override
 	public void renderWorld() {
 		super.renderWorld();

@@ -1,12 +1,12 @@
 package com.souchy.randd.commons.coral.in;
 
 import com.souchy.randd.annotationprocessor.ID;
+import com.souchy.randd.commons.diamond.statics.Constants;
+import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 import com.souchy.randd.jade.meta.JadeCreature;
 
-import gamemechanics.statics.Constants;
-import gamemechanics.statics.Element;
 import io.netty.buffer.ByteBuf;
 
 /**

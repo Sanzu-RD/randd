@@ -3,10 +3,9 @@ package com.souchy.randd.ebishoal.sapphire.ux.components;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.github.czyzby.lml.annotation.LmlActor;
+import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
-
-import data.new1.timed.Status;
 
 public class StatusIcon extends SapphireComponent { //Stack {
 //
@@ -25,13 +24,13 @@ public class StatusIcon extends SapphireComponent { //Stack {
 	public Label stacks;
 	@LmlActor("duration")
 	public Label duration;
-	
+
 //	public StatusIcon() {
 //		status = s;
 //		this.add(icon = new Image(LapisUtil.getImage("textures.statuses." + status.getIconName())));
 //		this.add(border = new Image(LapisUtil.getImage("textures.borders.blackborder")));
 //		var t = new Table();
-//		
+//
 //		this.add(stacks = new Label("", VisUI.getSkin()));
 //		this.add(duration = new Label("", VisUI.getSkin()));
 
@@ -52,9 +51,9 @@ public class StatusIcon extends SapphireComponent { //Stack {
 //		LapisUtil.setText(duration, status.duration + "");
 		stacks.setText("1"); //status.stacks + "");
 		duration.setText("2"); //status.duration + "");
-		
+
 		//var tip = new Tooltip<Actor>()
-		
+
 		return this;
 	}
 
@@ -67,32 +66,32 @@ public class StatusIcon extends SapphireComponent { //Stack {
 	@Override
 	public void resizeScreen(int w, int h, boolean centerCam) {
 		// TODO Auto-generated method stub
-		
-	}
-	
 
-//	/** 
-//	 * statusname = i18n.status.{id} 
+	}
+
+
+//	/**
+//	 * statusname = i18n.status.{id}
 //	 * icon = textures.statuses.{id}
 //	 */
 //	public int getStatusModelID() {
 //		return 0;
 //	}
-//	
+//
 //	public int getStatusStacks() {
 //		return status.stacks;
 //	}
-//	
+//
 //	public int getStatusDuration() {
 //		return status.duration;
 //	}
-//	
+//
 //	public int getStatusEffectCount() {
 //		return 0; //TODO status.effects;
 //	}
-//	
+//
 //	public String getStatusEffect(int statusid, int effectid) {
 //		return ""; //TODO status.effects.get(effectid).i18nKey();
 //	}
-	
+
 }

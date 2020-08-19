@@ -1,10 +1,10 @@
 package com.souchy.randd.deathshadows.blackmoonstone.handlers;
 
+import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 import com.souchy.randd.moonstone.commons.packets.c2s.GetUpdate;
 import com.souchy.randd.moonstone.commons.packets.s2c.FullUpdate;
 
-import gamemechanics.models.Fight;
 import io.netty.channel.ChannelHandlerContext;
 
 public class GetUpdateHandler implements BBMessageHandler<GetUpdate> {

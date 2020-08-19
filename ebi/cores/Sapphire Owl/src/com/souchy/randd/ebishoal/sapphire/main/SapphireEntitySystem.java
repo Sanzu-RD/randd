@@ -10,20 +10,20 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.google.common.eventbus.Subscribe;
+import com.souchy.randd.commons.diamond.common.ecs.Engine;
+import com.souchy.randd.commons.diamond.common.ecs.Entity;
+import com.souchy.randd.commons.diamond.common.ecs.Family;
+import com.souchy.randd.commons.diamond.common.ecs.Engine.AddEntityEvent;
+import com.souchy.randd.commons.diamond.common.ecs.Engine.RemoveEntityEvent;
+import com.souchy.randd.commons.diamond.ext.AssetData;
+import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.Status;
+import com.souchy.randd.commons.diamond.models.TerrainEffect;
+import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.status.Shocked;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 
-import data.new1.ecs.Engine;
-import data.new1.ecs.Engine.AddEntityEvent;
-import data.new1.ecs.Engine.RemoveEntityEvent;
-import data.new1.ecs.Entity;
-import data.new1.ecs.Family;
-import data.new1.timed.Status;
-import data.new1.timed.TerrainEffect;
-import gamemechanics.components.Position;
-import gamemechanics.ext.AssetData;
-import gamemechanics.models.Creature;
 import particles.ParticleEffekseer;
 
 /**

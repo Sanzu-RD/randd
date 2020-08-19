@@ -2,15 +2,15 @@ package com.souchy.randd.moonstone.white.handlers;
 
 import java.util.stream.Collectors;
 
+import com.souchy.randd.commons.diamond.models.Cell;
+import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.Spell;
+import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.moonstone.commons.packets.s2c.FullUpdate;
 import com.souchy.randd.moonstone.white.Moonstone;
 
-import data.new1.timed.Status;
-import gamemechanics.models.Cell;
-import gamemechanics.models.Creature;
-import gamemechanics.models.Spell;
 import io.netty.channel.ChannelHandlerContext;
 
 public class FullUpdateHandler implements BBMessageHandler<FullUpdate> {

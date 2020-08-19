@@ -3,10 +3,10 @@ package com.souchy.randd.moonstone.white;
 
 import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.deathebi.msg.GetSalt;
+import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
 
-import gamemechanics.models.Fight;
 import io.netty.util.AttributeKey;
 
 public class Moonstone extends EbiShoalTCP { 

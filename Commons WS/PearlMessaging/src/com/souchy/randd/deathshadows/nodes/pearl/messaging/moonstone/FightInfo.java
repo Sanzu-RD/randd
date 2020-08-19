@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.souchy.randd.annotationprocessor.ID;
+import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 
-import gamemechanics.models.Fight;
 import io.netty.buffer.ByteBuf;
 
 /**
