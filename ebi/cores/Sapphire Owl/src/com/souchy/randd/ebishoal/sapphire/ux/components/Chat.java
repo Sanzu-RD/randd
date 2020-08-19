@@ -35,21 +35,10 @@ public class Chat extends SapphireComponent {
 //	@LmlActor("area")
 //	public ScrollableTextArea area; /// HighlightTextArea
 	@LmlActor("area")
-	public VisList<ChatMessage> area;
-	public ListView<ChatMessage> adf;
+	public VisList<ICM> area;
+	public ListView<ICM> adf;
 
-	public Array<ChatMessage> messages = new Array<>();
-
-	public static class ChatMessage {
-		public Date date = new Date();
-		public String author; // ObjectId author
-		public String channel = "default";
-		public String content = "";
-		public ChatMessage(String author, String msg) {
-			this.author = author;
-			this.content = msg;
-		}
-	}
+	public Array<ICM> messages = new Array<>();
 
 
 	@Override
@@ -63,8 +52,8 @@ public class Chat extends SapphireComponent {
 //		area.appendText("h " + area.getHeight() + ", " + scroll.getHeight());
 
 		messages.ordered = true;
-		messages.add(new ChatMessage("souchy", "hey chat"));
-		messages.add(new ChatMessage("souchy", "hey chat"));
+		messages.add(new ICM("souchy", "hey chat"));
+		messages.add(new ICM("souchy", "hey chat"));
 		area.setItems(messages);
 
 //		area.appendText("bug.3style : " + area.getStyle());
@@ -122,12 +111,12 @@ public class Chat extends SapphireComponent {
 
 	@LmlAction("send")
 	public void sendMsg() {
-
+		
 	}
 
 	@Subscribe
 	public void receiveMsg(ICM icm) {
-		area.appendText("\n" + icm.author + ": " + icm.content);
+		messages.add(icm); //area.appendText("\n" + icm.author + ": " + icm.content);
 	}
 
 

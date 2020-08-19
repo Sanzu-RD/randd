@@ -16,10 +16,22 @@ import io.netty.buffer.ByteBuf;
 @ID(id = 12001)
 public class ICM implements BBMessage {
 	
-	public Date date;
+	public Date date = new Date();
+	public String channel = "default";
 	public String author;
-	public String channel;
 	public String content;
+
+	public ICM(String author, String msg) {
+		this.author = author;
+		this.content = msg;
+	}
+	
+	public ICM(String channel, String author, String msg) {
+		this.channel = channel;
+		this.author = author;
+		this.content = msg;
+	}
+	
 	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
