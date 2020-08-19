@@ -114,7 +114,8 @@ public class SapphireGame extends LapisGame {
 	@Subscribe
 	public void fullUpdateHandler(FullUpdate msg) {
 		// player hud
-		SapphireHudSkin.play(fight.creatures.first()); //.family.get(0)); // fight.teamA.get(0));
+		gfx.hud.reload();
+//		SapphireHudSkin.play(fight.creatures.first()); //.family.get(0)); // fight.teamA.get(0));
 //		SapphireHud.timeline.refresh();
 //		SapphireHud.refreshTimeline();
 //		gfx.hud.timeline.init();

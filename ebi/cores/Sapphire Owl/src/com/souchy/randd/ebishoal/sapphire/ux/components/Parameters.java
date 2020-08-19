@@ -4,26 +4,35 @@ import java.util.function.Consumer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.Align;
 import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.kotcrab.vis.ui.FocusManager;
 import com.kotcrab.vis.ui.widget.VisCheckBox;
+import com.kotcrab.vis.ui.widget.VisImageButton;
+import com.kotcrab.vis.ui.widget.VisWindow;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireHudSkin;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireLmlParser;
 
 public class Parameters extends SapphireComponent {
 
+	@LmlActor("window")
+	public VisWindow window;
+	
 	@LmlActor("scrollpane")
 	public ScrollPane scrollpane;
 	
@@ -64,9 +73,24 @@ public class Parameters extends SapphireComponent {
 				SapphireGame.gfx.hud.parameters.toggleVisibility();
 			}
 		});
+		
+		VisImageButton closeButton = (VisImageButton) window.getTitleTable().getCells().get(1).getActor();
+		closeButton.addListener(new ChangeListener() {
+			@Override
+			public void changed (ChangeEvent event, Actor actor) {
+				Parameters.this.remove();
+				SapphireGame.gfx.hud.parameters = null;
+			}
+		});
 	}
 	
-	public void foreachCell(Table group, Consumer<Cell> dothing) {
+	public void close() {
+		window.fadeOut();
+		Parameters.this.remove();
+		SapphireGame.gfx.hud.parameters = null;
+	}
+	
+	public void foreachCell(Table group, Consumer<Cell<?>> dothing) {
 		group.getCells().forEach(c -> {
 			if(c.getActor() instanceof Table) foreachCell((Table) c.getActor(), dothing);
 			dothing.accept(c);
@@ -83,6 +107,7 @@ public class Parameters extends SapphireComponent {
 		
 	}
 	
+	@LmlAction("toggleVisibility")
 	public void toggleVisibility() {
 		setVisible(!isVisible());
 	}

@@ -24,7 +24,9 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.FocusManager;
+import com.kotcrab.vis.ui.widget.VisWindow;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
@@ -34,6 +36,7 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.ux.components.CreatureSheet;
+import com.souchy.randd.ebishoal.sapphire.ux.components.Parameters;
 
 import data.new1.ecs.Entity;
 import gamemechanics.components.Position;
@@ -76,7 +79,17 @@ public class SapphireController extends CameraInputController {
 	public SapphireController(Camera camera) {
 		super(camera);
 
-		addOnKeyDown(Keys.ESCAPE, () -> SapphireGame.gfx.hud.parameters.toggleVisibility());
+		addOnKeyDown(Keys.ESCAPE, () -> {
+			if(SapphireGame.gfx.hud.parameters != null) {
+				SapphireGame.gfx.hud.parameters.close();
+//				var t = (Table) SapphireGame.gfx.hud.parameters;
+//				var w = (VisWindow) t;
+//				w.fadeOut();
+			} else {
+				SapphireGame.gfx.hud.parameters = new Parameters();
+			}
+//			SapphireGame.gfx.hud.parameters.toggleVisibility()
+		});
 		addOnKeyDown(Keys.SPACE, () -> {
 			SapphireGame.gfx.resetCamera();
 			SapphireGame.gfx.hud.reload(); //.refresh();
@@ -92,6 +105,8 @@ public class SapphireController extends CameraInputController {
 		addOnKeyDown(Keys.T, () -> SapphireGame.gfx.topView());
 		addOnKeyDown(Keys.P, () -> SapphireGame.gfx.startPfx());
 		addOnKeyDown(Keys.M, SapphireGame.music::togglePlayPause);
+		
+		addOnKeyDown(Keys.F3, () -> SapphireGame.gfx.hud.getStage().setDebugAll(!SapphireGame.gfx.hud.getStage().isDebugAll()));
 
 		addOnKeyDown(Keys.V, () -> {
 //			var creature = SapphireGame.fight.teamA.get(0)

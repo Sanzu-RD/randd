@@ -4,17 +4,17 @@
 <entry key="gfx.shadows">true</entry>
 <entry key="gfx.background">true</entry>
 <entry key="sound.music">0</entry>
-<entry key="sound.general">0</entry>
-<entry key="functionality.centerline">false</entry>
+<entry key="sound.general">4</entry>
+<entry key="functionality.centerline">true</entry>
 <entry key="gfx.blur">true</entry>
-<entry key="sound.ui">0</entry>
-<entry key="sound.ambiance">0</entry>
-<entry key="sound.fx">0</entry>
-<entry key="functionality.grid">false</entry>
-<entry key="general.locale">en</entry>
-<entry key="functionality.lineofsight">false</entry>
+<entry key="sound.ui">7</entry>
+<entry key="sound.ambiance">6</entry>
+<entry key="sound.fx">2</entry>
+<entry key="functionality.grid">true</entry>
+<entry key="general.locale">fr</entry>
+<entry key="functionality.lineofsight">true</entry>
 <entry key="gfx.postProcess">true</entry>
 <entry key="gfx.stencil">true</entry>
-<entry key="functionality.ruler">false</entry>
+<entry key="functionality.ruler">true</entry>
 <entry key="gfx.backgroundnPath"></entry>
 </properties>

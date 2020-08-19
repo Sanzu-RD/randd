@@ -27,27 +27,6 @@ import com.souchy.randd.ebishoal.sapphire.ux.components.Timeline;
 
 public class SapphireHud extends LapisHud {
 
-//	public static SapphireHud single;
-//	public static LmlParser parser;
-//	public static SapphireHudSkin skin;
-//	public static I18NBundle i18n;
-	
-//	@LmlActor("content")
-//	public Stack content;
-//	//@LmlActor("chat")
-//	public static Chat chat;
-//	@LmlActor("playbar")
-//	public static PlayBar playbar;
-//	@LmlActor("statusbar")
-//	public StatusBar statusBar;
-//	@LmlActor("timeline")
-//	public static Timeline timeline;
-//	@LmlActor("timer")
-//	public Timer timer;
-//	@LmlActor("parameters")
-//	public static Parameters parameters;
-	
-
 	public Chat chat;
 	public PlayBar playbar;
 	public Timeline timeline;
@@ -66,7 +45,11 @@ public class SapphireHud extends LapisHud {
 	
 	public void reload() {
 		this.getStage().clear();
-		SapphireLmlParser.parser.createView(this, getTemplateFile());
+		if(!isLoaded) SapphireLmlParser.parser.createView(this, getTemplateFile());
+
+		try {
+			SapphireHudSkin.play(SapphireGame.fight.creatures.first());
+		} catch (Exception e) { }
 		
 		chat = new Chat();
 		playbar = new PlayBar();
@@ -76,7 +59,6 @@ public class SapphireHud extends LapisHud {
 		parameters = new Parameters();
 		parameters.setVisible(false);
 		
-//		getStage().setDebugAll(true);
 		isLoaded = true;
 	}
 	

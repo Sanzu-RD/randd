@@ -44,9 +44,9 @@ public class SapphireHudSkin extends Skin {
 
 		// Link all textures
 		LapisAssets.assets.getAssetNames().forEach(a -> {
-			if(SapphireDevConfig.conf.logSkinResources)
-				Log.info("hud skin asset : " + a);
 			if(a.contains("res/textures")) {
+				if(SapphireDevConfig.conf.logSkinResources)
+					Log.info("hud skin asset : " + a);
 				var str = a.substring(a.indexOf("textures"), a.lastIndexOf(".")).replace("/", "."); // enlève le res/, enlève l'extension, et remplace / par .
 				add(str, LapisAssets.assets.get(a));
 				add(str + "_round", new TextureRegionDrawable(new RoundTextureRegion(LapisAssets.assets.get(a))));
@@ -119,7 +119,7 @@ public class SapphireHudSkin extends Skin {
 			lml.addArgument(prefix + camel(r.name(), "Current", "Shield"), val);
 			
 			val = c.stats.resources.get(r).max(); 
-			lml.addArgument(prefix + camel(r.name()) + "Max", val);
+			lml.addArgument(prefix + camel(r.name(), "Max"), val);
 		}
 		
 		// set all resistances
@@ -142,7 +142,7 @@ public class SapphireHudSkin extends Skin {
 			lml.getDefaultSkin().getAll(Texture.class).keys().forEach(s -> Log.info("Texture : " + s));
 		
 		// refresh hud
-		SapphireGame.gfx.hud.reload(); // SapphireHud.refresh();
+//		SapphireGame.gfx.hud.reload(); // SapphireHud.refresh();
 	}
 
 	private static String camel(String... args) {

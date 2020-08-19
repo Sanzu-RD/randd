@@ -30,17 +30,21 @@ public class SapphireLmlParser extends DefaultLmlParser {
 
 	public static SapphireComponent currentView = null;
 	
-	SapphireLmlParser(LmlData data, LmlSyntax syntax) {
-		super(data, syntax);
+	static {
 		var skin = new SapphireHudSkin(Gdx.files.internal("res/ux/sapphire/main.json")); // SapphireGame.gfx.hud.getSkinFile());
 		VisUI.dispose(true);
 		VisUI.load(skin);
+	}
+	
+	SapphireLmlParser(LmlData data, LmlSyntax syntax) {
+		super(data, syntax);
 	}
 	
 	public static void init() {
 		var config = JsonConfig.readExternal(SapphireOwlConf.class, "./");		
 		
 		var prefs = loadPrefs();
+		
 		
 //		var ii = LapisAssets.assets.get("res/i18n/ux/bundle", I18NBundle.class);
 		var bundle = Gdx.files.internal("res/i18n/ux/bundle");

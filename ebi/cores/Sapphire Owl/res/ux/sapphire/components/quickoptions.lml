@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE quickoptions SYSTEM "lml.dtd">
 
-<quickoptions id="quickoptions" align="bottomright" defaultpad="5" x="20" y="20" resizable="true" debug="true">
+<quickoptions id="quickoptions" align="bottomright" defaultpad="5" x="20" y="20" resizable="true" debug="false">
     <image id="imgFlag" style="textures.buttons.flag" width="30" height="30" />
     <image id="imgRotate" style="textures.buttons.rotate" width="30" height="30" />
     <stack id="btnIsoTop" width="30" height="30">
