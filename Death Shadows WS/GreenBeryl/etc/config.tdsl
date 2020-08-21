@@ -1,0 +1,28 @@
+admins = [
+    'admin@blank'
+]
+'config-type' = 'default'
+debug = [ 'server' ]
+'default-virtual-host' = 'blank'
+dataSource () {
+    default () {
+        uri = 'jdbc:derby:tigasedb;create=true'
+    }
+}
+http () {
+    setup () {
+        'admin-password' = 'tigase'
+        'admin-user' = 'admin'
+    }
+}
+pubsub () {
+    trusted = [ 'http@{clusterNode}' ]
+}
+'sess-man' () {
+    'http://jabber.org/protocol/jingle' () {}
+    'http://jabber.org/protocol/offline' () {}
+    'invisible-command' () {}
+    'unified-message-archive-xep-0136' (active: false) {}
+}
+test () {}
+upload () {}

@@ -1,0 +1,643 @@
+Thu Aug 20 19:31:32 EDT 2020: All threads information:
+"main" prio=5 Id=1 WAITING on tigase.server.monitor.MonitorRuntime$MainShutdownThread@57cf54e1
+	at java.base@12.0.1/java.lang.Object.wait(Native Method)
+	-  waiting on tigase.server.monitor.MonitorRuntime$MainShutdownThread@57cf54e1
+	at java.base@12.0.1/java.lang.Thread.join(Thread.java:1308)
+	at java.base@12.0.1/java.lang.Thread.join(Thread.java:1375)
+	at java.base@12.0.1/java.lang.ApplicationShutdownHooks.runHooks(ApplicationShutdownHooks.java:107)
+	at java.base@12.0.1/java.lang.ApplicationShutdownHooks$1.run(ApplicationShutdownHooks.java:46)
+	at java.base@12.0.1/java.lang.Shutdown.runHooks(Shutdown.java:130)
+	at java.base@12.0.1/java.lang.Shutdown.exit(Shutdown.java:174)
+	-  locked java.lang.Class@45958d8a
+	at java.base@12.0.1/java.lang.Runtime.exit(Runtime.java:113)
+	...
+
+"Reference Handler" daemon prio=10 Id=2 RUNNABLE
+	at java.base@12.0.1/java.lang.ref.Reference.waitForReferencePendingList(Native Method)
+	at java.base@12.0.1/java.lang.ref.Reference.processPendingReferences(Reference.java:241)
+	at java.base@12.0.1/java.lang.ref.Reference$ReferenceHandler.run(Reference.java:213)
+
+"Finalizer" daemon prio=8 Id=3 WAITING on java.lang.ref.ReferenceQueue$Lock@2a7d3c21
+	at java.base@12.0.1/java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.ReferenceQueue$Lock@2a7d3c21
+	at java.base@12.0.1/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:155)
+	at java.base@12.0.1/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:176)
+	at java.base@12.0.1/java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:170)
+
+"Signal Dispatcher" daemon prio=9 Id=4 RUNNABLE
+
+"Attach Listener" daemon prio=5 Id=5 RUNNABLE
+
+"Common-Cleaner" daemon prio=8 Id=19 TIMED_WAITING on java.lang.ref.ReferenceQueue$Lock@27c93ad
+	at java.base@12.0.1/java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.ReferenceQueue$Lock@27c93ad
+	at java.base@12.0.1/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:155)
+	at java.base@12.0.1/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:148)
+	at java.base@12.0.1/java.lang.Thread.run(Thread.java:835)
+	at java.base@12.0.1/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:134)
+
+"MainShutdownThread" prio=5 Id=22 RUNNABLE
+	at java.management@12.0.1/sun.management.ThreadImpl.dumpThreads0(Native Method)
+	at java.management@12.0.1/sun.management.ThreadImpl.dumpAllThreads(ThreadImpl.java:502)
+	at java.management@12.0.1/sun.management.ThreadImpl.dumpAllThreads(ThreadImpl.java:490)
+	at app//tigase.server.monitor.MonitorRuntime$MainShutdownThread.createThreadDump(MonitorRuntime.java:219)
+	at app//tigase.server.monitor.MonitorRuntime$MainShutdownThread.run(MonitorRuntime.java:187)
+
+
+===========
+
+Thu Aug 20 19:34:11 EDT 2020: All threads information:
+"main" prio=5 Id=1 WAITING on tigase.server.monitor.MonitorRuntime$MainShutdownThread@57cf54e1
+	at java.base@12.0.1/java.lang.Object.wait(Native Method)
+	-  waiting on tigase.server.monitor.MonitorRuntime$MainShutdownThread@57cf54e1
+	at java.base@12.0.1/java.lang.Thread.join(Thread.java:1308)
+	at java.base@12.0.1/java.lang.Thread.join(Thread.java:1375)
+	at java.base@12.0.1/java.lang.ApplicationShutdownHooks.runHooks(ApplicationShutdownHooks.java:107)
+	at java.base@12.0.1/java.lang.ApplicationShutdownHooks$1.run(ApplicationShutdownHooks.java:46)
+	at java.base@12.0.1/java.lang.Shutdown.runHooks(Shutdown.java:130)
+	at java.base@12.0.1/java.lang.Shutdown.exit(Shutdown.java:174)
+	-  locked java.lang.Class@6847136f
+	at java.base@12.0.1/java.lang.Runtime.exit(Runtime.java:113)
+	...
+
+"Reference Handler" daemon prio=10 Id=2 RUNNABLE
+	at java.base@12.0.1/java.lang.ref.Reference.waitForReferencePendingList(Native Method)
+	at java.base@12.0.1/java.lang.ref.Reference.processPendingReferences(Reference.java:241)
+	at java.base@12.0.1/java.lang.ref.Reference$ReferenceHandler.run(Reference.java:213)
+
+"Finalizer" daemon prio=8 Id=3 WAITING on java.lang.ref.ReferenceQueue$Lock@2ff68387
+	at java.base@12.0.1/java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.ReferenceQueue$Lock@2ff68387
+	at java.base@12.0.1/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:155)
+	at java.base@12.0.1/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:176)
+	at java.base@12.0.1/java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:170)
+
+"Signal Dispatcher" daemon prio=9 Id=4 RUNNABLE
+
+"Attach Listener" daemon prio=5 Id=5 RUNNABLE
+
+"Common-Cleaner" daemon prio=8 Id=19 TIMED_WAITING on java.lang.ref.ReferenceQueue$Lock@75e8abe0
+	at java.base@12.0.1/java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.ReferenceQueue$Lock@75e8abe0
+	at java.base@12.0.1/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:155)
+	at java.base@12.0.1/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:148)
+	at java.base@12.0.1/java.lang.Thread.run(Thread.java:835)
+	at java.base@12.0.1/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:134)
+
+"MainShutdownThread" prio=5 Id=22 RUNNABLE
+	at java.management@12.0.1/sun.management.ThreadImpl.dumpThreads0(Native Method)
+	at java.management@12.0.1/sun.management.ThreadImpl.dumpAllThreads(ThreadImpl.java:502)
+	at java.management@12.0.1/sun.management.ThreadImpl.dumpAllThreads(ThreadImpl.java:490)
+	at app//tigase.server.monitor.MonitorRuntime$MainShutdownThread.createThreadDump(MonitorRuntime.java:219)
+	at app//tigase.server.monitor.MonitorRuntime$MainShutdownThread.run(MonitorRuntime.java:187)
+
+
+===========
+
+Thu Aug 20 21:32:36 EDT 2020: All threads information:
+"main" prio=5 Id=1 WAITING on tigase.server.monitor.MonitorRuntime$MainShutdownThread@5c3ad125
+	at java.base@12.0.1/java.lang.Object.wait(Native Method)
+	-  waiting on tigase.server.monitor.MonitorRuntime$MainShutdownThread@5c3ad125
+	at java.base@12.0.1/java.lang.Thread.join(Thread.java:1308)
+	at java.base@12.0.1/java.lang.Thread.join(Thread.java:1375)
+	at java.base@12.0.1/java.lang.ApplicationShutdownHooks.runHooks(ApplicationShutdownHooks.java:107)
+	at java.base@12.0.1/java.lang.ApplicationShutdownHooks$1.run(ApplicationShutdownHooks.java:46)
+	at java.base@12.0.1/java.lang.Shutdown.runHooks(Shutdown.java:130)
+	at java.base@12.0.1/java.lang.Shutdown.exit(Shutdown.java:174)
+	-  locked java.lang.Class@6247fe18
+	at java.base@12.0.1/java.lang.Runtime.exit(Runtime.java:113)
+	...
+
+"Reference Handler" daemon prio=10 Id=2 RUNNABLE
+	at java.base@12.0.1/java.lang.ref.Reference.waitForReferencePendingList(Native Method)
+	at java.base@12.0.1/java.lang.ref.Reference.processPendingReferences(Reference.java:241)
+	at java.base@12.0.1/java.lang.ref.Reference$ReferenceHandler.run(Reference.java:213)
+
+"Finalizer" daemon prio=8 Id=3 WAITING on java.lang.ref.ReferenceQueue$Lock@14ee0d96
+	at java.base@12.0.1/java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.ReferenceQueue$Lock@14ee0d96
+	at java.base@12.0.1/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:155)
+	at java.base@12.0.1/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:176)
+	at java.base@12.0.1/java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:170)
+
+"Signal Dispatcher" daemon prio=9 Id=4 RUNNABLE
+
+"Attach Listener" daemon prio=5 Id=5 RUNNABLE
+
+"Common-Cleaner" daemon prio=8 Id=19 TIMED_WAITING on java.lang.ref.ReferenceQueue$Lock@33717396
+	at java.base@12.0.1/java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.ReferenceQueue$Lock@33717396
+	at java.base@12.0.1/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:155)
+	at java.base@12.0.1/jdk.internal.ref.CleanerImpl.run(CleanerImpl.java:148)
+	at java.base@12.0.1/java.lang.Thread.run(Thread.java:835)
+	at java.base@12.0.1/jdk.internal.misc.InnocuousThread.run(InnocuousThread.java:134)
+
+"pool-3-thread-1" prio=5 Id=22 TIMED_WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@36662e4e
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@36662e4e
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:235)
+	at java.base@12.0.1/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2123)
+	at java.base@12.0.1/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+	at java.base@12.0.1/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+	at java.base@12.0.1/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1054)
+	at java.base@12.0.1/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1114)
+	at java.base@12.0.1/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	...
+
+"dbinit-fork-join-pool-cache-timer" daemon prio=5 Id=24 TIMED_WAITING on java.util.TaskQueue@6b0cb1a4
+	at java.base@12.0.1/java.lang.Object.wait(Native Method)
+	-  waiting on java.util.TaskQueue@6b0cb1a4
+	at java.base@12.0.1/java.util.TimerThread.mainLoop(Timer.java:553)
+	at java.base@12.0.1/java.util.TimerThread.run(Timer.java:506)
+
+"ForkJoinPool-1-worker-115" daemon prio=5 Id=25 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-229" daemon prio=5 Id=26 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-87" daemon prio=5 Id=27 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-201" daemon prio=5 Id=28 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-59" daemon prio=5 Id=29 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-173" daemon prio=5 Id=30 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-31" daemon prio=5 Id=31 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-145" daemon prio=5 Id=32 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-3" daemon prio=5 Id=33 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-117" daemon prio=5 Id=34 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-231" daemon prio=5 Id=35 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-89" daemon prio=5 Id=36 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-203" daemon prio=5 Id=37 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-61" daemon prio=5 Id=38 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-175" daemon prio=5 Id=39 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-33" daemon prio=5 Id=40 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-147" daemon prio=5 Id=41 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-5" daemon prio=5 Id=42 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-119" daemon prio=5 Id=43 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-233" daemon prio=5 Id=44 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-91" daemon prio=5 Id=45 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-205" daemon prio=5 Id=46 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-63" daemon prio=5 Id=47 TIMED_WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.parkUntil(LockSupport.java:276)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1619)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-177" daemon prio=5 Id=48 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-35" daemon prio=5 Id=49 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-149" daemon prio=5 Id=50 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-7" daemon prio=5 Id=51 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-121" daemon prio=5 Id=52 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-235" daemon prio=5 Id=53 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-93" daemon prio=5 Id=54 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-207" daemon prio=5 Id=55 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-65" daemon prio=5 Id=56 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-179" daemon prio=5 Id=57 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-37" daemon prio=5 Id=58 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-151" daemon prio=5 Id=59 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-9" daemon prio=5 Id=60 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-123" daemon prio=5 Id=61 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-237" daemon prio=5 Id=62 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-95" daemon prio=5 Id=63 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-209" daemon prio=5 Id=64 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-67" daemon prio=5 Id=65 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-181" daemon prio=5 Id=66 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-39" daemon prio=5 Id=67 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-153" daemon prio=5 Id=68 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-11" daemon prio=5 Id=69 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-125" daemon prio=5 Id=70 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-239" daemon prio=5 Id=71 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-97" daemon prio=5 Id=72 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-211" daemon prio=5 Id=73 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-69" daemon prio=5 Id=74 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-183" daemon prio=5 Id=75 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-41" daemon prio=5 Id=76 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-155" daemon prio=5 Id=77 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-13" daemon prio=5 Id=78 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-127" daemon prio=5 Id=79 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-241" daemon prio=5 Id=80 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-213" daemon prio=5 Id=82 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-99" daemon prio=5 Id=81 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-71" daemon prio=5 Id=83 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-185" daemon prio=5 Id=84 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-43" daemon prio=5 Id=85 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-157" daemon prio=5 Id=86 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-15" daemon prio=5 Id=87 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-129" daemon prio=5 Id=88 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"ForkJoinPool-1-worker-243" daemon prio=5 Id=89 WAITING on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/jdk.internal.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@fea83ee
+	at java.base@12.0.1/java.util.concurrent.locks.LockSupport.park(LockSupport.java:194)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1628)
+	at java.base@12.0.1/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+
+"Timer-0" daemon prio=5 Id=90 WAITING on java.util.TaskQueue@373fac46
+	at java.base@12.0.1/java.lang.Object.wait(Native Method)
+	-  waiting on java.util.TaskQueue@373fac46
+	at java.base@12.0.1/java.lang.Object.wait(Object.java:326)
+	at java.base@12.0.1/java.util.TimerThread.mainLoop(Timer.java:527)
+	at java.base@12.0.1/java.util.TimerThread.run(Timer.java:506)
+
+"Abandoned connection cleanup thread" daemon prio=5 Id=91 TIMED_WAITING on java.lang.ref.ReferenceQueue$Lock@30ace0b1
+	at java.base@12.0.1/java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.ReferenceQueue$Lock@30ace0b1
+	at java.base@12.0.1/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:155)
+	at app//com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:64)
+	at java.base@12.0.1/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base@12.0.1/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base@12.0.1/java.lang.Thread.run(Thread.java:835)
+
+	Number of locked synchronizers = 1
+	- java.util.concurrent.ThreadPoolExecutor$Worker@39090d6d
+
+"derby.rawStoreDaemon" daemon prio=5 Id=156 TIMED_WAITING on org.apache.derby.impl.services.daemon.BasicDaemon@3e23e691
+	at java.base@12.0.1/java.lang.Object.wait(Native Method)
+	-  waiting on org.apache.derby.impl.services.daemon.BasicDaemon@3e23e691
+	at app//org.apache.derby.impl.services.daemon.BasicDaemon.rest(Unknown Source)
+	at app//org.apache.derby.impl.services.daemon.BasicDaemon.run(Unknown Source)
+	at java.base@12.0.1/java.lang.Thread.run(Thread.java:835)
+
+"MainShutdownThread" prio=5 Id=23 RUNNABLE
+	at java.management@12.0.1/sun.management.ThreadImpl.dumpThreads0(Native Method)
+	at java.management@12.0.1/sun.management.ThreadImpl.dumpAllThreads(ThreadImpl.java:502)
+	at java.management@12.0.1/sun.management.ThreadImpl.dumpAllThreads(ThreadImpl.java:490)
+	at app//tigase.server.monitor.MonitorRuntime$MainShutdownThread.createThreadDump(MonitorRuntime.java:219)
+	at app//tigase.server.monitor.MonitorRuntime$MainShutdownThread.run(MonitorRuntime.java:187)
+
+
+===========
+

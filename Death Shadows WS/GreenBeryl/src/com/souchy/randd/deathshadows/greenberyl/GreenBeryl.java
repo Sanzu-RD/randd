@@ -2,6 +2,8 @@ package com.souchy.randd.deathshadows.greenberyl;
 
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 
+import tigase.server.XMPPServer;
+
 public class GreenBeryl extends DeathShadowCore {
 
 	public static GreenBeryl beryl;
@@ -14,6 +16,8 @@ public class GreenBeryl extends DeathShadowCore {
 	public GreenBeryl(String[] args) throws Exception {
 		super(args);
 		beryl = this;
+		
+		XMPPServer.main(args);
 	}
 
 
