@@ -1,11 +1,22 @@
 package com.souchy.randd.commons.diamond.models;
 
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.souchy.randd.commons.diamond.common.Action;
+import com.souchy.randd.commons.diamond.common.Action.EndTurnAction;
 import com.souchy.randd.commons.diamond.common.ActionPipeline;
 import com.souchy.randd.commons.diamond.common.ecs.Engine;
+import com.souchy.randd.commons.diamond.common.generic.IndexedList;
 import com.souchy.randd.commons.diamond.statusevents.EventPipeline;
 import com.souchy.randd.commons.diamond.systems.CellSystem;
 import com.souchy.randd.commons.diamond.systems.CreatureSystem;
@@ -23,6 +34,10 @@ import io.netty.util.AttributeKey;
 
 
 public class Fight extends Engine implements Identifiable<Integer>, BBSerializer, BBDeserializer {
+	
+	public ScheduledExecutorService timer = Executors.newSingleThreadScheduledExecutor();
+	public Future<?> future;
+	
 
 	public static final AttributeKey<Fight> attrkey = AttributeKey.newInstance("fight");
 	
@@ -33,22 +48,19 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 	 */
 	public int id = ++engineIdCounter;
 	
-	/**
-	 * All entities (cells and creatures)
-	 */
-//	public Map<Integer, Entity> entities;
 	
 	/**
 	 * Board
 	 */
 	public Board board;
+
 	
 	/**
 	 * Creature timeline / turn order by creature ID.
 	 * Timeline has to be populated manually on the server when a new creature (normal or summon) is created.
 	 * Client just copies it in FullUpdateHandler
 	 */
-	public List<Integer> timeline; 
+	public IndexedList<Integer> timeline; 
 	
 	public List<Creature> teamA(){
 		return creatures.where(c -> c.team == Team.A);
@@ -62,10 +74,6 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 	 */
 	public ActionPipeline pipe; 
 	
-	/**
-	 * action history : past / resolved actions
-	 */
-	public List<Action> history; 
 	
 	/**
 	 * Status event handlers
@@ -90,15 +98,22 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 		
 		board = new Board(this);
 		
-		timeline = new ArrayList<>();
-//		teamA = new ArrayList<>();
-//		teamB = new ArrayList<>();
-//		teamC = new ArrayList<>();
+		timeline = new IndexedList<>();
+		
 		
 		handlers = new EventPipeline();
-		
 		pipe = new ActionPipeline();
-		history = new ArrayList<>();
+		
+		handlers.reactors.register(this);
+
+		startTurn();
+	}
+
+
+	public void startTurn() {
+//		broadcast(new TurnStartMsg(timeline.index));
+//		timer.schedule(this::startTurn, 60 * 1000);
+		future = timer.schedule(() -> pipe.push(new EndTurnAction(this)), 60, TimeUnit.SECONDS);
 	}
 	
 

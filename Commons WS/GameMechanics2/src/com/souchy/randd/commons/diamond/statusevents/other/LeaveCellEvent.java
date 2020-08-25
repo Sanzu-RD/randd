@@ -7,23 +7,23 @@ import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 
-public class OnRoundStartEvent extends Event {
+public class LeaveCellEvent extends Event {
 
-	public interface OnRoundStartHandler extends Handler { //<OnRoundStartEvent> {
+	public interface OnLeaveCellHandler extends Handler { //<OnLeaveCellEvent> {
 		@Subscribe
-		public default void handle0(OnRoundStartEvent event) {
-			if(check(event)) onRoundStart(event);
+		public default void handle0(LeaveCellEvent event) {
+			if(check(event)) onLeaveCell(event);
 		}
-		public void onRoundStart(OnRoundStartEvent event);
+		public void onLeaveCell(LeaveCellEvent event);
 	}
 	
-	public OnRoundStartEvent(Creature source, Cell target, Effect effect) {
+	public LeaveCellEvent(Creature source, Cell target, Effect effect) {
 		super(source, target, effect);
 	}
 	
 	@Override
-	public OnRoundStartEvent copy0() {
-		return new OnRoundStartEvent(source, target, effect.copy());
+	public LeaveCellEvent copy0() {
+		return new LeaveCellEvent(source, target, effect.copy());
 	}
 	
 }

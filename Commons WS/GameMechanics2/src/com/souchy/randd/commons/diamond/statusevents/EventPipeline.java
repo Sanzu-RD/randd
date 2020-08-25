@@ -20,7 +20,7 @@ public class EventPipeline {
 	public EventBus modifiers;
 	public EventBus reactors;
 	
-	public <T extends Event> void post(Entity target, T e) {
+	public <T extends Event> void post(T e) { // Entity target, T e) {
 		interceptors.post(e);
 		modifiers.post(e);
 		reactors.post(e);

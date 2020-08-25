@@ -7,7 +7,7 @@ import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.diamond.models.stats.TargetConditionStat;
-import com.souchy.randd.commons.diamond.statusevents.status.OnRemoveStatusEvent;
+import com.souchy.randd.commons.diamond.statusevents.status.RemoveStatusEvent;
 
 /** One-shot effect */
 public class RemoveStatusEffect extends Effect {
@@ -21,8 +21,8 @@ public class RemoveStatusEffect extends Effect {
 	}
 
 	@Override
-	public OnRemoveStatusEvent createAssociatedEvent(Creature source, Cell target) {
-		return new OnRemoveStatusEvent(source, target, this);
+	public RemoveStatusEvent createAssociatedEvent(Creature source, Cell target) {
+		return new RemoveStatusEvent(source, target, this);
 	}
 
 	@Override

@@ -17,7 +17,6 @@ public class FightClientSystem extends Family<Channel> {
 		
 	}
 
-	
 	public void broadcast(BBMessage msg) {
 		this.foreach(c -> c.writeAndFlush(msg));
 	}

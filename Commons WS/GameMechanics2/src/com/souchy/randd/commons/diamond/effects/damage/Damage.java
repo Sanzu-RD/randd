@@ -12,7 +12,7 @@ import com.souchy.randd.commons.diamond.models.stats.TargetConditionStat;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
-import com.souchy.randd.commons.diamond.statusevents.damage.OnDmgEvent;
+import com.souchy.randd.commons.diamond.statusevents.damage.DmgEvent;
 
 /**
  * Damage always applies to the primary resource of the targets (ex: life)
@@ -162,8 +162,8 @@ public class Damage extends Effect {
 	}
 
 	@Override
-	public OnDmgEvent createAssociatedEvent(Creature caster, Cell target) {
-		return new OnDmgEvent(caster, target, this); 
+	public DmgEvent createAssociatedEvent(Creature caster, Cell target) {
+		return new DmgEvent(caster, target, this); 
 	}
 
 	@Override

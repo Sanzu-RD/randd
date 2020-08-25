@@ -3,14 +3,14 @@ package gamemechanics.data;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.TerrainEffect;
 import com.souchy.randd.commons.diamond.statusevents.Handler.HandlerType;
-import com.souchy.randd.commons.diamond.statusevents.other.OnEnterCellEvent;
-import com.souchy.randd.commons.diamond.statusevents.other.OnLeaveCellEvent;
-import com.souchy.randd.commons.diamond.statusevents.other.OnTurnStartEvent;
-import com.souchy.randd.commons.diamond.statusevents.other.OnWalkEvent;
-import com.souchy.randd.commons.diamond.statusevents.other.OnEnterCellEvent.OnEnterCellHandler;
-import com.souchy.randd.commons.diamond.statusevents.other.OnLeaveCellEvent.OnLeaveCellHandler;
-import com.souchy.randd.commons.diamond.statusevents.other.OnTurnStartEvent.OnTurnStartHandler;
-import com.souchy.randd.commons.diamond.statusevents.other.OnWalkEvent.OnWalkHandler;
+import com.souchy.randd.commons.diamond.statusevents.other.EnterCellEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.LeaveCellEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.WalkEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.EnterCellEvent.OnEnterCellHandler;
+import com.souchy.randd.commons.diamond.statusevents.other.LeaveCellEvent.OnLeaveCellHandler;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurnStartHandler;
+import com.souchy.randd.commons.diamond.statusevents.other.WalkEvent.OnWalkHandler;
 
 public class BurningGlyph extends TerrainEffect implements OnWalkHandler, OnEnterCellHandler, OnLeaveCellHandler, OnTurnStartHandler {
 
@@ -29,25 +29,25 @@ public class BurningGlyph extends TerrainEffect implements OnWalkHandler, OnEnte
 	}
 
 	@Override
-	public void onTurnStart(OnTurnStartEvent event) {
+	public void onTurnStart(TurnStartEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onLeaveCell(OnLeaveCellEvent event) {
+	public void onLeaveCell(LeaveCellEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onEnterCell(OnEnterCellEvent event) {
+	public void onEnterCell(EnterCellEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onWalk(OnWalkEvent event) {
+	public void onWalk(WalkEvent event) {
 		// TODO Auto-generated method stub
 		
 	}

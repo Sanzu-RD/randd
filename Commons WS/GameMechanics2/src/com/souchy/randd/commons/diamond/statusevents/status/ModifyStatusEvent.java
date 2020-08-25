@@ -7,23 +7,23 @@ import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 
-public class OnModifyStatusEvent extends Event {
+public class ModifyStatusEvent extends Event {
 
 	public interface OnModifyStatusHandler extends Handler { //<OnModifyStatusEvent> {
 		@Subscribe
-		public default void handle0(OnModifyStatusEvent event) {
+		public default void handle0(ModifyStatusEvent event) {
 			if(check(event)) onModifyStatus(event);
 		}
-		public void onModifyStatus(OnModifyStatusEvent event);
+		public void onModifyStatus(ModifyStatusEvent event);
 	}
 	
-	public OnModifyStatusEvent(Creature source, Cell target, ModifyStatusEffect effect) {
+	public ModifyStatusEvent(Creature source, Cell target, ModifyStatusEffect effect) {
 		super(source, target, effect);
 	}
 
 	@Override
-	public OnModifyStatusEvent copy0() {
-		return new OnModifyStatusEvent(source, target, (ModifyStatusEffect) effect.copy());
+	public ModifyStatusEvent copy0() {
+		return new ModifyStatusEvent(source, target, (ModifyStatusEffect) effect.copy());
 	}
 	
 }

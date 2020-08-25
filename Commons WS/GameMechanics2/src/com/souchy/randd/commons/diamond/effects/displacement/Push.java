@@ -8,7 +8,7 @@ import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.stats.TargetConditionStat;
 import com.souchy.randd.commons.diamond.statusevents.Event;
-import com.souchy.randd.commons.diamond.statusevents.displacement.OnPushEvent;
+import com.souchy.randd.commons.diamond.statusevents.displacement.PushEvent;
 
 /** 
  * Pushes a target creature by a set distance (stopped by no-passthrough cells) 
@@ -101,7 +101,7 @@ public class Push extends Effect {
 
 	@Override
 	public Event createAssociatedEvent(Creature source, Cell target) {
-		return new OnPushEvent(source, target, this);
+		return new PushEvent(source, target, this);
 	}
 	
 

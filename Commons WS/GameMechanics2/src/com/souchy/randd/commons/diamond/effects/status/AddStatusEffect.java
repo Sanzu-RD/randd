@@ -10,7 +10,7 @@ import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.diamond.models.stats.TargetConditionStat;
 import com.souchy.randd.commons.diamond.statusevents.Event;
-import com.souchy.randd.commons.diamond.statusevents.status.OnAddStatusEvent;
+import com.souchy.randd.commons.diamond.statusevents.status.AddStatusEvent;
 
 public class AddStatusEffect extends Effect {
 	
@@ -26,7 +26,7 @@ public class AddStatusEffect extends Effect {
 
 	@Override
 	public Event createAssociatedEvent(Creature source, Cell target) {
-		return new OnAddStatusEvent(source, target, this);
+		return new AddStatusEvent(source, target, this);
 	}
 
 	@Override

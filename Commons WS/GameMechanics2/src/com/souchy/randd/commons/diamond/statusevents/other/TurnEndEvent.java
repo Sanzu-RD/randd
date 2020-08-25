@@ -7,23 +7,23 @@ import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 
-public class OnRoundEndEvent extends Event {
+public class TurnEndEvent extends Event {
 
-	public interface OnRoundEndHandler extends Handler { //<OnRoundEndEvent> {
+	public interface OnTurnEndHandler extends Handler { //<OnTurnEndEvent> {
 		@Subscribe
-		public default void handle0(OnRoundEndEvent event) {
-			if(check(event)) onRoundEnd(event);
+		public default void handle0(TurnEndEvent event) {
+			if(check(event)) onTurnEnd(event);
 		}
-		public void onRoundEnd(OnRoundEndEvent event);
+		public void onTurnEnd(TurnEndEvent event);
 	}
 	
-	public OnRoundEndEvent(Creature source, Cell target, Effect effect) {
+	public TurnEndEvent(Creature source, Cell target, Effect effect) {
 		super(source, target, effect);
 	}
 	
 	@Override
-	public OnRoundEndEvent copy0() {
-		return new OnRoundEndEvent(source, target, effect.copy());
+	public TurnEndEvent copy0() {
+		return new TurnEndEvent(source, target, effect.copy());
 	}
 	
 }

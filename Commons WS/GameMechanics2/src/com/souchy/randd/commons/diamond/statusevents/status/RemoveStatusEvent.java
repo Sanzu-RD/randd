@@ -7,23 +7,23 @@ import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 
-public class OnRemoveStatusEvent extends Event {
+public class RemoveStatusEvent extends Event {
 
 	public interface OnRemoveStatusHandler extends Handler { //<OnRemoveStatusEvent> {
 		@Subscribe
-		public default void handle0(OnRemoveStatusEvent event) {
+		public default void handle0(RemoveStatusEvent event) {
 			if(check(event)) onRemoveStatus(event);
 		}
-		public void onRemoveStatus(OnRemoveStatusEvent event);
+		public void onRemoveStatus(RemoveStatusEvent event);
 	}
 	
-	public OnRemoveStatusEvent(Creature source, Cell target, RemoveStatusEffect effect) {
+	public RemoveStatusEvent(Creature source, Cell target, RemoveStatusEffect effect) {
 		super(source, target, effect);
 	}
 
 	@Override
-	public OnRemoveStatusEvent copy0() {
-		return new OnRemoveStatusEvent(source, target, (RemoveStatusEffect) effect.copy());
+	public RemoveStatusEvent copy0() {
+		return new RemoveStatusEvent(source, target, (RemoveStatusEffect) effect.copy());
 	}
 	
 }
