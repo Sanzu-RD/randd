@@ -59,7 +59,7 @@ public class AddStatusEffect extends Effect {
 //		} else {
 			target.getCreatures().get(0).statuses.addStatus(status);
 			// register in the eventpipeline if the status is either of interceptors/modifiers/reactors
-			this.get(Fight.class).handlers.register(status);
+			this.get(Fight.class).statusbus.register(status);
 //			target.getCreatures().get(0).handlers.register(status);
 //		}
 		

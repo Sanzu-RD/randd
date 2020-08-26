@@ -18,6 +18,15 @@ public class IndexedList<T> { // extends ArrayList<T> {
 	private int index;
 
 	public List<T> list = new ArrayList<>();
+	
+	public IndexedList() {
+		
+	}
+	public IndexedList(List<T> list, int index, int turn) {
+		this.list = list;
+		this.index = index;
+		this.turn = turn;
+	}
 
 	public synchronized void add(T t) {
 		list.add(t);
@@ -78,4 +87,8 @@ public class IndexedList<T> { // extends ArrayList<T> {
 		}
 	}
 
+	public synchronized List<T> copy(){
+		return new ArrayList<>(list);
+	}
+	
 }

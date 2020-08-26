@@ -29,9 +29,18 @@ public class Log {
 	public static void log(LogImportance importance, String details) {
 		Logging.log(new Log(importance, details));
 	}
+
 	
 	public static void info(String details) {
 		Logging.log(new Log(LogImportance.Info, details));
+	}
+	
+	public static void info(String details,  String... elements) {
+		info(details + " { " + String.join(", ", elements) + " }");
+	}
+
+	public static void format(String details,  Object... elements) {
+		info(String.format(details, elements));
 	}
 	
 	public static void info(String details,  Iterable<? extends CharSequence> elements) {

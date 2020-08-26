@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
+import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 
@@ -16,14 +17,24 @@ public class TurnStartEvent extends Event {
 		}
 		public void onTurnStart(TurnStartEvent event);
 	}
+
+	/** fight, should be in Event class */
+	public Fight fight;
+	/** full turns */
+	public int turn;
+	/** player index in the timeline */
+	public int index;
 	
-	public TurnStartEvent(Creature source, Cell target, Effect effect) {
-		super(source, target, effect);
+	public TurnStartEvent(Fight f, int turn, int index) { //Creature source, Cell target, Effect effect) {
+		super(null, null, null); //source, target, effect);
+		this.fight = f;
+		this.turn = turn;
+		this.index = index;
 	}
 	
 	@Override
 	public TurnStartEvent copy0() {
-		return new TurnStartEvent(source, target, effect.copy());
+		return new TurnStartEvent(this.fight, this.turn, this.index); // source, target, effect.copy());
 	}
 	
 }

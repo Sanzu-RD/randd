@@ -6,9 +6,9 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 
 import io.netty.channel.Channel;
 
-public class FightClientSystem extends Family<Channel> {
+public class FightChannelSystem extends Family<Channel> {
 
-	public FightClientSystem(Engine engine) {
+	public FightChannelSystem(Engine engine) {
 		super(engine, Channel.class);
 	}
 

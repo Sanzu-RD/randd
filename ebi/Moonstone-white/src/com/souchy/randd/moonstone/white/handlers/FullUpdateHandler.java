@@ -2,6 +2,7 @@ package com.souchy.randd.moonstone.white.handlers;
 
 import java.util.stream.Collectors;
 
+import com.souchy.randd.commons.diamond.common.generic.IndexedList;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Spell;
@@ -53,7 +54,8 @@ public class FullUpdateHandler implements BBMessageHandler<FullUpdate> {
 		message.spells.forEach(c -> c.register(Moonstone.fight));
 		message.status.forEach(c -> c.register(Moonstone.fight));
 		
-		Moonstone.fight.timeline = message.timeline;
+		Moonstone.fight.timeline = new IndexedList<>(message.timeline, message.currentIndex, message.currentTurn);
+		
 		
 //		Log.info("FullUpdate cells previous intances " + Moonstone.fight.cells.family.size());
 //		Log.info("FullUpdate creatures previous intances " + Moonstone.fight.creatures.family.size());

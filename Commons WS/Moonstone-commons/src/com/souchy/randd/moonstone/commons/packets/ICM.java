@@ -21,6 +21,9 @@ public class ICM implements BBMessage {
 	public String author;
 	public String content;
 
+	public ICM() {
+	}
+
 	public ICM(String author, String msg) {
 		this.author = author;
 		this.content = msg;

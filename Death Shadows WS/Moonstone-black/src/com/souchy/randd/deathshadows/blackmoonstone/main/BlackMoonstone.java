@@ -5,22 +5,38 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.diamond.statusevents.Handler;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent.OnTurnEndHandler;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurnStartHandler;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
 import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.SelfIdentify;
 import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.jade.meta.UserLevel;
+import com.souchy.randd.moonstone.commons.packets.s2c.TurnStart;
 
 import io.netty.channel.Channel;
 
-public class BlackMoonstone extends DeathShadowCore {
+public class BlackMoonstone extends DeathShadowCore implements OnTurnEndHandler, OnTurnStartHandler {
 	
+	/**
+	 * Static ref
+	 */
 	public static BlackMoonstone moon;
 	
+	/**
+	 * TCP Server
+	 */
 	public final DeathShadowTCP server;
 	
+	/**
+	 * One server can handle multiple fights
+	 */
 	public Map<Integer, Fight> fights;
 	
 	
@@ -40,22 +56,43 @@ public class BlackMoonstone extends DeathShadowCore {
 		// create a mock fight for tests
 		if(Arrays.asList(args).contains("mock")) {
 			var mock = MockFight.createFight();
+			new FightChannelSystem(mock);
+			mock.statusbus.register(this);
+			mock.startTurnTimer();
 			fights.put(mock.id, mock);
-			new FightClientSystem(mock);
 		}
-		
+		if(Arrays.asList(args).contains("mock")) {
+			var mock = MockFight.createFight();
+			new FightChannelSystem(mock);
+			mock.statusbus.register(this);
+			mock.startTurnTimer();
+			fights.put(mock.id, mock);
+		}
+
 		// register node on pearl
 		// rivers.consume("idmaker" () -> {
-			int nodeid = 0; // get nodeid from idmaker queue
-	//		rivers.send("pearl", new SelfIdentify(nodeid));
-		//});
+//			int nodeid = 0; // get nodeid from idmaker queue
+		// rivers.send("pearl", new SelfIdentify(nodeid));
+		// });
 		
 		// block here to not just exit the program
 		if(!Arrays.asList(args).contains("async"))
 			server.block();
 	}
 
-
+	public void onTurnEnd(TurnEndEvent e) {
+		Log.format("event fight %s turn %s end %s", e.fight.id, e.turn, e.index);
+	}
+	public void onTurnStart(TurnStartEvent e) {
+		Log.format("event fight %s turn %s sta %s", e.fight.id, e.turn, e.index);
+		broadcast(e.fight, new TurnStart(e.turn, e.index));
+	}
+	
+	public static void broadcast(Fight f, BBMessage m) {
+		var syst = f.get(FightChannelSystem.class);
+		syst.broadcast(m);
+	}
+	
 	@Override
 	protected String[] getRootPackages() {
 		return new String[]{ 
@@ -67,6 +104,11 @@ public class BlackMoonstone extends DeathShadowCore {
 				"com.souchy.randd.deathshadows.blackmoonstone.handlers",
 				"com.souchy.randd.deathshadows.blackmoonstone.riverhandlers"
 				};
+	}
+
+	@Override
+	public HandlerType type() {
+		return HandlerType.Reactor;
 	}
 
 }

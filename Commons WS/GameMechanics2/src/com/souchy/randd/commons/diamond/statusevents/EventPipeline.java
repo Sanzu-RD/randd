@@ -16,40 +16,44 @@ public class EventPipeline {
 	// appliers		   // actually apply effect (reduce hp, displace a creature, send packets...)
 	// reactors		   // proc reaction effects propagation
 	
-	public EventBus interceptors;
-	public EventBus modifiers;
-	public EventBus reactors;
+	public EventBus interceptors = new EventBus("interceptors");
+	public EventBus modifiers = new EventBus("modifiers");
+	public EventBus reactors = new EventBus("reactors");
 	
 	public <T extends Event> void post(T e) { // Entity target, T e) {
 		interceptors.post(e);
 		modifiers.post(e);
 		reactors.post(e);
 	}
+	
+	/** StatusAdd effect : */
+	public void register(Status status) {
+		if(status instanceof Handler) {
+			register((Handler) status);
+		}
+	}
+	public void register(Handler handler) {
+		switch (handler.type()) {
+			case Interceptor -> interceptors.register(handler);
+			case Modifier -> modifiers.register(handler);
+			case Reactor -> reactors.register(handler);
+		}
+	}
 
 	/** StatusRemove effect : */
 	public void unregister(Status status) {
 		// Status Remove Effect
 		if(status instanceof Handler) {
-			Handler handler = (Handler) status;
-			switch (handler.type()) {
-				case Interceptor -> interceptors.unregister(status);
-				case Modifier -> modifiers.unregister(status);
-				case Reactor -> reactors.unregister(status);
-			}
+			unregister((Handler) status);
 		}
 	}
-	
-	/** StatusAdd effect : */
-	public void register(Status status) {
-		if(status instanceof Handler) {
-			Handler handler = (Handler) status;
-			switch (handler.type()) {
-				case Interceptor -> interceptors.register(status);
-				case Modifier -> modifiers.register(status);
-				case Reactor -> reactors.register(status);
-			}
+	public void unregister(Handler handler) {
+		// Status Remove Effect
+		switch (handler.type()) {
+		case Interceptor -> interceptors.unregister(handler);
+		case Modifier -> modifiers.unregister(handler);
+		case Reactor -> reactors.unregister(handler);
 		}
 	}
-	
 	
 }

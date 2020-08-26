@@ -4,7 +4,7 @@ import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadows.blackmoonstone.main.BlackMoonstone;
-import com.souchy.randd.deathshadows.blackmoonstone.main.FightClientSystem;
+import com.souchy.randd.deathshadows.blackmoonstone.main.FightChannelSystem;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.moonstone.CreateFight;
 
 import io.netty.channel.Channel;
@@ -18,7 +18,7 @@ public class CreateFightHandler implements BBMessageHandler<CreateFight> {
 		
 		if(true) { // if the client is Coral matchmaking server or Pearl then the request is authorized
 			var fight = new Fight();
-			new FightClientSystem(fight);
+			new FightChannelSystem(fight);
 			BlackMoonstone.moon.fights.put(fight.id, fight);
 			// 
 			message.fight = fight;

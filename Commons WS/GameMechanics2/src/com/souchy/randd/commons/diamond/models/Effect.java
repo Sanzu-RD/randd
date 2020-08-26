@@ -105,15 +105,15 @@ public abstract class Effect extends Entity {
 	
 	private static void interceptors(Entity e, Event tempEvent) {
 		if(tempEvent.intercepted) return;
-		e.get(Fight.class).handlers.interceptors.post(tempEvent);
+		e.get(Fight.class).statusbus.interceptors.post(tempEvent);
 	}
 	private static void modifiers(Entity e, Event tempEvent) {
 		if(tempEvent.intercepted) return;
-		e.get(Fight.class).handlers.modifiers.post(tempEvent);
+		e.get(Fight.class).statusbus.modifiers.post(tempEvent);
 	}
 	private static void reactors(Entity e, Event tempEvent) {
 		if(tempEvent.intercepted) return;
-		e.get(Fight.class).handlers.reactors.post(tempEvent);
+		e.get(Fight.class).statusbus.reactors.post(tempEvent);
 	}
 	
 	/**

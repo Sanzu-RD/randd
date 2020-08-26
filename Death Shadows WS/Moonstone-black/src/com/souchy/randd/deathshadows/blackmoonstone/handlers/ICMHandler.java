@@ -2,7 +2,7 @@ package com.souchy.randd.deathshadows.blackmoonstone.handlers;
 
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
-import com.souchy.randd.deathshadows.blackmoonstone.main.FightClientSystem;
+import com.souchy.randd.deathshadows.blackmoonstone.main.FightChannelSystem;
 import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.moonstone.commons.packets.ICM;
 
@@ -24,7 +24,7 @@ public class ICMHandler implements BBMessageHandler<ICM> {
 	public void handle(ChannelHandlerContext client, ICM message) {
 		Fight fight = client.channel().attr(Fight.attrkey).get();
 		
-		fight.get(FightClientSystem.class).foreach(c -> {
+		fight.get(FightChannelSystem.class).foreach(c -> {
 			// si c'est un message privé envoyé à quelqu'un en particulier
 			if (message.channel.startsWith("user")) {
 				var usertarget = message.channel.split(".")[1];

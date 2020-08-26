@@ -2,6 +2,7 @@ package com.souchy.randd.commons.diamond.common;
 
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 public abstract class Action {
 	
@@ -11,10 +12,11 @@ public abstract class Action {
 		}
 		@Override
 		public void apply() {
+			//Log.info("EndTurnAction apply");
 			fight.future.cancel(false);
-			fight.handlers.post(new TurnEndEvent(null, null, null));
+			fight.statusbus.post(new TurnEndEvent(fight, fight.timeline.turn(), fight.timeline.index()));
 			fight.timeline.moveUp();
-			fight.startTurn();
+			fight.startTurnTimer();
 		}
 	}
 	

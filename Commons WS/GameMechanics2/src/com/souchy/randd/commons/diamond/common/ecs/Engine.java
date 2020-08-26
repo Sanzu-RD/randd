@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.eventbus.EventBus;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 /**
  * 
@@ -17,7 +18,7 @@ public class Engine {
 	
 	protected static int engineIdCounter = 0;
 
-	private final Map<Class<? extends System>, System> systems = new HashMap<>();
+	public final Map<Class<? extends System>, System> systems = new HashMap<>();
 	
 	/* *
 	 * might delete this and just let systems take care of entities..

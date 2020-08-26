@@ -18,6 +18,7 @@ import com.souchy.randd.commons.diamond.models.Effect;
  */
 public abstract class Event {
 	
+	
 	// public final boolean canBeIntercepted;
 	public boolean intercepted;
 	public Creature source;

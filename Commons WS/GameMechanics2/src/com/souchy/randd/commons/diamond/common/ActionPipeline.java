@@ -8,6 +8,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import com.souchy.randd.commons.tealwaters.logging.Log;
+
 /**
  * Synchronized Action list using a pooled thread to execute the actions in order
  * @author Robyn Girardeau
@@ -77,6 +79,7 @@ public class ActionPipeline {
 			if(!q.isEmpty())
 				action = q.pop();
 		}
+		//Log.format("ActionPipe flush %s", action);
 		if(action != null) {
 			if(action.canApply()) {
 				action.apply();

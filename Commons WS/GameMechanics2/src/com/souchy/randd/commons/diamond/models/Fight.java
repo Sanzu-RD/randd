@@ -18,6 +18,7 @@ import com.souchy.randd.commons.diamond.common.ActionPipeline;
 import com.souchy.randd.commons.diamond.common.ecs.Engine;
 import com.souchy.randd.commons.diamond.common.generic.IndexedList;
 import com.souchy.randd.commons.diamond.statusevents.EventPipeline;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
 import com.souchy.randd.commons.diamond.systems.CellSystem;
 import com.souchy.randd.commons.diamond.systems.CreatureSystem;
 import com.souchy.randd.commons.diamond.systems.SpellSystem;
@@ -26,6 +27,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.matchmaking.Team;
 import com.souchy.randd.jade.meta.User;
 
@@ -74,11 +76,11 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 	 */
 	public ActionPipeline pipe; 
 	
-	
 	/**
 	 * Status event handlers
 	 */
-	public EventPipeline handlers;
+	public EventPipeline statusbus;
+	
 	
 	// systems hold and manage instances, theyre cool guys
 	// might want a system for Effects and have effect models with ids the same way as status/spells
@@ -100,20 +102,23 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 		
 		timeline = new IndexedList<>();
 		
-		
-		handlers = new EventPipeline();
 		pipe = new ActionPipeline();
-		
-		handlers.reactors.register(this);
-
-		startTurn();
+		statusbus = new EventPipeline();
 	}
 
-
-	public void startTurn() {
-//		broadcast(new TurnStartMsg(timeline.index));
-//		timer.schedule(this::startTurn, 60 * 1000);
-		future = timer.schedule(() -> pipe.push(new EndTurnAction(this)), 60, TimeUnit.SECONDS);
+	/**
+	 * Start the turn timer thread and sends a TurnStart event. 
+	 * Servers will react to this event by broadcasting a TurnStart message.
+	 * Will get cancelled by an EndTurnAction if a player passes his turn.
+	 */
+	public void startTurnTimer() {
+//		Log.format("raw turn start %s %s", timeline.turn(), timeline.index());
+		statusbus.post(new TurnStartEvent(this, timeline.turn(), timeline.index()));
+		future = timer.schedule(() -> {
+//			Log.format("raw turn end %s %s", timeline.turn(), timeline.index());
+			pipe.push(new EndTurnAction(this));
+		}, 40, TimeUnit.SECONDS);
+		
 	}
 	
 

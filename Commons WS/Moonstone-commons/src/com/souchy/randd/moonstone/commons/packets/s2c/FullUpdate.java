@@ -29,6 +29,8 @@ public class FullUpdate implements BBMessage {
 	public List<Status> status = new ArrayList<>();
 	public List<Spell> spells = new ArrayList<>();
 	public List<Integer> timeline = new ArrayList<>();
+	public int currentIndex = 0;
+	public int currentTurn = 0;
 	
 	public FullUpdate() { }
 	public FullUpdate(Fight fight) {
@@ -37,7 +39,9 @@ public class FullUpdate implements BBMessage {
 			this.creatures = fight.creatures.copy();
 			this.status = fight.status.copy();
 			this.spells = fight.spells.copy();
-			this.timeline = fight.timeline;
+			this.timeline = fight.timeline.copy();
+			this.currentIndex = fight.timeline.index();
+			this.currentTurn = fight.timeline.turn();
 		}
 	}
 	
@@ -48,6 +52,8 @@ public class FullUpdate implements BBMessage {
 		out.writeInt(status.size());
 		out.writeInt(spells.size());
 		out.writeInt(timeline.size());
+		out.writeInt(currentIndex);
+		out.writeInt(currentTurn);
 		
 		Log.info("FullUpdate write : " + String.join(", ", cells.size()+"", creatures.size()+"", status.size()+"", spells.size()+"", timeline.size()+""));
 		
@@ -67,6 +73,8 @@ public class FullUpdate implements BBMessage {
 		int statuscount = in.readInt();
 		int spellcount = in.readInt();
 		int timelinecount = in.readInt();
+		this.currentIndex = in.readInt();
+		this.currentTurn = in.readInt();
 		
 		Log.info("FullUpdate read : " + String.join(", ", cellcount+"", creaturecount+"", statuscount+"", spellcount+"", timelinecount+""));
 		

@@ -13,26 +13,40 @@ import io.netty.buffer.ByteBuf;
  * @date 9 mai 2020
  */
 @ID(id = 11003)
-public class NextTurn implements BBMessage {
+public class TurnStart implements BBMessage {
+	
+	public int turn, index;
+	
+	public TurnStart() {
+		
+	}
+	public TurnStart(int turn, int index) {
+		this.turn = turn;
+		this.index = index;
+	}
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		return null;
+		out.writeInt(turn);
+		out.writeInt(index);
+		return out;
 	}
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
-		return null;
+		this.turn = in.readInt();
+		this.index = in.readInt();
+		return this;
 	}
 
 	@Override
 	public Deserializer<ByteBuf, BBMessage> create() {
-		return null;
+		return new TurnStart();
 	}
 
 	@Override
 	public int getBufferCapacity() {
-		return 0;
+		return 8;
 	}
 	
 }

@@ -43,7 +43,7 @@ public class MockFight {
 		
 		// base model
 		CreatureModel model = DiamondModels.creatures.get(jade.creatureModelID);
-		Log.info("");
+//		Log.info("");
 		// override model stats
 		model.baseStats.resources.put(Resource.life, new IntStat(30)); 
 		// instance
