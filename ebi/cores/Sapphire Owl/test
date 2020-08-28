@@ -17,4 +17,5 @@
 <entry key="gfx.stencil">true</entry>
 <entry key="functionality.ruler">true</entry>
 <entry key="gfx.backgroundnPath"></entry>
+<entry key="general.maxChatMessages">100</entry>
 </properties>

@@ -15,19 +15,29 @@ import io.netty.buffer.ByteBuf;
 @SuppressWarnings("exports")
 @ID(id = 10003)
 public class PassTurn implements BBMessage {
+	
+	public int turn, index;	
 
 	public PassTurn() {
 		
 	}
+	public PassTurn(int turn, int index) {
+		this.turn = turn;
+		this.index = index;
+	}
 	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		return null;
+		out.writeInt(turn);
+		out.writeInt(index);
+		return out;
 	}
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
-		return null;
+		this.turn = in.readInt();
+		this.index = in.readInt();
+		return this;
 	}
 
 	@Override
@@ -37,6 +47,6 @@ public class PassTurn implements BBMessage {
 
 	@Override
 	public int getBufferCapacity() {
-		return 1;
+		return 8;
 	}
 }

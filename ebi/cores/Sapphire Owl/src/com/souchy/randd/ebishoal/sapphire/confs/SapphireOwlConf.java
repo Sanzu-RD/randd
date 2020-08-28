@@ -24,6 +24,7 @@ public class SapphireOwlConf extends JsonConfig {
 
 	public static class GeneralConfig extends JsonConfig {
 		public String locale = "fr";
+		public int maxChatMessages = 100;
 	}
 
 	public static class FunctionalityConfig extends JsonConfig {

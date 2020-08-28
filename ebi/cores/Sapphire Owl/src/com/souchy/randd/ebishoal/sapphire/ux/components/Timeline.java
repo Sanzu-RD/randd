@@ -1,13 +1,19 @@
 package com.souchy.randd.ebishoal.sapphire.ux.components;
 
+import java.util.concurrent.TimeUnit;
+
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
+import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.ext.AssetData;
+import com.souchy.randd.commons.diamond.statics.Constants;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.util.DragAndResizeListener;
@@ -16,29 +22,54 @@ import com.souchy.randd.ebishoal.sapphire.gfx.SapphireAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
+import com.souchy.randd.moonstone.commons.packets.ICM;
+import com.souchy.randd.moonstone.white.Moonstone;
 
 public class Timeline extends SapphireComponent {
 
 	@LmlActor("table")
 	public Table table;
 
-
+	@LmlActor("timer")
+	public Label timer;
+	/** current time remaining */
+	public int time;
+	
 	@Override
 	public String getTemplateId() {
 		return "timeline";
 	}
 
 
+	public Timeline() {
+		Moonstone.fight.bus.register(this);
+	}
+	
 	@Override
 	protected void onInit() {
 //		Log.info("Timeline.init()");
 		this.addListener(new DragAndResizeListener(this));
 		refresh();
 	}
+	
 
+	@Subscribe
+	public void onTurnStart(TurnStartEvent e) {
+		if(e.fight.future != null) e.fight.future.cancel(true);
+		time = Constants.baseTimePerTurn;
+		e.fight.future = e.fight.timer.scheduleAtFixedRate(() -> {
+			//Moonstone.bus.post(new ICM("event", "timeline", "time " + time));
+			timer.setText(time + "s");
+			if(time > 0) time--;
+			else e.fight.future.cancel(true);
+		}, 0, 1, TimeUnit.SECONDS);
+	}
+
+	
 	public void refresh() {
 		Log.info("UI Timeline refresh");
 		table.getChildren().forEach(a -> {
+			if(a instanceof Stack == false) return;
 			var stack = (Stack) a;
 			var img = (RoundImage) stack.getChild(0);
 			LapisUtil.setImage(img, getCreatureIcon(img));
@@ -115,6 +146,12 @@ public class Timeline extends SapphireComponent {
 	public void resizeScreen(int w, int h, boolean centerCam) {
 		// TODO Auto-generated method stub
 
+	}
+
+
+	@Override
+	public void dispose() {
+		SapphireGame.fight.bus.unregister(this);
 	}
 
 //

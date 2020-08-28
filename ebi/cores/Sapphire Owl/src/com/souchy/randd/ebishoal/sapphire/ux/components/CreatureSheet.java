@@ -96,6 +96,11 @@ public class CreatureSheet extends SapphireComponent {
 		SapphireGame.gfx.hud.getStage().addActor(sheet);
 	}
 
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	protected void onInit() {

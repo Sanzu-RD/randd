@@ -69,6 +69,12 @@ public class StatusIcon extends SapphireComponent { //Stack {
 
 	}
 
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 //	/**
 //	 * statusname = i18n.status.{id}

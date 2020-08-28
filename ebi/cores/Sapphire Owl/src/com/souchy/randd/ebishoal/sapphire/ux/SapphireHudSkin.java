@@ -97,7 +97,7 @@ public class SapphireHudSkin extends Skin {
 		// set spell icons
 		for (var s : c.spellbook) {
 			String iconPath = "missing";
-			var spell = Moonstone.fight.spells.get(s);
+			var spell = SapphireGame.fight.spells.get(s);
 			var spellResource = AssetData.spells.get(spell.modelid()); 
 			if (spellResource != null) {
 				iconPath = SapphireAssets.getSpellIconPath(spellResource.icon) + "_round";

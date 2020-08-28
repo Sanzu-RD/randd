@@ -10,4 +10,5 @@ module com.souchy.randd.moonstone.white {
 	requires com.souchy.randd.moonstone.Commons;
 	requires GameMechanics2;
 	requires com.google.common;
+	requires com.souchy.randd.commons.Jade;
 }

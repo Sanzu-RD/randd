@@ -24,5 +24,10 @@ public class StatusFlow extends SapphireComponent {
 		
 	}
 
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

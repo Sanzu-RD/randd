@@ -18,6 +18,7 @@ import com.souchy.randd.commons.diamond.common.ActionPipeline;
 import com.souchy.randd.commons.diamond.common.ecs.Engine;
 import com.souchy.randd.commons.diamond.common.generic.IndexedList;
 import com.souchy.randd.commons.diamond.statusevents.EventPipeline;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
 import com.souchy.randd.commons.diamond.systems.CellSystem;
 import com.souchy.randd.commons.diamond.systems.CreatureSystem;
@@ -108,18 +109,22 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 
 	/**
 	 * Start the turn timer thread and sends a TurnStart event. 
-	 * Servers will react to this event by broadcasting a TurnStart message.
+	 * Clients will react to this in status handlers
+	 * Servers will react to this in status handlers and by broadcasting a TurnStart message.
 	 * Will get cancelled by an EndTurnAction if a player passes his turn.
 	 */
 	public void startTurnTimer() {
 //		Log.format("raw turn start %s %s", timeline.turn(), timeline.index());
-		statusbus.post(new TurnStartEvent(this, timeline.turn(), timeline.index()));
-		future = timer.schedule(() -> {
-//			Log.format("raw turn end %s %s", timeline.turn(), timeline.index());
-			pipe.push(new EndTurnAction(this));
-		}, 40, TimeUnit.SECONDS);
-		
+		var event = new TurnStartEvent(this, timeline.turn(), timeline.index());
+		statusbus.post(event);
+		bus.post(event);
 	}
+	public void endTurnTimer() {
+		var event = new TurnEndEvent(this, this.timeline.turn(), this.timeline.index());
+		this.statusbus.post(event);
+		this.bus.post(event);
+	}
+	
 	
 
 	@Override

@@ -40,6 +40,8 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.ux.components.CreatureSheet;
 import com.souchy.randd.ebishoal.sapphire.ux.components.Parameters;
+import com.souchy.randd.moonstone.commons.packets.c2s.PassTurn;
+import com.souchy.randd.moonstone.white.Moonstone;
 
 public class SapphireController extends CameraInputController {
 
@@ -92,6 +94,10 @@ public class SapphireController extends CameraInputController {
 			SapphireGame.gfx.resetCamera();
 			SapphireGame.gfx.hud.reload(); //.refresh();
 			//GlobalLML.lml().reloadViews();
+		});
+
+		addOnKeyDown(Keys.C, () -> {
+			Moonstone.moon.write(new PassTurn());
 		});
 
 		addOnKeyDown(RIGHT, () -> camera.rotate(45, 0, 0, 1));

@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.czyzby.lml.parser.impl.AbstractLmlView;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
@@ -137,7 +138,14 @@ interface LapisScreenRenderer extends Screen {
 	 */
 	public default void renderView(float delta) {
 		// render UI
-		if(getView() != null) getView().render(delta);
+		if(getView() != null) {
+			try {
+				getView().render(delta);
+			} catch (Exception e) {
+				Log.error("view rendering error :\n", e);
+				getView().getStage().getBatch().end();
+			}
+		}
 	}
 	
 	/*

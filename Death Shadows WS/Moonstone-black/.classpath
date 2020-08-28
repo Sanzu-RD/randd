@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="com/souchy/randd/deathshadows/blackmoonstone/main/RegisterPackets.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty">
 		<attributes>
 			<attribute name="module" value="true"/>

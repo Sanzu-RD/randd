@@ -20,4 +20,9 @@ public class Constants {
 	 */
 	public static final int MovementActionID = 0;
 	
+	/**
+	 * Base time per turn in seconds
+	 */
+	public static final int baseTimePerTurn = 30;
+	
 }

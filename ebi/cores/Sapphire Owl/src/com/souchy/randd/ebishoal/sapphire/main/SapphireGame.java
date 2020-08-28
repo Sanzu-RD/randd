@@ -29,6 +29,9 @@ public class SapphireGame extends LapisGame {
 
 	@Override
 	public void init() {
+		SapphireGame.fight = Moonstone.fight; // = new Fight();
+		renderableEntitySystem = new SapphireEntitySystem(Moonstone.fight);
+		
 		// init elements
 		Elements.values();
 		// models configurations (creatures, spells, statuses)
@@ -59,9 +62,6 @@ public class SapphireGame extends LapisGame {
 
 		try {
 			Log.info("data.creatures : " + DiamondModels.creatures);
-
-			SapphireGame.fight = Moonstone.fight = new Fight();
-			renderableEntitySystem = new SapphireEntitySystem(Moonstone.fight);
 
 			// ask for fight data after assets have been loaded
 			if(Moonstone.moon != null) {

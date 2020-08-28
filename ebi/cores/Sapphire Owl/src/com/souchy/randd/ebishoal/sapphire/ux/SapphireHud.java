@@ -24,6 +24,8 @@ import com.souchy.randd.ebishoal.sapphire.ux.components.Parameters;
 import com.souchy.randd.ebishoal.sapphire.ux.components.PlayBar;
 import com.souchy.randd.ebishoal.sapphire.ux.components.QuickOptions;
 import com.souchy.randd.ebishoal.sapphire.ux.components.Timeline;
+import com.souchy.randd.moonstone.white.Moonstone;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent.DisposeUIEvent;
 
 public class SapphireHud extends LapisHud {
 
@@ -44,6 +46,7 @@ public class SapphireHud extends LapisHud {
 	}
 	
 	public void reload() {
+		SapphireOwl.core.bus.post(new DisposeUIEvent());
 		this.getStage().clear();
 		if(!isLoaded) SapphireLmlParser.parser.createView(this, getTemplateFile());
 

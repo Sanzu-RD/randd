@@ -17,18 +17,18 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DB"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SmoothRivers"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-white"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SmoothRivers"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Effekseer 2"/>
 	<classpathentry kind="output" path="bin/"/>
 </classpath>

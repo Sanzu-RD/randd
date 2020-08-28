@@ -118,7 +118,7 @@ public abstract class Family<T> extends com.souchy.randd.commons.diamond.common.
 	 * 
 	 * @param entity
 	 */
-	protected void add(T entity) {
+	public void add(T entity) {
 		synchronized(family) {
 			family.add(entity);
 		}
@@ -127,7 +127,7 @@ public abstract class Family<T> extends com.souchy.randd.commons.diamond.common.
 	 * 
 	 * @param entity
 	 */
-	protected void remove(T entity) {
+	public void remove(T entity) {
 		synchronized(family) {
 			family.remove(entity);
 		}

@@ -147,5 +147,10 @@ public class Parameters extends SapphireComponent {
 		
 	}
 
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

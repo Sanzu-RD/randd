@@ -21,6 +21,7 @@ public class SendUserHandler implements BBMessageHandler<SendUser> {
 		
 		// set user object
 		client.channel().attr(User.attrkey).set(message.user);
+		Moonstone.user = message.user;
 		
 		// get fight id from args[] sent by amethyst to sapphire
 		var auth = client.channel().attr(Moonstone.authKey).get();

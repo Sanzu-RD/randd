@@ -3,6 +3,7 @@ package com.souchy.randd.commons.diamond.systems;
 import com.souchy.randd.commons.diamond.common.ecs.Engine;
 import com.souchy.randd.commons.diamond.common.ecs.Family;
 import com.souchy.randd.commons.diamond.models.Cell;
+import com.souchy.randd.commons.diamond.models.Spell;
 
 public class CellSystem extends Family<Cell> { 
 
@@ -17,6 +18,9 @@ public class CellSystem extends Family<Cell> {
 			
 		});
 	}
-	
+
+	public Cell get(int instanceid) {
+		return first(s -> s.id == instanceid);
+	}
 	
 }

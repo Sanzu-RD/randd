@@ -9,20 +9,28 @@ public abstract class Action {
 	public static class EndTurnAction extends Action {
 		public EndTurnAction(Fight f) {
 			super(f);
+			this.id = TurnEndActionID;
 		}
 		@Override
 		public void apply() {
 			//Log.info("EndTurnAction apply");
-			fight.future.cancel(false);
-			fight.statusbus.post(new TurnEndEvent(fight, fight.timeline.turn(), fight.timeline.index()));
-			fight.timeline.moveUp();
-			fight.startTurnTimer();
+			synchronized(fight.timeline) {
+				fight.endTurnTimer();
+//				var event = new TurnEndEvent(fight, fight.timeline.turn(), fight.timeline.index());
+//				fight.statusbus.post(event);
+//				fight.bus.post(event);
+				fight.timeline.moveUp();
+				fight.startTurnTimer();
+			}
 		}
 	}
 	
-	public static class MoveAction {}
-	public static class SpellAction {}
-
+	public static class MoveAction {
+	}
+	
+	public static class SpellAction {
+	}
+	
 	/**
 	 * id for ending turn is -1
 	 */
@@ -62,7 +70,6 @@ public abstract class Action {
 	
 	public Action(Fight f) {
 		fight = f;
-		id = TurnEndActionID;
 		caster = fight.timeline.current();
 		turn = fight.timeline.turn();
 	}

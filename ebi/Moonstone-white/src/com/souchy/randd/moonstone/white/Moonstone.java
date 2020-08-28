@@ -1,37 +1,57 @@
 package com.souchy.randd.moonstone.white;
 
 
+import java.util.concurrent.TimeUnit;
+
 import com.google.common.eventbus.EventBus;
-import com.souchy.randd.commons.deathebi.msg.GetSalt;
+import com.google.common.eventbus.Subscribe;
+import com.souchy.randd.commons.diamond.common.Action.EndTurnAction;
 import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
+import com.souchy.randd.jade.meta.User;
 
 import io.netty.util.AttributeKey;
 
-public class Moonstone extends EbiShoalTCP { 
+public class Moonstone extends EbiShoalTCP { //implements OnTurnStartHandler, OnTurnEndHandler { 
 	
 	public static final AttributeKey<String[]> authKey = AttributeKey.newInstance("moonstone.white.auth");
 	
 	public static Moonstone moon;
-	public static Fight fight;
-	public static EventBus bus;
+	public static User user;
+	public static Fight fight = new Fight();
+	public static EventBus bus = new EventBus();
 	
 	public Moonstone(String ip, int port, EbiShoalCore core) throws Exception {
 		super(ip, port, core);
 		moon = this;
-		bus = new EventBus();
-//		fight = new Fight();
+		fight.bus.register(this); //.statusbus.register(this);
 	}
-	
-//	public void auth(String username, String password, int fightid) {
-////		this.channel.attr(authKey).set(new String[]{ username, password, fightid + "" });
-//		write(new GetSalt(username));
+
+//	@Override
+//	public HandlerType type() {
+//		return HandlerType.Reactor;
 //	}
-	
-//	public static void write(BBMessage msg) {
-//		moon.channel.writeAndFlush(msg);
-//	}
+
+	@Subscribe
+	public void onTurnStart(TurnStartEvent e) {
+		Log.format("event fight %s turn %s sta %s", e.fight.id, e.turn, e.index);
+//		if(e.fight.future != null) e.fight.future.cancel(true);
+//		e.fight.future = e.fight.timer.schedule(() -> {
+////			fight.endTurnTimer();
+////			moon.write(new PassTurn());
+//			fight.bus.post(new TimerTick());
+//		}, 1, TimeUnit.SECONDS);
+	}
+
+	@Subscribe
+	public void onTurnEnd(TurnEndEvent e) {
+		Log.format("event fight %s turn %s end %s", e.fight.id, e.turn, e.index);
+	}
+
 	
 	// add fight object to here as fieldmember or ecs component ? 
 	// but the fight object is already an engine

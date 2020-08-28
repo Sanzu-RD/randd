@@ -3,8 +3,12 @@ package com.souchy.randd.deathshadows.blackmoonstone.main;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import com.google.common.eventbus.Subscribe;
+import com.souchy.randd.commons.diamond.common.Action.EndTurnAction;
 import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.diamond.statics.Constants;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent.OnTurnEndHandler;
@@ -14,6 +18,8 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
+import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserActiveEvent;
+import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserInactiveEvent;
 import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.SelfIdentify;
 import com.souchy.randd.jade.meta.User;
@@ -22,7 +28,7 @@ import com.souchy.randd.moonstone.commons.packets.s2c.TurnStart;
 
 import io.netty.channel.Channel;
 
-public class BlackMoonstone extends DeathShadowCore implements OnTurnEndHandler, OnTurnStartHandler {
+public class BlackMoonstone extends DeathShadowCore { // implements OnTurnEndHandler, OnTurnStartHandler {
 	
 	/**
 	 * Static ref
@@ -52,21 +58,22 @@ public class BlackMoonstone extends DeathShadowCore implements OnTurnEndHandler,
 		
 		server = new DeathShadowTCP(port, this);
 		fights = new HashMap<>();
+		server.auth.bus.register(this);
 		
 		// create a mock fight for tests
 		if(Arrays.asList(args).contains("mock")) {
-			var mock = MockFight.createFight();
-			new FightChannelSystem(mock);
-			mock.statusbus.register(this);
-			mock.startTurnTimer();
-			fights.put(mock.id, mock);
+			var fight = MockFight.createFight();
+			new FightChannelSystem(fight);
+			fight.bus.register(this); //.statusbus.register(this);
+			fight.startTurnTimer();
+			fights.put(fight.id, fight);
 		}
 		if(Arrays.asList(args).contains("mock")) {
-			var mock = MockFight.createFight();
-			new FightChannelSystem(mock);
-			mock.statusbus.register(this);
-			mock.startTurnTimer();
-			fights.put(mock.id, mock);
+			var fight = MockFight.createFight();
+			new FightChannelSystem(fight);
+			fight.bus.register(this); //.statusbus.register(this);
+			fight.startTurnTimer();
+			fights.put(fight.id, fight);
 		}
 
 		// register node on pearl
@@ -74,24 +81,51 @@ public class BlackMoonstone extends DeathShadowCore implements OnTurnEndHandler,
 //			int nodeid = 0; // get nodeid from idmaker queue
 		// rivers.send("pearl", new SelfIdentify(nodeid));
 		// });
+
 		
 		// block here to not just exit the program
 		if(!Arrays.asList(args).contains("async"))
 			server.block();
-	}
 
-	public void onTurnEnd(TurnEndEvent e) {
-		Log.format("event fight %s turn %s end %s", e.fight.id, e.turn, e.index);
-	}
-	public void onTurnStart(TurnStartEvent e) {
-		Log.format("event fight %s turn %s sta %s", e.fight.id, e.turn, e.index);
-		broadcast(e.fight, new TurnStart(e.turn, e.index));
 	}
 	
 	public static void broadcast(Fight f, BBMessage m) {
 		var syst = f.get(FightChannelSystem.class);
+		Log.format("broadcast to system size %s", syst.size());
 		syst.broadcast(m);
 	}
+
+	@Subscribe
+	public void onConnect(UserActiveEvent e) {
+		Log.info("black on connect : " + e.user.username);
+//		Fight fight = e.ctx.channel().attr(Fight.attrkey).get();
+//		var user = e.ctx.channel().attr(User.attrkey).get();
+//		fight.creatures.foreach(c -> c.add(user._id));
+	}
+	
+	@Subscribe
+	public void onDisconnect(UserInactiveEvent e) {
+		Log.info("black on disconnect : " + e.user.username);
+		Fight fight = e.ctx.channel().attr(Fight.attrkey).get();
+		fight.get(FightChannelSystem.class).remove(e.ctx.channel());
+	}
+
+
+	@Subscribe
+	public void onTurnStart(TurnStartEvent e) {
+		Log.format("event fight %s turn %s sta %s", e.fight.id, e.turn, e.index);
+		if(e.fight.future != null) e.fight.future.cancel(true);
+		e.fight.future = e.fight.timer.schedule(() -> {
+			e.fight.pipe.push(new EndTurnAction(e.fight));
+		}, Constants.baseTimePerTurn, TimeUnit.SECONDS);
+		broadcast(e.fight, new TurnStart(e.turn, e.index));
+	}
+	
+	@Subscribe
+	public void onTurnEnd(TurnEndEvent e) {
+		Log.format("event fight %s turn %s end %s", e.fight.id, e.turn, e.index);
+	}
+	
 	
 	@Override
 	protected String[] getRootPackages() {
@@ -106,9 +140,9 @@ public class BlackMoonstone extends DeathShadowCore implements OnTurnEndHandler,
 				};
 	}
 
-	@Override
-	public HandlerType type() {
-		return HandlerType.Reactor;
-	}
+//	@Override
+//	public HandlerType type() {
+//		return HandlerType.Reactor;
+//	}
 
 }

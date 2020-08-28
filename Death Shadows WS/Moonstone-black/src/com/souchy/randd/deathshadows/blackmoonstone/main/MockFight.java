@@ -21,11 +21,14 @@ public class MockFight {
 		
 		// init fight with cells, creatures and spells
 		Fight fight = new Fight();
+		
 		var c1 = testCreateCreature(fight, 1);
-		var c2 = testCreateCreature(fight, 2);
 		c1.team = Team.A;
-		c2.team = Team.B;
 		c1.pos.set(2, 16);
+//		c1.add(user);
+		
+		var c2 = testCreateCreature(fight, 2);
+		c2.team = Team.B;
 		c2.pos.set(16, 2);
 		
 		fight.timeline.add(c1.id);

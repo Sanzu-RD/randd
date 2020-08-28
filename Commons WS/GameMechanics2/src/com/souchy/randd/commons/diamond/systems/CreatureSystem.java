@@ -3,6 +3,7 @@ package com.souchy.randd.commons.diamond.systems;
 import com.souchy.randd.commons.diamond.common.ecs.Engine;
 import com.souchy.randd.commons.diamond.common.ecs.Family;
 import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.Spell;
 
 public class CreatureSystem extends Family<Creature> {
 	
@@ -16,6 +17,10 @@ public class CreatureSystem extends Family<Creature> {
 		foreach(c -> {
 			
 		});
+	}
+
+	public Creature get(int instanceid) {
+		return first(s -> s.id == instanceid);
 	}
 	
 	/**

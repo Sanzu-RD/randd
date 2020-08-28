@@ -71,6 +71,9 @@ public class IndexedList<T> { // extends ArrayList<T> {
 		return index;
 	}
 
+	public synchronized void setTurn(int i) {
+		turn = i;
+	}
 	public synchronized void setIndex(int i) {
 		index = i;
 	}
@@ -87,6 +90,15 @@ public class IndexedList<T> { // extends ArrayList<T> {
 		}
 	}
 
+	public synchronized T get(int index) {
+		if(index > list.size() || index < 0) return null;
+		return list.get(index);
+	}
+	
+	public synchronized int size() {
+		return list.size();
+	}
+	
 	public synchronized List<T> copy(){
 		return new ArrayList<>(list);
 	}

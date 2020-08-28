@@ -18,6 +18,7 @@
             <:row/>
         </:loop>
 
+        <label id="timer" value=""/>
     </table>
 
 </timeline>

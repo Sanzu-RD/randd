@@ -66,7 +66,6 @@ public class FullUpdateHandler implements BBMessageHandler<FullUpdate> {
 		Log.info("FullUpdate status intances " + Moonstone.fight.status.size());
 		
 		
-		
 		// propagate event to UIs
 		Moonstone.bus.post(message);
 	}
