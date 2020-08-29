@@ -22,7 +22,7 @@ public class TurnStartHandler implements BBMessageHandler<TurnStart> {
 	@Override
 	public void handle(ChannelHandlerContext client, TurnStart message) {
 		if(notfirst) { // || Moonstone.fight.timeline.turn() != 0 || Moonstone.fight.timeline.index() != 0) { // Moonstone.fight.future != null
-			Log.info("TurnStartHandler endturntimer");
+//			Log.info("TurnStartHandler endturntimer");
 			Moonstone.fight.endTurnTimer(); 
 		} else {
 			notfirst = true;
@@ -30,6 +30,7 @@ public class TurnStartHandler implements BBMessageHandler<TurnStart> {
 		
 		Moonstone.fight.timeline.setTurn(message.turn);
 		Moonstone.fight.timeline.setIndex(message.index);
+		Moonstone.fight.time = message.time;
 
 		Moonstone.fight.startTurnTimer();
 	}

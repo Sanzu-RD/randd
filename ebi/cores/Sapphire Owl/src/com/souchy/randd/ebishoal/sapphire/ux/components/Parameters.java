@@ -21,7 +21,9 @@ import com.kotcrab.vis.ui.FocusManager;
 import com.kotcrab.vis.ui.widget.VisCheckBox;
 import com.kotcrab.vis.ui.widget.VisImageButton;
 import com.kotcrab.vis.ui.widget.VisWindow;
+import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
@@ -82,12 +84,28 @@ public class Parameters extends SapphireComponent {
 				SapphireGame.gfx.hud.parameters = null;
 			}
 		});
+
+		
+		// focus on hover
+		LapisUtil.onHover(scrollpane, this::focusScroll, this::unfocusScroll);
+		// focus on click
+		LapisUtil.onClick(window, this::focusScroll);
+	}
+	
+	private void focusScroll() {
+		SapphireGame.gfx.hud.getStage().setScrollFocus(scrollpane);
+	}
+	
+	private void unfocusScroll (){
+		SapphireGame.gfx.hud.getStage().setScrollFocus(null);
 	}
 	
 	public void close() {
+		unfocusScroll();
 		window.fadeOut();
 		Parameters.this.remove();
 		SapphireGame.gfx.hud.parameters = null;
+		dispose();
 	}
 	
 	public void foreachCell(Table group, Consumer<Cell<?>> dothing) {
@@ -110,6 +128,11 @@ public class Parameters extends SapphireComponent {
 	@LmlAction("toggleVisibility")
 	public void toggleVisibility() {
 		setVisible(!isVisible());
+		if(this.isVisible()) {
+			focusScroll();
+		} else {
+			unfocusScroll();
+		}
 	}
 
 

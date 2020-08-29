@@ -5,7 +5,6 @@ import org.bson.types.ObjectId;
 import com.souchy.randd.commons.diamond.common.Action.EndTurnAction;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
-import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.moonstone.commons.packets.c2s.PassTurn;
 
@@ -22,9 +21,9 @@ public class PassTurnHandler implements BBMessageHandler<PassTurn> {
 		var creature = fight.creatures.get(action.caster);
 		var user = client.channel().attr(User.attrkey).get();
 		
-		Log.format("passturn   user %s creature %s owner %s  turn %s i %s", user._id, creature.id, creature.get(ObjectId.class), action.turn, fight.timeline.index());
+//		Log.format("passturn   user %s creature %s owner %s %s turn %s i %s", user._id, creature.id, creature.get(ObjectId.class), creature.get(ObjectId.class).equals(user._id), action.turn, fight.timeline.index());
 		
-		if(creature.get(ObjectId.class) == user._id) {
+		if(creature.get(ObjectId.class).equals(user._id)) {
 			fight.pipe.push(action);
 		}
 		

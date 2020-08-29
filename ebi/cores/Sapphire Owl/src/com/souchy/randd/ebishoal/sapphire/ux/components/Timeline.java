@@ -33,7 +33,7 @@ public class Timeline extends SapphireComponent {
 	@LmlActor("timer")
 	public Label timer;
 	/** current time remaining */
-	public int time;
+//	public int time;
 	
 	@Override
 	public String getTemplateId() {
@@ -56,11 +56,11 @@ public class Timeline extends SapphireComponent {
 	@Subscribe
 	public void onTurnStart(TurnStartEvent e) {
 		if(e.fight.future != null) e.fight.future.cancel(true);
-		time = Constants.baseTimePerTurn;
+//		time = Constants.baseTimePerTurn;
 		e.fight.future = e.fight.timer.scheduleAtFixedRate(() -> {
 			//Moonstone.bus.post(new ICM("event", "timeline", "time " + time));
-			timer.setText(time + "s");
-			if(time > 0) time--;
+			timer.setText(e.fight.time + "s");
+			if(e.fight.time > 0) e.fight.time--;
 			else e.fight.future.cancel(true);
 		}, 0, 1, TimeUnit.SECONDS);
 	}

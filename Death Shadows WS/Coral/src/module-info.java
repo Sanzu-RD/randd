@@ -13,4 +13,5 @@ module com.souchy.randd.deathshadows.coral {
 	requires transitive com.souchy.randd.commons.deathebi;
 	requires transitive org.mongodb.driver.sync.client;
 	requires transitive com.souchy.randd.deathshadow.core;
+	requires GameMechanics2;
 }

@@ -8,6 +8,7 @@ import io.netty.buffer.ByteBuf;
 
 /**
  * Server sends this to the clients whenever : a client passes turn (in response to PassTurn packet), or when the timer expires
+ * or when a client connects in the middle of a turn, so it can know the timer
  * 
  * @author Blank
  * @date 9 mai 2020
@@ -15,20 +16,23 @@ import io.netty.buffer.ByteBuf;
 @ID(id = 11003)
 public class TurnStart implements BBMessage {
 	
-	public int turn, index;
+	public int turn, index, time;
+	
 	
 	public TurnStart() {
 		
 	}
-	public TurnStart(int turn, int index) {
+	public TurnStart(int turn, int index, int time) {
 		this.turn = turn;
 		this.index = index;
+		this.time = time;
 	}
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 		out.writeInt(turn);
 		out.writeInt(index);
+		out.writeInt(time);
 		return out;
 	}
 
@@ -36,6 +40,7 @@ public class TurnStart implements BBMessage {
 	public BBMessage deserialize(ByteBuf in) {
 		this.turn = in.readInt();
 		this.index = in.readInt();
+		this.time = in.readInt();
 		return this;
 	}
 

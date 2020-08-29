@@ -8,7 +8,7 @@ import java.util.HashMap;
  * @author Blank
  * @date 10 juin 2020
  */
-public class Entity {
+public class Entity implements EntityF {
 	
 	public final HashMap<Class<?>, Object> components = new HashMap<>();
 	

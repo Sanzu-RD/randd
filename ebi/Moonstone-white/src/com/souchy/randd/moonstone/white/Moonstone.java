@@ -38,7 +38,7 @@ public class Moonstone extends EbiShoalTCP { //implements OnTurnStartHandler, On
 
 	@Subscribe
 	public void onTurnStart(TurnStartEvent e) {
-		Log.format("event fight %s turn %s sta %s", e.fight.id, e.turn, e.index);
+//		Log.format("event fight %s turn %s sta %s", e.fight.id, e.turn, e.index);
 //		if(e.fight.future != null) e.fight.future.cancel(true);
 //		e.fight.future = e.fight.timer.schedule(() -> {
 ////			fight.endTurnTimer();
@@ -49,7 +49,7 @@ public class Moonstone extends EbiShoalTCP { //implements OnTurnStartHandler, On
 
 	@Subscribe
 	public void onTurnEnd(TurnEndEvent e) {
-		Log.format("event fight %s turn %s end %s", e.fight.id, e.turn, e.index);
+//		Log.format("event fight %s turn %s end %s", e.fight.id, e.turn, e.index);
 	}
 
 	

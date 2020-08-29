@@ -26,5 +26,6 @@ module com.souchy.randd.moonstone.Black {
 	requires com.souchy.randd.deathshadows.nodes.pearl.PearlMessaging;
 	requires CreatureCommons;
 	requires com.souchy.randd.commons.Jade;
+	requires org.mongodb.bson;
 //	requires com.souchy.randd.deathshadows.commons.deathrivers;
 }

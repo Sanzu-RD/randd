@@ -17,13 +17,12 @@ public final class JadeCreature {
 	/** creature model id */
 	public int creatureModelID;
 
-	/** in which elements the player allocated how much stats */
+	/** in which elements the PLAYER allocated how much stats */
 	public int[] affinities;
 	
-	/** selected spell models ids */
+	/** PLAYER-selected spell models ids */
 	public int[] spellIDs;
 
-	
 	
 	public ByteBuf serialize(ByteBuf out) {
 		out.writeInt(creatureModelID);

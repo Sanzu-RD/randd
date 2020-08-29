@@ -7,9 +7,9 @@
 <entry key="sound.general">4</entry>
 <entry key="functionality.centerline">true</entry>
 <entry key="gfx.blur">true</entry>
-<entry key="sound.ui">7</entry>
+<entry key="sound.ui">4</entry>
 <entry key="sound.ambiance">6</entry>
-<entry key="sound.fx">2</entry>
+<entry key="sound.fx">3</entry>
 <entry key="functionality.grid">true</entry>
 <entry key="general.locale">fr</entry>
 <entry key="functionality.lineofsight">true</entry>

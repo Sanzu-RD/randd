@@ -3,6 +3,7 @@ package com.souchy.randd.ebishoal.sapphire.main;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader;
 import com.google.common.eventbus.Subscribe;
+import com.souchy.randd.commons.deathebi.msg.GetSalt;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Fight;
@@ -59,23 +60,13 @@ public class SapphireGame extends LapisGame {
 
 		Log.info("LapisResources : { " + String.join(", ", LapisAssets.assets.getAssetNames()) + " }");
 
-
-		try {
-			Log.info("data.creatures : " + DiamondModels.creatures);
-
-			// ask for fight data after assets have been loaded
-			if(Moonstone.moon != null) {
-				Moonstone.bus.register(this);
-				Moonstone.moon.write(new GetUpdate());
-			}
-
-			// player hud
-			// SapphireHudSkin.play(fight.teamA.get(0));
-
-		} catch (Exception e) {
-			Log.error("SapphireOwl creature error : ", e);
-			Gdx.app.exit();
-			System.exit(0);
+		Log.info("data.creatures : " + DiamondModels.creatures);
+		
+		// after assets have been loaded, log into moonstone then ask for fight data on
+		// JoinFight
+		if(Moonstone.moon != null) {
+			Moonstone.bus.register(this);
+			Moonstone.moon.write(new GetSalt(Moonstone.moon.channel.attr(Moonstone.authKey).get()[0]));
 		}
 	}
 
@@ -92,7 +83,10 @@ public class SapphireGame extends LapisGame {
 	public SapphireScreen getStartScreen() {
 		return gfx;
 	}
-
+	
+	/**
+	 * Update UI when receiving FullUpdate msg
+	 */
 	@Subscribe
 	public void fullUpdateHandler(FullUpdate msg) {
 		// player hud

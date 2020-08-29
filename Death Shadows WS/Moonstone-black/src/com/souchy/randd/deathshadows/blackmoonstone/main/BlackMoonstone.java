@@ -91,7 +91,7 @@ public class BlackMoonstone extends DeathShadowCore { // implements OnTurnEndHan
 	
 	public static void broadcast(Fight f, BBMessage m) {
 		var syst = f.get(FightChannelSystem.class);
-		Log.format("broadcast to system size %s", syst.size());
+//		Log.format("broadcast to system size %s", syst.size());
 		syst.broadcast(m);
 	}
 
@@ -113,17 +113,23 @@ public class BlackMoonstone extends DeathShadowCore { // implements OnTurnEndHan
 
 	@Subscribe
 	public void onTurnStart(TurnStartEvent e) {
-		Log.format("event fight %s turn %s sta %s", e.fight.id, e.turn, e.index);
+//		Log.format("event fight %s turn %s sta %s", e.fight.id, e.turn, e.index);
+		
 		if(e.fight.future != null) e.fight.future.cancel(true);
-		e.fight.future = e.fight.timer.schedule(() -> {
-			e.fight.pipe.push(new EndTurnAction(e.fight));
-		}, Constants.baseTimePerTurn, TimeUnit.SECONDS);
-		broadcast(e.fight, new TurnStart(e.turn, e.index));
+		
+		e.fight.time = Constants.baseTimePerTurn;
+		
+		e.fight.future = e.fight.timer.scheduleAtFixedRate(() -> {
+			if(e.fight.time > 0) e.fight.time--;
+			else e.fight.pipe.push(new EndTurnAction(e.fight));
+		}, 1, 1, TimeUnit.SECONDS);
+
+		broadcast(e.fight, new TurnStart(e.turn, e.index, e.fight.time));
 	}
 	
 	@Subscribe
 	public void onTurnEnd(TurnEndEvent e) {
-		Log.format("event fight %s turn %s end %s", e.fight.id, e.turn, e.index);
+//		Log.format("event fight %s turn %s end %s", e.fight.id, e.turn, e.index);
 	}
 	
 	

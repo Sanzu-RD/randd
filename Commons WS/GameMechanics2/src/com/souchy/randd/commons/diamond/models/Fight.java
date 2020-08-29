@@ -2,6 +2,7 @@ package com.souchy.randd.commons.diamond.models;
 
 import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,6 +17,7 @@ import com.souchy.randd.commons.diamond.common.Action;
 import com.souchy.randd.commons.diamond.common.Action.EndTurnAction;
 import com.souchy.randd.commons.diamond.common.ActionPipeline;
 import com.souchy.randd.commons.diamond.common.ecs.Engine;
+import com.souchy.randd.commons.diamond.common.ecs.EntityF;
 import com.souchy.randd.commons.diamond.common.generic.IndexedList;
 import com.souchy.randd.commons.diamond.statusevents.EventPipeline;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
@@ -43,6 +45,8 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 	
 
 	public static final AttributeKey<Fight> attrkey = AttributeKey.newInstance("fight");
+
+//	public final HashMap<String, Object> components = new HashMap<>();
 	
 	//public EventPipeline bus;
 	
@@ -51,6 +55,10 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 	 */
 	public int id = ++engineIdCounter;
 	
+	/**
+	 * Time currently remaining on the turn timer
+	 */
+	public int time;
 	
 	/**
 	 * Board
@@ -145,6 +153,7 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	
 	
 }
