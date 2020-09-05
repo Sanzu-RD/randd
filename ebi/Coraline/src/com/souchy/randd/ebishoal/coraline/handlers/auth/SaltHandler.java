@@ -20,11 +20,11 @@ public class SaltHandler implements BBMessageHandler<SendSalt> {
 	public void handle(ChannelHandlerContext client, SendSalt message) {
 		
 		var username = Coraline.credentials[0];
-		var password = Coraline.credentials[1];
-		var hashedPassword = UserUtil.hashPassword(password, message.salt);
+		var password = Coraline.credentials[1]; // already hashed
+//		var hashedPassword = UserUtil.hashPassword(password, message.salt);
 		
 		Log.info("Coraline GetUser " + username + ", " + password);
-		var getuser = new GetUser(username, hashedPassword);
+		var getuser = new GetUser(username, password);
 		client.channel().writeAndFlush(getuser);
 	}
 	

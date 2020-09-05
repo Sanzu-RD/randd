@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import com.souchy.randd.commons.deathebi.UserUtil;
 import com.souchy.randd.commons.opal.IAuthentication.LoginToken;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.amethyst.main.Amethyst;
 import com.souchy.randd.ebishoal.amethyst.main.AmethystApp;
 import com.souchy.randd.ebishoal.coraline.Coraline;
 import com.souchy.randd.ebishoal.opaline.api.Opaline;
@@ -68,6 +69,8 @@ public class LoginForm { //extends VBox {
 //			Log.error("Amethyst.LoginForm.login : event is null");
 //			return;
 //		}
+		
+		// bypass login with Right click
 		if(event != null && event.getButton() == MouseButton.SECONDARY) {
 			AmethystApp.stage.setScene(AmethystApp.mainScene);
 			return;
@@ -80,13 +83,13 @@ public class LoginForm { //extends VBox {
 		try {
 			var salt = Opaline.auth.getSalt(username);
 			var hashedPassword = UserUtil.hashPassword(password, salt);
-			user = Opaline.auth.signin(new LoginToken(username, hashedPassword));
+			user = Opaline.auth.signin(username + "@" + hashedPassword); // new LoginToken(username, hashedPassword));
 		} catch(Exception e) {
 			Log.info("Amethyst.login form error : " + e);
 		}
 		
 		if(user != null) {
-			Coraline.credentials = new String[] { username, password };
+			Coraline.credentials = new String[] { user.username, user.password };
 			AmethystApp.stage.setScene(AmethystApp.mainScene);
 		} else {
 			// show tooltip for wrong username/password combination
@@ -109,8 +112,8 @@ public class LoginForm { //extends VBox {
 
 		tip.setStyle("-fx-text-fill: red; -fx-font-size: 15px;");
 		
-		usernameField.setText("souchy");
-		passwordField.setText("z");
+		usernameField.setText(Amethyst.conf.username);
+		passwordField.setText(Amethyst.conf.hashedpass);
 	}
 	
 }

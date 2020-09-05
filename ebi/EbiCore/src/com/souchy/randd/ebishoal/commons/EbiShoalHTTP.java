@@ -63,7 +63,7 @@ public class EbiShoalHTTP {
 	 * @param <T> what we read the response as (.readEntity(c);)
 	 * @param path
 	 * @param entity - the entity the send
-	 * @param c
+	 * @param c - output/response class type
 	 * @return
 	 */
 	public <T> T post(WebTarget target, Entity<?> entity, Class<T> c, MediaType... mediatypes) {

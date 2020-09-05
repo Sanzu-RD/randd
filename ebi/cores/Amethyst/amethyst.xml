@@ -29,7 +29,7 @@
 			</chainedmapper>
 		</mapper>
 	</pathconvert>
-		
+
 	<target name="create_run_jar">
 		<jar destfile="${dir.jarfile}/amethyst.jar">
 			<manifest>
@@ -56,14 +56,18 @@
 			<fileset dir="${dir.git}/r and d/Commons WS/Teal Net/bin"/>
 			<fileset dir="${dir.git}/r and d/Commons WS/DeathEbi-commons/bin"/>
 			<fileset dir="${dir.git}/r and d/ebi/EbiCore/bin"/>
-			
+
 			<fileset dir="${dir.git}/r and d/Commons WS/Jade Models/bin"/>
 			<fileset dir="${dir.git}/r and d/Commons WS/GameMechanics2/bin"/>
 			<fileset dir="${dir.git}/r and d/Data WS/Creature Commons/bin"/>
 
 			<fileset dir="${dir.git}/r and d/ebi/Opaline/bin"/>
 			<fileset dir="${dir.git}/r and d/Commons WS/Opal-commons/bin"/>
-			<!-- add DeathEbiCommons, Coraline, Coral-commons,   -->
+			
+			<fileset dir="${dir.git}/r and d/ebi/Coraline/bin" />
+			<fileset dir="${dir.git}/r and d/Commons WS/Coral-commons/bin" />
+
+			<fileset dir="${dir.git}/r and d/Commons WS/DeathEbi-commons/bin" />
 		</jar>
 
 		<!-- Delete libs -->

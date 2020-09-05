@@ -75,7 +75,6 @@ public class Home {
 			Coraline.enqueue(GameQueue.mock); // TODO select gamme mode
 			timeline.play();
 			timer.setVisible(true);
-			
 			this.playLbl.setText("Dequeue");
 		} else {
 			Coraline.dequeue();
@@ -93,6 +92,7 @@ public class Home {
 	 */
 	@Subscribe
 	public void onMathFoundMsg(MatchFound msg) {
+		Log.info("Amethyst on MatchFound, change screen to draft");
 		AmethystApp.mainController.mainTabs.getSelectionModel().select(AmethystApp.mainController.draftTab);
 	}
 	
@@ -116,6 +116,7 @@ public class Home {
 	
 	@FXML
 	public void initialize() {
+		Coraline.core.bus.register(this);
 		try {
 			// queue timer
 			{

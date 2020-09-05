@@ -1,5 +1,8 @@
 package com.souchy.randd.ebishoal.amethyst.main;
 
+import java.io.IOException;
+import java.net.URL;
+
 import com.souchy.randd.commons.tealwaters.io.files.FilesManager;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.amethyst.ui.LoginScene;
@@ -11,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -64,6 +68,7 @@ public class AmethystApp extends Application {
 	
 	public Scene loadScene(String name) {
 		try {
+			if(!name.endsWith(".fxml")) name += ".fxml";
 			String devPath = "ux/amethyst/scenes/";
 			String deployPath = "res/" + devPath;
 			var url = FilesManager.getResource(devPath + name);
@@ -76,6 +81,34 @@ public class AmethystApp extends Application {
 			return null;
 		}
 	}
-	
+	public <T extends Parent> T loadComponent(T controller, String name) {
+		try {
+			if(!name.endsWith(".fxml")) name += ".fxml";
+			String devPath = "ux/amethyst/components/";
+			String deployPath = "res/" + devPath;
+			var url = FilesManager.getResource(devPath + name);
+			if(url == null) url = FilesManager.getResource(deployPath + name);
+			//Log.info("["+name+"] scene url : " + url);
+
+			FXMLLoader fxmlLoader = new FXMLLoader(url);
+			fxmlLoader.setRoot(controller);
+			fxmlLoader.setController(controller);
+			try {
+				fxmlLoader.load();
+			} catch (IOException exception) {
+				throw new RuntimeException(exception);
+			}
+			return controller;
+//			var obj = FXMLLoader.load(url);
+//			Log.info("loaded component " + obj + ", " + obj.getClass());
+//			T out = (T) obj;
+//			return out;
+		} catch (Exception e) {
+			Log.error("Amethyst unable to load the component ["+name+"] : ", e);
+			return null;
+		}
+	}
+
+
 	
 }

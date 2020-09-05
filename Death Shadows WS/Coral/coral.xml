@@ -49,14 +49,14 @@
             <fileset dir="${dir.git}/r and d/Commons WS/DeathEbi-commons/bin"/>
             <fileset dir="${dir.git}/r and d/Death Shadows WS/DeathShadowCore/bin"/>
         	
-            <fileset dir="${dir.git}/r and d/Commons WS/Jade Models/bin"/>
-            <fileset dir="${dir.git}/r and d/Commons WS/GameMechanics2/bin"/>
-        	
             <fileset dir="${dir.git}/r and d/Commons WS/Coral-commons/bin"/>
         	
             <fileset dir="${dir.git}/r and d/Commons WS/PearlMessaging/bin"/>
             <fileset dir="${dir.git}/r and d/Death Shadows WS/SmoothRivers/bin"/>
             <fileset dir="${dir.git}/r and d/Death Shadows WS/Iolite/bin"/>
+        	
+            <fileset dir="${dir.git}/r and d/Commons WS/Jade Models/bin"/>
+            <fileset dir="${dir.git}/r and d/Commons WS/GameMechanics2/bin"/>
             <fileset dir="${dir.git}/r and d/Data WS/Creature Commons/bin"/>
         </jar>
         

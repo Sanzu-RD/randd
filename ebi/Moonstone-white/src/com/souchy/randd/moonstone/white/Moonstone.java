@@ -23,11 +23,12 @@ public class Moonstone extends EbiShoalTCP { //implements OnTurnStartHandler, On
 	public static Moonstone moon;
 	public static User user;
 	public static Fight fight = new Fight();
-	public static EventBus bus = new EventBus();
+	public static EventBus bus; // = new EventBus();
 	
 	public Moonstone(String ip, int port, EbiShoalCore core) throws Exception {
 		super(ip, port, core);
 		moon = this;
+		bus = moon.bus;
 		fight.bus.register(this); //.statusbus.register(this);
 	}
 

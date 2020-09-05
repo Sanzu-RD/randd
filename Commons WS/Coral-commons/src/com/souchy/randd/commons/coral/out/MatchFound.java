@@ -3,6 +3,7 @@ package com.souchy.randd.commons.coral.out;
 import com.souchy.randd.annotationprocessor.ID;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.commons.Deserializer;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.matchmaking.Lobby;
 
 import io.netty.buffer.ByteBuf;
@@ -20,7 +21,11 @@ public class MatchFound implements BBMessage {
 	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		lobby.serialize(out);
+		try {
+			lobby.serialize(out);
+		}catch(Exception e) {
+			Log.info("", e);
+		}
 		return out;
 	}
 

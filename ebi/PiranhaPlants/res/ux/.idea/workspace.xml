@@ -5,6 +5,8 @@
       <change beforePath="$PROJECT_DIR$/../../../../Death Shadows WS/Moonstone-black/src/com/souchy/randd/deathshadows/blackmoonstone/main/BlackMoonstone.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Death Shadows WS/Moonstone-black/src/com/souchy/randd/deathshadows/blackmoonstone/main/BlackMoonstone.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Moonstone-white/src/com/souchy/randd/moonstone/white/Moonstone.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Moonstone-white/src/com/souchy/randd/moonstone/white/Moonstone.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Moonstone-white/src/com/souchy/randd/moonstone/white/handlers/TurnStartHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Moonstone-white/src/com/souchy/randd/moonstone/white/handlers/TurnStartHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/sapphireowl.conf" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/sapphireowl.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/components/Parameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/components/Parameters.java" afterDir="false" />
     </list>
@@ -183,7 +185,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1494" y="266" width="1471" height="807" extended-state="0" />
+    <frame x="-1494" y="177" width="1471" height="896" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19844082" />

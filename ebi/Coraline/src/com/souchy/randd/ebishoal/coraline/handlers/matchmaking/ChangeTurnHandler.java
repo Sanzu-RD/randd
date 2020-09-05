@@ -15,7 +15,7 @@ public class ChangeTurnHandler implements BBMessageHandler<ChangeTurn> {
 
 	@Override
 	public void handle(ChannelHandlerContext client, ChangeTurn message) {
-		Coraline.core.bus.post(message);
+//		Coraline.core.bus.post(message);
 	}
 	
 }

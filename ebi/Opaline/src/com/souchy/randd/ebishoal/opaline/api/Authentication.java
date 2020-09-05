@@ -23,9 +23,10 @@ public class Authentication implements IAuthentication {
 		return user;
 	}
 	@Override
-	public User signin(LoginToken token) { 
+	public User signin(String token) { // LoginToken token) { 
 		Log.info("Opaline.Authentication.signin : token = " + token);
-		var user = Opaline.post(target.path("signin"), Entity.entity(token, MediaType.APPLICATION_JSON), User.class, MediaType.APPLICATION_JSON_TYPE);
+//		var user = Opaline.post(target.path("signin"), Entity.entity(token, MediaType.APPLICATION_JSON), User.class, MediaType.APPLICATION_JSON_TYPE);
+		var user = Opaline.get(target.path("signin/" + token), User.class);
 		Log.info("Opaline.Authentication.signin : " + user);
 		return user;
 	}
@@ -33,7 +34,7 @@ public class Authentication implements IAuthentication {
 	@Override
 	public String getSalt(String username) {
 		Log.info("Opaline.Authentication.getSalt : username = " + username);
-		var salt = Opaline.get(target.path("salt/" + username), String.class);;
+		var salt = Opaline.get(target.path("salt/" + username), String.class);
 		Log.info("Opaline.Authentication.getSalt : " + salt);
 		return salt;
 	}

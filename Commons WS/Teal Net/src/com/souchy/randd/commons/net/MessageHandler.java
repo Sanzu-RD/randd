@@ -12,6 +12,11 @@ public interface MessageHandler<C, M extends Message<?, ?>> extends Identifiable
 		return AnnotatedIdentifiable.getID(getMessageClass());
 	}
 
+	/**
+	 * Handle message, then post it on the core's event bus
+	 * @param client
+	 * @param message
+	 */
 	public void handle(C client, M message);
 
 	public Class<M> getMessageClass();

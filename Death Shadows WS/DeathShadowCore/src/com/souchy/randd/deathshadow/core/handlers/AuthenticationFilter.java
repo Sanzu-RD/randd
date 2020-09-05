@@ -82,7 +82,7 @@ public class AuthenticationFilter extends ChannelInboundHandlerAdapter { //imple
 	
 	/** get and send a salt */
 	public void getSalt(ChannelHandlerContext ctx, GetSalt msg) {
-		Log.info("AuthenticationFilter getSalt");
+		Log.info("AuthenticationFilter getSalt for user: " + msg.username);
 		// trouve le salt associé au username et renvoi le
 		var user = Emerald.users().find(eq(User.name_username, msg.username)).first();
 		if(user != null) 

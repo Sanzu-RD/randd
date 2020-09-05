@@ -22,6 +22,8 @@ public class SendSaltHandler implements BBMessageHandler<SendSalt> {
 		var password = authCredentials[1];
 		var hashedPassword = UserUtil.hashPassword(password, message.salt);
 		
+//		Log.info("hashed pass " + hashedPassword);
+		
 		var getuser = new GetUser(username, hashedPassword);
 		Moonstone.moon.write(getuser);
 	}

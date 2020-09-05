@@ -11,7 +11,6 @@ import com.souchy.randd.ebishoal.coraline.Coraline;
 import javafx.application.Application;
 
 
-
 /**
  * 
  * java fx application
@@ -44,10 +43,10 @@ public class Amethyst extends EbiShoalCore {
 		
 		// init elements
 		Elements.values(); 
-		// models configurations (creatures, spells, statuses)
-		AssetData.loadResources();
 		// init creatures & spells models
 		DiamondModels.instantiate("com.souchy.randd.data.s1");
+		// models configurations (creatures, spells, statuses)
+		AssetData.loadResources();
 		
 		Log.info("Amethyst start.");
 		Application.launch(AmethystApp.class);
@@ -60,7 +59,8 @@ public class Amethyst extends EbiShoalCore {
 		return new String[] { 
 				"com.souchy.randd.commons.deathebi.msg", 
 				"com.souchy.randd.ebishoal.amethyst", 
-				"com.souchy.randd.ebishoal.coraline"
+				"com.souchy.randd.ebishoal.coraline",
+				"com.souchy.randd.commons.coral"
 		};
 	}
 

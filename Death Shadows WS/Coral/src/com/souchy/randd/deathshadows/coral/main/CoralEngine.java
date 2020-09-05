@@ -1,5 +1,6 @@
 package com.souchy.randd.deathshadows.coral.main;
 
+import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -9,6 +10,7 @@ import com.google.common.eventbus.Subscribe;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.souchy.randd.commons.coral.out.MatchFound;
+import com.souchy.randd.commons.diamond.statics.Constants;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserActiveEvent;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserInactiveEvent;
@@ -16,6 +18,8 @@ import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 import com.souchy.randd.jade.matchmaking.GameQueue;
 import com.souchy.randd.jade.matchmaking.Lobby;
 import com.souchy.randd.jade.matchmaking.Lobby.LobbyPhase;
+import com.souchy.randd.jade.meta.JadeCreature;
+import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.jade.matchmaking.Queuee;
 import com.souchy.randd.jade.matchmaking.Team;
 
@@ -62,6 +66,8 @@ public class CoralEngine {
 		queuee.mmr = user.mmr;
 		queuee.timeQueued = System.currentTimeMillis();
 		Emerald.collection(q.getQueueeClass()).insertOne(queuee);
+		
+		Log.info("enqueued (" + q.name() + ") user " + event.user.username);
 	}
 
 	/**
@@ -69,12 +75,17 @@ public class CoralEngine {
 	 */
 	@Subscribe
 	public void channelInactive(UserInactiveEvent event) throws Exception {
+		if(event.user == null) {
+			var u = event.ctx.channel().attr(User.attrkey);
+			Log.info("Coral user inactive (" + u + "), channel " + event.ctx.channel());
+			return;
+		}
 		var filter = Filters.eq(event.user._id);
 		Log.info("CoralEngine " + Coral.coral.queue.getQueueeClass() + " channel inactive " + filter);
 		
 		// remove the user from the queue
 		dequeue(event.user._id);
-//		Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(filter);
+		// Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(filter);
 		
 		// if the client was in a lobby, close every participant's channel in the lobby
 		var lobby = event.ctx.channel().attr(Lobby.attrkey).get();
@@ -109,6 +120,7 @@ public class CoralEngine {
 //			lobby.users.add(p1._id);
 			//lobby.users.add(p2._id);
 			lobby.teams.put(p1._id, Team.A);
+			lobby.jadeteams.put(p1._id, new ArrayList<>()); // new JadeCreature[Constants.CreaturesPerTeam]);
 			//lobby.teams.put(p2._id, Team.B);
 			lobby.moonstoneInfo = "127.0.0.1:443";
 			lobby.playerTurn = p1._id;

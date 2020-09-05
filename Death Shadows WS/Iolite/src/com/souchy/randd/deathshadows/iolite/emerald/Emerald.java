@@ -143,7 +143,7 @@ public final class Emerald {
 		var fullpackag = clazz.getPackageName();
 		var packag = fullpackag.substring(fullpackag.lastIndexOf('.') + 1);
 		var collection = clazz.getSimpleName();
-		
+//		System.out.println("Emerald collection : " + root + "#" + packag);
 		return client.getDatabase(root + "#" + packag).getCollection(collection, clazz);
 	}
 

@@ -51,16 +51,27 @@ public class Authentication implements IAuthentication {
 		}
 	}
 	
-	@POST
-	@Path("signin")
-	@Consumes(MediaType.APPLICATION_JSON)
+	@GET
+	@Path("signin/{token}")
+//	@Consumes(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
     //@RolesAllowed(UserLevel.name_anonymous)
 	@PermitAll
 	@Override
-	public User signin(LoginToken token) {
+	public User signin(@PathParam("token") String token) { // LoginToken token) {
 		Log.info("Opal.signin : token = " + token);
-		return getUserEmerald(token.username, token.hashedPassword);
+		try {
+			var data = token.split("@", 2);
+			var username = data[0];
+			var hashedpass = data[1];
+			var user = getUserEmerald(username, hashedpass); // token.username, token.hashedPassword);
+			Log.format("Opal.signin : user (%s, %s) = %s", username, hashedpass, user);
+			return user;
+		} catch (Exception e) {
+			Log.info("", e);
+			return null;
+		}
 	}
 	
 	@POST

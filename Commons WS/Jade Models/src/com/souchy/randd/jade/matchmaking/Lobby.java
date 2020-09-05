@@ -10,6 +10,7 @@ import org.bson.types.ObjectId;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.meta.JadeCreature;
 import com.souchy.randd.jade.meta.User;
 
@@ -42,7 +43,7 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	public Map<ObjectId, Team> teams = new HashMap<>(); // instead of using Team enum, use 0-1 for A and B team
 	
 	/** jadeteam for each players */
-	public Map<ObjectId, JadeCreature[]> jadeteams = new HashMap<>();
+	public Map<ObjectId, List<JadeCreature>> jadeteams = new HashMap<>();
 	
 	/** queue answer for each player */
 //	public Map<ObjectId, QueueAnswer> answers = new HashMap<>();
@@ -73,25 +74,29 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 		// type and phase
-		out.writeByte(type.ordinal());
-		out.writeInt(phase.ordinal());
-		// player count
-		out.writeByte(teams.size());
-		for(var id : teams.keySet()) {
-			// player id
-			writeString(out, id.toHexString());
-			out.writeInt(teams.get(id).ordinal());
-			// creatures
-			var team = jadeteams.get(id);
-			out.writeByte(team.length);
-			for(var creature : team)
-				creature.serialize(out);
-			// answer
-//			out.writeByte(answers.get(id).ordinal());
+		try {
+			out.writeByte(type.ordinal());
+			out.writeInt(phase.ordinal());
+			// player count
+			out.writeByte(teams.size());
+			for (var id : teams.keySet()) {
+				// player id
+				writeString(out, id.toHexString());
+				out.writeInt(teams.get(id).ordinal());
+				// creatures
+				var team = jadeteams.get(id);
+				out.writeByte(team.size());
+				for (var creature : team)
+					creature.serialize(out);
+				// answer
+				// out.writeByte(answers.get(id).ordinal());
+			}
+		} catch (Exception e) {
+			Log.info("", e);
 		}
 		return out;
 	}
-
+	
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
 		
@@ -110,9 +115,10 @@ public class Lobby implements BBSerializer, BBDeserializer {
 			teams.put(id, Team.values()[teamordinal]);
 			// creatures
 			byte creaturecount = in.readByte();
-			var creatures = new JadeCreature[creaturecount];
+			var creatures = new ArrayList<JadeCreature>(); //new JadeCreature[creaturecount];
 			for(int j = 0; j < creaturecount; j++)
-				creatures[j] = new JadeCreature().deserialize(in);
+				creatures.add(new JadeCreature().deserialize(in));
+//				creatures[j] = new JadeCreature().deserialize(in);
 			jadeteams.put(id, creatures);
 			// answer
 //			answers.put(id, QueueAnswer.values()[in.readByte()]);

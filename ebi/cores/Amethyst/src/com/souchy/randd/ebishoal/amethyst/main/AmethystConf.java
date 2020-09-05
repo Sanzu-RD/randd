@@ -19,4 +19,16 @@ public class AmethystConf extends JsonConfig {
 	 */
 	public String language = "en";
 	
+	
+	
+	/**
+	 * saved username
+	 */
+	public String username = "";
+	/**
+	 * saved hashedpass for quick connect
+	 */
+	public String hashedpass = "";
+	
+	
 }

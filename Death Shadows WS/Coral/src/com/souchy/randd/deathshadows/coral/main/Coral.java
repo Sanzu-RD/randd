@@ -1,6 +1,8 @@
 package com.souchy.randd.deathshadows.coral.main;
 
+import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
 import com.souchy.randd.jade.matchmaking.GameQueue;
@@ -33,6 +35,11 @@ public final class Coral extends DeathShadowCore {
 		if(args.length > 1) port = Integer.parseInt(args[1]); // override default port
 		
 		Log.info("Coral port " + port + " queue " + queue.toString());
+
+		// init elements
+		Elements.values(); 
+		// init creatures & spells models
+		DiamondModels.instantiate("com.souchy.randd.data.s1");
 		
 		// start match making thread loops
 		var engine = new CoralEngine();
@@ -50,7 +57,8 @@ public final class Coral extends DeathShadowCore {
 				"com.souchy.randd.commons.deathebi.msg", 
 				"com.souchy.randd.deathshadows.nodes.pearl.messaging",
 				"com.souchy.randd.deathshadows.nodes.pearl.messaging.moonstone",
-				"com.souchy.randd.deathshadows.coral" 
+				"com.souchy.randd.deathshadows.coral",
+				"com.souchy.randd.commons.coral"
 		};
 	}
 	

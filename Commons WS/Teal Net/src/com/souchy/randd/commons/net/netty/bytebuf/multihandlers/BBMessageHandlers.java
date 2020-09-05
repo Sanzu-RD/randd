@@ -33,6 +33,11 @@ public class BBMessageHandlers { // extends ResponsibilityManager<BBMessage, BBM
 		return handlers.containsKey(msg.getID());
 	}
 
+	/**
+	 * Handle message, then post it on the core's event bus
+	 * @param ctx
+	 * @param msg
+	 */
 	public void handle(ChannelHandlerContext ctx, BBMessage msg) {
 		if (canHandle(msg)) {
 			Log.info("BBMessageHandlers handling message [" + msg + "] of ID [" + msg.getID() + "]");

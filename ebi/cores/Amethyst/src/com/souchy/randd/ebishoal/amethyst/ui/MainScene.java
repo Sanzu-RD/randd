@@ -1,5 +1,6 @@
 package com.souchy.randd.ebishoal.amethyst.ui;
 
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.amethyst.main.AmethystApp;
 import com.souchy.randd.ebishoal.amethyst.ui.tabs.Collection;
 import com.souchy.randd.ebishoal.amethyst.ui.tabs.DraftController;
@@ -49,6 +50,8 @@ public class MainScene extends Common {
     @FXML
     public void initialize() {
     	super.initialize();
+
+		Log.error("init draft main scene");
     	AmethystApp.mainController = this;
     }
 

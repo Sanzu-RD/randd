@@ -12,6 +12,7 @@ import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.CreatureModel;
 import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.amethyst.main.Amethyst;
 import com.souchy.randd.ebishoal.amethyst.ui.components.DraftRow;
 import com.souchy.randd.ebishoal.coraline.Coraline;
 import com.souchy.randd.jade.matchmaking.GameQueue;
@@ -22,8 +23,11 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Glow;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -68,10 +72,15 @@ public class DraftController {
 	
 	private ImageView selected;
 	private Timeline timeline;
+	private CreatureModel selectedModel;
+	
+	public DraftController() {
+		Log.error("init draft controller");
+		Coraline.core.bus.register(this);
+	}
 	
 	@FXML
 	public void initialize() {
-		Coraline.core.bus.register(this);
 		
 		// clear everything else
 		teamA.getChildren().clear();
@@ -105,22 +114,40 @@ public class DraftController {
 				img.setSmooth(true);
 				img.setFitWidth(48);
 				img.setFitHeight(48);
-				creatureList.getChildren().add(img);
 				
 				// identification property
 				img.getProperties().put(CreatureModel.class, model);
 				
+				// hover glow
+				img.setOnMouseEntered(e -> {
+					var imgtarget = (ImageView) e.getTarget();
+					if(imgtarget.getEffect() == null) {
+						imgtarget.setEffect(new Glow());
+					}
+				});
+				img.setOnMouseExited(e -> {
+					var imgtarget = (ImageView) e.getTarget();
+					if(imgtarget.getEffect() instanceof Glow) {
+						imgtarget.setEffect(null);
+					}
+				});
+				
+				creatureList.getChildren().add(img);
+				
+				
 				// click select effect
 				creatureList.setOnMouseClicked(e -> {
-//					Log.info("DraftController target " + e.getTarget());
+					Log.info("DraftController target " + e.getTarget());
 //					Log.info("" + e.getPickResult());
 					if(e.getTarget() == null) return;
 					if(e.getTarget() instanceof ImageView == false) return;
 					
 					if(selected != null) selected.setEffect(null);
 					var imgtarget = (ImageView) e.getTarget();
-					imgtarget.setEffect(new Shadow(5, Color.ALICEBLUE));
+					imgtarget.setEffect(new DropShadow(3, Color.ALICEBLUE));
 					selected = imgtarget;
+					
+					selectedModel = (CreatureModel) imgtarget.getProperties().get(CreatureModel.class);
 				});
 			} catch (Exception e) {
 				Log.info("DraftController Error creating image : " +  url, e);
@@ -135,18 +162,21 @@ public class DraftController {
 	public void select(MouseEvent e) { 
 		Log.info("select");
 		// get selected creature
-		var filtered = creatureList.getChildren().filtered(i -> i.getEffect() != null);
-		// be sure that a creature is selected
-		if(filtered.size() == 0) return;
-		// get creature model
-		var img = filtered.get(0);
-		var model = (CreatureModel) img.getProperties().get(CreatureModel.class);
+//		var filtered = creatureList.getChildren().filtered(i -> i.getEffect() != null);
+//		// be sure that a creature is selected
+//		if(filtered.size() == 0) return;
+//		// get creature model
+//		var img = filtered.get(0);
+//		var model = (CreatureModel) img.getProperties().get(CreatureModel.class);
+		var img = selected;
+		var model = selectedModel;
 		// unselect
 		
 //		var filtered = creatureList.getChildren().filtered(i -> i.getProperties().get(CreatureModel.class) == model);
 //		var img = filtered.get(0);
 		img.setEffect(null);
 		selected = null;
+		selectedModel = null;
 		
 		Log.info("select " + model);
 		
@@ -161,11 +191,13 @@ public class DraftController {
 	 */
 	@Subscribe
 	public void receiveSelectMsg(SelectCreature msg) {
-		Log.info("DraftController . onSelectCreature msg handler");
+		Log.error("DraftController . onSelectCreature event handler " + msg.modelid);
 		Platform.runLater(() -> {
 //			var icon = AssetData.creatures.get(msg.modelid).getIcon();
 //			var node = new ImageView(icon.getAbsolutePath());
-			var node = new DraftRow(msg.modelid);
+			DraftRow node = new DraftRow(msg.modelid); // Amethyst.app.loadComponent("draftrow"); // new DraftRow(msg.modelid);
+			node.creature.creatureModelID = msg.modelid;
+			node.init();
 			switch (msg.team) {
 				case A -> teamA.add(node, 0, teamA.getChildren().size());
 				case B -> teamB.add(node, 0, teamB.getChildren().size());

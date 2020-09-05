@@ -34,7 +34,7 @@ public interface IAuthentication {
 	}
 	
 	
-	public User signin(LoginToken token); //String username, String password);
+	public User signin(String token); //LoginToken token); //String username, String password);
 	
 	public User signup(RegistrationToken token); //String pseudo, String username, String password, String salt, String email);
 
