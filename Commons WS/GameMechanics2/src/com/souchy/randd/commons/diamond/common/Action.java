@@ -1,10 +1,12 @@
 package com.souchy.randd.commons.diamond.common;
 
+import java.util.function.Supplier;
+
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
-public abstract class Action {
+public abstract class Action implements Supplier<Boolean> {
 	
 	public static class EndTurnAction extends Action {
 		public EndTurnAction(Fight f) {
@@ -72,6 +74,16 @@ public abstract class Action {
 		fight = f;
 		caster = fight.timeline.current();
 		turn = fight.timeline.turn();
+	}
+	
+
+	@Override
+	public Boolean get() {
+		if(canApply()) {
+			apply();
+			return true;
+		}
+		return false;
 	}
 	
 	/**

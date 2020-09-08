@@ -1,4 +1,4 @@
-package com.souchy.randd.commons.diamond.common.ecs;
+package com.souchy.randd.commons.tealwaters.ecs;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.souchy.randd.commons.diamond.common;
+package com.souchy.randd.commons.tealwaters.commons;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -7,18 +7,23 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.function.Supplier;
 
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
 /**
  * Synchronized Action list using a pooled thread to execute the actions in order
- * @author Robyn Girardeau
+ * 
+ * 
+ * Supplier.get() has to return true if the action has been applied or false if it couldnt be applied.
+ * 
+ * @author Blank
  * @date 2020-08-25
  */
 public class ActionPipeline {
 
 	/**
-	 * Thread pool
+	 * Thread pool for flushing/executing actions. This is where the actual execution / fight thread comes from
 	 */
 	private static ExecutorService executors = Executors.newCachedThreadPool();
 
@@ -30,19 +35,19 @@ public class ActionPipeline {
 	/**
 	 * Current action deck
 	 */
-	private final Deque<Action> q = new ArrayDeque<>();
+	private final Deque<Supplier<Boolean>> q = new ArrayDeque<>();
 
 	/**
 	 * action history : past / resolved actions
 	 */
-	private List<Action> history = new ArrayList<>();
+	private List<Supplier<Boolean>> history = new ArrayList<>();
 
 
 	/**
 	 * ASYNC 
 	 * push an action to the bottom of the deck (last)
 	 */
-	public void push(Action a) { // under
+	public void push(Supplier<Boolean> a) { // under
 		synchronized (q) {
 			q.add(a);
 		}
@@ -53,7 +58,7 @@ public class ActionPipeline {
 	 * ASYNC 
 	 * push an action to the top of the deck (first)
 	 */
-	public void insert(Action a) { // over
+	public void insert(Supplier<Boolean> a) { // over
 		synchronized (q) {
 			q.push(a);
 		}
@@ -74,17 +79,20 @@ public class ActionPipeline {
 	 * as long as there are actions in the deck, pops an action then executes it
 	 */
 	private void flush() {
-		Action action = null;
+		Supplier<Boolean> action = null;
 		synchronized(q) {
 			if(!q.isEmpty())
 				action = q.pop();
 		}
 		//Log.format("ActionPipe flush %s", action);
 		if(action != null) {
-			if(action.canApply()) {
-				action.apply();
+			if(action.get()) {
 				history.add(action);
 			}
+//			if(action.canApply()) {
+//				action.apply();
+//				history.add(action);
+//			}
 			flush();
 		}
 	}

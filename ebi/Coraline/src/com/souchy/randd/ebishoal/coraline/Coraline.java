@@ -6,6 +6,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
 import com.souchy.randd.jade.matchmaking.GameQueue;
+import com.souchy.randd.jade.matchmaking.Lobby;
 
 /**
  * Coraline is the match making client
@@ -28,6 +29,11 @@ public class Coraline {
 	 * Internal Coraline tcp client
 	 */
 	public static EbiShoalTCP tcp;
+	
+	/**
+	 * Current match lobby
+	 */
+	public static Lobby lobby;
 
 	
 	/**
@@ -57,6 +63,7 @@ public class Coraline {
 			tcp.close();
 			tcp = null;
 		}
+		lobby = null;
 	}
 	
 	public static void write(BBMessage msg) {

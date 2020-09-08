@@ -2,23 +2,19 @@ package com.souchy.randd.deathshadows.coral.main;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import org.bson.types.ObjectId;
-
 import com.google.common.eventbus.Subscribe;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.souchy.randd.commons.coral.out.MatchFound;
 import com.souchy.randd.commons.diamond.statics.Constants;
+import com.souchy.randd.commons.tealwaters.commons.ActionPipeline;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserActiveEvent;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserInactiveEvent;
-import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 import com.souchy.randd.jade.matchmaking.GameQueue;
 import com.souchy.randd.jade.matchmaking.Lobby;
-import com.souchy.randd.jade.matchmaking.Lobby.LobbyPhase;
-import com.souchy.randd.jade.meta.JadeCreature;
 import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.jade.matchmaking.Queuee;
 import com.souchy.randd.jade.matchmaking.Team;
@@ -29,9 +25,11 @@ import com.souchy.randd.jade.matchmaking.Team;
  * @author Blank
  * @date 27 déc. 2019
  */
-@SuppressWarnings("unchecked")
 public class CoralEngine {
 
+	public CoralDB db = new CoralDB.CoralList();
+	
+	
 	public CoralEngine() {
 		var pool = Executors.newScheduledThreadPool(10);
 		if(Coral.coral.queue == GameQueue.mock) {
@@ -40,6 +38,7 @@ public class CoralEngine {
 			pool.scheduleWithFixedDelay(this::findMatch, 0, 200, TimeUnit.MILLISECONDS);
 		}
 	}
+
 	
 	/**
 	 * When a new client is connected to the server : Enqueue
@@ -65,7 +64,7 @@ public class CoralEngine {
 		queuee._id = user._id;
 		queuee.mmr = user.mmr;
 		queuee.timeQueued = System.currentTimeMillis();
-		Emerald.collection(q.getQueueeClass()).insertOne(queuee);
+		db.enqueue(queuee);
 		
 		Log.info("enqueued (" + q.name() + ") user " + event.user.username);
 	}
@@ -84,13 +83,13 @@ public class CoralEngine {
 		Log.info("CoralEngine " + Coral.coral.queue.getQueueeClass() + " channel inactive " + filter);
 		
 		// remove the user from the queue
-		dequeue(event.user._id);
+		db.dequeue(event.user._id);
 		// Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(filter);
 		
 		// if the client was in a lobby, close every participant's channel in the lobby
 		var lobby = event.ctx.channel().attr(Lobby.attrkey).get();
 		if(lobby != null) {
-			for(var userid : lobby.teams.keySet()) {
+			for(var userid : lobby.users) { // .teams.keySet()) {
 				var channel = Coral.coral.server.users.get(userid);
 				if(channel != null) 
 					channel.close();
@@ -98,99 +97,92 @@ public class CoralEngine {
 		}
 	}
 	
-	private void dequeue(ObjectId userid) {
-		Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(userid));
-	}
 	
 	/**
 	 * mock queue starts a lobby instantly with only 1 player
 	 */
 	private void findMatchMock() {
-		var docs = ((MongoCollection<Queuee>) Emerald.collection(Coral.coral.queue.getQueueeClass())).find();
-
-		// find 1st player
-		var itor1 = docs.iterator();
-		while(itor1.hasNext()) {
-			var p1 = itor1.next();
-
+		db.foreach(p1 -> {
 			var channel1 = Coral.coral.server.users.get(p1._id);
 			
 			Lobby lobby = new Lobby();
 			lobby.type = GameQueue.mock;
-//			lobby.users.add(p1._id);
-			//lobby.users.add(p2._id);
-			lobby.teams.put(p1._id, Team.A);
-			lobby.jadeteams.put(p1._id, new ArrayList<>()); // new JadeCreature[Constants.CreaturesPerTeam]);
-			//lobby.teams.put(p2._id, Team.B);
+			lobby.users.add(p1._id);
+			lobby.teams.add(Team.A); 
+			lobby.jadeteams.add(new ArrayList<>()); // .jadeteams.put(p1._id, new ArrayList<>()); // new JadeCreature[Constants.CreaturesPerTeam]);
 			lobby.moonstoneInfo = "127.0.0.1:443";
-			lobby.playerTurn = p1._id;
+			lobby.turn = 0; // p1._id;
 			lobby.time = System.currentTimeMillis();
-			lobby.phase = LobbyPhase.pick;
+//			lobby.phase = LobbyPhase.pick;2
 			
 			var msg = new MatchFound();
 			msg.lobby = lobby;
 			
-			dequeue(p1._id);
+			db.dequeue(p1._id);
 
 			channel1.attr(Lobby.attrkey).set(lobby);
 			channel1.writeAndFlush(msg);
-			return;
-		}
+			
+			startTimer(lobby);
+			return true;
+		});
 	}
 	
+
+	public ScheduledExecutorService timers = Executors.newScheduledThreadPool(10);
+	public Future<?> future;
+	public ActionPipeline actions;
+	
+	public void startTimer(Lobby lobby) {
+//		e.fight.future = e.fight.timer.scheduleAtFixedRate(() -> {
+//			if(e.fight.time > 0) e.fight.time--;
+//			else e.fight.pipe.push(new EndTurnAction(e.fight));
+//		}, 1, 1, TimeUnit.SECONDS);
+		
+		var userturn = lobby.playerTurn();
+		timers.schedule(() -> {
+			lobby.pipe().push(new OnTurnEndAction(lobby, userturn)); //() -> onTimerEndAction(lobby, userturn));
+		}, Constants.baseTimePerTurn, TimeUnit.SECONDS);
+	}
+
+
 	/**
 	 * normal queues try to match 2 players of similar mmr
 	 */
 	private void findMatch() {
-		var docs = ((MongoCollection<Queuee>) Emerald.collection(Coral.coral.queue.getQueueeClass())).find();
-		
-		// find 1st player
-		var itor1 = docs.iterator();
-		while(itor1.hasNext()) {
-			var p1 = itor1.next();
-
-			// find 2nd player
-			var itor2 = docs.iterator();
-			while(itor2.hasNext()) {
-				var p2 = itor2.next();
-				
+//		var docs = ((MongoCollection<Queuee>) Emerald.collection(Coral.coral.queue.getQueueeClass())).find();
+//		// find 1st player
+//		var itor1 = docs.iterator();
+		db.foreach(p1 -> {
+			db.foreach(p2 -> {
 				// if match
 				if(canMatch(p1, p2)) {
-//					itor1.remove();
-//					itor2.remove();
-					itor1.close();
-					itor2.close();
-					
 					var channel1 = Coral.coral.server.users.get(p1._id);
 					var channel2 = Coral.coral.server.users.get(p2._id);
 					
 					if(channel1 == null) {
 						Coral.coral.server.users.remove(p1._id);
-//						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p1._id));
-						dequeue(p1._id);
+						db.dequeue(p1._id);
 					}
 					if(channel2 == null) {
 						Coral.coral.server.users.remove(p2._id);
-//						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p2._id));
-						dequeue(p2._id);
+						db.dequeue(p2._id);
 					}
 					if(channel1 != null && channel2 != null) {
 						Lobby lobby = new Lobby();
 						lobby.type = GameQueue.draft;
-//						lobby.users.add(p1._id);
-//						lobby.users.add(p2._id);
-						lobby.teams.put(p1._id, Team.A);
-						lobby.teams.put(p2._id, Team.B);
+						lobby.users.add(p1._id);
+						lobby.users.add(p2._id);
+						lobby.teams.add(Team.A); 
+						lobby.teams.add(Team.B); 
 						lobby.moonstoneInfo = "127.0.0.1:443";
-						lobby.playerTurn = p1._id;
+						lobby.turn = 0; // p1._id;
 						lobby.time = System.currentTimeMillis();
-						lobby.phase = LobbyPhase.ban;
+//						lobby.phase = LobbyPhase.ban;
 						
 						// dequeue
-						dequeue(p1._id);
-						dequeue(p2._id);
-//						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p1._id));
-//						Emerald.collection(Coral.coral.queue.getQueueeClass()).deleteOne(Filters.eq(p2._id));
+						db.dequeue(p1._id);
+						db.dequeue(p2._id);
 						
 						var msg = new MatchFound();
 						msg.lobby = lobby;
@@ -201,10 +193,13 @@ public class CoralEngine {
 						channel2.writeAndFlush(msg);
 					}
 					
-					return;
+					return true;
 				}
-			}
-		}
+				return false;
+			});
+			return false;
+		});
+		
 	}
 	
 	/**
@@ -213,6 +208,7 @@ public class CoralEngine {
 	 * The maximum difference between two MMRs grows with time queued to insure queue times aren't too long.
 	 */
 	private boolean canMatch(Queuee p1, Queuee p2) {
+		if(p1 == p2) return false;
 		var dm = Math.abs(p1.mmr - p2.mmr);
 		var limit = 100;
 		var factor1 = p1.timeQueued / (1000 * 60);

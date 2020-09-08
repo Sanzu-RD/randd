@@ -2,9 +2,9 @@ package com.souchy.randd.commons.diamond.models;
 
 
 import com.souchy.randd.commons.diamond.common.Aoe;
-import com.souchy.randd.commons.diamond.common.ecs.Entity;
 import com.souchy.randd.commons.diamond.models.stats.TargetConditionStat;
 import com.souchy.randd.commons.diamond.statusevents.Event;
+import com.souchy.randd.commons.tealwaters.ecs.Entity;
 
 /**
  * 

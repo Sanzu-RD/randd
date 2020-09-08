@@ -58,13 +58,13 @@ public class DraftController {
 	// <- start timer / change turn
 	// -> jadecreature array (affinity customization)
 	
-	@FXML public FlowPane creatureList;
+	@FXML public FlowPane list;
 	
-	@FXML public GridPane teamA;
-	@FXML public GridPane bansA;
+	@FXML public GridPane teamLeft;
+	@FXML public GridPane bansLeft;
 	
-	@FXML public GridPane teamB;
-	@FXML public GridPane bansB;
+	@FXML public GridPane leftRight;
+	@FXML public GridPane bansRight;
 	
 	@FXML public Label lblTime;
 	
@@ -73,20 +73,19 @@ public class DraftController {
 	private ImageView selected;
 	private Timeline timeline;
 	private CreatureModel selectedModel;
+	public Team team;
 	
-	public DraftController() {
-		Log.error("init draft controller");
-		Coraline.core.bus.register(this);
-	}
 	
 	@FXML
 	public void initialize() {
+		Coraline.core.bus.register(this);
+		Amethyst.core.bus.register(this);
 		
 		// clear everything else
-		teamA.getChildren().clear();
-		bansA.getChildren().clear();
-		teamB.getChildren().clear();
-		bansB.getChildren().clear();
+		teamLeft.getChildren().clear();
+		bansLeft.getChildren().clear();
+		leftRight.getChildren().clear();
+		bansRight.getChildren().clear();
 		
 		// select btn
 		btnSelect.setOnMouseClicked(this::select);
@@ -132,11 +131,11 @@ public class DraftController {
 					}
 				});
 				
-				creatureList.getChildren().add(img);
+				list.getChildren().add(img);
 				
 				
 				// click select effect
-				creatureList.setOnMouseClicked(e -> {
+				list.setOnMouseClicked(e -> {
 					Log.info("DraftController target " + e.getTarget());
 //					Log.info("" + e.getPickResult());
 					if(e.getTarget() == null) return;
@@ -156,7 +155,7 @@ public class DraftController {
 	}
 	
 	/**
-	 * Called on btn select click
+	 * Called on btn select click in the list
 	 * @param e
 	 */
 	public void select(MouseEvent e) { 
@@ -187,6 +186,14 @@ public class DraftController {
 	}
 	
 	/**
+	 * On click edit/customize creature
+	 */
+	public void edit(MouseEvent e) {
+		
+	}
+	
+	
+	/**
 	 * Event handler for SelectCreature message response
 	 */
 	@Subscribe
@@ -198,11 +205,34 @@ public class DraftController {
 			DraftRow node = new DraftRow(msg.modelid); // Amethyst.app.loadComponent("draftrow"); // new DraftRow(msg.modelid);
 			node.creature.creatureModelID = msg.modelid;
 			node.init();
-			switch (msg.team) {
-				case A -> teamA.add(node, 0, teamA.getChildren().size());
-				case B -> teamB.add(node, 0, teamB.getChildren().size());
+			node.setOnMouseClicked(this::onRowClick);
+			// if the msg team is equal to this user's team, add the draftrow on the left team
+			if(this.team == msg.team) {
+				teamLeft.add(node, 0, teamLeft.getChildren().size());
+			} else {
+				leftRight.add(node, 0, leftRight.getChildren().size());
+				node.setDisable(true);
 			}
 		});
+	}
+	/**
+	 * TODO Event handler for BanCreature message response
+	 */
+	@Subscribe 
+	public void receivebanMsg() { // BanCreature msg) {
+		
+	}
+	
+	
+	/**
+	 * When selecting an owned draft row, highlight its border
+	 */
+	public void onRowClick(MouseEvent e) {
+		var row = (DraftRow) e.getTarget();
+		var isLeft = teamLeft.getChildren().contains(row);
+		if(!isLeft) return;
+		teamLeft.getChildren().forEach(c -> c.setStyle("-fx-border-color: white; -fx-border-width: 2;"));
+		row.setStyle("-fx-border-color: borderColor1; -fx-border-width: 2;");
 	}
 
 	/**
@@ -210,9 +240,11 @@ public class DraftController {
 	 */
 	@Subscribe
 	public void receiveTimerMsg(ChangeTurn msg) {
-		if(msg.team == Team.A) {
-			teamA.getCssMetaData().add(null);
-		}
+//		if(msg.team == Team.A) {
+//			teamLeft.getCssMetaData().add(null);
+//		}
+//		teamLeft.getChildren()
+//		Coraline.lobby
 		var keyframe = new KeyFrame(Duration.seconds(1), ae -> {
 			var key = (KeyFrame) ae.getSource();
 			lblTime.setText(key.getTime().toSeconds() + "");
@@ -221,6 +253,10 @@ public class DraftController {
 		timeline = new Timeline(keyframe);
 		timeline.play();
 	}
+	
+	
+	
+	
 	
 	
 }

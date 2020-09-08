@@ -2,7 +2,7 @@ package com.souchy.randd.commons.diamond.models;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import com.souchy.randd.commons.diamond.common.ecs.Entity;
+import com.souchy.randd.commons.tealwaters.ecs.Entity;
 
 public class Board extends Entity {
 	

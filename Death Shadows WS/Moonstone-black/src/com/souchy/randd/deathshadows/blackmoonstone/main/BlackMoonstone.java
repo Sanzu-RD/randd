@@ -119,9 +119,10 @@ public class BlackMoonstone extends DeathShadowCore { // implements OnTurnEndHan
 		
 		e.fight.time = Constants.baseTimePerTurn;
 		
+		var action = new EndTurnAction(e.fight);
 		e.fight.future = e.fight.timer.scheduleAtFixedRate(() -> {
 			if(e.fight.time > 0) e.fight.time--;
-			else e.fight.pipe.push(new EndTurnAction(e.fight));
+			else e.fight.pipe.push(action);
 		}, 1, 1, TimeUnit.SECONDS);
 
 		broadcast(e.fight, new TurnStart(e.turn, e.index, e.fight.time));

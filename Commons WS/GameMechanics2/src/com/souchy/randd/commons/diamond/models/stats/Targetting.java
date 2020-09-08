@@ -3,9 +3,9 @@ package com.souchy.randd.commons.diamond.models.stats;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.souchy.randd.commons.diamond.common.ecs.Entity;
 import com.souchy.randd.commons.diamond.models.stats.base.BoolStat;
 import com.souchy.randd.commons.diamond.statics.properties.Targetability;
+import com.souchy.randd.commons.tealwaters.ecs.Entity;
 
 public class Targetting {
 	

@@ -1,9 +1,9 @@
 package com.souchy.randd.commons.diamond.systems;
 
-import com.souchy.randd.commons.diamond.common.ecs.Engine;
-import com.souchy.randd.commons.diamond.common.ecs.Family;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Spell;
+import com.souchy.randd.commons.tealwaters.ecs.Engine;
+import com.souchy.randd.commons.tealwaters.ecs.Family;
 
 public class CellSystem extends Family<Cell> { 
 

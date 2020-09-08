@@ -1,4 +1,4 @@
-package com.souchy.randd.commons.diamond.common.ecs;
+package com.souchy.randd.commons.tealwaters.ecs;
 
 import com.souchy.randd.commons.tealwaters.logging.Log;
 

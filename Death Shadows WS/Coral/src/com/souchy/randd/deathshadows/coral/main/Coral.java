@@ -1,11 +1,13 @@
 package com.souchy.randd.deathshadows.coral.main;
 
 import com.souchy.randd.commons.diamond.main.DiamondModels;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
 import com.souchy.randd.jade.matchmaking.GameQueue;
+import com.souchy.randd.jade.matchmaking.Lobby;
 
 /**
  * Coral is the match making server
@@ -50,6 +52,14 @@ public final class Coral extends DeathShadowCore {
 		server.auth.bus.register(engine);
 		server.block(); 
 	} 
+	
+	/**
+	 * Broadcast a message to all users in a lobby
+	 */
+	public static void broadcast(Lobby lobby, BBMessage msg) {
+		for (var uid : lobby.users)
+			Coral.coral.server.users.get(uid).writeAndFlush(msg);
+	}
 	
 	@Override
 	protected String[] getRootPackages() {

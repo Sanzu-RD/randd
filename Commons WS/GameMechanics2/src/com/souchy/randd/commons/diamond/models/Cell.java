@@ -3,12 +3,12 @@ package com.souchy.randd.commons.diamond.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.souchy.randd.commons.diamond.common.ecs.Entity;
 import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.models.stats.Targetting;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+import com.souchy.randd.commons.tealwaters.ecs.Entity;
 
 import io.netty.buffer.ByteBuf;
 

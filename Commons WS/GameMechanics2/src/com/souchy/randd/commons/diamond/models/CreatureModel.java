@@ -17,13 +17,24 @@ public abstract class CreatureModel {  //extends Entity {
 	 */
 	public abstract int id();
 
+	/**
+	 * Base stats for the model
+	 */
 	public final CreatureStats baseStats;
+	
+	/**
+	 * Amount of points the creature can use on affinities during customization. Some creatures are more flexible than others (ex: ditto pokemon)
+	 */
+	public final int affinityPoints;
 	
 	public CreatureModel() { //Fight f) {
 //		super(f);
 		baseStats = initBaseStats();
+		affinityPoints = initAffinityPoints();
 	}
 	
 	protected abstract CreatureStats initBaseStats();
+	
+	protected abstract int initAffinityPoints();
 	
 }

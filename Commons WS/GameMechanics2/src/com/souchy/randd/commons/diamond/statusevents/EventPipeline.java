@@ -1,8 +1,8 @@
 package com.souchy.randd.commons.diamond.statusevents;
 
 import com.google.common.eventbus.EventBus;
-import com.souchy.randd.commons.diamond.common.ecs.Entity;
 import com.souchy.randd.commons.diamond.models.Status;
+import com.souchy.randd.commons.tealwaters.ecs.Entity;
 
 @SuppressWarnings("preview")
 public class EventPipeline {

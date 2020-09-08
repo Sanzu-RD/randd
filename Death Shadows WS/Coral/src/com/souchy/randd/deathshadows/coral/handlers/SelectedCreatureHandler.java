@@ -22,29 +22,29 @@ public class SelectedCreatureHandler implements BBMessageHandler<SelectCreature>
 	}
 
 	@Override
-	public void handle(ChannelHandlerContext client, SelectCreature message) {
+	public void handle(ChannelHandlerContext client, SelectCreature msg) {
 		try {
 
-			Log.format("Coral on select creature (%s)", message.modelid);
+			Log.format("Coral on select creature (%s)", msg.modelid);
 			
 			// if the creature model doesnt exist, cancel
-			if(!DiamondModels.creatures.containsKey(message.modelid)) {
+			if(!DiamondModels.creatures.containsKey(msg.modelid)) {
 				return;
 			}
 			
 			User user = client.channel().attr(User.attrkey).get();
 			Lobby lobby = client.channel().attr(Lobby.attrkey).get();
 
-			Log.format("Coral on select creature (%s), user %s, lobby %s", message.modelid, user, lobby);
+			Log.format("Coral on select creature (%s), user %s, lobby %s", msg.modelid, user, lobby);
 			
 			// fix team unless it's a mocking lobby
 			if(lobby.type != GameQueue.mock) 
-				message.team = lobby.teams.get(user._id);
+				msg.team = lobby.team(user._id); // lobby.teams.get(user._id);
 			
 			// add new jade creature
 			var crea = new JadeCreature();
-			crea.creatureModelID = message.modelid;
-			var creatures = lobby.jadeteams.get(user._id); // = new JadeCreature[1];
+			crea.creatureModelID = msg.modelid;
+			var creatures = lobby.creatures(user._id); // .jadeteams.get(user._id); // = new JadeCreature[1];
 			creatures.add(crea);
 //			if(creatures == null || creatures.length == 0) {
 //				creatures = new JadeCreature[] { crea };
@@ -53,12 +53,13 @@ public class SelectedCreatureHandler implements BBMessageHandler<SelectCreature>
 //				list.add(crea);
 //				creatures = (JadeCreature[]) list.toArray();
 //			}
-			lobby.jadeteams.put(user._id, creatures);
+//			lobby.jadeteams.put(user._id, creatures);
 			
 			// broadcast select to all lobby participants
-			for (var id : lobby.teams.keySet()) {
-				Coral.coral.server.users.get(id).writeAndFlush(message);
-			}
+			Coral.broadcast(lobby, msg);
+//			for (var id : lobby.teams.keySet()) {
+//				Coral.coral.server.users.get(id).writeAndFlush(message);
+//			}
 		} catch (Exception e) {
 			Log.info("", e);
 			client.channel().close();

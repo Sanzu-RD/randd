@@ -1,4 +1,4 @@
-package com.souchy.randd.commons.diamond.common.ecs;
+package com.souchy.randd.commons.tealwaters.ecs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import com.google.common.eventbus.Subscribe;
-import com.souchy.randd.commons.diamond.common.ecs.Engine.AddEntityEvent;
-import com.souchy.randd.commons.diamond.common.ecs.Engine.RemoveEntityEvent;
+import com.souchy.randd.commons.tealwaters.ecs.Engine.AddEntityEvent;
+import com.souchy.randd.commons.tealwaters.ecs.Engine.RemoveEntityEvent;
 
 /**
  * Synchronizes all access to a family of entities
@@ -16,7 +16,7 @@ import com.souchy.randd.commons.diamond.common.ecs.Engine.RemoveEntityEvent;
  * @author Blank
  * @date 4 juill. 2020
  */
-public abstract class Family<T> extends com.souchy.randd.commons.diamond.common.ecs.System {
+public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.System {
 	
 	/**
 	 * might use CopyOnWriteArrayList ? 

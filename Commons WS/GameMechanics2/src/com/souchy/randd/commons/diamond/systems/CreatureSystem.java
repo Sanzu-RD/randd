@@ -1,9 +1,9 @@
 package com.souchy.randd.commons.diamond.systems;
 
-import com.souchy.randd.commons.diamond.common.ecs.Engine;
-import com.souchy.randd.commons.diamond.common.ecs.Family;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Spell;
+import com.souchy.randd.commons.tealwaters.ecs.Engine;
+import com.souchy.randd.commons.tealwaters.ecs.Family;
 
 public class CreatureSystem extends Family<Creature> {
 	

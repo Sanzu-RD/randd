@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
+import com.souchy.randd.commons.diamond.models.CreatureModel;
 import com.souchy.randd.commons.diamond.statics.Constants;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -15,9 +16,11 @@ import com.souchy.randd.jade.meta.JadeCreature;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
@@ -30,21 +33,27 @@ public class DraftRow extends GridPane {
 	public ImageView icon;
 	
 	@FXML
-	public HBox spells;
+	public FlowPane spells;
 	
 	@FXML
-	public GridPane affinities;
+	public FlowPane affinities;
+	
+	@FXML
+	public Button btnPage;
 	
 //	public Label affinities;
+	
+	
 	/**
 	 * Customization
 	 */
 	public JadeCreature creature = new JadeCreature();
+	public CreatureModel model;
 	
 	public DraftRow() {}
 	
 	public DraftRow(int creatureModelId) {
-		// var model = DiamondModels.creatures.get(creatureModelId);
+		model = DiamondModels.creatures.get(creatureModelId);
 		creature.creatureModelID = creatureModelId;
 		creature.affinities = new int[Elements.values().length];
 		creature.spellIDs = new int[Constants.numberOfSpells];
@@ -54,7 +63,13 @@ public class DraftRow extends GridPane {
 	
 	@FXML
 	public void initialize() {
+		Amethyst.core.bus.register(this);
+		
 		this.name.setText("bambi");
+		
+		for (var e : Elements.values()) {
+			this.affinities.getChildren().add(new AffinityBox(model, creature, e));
+		}
 	}
 	
 	public void init() {
@@ -70,31 +85,36 @@ public class DraftRow extends GridPane {
 			if(name != null) this.name.setText("missing bundle");
 		}
 		this.icon.setImage(new Image(AssetData.creatures.get(creatureModelId).getIconURL().toString()));
-		refreshAffinities();
-		refreshSpells();
+//		refreshAffinities();
+//		refreshSpells();
 	}
 	
 	
-	public void setAffinity(Element e, int affinity) {
-		creature.affinities[e.val()] = affinity;
-		refreshAffinities();
-	}
+//	public void setAffinity(Element e, int affinity) {
+//		creature.affinities[e.val()] = affinity;
+//		refreshAffinities();
+//	}
 	public void setSpell(int index, int id) {
 		creature.spellIDs[index] = id;
 		refreshSpells();
 	}
 	
-	private void refreshAffinities() {
-		// 2 rows
-		var halfLength = creature.affinities.length / 2;
-		for (int r = 0; r < 2; r++) {
-			for (int i = r * halfLength; i < (r + 1) * halfLength; i++) {
-				if(r * halfLength + i < creature.affinities.length) {
-					affinities.addRow(r, new Label(String.valueOf(creature.affinities[r * halfLength + i])));
-				}
-			}
-		}
-	}
+//	private void refreshAffinities() {
+//		// 2 rows
+//		for(int i = 0; i < creature.affinities.length; i++) {
+//			var node = new AffinityBox();
+//			affinities.getChildren().add(node);
+//		}
+//		
+////		var halfLength = creature.affinities.length / 2;
+////		for (int r = 0; r < 2; r++) {
+////			for (int i = r * halfLength; i < (r + 1) * halfLength; i++) {
+////				if(r * halfLength + i < creature.affinities.length) {
+////					affinities.addRow(r, new Label(String.valueOf(creature.affinities[r * halfLength + i])));
+////				}
+////			}
+////		}
+//	}
 	
 	private void refreshSpells() {
 		this.spells.getChildren().clear();

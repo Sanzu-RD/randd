@@ -4,6 +4,7 @@ module com.souchy.randd.commons.TealWaters {
 	exports com.souchy.randd.commons.tealwaters.commons;
 	exports com.souchy.randd.commons.tealwaters.io.files;
 	exports com.souchy.randd.commons.tealwaters.data.tables;
+	exports com.souchy.randd.commons.tealwaters.ecs;
 	
 	requires transitive com.souchy.randd.AnnotationProcessor;
 	requires transitive java.sql;

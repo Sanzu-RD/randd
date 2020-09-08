@@ -1,4 +1,4 @@
-package com.souchy.randd.commons.diamond.common.ecs;
+package com.souchy.randd.commons.tealwaters.ecs;
 
 import java.util.HashMap;
 
@@ -8,7 +8,7 @@ import java.util.HashMap;
  * @author Blank
  * @date 10 juin 2020
  */
-public class Entity implements EntityF {
+public class Entity { // implements EntityF {
 	
 	public final HashMap<Class<?>, Object> components = new HashMap<>();
 	

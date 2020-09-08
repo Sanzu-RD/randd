@@ -14,6 +14,7 @@ public class MatchFoundHandler implements BBMessageHandler<MatchFound> {
 		Log.info("Coraline match found handler");
 		// go to champ select screen
 //		Coraline.core.bus.post(message);
+		Coraline.lobby = message.lobby;
 	}
 
 	@Override
