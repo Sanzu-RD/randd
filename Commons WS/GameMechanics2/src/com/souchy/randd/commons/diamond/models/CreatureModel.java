@@ -34,7 +34,9 @@ public abstract class CreatureModel {  //extends Entity {
 	}
 	
 	protected abstract CreatureStats initBaseStats();
-	
-	protected abstract int initAffinityPoints();
+
+	protected int initAffinityPoints() {
+		return 30;
+	}
 	
 }

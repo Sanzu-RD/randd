@@ -1,6 +1,7 @@
 package com.souchy.randd.deathshadows.coral.main;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
@@ -10,6 +11,7 @@ import com.mongodb.client.model.Filters;
 import com.souchy.randd.commons.coral.out.MatchFound;
 import com.souchy.randd.commons.diamond.statics.Constants;
 import com.souchy.randd.commons.tealwaters.commons.ActionPipeline;
+import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserActiveEvent;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserInactiveEvent;
@@ -37,6 +39,24 @@ public class CoralEngine {
 		} else {
 			pool.scheduleWithFixedDelay(this::findMatch, 0, 200, TimeUnit.MILLISECONDS);
 		}
+	}
+
+
+	public ScheduledExecutorService timers = Executors.newScheduledThreadPool(10);
+	
+	
+	public void startTimer(Lobby lobby) {
+//		e.fight.future = e.fight.timer.scheduleAtFixedRate(() -> {
+//			if(e.fight.time > 0) e.fight.time--;
+//			else e.fight.pipe.push(new EndTurnAction(e.fight));
+//		}, 1, 1, TimeUnit.SECONDS);
+		
+		if(lobby.future != null) lobby.future.cancel(true);
+		
+		var action = new OnTurnEndAction(lobby);
+		lobby.future = timers.schedule(() -> {
+			lobby.pipe().push(action);
+		}, Constants.baseTimePerTurn, TimeUnit.SECONDS);
 	}
 
 	
@@ -111,15 +131,14 @@ public class CoralEngine {
 			lobby.teams.add(Team.A); 
 			lobby.jadeteams.add(new ArrayList<>()); // .jadeteams.put(p1._id, new ArrayList<>()); // new JadeCreature[Constants.CreaturesPerTeam]);
 			lobby.moonstoneInfo = "127.0.0.1:443";
-			lobby.turn = 0; // p1._id;
+			lobby.turn(0); // p1._id;
 			lobby.time = System.currentTimeMillis();
-//			lobby.phase = LobbyPhase.pick;2
+//			lobby.phase = LobbyPhase.pick;
+			
+			db.dequeue(p1._id);
 			
 			var msg = new MatchFound();
 			msg.lobby = lobby;
-			
-			db.dequeue(p1._id);
-
 			channel1.attr(Lobby.attrkey).set(lobby);
 			channel1.writeAndFlush(msg);
 			
@@ -128,23 +147,6 @@ public class CoralEngine {
 		});
 	}
 	
-
-	public ScheduledExecutorService timers = Executors.newScheduledThreadPool(10);
-	public Future<?> future;
-	public ActionPipeline actions;
-	
-	public void startTimer(Lobby lobby) {
-//		e.fight.future = e.fight.timer.scheduleAtFixedRate(() -> {
-//			if(e.fight.time > 0) e.fight.time--;
-//			else e.fight.pipe.push(new EndTurnAction(e.fight));
-//		}, 1, 1, TimeUnit.SECONDS);
-		
-		var userturn = lobby.playerTurn();
-		timers.schedule(() -> {
-			lobby.pipe().push(new OnTurnEndAction(lobby, userturn)); //() -> onTimerEndAction(lobby, userturn));
-		}, Constants.baseTimePerTurn, TimeUnit.SECONDS);
-	}
-
 
 	/**
 	 * normal queues try to match 2 players of similar mmr
@@ -176,7 +178,7 @@ public class CoralEngine {
 						lobby.teams.add(Team.A); 
 						lobby.teams.add(Team.B); 
 						lobby.moonstoneInfo = "127.0.0.1:443";
-						lobby.turn = 0; // p1._id;
+						lobby.turn(0); // p1._id;
 						lobby.time = System.currentTimeMillis();
 //						lobby.phase = LobbyPhase.ban;
 						
@@ -186,11 +188,12 @@ public class CoralEngine {
 						
 						var msg = new MatchFound();
 						msg.lobby = lobby;
-						
 						channel1.attr(Lobby.attrkey).set(lobby);
 						channel2.attr(Lobby.attrkey).set(lobby);
 						channel1.writeAndFlush(msg);
 						channel2.writeAndFlush(msg);
+
+						startTimer(lobby);
 					}
 					
 					return true;

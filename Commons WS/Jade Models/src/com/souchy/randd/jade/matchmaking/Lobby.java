@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
+
 import org.bson.types.ObjectId;
 
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.commons.ActionPipeline;
+import com.souchy.randd.commons.tealwaters.ecs.Engine;
+import com.souchy.randd.commons.tealwaters.ecs.Entity;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.meta.JadeCreature;
 import io.netty.buffer.ByteBuf;
@@ -54,7 +58,7 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	/**
 	 * Current turn starting from 0 (+1 for each ban and pick so 3 bans * 2 + 4 picks * 2 = 14 turns total)
 	 */
-	public int turn;
+	private int turn;
 	/**
 	 * 
 	 */
@@ -66,6 +70,10 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	public static final String name_jadeteams = "jadeteams";
 //	public static final String name_answers = "answers";
 	public static final String name_moonstoneInfo = "moonstoneInfo";
+	
+
+	private ActionPipeline pipe = new ActionPipeline();
+	public Future<?> future;
 	
 	/**
 	 * get the team for a player
@@ -79,9 +87,7 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	public List<JadeCreature> creatures(ObjectId player) {
 		return jadeteams.get(users.indexOf(player));
 	}
-	
-	
-	private ActionPipeline pipe = new ActionPipeline();
+
 	/**
 	 * Action pipeline for managing turn actions
 	 */
@@ -92,8 +98,11 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	/**
 	 * Get the current player turn in a synchronized way
 	 */
-	public synchronized int playerTurn() {
+	public synchronized int turn() {
 		return turn;
+	}
+	public synchronized void turn(int turn) {
+		this.turn = turn;
 	}
 	
 	/** get player index (not id) in the user list from turn index */
@@ -126,6 +135,9 @@ public class Lobby implements BBSerializer, BBDeserializer {
 		return users.get(index);
 	}
 	
+	public ObjectId getCurrentPlayer() {
+		return getPlayer(turn());
+	}
 	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {

@@ -23,29 +23,32 @@ public class ChangeTurn implements BBMessage {
 	 * Current team turn
 	 */
 //	public Team team;
-	public ObjectId playerid;
+//	public ObjectId playerid;
+	public int turn;
 	
 	public ChangeTurn() {
 		
 	}
-	public ChangeTurn(ObjectId playerid) {
-		this.playerid = playerid;
+	public ChangeTurn(int turn) {
+		this.turn = turn;
 	}
 	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 		// out.writeInt(team.ordinal());
-		out.writeInt(playerid.getTimestamp());
-		out.writeInt(playerid.getMachineIdentifier());
-		out.writeShort(playerid.getProcessIdentifier());
-		out.writeInt(playerid.getCounter());
+//		out.writeInt(playerid.getTimestamp());
+//		out.writeInt(playerid.getMachineIdentifier());
+//		out.writeShort(playerid.getProcessIdentifier());
+//		out.writeInt(playerid.getCounter());
+		out.writeInt(turn);
 		return out;
 	}
 	
 	@Override
 	public ChangeTurn deserialize(ByteBuf in) {
 		// team = Team.values()[in.readInt()];
-		playerid = new ObjectId(in.readInt(), in.readInt(), in.readShort(), in.readInt());
+//		playerid = new ObjectId(in.readInt(), in.readInt(), in.readShort(), in.readInt());
+		turn = in.readInt();
 		return this;
 	}
 	

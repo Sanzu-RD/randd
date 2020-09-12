@@ -7,6 +7,7 @@ import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadows.coral.main.Coral;
+import com.souchy.randd.deathshadows.coral.main.OnTurnEndAction;
 import com.souchy.randd.jade.matchmaking.GameQueue;
 import com.souchy.randd.jade.matchmaking.Lobby;
 import com.souchy.randd.jade.meta.JadeCreature;
@@ -25,41 +26,37 @@ public class SelectedCreatureHandler implements BBMessageHandler<SelectCreature>
 	public void handle(ChannelHandlerContext client, SelectCreature msg) {
 		try {
 
-			Log.format("Coral on select creature (%s)", msg.modelid);
+//			Log.format("Coral on select creature (%s)", msg.modelid);
 			
 			// if the creature model doesnt exist, cancel
-			if(!DiamondModels.creatures.containsKey(msg.modelid)) {
-				return;
-			}
+			if(!DiamondModels.creatures.containsKey(msg.modelid)) return;
 			
 			User user = client.channel().attr(User.attrkey).get();
 			Lobby lobby = client.channel().attr(Lobby.attrkey).get();
 
-			Log.format("Coral on select creature (%s), user %s, lobby %s", msg.modelid, user, lobby);
+			// ignore if the user is not the current player
+			if(lobby.getCurrentPlayer() != user._id) return;
+			
+//			Log.format("Coral on select creature (%s), user %s, lobby %s", msg.modelid, user, lobby);
 			
 			// fix team unless it's a mocking lobby
-			if(lobby.type != GameQueue.mock) 
-				msg.team = lobby.team(user._id); // lobby.teams.get(user._id);
+			if(lobby.type != GameQueue.mock) msg.team = lobby.team(user._id);
+			
+			// set turn on action
+			var action = new OnTurnEndAction(lobby);
 			
 			// add new jade creature
 			var crea = new JadeCreature();
 			crea.creatureModelID = msg.modelid;
-			var creatures = lobby.creatures(user._id); // .jadeteams.get(user._id); // = new JadeCreature[1];
+			var creatures = lobby.creatures(user._id); 
 			creatures.add(crea);
-//			if(creatures == null || creatures.length == 0) {
-//				creatures = new JadeCreature[] { crea };
-//			} else {
-//				var list = Arrays.asList(creatures);
-//				list.add(crea);
-//				creatures = (JadeCreature[]) list.toArray();
-//			}
-//			lobby.jadeteams.put(user._id, creatures);
 			
 			// broadcast select to all lobby participants
 			Coral.broadcast(lobby, msg);
-//			for (var id : lobby.teams.keySet()) {
-//				Coral.coral.server.users.get(id).writeAndFlush(message);
-//			}
+
+			// end turn
+			lobby.pipe().push(action);
+			
 		} catch (Exception e) {
 			Log.info("", e);
 			client.channel().close();

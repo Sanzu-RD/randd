@@ -15,4 +15,5 @@ module com.souchy.randd.deathshadows.coral {
 	requires transitive com.souchy.randd.deathshadow.core;
 	requires transitive CreatureCommons;
 	requires GameMechanics2;
+	requires com.souchy.randd.commons.TealWaters;
 }
