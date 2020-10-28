@@ -40,7 +40,7 @@ public abstract class ClassDiscoverer<T> implements Discoverer<String, Class<?>,
 				Reflections reflections = new Reflections(packageName, new SubTypesScanner(false)); 
 				Set<Class<? extends T>> resourceList = reflections.getSubTypesOf(superClass);
 				for(var res : resourceList) {
-//					Log.info("ClassDiscoverer.explore : reflection res : " + res);
+					Log.info("ClassDiscoverer.explore : reflection res : " + res);
 					if(identify(res)) // the implementation of this makes sure the res is the correct class type
 						classes.add((Class<T>) res);
 				}
@@ -60,7 +60,7 @@ public abstract class ClassDiscoverer<T> implements Discoverer<String, Class<?>,
 			Reflections reflections = new Reflections(packageName, new SubTypesScanner(false));
 			Set<Class<?>> resourceList = reflections.getSubTypesOf(Object.class);
 			for(var res : resourceList) {
-//				Log.info("ClassDiscoverer.explore : reflection res : " + res);
+				Log.info("ClassDiscoverer.explore : reflection res : " + res);
 				if(identify(res)) // the implementation of this makes sure the res is the correct class type
 					classes.add((Class<T>) res);
 			}
