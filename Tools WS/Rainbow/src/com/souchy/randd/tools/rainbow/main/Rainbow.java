@@ -22,6 +22,9 @@ public class Rainbow extends EbiShoalCore {
 	public static RainbowConf conf;
 	public static EbiShoalTCP client;
 	
+	public String host;
+	public int port;
+	
 	public static void main(String[] args) throws Exception {
 		new Rainbow(args);
 	}
@@ -30,16 +33,24 @@ public class Rainbow extends EbiShoalCore {
 		super(args);
 		core = this;
 		
-		var host = "127.0.0.1";
-		var port = 1000;
+		this.host = "127.0.0.1";
+		this.port = 1000;
 		if(args.length > 0) host = args[0];
 		if(args.length > 1) port = Integer.parseInt(args[1]);
-		client = new EbiShoalTCP(host, port, this);
+		connect();
 
 		Log.info("Rainbow start " + host + ":" + port);
 		Application.launch(RainbowApp.class);
 		Log.info("Rainbow stopped.");
 //		Platform.runLater(() -> RainbowApp.stage.setScene(RainbowApp.mainScene));
+	}
+
+	public void connect() {
+		try {
+			client = new EbiShoalTCP(host, port, this);
+		} catch (Exception e) {
+			Log.error("", e);
+		}
 	}
 	
 	@Override

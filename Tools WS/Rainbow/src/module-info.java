@@ -22,5 +22,6 @@ module com.souchy.randd.tools.Rainbow {
 	requires com.souchy.randd.moonstone.Black;
 	requires com.souchy.randd.deathshadows.coral;
 	requires com.souchy.randd.deathshadows.opal;
+	requires com.souchy.randd.deathshadows.Pearl;
 //	requires com.souchy.randd.deathshadows.greenberyl;
 }

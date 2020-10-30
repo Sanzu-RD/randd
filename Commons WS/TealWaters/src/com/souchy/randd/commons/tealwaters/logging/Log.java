@@ -42,15 +42,6 @@ public class Log {
 	public static void log(LogImportance importance, String details) {
 		Logging.log(new Log(importance, details));
 	}
-
-	public static void deffered(String module, String details) {
-		Logging.log(new DefferedLog(module, details));
-	}
-	public static void defferedError(String module, String details) {
-		var log = new DefferedLog(module, details);
-		log.importance = LogImportance.Error;
-		Logging.log(log);
-	}
 	
 	public static void info(String details) {
 		Logging.log(new Log(LogImportance.Info, details));
@@ -94,6 +85,15 @@ public class Log {
 	
 	public static void critical(String details, Throwable e) {
 		critical(details + throwableToString(e));
+	}
+
+	public static void deffered(String module, String details) {
+		Logging.log(new DefferedLog(module, details));
+	}
+	public static void defferedError(String module, String details) {
+		var log = new DefferedLog(module, details);
+		log.importance = LogImportance.Error;
+		Logging.log(log);
 	}
 	
 	private static String throwableToString(Throwable e) {

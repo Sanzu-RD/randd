@@ -10,6 +10,7 @@ import com.souchy.randd.deathshadows.coral.main.Coral;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.AskCreate;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.AskNodes;
 import com.souchy.randd.deathshadows.opal.Opal;
+import com.souchy.randd.deathshadows.pearl.main.Pearl;
 import com.souchy.randd.tools.rainbow.main.Rainbow;
 import com.souchy.randd.tools.rainbow.main.RainbowApp;
 import com.souchy.randd.tools.rainbow.ui.events.Kill;
@@ -70,8 +71,10 @@ public class Layout { //extends BorderPane {
 	
 	// network
 	@FXML private Menu menuNetwork;
-	@FXML private RadioMenuItem btnLocal;
+	@FXML private MenuItem btnConnect;
+	@FXML private MenuItem btnPearl;
 	@FXML private ToggleGroup networkToggleGroup;
+	@FXML private RadioMenuItem btnLocal;
 	@FXML private RadioMenuItem btnLan;
 	@FXML private RadioMenuItem btnExternal;
 	
@@ -128,6 +131,15 @@ public class Layout { //extends BorderPane {
 			btnCoral.setOnAction(e -> Rainbow.client.write(new AskCreate(Coral.class.getSimpleName())));
 			btnOpal.setOnAction(e -> Rainbow.client.write(new AskCreate(Opal.class.getSimpleName())));
 //			btnBeryl.setOnAction(e -> Rainbow.client.write(new AskCreate(GreenBeryl.class.getSimpleName()))));
+			
+			
+			btnConnect.setOnAction(e -> Rainbow.core.connect());
+			btnPearl.setOnAction(e -> Pearl.createProcess(Pearl.class));
+			btnLocal.setOnAction(e -> Rainbow.core.host = "localhost");
+			btnLan.setOnAction(e -> Rainbow.core.host = "192.168.2.15");
+			btnExternal.setOnAction(e -> Rainbow.core.host = "vyxyn.ddns.net");
+			btnLocal.setSelected(true);
+			
 			
 		} catch (Exception ex) {
 			Log.error("", ex);

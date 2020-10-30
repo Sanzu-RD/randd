@@ -63,17 +63,21 @@ public final class Pearl extends DeathShadowCore {
 	
 	// <Type, Port> ports
 	// <Type, Info> infos
-	public final Map<Class<? extends DeathShadowCore>, Stack<NodeInfo>> nodes = new HashMap<>();
+	public final static Map<Class<? extends DeathShadowCore>, Stack<NodeInfo>> nodes = new HashMap<>();
 	
 	@SuppressWarnings("serial")
-	public final Map<Class<? extends DeathShadowCore>, Integer> basePorts = new HashMap<>() {{
+	public final static Map<Class<? extends DeathShadowCore>, Integer> basePorts = new HashMap<>() {{
 	    put(Opal.class, 8000);
 	    put(Coral.class, 7000);
 	    put(BlackMoonstone.class, 6000);
 	    put(Pearl.class, 1000);
 	}};
 	
-	
+	static {
+		var classes = new DefaultClassDiscoverer<DeathShadowCore>(DeathShadowCore.class).explore("com.souchy.randd.deathshadows");
+		classes.forEach(c -> nodes.put(c, new Stack<>()));
+		Log.info("Pearl DeathShadowCore types : " + String.join(", ", nodes.keySet().stream().map(t -> t.getSimpleName()).collect(Collectors.toList())));
+	}
 	
 	public static void main(String[] args) throws Exception {
 		new Pearl(args);
@@ -83,19 +87,12 @@ public final class Pearl extends DeathShadowCore {
 		super(args);
 		core = this;
 		
-		var port = 1000;
+		this.port = 1000;
 		var root = "../../../"; // GitPiranha root path which contains 'r and d' and 'release' repositories
 		if(args.length > 0) port = Integer.parseInt(args[0]);
 		if(args.length > 1) root = args[1];
 
 		Environment.root = Paths.get(root);
-		var classes = new DefaultClassDiscoverer<DeathShadowCore>(DeathShadowCore.class).explore("com.souchy.randd.deathshadows");
-		
-//		deathShadowCoreTypes.addAll(classes);
-		
-		classes.forEach(c -> nodes.put(c, new Stack<>()));
-		
-		Log.info("Pearl DeathShadowCore types : " + String.join(", ", nodes.keySet().stream().map(t -> t.getSimpleName()).collect(Collectors.toList())));
 		
 		// start server
 		server = new DeathShadowTCP(port, this); 
@@ -138,32 +135,7 @@ public final class Pearl extends DeathShadowCore {
 				
 				Log.info("Pearl create node 2 : " + coreName + " == " + type);
 				
-				
-				var typelist = nodes.get(type);
-				int port = basePorts.get(type) + typelist.size();
-				
-				var file = Environment.fromRoot("/release/deathshadows/" + typename + ".jar").toFile();
-				var path = file.getAbsolutePath();
-				var command = "java -jar --enable-preview \"" + path + "\" " + port;
-
-				Log.info("Pearl create node 2 file " + file);
-				Log.info("Pearl create node 2 command " + command);
-				
-				Process proc = Runtime.getRuntime().exec(command);
-				
-				// Logging.streams.add(e -> System.out.println());
-				
-				
-				StreamGobbler streamGobblerError = new StreamGobbler(proc.getErrorStream(), (s) -> Log.defferedError(typename + "(" + proc.pid() + ")", s));
-				Executors.newSingleThreadExecutor().submit(streamGobblerError);
-				
-				StreamGobbler streamGobbler = new StreamGobbler(proc.getInputStream(), (s) -> Log.deffered(typename + "(" + proc.pid() + ")", s));
-				Executors.newSingleThreadExecutor().submit(streamGobbler);
-				
-				// int exitCode = proc.waitFor();
-				// assert exitCode == 0;
-
-				Log.info("Pearl create node 3 : " + proc);
+				createProcess(type);
 				
 				return null;
 			}
@@ -172,10 +144,37 @@ public final class Pearl extends DeathShadowCore {
 		}
 		return null;
 	}
-	
-	public void getNextNodeID() {
-		
+
+	public static void createProcess(Class<? extends DeathShadowCore> type) {
+		var typelist = nodes.get(type);
+		int port = basePorts.get(type) + typelist.size();
+		createProcess(type, port);
 	}
+	
+	public static void createProcess(Class<? extends DeathShadowCore> type, int port) {
+		try {
+			var typename = type.getSimpleName().toLowerCase();
+			var file = Environment.fromRoot("/release/deathshadows/" + typename + ".jar").toFile();
+			var path = file.getAbsolutePath();
+			var command = "java -jar --enable-preview \"" + path + "\" " + port;
+			
+			Log.info("Pearl create node 2 file " + file);
+			Log.info("Pearl create node 2 command " + command);
+			
+			Process proc = Runtime.getRuntime().exec(command);
+			
+			StreamGobbler streamGobblerError = new StreamGobbler(proc.getErrorStream(), (s) -> Log.defferedError(typename + "(" + proc.pid() + ")", s));
+			Executors.newSingleThreadExecutor().submit(streamGobblerError);
+			
+			StreamGobbler streamGobbler = new StreamGobbler(proc.getInputStream(), (s) -> Log.deffered(typename + "(" + proc.pid() + ")", s));
+			Executors.newSingleThreadExecutor().submit(streamGobbler);
+			
+			Log.info("Pearl create process : " + proc);
+		} catch (Exception e) {
+			Log.error("", e);
+		}
+	}
+
 
 	
 	private static class StreamGobbler implements Runnable {
