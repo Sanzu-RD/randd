@@ -35,7 +35,13 @@ public final class Opal extends DeathShadowCore {
 	
 	@Override
 	protected String[] getRootPackages() {
-		return new String[] { "com.souchy.randd.deathshadows.opal" };
+		return new String[] {
+				"com.souchy.randd.deathshadows.opal",
+				"com.souchy.randd.commons.deathebi.msg", 
+				"com.souchy.randd.deathshadow.core.handlers", 
+				"com.souchy.randd.deathshadow.core.smoothrivers", 
+				
+		};
 	}
 
 	

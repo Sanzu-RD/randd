@@ -78,7 +78,7 @@
 
 			<fileset dir="${dir.git}/r and d/Death Shadows WS/Moonstone-black/bin" />
 			<fileset dir="${dir.git}/r and d/Death Shadows WS/Coral/bin" />
-			
+			<fileset dir="${dir.git}/r and d/Death Shadows WS/GreenBeryl/bin" />
 		</jar>
 
 

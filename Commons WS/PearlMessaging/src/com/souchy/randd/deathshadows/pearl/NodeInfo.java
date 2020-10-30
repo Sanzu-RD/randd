@@ -93,4 +93,28 @@ public class NodeInfo implements BBSerializer, BBDeserializer {
 		return null;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public int getPort() {
+		return port;
+	}
+	public Class<?> getType(){
+		return type;
+	}
+	public int getClients() {
+		return clientCount;
+	}
+	public long getLaunchTime() {
+		return launchTime;
+	}
+	public long getUptime() {
+		return System.currentTimeMillis() - launchTime;
+	}
+	
+	
+	
 }

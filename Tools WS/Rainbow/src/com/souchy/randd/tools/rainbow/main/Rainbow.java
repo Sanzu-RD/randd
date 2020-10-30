@@ -44,8 +44,11 @@ public class Rainbow extends EbiShoalCore {
 	
 	@Override
 	protected String[] getRootPackages() {
-		return new String[] { "com.souchy.randd.commons.deathebi", "com.souchy.randd.tools.rainbow", "com.souchy.randd.tools.rainbow.handlers", "com.souchy.randd.deathshadows.nodes.pearl.messaging" };
+		return new String[] { 
+				"com.souchy.randd.commons.deathebi", 
+				"com.souchy.randd.tools.rainbow", 
+				"com.souchy.randd.tools.rainbow.handlers",
+				"com.souchy.randd.deathshadows.nodes.pearl.messaging" };
 	}
-	
 	
 }

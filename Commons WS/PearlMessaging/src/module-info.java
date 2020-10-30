@@ -9,6 +9,7 @@ module com.souchy.randd.deathshadows.nodes.pearl.PearlMessaging {
 	exports com.souchy.randd.deathshadows.pearl;
 	
 	exports com.souchy.randd.deathshadows.nodes.pearl.messaging;
+//	exports com.souchy.randd.deathshadows.nodes.pearl.messaging.rivers;
 //	exports com.souchy.randd.deathshadows.nodes.pearl.messaging.coral;
 	exports com.souchy.randd.deathshadows.nodes.pearl.messaging.moonstone;
 //	exports com.souchy.randd.deathshadows.nodes.pearl.messaging.opal;

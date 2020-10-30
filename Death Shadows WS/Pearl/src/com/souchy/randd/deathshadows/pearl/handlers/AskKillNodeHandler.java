@@ -2,6 +2,7 @@ package com.souchy.randd.deathshadows.pearl.handlers;
 
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.AskKillNode;
 import com.souchy.randd.deathshadows.pearl.main.Pearl;
 
@@ -17,16 +18,26 @@ public class AskKillNodeHandler implements BBMessageHandler<AskKillNode> {
 	@Override
 	public void handle(ChannelHandlerContext client, AskKillNode message) {
 		Log.info("Pearl handle kill node " + message.id);
-		for(var node : Pearl.core.nodes) {
-			if(node.id == message.id) {
-				try {
-					node.process.destroy();
-				} catch(Exception e) {
-					Log.warning("", e);
+		
+		Class<? extends DeathShadowCore> type = null;
+		
+		outloop:
+		for(var key : Pearl.core.nodes.keySet()) {
+			for(var node : Pearl.core.nodes.get(key)) {
+				if(node.id == message.id) {
+					try {
+						if(node.process != null) node.process.destroy();
+						type = key;
+						break outloop;
+					} catch(Exception e) {
+						Log.warning("", e);
+					}
 				}
 			}
 		}
-		Pearl.core.nodes.removeIf(n -> n.id == message.id);
+
+		Pearl.core.nodes.get(type).removeIf(n -> n.id == message.id);
+		
 	}
 	
 }

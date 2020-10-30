@@ -19,7 +19,19 @@ public interface BBMessage extends Message<ByteBuf, BBMessage>,
 {
 
 	/** Initial capacity */
-	public int getBufferCapacity();
+//	public int getBufferCapacity();
+	public default int getBufferCapacity() {
+		return 0;
+	}
+
+	@Override
+	public default ByteBuf serialize(ByteBuf out) {
+		return out;
+	}
+	@Override
+	public default BBMessage deserialize(ByteBuf in) {
+		return this;
+	}
 	
 /*
 	public static void writeString(ByteBuf out, String str) {

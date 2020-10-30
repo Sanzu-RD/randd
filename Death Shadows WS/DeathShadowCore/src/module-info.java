@@ -1,6 +1,7 @@
 module com.souchy.randd.deathshadow.core {
 	exports com.souchy.randd.deathshadow.core;
 	exports com.souchy.randd.deathshadow.core.handlers;
+	exports com.souchy.randd.deathshadow.core.smoothrivers;
 	
 	requires transitive com.souchy.randd.commons.TealNet;
 	requires transitive netty.all;
@@ -9,4 +10,5 @@ module com.souchy.randd.deathshadow.core {
 	requires transitive com.souchy.randd.deathshadows.iolite;
 	requires com.souchy.randd.commons.TealWaters;
 	requires com.google.common;
+	requires com.rabbitmq.client;
 }

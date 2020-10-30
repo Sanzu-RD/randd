@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+
+<TableView fx:id="root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.tools.rainbow.ui.NodeTable">
+   <columns>
+      <TableColumn fx:id="colName" editable="false" prefWidth="75.0" text="type" />
+      <TableColumn fx:id="colIp" prefWidth="75.0" text="ip" />
+      <TableColumn fx:id="colPort" prefWidth="75.0" text="Port" />
+      <TableColumn fx:id="colClients" prefWidth="75.0" text="Clients" />
+      <TableColumn fx:id="colUptime" prefWidth="75.0" text="Uptime" />
+      <TableColumn fx:id="colCpu" prefWidth="75.0" text="Cpu" />
+      <TableColumn fx:id="colRam" prefWidth="75.0" text="Ram" />
+      <TableColumn fx:id="colAction" prefWidth="75.0" text="Action" />
+   </columns>
+</TableView>

@@ -81,6 +81,7 @@ public class MainController extends Common {
 	public void initialize() {
 //		super.initialize();
 		Logging.streams.add(log -> Platform.runLater(() -> consoleText.appendText("\n" + log.toString())));
+		
 		nodeList.setItems(nodes);
 		nodeList.getSelectionModel().selectedItemProperty().addListener(this::select);
 		

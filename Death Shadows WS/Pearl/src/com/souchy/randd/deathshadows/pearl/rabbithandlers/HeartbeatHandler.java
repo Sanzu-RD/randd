@@ -1,4 +1,4 @@
-package com.souchy.randd.deathshadows.pearl.handlers;
+package com.souchy.randd.deathshadows.pearl.rabbithandlers;
 
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 import com.souchy.randd.commons.tealwaters.logging.Log;

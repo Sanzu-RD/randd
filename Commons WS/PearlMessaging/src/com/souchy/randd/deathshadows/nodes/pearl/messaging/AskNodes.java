@@ -51,10 +51,5 @@ public class AskNodes implements BBMessage {
 		return new AskNodes();
 	}
 
-	@Override
-	public int getBufferCapacity() {
-		return 0;
-	}
-
 
 }

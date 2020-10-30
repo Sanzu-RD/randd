@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.tools.rainbow.ui.Console">
+   <children>
+      <TextArea fx:id="consoleText" editable="false" prefHeight="0.0" prefWidth="1066.0" VBox.vgrow="ALWAYS" />
+      <TextField fx:id="consoleInput" prefHeight="40.0" prefWidth="1066.0" />
+   </children>
+</VBox>

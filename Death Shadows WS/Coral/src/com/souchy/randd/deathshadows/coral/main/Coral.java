@@ -30,7 +30,7 @@ public final class Coral extends DeathShadowCore {
 	private Coral(String[] args) throws Exception {
 		super(args);
 		coral = this;
-		int port = 7000;
+		port = 7000;
 		queue = GameQueue.mock;
 		if(args.length > 0) queue = GameQueue.valueOf(args[0]);
 		port += queue.ordinal();

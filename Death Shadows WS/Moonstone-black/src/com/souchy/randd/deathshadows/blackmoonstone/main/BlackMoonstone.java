@@ -20,8 +20,8 @@ import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserActiveEvent;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserInactiveEvent;
+import com.souchy.randd.deathshadow.core.smoothrivers.SelfIdentify;
 import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
-import com.souchy.randd.deathshadows.nodes.pearl.messaging.SelfIdentify;
 import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.jade.meta.UserLevel;
 import com.souchy.randd.moonstone.commons.packets.s2c.TurnStart;
@@ -53,7 +53,7 @@ public class BlackMoonstone extends DeathShadowCore { // implements OnTurnEndHan
 	public BlackMoonstone(String[] args) throws Exception {
 		super(args);
 		moon = this;
-		int port = 443; // port changeant pour chaque node instance
+		port = 443; // port changeant pour chaque node instance
 		if(args.length > 0) port = Integer.parseInt(args[0]);
 		
 		server = new DeathShadowTCP(port, this);
@@ -77,11 +77,14 @@ public class BlackMoonstone extends DeathShadowCore { // implements OnTurnEndHan
 		}
 
 		// register node on pearl
-		// rivers.consume("idmaker" () -> {
+//		 rivers.consume("idmaker" () -> {
 //			int nodeid = 0; // get nodeid from idmaker queue
-		// rivers.send("pearl", new SelfIdentify(nodeid));
-		// });
+//		 rivers.send("pearl", new SelfIdentify(nodeid));
+//		 });
 
+		this.rivers.connect(port);
+		this.rivers.sendPearl(new SelfIdentify(this));
+		
 		
 		// block here to not just exit the program
 		if(!Arrays.asList(args).contains("async"))
@@ -138,6 +141,8 @@ public class BlackMoonstone extends DeathShadowCore { // implements OnTurnEndHan
 	protected String[] getRootPackages() {
 		return new String[]{ 
 				"com.souchy.randd.commons.deathebi.msg", 
+				"com.souchy.randd.deathshadow.core.handlers", 
+				"com.souchy.randd.deathshadow.core.smoothrivers", 
 				"com.souchy.randd.deathshadows.nodes.pearl.messaging",
 				"com.souchy.randd.deathshadows.nodes.pearl.messaging.moonstone",
 				"com.souchy.randd.moonstone", 

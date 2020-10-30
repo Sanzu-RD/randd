@@ -26,10 +26,31 @@ public class Log {
 		return "[" + date + "]\t[" + module + "]\t[" + importance + "] : " + details;
 	}
 	
+	public static class DefferedLog extends Log {
+		public String process;
+		public DefferedLog(String process, String details) {
+			super(LogImportance.Info, details);
+			this.process = process;
+		}
+
+		@Override
+		public String toString() {
+			return process + ":// " + details;
+		}
+	}
+	
 	public static void log(LogImportance importance, String details) {
 		Logging.log(new Log(importance, details));
 	}
 
+	public static void deffered(String module, String details) {
+		Logging.log(new DefferedLog(module, details));
+	}
+	public static void defferedError(String module, String details) {
+		var log = new DefferedLog(module, details);
+		log.importance = LogImportance.Error;
+		Logging.log(log);
+	}
 	
 	public static void info(String details) {
 		Logging.log(new Log(LogImportance.Info, details));

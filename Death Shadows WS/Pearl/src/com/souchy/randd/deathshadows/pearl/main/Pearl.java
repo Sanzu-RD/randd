@@ -1,20 +1,36 @@
 package com.souchy.randd.deathshadows.pearl.main;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Stack;
+import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 import com.souchy.randd.commons.tealwaters.io.files.ClassDiscoverer.DefaultClassDiscoverer;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.commons.tealwaters.logging.Logging;
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 //import com.souchy.randd.deathshadows.commons.core.CoreServer;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
+import com.souchy.randd.deathshadow.core.smoothrivers.AskIdentifications;
+import com.souchy.randd.deathshadow.core.smoothrivers.SelfIdentify;
+import com.souchy.randd.deathshadow.core.smoothrivers.SmoothRivers;
+import com.souchy.randd.deathshadows.blackmoonstone.main.BlackMoonstone;
+import com.souchy.randd.deathshadows.coral.main.Coral;
+import com.souchy.randd.deathshadows.opal.Opal;
 import com.souchy.randd.deathshadows.pearl.NodeInfo;
 import com.souchy.randd.jade.meta.UserLevel;
 
@@ -38,12 +54,24 @@ public final class Pearl extends DeathShadowCore {
 	/**
 	 * Server Core class types
 	 */
-	private final List<Class<DeathShadowCore>> deathShadowCoreTypes = new ArrayList<>();
+//	private final List<Class<DeathShadowCore>> deathShadowCoreTypes = new ArrayList<>();
 	
 	/**
 	 * Physical node servers currently running
 	 */
-	public final List<NodeInfo> nodes = new ArrayList<>();
+//	public final List<NodeInfo> nodes = new ArrayList<>();
+	
+	// <Type, Port> ports
+	// <Type, Info> infos
+	public final Map<Class<? extends DeathShadowCore>, Stack<NodeInfo>> nodes = new HashMap<>();
+	
+	@SuppressWarnings("serial")
+	public final Map<Class<? extends DeathShadowCore>, Integer> basePorts = new HashMap<>() {{
+	    put(Opal.class, 8000);
+	    put(Coral.class, 7000);
+	    put(BlackMoonstone.class, 6000);
+	    put(Pearl.class, 1000);
+	}};
 	
 	
 	
@@ -61,14 +89,23 @@ public final class Pearl extends DeathShadowCore {
 		if(args.length > 1) root = args[1];
 
 		Environment.root = Paths.get(root);
-		deathShadowCoreTypes.addAll(new DefaultClassDiscoverer<DeathShadowCore>(DeathShadowCore.class).explore("com.souchy.randd.deathshadows"));
-		Log.info("Pearl DeathShadowCore types : " + String.join(", ", deathShadowCoreTypes.stream().map(t -> t.getSimpleName()).collect(Collectors.toList())));
+		var classes = new DefaultClassDiscoverer<DeathShadowCore>(DeathShadowCore.class).explore("com.souchy.randd.deathshadows");
 		
-//		rivers.connect();
+//		deathShadowCoreTypes.addAll(classes);
+		
+		classes.forEach(c -> nodes.put(c, new Stack<>()));
+		
+		Log.info("Pearl DeathShadowCore types : " + String.join(", ", nodes.keySet().stream().map(t -> t.getSimpleName()).collect(Collectors.toList())));
 		
 		// start server
 		server = new DeathShadowTCP(port, this); 
 		server.auth.minLevel = UserLevel.Creator;
+		
+		// start rivers
+		this.rivers.connect(port);
+//		SmoothRivers.sendPearl(new SelfIdentify(this));
+		SmoothRivers.send("nodes", new AskIdentifications());
+		
 		server.block(); 
 	}
 
@@ -77,7 +114,9 @@ public final class Pearl extends DeathShadowCore {
 	protected String[] getRootPackages() {
 		return new String[]{
 				"com.souchy.randd.commons.deathebi", 
-				"com.souchy.randd.deathshadows.pearl", "com.souchy.randd.deathshadows.pearl.handlers", 
+				"com.souchy.randd.deathshadow.core.handlers", 
+				"com.souchy.randd.deathshadow.core.smoothrivers", 
+				"com.souchy.randd.deathshadows.pearl", "com.souchy.randd.deathshadows.pearl.handlers", "com.souchy.randd.deathshadows.pearl.rabbithandlers", 
 				"com.souchy.randd.deathshadows.nodes.pearl.messaging", "com.souchy.randd.deathshadows.nodes.pearl.messaging.moonstone",
 				"com.souchy.randd.deathshadows.nodes.pearl.messaging.coral", "com.souchy.randd.deathshadows.nodes.pearl.messaging.opal"  
 				};
@@ -85,34 +124,48 @@ public final class Pearl extends DeathShadowCore {
 
 	
 	// node shall get an id themselves from the idqueue and then selfidentify to pearl
-	private int tempIdmaker = 1;
+	public int tempIdmaker = 1;
 	public NodeInfo create(String coreName) {
 		try {
 //			coreName = coreName.toLowerCase();
 			Log.info("Pearl create node 1 : " + coreName);
-			for(var type : deathShadowCoreTypes) {
+			for(var type : nodes.keySet()) {
 				
 				var typename = type.getSimpleName().toLowerCase();
 				Log.info("Pearl create node 2 : " + coreName + " ?= " + typename);
 				
 				if(!coreName.equalsIgnoreCase(typename)) continue;
 				
-				Log.info("Pearl create node 2 : " + coreName + " == " + typename);
+				Log.info("Pearl create node 2 : " + coreName + " == " + type);
 				
-				var file = Environment.fromRoot("/release/deathshadows/" + coreName + ".jar").toFile();
 				
-				Process proc = null; //Runtime.getRuntime().exec("java -jar \"" + file.getAbsolutePath() + "\"");
+				var typelist = nodes.get(type);
+				int port = basePorts.get(type) + typelist.size();
 				
-				var node = new NodeInfo();
-				node.id = tempIdmaker++;
-				node.type = type;
-				node.launchTime = System.currentTimeMillis();
-				node.process = proc;
-				nodes.add(node);
+				var file = Environment.fromRoot("/release/deathshadows/" + typename + ".jar").toFile();
+				var path = file.getAbsolutePath();
+				var command = "java -jar --enable-preview \"" + path + "\" " + port;
 
-				Log.info("Pearl create node 3 : " + coreName + ", type " + type.getName());
+				Log.info("Pearl create node 2 file " + file);
+				Log.info("Pearl create node 2 command " + command);
 				
-				return node;
+				Process proc = Runtime.getRuntime().exec(command);
+				
+				// Logging.streams.add(e -> System.out.println());
+				
+				
+				StreamGobbler streamGobblerError = new StreamGobbler(proc.getErrorStream(), (s) -> Log.defferedError(typename + "(" + proc.pid() + ")", s));
+				Executors.newSingleThreadExecutor().submit(streamGobblerError);
+				
+				StreamGobbler streamGobbler = new StreamGobbler(proc.getInputStream(), (s) -> Log.deffered(typename + "(" + proc.pid() + ")", s));
+				Executors.newSingleThreadExecutor().submit(streamGobbler);
+				
+				// int exitCode = proc.waitFor();
+				// assert exitCode == 0;
+
+				Log.info("Pearl create node 3 : " + proc);
+				
+				return null;
 			}
 		} catch (Exception e) {
 			Log.error("", e);
@@ -125,6 +178,17 @@ public final class Pearl extends DeathShadowCore {
 	}
 
 	
-	
+	private static class StreamGobbler implements Runnable {
+		private InputStream inputStream;
+		private Consumer<String> consumer;
+		public StreamGobbler(InputStream inputStream, Consumer<String> consumer) {
+			this.inputStream = inputStream;
+			this.consumer = consumer;
+		}
+		@Override
+		public void run() {
+			new BufferedReader(new InputStreamReader(inputStream)).lines().forEach(consumer);
+		}
+	}
 	
 }

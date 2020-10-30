@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.WebView?>
+
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.tools.rainbow.ui.PacketEditor">
+   <children>
+      <Label fx:id="lblTarget" layoutX="14.0" layoutY="14.0" text="Target : Pearl#10000" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <WebView fx:id="webview" layoutX="10.0" layoutY="27.0" prefHeight="665.0" prefWidth="1260.0" />
+   </children>
+</AnchorPane>

@@ -18,4 +18,9 @@ module com.souchy.randd.tools.Rainbow {
 	requires transitive javafx.graphics;
 	requires com.souchy.randd.commons.deathebi;
 	requires com.google.common;
+	requires javafx.web;
+	requires com.souchy.randd.moonstone.Black;
+	requires com.souchy.randd.deathshadows.coral;
+	requires com.souchy.randd.deathshadows.opal;
+//	requires com.souchy.randd.deathshadows.greenberyl;
 }
