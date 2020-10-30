@@ -8,9 +8,11 @@ import java.util.concurrent.TimeUnit;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.commons.tealwaters.logging.Logging;
+import com.souchy.randd.deathshadows.nodes.pearl.messaging.AskKillNode;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.AskNodes;
 import com.souchy.randd.deathshadows.pearl.NodeInfo;
 import com.souchy.randd.tools.rainbow.main.Rainbow;
+import com.souchy.randd.tools.rainbow.ui.events.Kill;
 import com.souchy.randd.tools.rainbow.ui.events.RefreshEvent;
 
 import javafx.application.Platform;
@@ -69,7 +71,16 @@ public class NodeTable { // extends VBox {
 				}
 			});
 //			this.nodes.addAll(nodes.nodes);
+			this.root.setItems(this.nodes);
 		});
+	}
+	
+	@Subscribe
+	public void onKill(Kill k) {
+		var node = this.root.getSelectionModel().getSelectedItem();
+		if(node != null) {
+			Rainbow.client.write(new AskKillNode(node.id));
+		}
 	}
 	
     @FXML
@@ -78,14 +89,16 @@ public class NodeTable { // extends VBox {
 
 //		root.getColumns().clear();
 //		root.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("ip"));
-		
-//		((TableColumn<NodeInfo, String>) root.getColumns().get(1)).setCellValueFactory(new PropertyValueFactory<NodeInfo, String>("ip"));
-		((TableColumn<NodeInfo, String>) root.getColumns().get(0)).setCellValueFactory(e -> new SimpleStringProperty(e.getValue().type.getSimpleName()));
-		((TableColumn<NodeInfo, String>) root.getColumns().get(1)).setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getIp()));
-		((TableColumn<NodeInfo, Integer>) root.getColumns().get(2)).setCellValueFactory(new PropertyValueFactory<NodeInfo, Integer>("id"));
-		((TableColumn<NodeInfo, Integer>) root.getColumns().get(3)).setCellValueFactory(new PropertyValueFactory<NodeInfo, Integer>("clients"));
-		((TableColumn<NodeInfo, String>) root.getColumns().get(4)).setCellValueFactory(e -> new SimpleStringProperty(Long.toString(TimeUnit.MILLISECONDS.toHours(e.getValue().getUptime()))));
-//		((TableColumn<NodeInfo, Long>) root.getColumns().get(4)).setCellValueFactory(new PropertyValueFactory<NodeInfo, Long>("uptime"));
+
+		int c = 0;
+		((TableColumn<NodeInfo, Long>) root.getColumns().get(c++)).setCellValueFactory(new PropertyValueFactory<NodeInfo, Long>("id"));
+//		((TableColumn<NodeInfo, String>) root.getColumns().get(c++)).setCellValueFactory(new PropertyValueFactory<NodeInfo, String>("ip"));
+		((TableColumn<NodeInfo, String>) root.getColumns().get(c++)).setCellValueFactory(e -> new SimpleStringProperty(e.getValue().type.getSimpleName()));
+		((TableColumn<NodeInfo, String>) root.getColumns().get(c++)).setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getIp()));
+		((TableColumn<NodeInfo, Integer>) root.getColumns().get(c++)).setCellValueFactory(new PropertyValueFactory<NodeInfo, Integer>("port"));
+		((TableColumn<NodeInfo, Integer>) root.getColumns().get(c++)).setCellValueFactory(new PropertyValueFactory<NodeInfo, Integer>("clients"));
+		((TableColumn<NodeInfo, String>) root.getColumns().get(c++)).setCellValueFactory(e -> new SimpleStringProperty(Long.toString(TimeUnit.MILLISECONDS.toHours(e.getValue().getUptime()))));
+//		((TableColumn<NodeInfo, Long>) root.getColumns().get(c++)).setCellValueFactory(new PropertyValueFactory<NodeInfo, Long>("uptime"));
 		
 		root.setItems(nodes);
 		root.getSelectionModel().selectedItemProperty().addListener(this::select);

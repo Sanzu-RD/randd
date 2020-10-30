@@ -15,23 +15,23 @@ import io.netty.buffer.ByteBuf;
 @ID(id = 1006)
 public class AskKillNode implements BBMessage {
 
-	public int id;
+	public long id;
 	public AskKillNode() {
 	}
-	public AskKillNode(int id) {
+	public AskKillNode(long id) {
 		this.id = id;
 	}
 	
 	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		out.writeInt(id);
+		out.writeLong(id);
 		return out;
 	}
 
 	@Override
 	public AskKillNode deserialize(ByteBuf in) {
-		id = in.readInt();
+		id = in.readLong();
 		return this;
 	}
 
@@ -40,9 +40,5 @@ public class AskKillNode implements BBMessage {
 		return new AskKillNode();
 	}
 
-	@Override
-	public int getBufferCapacity() {
-		return 0;
-	}
 	
 }

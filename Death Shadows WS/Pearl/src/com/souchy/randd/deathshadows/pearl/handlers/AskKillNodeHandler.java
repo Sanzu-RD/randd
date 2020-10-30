@@ -26,7 +26,11 @@ public class AskKillNodeHandler implements BBMessageHandler<AskKillNode> {
 			for(var node : Pearl.core.nodes.get(key)) {
 				if(node.id == message.id) {
 					try {
-						if(node.process != null) node.process.destroy();
+						Log.info("found node with id " + node.id);
+						if(node.process != null) {
+							Log.info("try to destroy node id " + node.id);
+							node.process.destroy();
+						}
 						type = key;
 						break outloop;
 					} catch(Exception e) {

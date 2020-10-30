@@ -11,4 +11,6 @@ module com.souchy.randd.deathshadow.core {
 	requires com.souchy.randd.commons.TealWaters;
 	requires com.google.common;
 	requires com.rabbitmq.client;
+	requires java.management;
+	requires jdk.management;
 }

@@ -6,6 +6,8 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
+import com.souchy.randd.deathshadow.core.smoothrivers.SelfIdentify;
+import com.souchy.randd.deathshadow.core.smoothrivers.SmoothRivers;
 import com.souchy.randd.jade.matchmaking.GameQueue;
 import com.souchy.randd.jade.matchmaking.Lobby;
 
@@ -30,7 +32,7 @@ public final class Coral extends DeathShadowCore {
 	private Coral(String[] args) throws Exception {
 		super(args);
 		coral = this;
-		port = 7000;
+		this.port = 7000;
 		queue = GameQueue.mock;
 		if(args.length > 0) queue = GameQueue.valueOf(args[0]);
 		port += queue.ordinal();
@@ -50,6 +52,12 @@ public final class Coral extends DeathShadowCore {
 		server = new DeathShadowTCP(port, this);
 		// register the engine on the authenticationfilter handler bus to receive new/terminated client connections
 		server.auth.bus.register(engine);
+		
+
+		rivers.connect(port);
+		SmoothRivers.sendPearl(new SelfIdentify(this));
+		
+		
 		server.block(); 
 	} 
 	

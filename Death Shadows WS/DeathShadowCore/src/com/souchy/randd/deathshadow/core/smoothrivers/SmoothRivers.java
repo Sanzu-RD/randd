@@ -106,7 +106,7 @@ public class SmoothRivers {
 			var buf = Unpooled.copiedBuffer(delivery.getBody());
 			int packetid = buf.readInt();
 			
-			Log.info("SmoothRivers rcv " + packetid + " / " + core.getMessages());
+//			Log.info("SmoothRivers rcv " + packetid + " / " + core.getMessages());
 			
 			var msg = core.getMessages().get(packetid).create().deserialize(buf);
 //			handlers.get(packetid).handle(consumerTag, delivery, msg);

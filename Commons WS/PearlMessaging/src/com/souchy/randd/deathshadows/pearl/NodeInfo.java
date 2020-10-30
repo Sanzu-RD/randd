@@ -20,9 +20,9 @@ public class NodeInfo implements BBSerializer, BBDeserializer {
 	public static final AttributeKey<NodeInfo> attrKey = AttributeKey.newInstance("pearl.nodeinfo");
 	
 	/*
-	 * Node id
+	 * Node process id
 	 */
-	public int id;
+	public long id;
 	/**
 	 * Core class / type
 	 */
@@ -50,7 +50,10 @@ public class NodeInfo implements BBSerializer, BBDeserializer {
 	/**
 	 * Physical application process so we're able to kill it
 	 */
-	public Process process;
+	public ProcessHandle process;
+	
+	public double cpu;
+	public long ram;
 	
 	public String url() {
 		return ip + ":" + port;
@@ -58,13 +61,13 @@ public class NodeInfo implements BBSerializer, BBDeserializer {
 	
 	@Override
 	public String toString() {
-		if(type == null) return "null" + "#" + id;
-		return type.getSimpleName() + "#" + id;
+		if(type == null) return "null" + "#" + id + ":" + port;
+		return type.getSimpleName() + "#" + id + ":" + port;
 	}
 	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		out.writeInt(id);
+		out.writeLong(id);
 		Log.info("nodeinfo serialize type name " + type.getName());
 		writeString(out, type.getName());
 		writeString(out, ip);
@@ -77,7 +80,7 @@ public class NodeInfo implements BBSerializer, BBDeserializer {
 	}
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
-		id = in.readInt();
+		id = in.readLong();
 		var className = readString(in);
 		try {
 			type = (Class<? extends DeathShadowCore>) Class.forName(className);
@@ -93,7 +96,7 @@ public class NodeInfo implements BBSerializer, BBDeserializer {
 		return null;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	public String getIp() {

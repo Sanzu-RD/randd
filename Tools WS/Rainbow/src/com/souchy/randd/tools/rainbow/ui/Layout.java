@@ -12,6 +12,7 @@ import com.souchy.randd.deathshadows.nodes.pearl.messaging.AskNodes;
 import com.souchy.randd.deathshadows.opal.Opal;
 import com.souchy.randd.tools.rainbow.main.Rainbow;
 import com.souchy.randd.tools.rainbow.main.RainbowApp;
+import com.souchy.randd.tools.rainbow.ui.events.Kill;
 import com.souchy.randd.tools.rainbow.ui.events.RefreshEvent;
 import com.souchy.randd.tools.rainbow.ui.tools.Anchors;
 
@@ -121,6 +122,7 @@ public class Layout { //extends BorderPane {
 			consolePane.getChildren().add(console);
 			Anchors.fill(console);
 
+			btnKill.setOnAction(e -> Rainbow.core.bus.post(new Kill()));
 			
 			btnMoonstone.setOnAction(e -> Rainbow.client.write(new AskCreate(BlackMoonstone.class.getSimpleName())));
 			btnCoral.setOnAction(e -> Rainbow.client.write(new AskCreate(Coral.class.getSimpleName())));

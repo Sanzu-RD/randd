@@ -6,6 +6,7 @@
 
 <TableView fx:id="root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.tools.rainbow.ui.NodeTable">
    <columns>
+      <TableColumn fx:id="colId" prefWidth="75.0" text="pid" />
       <TableColumn fx:id="colName" editable="false" prefWidth="75.0" text="type" />
       <TableColumn fx:id="colIp" prefWidth="75.0" text="ip" />
       <TableColumn fx:id="colPort" prefWidth="75.0" text="Port" />
