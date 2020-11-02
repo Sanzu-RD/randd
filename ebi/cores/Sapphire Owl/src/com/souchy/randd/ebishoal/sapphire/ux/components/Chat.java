@@ -133,7 +133,7 @@ public class Chat extends SapphireComponent {
 	/** moonstone event */
 	@Subscribe
 	public void addMsg(ICM icm) {
-		Log.info("chat add msg");
+//		Log.info("chat add msg");
 		try {
 			icm.content = messages.size + " " + icm.content;
 			messages.add(icm);
@@ -150,14 +150,14 @@ public class Chat extends SapphireComponent {
 	/** fight event */
 	@Subscribe
 	public void onTurnStart(TurnStartEvent e) {
-		Log.info("chat turn start");
+//		Log.info("chat turn start");
 		addMsg(new ICM("event", "system", String.format("fight %s turn %s sta %s", e.fight.id, e.turn, e.index)));
 	}
 
 	/** fight event */
 	@Subscribe
 	public void onTurnEnd(TurnEndEvent e) {
-		Log.info("chat turn end");
+//		Log.info("chat turn end");
 		addMsg(new ICM("event", "system", String.format("fight %s turn %s end %s", e.fight.id, e.turn, e.index)));
 	}
 	

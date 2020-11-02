@@ -9,6 +9,7 @@ import com.souchy.randd.commons.diamond.models.Board;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.statics.properties.Orientation;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 public class Pathfinding {
 	
@@ -18,28 +19,32 @@ public class Pathfinding {
 		return list;
 	}
 	
-	public static List<Cell> aStar(Board board, Creature caster, Cell source, Cell target){
+	public static List<Cell> aStar(Board board, Creature caster, Cell source, Cell target) {
+		List<Cell> path = new ArrayList<>();
 		List<Node> closed = new ArrayList<>();
 		List<Node> open = new ArrayList<>();
+		
+		if(source == null || target == null) return path;
 		
 		var start = new Node();
 		start.pos = source.pos;
 		start.g = 0;
+		start.v = 0;
 		start.h = manhattan(start.pos, target.pos);
 		start.f = start.g + start.h;
+		
 //		var goal = new Node();
 //		goal.pos = source.pos;
 //		goal.g = manhattan(goal.pos, start.pos);
 //		goal.h = 0;
 //		goal.f = goal.g + goal.h;
-		
-		
+
 		open.add(start);
 		
 		
 		while(!open.isEmpty()) {
 			Node current = null; //open.stream().min((n1, n2) -> n1.compare(n2)).get();
-			int min = Integer.MAX_VALUE;
+			double min = Integer.MAX_VALUE;
 			for(var n : open) {
 				if(n.f < min) {
 					min = n.f;
@@ -47,60 +52,128 @@ public class Pathfinding {
 				}
 			}
 			
+//			Log.info("current = " + current.pos + " = " + current.f);
+			
 			// si on arrive à la fin
-			if(current.pos == target.pos) {
-				List<Cell> path = new ArrayList<>();
+			if(current.pos.equals(target.pos)) {
 				// foreach jusqu'au début en passant par les parents
-				while(current.pos.equals(source.pos) == false) {
-					path.add(board.cells.get(current.pos.x, current.pos.y));
+				while(current != null && current.pos.equals(source.pos) == false) {
+					path.add(board.get(current.pos.x, current.pos.y));
 					current = current.parent;
 				}
-				return path;
+				return path; // reverse?
 			}
 			
 			open.remove(current);
 			closed.add(current);
 
 			// find and add all neighbors to the open list
-			for(var o : Orientation.values()) {
+			for(var o : Orientation.values()) { // getOrientations(current.pos, target.pos)) { // 
 				var pos = getPositionByDirection(current.pos, o);
-				Cell neighbor = board.cells.get(pos.x, pos.y);
 				
-				// if the neighbor node has already been evaluated
-				if(containsPredicate(closed, n1 -> n1.pos.equals(neighbor.pos))) {
-					continue;
-				}
+				// if the neighbor node has already been evaluated (aka if its position is in the list of closed nodes)
+//				if(containsPredicate(closed, n1 -> n1.pos.equals(pos))) {
+//					continue;
+//				}
 
 	            // The distance from start to a neighbor
-				int tentative_gScore = current.g + manhattan(current.pos, neighbor.pos);
+				double tentative_gScore = current.g + 1; // manhattan(current.pos, pos);
 				
-				// si la liste NE contient PAS déjà un node avec la position du neighbor
-				Node n = findFirst(open, n1 -> n1.pos.equals(neighbor.pos));
-				if(n == null) {
-					n = new Node();
+				// si la liste NE contient PAS déjà un node avec la position du neighbor ou si le chemin jusqu'au neighbor est plus court
+				Node n = findFirst(open, n1 -> n1.pos.equals(pos));
+				if(n == null || tentative_gScore < n.g) {
+					if(n == null) n = new Node();
+					else open.remove(n);
+
+					// neighbor could be null if it's outside of the map
+					Cell neighbor = board.get(pos.x, pos.y);
+					
 					
 					//cameFrom.put(n, current);
 					n.parent = current;
-					n.pos = neighbor.pos;
+					n.pos = pos;
+					n.o = o;
 					n.g = tentative_gScore;
-					n.h = manhattan(n.pos, target.pos);
-					n.f = n.g + n.h;
+					n.h = euclidean(n.pos, target.pos);
+					n.v = current.v + 1;
 					
-					if(caster.targeting.canWalkThrough(neighbor)) {
-						open.add(n);
-					} else {
-						closed.add(n);
-					}
-				} else if(tentative_gScore >= n.g) {
-					continue;
-				}
+					if(n.pos.equals(target.pos)) Log.format("add target %s %s", n.pos, n.f);
+					
+					if(neighbor == null) n.v += 1000;
+					else if(!caster.targeting.canWalkThrough(neighbor)) n.v += 1000;
+//					if(n.pos.equals(target.pos))  n.v -= 1000;
+					
+					n.f = n.v + n.h;
+
+					// if(!open.contains(n)) { // && neighbor != null &&
+					// caster.targeting.canWalkThrough(neighbor)) {
+					// Log.info("add " + n.pos + " = " + n.f);
+					
+					open.add(n);
+					// }
+					
+//					if(neighbor != null && caster.targeting.canWalkThrough(neighbor)) {
+//						open.add(n);
+//						Log.info("Pathfinding add open " + n.pos);
+//					} else {
+//						closed.add(n);
+//						Log.info("Pathfinding add closed " + n.pos);
+//					}
+				} 
+//				else 
+//					if(tentative_gScore >= n.g) {
+//					continue;
+//				}
 				
 			}
 		}
+		
+		
 		return null;
 	}
 	
+	private static List<Orientation> getOrientations(Vector2 pos, Vector2 target) {
+		var list = new ArrayList<Orientation>();
+		for(var o : Orientation.values())
+			list.add(o);
+		
+		int dx = (int) (target.x - pos.x);
+		int dy = (int) (target.y - pos.y);
+//		Orientation horizontal = dx >= 0 ? Orientation.East : Orientation.West;
+//		Orientation vertical = dy >= 0 ? Orientation.North : Orientation.South;
+		
+		list.sort((o1,o2) -> {
+			int d1 = o1.scaledDistance(dx, dy);
+			int d2 = o2.scaledDistance(dx, dy);
+			return d2 - d1;
+		});
+		
+//		Log.format("Pathfinding Orientations %s - %s = %s, %s, %s, %s", pos, target, list.get(0), list.get(1), list.get(2), list.get(3));
+		
+//		while (list.size() < 4) {
+//			var max = Orientation.North;
+//			double maxi = 0;
+//			for (var o : Orientation.values()) {
+//				if(o.x * dx + o.y * dy)
+//			}
+//			list.add(max);
+//		}
+		
+//		if(Math.abs(dx) >= (Math.abs(dy))) {
+//			list.add(horizontal);
+//			list.add(vertical);
+//			
+//		}
+////			return horizontal;
+//		else
+////			return vertical;
+		
+		
+		
+		return list;
+	}
 
+	
 	public static <T> T findFirst(List<T> obj, Predicate<T> pred) {
 		for(var o : obj) {
 			if(pred.apply(o)) {
@@ -124,15 +197,19 @@ public class Pathfinding {
 	public static int manhattan(Vector2 v1, Vector2 v2) {
 		return (int) (Math.abs(v1.x - v2.x) + Math.abs(v1.y - v2.y));
 	}
-	//public double euclidean(Vector2 v1, Vector2 v2) {
-	//	return Math.hypot(v1.x - v2.x, v1.y - v2.y);
-	//}
+	public static double euclidean(Vector2 v1, Vector2 v2) {
+		return Math.hypot(v1.x - v2.x, v1.y - v2.y);
+	}
 	
 	
 	public static class Node {
-		public int f;
-		public int g;
-		public int h;
+		public double f;
+		public double g;
+		public double h;
+		
+		public double v;
+		
+		public Orientation o;
 		
 		public Node parent;
 		public Vector2 pos;

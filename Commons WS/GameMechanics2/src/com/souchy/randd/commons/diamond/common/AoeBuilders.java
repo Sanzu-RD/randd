@@ -28,7 +28,8 @@ public class AoeBuilders {
 	};
 	/** circle = diamond */
 	public static Function<Integer, Aoe> circle = (radius) -> {
-		int w = radius * 2 - 1;
+		radius++;
+		int w = radius * 2; // - 1;
 		var aoe = new Aoe(w, w);
 		for (int i = -radius; i < radius; i++) {
 			for (int j = -radius; j < radius; j++) {
@@ -46,7 +47,8 @@ public class AoeBuilders {
 	// je le laisse pour l'instant, mais pas besoin de ça. Il vaut mieux faire aoe =
 	// circle(3,3).sub(circle(2,2);
 	public static Function<Integer, Aoe> circleEmpty = (radius) -> {
-		int w = radius * 2 - 1;
+		radius++;
+		int w = radius * 2; // - 1;
 		var aoe = new Aoe(w, w);
 		for (int i = -radius; i < radius; i++) {
 			for (int j = -radius; j < radius; j++) {

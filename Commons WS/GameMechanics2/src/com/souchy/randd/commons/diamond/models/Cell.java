@@ -73,6 +73,7 @@ public class Cell extends Entity implements BBSerializer, BBDeserializer {
 		out.writeDouble(pos.y);
 		
 		// TODO serialize status ids, creatures ids, targeting
+		targeting.serialize(out);
 		return out;
 	}
 
@@ -83,6 +84,7 @@ public class Cell extends Entity implements BBSerializer, BBDeserializer {
 		pos = new Position(in.readDouble(), in.readDouble());
 
 		// TODO deserialize status ids, creatures ids, targeting
+		targeting.deserialize(in);
 		return null;
 	}
 	

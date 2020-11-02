@@ -1,5 +1,6 @@
 package com.souchy.randd.commons.diamond.common.generic;
 
+import java.util.function.BiConsumer;
 
 public class BoolTable extends Table<Boolean> {
 	
@@ -84,6 +85,16 @@ public class BoolTable extends Table<Boolean> {
 			put(i, j, !get(i, j));
 		});
 		return this;
+	}
+	
+	public void foreachTrue(BiConsumer<Integer, Integer> action) {
+		int w = width();
+		int h = height();
+		for (int i = 0; i < w; i++) {
+			for (int j = 0; j < h; j++) {
+				if(get(i, j)) action.accept(i, j);
+			}
+		}
 	}
 	
 	@Override

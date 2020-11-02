@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
+import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.models.Creature;
@@ -23,6 +24,7 @@ import com.souchy.randd.commons.tealwaters.ecs.Engine.RemoveEntityEvent;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.status.Shocked;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
+import com.souchy.randd.ebishoal.sapphire.gfx.Highlight;
 
 import particles.ParticleEffekseer;
 
@@ -51,8 +53,8 @@ public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.Syste
 			if(model == null || pos == null) return;
 			// Log.info("set sapphire entity model pos : " + pos + "; " + model);
 			model.transform.setTranslation(
-					(float) pos.x - 0.5f, 
-					(float) pos.y - 0.5f, 
+					(float) pos.x + 0.5f, 
+					(float) pos.y + 0.5f, 
 					1f
 			);
 			var anime = e.get(AnimationController.class);
@@ -63,7 +65,7 @@ public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.Syste
 			if(status != null) {
 				ParticleEffekseer effect = status.get(ParticleEffekseer.class);
 				if(effect != null) {
-		        	effect.setLocation((float) pos.x - 0.5f, 1.5f, (float) -pos.y + 0.5f);
+		        	effect.setLocation((float) pos.x + 0.5f, 1.5f, (float) -pos.y - 0.5f);
 				}
 			}
 		});
@@ -83,7 +85,8 @@ public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.Syste
 //		Log.info("Sapphire Entity System on add");
 		if(event.entity instanceof Creature) {
 			Log.info("Sapphire Entity System on add " + event);
-			var modelpath = AssetData.creatures.get(((Creature) event.entity).modelid).models[0]; 
+			var crea = (Creature) event.entity;
+			var modelpath = AssetData.creatures.get((crea).modelid).models[0]; 
 			var model3d = LapisAssets.assets.<Model>get(modelpath);
 			var modelinstance = new ModelInstance(model3d);
 			modelinstance.transform.rotate(1, 0, 0, 90);
@@ -101,6 +104,10 @@ public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.Syste
 			float ratio = 1f /  2f;
 			modelinstance.materials.get(5).set(ColorAttribute.createDiffuse(baseColor.mul(ratio, ratio, ratio, 1f)));
 
+			var teamHighlight = Highlight.team(crea.team);
+			
+			modelinstance.nodes.addAll(teamHighlight.nodes);
+			
 			// add model and animation to entity as components
 			event.entity.add(animController);
 			event.entity.add(modelinstance);

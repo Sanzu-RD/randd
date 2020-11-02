@@ -4,13 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.deathebi.msg.GetSalt;
+import com.souchy.randd.commons.diamond.common.BoardGenerator;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.RenderOptions;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
+import com.souchy.randd.ebishoal.sapphire.gfx.Highlight;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHudSkin;
@@ -50,10 +53,12 @@ public class SapphireGame extends LapisGame {
 
 		music = new MusicPlayer();
 
+		Highlight.init();
+		
 		// screen
 		gfx = new SapphireScreen();
 		gfx.init();
-
+		
 		// pfx
 		ParticleEffectLoader.ParticleEffectLoadParameter params = new ParticleEffectLoader.ParticleEffectLoadParameter(gfx.getPfxSystem().getBatches());
 		LapisAssets.loadParticleEffects(Gdx.files.internal("res/fx/"), params);
@@ -75,7 +80,7 @@ public class SapphireGame extends LapisGame {
 		// render 3D
 		if (screen != null) screen.render(Gdx.graphics.getDeltaTime());
 		// render UI
-		if(gfx.renderUI && gfx.hud.isLoaded) gfx.renderView(Gdx.graphics.getDeltaTime());
+		if(RenderOptions.renderUI && gfx.hud.isLoaded) gfx.renderView(Gdx.graphics.getDeltaTime());
 	}
 
 

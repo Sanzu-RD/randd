@@ -10,6 +10,7 @@ import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import io.netty.buffer.ByteBuf;
 
@@ -96,12 +97,22 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 	public CreatureStats copy() {
 		final var s = new CreatureStats();
 		
-		resources.forEach((r, i) -> s.resources.put(r, i.copy()));
-		shield.forEach((r, i) -> s.shield.put(r, i.copy()));
+		// resources.forEach((r, i) -> s.resources.put(r, i.copy()));
+		// shield.forEach((r, i) -> s.shield.put(r, i.copy()));
+		// affinity.forEach((r, i) -> s.affinity.put(r, i.copy()));
+		// resistance.forEach((r, i) -> s.resistance.put(r, i.copy()));
+		// penetration.forEach((r, i) -> s.penetration.put(r, i.copy()));
 		
-		affinity.forEach((r, i) -> s.affinity.put(r, i.copy()));
-		resistance.forEach((r, i) -> s.resistance.put(r, i.copy()));
-		penetration.forEach((r, i) -> s.penetration.put(r, i.copy()));
+		for (var r : Resource.values()) {
+			s.resources.put(r, resources.get(r).copy());
+			s.shield.put(r, shield.get(r).copy());
+		}
+		
+		for (var r : Element.values) {
+			s.affinity.put(r, affinity.get(r).copy());
+			s.resistance.put(r, resistance.get(r).copy());
+			s.penetration.put(r, penetration.get(r).copy());
+		}
 		
 		s.healingAffinity = healingAffinity.copy();
 		s.healingRes = healingRes.copy();
@@ -125,12 +136,23 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		resources.forEach((r, i) -> i.serialize(out));
-		shield.forEach((r, i) -> i.serialize(out));
+		// resources.forEach((r, i) -> i.serialize(out));
+		// shield.forEach((r, i) -> i.serialize(out));
+		// affinity.forEach((r, i) -> i.serialize(out));
+		// resistance.forEach((r, i) -> i.serialize(out));
+		// penetration.forEach((r, i) -> i.serialize(out));
 		
-		affinity.forEach((r, i) -> i.serialize(out));
-		resistance.forEach((r, i) -> i.serialize(out));
-		penetration.forEach((r, i) -> i.serialize(out));
+		for (var r : Resource.values()) {
+			resources.get(r).serialize(out);
+			shield.get(r).serialize(out);
+		}
+		for (var r : Element.values) {
+			affinity.get(r).serialize(out);
+			resistance.get(r).serialize(out);
+			penetration.get(r).serialize(out);
+		}
+		
+//		Log.info("Stats serialize mvm " + resources.get(Resource.move).value());
 		
 		healingAffinity.serialize(out);
 		healingRes.serialize(out);
@@ -142,12 +164,24 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
-		resources.forEach((r, i) -> i.deserialize(in));
-		shield.forEach((r, i) -> i.deserialize(in));
+//		resources.forEach((r, i) -> i.deserialize(in));
+//		shield.forEach((r, i) -> i.deserialize(in));
+//		affinity.forEach((e, i) -> i.deserialize(in));
+//		resistance.forEach((e, i) -> i.deserialize(in));
+//		penetration.forEach((e, i) -> i.deserialize(in));
 		
-		affinity.forEach((e, i) -> i.deserialize(in));
-		resistance.forEach((e, i) -> i.deserialize(in));
-		penetration.forEach((e, i) -> i.deserialize(in));
+		for (var r : Resource.values()) {
+			resources.get(r).deserialize(in);
+			shield.get(r).deserialize(in);
+		}
+		
+		for (var r : Element.values) {
+			affinity.get(r).deserialize(in);
+			resistance.get(r).deserialize(in);
+			penetration.get(r).deserialize(in);
+		}
+		
+//		Log.info("Stats deserialize mvm " + resources.get(Resource.move).value());
 		
 		this.healingAffinity.deserialize(in);
 		this.healingRes.deserialize(in);

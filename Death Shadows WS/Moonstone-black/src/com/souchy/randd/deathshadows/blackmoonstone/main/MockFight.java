@@ -26,13 +26,13 @@ public class MockFight {
 		
 		var c1 = testCreateCreature(fight, 1);
 		c1.team = Team.A;
-		c1.pos.set(2, 16);
+		c1.pos.set(3, 17);
 		c1.add(new ObjectId("5efbf61f0856d10feb48c193"));
 //		c1.add(user);
 		
 		var c2 = testCreateCreature(fight, 2);
 		c2.team = Team.B;
-		c2.pos.set(16, 2);
+		c2.pos.set(15, 1);
 		c2.add(new ObjectId("5efbf61f0856d10feb48c193"));
 		
 		fight.timeline.add(c1.id);
@@ -56,7 +56,7 @@ public class MockFight {
 		// instance
 		Creature creature = new Creature(fight, model, jade, new Position(5, 5));
 		creature.stats.resources.get(Resource.life).fight = -150; 
-		creature.stats.shield.get(Resource.life).fight = 600; 
+		creature.stats.shield.get(Resource.life).fight = 200; 
 		
 		return creature;
 	}

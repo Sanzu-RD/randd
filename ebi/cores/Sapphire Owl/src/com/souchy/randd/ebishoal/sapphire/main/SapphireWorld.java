@@ -24,6 +24,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.Meshing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
+import com.souchy.randd.moonstone.white.Moonstone;
 
 public class SapphireWorld extends World {
 	
@@ -64,7 +65,9 @@ public class SapphireWorld extends World {
         String mapFolder = "res/maps/"; //"F:/Users/Souchy/Desktop/Robyn/eclipse-workspaces/hidden workspaces/r and d/Maps/data/maps/";
         MapData data = MapData.read(Gdx.files.internal(mapFolder + "goulta7b.map").path());
         this.center = new Vector3(data.cellModels[0].length / 2f, data.cellModels.length / 2f, 0);
-        
+
+		new EbiBoardGenerator().generate(Moonstone.fight, data);
+		
         if(true) {
         	// fonctionne, mais jsais pas si le shine fit avec mon environnement
         	var shiny = 0f;
@@ -72,7 +75,6 @@ public class SapphireWorld extends World {
         	
         	
             cache.begin();
-        	
         	// create greedy mesh for texture-type cells
             var greed = Meshing.greedy(data, cellSize, GL20.GL_TRIANGLES);
             greed.materials.forEach(m -> m.set(shine));

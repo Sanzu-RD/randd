@@ -16,7 +16,9 @@ import static com.badlogic.gdx.Input.Keys.W;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
@@ -27,12 +29,18 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.FocusManager;
+import com.souchy.randd.commons.diamond.common.Aoe;
+import com.souchy.randd.commons.diamond.common.AoeBuilders;
+import com.souchy.randd.commons.diamond.common.Pathfinding;
+import com.souchy.randd.commons.diamond.common.generic.Vector2;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.RenderOptions;
 import com.souchy.randd.ebishoal.sapphire.gfx.Highlight;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
@@ -64,6 +72,7 @@ public class SapphireController extends CameraInputController {
 //	private Vector3 axisXY = new Vector3(-1, 1, 0).nor();
 
 	private Entity draggedEntity;
+	private Entity targetEntity;
 
 
 	/** <int keycode, lamba action> */
@@ -97,6 +106,9 @@ public class SapphireController extends CameraInputController {
 			SapphireGame.gfx.resetCamera();
 			SapphireGame.gfx.hud.reload(); //.refresh();
 			//GlobalLML.lml().reloadViews();
+			// reset camera movement vectors just in case. 
+			translation.set(0, 0, 0);
+			rotationUnit.set(0, 0, 0);
 		});
 
 		addOnKeyDown(Keys.C, () -> {
@@ -112,9 +124,7 @@ public class SapphireController extends CameraInputController {
 		addOnKeyDown(Keys.T, () -> SapphireGame.gfx.topView());
 		addOnKeyDown(Keys.P, () -> SapphireGame.gfx.startPfx());
 		addOnKeyDown(Keys.M, SapphireGame.music::togglePlayPause);
-
 		addOnKeyDown(Keys.F3, () -> SapphireGame.gfx.hud.getStage().setDebugAll(!SapphireGame.gfx.hud.getStage().isDebugAll()));
-
 		addOnKeyDown(Keys.V, () -> {
 //			var creature = SapphireGame.fight.teamA.get(0)
 			var creature = SapphireGame.fight.creatures.first();
@@ -122,7 +132,43 @@ public class SapphireController extends CameraInputController {
 			Log.info(creature.stats.resources.get(Resource.life).toString());
 			SapphireGame.gfx.hud.reload(); // SapphireHud.refresh();
 		});
-
+		
+		addOnKeyDown(Keys.X, () -> {
+			if(targetEntity == null) return;
+			var casterpos = targetEntity.get(Position.class);
+			var targetpos = getCursorWorldPos(Gdx.input.getX(), Gdx.input.getY());
+			var start = Moonstone.fight.board.get(casterpos.x, casterpos.y);
+			var end = Moonstone.fight.board.get(targetpos.x, targetpos.y);
+			Log.format("caster pos %s, target pos %s", casterpos, targetpos);
+//			Log.info("Moonstone.fight.board.cells " + Moonstone.fight.board.cells.size() + "" + Moonstone.fight.board.cells);
+			Log.info("Highlight mvm (" + start + " - " + end + ")");
+			var list = Pathfinding.aStar(Moonstone.fight.board, (Creature) targetEntity, start, end);
+			Log.info("vectors " + String.join(", ", list.stream().map(v -> v.pos.toString()).collect(Collectors.toList())));
+			Highlight.movement(list.stream().map(c -> (Vector2) c.pos).collect(Collectors.toList()));
+		});
+		addOnKeyDown(Keys.J, () -> {
+			if(Highlight.isActive()) Highlight.clear();
+			else Highlight.cellTypes();
+		});
+		addOnKeyDown(Keys.K, () -> {
+			RenderOptions.renderCache = !RenderOptions.renderCache;
+		});
+		addOnKeyDown(Keys.N, () -> {
+			var targetpos = getCursorWorldPos(Gdx.input.getX(), Gdx.input.getY());
+			Log.format("target %s, %s", Gdx.input.getX(), Gdx.input.getY());
+			Highlight.spell(List.of(new Vector2(targetpos.x, targetpos.y)));
+		});
+		
+//		addOnKeyDown(Keys.H, () -> {
+//			Highlight.movement(new ArrayList<>() {{
+//				add(new Vector3(0, 0, 0));
+//				add(new Vector3(5, 5, 0));
+//				add(new Vector3(5, 6, 0));
+//				add(new Vector3(6, 7, 0));
+//				add(new Vector3(5, 8, 0));
+//				add(new Vector3(5, 9, 0));
+//			}});
+//		});
 
 		addOnKeyDown(Keys.W, () -> {
 			Vector3 up  = camera.up;
@@ -295,7 +341,7 @@ public class SapphireController extends CameraInputController {
 		// remove focus from UI
 		var s = (SapphireScreen) SapphireOwl.game.getScreen();
 		if(s.getView() != null) {
-			Log.info("unfocus");
+//			Log.info("unfocus");
 			FocusManager.resetFocus(s.getView().getStage());
 			s.getView().getStage().unfocusAll();
 			s.getView().getStage().cancelTouchFocus();
@@ -323,16 +369,18 @@ public class SapphireController extends CameraInputController {
 
 		// start drag
 		if(button == Buttons.LEFT) {
-			Log.info("touchdown " + cellpos);
+			Log.info("touchdown " + cellpos + " " + creature);
 			draggedEntity = creature;
-			Highlight.movement(new ArrayList<>() {{
-				add(new Vector3(0, 0, 0));
-				add(new Vector3(5, 5, 0));
-				add(new Vector3(5, 6, 0));
-				add(new Vector3(6, 7, 0));
-				add(new Vector3(5, 8, 0));
-				add(new Vector3(5, 9, 0));
-			}});
+			
+			if(creature != null) {
+				targetEntity = creature;
+				var mvm = creature.stats.resources.get(Resource.move).value();
+				Aoe aoe = AoeBuilders.circle.apply(mvm);
+				aoe.source = new Vector2(cellpos.x, cellpos.y);
+				var list = aoe.asList();
+//				Log.info("Highlight mvm (" + mvm + ") vectors " + String.join(", ", list.stream().map(v -> v.toString()).collect(Collectors.toList())));
+				Highlight.movementPossibilities(list);
+			}
 		} else
 		// toggle character sheet
 		if(button == Buttons.RIGHT && creature != null) {
@@ -354,10 +402,11 @@ public class SapphireController extends CameraInputController {
 	public boolean touchDragged(int x, int y, int pointer) {
 		var pos = getCursorWorldPos(x, y);
 		if(draggedEntity != null) {
-//			var epos = draggedEntity.get(Position.class).set(pos.x, pos.y);
+//			var epos = 
+			draggedEntity.get(Position.class).set(pos.x, pos.y);
 			//Log.info("dragged entity " + epos);
 		}
-		SapphireWorld.world.cursor.transform.setTranslation(pos.sub(0.5f, 0.5f, 0f));
+		SapphireWorld.world.cursor.transform.setTranslation(pos.add(0.5f, 0.5f, 0f));
 
 		if(!activateBaseCamControl) return true;
 		return super.touchDragged(x, y, pointer);
@@ -365,7 +414,7 @@ public class SapphireController extends CameraInputController {
 
 	@Override
 	public boolean mouseMoved(int x, int y) {
-		SapphireWorld.world.cursor.transform.setTranslation(getCursorWorldPos(x, y).sub(0.5f, 0.5f, 0f));
+		SapphireWorld.world.cursor.transform.setTranslation(getCursorWorldPos(x, y).add(0.5f, 0.5f, 0f));
 
 		if(!activateBaseCamControl) return true;
 		return super.mouseMoved(x, y);
@@ -378,9 +427,10 @@ public class SapphireController extends CameraInputController {
 		Vector3 v = new Vector3();
 		v.set(ray.direction).scl(distance).add(ray.origin);
 //		Log.info("" + v);
-		v.x = (float) Math.floor(v.x) + 1f;
-		v.y = (float) Math.floor(v.y) + 1f;
+		v.x = (float) Math.floor(v.x) + 0f;
+		v.y = (float) Math.floor(v.y) + 0f;
 		v.z = floorHeight;
+//		Log.info("getCursorWorldPos " + v);
 		return v;
 	}
 

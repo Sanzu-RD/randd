@@ -63,6 +63,8 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		this.modelid = model.id();
 		this.pos = pos;
 		this.targeting = new Targetting();
+		this.targeting.initCreature();
+		
 		this.spellbook = new ArrayList<>();
 		this.statuses = new StatusList(fight);
 
@@ -115,7 +117,9 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		// status 
 		this.statuses.serialize(out);
 		
-		// TODO serialize targeting...
+		// targeting
+		this.targeting.serialize(out);
+		
 		return null;
 	}
 
@@ -138,14 +142,16 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 			spellbook.add(spellid);
 		}
 //		Log.info("read spellbook " + spellbook.size());
-		Log.info("Creature deserialize spells : " + String.join(",", spellbook.stream().map(i -> String.valueOf(i)).collect(Collectors.toList())) );
+//		Log.info("Creature deserialize spells : " + String.join(",", spellbook.stream().map(i -> String.valueOf(i)).collect(Collectors.toList())) );
 		
 		// status
 		this.statuses = new StatusList(null);
 		this.statuses.deserialize(in);
+
+		// targeting
+		this.targeting = new Targetting();
+		this.targeting.deserialize(in);
 		
-		
-		// TODO deserialize targeting...
 		return null;
 	}
 	

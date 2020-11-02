@@ -6,22 +6,34 @@ import com.souchy.randd.commons.tealwaters.ecs.Entity;
 
 public class Board extends Entity {
 	
-	public Table<Integer, Integer, Cell> cells;
+	public Table<Integer, Integer, Cell> cells = HashBasedTable.create();
 	
 	public Board(Fight f) {
 		super(f);
-		readMap();
+//		readMap();
 	}
 	
 	/**
 	 * Load json with cell properties (line of sight, walkable, ..)
 	 */
-	public void readMap() { 
-		var fight = get(Fight.class);
-		cells = HashBasedTable.create();
-		for(int i = 0; i < 30; i++)
-			for(int j = 0; j < 30; j++)
-				cells.put(i, j, new Cell(fight, i, j));
+//	public void readMap() { 
+//		var fight = get(Fight.class);
+//		cells = HashBasedTable.create();
+//		for(int i = 0; i < 30; i++)
+//			for(int j = 0; j < 30; j++)
+//				cells.put(i, j, new Cell(fight, i, j));
+//	}
+	
+	public Cell get(int x, int y) {
+		return cells.get(x, y);
+	}
+	
+	public Cell get(double x, double y) {
+		return get((int) x, (int) y);
+	}
+	
+	public Cell get(float x, float y) {
+		return get((int) x, (int) y);
 	}
 	
 }

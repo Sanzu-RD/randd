@@ -5,17 +5,20 @@ import java.util.Map;
 
 import com.souchy.randd.commons.diamond.models.stats.base.BoolStat;
 import com.souchy.randd.commons.diamond.statics.properties.Targetability;
+import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 
-public class Targetting {
+import io.netty.buffer.ByteBuf;
+
+public class Targetting implements BBSerializer, BBDeserializer {
 	
 	public Map<Targetability, BoolStat> targetability;
 	
 	public Targetting() {
 		targetability = new HashMap<>();
-		for(var t : Targetability.values()) {
-			targetability.put(t, new BoolStat(false));
-		}
+		reset();
 //		setBase(Targetability.CanBeCastedOn, false);
 //		setBase(Targetability.CanBeCastedThrough, false);
 //		setBase(Targetability.CanBeWalkedOn, false);
@@ -25,6 +28,10 @@ public class Targetting {
 //		setBase(Targetability.CanCastThroughBlocks, false);
 //		setBase(Targetability.CanWalkOnBlocks, false);
 //		setBase(Targetability.CanWalkThroughBlocks, false);
+	}
+	public void reset() {
+		for(var t : Targetability.values()) 
+			targetability.put(t, new BoolStat(false));
 	}
 	/** generic creature type, but certain creatures are more special (flyers can walk through holes, ghosts can walk through blocks...) */
 	public void initCreature() {
@@ -97,6 +104,22 @@ public class Targetting {
 	public boolean canWalkOn(Entity e) {
 		var targetTargetting = e.get(Targetting.class);
 		return can(Targetability.CanWalkOnBlocks) || targetTargetting.can(Targetability.CanBeWalkedOn);
+	}
+	
+	
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		for(var t : Targetability.values()) {
+			this.targetability.get(t).serialize(out);
+		}
+		return out;
+	}
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		for(var t : Targetability.values()) {
+			this.targetability.get(t).deserialize(in);
+		}
+		return null;
 	}
 	
 	

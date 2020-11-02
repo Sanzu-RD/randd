@@ -63,7 +63,7 @@ public class Vector2 implements BBSerializer, BBDeserializer {
 		if(o == null) return false;
 		if(o instanceof Vector2 == false) return false;
 		Vector2 v = (Vector2) o;
-		return v.x == y && v.y == y;
+		return v.x == x && v.y == y;
 	}
 
 	@Override
