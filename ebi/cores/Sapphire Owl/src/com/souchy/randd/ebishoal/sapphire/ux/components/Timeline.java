@@ -12,7 +12,6 @@ import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.ext.AssetData;
-import com.souchy.randd.commons.diamond.statics.Constants;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
@@ -42,6 +41,7 @@ public class Timeline extends SapphireComponent {
 
 
 	public Timeline() {
+		
 		Moonstone.fight.bus.register(this);
 	}
 	

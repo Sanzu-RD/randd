@@ -83,7 +83,7 @@ public class RainbowApp extends Application {
 	private static void preloadComponents() {
 		try {
 			components.put("nodetable", FXMLLoader.load(new File("res/ux/rainbow/nodetable.fxml").toURI().toURL())); // new NodeTable()); //
-			components.put("nodedetails", FXMLLoader.load(new File("res/ux/rainbow/nodedetails.fxml").toURI().toURL()));
+//			components.put("nodedetails", FXMLLoader.load(new File("res/ux/rainbow/nodedetails.fxml").toURI().toURL()));
 			components.put("console", FXMLLoader.load(new File("res/ux/rainbow/console.fxml").toURI().toURL()));
 			components.put("packeteditor", FXMLLoader.load(new File("res/ux/rainbow/packeteditor.fxml").toURI().toURL())); // new PacketEditor()); //
 			
@@ -100,9 +100,9 @@ public class RainbowApp extends Application {
 	public static Parent getNodeTable() {
 		return components.get("nodetable");
 	}
-	public static Parent getNodeDetails() {
-		return components.get("nodedetails");
-	}
+//	public static Parent getNodeDetails() {
+//		return components.get("nodedetails");
+//	}
 	public static Parent getConsole() {
 		return components.get("console");
 	}

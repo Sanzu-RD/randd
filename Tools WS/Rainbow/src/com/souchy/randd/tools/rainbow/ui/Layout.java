@@ -10,16 +10,22 @@ import com.souchy.randd.deathshadows.coral.main.Coral;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.AskCreate;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.AskNodes;
 import com.souchy.randd.deathshadows.opal.Opal;
+import com.souchy.randd.deathshadows.pearl.NodeInfo;
 import com.souchy.randd.deathshadows.pearl.main.Pearl;
 import com.souchy.randd.tools.rainbow.main.Rainbow;
 import com.souchy.randd.tools.rainbow.main.RainbowApp;
+import com.souchy.randd.tools.rainbow.ui.events.Connected;
 import com.souchy.randd.tools.rainbow.ui.events.Kill;
 import com.souchy.randd.tools.rainbow.ui.events.RefreshEvent;
 import com.souchy.randd.tools.rainbow.ui.tools.Anchors;
+import com.souchy.randd.ebishoal.amethyst.main.Amethyst;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -31,6 +37,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import particles.EffekseerManager;
 
 // com.souchy.randd.tools.rainbow.ui.Layout
 public class Layout { //extends BorderPane {
@@ -39,6 +46,8 @@ public class Layout { //extends BorderPane {
 	@FXML private BorderPane root;
 	// menu
 	@FXML private MenuBar menu;
+	// 
+	@FXML private CheckBox chkConnected;
 	
 	// views
 	@FXML private Menu menuView;
@@ -56,15 +65,24 @@ public class Layout { //extends BorderPane {
 	// new
 	@FXML private Menu menuNew;
 	// new death shadow
-	@FXML private Menu menuDeath;
 	@FXML private MenuItem btnOpal;
 	@FXML private MenuItem btnCoral;
 	@FXML private MenuItem btnMoonstone;
 	@FXML private MenuItem btnBeryl;
 	// new ebi shoal
-	@FXML private Menu menuEbi;
 	@FXML private MenuItem btnAmethyst;
 	@FXML private MenuItem btnSapphire;
+
+	// new mock
+	@FXML private Menu menuNewMock;
+	// new death shadow
+	@FXML private MenuItem btnOpalMock;
+	@FXML private MenuItem btnCoralMock;
+	@FXML private MenuItem btnMoonstoneMock;
+	@FXML private MenuItem btnBerylMock;
+	// new ebi shoal
+	@FXML private MenuItem btnAmethystMock;
+	@FXML private MenuItem btnSapphireMock;
 	
 	// packets
 	@FXML private Menu menuPacket;
@@ -85,6 +103,7 @@ public class Layout { //extends BorderPane {
 	
 	@FXML private VBox console;
 	@FXML private Console consoleController;
+	
 
 	public Layout() {
 		Log.info("Layout ctor");
@@ -109,6 +128,8 @@ public class Layout { //extends BorderPane {
 			Log.info("Layout init, cons = " + "" + " + " + consoleController);
 			// content.getChildren().add(RainbowApp.getNodeTable());
 			
+			chkConnected.setSelected(Rainbow.client != null);
+			
 			btnViewConsole.setOnAction(this::toggleConsole);
 //			toggleConsole(null);
 			
@@ -131,15 +152,26 @@ public class Layout { //extends BorderPane {
 			btnCoral.setOnAction(e -> Rainbow.client.write(new AskCreate(Coral.class.getSimpleName())));
 			btnOpal.setOnAction(e -> Rainbow.client.write(new AskCreate(Opal.class.getSimpleName())));
 //			btnBeryl.setOnAction(e -> Rainbow.client.write(new AskCreate(GreenBeryl.class.getSimpleName()))));
+			btnAmethyst.setOnAction(e -> Pearl.createProcess(Amethyst.class, ""));
+			btnSapphire.setOnAction(e -> Pearl.createProcess(SapphireOwl.class, ""));
+
+
+			btnMoonstoneMock.setOnAction(e -> Rainbow.client.write(new AskCreate(BlackMoonstone.class.getSimpleName(), "mock")));
+			btnCoralMock.setOnAction(e -> Rainbow.client.write(new AskCreate(Coral.class.getSimpleName())));
+			btnOpalMock.setOnAction(e -> Rainbow.client.write(new AskCreate(Opal.class.getSimpleName())));
+//			btnBerylMock.setOnAction(e -> Rainbow.client.write(new AskCreate(GreenBeryl.class.getSimpleName()))));
+			btnAmethystMock.setOnAction(e -> Pearl.createProcess(Amethyst.class, ""));
+			btnSapphireMock.setOnAction(e -> Pearl.createProcess(SapphireOwl.class, "prod localhost 6000 souchy z 1"));
 			
 			
 			btnConnect.setOnAction(e -> Rainbow.core.connect());
-			btnPearl.setOnAction(e -> Pearl.createProcess(Pearl.class));
+			btnPearl.setOnAction(e -> Pearl.createDeathShadow(Pearl.class, "../"));
 			btnLocal.setOnAction(e -> Rainbow.core.host = "localhost");
 			btnLan.setOnAction(e -> Rainbow.core.host = "192.168.2.15");
 			btnExternal.setOnAction(e -> Rainbow.core.host = "vyxyn.ddns.net");
 			btnLocal.setSelected(true);
 			
+			btnViewMain.setOnAction(this::viewOverview);
 			
 		} catch (Exception ex) {
 			Log.error("", ex);
@@ -169,8 +201,32 @@ public class Layout { //extends BorderPane {
 //			split.setDividerPositions(1);
 //			split.setStyle(".split-pane-divider { -fx-background-color: transparent; }");
 		}
+    }
+
+	/**
+	 * EventHandler for AskNodes packet 
+	 */
+	@Subscribe
+	public void handleAskNodes(AskNodes nodes) {
+		Platform.runLater(() -> {
+			nodes.nodes.forEach(n -> {
+				if(n.port != 0) {
+				}
+			});
+		});
+	}
+
+    public void viewOverview(ActionEvent e) {
     	
     }
+    public void viewNode(NodeInfo node) {
+    	this.consolePane.getChildren().set(0, new NodeDetails(node));
+    }
     
-	
+    
+    @Subscribe
+    public void onConnected(Connected event) {
+    	Platform.runLater(() -> chkConnected.setSelected(event.connected));
+    }
+    
 }

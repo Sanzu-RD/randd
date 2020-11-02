@@ -1,8 +1,14 @@
 package com.souchy.randd.tools.rainbow.main;
 
+import java.nio.file.Paths;
+import java.util.concurrent.Executors;
+
+import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
+import com.souchy.randd.tools.rainbow.ui.events.Connected;
 
 import javafx.application.Application;
 
@@ -35,21 +41,26 @@ public class Rainbow extends EbiShoalCore {
 		
 		this.host = "127.0.0.1";
 		this.port = 1000;
+		var root = "../"; 
 		if(args.length > 0) host = args[0];
 		if(args.length > 1) port = Integer.parseInt(args[1]);
+		if(args.length > 2) root = args[2];
+		
+		Environment.root = Paths.get(root);
+		
 		connect();
 
 		Log.info("Rainbow start " + host + ":" + port);
 		Application.launch(RainbowApp.class);
-		Log.info("Rainbow stopped.");
-//		Platform.runLater(() -> RainbowApp.stage.setScene(RainbowApp.mainScene));
 	}
 
 	public void connect() {
 		try {
 			client = new EbiShoalTCP(host, port, this);
+			Rainbow.core.bus.post(new Connected(true));
 		} catch (Exception e) {
 			Log.error("", e);
+			Rainbow.core.bus.post(new Connected(false));
 		}
 	}
 	
@@ -61,5 +72,6 @@ public class Rainbow extends EbiShoalCore {
 				"com.souchy.randd.tools.rainbow.handlers",
 				"com.souchy.randd.deathshadows.nodes.pearl.messaging" };
 	}
+	
 	
 }

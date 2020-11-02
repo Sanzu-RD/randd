@@ -1,4 +1,3 @@
-/delete/
 /fonts/
 /fx/
 /i18n/
@@ -6,6 +5,8 @@
 /models/
 /music/
 /shaders/
-/src.dll
 /textures/
 /ux/
+/sounds/
+/src.dll
+/effekseer.dll

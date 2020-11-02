@@ -16,7 +16,7 @@
 	<property name="dir.natives" value="${dir.jarfile}/natives"/>
 	<property name="dir.modules" value="${dir.jarfile}/modules"/>
 
-	
+
 	<path id="build.classpath">
 		<fileset dir="${dir.lib}">
 			<include name="**/*.jar" />
@@ -36,9 +36,10 @@
 
 	<target name="create_run_jar">
 		<jar destfile="${dir.jarfile}/sapphireowl.jar">
+			
 			<manifest>
 				<attribute name="Main-Class" value="com.souchy.randd.ebishoal.sapphire.main.SapphireOwl" />
-				<attribute name="Class-Path" value=". ./res/ ./data/ ${mf.classpath} "/>
+				<attribute name="Class-Path" value=". ./res/ ./data/ ./natives/ ${mf.classpath}" />
 			</manifest>
 
 			<fileset dir="${dir.buildfile}/bin">
@@ -57,6 +58,7 @@
 			<fileset dir="${dir.git}/r and d/Commons WS/GameMechanics2/bin"/>
 			<fileset dir="${dir.git}/r and d/Commons WS/Moonstone-commons/bin"/>
 			<fileset dir="${dir.git}/r and d/ebi/Moonstone-white/bin"/>
+			<fileset dir="${dir.git}/r and d/ebi/Effekseer 2/bin"/>
 		</jar>
 
 		<!-- Delete libs -->
@@ -79,6 +81,10 @@
 			<fileset dir="${dir.buildfile}/data"/>
 		</copy>
 
+		<!-- natives -->
+		<copy file="${dir.git}/r and d/ebi/Effekseer 2/effekseer.dll" todir="${dir.natives}"/>
+
+
 		<!-- config files -->
 		<copy overwrite="true" file="${dir.buildfile}/lapis.properties" todir="${dir.jarfile}"/>
 		<copy overwrite="true" file="${dir.buildfile}/sapphireowl.conf" todir="${dir.jarfile}"/>
@@ -92,7 +98,7 @@
 		<copy file="${dir.gitres}/libs other/gson-2.8.6.jar" todir="${dir.lib}"/>
 		<copy file="${dir.gitres}/libs other/reflections-0.9.11.jar" todir="${dir.lib}"/>
 		<copy file="${dir.gitres}/libs other/javassist.jar" todir="${dir.lib}"/>
-	    <copy file="${dir.gitres}/libs other/bson-3.10.1.jar" todir="${dir.lib}"/>
+		<copy file="${dir.gitres}/libs other/bson-3.10.1.jar" todir="${dir.lib}"/>
 
 
 		<copy file="${dir.gitres}/libs gdx 2/gdx.jar" todir="${dir.lib}" />

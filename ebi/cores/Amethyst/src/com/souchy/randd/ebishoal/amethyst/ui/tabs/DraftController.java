@@ -24,6 +24,7 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -63,7 +64,7 @@ public class DraftController {
 	@FXML public GridPane teamLeft;
 	@FXML public GridPane bansLeft;
 	
-	@FXML public GridPane leftRight;
+	@FXML public GridPane teamRight;
 	@FXML public GridPane bansRight;
 	
 	@FXML public Label lblTime;
@@ -82,14 +83,20 @@ public class DraftController {
 		Amethyst.core.bus.register(this);
 		
 		// clear everything else
-		teamLeft.getChildren().clear();
-		bansLeft.getChildren().clear();
-		leftRight.getChildren().clear();
-		bansRight.getChildren().clear();
+//		teamLeft.getChildren().clear();
+//		bansLeft.getChildren().clear();
+//		leftRight.getChildren().clear();
+//		bansRight.getChildren().clear();
 		
 		// select btn
 		btnSelect.setOnMouseClicked(this::select);
-				
+		
+		initCreatvureList();
+		
+		initTeams();
+	}
+	
+	private void initCreatvureList() {
 		// fill creature list with images + click handler
 		for (var model : DiamondModels.creatures.values()) {
 			String url = "";
@@ -154,6 +161,10 @@ public class DraftController {
 		}
 	}
 	
+	private void initTeams() {
+		
+	}
+	
 	/**
 	 * Called on btn select click in the list
 	 * @param e
@@ -202,19 +213,36 @@ public class DraftController {
 		Platform.runLater(() -> {
 //			var icon = AssetData.creatures.get(msg.modelid).getIcon();
 //			var node = new ImageView(icon.getAbsolutePath());
-			DraftRow node = new DraftRow(msg.modelid); // Amethyst.app.loadComponent("draftrow"); // new DraftRow(msg.modelid);
-			node.creature.creatureModelID = msg.modelid;
-			node.init();
-			node.setOnMouseClicked(this::onRowClick);
+//			DraftRow node = new DraftRow(msg.modelid); // Amethyst.app.loadComponent("draftrow"); // new DraftRow(msg.modelid);
+			
+			var node = getRow(msg.team, Coraline.lobby.getPickTurn());
+			
 			// if the msg team is equal to this user's team, add the draftrow on the left team
-			if(this.team == msg.team) {
-				teamLeft.add(node, 0, teamLeft.getChildren().size());
-			} else {
-				leftRight.add(node, 0, leftRight.getChildren().size());
-				node.setDisable(true);
-			}
+//			if(this.team == msg.team) {
+////				teamLeft.add(node, 0, teamLeft.getChildren().size());
+//				node = null;
+////				teamLeft.cell
+//			} else {
+//				leftRight.add(node, 0, leftRight.getChildren().size());
+//				node.setDisable(true);
+//			}
+			
+			node.init(msg.modelid);
+			node.setOnMouseClicked(this::onRowClick);
 		});
 	}
+	
+	private DraftRow getRow(Team t, int pickTurn) {
+		var col = teamLeft;
+		if(this.team != t) col = teamRight;
+		for (Node node : col.getChildren()) {
+			if(GridPane.getRowIndex(node) == pickTurn) {
+				return (DraftRow) node;
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * TODO Event handler for BanCreature message response
 	 */

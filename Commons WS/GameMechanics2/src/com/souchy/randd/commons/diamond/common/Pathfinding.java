@@ -12,8 +12,13 @@ import com.souchy.randd.commons.diamond.statics.properties.Orientation;
 
 public class Pathfinding {
 	
+	public static List<Cell> possibleMovement(Board board, Creature caster){
+		var list = new ArrayList<Cell>();
+		
+		return list;
+	}
 	
-	public List<Cell> aStar(Board board, Creature caster, Cell source, Cell target){
+	public static List<Cell> aStar(Board board, Creature caster, Cell source, Cell target){
 		List<Node> closed = new ArrayList<>();
 		List<Node> open = new ArrayList<>();
 		

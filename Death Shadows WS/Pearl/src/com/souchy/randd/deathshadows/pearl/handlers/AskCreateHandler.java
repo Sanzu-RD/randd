@@ -14,7 +14,7 @@ public class AskCreateHandler implements BBMessageHandler<AskCreate> {
 		Log.info("AskCreateHandler handling message [" + message.askedCoreType + "]");
 		
 		// message.node =
-		Pearl.core.create(message.askedCoreType);
+		Pearl.core.create(message.askedCoreType, message.args);
 		
 //		client.channel().writeAndFlush(message);
 	}

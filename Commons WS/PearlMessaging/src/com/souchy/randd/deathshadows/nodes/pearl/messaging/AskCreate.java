@@ -23,12 +23,17 @@ public class AskCreate implements BBMessage {
 	 * name of core type asked (DeathShadowCore.class.getSimpleName())
 	 */
 	public String askedCoreType;
+	public String args = "";
 	
 	public NodeInfo node;
 	
 	public AskCreate() {}
 	public AskCreate(String corename) {
 		this.askedCoreType = corename;
+	}
+	public AskCreate(String corename, String args) {
+		this.askedCoreType = corename;
+		this.args = args;
 	}
 	
 	@Override
@@ -38,6 +43,7 @@ public class AskCreate implements BBMessage {
 			node.serialize(out);
 		} else {
 			writeString(out, askedCoreType);
+			writeString(out, args);
 		}
 		return out;
 	}
@@ -50,6 +56,7 @@ public class AskCreate implements BBMessage {
 			node.deserialize(in);
 		} else {
 			askedCoreType = readString(in);
+			args = readString(in);
 		}
 		return this;
 	}

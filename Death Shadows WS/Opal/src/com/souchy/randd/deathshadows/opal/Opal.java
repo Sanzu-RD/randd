@@ -27,8 +27,9 @@ public final class Opal extends DeathShadowCore {
 		super(args);
 		String ip = "localhost";
 		this.port = 8000;
-		if(args.length > 0) ip = args[0];
-		if(args.length > 1) port = Integer.parseInt(args[0]);
+		
+		if(args.length > 0) port = Integer.parseInt(args[0]);
+		if(args.length > 1) ip = args[1];
 		
 		Log.info("Start Opal on : " + ip + ":" + port);
 		server = new DeathShadowHTTP(ip, port, getRootPackages());

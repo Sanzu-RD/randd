@@ -7,11 +7,11 @@ import java.util.ResourceBundle;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.CreatureModel;
-import com.souchy.randd.commons.diamond.statics.Constants;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.amethyst.main.Amethyst;
+import com.souchy.randd.jade.Constants;
 import com.souchy.randd.jade.meta.JadeCreature;
 
 import javafx.fxml.FXML;
@@ -50,16 +50,17 @@ public class DraftRow extends GridPane {
 	public JadeCreature creature = new JadeCreature();
 	public CreatureModel model;
 	
-	public DraftRow() {}
-	
-	public DraftRow(int creatureModelId) {
-		model = DiamondModels.creatures.get(creatureModelId);
-		creature.creatureModelID = creatureModelId;
-		creature.affinities = new int[Elements.values().length];
-		creature.spellIDs = new int[Constants.numberOfSpells];
-		
-		Amethyst.app.loadComponent(this, "draftrow");
+	public DraftRow() {
+//		Amethyst.app.loadComponent(this, "draftrow");
 	}
+	
+//	public DraftRow(int creatureModelId) {
+//		this();
+//		model = DiamondModels.creatures.get(creatureModelId);
+//		creature.creatureModelID = creatureModelId;
+//		creature.affinities = new int[Elements.values().length];
+//		creature.spellIDs = new int[Constants.numberOfSpells];
+//	}
 	
 	@FXML
 	public void initialize() {
@@ -72,18 +73,26 @@ public class DraftRow extends GridPane {
 		}
 	}
 	
-	public void init() {
-		int creatureModelId = creature.creatureModelID;
-		Log.info("draft row initialize " + creatureModelId);
+	public void init(int creatureModelId) {
+		// get model
+		model = DiamondModels.creatures.get(creatureModelId);
+		// make creature
+		creature.creatureModelID = creatureModelId;
+		creature.affinities = new int[Elements.values().length];
+		creature.spellIDs = new int[Constants.numberOfSpells];
+
+		// get i18n name 
+		//Log.info("draft row initialize " + creatureModelId);
 		try {
 			ResourceBundle b = ResourceBundle.getBundle("../res/i18n/creatures/bundle");
 			var namestr = b.getString("creature." + creatureModelId + ".name");
-			Log.info("DraftRow i18n name : " + namestr);
+			//Log.info("DraftRow i18n name : " + namestr);
 			this.name.setText(namestr);
 		} catch (Exception e) {
 //			Log.info("", e);
 			if(name != null) this.name.setText("missing bundle");
 		}
+		// get icon
 		this.icon.setImage(new Image(AssetData.creatures.get(creatureModelId).getIconURL().toString()));
 //		refreshAffinities();
 //		refreshSpells();

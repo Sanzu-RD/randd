@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<fx:root maxWidth="380.0" prefHeight="150.0" prefWidth="380.0" type="GridPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxWidth="380.0" prefHeight="150.0" prefWidth="380.0" type="GridPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.ebishoal.amethyst.ui.components.DraftRow">
    <columnConstraints>
       <ColumnConstraints minWidth="90.0" />
       <ColumnConstraints minWidth="10.0" />

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,78 +14,91 @@
 
 <BorderPane fx:id="root" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.souchy.randd.tools.rainbow.ui.Layout">
    <top>
-      <MenuBar fx:id="menu" BorderPane.alignment="CENTER">
-        <menus>
-            <Menu fx:id="menuView" mnemonicParsing="false" text="View">
-               <items>
-                  <MenuItem fx:id="btnViewMain" mnemonicParsing="false" text="Overview" />
-                  <RadioMenuItem fx:id="btnViewConsole" mnemonicParsing="false" selected="true" text="Console" />
-                  <Menu fx:id="menuNodeView" mnemonicParsing="false" text="Nodes" />
-               </items>
-            </Menu>
-            <Menu fx:id="menuEdit" mnemonicParsing="false" text="Edit">
-              <items>
-                  <MenuItem fx:id="btnRefresh" mnemonicParsing="false" text="Refresh" />
-                <MenuItem fx:id="btnRestart" mnemonicParsing="false" text="Restart" />
-                  <MenuItem fx:id="btnShutdown" mnemonicParsing="false" text="Shutdown" />
-                  <MenuItem fx:id="btnKill" mnemonicParsing="false" text="Kill" />
-              </items>
-            </Menu>
-          <Menu fx:id="menuNew" mnemonicParsing="false" text="New">
-               <items>
-                  <Menu fx:id="menuDeath" mnemonicParsing="false" text="Death Shadow Fleet">
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar fx:id="menu" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+              <menus>
+                  <Menu fx:id="menuView" mnemonicParsing="false" text="View">
+                     <items>
+                        <MenuItem fx:id="btnViewMain" mnemonicParsing="false" text="Overview" />
+                        <RadioMenuItem fx:id="btnViewConsole" mnemonicParsing="false" selected="true" text="Console" />
+                        <Menu fx:id="menuNodeView" mnemonicParsing="false" text="Nodes" />
+                     </items>
+                  </Menu>
+                  <Menu fx:id="menuEdit" mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem fx:id="btnRefresh" mnemonicParsing="false" text="Refresh" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                      <MenuItem fx:id="btnRestart" mnemonicParsing="false" text="Restart" />
+                        <MenuItem fx:id="btnShutdown" mnemonicParsing="false" text="Shutdown" />
+                        <MenuItem fx:id="btnKill" mnemonicParsing="false" text="Kill" />
+                    </items>
+                  </Menu>
+                <Menu fx:id="menuNew" mnemonicParsing="false" text="New">
                      <items>
                         <MenuItem fx:id="btnOpal" mnemonicParsing="false" text="Opal (HTTP API)" />
                         <MenuItem fx:id="btnCoral" mnemonicParsing="false" text="Coral (TCP Matchmaking)" />
                         <MenuItem fx:id="btnMoonstone" mnemonicParsing="false" text="Moonstone (TCP Game)" />
                         <MenuItem fx:id="btnBeryl" mnemonicParsing="false" text="Beryl (XMPP Chat)" />
-                     </items>
-                  </Menu>
-                  <Menu fx:id="menuEbi" mnemonicParsing="false" text="Ebi Shoal">
-                     <items>
+                        <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem fx:id="btnAmethyst" mnemonicParsing="false" text="Amethyst (Opaline + Coraline + Beryl)" />
                         <MenuItem fx:id="btnSapphire" mnemonicParsing="false" text="Sapphire Owl (Moonstone + Beryl)" />
                      </items>
+                </Menu>
+                  <Menu fx:id="menuNewMock" mnemonicParsing="false" text="Mock">
+                     <items>
+                        <MenuItem fx:id="btnOpalMock" mnemonicParsing="false" text="Opal (HTTP API)" />
+                        <MenuItem fx:id="btnCoralMock" mnemonicParsing="false" text="Coral (TCP Matchmaking)" />
+                        <MenuItem fx:id="btnMoonstoneMock" mnemonicParsing="false" text="Moonstone (TCP Game)" />
+                        <MenuItem fx:id="btnBerylMock" mnemonicParsing="false" text="Beryl (XMPP Chat)" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="btnAmethystMock" mnemonicParsing="false" text="Amethyst (Opaline + Coraline + Beryl)" />
+                        <MenuItem fx:id="btnSapphireMock" mnemonicParsing="false" text="Sapphire Owl (Moonstone + Beryl)" />
+                     </items>
                   </Menu>
-               </items>
-          </Menu>
-            <Menu fx:id="menuPacket" mnemonicParsing="false" text="Packet">
-               <items>
-                  <Menu mnemonicParsing="false" text="Pearl">
+                  <Menu fx:id="menuPacket" mnemonicParsing="false" text="Packet">
+                     <items>
+                        <Menu mnemonicParsing="false" text="Pearl">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Opal">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Unspecified Menu">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                           </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Unspecified Menu">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                           </items>
+                        </Menu>
+                     </items>
+                  </Menu>
+                  <Menu fx:id="menuNetwork" mnemonicParsing="false" text="Network : Local">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem fx:id="btnConnect" mnemonicParsing="false" text="Connect" />
+                        <MenuItem fx:id="btnPearl" mnemonicParsing="false" text="Create Pearl" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <RadioMenuItem fx:id="btnLocal" mnemonicParsing="false" text="Local">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="networkToggleGroup" />
+                           </toggleGroup>
+                        </RadioMenuItem>
+                        <RadioMenuItem fx:id="btnLan" mnemonicParsing="false" text="Lan" toggleGroup="$networkToggleGroup" />
+                        <RadioMenuItem fx:id="btnExternal" mnemonicParsing="false" text="External" toggleGroup="$networkToggleGroup" />
                     </items>
                   </Menu>
-                  <Menu mnemonicParsing="false" text="Opal">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Unspecified Menu">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                     </items>
-                  </Menu>
-                  <Menu mnemonicParsing="false" text="Unspecified Menu">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                     </items>
-                  </Menu>
-               </items>
-            </Menu>
-            <Menu fx:id="menuNetwork" mnemonicParsing="false" text="Network : Local">
-              <items>
-                  <RadioMenuItem fx:id="btnLocal" mnemonicParsing="false" text="Local">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="networkToggleGroup" />
-                     </toggleGroup>
-                  </RadioMenuItem>
-                  <RadioMenuItem fx:id="btnLan" mnemonicParsing="false" text="Lan" toggleGroup="$networkToggleGroup" />
-                  <RadioMenuItem fx:id="btnExternal" mnemonicParsing="false" text="External" toggleGroup="$networkToggleGroup" />
-              </items>
-            </Menu>
-        </menus>
-      </MenuBar>
+              </menus>
+            </MenuBar>
+            <CheckBox fx:id="chkConnected" disable="true" mnemonicParsing="false" text="Connected" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
    </top>
    <center>
       <SplitPane fx:id="split" dividerPositions="0.75" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: transparent; -fx-border-width: 0;" stylesheets="@style.css" BorderPane.alignment="CENTER">

@@ -32,7 +32,7 @@ public class SapphireOwl extends LapisCore {
 		core = new SapphireOwl(args);
 		
 		// si active le net
-		if(args.length > 5) {
+		if(args.length > 4) {
 			var ip = args[1]; // "localhost";
 			var port = Integer.parseInt(args[2]); // 443;
 			var username = args[3];
@@ -40,10 +40,12 @@ public class SapphireOwl extends LapisCore {
 			var fightid = Integer.parseInt(args[5]);
 			
 			try {
+				Log.info("SapphireOwl connect to moonstone (" + ip + ":" + port + ")  ");
 				// authentifie moonstone et join le fight
 				moon = new Moonstone(ip, port, core);
 				moon.channel.attr(Moonstone.authKey).set(new String[] { username, password, fightid + "" });
 			} catch (Exception e) {
+				e.printStackTrace();
 				moon = null;
 			}
 		}

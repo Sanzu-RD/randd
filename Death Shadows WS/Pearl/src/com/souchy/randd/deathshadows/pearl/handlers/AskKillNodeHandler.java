@@ -22,8 +22,8 @@ public class AskKillNodeHandler implements BBMessageHandler<AskKillNode> {
 		Class<? extends DeathShadowCore> type = null;
 		
 		outloop:
-		for(var key : Pearl.core.nodes.keySet()) {
-			for(var node : Pearl.core.nodes.get(key)) {
+		for(var key : Pearl.nodes.keySet()) {
+			for(var node : Pearl.nodes.get(key)) {
 				if(node.id == message.id) {
 					try {
 						Log.info("found node with id " + node.id);
@@ -40,7 +40,9 @@ public class AskKillNodeHandler implements BBMessageHandler<AskKillNode> {
 			}
 		}
 
-		Pearl.core.nodes.get(type).removeIf(n -> n.id == message.id);
+		Pearl.nodes.get(type).removeIf(n -> n.id == message.id);
+		
+		if(type == Pearl.class) System.exit(0);
 		
 	}
 	

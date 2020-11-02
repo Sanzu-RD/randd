@@ -120,6 +120,12 @@ public class SmoothRivers {
 		}
 	}
 	
+	public static void sendAll(BBMessage msg) {
+		send("nodes", msg);
+	}
+	public static void send(Class<? extends DeathShadowCore> clazz, BBMessage msg) {
+		send("nodes." + clazz.getSimpleName(), msg);
+	}
 	public static void sendPearl(BBMessage msg) {
 		send("nodes.Pearl", msg);
 	}

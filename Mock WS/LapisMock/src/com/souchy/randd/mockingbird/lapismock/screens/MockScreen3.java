@@ -481,8 +481,12 @@ public class MockScreen3 extends BaseScreen {
 		
 		int vertexPropCount = 6; // nombre de propriété par vertex (pos.xyz + norm.xyz = 6)
 		
-		var vertices = new float[] { pos.x, pos.y, pos.z, normal.x, normal.y, normal.z, pos.x + size.x, pos.y, pos.z, normal.x, normal.y, normal.z,
-				pos.x + size.x, pos.y + size.y, pos.z, normal.x, normal.y, normal.z, pos.x, pos.y + size.y, pos.z, normal.x, normal.y, normal.z, };
+		var vertices = new float[] { 
+				pos.x, pos.y, pos.z, 						normal.x, normal.y, normal.z, 
+				pos.x + size.x, pos.y, pos.z, 				normal.x, normal.y, normal.z,
+				pos.x + size.x, pos.y + size.y, pos.z, 		normal.x, normal.y, normal.z,
+				pos.x, pos.y + size.y, pos.z, 				normal.x, normal.y, normal.z,
+				};
 		var indices = new short[] { 0, 1, 2, 2, 3, 0 };
 		Mesh mesh = new Mesh(true, vertices.length, indices.length, VertexAttribute.Position(), VertexAttribute.Normal());
 		mesh.setVertices(vertices);

@@ -15,6 +15,7 @@ import com.souchy.randd.commons.tealwaters.commons.ActionPipeline;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.jade.Constants;
 import com.souchy.randd.jade.meta.JadeCreature;
 import io.netty.buffer.ByteBuf;
 import io.netty.util.AttributeKey;
@@ -98,6 +99,7 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	/**
 	 * Get the current player turn in a synchronized way
 	 */
+	
 	public synchronized int turn() {
 		return turn;
 	}
@@ -126,6 +128,44 @@ public class Lobby implements BBSerializer, BBDeserializer {
 			}
 		}
 		return -1;
+	}
+	
+	/** nombre de joueurs au total */
+	public int getPlayerCount() {
+		return users.size();
+	}
+	/** nombre de joueurs par team */
+	public int getPlayersPerTeam() {
+		return getPlayerCount() / 2;
+	}
+	/** nombre de ban par team */
+	public int getBansPerTeam() {
+		return Constants.BansPerTeam; // getTeamSize();
+	}
+	public int getPicksPerTeam() {
+		return Constants.CreaturesPerTeam; // getTeamSize();
+	}
+	/** 0 pour team A, 1 pour team B */
+	public Team getPickingTeam() {
+		return Team.values()[turn % 2];
+	}
+	/** Ban turn inside of a team (0-1, 0-1) */
+	public int getBanTurn() {
+		return turn % getBansPerTeam();
+	}
+	/** Pick turn inside of a team (0-1-2-3, 0-1-2-3) */
+	public int getPickTurn() {
+		int bans = getBansPerTeam() * 2;
+		int pick = turn - bans;
+		return pick % Constants.CreaturesPerTeam;
+	}
+	/** 0,1,2,3,4,5  */
+	public boolean isBanPhase() {
+		return turn < (getBansPerTeam() * 2);
+	}
+	/** 6,7,8,9 */
+	public boolean isPickPhase() {
+		return !isBanPhase();
 	}
 	
 	/** get player id from turn index */

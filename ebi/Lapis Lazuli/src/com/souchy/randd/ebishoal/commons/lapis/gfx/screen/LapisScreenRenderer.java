@@ -121,7 +121,7 @@ interface LapisScreenRenderer extends Screen {
 		if(getLining() != null) getLining().renderLines();
 		
 		// render UI
-//		if(renderUI) renderView(delta);
+		if(renderUI) renderView(delta);
 	}
 	
 	public default void renderEffekseer() {

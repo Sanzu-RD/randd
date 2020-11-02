@@ -13,13 +13,14 @@ public class JoinFightResponseHandler implements BBMessageHandler<JoinFightRespo
 	@Override
 	public void handle(ChannelHandlerContext client, JoinFightResponse message) {
 		// 
-		Log.info("Moonstone White handle JoinFightResponse " + message.accepted);
+		Log.info("Moonstone White handle JoinFightResponse accepted=" + message.accepted);
 		
 		// close sapphire if not accepted
-		if(!message.accepted) 
+		if(!message.accepted) {
 			System.exit(0);
+		}
 		else {
-			Moonstone.moon.write(new GetUpdate());
+			Moonstone.writes(new GetUpdate());
 		}
 	}
 

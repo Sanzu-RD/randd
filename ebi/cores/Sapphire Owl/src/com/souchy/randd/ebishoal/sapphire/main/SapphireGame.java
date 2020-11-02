@@ -66,7 +66,7 @@ public class SapphireGame extends LapisGame {
 		// JoinFight
 		if(Moonstone.moon != null) {
 			Moonstone.bus.register(this);
-			Moonstone.moon.write(new GetSalt(Moonstone.moon.channel.attr(Moonstone.authKey).get()[0]));
+			Moonstone.writes(new GetSalt(Moonstone.moon.channel.attr(Moonstone.authKey).get()[0]));
 		}
 	}
 

@@ -1,7 +1,7 @@
 package com.souchy.randd.ebishoal.amethyst.ui.components;
 
 import com.souchy.randd.commons.diamond.models.CreatureModel;
-import com.souchy.randd.commons.diamond.statics.Constants;
+import com.souchy.randd.jade.Constants;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.amethyst.main.Amethyst;
 import com.souchy.randd.jade.meta.JadeCreature;

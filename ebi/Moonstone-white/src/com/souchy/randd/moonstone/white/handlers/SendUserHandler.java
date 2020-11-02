@@ -29,7 +29,7 @@ public class SendUserHandler implements BBMessageHandler<SendUser> {
 		
 		// demande à rejoindre un combat
 		var join = new JoinFight(Integer.parseInt(fightid)); 
-		Moonstone.moon.write(join);
+		Moonstone.writes(join);
 	}
 
 	@Override

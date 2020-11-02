@@ -12,6 +12,7 @@ import com.souchy.randd.deathshadows.nodes.pearl.messaging.AskKillNode;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.AskNodes;
 import com.souchy.randd.deathshadows.pearl.NodeInfo;
 import com.souchy.randd.tools.rainbow.main.Rainbow;
+import com.souchy.randd.tools.rainbow.main.RainbowApp;
 import com.souchy.randd.tools.rainbow.ui.events.Kill;
 import com.souchy.randd.tools.rainbow.ui.events.RefreshEvent;
 
@@ -113,6 +114,8 @@ public class NodeTable { // extends VBox {
     	var startdate = new Date(newValue.launchTime);
     	var uptimed = new Date(System.currentTimeMillis() - newValue.launchTime);
     	var lastbeat = new Date(newValue.lastHeartbeatTime);
+    	
+    	RainbowApp.mainController.viewNode(newValue);
     	
 //    	selectedTitle.setText(newValue.toString());
 //    	ipport.setText("URL : " + newValue.url());

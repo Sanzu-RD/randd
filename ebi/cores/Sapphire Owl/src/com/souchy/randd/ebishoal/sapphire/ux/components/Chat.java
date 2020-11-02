@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
+import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.kotcrab.vis.ui.widget.ListView;
 import com.kotcrab.vis.ui.widget.ScrollableTextArea;
@@ -125,7 +126,7 @@ public class Chat extends SapphireComponent {
 
 	@LmlAction("send")
 	public void sendMsg() {
-		Moonstone.moon.write(new ICM("default", Moonstone.user.pseudo, field.getText()));
+		Moonstone.writes(new ICM("default", Moonstone.user.pseudo, field.getText()));
 		field.clearText();
 	}
 	

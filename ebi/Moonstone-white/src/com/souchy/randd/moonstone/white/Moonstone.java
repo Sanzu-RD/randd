@@ -9,6 +9,7 @@ import com.souchy.randd.commons.diamond.common.Action.EndTurnAction;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
@@ -23,14 +24,19 @@ public class Moonstone extends EbiShoalTCP { //implements OnTurnStartHandler, On
 	public static Moonstone moon;
 	public static User user;
 	public static Fight fight = new Fight();
-	public static EventBus bus; // = new EventBus();
+	public static EventBus bus = new EventBus();
 	
 	public Moonstone(String ip, int port, EbiShoalCore core) throws Exception {
 		super(ip, port, core);
 		moon = this;
-		bus = moon.bus;
+//		Moonstone.bus = moon.bus;
 		fight.bus.register(this); //.statusbus.register(this);
 	}
+	
+	public static void writes(BBMessage msg) {
+		moon.write(msg);
+	}
+	
 
 //	@Override
 //	public HandlerType type() {

@@ -17,6 +17,8 @@ import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import com.google.common.io.Files;
+import com.souchy.randd.commons.deathebi.Core;
 import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 import com.souchy.randd.commons.tealwaters.io.files.ClassDiscoverer.DefaultClassDiscoverer;
@@ -88,7 +90,7 @@ public final class Pearl extends DeathShadowCore {
 		core = this;
 		
 		this.port = 1000;
-		var root = "../../../"; // GitPiranha root path which contains 'r and d' and 'release' repositories
+		var root = "../../../release/"; // GitPiranha root path which contains 'r and d' and 'release' repositories
 		if(args.length > 0) port = Integer.parseInt(args[0]);
 		if(args.length > 1) root = args[1];
 
@@ -101,7 +103,7 @@ public final class Pearl extends DeathShadowCore {
 		// start rivers
 		this.rivers.connect(port);
 //		SmoothRivers.sendPearl(new SelfIdentify(this));
-		SmoothRivers.send("nodes", new AskIdentifications());
+		SmoothRivers.sendAll(new AskIdentifications());
 		
 		server.block(); 
 	}
@@ -122,7 +124,11 @@ public final class Pearl extends DeathShadowCore {
 	
 	// node shall get an id themselves from the idqueue and then selfidentify to pearl
 	public int tempIdmaker = 1;
+
 	public NodeInfo create(String coreName) {
+		return create(coreName, "");
+	}
+	public NodeInfo create(String coreName, String args) {
 		try {
 //			coreName = coreName.toLowerCase();
 			Log.info("Pearl create node 1 : " + coreName);
@@ -135,33 +141,42 @@ public final class Pearl extends DeathShadowCore {
 				
 				Log.info("Pearl create node 2 : " + coreName + " == " + type);
 				
-				createProcess(type);
-				
+				createDeathShadow(type, args);
 				return null;
 			}
 		} catch (Exception e) {
 			Log.error("", e);
 		}
 		return null;
+		
 	}
 
-	public static void createProcess(Class<? extends DeathShadowCore> type) {
+	public static void createDeathShadow(Class<? extends DeathShadowCore> type) {
+		createDeathShadow(type, "");
+	}
+	public static void createDeathShadow(Class<? extends DeathShadowCore> type, String args) {
+		int port = basePorts.get(type);
 		var typelist = nodes.get(type);
-		int port = basePorts.get(type) + typelist.size();
-		createProcess(type, port);
+		if(typelist.size() > 0) {
+			port = typelist.lastElement().port + 1; // basePorts.get(type) + typelist.size();
+		}
+		createProcess(type, String.join(" ", Integer.toString(port), args));
 	}
 	
-	public static void createProcess(Class<? extends DeathShadowCore> type, int port) {
+	public static void createProcess(Class<? extends Core> type, String args) {
 		try {
 			var typename = type.getSimpleName().toLowerCase();
-			var file = Environment.fromRoot("/release/deathshadows/" + typename + ".jar").toFile();
-			var path = file.getAbsolutePath();
-			var command = "java -jar --enable-preview \"" + path + "\" " + port;
+			var env = DeathShadowCore.class.isAssignableFrom(type) ? "/deathshadows" : "/ebishoal";
+			var file = Environment.fromRoot(env + "/" + typename + ".jar").toFile();
+			var dir = new File(Files.simplifyPath(file.getParentFile().getAbsolutePath().replace("\\", "/") + "/"));
+			var path = file.getName();
+			var command = "java -jar --enable-preview " + path + " " + args;
 			
 			Log.info("Pearl create node 2 file " + file);
 			Log.info("Pearl create node 2 command " + command);
 			
-			Process proc = Runtime.getRuntime().exec(command);
+			
+			Process proc = Runtime.getRuntime().exec(command, null, dir); // new ProcessBuilder().directory(dir).command(command).start(); // Runtime.getRuntime().exec(command);
 			
 			StreamGobbler streamGobblerError = new StreamGobbler(proc.getErrorStream(), (s) -> Log.defferedError(typename + "(" + proc.pid() + ")", s));
 			Executors.newSingleThreadExecutor().submit(streamGobblerError);
@@ -174,7 +189,6 @@ public final class Pearl extends DeathShadowCore {
 			Log.error("", e);
 		}
 	}
-
 
 	
 	private static class StreamGobbler implements Runnable {

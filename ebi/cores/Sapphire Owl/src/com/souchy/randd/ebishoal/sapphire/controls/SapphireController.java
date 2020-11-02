@@ -14,6 +14,7 @@ import static com.badlogic.gdx.Input.Keys.SHIFT_LEFT;
 import static com.badlogic.gdx.Input.Keys.UP;
 import static com.badlogic.gdx.Input.Keys.W;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,7 @@ import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.sapphire.gfx.Highlight;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
@@ -45,13 +47,13 @@ import com.souchy.randd.moonstone.white.Moonstone;
 
 public class SapphireController extends CameraInputController {
 
-	public Vector3 old = Vector3.Zero.cpy();
-	private Vector3 target = Vector3.Zero.cpy();
-	private Vector3 temp = Vector3.Zero.cpy();
+//	public Vector3 old = Vector3.Zero.cpy();
+//	private Vector3 target = Vector3.Zero.cpy();
+//	private Vector3 temp = Vector3.Zero.cpy();
 
 	public boolean activateBaseCamControl = false;
 
-	private float translationSpeed = 40;
+	private float translationSpeed = 10;
 	private float rotationSpeed = 60;
 	private Vector3 translation = Vector3.Zero.cpy();
 	private Vector3 rotationUnit = Vector3.Zero.cpy();
@@ -76,6 +78,7 @@ public class SapphireController extends CameraInputController {
 	public void addOnKeyUp(int keycode, Lambda action) {
 		onKeyUp.put(keycode, action);
 	}
+
 	public SapphireController(Camera camera) {
 		super(camera);
 
@@ -97,7 +100,7 @@ public class SapphireController extends CameraInputController {
 		});
 
 		addOnKeyDown(Keys.C, () -> {
-			Moonstone.moon.write(new PassTurn());
+			Moonstone.writes(new PassTurn());
 		});
 
 		addOnKeyDown(RIGHT, () -> camera.rotate(45, 0, 0, 1));
@@ -144,7 +147,7 @@ public class SapphireController extends CameraInputController {
 		addOnKeyDown(Keys.Q, () -> zoom += 0.2f);
 		addOnKeyDown(Keys.E, () -> zoom += -0.2f);
 
-
+		
 		addOnKeyUp(Keys.W, () -> {
 			Vector3 up  = camera.up;
 			if(Gdx.input.isKeyPressed(ALT_LEFT)) translation.add( -up.x,  -up.y, 0);
@@ -165,8 +168,10 @@ public class SapphireController extends CameraInputController {
 			if(Gdx.input.isKeyPressed(ALT_LEFT)) translation.add(-up.y,  up.x, 0);
 			else rotationUnit.add(0, 0, -1f); // look right
 		});
+		
 		addOnKeyUp(Keys.Q, () -> zoom += -0.2f);
 		addOnKeyUp(Keys.E, () -> zoom += 0.2f);
+		
 	}
 
 	/**
@@ -208,7 +213,7 @@ public class SapphireController extends CameraInputController {
 		Vector3 p = new Vector3(dir.x * scl + pos.x, dir.y * scl + pos.y, 0);
 
 		float distance = translationSpeed * delta;
-		Vector3 movement = translation.scl(distance);
+		Vector3 movement = translation.cpy().scl(distance);
 
 		float angle = rotationSpeed * delta;
 		rotation.x = rotationUnit.x * up.y;
@@ -320,6 +325,14 @@ public class SapphireController extends CameraInputController {
 		if(button == Buttons.LEFT) {
 			Log.info("touchdown " + cellpos);
 			draggedEntity = creature;
+			Highlight.movement(new ArrayList<>() {{
+				add(new Vector3(0, 0, 0));
+				add(new Vector3(5, 5, 0));
+				add(new Vector3(5, 6, 0));
+				add(new Vector3(6, 7, 0));
+				add(new Vector3(5, 8, 0));
+				add(new Vector3(5, 9, 0));
+			}});
 		} else
 		// toggle character sheet
 		if(button == Buttons.RIGHT && creature != null) {
@@ -341,7 +354,7 @@ public class SapphireController extends CameraInputController {
 	public boolean touchDragged(int x, int y, int pointer) {
 		var pos = getCursorWorldPos(x, y);
 		if(draggedEntity != null) {
-			var epos = draggedEntity.get(Position.class).set(pos.x, pos.y);
+//			var epos = draggedEntity.get(Position.class).set(pos.x, pos.y);
 			//Log.info("dragged entity " + epos);
 		}
 		SapphireWorld.world.cursor.transform.setTranslation(pos.sub(0.5f, 0.5f, 0f));

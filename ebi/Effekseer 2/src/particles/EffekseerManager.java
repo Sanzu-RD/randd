@@ -23,9 +23,14 @@ public class EffekseerManager implements Disposable {
 	
 	public static void InitializeEffekseer() {
 		try {
-			System.loadLibrary("src");
+			System.loadLibrary("effekseer");
 		} catch (Error | Exception exception) {
-			exception.printStackTrace();
+//			exception.printStackTrace();
+			try {
+				System.loadLibrary("/natives/effekseer");
+			} catch (Exception e) {
+				exception.printStackTrace();
+			}
 		}
 	}
 	

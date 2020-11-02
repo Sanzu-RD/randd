@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.common.Action.EndTurnAction;
 import com.souchy.randd.commons.diamond.models.Fight;
-import com.souchy.randd.commons.diamond.statics.Constants;
+import com.souchy.randd.jade.Constants;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent.OnTurnEndHandler;

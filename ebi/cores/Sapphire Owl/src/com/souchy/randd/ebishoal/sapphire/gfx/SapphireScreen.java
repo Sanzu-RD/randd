@@ -170,6 +170,7 @@ public class SapphireScreen extends LapisScreen {
 
 	@Override
 	public void renderWorld() {
+		// render World.cache and Worldinstances
 		super.renderWorld();
 		// render dynamic instances (creatures, terrain effects like glyphs and traps, highlighting effects ..)
 		SapphireGame.renderableEntitySystem.foreach(e -> {

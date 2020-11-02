@@ -1,7 +1,7 @@
 package com.souchy.randd.deathshadows.blackmoonstone.handlers;
 
 import com.souchy.randd.commons.diamond.models.Fight;
-import com.souchy.randd.commons.diamond.statics.Constants;
+import com.souchy.randd.jade.Constants;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadows.blackmoonstone.main.BlackMoonstone;

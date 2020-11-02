@@ -1,4 +1,5 @@
 module com.souchy.randd.commons.Jade {
+	exports com.souchy.randd.jade;
 	exports com.souchy.randd.jade.meta;
 	exports com.souchy.randd.jade.matchmaking;
 	//exports com.souchy.randd.jade.combat;
