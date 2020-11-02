@@ -138,8 +138,8 @@ public class MockScreen3 extends BaseScreen {
 		
 		Log.info("assets : { " + String.join(", ", LapisAssets.assets.getAssetNames()) + " }");
 		
-		String vert = Gdx.files.internal(internal+"shaders/default.vertex.glsl").readString();
-		String frag = Gdx.files.internal(internal+"shaders/default.fragment.glsl").readString();
+		String vert = Gdx.files.internal("data/shaders/default.vertex.glsl").readString();
+		String frag = Gdx.files.internal("data/shaders/default.fragment.glsl").readString();
 		modelBatch = new ModelBatch(vert, frag);
 		var asdf = new ModelBatch(new DefaultShaderProvider());
 		var mod = new Model();
@@ -162,7 +162,7 @@ public class MockScreen3 extends BaseScreen {
 		// List<FileHandle> files =
 		// MockCore.core.getGame().modelDiscoverer.explore("models");
 		// MockCore.core.getGame().modelManager.loadSync(files);
-		Model spider = LapisAssets.get(internal+"delete/Wasp.g3dj"); //LapisMock.core.getGame().modelManager.loadSync("models/Wasp.g3dj");
+		Model spider = LapisAssets.get(internal+"models/Wasp.g3dj"); //LapisMock.core.getGame().modelManager.loadSync("models/Wasp.g3dj");
 		System.out.println("spider 1 = " + spider);
 //		Model spider = LapisResources.assets.get("res/delete/Wasp.g3dj", Model.class); //LapisMock.core.getGame().modelManager.get("Wasp");
 //		System.out.println("spider 2 = " + spider);
@@ -402,12 +402,12 @@ public class MockScreen3 extends BaseScreen {
 					// Registering global action container:
 					.actions("global", GlobalLMLActions.class)
 					// Adding localization support:
-					.i18nBundle(I18NBundle.createBundle(Gdx.files.internal(internal+"i18n/ux/bundle")))
+					.i18nBundle(I18NBundle.createBundle(Gdx.files.internal(internal+"i18n/bundle"))) // ""i18n/ux/bundle")))
 					// custom tags
 					.tag(new Test2TagProvider(), "test2")
 					.tag(new AsdfTagProvider(), "asdf")
 					// Add custom skin
-					.skin(new Skin(Gdx.files.internal(internal+"ux/sapphire/main.json"))).build();//+"ui/uiskin.json"))).build();
+					.skin(new Skin(Gdx.files.internal(internal+"ui/uiskin.json"))).build(); // "ux/sapphire/main.json"))).build();//+"ui/uiskin.json"))).build();
 		}
 	}
 	

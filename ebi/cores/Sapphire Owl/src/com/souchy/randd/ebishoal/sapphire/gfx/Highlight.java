@@ -88,6 +88,9 @@ public class Highlight {
 		return highlights;
 	}
 	
+	/**
+	 * Creates a model of a rectangle with a border
+	 */
     private static Model model(String name, Material mat, Material matBorder) {
 //    	Model mod = modelBuilder.createRect(
 //				0, 0, 0, 

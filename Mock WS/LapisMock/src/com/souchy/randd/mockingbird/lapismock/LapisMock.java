@@ -15,9 +15,10 @@ public class LapisMock extends LapisCore {
 	public static /* final */ LapisMock core;
 	
 	public static void main(String[] args) throws Exception {
-		core = new LapisMock(args);
 		LapisCore.arguments(args);
-		//launch(core);
+		core = new LapisMock(args);
+//		launch(core);
+		core.start();
 	}
 	
 	@Override
