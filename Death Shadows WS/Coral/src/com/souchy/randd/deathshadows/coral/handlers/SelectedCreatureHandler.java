@@ -41,6 +41,7 @@ public class SelectedCreatureHandler implements BBMessageHandler<SelectCreature>
 			
 			// fix team unless it's a mocking lobby
 			if(lobby.type != GameQueue.mock) msg.team = lobby.team(user._id);
+			msg.turn = lobby.turn();
 			
 			// set turn on action
 			var action = new OnTurnEndAction(lobby);

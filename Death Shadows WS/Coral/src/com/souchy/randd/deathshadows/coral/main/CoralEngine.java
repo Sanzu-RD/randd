@@ -130,7 +130,7 @@ public class CoralEngine {
 			lobby.users.add(p1._id);
 			lobby.teams.add(Team.A); 
 			lobby.jadeteams.add(new ArrayList<>()); // .jadeteams.put(p1._id, new ArrayList<>()); // new JadeCreature[Constants.CreaturesPerTeam]);
-			lobby.moonstoneInfo = "127.0.0.1:443";
+			lobby.moonstoneInfo = "127.0.0.1:6000";
 			lobby.turn(0); // p1._id;
 			lobby.time = System.currentTimeMillis();
 //			lobby.phase = LobbyPhase.pick;
@@ -173,11 +173,14 @@ public class CoralEngine {
 					if(channel1 != null && channel2 != null) {
 						Lobby lobby = new Lobby();
 						lobby.type = GameQueue.draft;
+						lobby.playersPerTeam = 1;
+						lobby.bansPerTeam = 1;
+						lobby.picksPerTeam = 4;
 						lobby.users.add(p1._id);
 						lobby.users.add(p2._id);
 						lobby.teams.add(Team.A); 
 						lobby.teams.add(Team.B); 
-						lobby.moonstoneInfo = "127.0.0.1:443";
+						lobby.moonstoneInfo = "127.0.0.1:6000";
 						lobby.turn(0); // p1._id;
 						lobby.time = System.currentTimeMillis();
 //						lobby.phase = LobbyPhase.ban;

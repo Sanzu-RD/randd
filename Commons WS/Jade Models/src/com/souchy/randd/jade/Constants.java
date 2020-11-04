@@ -14,11 +14,11 @@ public class Constants {
 	/**
 	 * Nombre de créatures de base par équipe / deck
 	 */
-	public static final int CreaturesPerTeam = 4;
+//	public static final int CreaturesPerTeam = 4;
 	/**
 	 * Nombre de bans par équipe en mode draft
 	 */
-	public static final int BansPerTeam = 3;
+//	public static final int BansPerTeam = 3;
 	/**
 	 * ID de l'action de mouvement
 	 */

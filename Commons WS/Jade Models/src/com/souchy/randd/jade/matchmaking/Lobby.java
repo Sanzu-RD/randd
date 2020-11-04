@@ -30,11 +30,7 @@ public class Lobby implements BBSerializer, BBDeserializer {
 
 	public static final AttributeKey<Lobby> attrkey = AttributeKey.newInstance("jade.matchmaking.lobby");
 	
-//	public enum LobbyPhase {
-//		ban,
-//		pick,
-//		customize;
-//	}
+	private static final int teamCount = 2;
 	
 	/** game server info */
 	public String moonstoneInfo;
@@ -42,10 +38,11 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	/** draft / blind / mock */
 	public GameQueue type; 
 	
-	/**
-	 * ban, pick, customisation
-	 */
-//	public LobbyPhase phase;
+	// settings par défaut à 1v1, 1 ban et 4 pick 
+	public int playersPerTeam = 1;
+	public int bansPerTeam = 1;
+	public int picksPerTeam = 4;
+	
 	
 	/** user IDs in the lobby */
 	public List<ObjectId> users = new ArrayList<>();
@@ -58,6 +55,7 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	
 	/**
 	 * Current turn starting from 0 (+1 for each ban and pick so 3 bans * 2 + 4 picks * 2 = 14 turns total)
+	 * les tours alternent toujours d'une équipe à l'autre
 	 */
 	private int turn;
 	/**
@@ -111,59 +109,60 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	public int getPlayerIndex(int turn) {
 		switch(users.size()) {
 			// 1 player = mock fight
-			case 1 : return 0;
+			case 1 : 
+				return 0;
 			// 1v1 = 2 players
 			case 2 : { 
-				return turn % 2;
+				return turn % teamCount;
 			}
 			// 2v2 = 4 players
-			case 4 : {
-				if(turn < 2) return turn % 2;
-				else return (turn - 2) % 4;
-			}
+			case 4:
+			// 3v3 = 6 players
+			case 6:
 			// 4v4 = 8 players
 			case 8 : {
-				if(turn < 2) return turn % 2;
-				else return (turn - 2) % 8;
+				// à 4 :
+				// bans : tours = {0, 1, 2, 3, 4, 5}, joueurs = {0, 1, 0, 1, 0, 1}
+				// picks = tours {6, 7, 8, 9, 10, 11, 12, 13}, joueurs = {0, 1, 2, 3, 0, 1, 2, 3}
+				// à 8 :
+				// bans : tours = {0, 1, 2, 3, 4, 5}, joueurs = {0, 1, 0, 1, 0, 1}
+				// picks = tours {6, 7, 8, 9, 10, 11, 12, 13}, joueurs = {0, 1, 2, 3, 4, 5, 6, 7}
+				
+				int bans = bansPerTeam * teamCount;
+				int playerCount = playersPerTeam * teamCount;
+				if(isBanPhase()) return turn % teamCount;
+				else return (turn - bans) % playerCount;
 			}
 		}
 		return -1;
 	}
 	
-	/** nombre de joueurs au total */
-	public int getPlayerCount() {
-		return users.size();
-	}
-	/** nombre de joueurs par team */
-	public int getPlayersPerTeam() {
-		return getPlayerCount() / 2;
-	}
-	/** nombre de ban par team */
-	public int getBansPerTeam() {
-		return Constants.BansPerTeam; // getTeamSize();
-	}
-	public int getPicksPerTeam() {
-		return Constants.CreaturesPerTeam; // getTeamSize();
+	public int picksPerPlayer() {
+		return picksPerTeam / playersPerTeam;
 	}
 	/** 0 pour team A, 1 pour team B */
-	public Team getPickingTeam() {
-		return Team.values()[turn % 2];
+	public Team getTeamPlaying() {
+		return Team.values()[turn % teamCount];
 	}
-	/** Ban turn inside of a team (0-1, 0-1) */
-	public int getBanTurn() {
-		return turn % getBansPerTeam();
+	/** Ban turn inside of a team (0-1-2-3, 0-1-2-3) */
+	public int getTeamBanIndex() {
+		// team A : turn = {0, 2, 4, 6}, ban = {0,1,2,3}
+		// team B : turn = {1, 3, 5, 7}, ban = {0,1,2,3}
+		return Math.floorDiv(turn, teamCount); // turn % bansPerTeam; //getBansPerTeam();
 	}
 	/** Pick turn inside of a team (0-1-2-3, 0-1-2-3) */
-	public int getPickTurn() {
-		int bans = getBansPerTeam() * 2;
+	public int getTeamPickIndex() {
+		// team A : turn = {0, 2, 4, 6}, pick = {0,1,2,3}
+		// team B : turn = {1, 3, 5, 7}, pick = {0,1,2,3}
+		int bans = bansPerTeam * teamCount; // getBansPerTeam() * 2;
 		int pick = turn - bans;
-		return pick % Constants.CreaturesPerTeam;
+		return Math.floorDiv(pick, teamCount); //pick % picksPerTeam; //Constants.CreaturesPerTeam;
 	}
-	/** 0,1,2,3,4,5  */
+	/** 0,1,2, 3,4,5  */
 	public boolean isBanPhase() {
-		return turn < (getBansPerTeam() * 2);
+		return turn < bansPerTeam * teamCount; //(getBansPerTeam() * 2);
 	}
-	/** 6,7,8,9 */
+	/** 6,7,8,9, 10,11,12,13 */
 	public boolean isPickPhase() {
 		return !isBanPhase();
 	}

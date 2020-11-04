@@ -30,11 +30,16 @@ public class SelectCreature implements BBMessage {
 	 */
 	public Team team = Team.A;
 	
+	/**
+	 * pick or ban turn for the server to tell the client where the pick goes
+	 */
+	public int turn;
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 		out.writeInt(modelid);
 		out.writeInt(team.ordinal());
+		out.writeInt(turn);
 		return out;
 	}
 
@@ -42,6 +47,7 @@ public class SelectCreature implements BBMessage {
 	public SelectCreature deserialize(ByteBuf in) {
 		modelid = in.readInt();
 		team = Team.values()[in.readInt()];
+		turn = in.readInt();
 		return this;
 	}
 

@@ -1,6 +1,7 @@
 package com.souchy.randd.ebishoal.amethyst.ui.tabs;
 
 import java.io.File;
+import java.util.ResourceBundle;
 import java.util.Timer;
 
 import com.google.common.eventbus.Subscribe;
@@ -91,12 +92,12 @@ public class DraftController {
 		// select btn
 		btnSelect.setOnMouseClicked(this::select);
 		
-		initCreatvureList();
+		initCreatureList();
 		
 		initTeams();
 	}
 	
-	private void initCreatvureList() {
+	private void initCreatureList() {
 		// fill creature list with images + click handler
 		for (var model : DiamondModels.creatures.values()) {
 			String url = "";
@@ -211,31 +212,38 @@ public class DraftController {
 	public void receiveSelectMsg(SelectCreature msg) {
 		Log.error("DraftController . onSelectCreature event handler " + msg.modelid);
 		Platform.runLater(() -> {
-//			var icon = AssetData.creatures.get(msg.modelid).getIcon();
-//			var node = new ImageView(icon.getAbsolutePath());
-//			DraftRow node = new DraftRow(msg.modelid); // Amethyst.app.loadComponent("draftrow"); // new DraftRow(msg.modelid);
-			
-			var node = getRow(msg.team, Coraline.lobby.getPickTurn());
-			
-			// if the msg team is equal to this user's team, add the draftrow on the left team
-//			if(this.team == msg.team) {
-////				teamLeft.add(node, 0, teamLeft.getChildren().size());
-//				node = null;
-////				teamLeft.cell
-//			} else {
-//				leftRight.add(node, 0, leftRight.getChildren().size());
-//				node.setDisable(true);
-//			}
-			
-			node.init(msg.modelid);
-			node.setOnMouseClicked(this::onRowClick);
+			// set turn
+			Coraline.lobby.turn(msg.turn);
+			// enlève la picked creature de la creatureList
+			// ...
+			// set ban or pick
+			if(Coraline.lobby.isBanPhase()) {
+				var node = getBanColumn(msg.team, Coraline.lobby.getTeamBanIndex());
+				// set image + tooltip
+//				ResourceBundle b = ResourceBundle.getBundle("../res/i18n/creatures/bundle");
+//				var namestr = b.getString("creature." + creatureModelId + ".name");
+				node.setImage(new Image(AssetData.creatures.get(msg.modelid).getIconURL().toString()));
+			} else {
+				var node = getPickRow(msg.team, Coraline.lobby.getTeamPickIndex());
+				node.init(msg.modelid);
+			}
 		});
 	}
-	
-	private DraftRow getRow(Team t, int pickTurn) {
-		var col = teamLeft;
-		if(this.team != t) col = teamRight;
-		for (Node node : col.getChildren()) {
+
+	private ImageView getBanColumn(Team t, int pickTurn) {
+		var teamGrid = teamLeft;
+		if(this.team != t) teamGrid = teamRight;
+		for (Node node : teamGrid.getChildren()) {
+			if(GridPane.getColumnIndex(node) == pickTurn) {
+				return (ImageView) node; 
+			}
+		}
+		return null;
+	}
+	private DraftRow getPickRow(Team t, int pickTurn) {
+		var teamGrid = teamLeft;
+		if(this.team != t) teamGrid = teamRight;
+		for (Node node : teamGrid.getChildren()) {
 			if(GridPane.getRowIndex(node) == pickTurn) {
 				return (DraftRow) node;
 			}

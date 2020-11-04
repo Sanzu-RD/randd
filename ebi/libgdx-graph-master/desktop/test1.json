@@ -1,0 +1,71 @@
+{
+"version": "0.1.2",
+"nodes": [
+	{
+		"id": "202031b4a94b45298b91fea78b72490f",
+		"type": "Property",
+		"x": 63.0,
+		"y": 166.0,
+		"data": { "name": "New Stage", "type": "Stage" }
+	},
+	{
+		"id": "e6efaaf98a4d4ecba89445249e2008d1",
+		"type": "ValueFloat",
+		"x": 61.0,
+		"y": 264.0,
+		"data": { "v1": 1.0 }
+	},
+	{
+		"id": "a746f9ded9254f99b2c189cad2da7ef4",
+		"type": "ValueColor",
+		"x": 91.00003051757812,
+		"y": 642.0,
+		"data": { "color": "ffffffff" }
+	},
+	{
+		"id": "003fcde1d12d4b729f0648b5fdf2ee66",
+		"type": "Property",
+		"x": 50.0,
+		"y": 467.0,
+		"data": { "name": "New Models", "type": "Models" }
+	},
+	{ "id": "ebe8be16cc9b4efa81c90c6703775013", "type": "PipelineStart", "x": 306.0, "y": 596.0 },
+	{ "id": "87803d6e0eb54ec29241e905acb08fed", "type": "UIRenderer", "x": 305.0, "y": 167.0 },
+	{ "id": "end", "type": "PipelineEnd", "x": 307.0, "y": 50.0 },
+	{ "id": "9450b316390b433d8282b89b0f7cde3d", "type": "DefaultRenderer", "x": 307.0, "y": 378.0 },
+	{
+		"id": "f739f108f43a484cbd63fef9e3c31869",
+		"type": "Property",
+		"x": 54.0,
+		"y": 337.0,
+		"data": { "name": "New Lights", "type": "Lights" }
+	},
+	{
+		"id": "5f600a656e1148ed9500d9647dff3d93",
+		"type": "Property",
+		"x": 51.0,
+		"y": 400.0,
+		"data": { "name": "New Camera", "type": "Camera" }
+	},
+	{ "id": "2a0edbd2b2d44fd4b50ce51e23072eab", "type": "GaussianBlur", "x": 305.0, "y": 287.0 }
+],
+"connections": [
+	{ "fromNode": "ebe8be16cc9b4efa81c90c6703775013", "fromField": "output", "toNode": "9450b316390b433d8282b89b0f7cde3d", "toField": "input" },
+	{ "fromNode": "87803d6e0eb54ec29241e905acb08fed", "fromField": "output", "toNode": "end", "toField": "input" },
+	{ "fromNode": "2a0edbd2b2d44fd4b50ce51e23072eab", "fromField": "output", "toNode": "87803d6e0eb54ec29241e905acb08fed", "toField": "input" },
+	{ "fromNode": "9450b316390b433d8282b89b0f7cde3d", "fromField": "output", "toNode": "2a0edbd2b2d44fd4b50ce51e23072eab", "toField": "input" },
+	{ "fromNode": "a746f9ded9254f99b2c189cad2da7ef4", "fromField": "value", "toNode": "ebe8be16cc9b4efa81c90c6703775013", "toField": "background" },
+	{ "fromNode": "202031b4a94b45298b91fea78b72490f", "fromField": "value", "toNode": "87803d6e0eb54ec29241e905acb08fed", "toField": "stage" },
+	{ "fromNode": "5f600a656e1148ed9500d9647dff3d93", "fromField": "value", "toNode": "9450b316390b433d8282b89b0f7cde3d", "toField": "camera" },
+	{ "fromNode": "f739f108f43a484cbd63fef9e3c31869", "fromField": "value", "toNode": "9450b316390b433d8282b89b0f7cde3d", "toField": "lights" },
+	{ "fromNode": "003fcde1d12d4b729f0648b5fdf2ee66", "fromField": "value", "toNode": "9450b316390b433d8282b89b0f7cde3d", "toField": "models" },
+	{ "fromNode": "e6efaaf98a4d4ecba89445249e2008d1", "fromField": "value", "toNode": "2a0edbd2b2d44fd4b50ce51e23072eab", "toField": "blurRadius" }
+],
+"properties": [
+	{ "name": "New Models", "type": "Models" },
+	{ "name": "New Lights", "type": "Lights" },
+	{ "name": "New Camera", "type": "Camera" },
+	{ "name": "New Stage", "type": "Stage" }
+],
+"groups": []
+}

@@ -56,7 +56,7 @@ public class UpdateTeam implements BBMessage {
 
 	@Override
 	public int getBufferCapacity() {
-		return Constants.CreaturesPerTeam * (1 + Constants.numberOfSpells + Element.count());
+		return /*Constants.CreaturesPerTeam*/ creatures.length * (1 + Constants.numberOfSpells + Element.count());
 	}
 	
 }
