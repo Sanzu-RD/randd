@@ -79,17 +79,17 @@ public class LoginForm { //extends VBox {
 		var username = usernameField.getText();
 		var password = passwordField.getText();
 		
-		User user = null;
+		Amethyst.user = null;
 		try {
 			var salt = Opaline.auth.getSalt(username);
 			var hashedPassword = UserUtil.hashPassword(password, salt);
-			user = Opaline.auth.signin(username + "@" + hashedPassword); // new LoginToken(username, hashedPassword));
+			Amethyst.user = Opaline.auth.signin(username + "@" + hashedPassword); // new LoginToken(username, hashedPassword));
 		} catch(Exception e) {
 			Log.info("Amethyst.login form error : " + e);
 		}
 		
-		if(user != null) {
-			Coraline.credentials = new String[] { user.username, user.password };
+		if(Amethyst.user != null) {
+			Coraline.credentials = new String[] { Amethyst.user.username, Amethyst.user.password };
 			AmethystApp.stage.setScene(AmethystApp.mainScene);
 		} else {
 			// show tooltip for wrong username/password combination

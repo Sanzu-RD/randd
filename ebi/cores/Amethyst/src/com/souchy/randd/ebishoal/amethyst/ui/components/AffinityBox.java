@@ -1,6 +1,7 @@
 package com.souchy.randd.ebishoal.amethyst.ui.components;
 
 import com.souchy.randd.commons.diamond.models.CreatureModel;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.Constants;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.amethyst.main.Amethyst;
@@ -46,17 +47,24 @@ public class AffinityBox extends StackPane {
 	 */
 	public TextField box = new TextField();
 	
-	public AffinityBox(CreatureModel model, JadeCreature creature, Elements ele) {
+	public AffinityBox(CreatureModel model, JadeCreature creature, Elements ele) throws Exception {
 		this.model = model;
 		this.creature = creature;
 		this.ele = ele;
+		Amethyst.core.bus.register(this);
 		Amethyst.app.loadComponent(this, "affinitybox");
 	}
 	
 	@FXML
-	public void initialize() {
-		Amethyst.core.bus.register(this);
-		
+	public void initialize() throws Exception {
+//		try {
+//			Log.info("AffinityBox init");
+//		} catch (Exception e) {
+//			Log.error("AffinityBox init", e);
+//		}
+	}
+	
+	public AffinityBox init() {
 		// set base value
 		this.value.setText(model.baseStats.affinity.get(ele).value() + "");
 		this.box.setText(model.baseStats.affinity.get(ele).value() + "");
@@ -66,6 +74,7 @@ public class AffinityBox extends StackPane {
 		this.setOnMouseClicked(this::onClick);
 		this.setOnMouseExited(this::onExit);
 		this.box.textProperty().addListener(this::onChange);
+		return this;
 	}
 	
 	/**

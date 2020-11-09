@@ -112,9 +112,9 @@
                   </ImageView>
                </children>
             </GridPane>
-            <Label fx:id="lblTimer" styleClass="fdsa" text="Time" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+            <Label fx:id="lblTime" styleClass="fdsa" text="Time" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
          </children>
       </GridPane>
-      <Button fx:id="btnSelect" layoutX="766.0" layoutY="791.0" mnemonicParsing="false" text="select" />
+      <Button fx:id="btnSelect" layoutX="766.0" layoutY="759.0" mnemonicParsing="false" text="select" />
    </children>
 </AnchorPane>

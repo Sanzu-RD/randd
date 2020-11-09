@@ -7,6 +7,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.coraline.Coraline;
+import com.souchy.randd.jade.meta.User;
 
 import javafx.application.Application;
 
@@ -26,6 +27,11 @@ public class Amethyst extends EbiShoalCore {
 	public static AmethystConf conf;
 	//public static AmethystModule module;
 	//public static ExecutorService service;
+	
+	/**
+	 * User logged in
+	 */
+	public static User user;
 	
 	
 	public static void main(String[] args) throws Exception {

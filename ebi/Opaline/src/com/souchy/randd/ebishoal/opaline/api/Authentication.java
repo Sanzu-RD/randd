@@ -27,7 +27,7 @@ public class Authentication implements IAuthentication {
 		Log.info("Opaline.Authentication.signin : token = " + token);
 //		var user = Opaline.post(target.path("signin"), Entity.entity(token, MediaType.APPLICATION_JSON), User.class, MediaType.APPLICATION_JSON_TYPE);
 		var user = Opaline.get(target.path("signin/" + token), User.class);
-		Log.info("Opaline.Authentication.signin : " + user);
+		Log.info("Opaline.Authentication.signin : " + user + ", " + user._id.getCounter());
 		return user;
 	}
 	

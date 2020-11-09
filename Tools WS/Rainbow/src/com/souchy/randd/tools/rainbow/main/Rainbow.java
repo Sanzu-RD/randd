@@ -39,12 +39,12 @@ public class Rainbow extends EbiShoalCore {
 		super(args);
 		core = this;
 		
-		this.host = "127.0.0.1";
+		this.host = "localhost";
 		this.port = 1000;
 		var root = "../"; 
-		if(args.length > 0) host = args[0];
-		if(args.length > 1) port = Integer.parseInt(args[1]);
-		if(args.length > 2) root = args[2];
+		if(args.length > 0) root = args[0];
+		if(args.length > 1) host = args[1];
+		if(args.length > 2) port = Integer.parseInt(args[2]);
 		
 		Environment.root = Paths.get(root);
 		

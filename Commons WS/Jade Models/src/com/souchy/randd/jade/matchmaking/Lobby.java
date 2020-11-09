@@ -77,14 +77,14 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	/**
 	 * get the team for a player
 	 */
-	public Team team(ObjectId player) {
-		return teams.get(users.indexOf(player));
+	public Team team(ObjectId user) {
+		return teams.get(users.indexOf(user));
 	}
 	/**
 	 * get the creatures for a player
 	 */
-	public List<JadeCreature> creatures(ObjectId player) {
-		return jadeteams.get(users.indexOf(player));
+	public List<JadeCreature> creatures(ObjectId user) {
+		return jadeteams.get(users.indexOf(user));
 	}
 
 	/**
@@ -190,6 +190,7 @@ public class Lobby implements BBSerializer, BBDeserializer {
 			// for each player write : id, team, creatures
 			for (int i = 0; i < users.size(); i++) {
 				var user = users.get(i);
+				Log.info("Lobby serialize user " + user.toString());
 				// player id
 				writeString(out, user.toString());
 				// team 
@@ -220,6 +221,7 @@ public class Lobby implements BBSerializer, BBDeserializer {
 			// player id
 			var id = new ObjectId(readString(in));
 			users.add(id);
+			Log.info("Lobby deserialize user " + id.toString());
 			// player team
 			int teamordinal = in.readInt();
 			teams.add(Team.values()[teamordinal]); //.put(id, Team.values()[teamordinal]);

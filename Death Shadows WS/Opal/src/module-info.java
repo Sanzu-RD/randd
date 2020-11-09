@@ -4,7 +4,7 @@ module com.souchy.randd.deathshadows.opal {
 	exports com.souchy.randd.deathshadows.opal.api.data;
 
 	opens com.souchy.randd.deathshadows.opal.api;
-
+	opens com.souchy.randd.deathshadows.opal.api.authentication;
 	
 	
 	requires transitive com.souchy.randd.commons.Jade;
@@ -45,4 +45,5 @@ module com.souchy.randd.deathshadows.opal {
 	requires transitive com.google.common;
 	requires transitive org.mongodb.bson;
 	requires transitive com.souchy.randd.deathshadow.core;
+	requires reflections;
 }

@@ -2,6 +2,7 @@ package com.souchy.randd.ebishoal.coraline;
 
 import com.souchy.randd.commons.deathebi.msg.GetSalt;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
@@ -35,7 +36,6 @@ public class Coraline {
 	 */
 	public static Lobby lobby;
 
-	
 	/**
 	 * Connects, auths and enqueue automatically to a matchmaking server
 	 */
@@ -44,7 +44,9 @@ public class Coraline {
 		try {
 			// start by dequeueing
 			dequeue();
-			tcp = new EbiShoalTCP("127.0.0.1", 7000 + queue.ordinal(), core);
+			
+			var conf = JsonConfig.read(CoralineConf.class);
+			tcp = new EbiShoalTCP(conf.ip, conf.port + queue.ordinal(), core);
 			
 			// auth
 			var username = credentials[0];

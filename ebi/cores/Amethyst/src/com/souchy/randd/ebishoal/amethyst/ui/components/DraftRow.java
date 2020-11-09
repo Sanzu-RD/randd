@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ResourceBundle;
 
+import com.google.common.eventbus.Subscribe;
+import com.souchy.randd.commons.coral.draft.ChangeTurn;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.CreatureModel;
@@ -11,18 +13,24 @@ import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.amethyst.main.Amethyst;
+import com.souchy.randd.ebishoal.coraline.Coraline;
 import com.souchy.randd.jade.Constants;
 import com.souchy.randd.jade.meta.JadeCreature;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 
 public class DraftRow extends GridPane {
 
@@ -33,16 +41,21 @@ public class DraftRow extends GridPane {
 	public ImageView icon;
 	
 	@FXML
-	public FlowPane spells;
-	
+	public AnchorPane affinities;
 	@FXML
-	public FlowPane affinities;
+	public FlowPane affinitiesList;
+
+	@FXML
+	public AnchorPane spells;
+	@FXML
+	public FlowPane spellsList;
 	
 	@FXML
 	public Button btnPage;
 	
 //	public Label affinities;
 	
+	public int turn;
 	
 	/**
 	 * Customization
@@ -50,8 +63,9 @@ public class DraftRow extends GridPane {
 	public JadeCreature creature = new JadeCreature();
 	public CreatureModel model;
 	
-	public DraftRow() {
-//		Amethyst.app.loadComponent(this, "draftrow");
+	public DraftRow() throws Exception {
+//		Log.info("ctor draftrow");
+		Amethyst.app.loadComponent(this, "draftrow");
 	}
 	
 //	public DraftRow(int creatureModelId) {
@@ -63,39 +77,61 @@ public class DraftRow extends GridPane {
 //	}
 	
 	@FXML
-	public void initialize() {
+	public void initialize() throws Exception {
 		Amethyst.core.bus.register(this);
 		
 		this.name.setText("bambi");
 		
-		for (var e : Elements.values()) {
-			this.affinities.getChildren().add(new AffinityBox(model, creature, e));
-		}
 	}
 	
 	public void init(int creatureModelId) {
-		// get model
-		model = DiamondModels.creatures.get(creatureModelId);
-		// make creature
-		creature.creatureModelID = creatureModelId;
-		creature.affinities = new int[Elements.values().length];
-		creature.spellIDs = new int[Constants.numberOfSpells];
-
-		// get i18n name 
-		//Log.info("draft row initialize " + creatureModelId);
 		try {
-			ResourceBundle b = ResourceBundle.getBundle("../res/i18n/creatures/bundle");
-			var namestr = b.getString("creature." + creatureModelId + ".name");
-			//Log.info("DraftRow i18n name : " + namestr);
-			this.name.setText(namestr);
+			// get model
+			model = DiamondModels.creatures.get(creatureModelId);
+			// make creature
+			creature.creatureModelID = creatureModelId;
+			creature.affinities = new int[Elements.values().length];
+			creature.spellIDs = new int[Constants.numberOfSpells];
+			
+			// get i18n name
+			// Log.info("draft row initialize " + creatureModelId);
+			try {
+				ResourceBundle b = ResourceBundle.getBundle("../res/i18n/creatures/bundle");
+				var namestr = b.getString("creature." + creatureModelId + ".name");
+				// Log.info("DraftRow i18n name : " + namestr);
+				this.name.setText(namestr);
+			} catch (Exception e) {
+				// Log.info("", e);
+				if(name != null) this.name.setText("missing bundle");
+			}
+			// get icon
+			var img = new Image(AssetData.creatures.get(creatureModelId).getIconURL().toString());
+			this.icon.setImage(img);
+			this.icon.setFitHeight(80);
+			this.icon.setFitWidth(80);
+			
+			// refreshAffinities();
+			// refreshSpells();
+			for (var e : Elements.values()) {
+				this.affinities.getChildren().add(new AffinityBox(model, creature, e).init());
+			}
 		} catch (Exception e) {
-//			Log.info("", e);
-			if(name != null) this.name.setText("missing bundle");
+			Log.error("", e);
 		}
-		// get icon
-		this.icon.setImage(new Image(AssetData.creatures.get(creatureModelId).getIconURL().toString()));
-//		refreshAffinities();
-//		refreshSpells();
+	}
+
+	/**
+	 * Coral handler for timer/turnstate message 
+	 */
+	@Subscribe
+	public void receiveTimerMsg(ChangeTurn msg) {
+		Platform.runLater(() -> {
+			if(msg.turn == this.turn) {
+				this.getStyleClass().add("selected");
+			} else {
+				this.getStyleClass().remove("selected");
+			}
+		});
 	}
 	
 	

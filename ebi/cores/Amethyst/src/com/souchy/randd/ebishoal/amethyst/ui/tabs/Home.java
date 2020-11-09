@@ -88,11 +88,12 @@ public class Home {
 	}
 	
 	/**
-	 * Message handler
+	 * Coral Message handler
 	 */
 	@Subscribe
 	public void onMathFoundMsg(MatchFound msg) {
 		Log.info("Amethyst on MatchFound, change screen to draft");
+		AmethystApp.mainController.draftController.init();
 		AmethystApp.mainController.mainTabs.getSelectionModel().select(AmethystApp.mainController.draftTab);
 	}
 	

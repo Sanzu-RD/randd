@@ -21,7 +21,8 @@ public class UpdateTeam implements BBMessage {
 	public JadeCreature[] creatures;
 //	public boolean valid = false;
 	
-	private UpdateTeam() {}
+	public UpdateTeam() {
+	}
 	public UpdateTeam(JadeCreature[] creatures) {
 		this.creatures = creatures;
 	}

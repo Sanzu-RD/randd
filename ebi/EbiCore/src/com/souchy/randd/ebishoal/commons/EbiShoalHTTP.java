@@ -51,7 +51,9 @@ public class EbiShoalHTTP {
 	 */
 	public <T> T get(WebTarget target, Class<T> c) {
 		// if(conf == null) Log.critical("Impossible to create an Opaline config.");
-		return target.request().get().readEntity(c);
+		var asdf = target.request(MediaType.APPLICATION_JSON_TYPE).get();
+//		Log.info("Ebi HTTP get : " + asdf.read);
+		return asdf.readEntity(c);
 	}
 	public <T> T get(String path, Class<T> c) {
 		// if(conf == null) Log.critical("Impossible to create an Opaline config.");

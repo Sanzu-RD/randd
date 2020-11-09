@@ -17,9 +17,7 @@ public abstract class DeathShadowCore extends Core {
 		
 		deathShadowCore = this;
 		
-		Logging.streams.add(l -> {
-			Emerald.logs().insertOne(l);
-		});
+		Emerald.init();
 		
 		this.rivers = new SmoothRivers(this);
 	}

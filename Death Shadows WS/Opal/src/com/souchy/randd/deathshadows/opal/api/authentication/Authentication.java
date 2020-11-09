@@ -19,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
+
 import com.souchy.randd.commons.opal.IAuthentication;
 import com.souchy.randd.commons.opal.OpalCommons;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -28,7 +29,7 @@ import com.souchy.randd.jade.meta.User;
 @Path(OpalCommons.authentication)
 //@XmlType(name="")
 public class Authentication implements IAuthentication {
-	
+
 	// Note: you could even inject this as a method parameter
 	@Context public HttpServletRequest request;
 	@Context UriInfo ui;
@@ -66,7 +67,7 @@ public class Authentication implements IAuthentication {
 			var username = data[0];
 			var hashedpass = data[1];
 			var user = getUserEmerald(username, hashedpass); // token.username, token.hashedPassword);
-			Log.format("Opal.signin : user (%s, %s) = %s", username, hashedpass, user);
+			Log.format("Opal.signin : user %s", user);
 			return user;
 		} catch (Exception e) {
 			Log.info("", e);

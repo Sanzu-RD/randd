@@ -34,6 +34,7 @@ import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -73,28 +74,32 @@ public class DraftController {
 	@FXML public Button btnSelect;
 	
 	private ImageView selected;
-	private Timeline timeline;
+	private Timeline timeline = new Timeline();
 	private CreatureModel selectedModel;
 	public Team team;
 	
+	public DraftController() throws Exception {
+		Amethyst.core.bus.register(this);
+	}
 	
 	@FXML
-	public void initialize() {
-		Coraline.core.bus.register(this);
-		Amethyst.core.bus.register(this);
-		
-		// clear everything else
-//		teamLeft.getChildren().clear();
-//		bansLeft.getChildren().clear();
-//		leftRight.getChildren().clear();
-//		bansRight.getChildren().clear();
-		
-		// select btn
-		btnSelect.setOnMouseClicked(this::select);
-		
-		initCreatureList();
-		
-		initTeams();
+	public void initialize() throws Exception {
+		try {
+			// select btn
+			btnSelect.setOnMouseClicked(this::select);
+			
+			initCreatureList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void init() {
+		try {
+			initTeams();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void initCreatureList() {
@@ -105,16 +110,15 @@ public class DraftController {
 				
 				// creature pool
 				var data = AssetData.creatures.get(model.id());
-//				Log.info("DraftController init model " + model + " data " + data);
-//				Log.info("DraftController path 1 : " + data.getIconURL().toString());
-//				Log.info("DraftController path 2 : " + data.getIcon().getAbsolutePath());
-//				Log.info("DraftController path 3 : " + data.getIconPath().toString());
+				// Log.info("DraftController init model " + model + " data " + data);
+				// Log.info("DraftController path 1 : " + data.getIconURL().toString());
+				// Log.info("DraftController path 2 : " + data.getIcon().getAbsolutePath());
+				// Log.info("DraftController path 3 : " + data.getIconPath().toString());
 				url = data.getIconURL().toString();
-//				url = data.getIcon().getAbsolutePath();
-//				url = data.getIconPath().toString();
-//				url = "res/textures/creatures/luna.png";
-//				Log.info("DraftController . img url " + url);
-				
+				// url = data.getIcon().getAbsolutePath();
+				// url = data.getIconPath().toString();
+				// url = "res/textures/creatures/luna.png";
+				// Log.info("DraftController . img url " + url);
 				
 				var img = new ImageView(url);
 				img.setPreserveRatio(true);
@@ -141,11 +145,10 @@ public class DraftController {
 				
 				list.getChildren().add(img);
 				
-				
 				// click select effect
 				list.setOnMouseClicked(e -> {
 					Log.info("DraftController target " + e.getTarget());
-//					Log.info("" + e.getPickResult());
+					// Log.info("" + e.getPickResult());
 					if(e.getTarget() == null) return;
 					if(e.getTarget() instanceof ImageView == false) return;
 					
@@ -157,13 +160,71 @@ public class DraftController {
 					selectedModel = (CreatureModel) imgtarget.getProperties().get(CreatureModel.class);
 				});
 			} catch (Exception e) {
-				Log.info("DraftController Error creating image : " +  url, e);
+				Log.info("DraftController Error creating image : " + url, e);
 			}
 		}
 	}
 	
-	private void initTeams() {
-		
+	private void initTeams() throws Exception {
+		Platform.runLater(() -> {
+			
+			this.team = Coraline.lobby.team(Amethyst.user._id);
+			
+			Log.info("DraftController init team " + team);
+			
+			Team t = Team.A;
+			
+			// init bans 
+			bansLeft.getChildren().clear();
+			bansRight.getChildren().clear();
+			for(int i = 0; i < Coraline.lobby.bansPerTeam * 2; i++) {
+				var img = new ImageView();
+				img.setFitHeight(32);
+				img.setFitWidth(32);
+				var p = new AnchorPane(img);
+				p.getStyleClass().add("banborder");
+				if(t == Team.A) {
+					bansLeft.add(p, i % Coraline.lobby.bansPerTeam, 0); // .getChildren().add(p);
+				} else {
+					bansRight.add(p, i % Coraline.lobby.bansPerTeam, 0);
+//					bansRight.getChildren().add(p);
+				}
+				t = t.inverse();
+			}
+			
+			// init picks
+			teamLeft.getChildren().clear();
+			teamRight.getChildren().clear();
+			int b = Coraline.lobby.bansPerTeam * 2;
+			for (int i = 0; i < Coraline.lobby.picksPerTeam * 2; i ++) {
+				try {
+					DraftRow row = new DraftRow();
+					row.turn = i + b;
+					row.getStyleClass().add("rowborder");
+					if(t == Team.A) {
+//						teamLeft.getChildren().add(row);
+						teamLeft.add(row, 0, i % Coraline.lobby.picksPerTeam); 
+					} else {
+//						teamRight.getChildren().add(row);
+						teamRight.add(row, 0, i % Coraline.lobby.picksPerTeam); 
+					}
+					t = t.inverse();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			// for(var c : teamLeft.getChildren()) {
+//				var row = (DraftRow) c;
+//				row.turn = t;
+//				t += 2;
+//			}
+//			t = Coraline.lobby.bansPerTeam * 2 + 1;
+//			for(var c : teamRight.getChildren()) {
+//				var row = (DraftRow) c;
+//				row.turn = t;
+//				t += 2;
+//			}
+		});
 	}
 	
 	/**
@@ -176,16 +237,18 @@ public class DraftController {
 //		var filtered = creatureList.getChildren().filtered(i -> i.getEffect() != null);
 //		// be sure that a creature is selected
 //		if(filtered.size() == 0) return;
+		
 //		// get creature model
 //		var img = filtered.get(0);
 //		var model = (CreatureModel) img.getProperties().get(CreatureModel.class);
 		var img = selected;
 		var model = selectedModel;
-		// unselect
 		
+		// unselect
 //		var filtered = creatureList.getChildren().filtered(i -> i.getProperties().get(CreatureModel.class) == model);
 //		var img = filtered.get(0);
-		img.setEffect(null);
+		if(img != null) img.setEffect(null);
+		
 		selected = null;
 		selectedModel = null;
 		
@@ -206,24 +269,27 @@ public class DraftController {
 	
 	
 	/**
-	 * Event handler for SelectCreature message response
+	 * Coral handler for SelectCreature message response
 	 */
 	@Subscribe
 	public void receiveSelectMsg(SelectCreature msg) {
-		Log.error("DraftController . onSelectCreature event handler " + msg.modelid);
+		Log.error("DraftController . onSelectCreature event handler " + msg.modelid + ", on turn " + msg.turn);
 		Platform.runLater(() -> {
 			// set turn
 			Coraline.lobby.turn(msg.turn);
+			msg.team = Coraline.lobby.getTeamPlaying();
 			// enlève la picked creature de la creatureList
 			// ...
 			// set ban or pick
 			if(Coraline.lobby.isBanPhase()) {
+				Log.info("select turn " + Coraline.lobby.turn() + ", team " + Coraline.lobby.getTeamPlaying() + ", ban " + Coraline.lobby.getTeamBanIndex());
 				var node = getBanColumn(msg.team, Coraline.lobby.getTeamBanIndex());
 				// set image + tooltip
 //				ResourceBundle b = ResourceBundle.getBundle("../res/i18n/creatures/bundle");
 //				var namestr = b.getString("creature." + creatureModelId + ".name");
 				node.setImage(new Image(AssetData.creatures.get(msg.modelid).getIconURL().toString()));
 			} else {
+				Log.info("select turn " + Coraline.lobby.turn() + ", team " + Coraline.lobby.getTeamPlaying() + ", pick " + Coraline.lobby.getTeamPickIndex());
 				var node = getPickRow(msg.team, Coraline.lobby.getTeamPickIndex());
 				node.init(msg.modelid);
 			}
@@ -231,11 +297,14 @@ public class DraftController {
 	}
 
 	private ImageView getBanColumn(Team t, int pickTurn) {
-		var teamGrid = teamLeft;
-		if(this.team != t) teamGrid = teamRight;
+		var teamGrid = bansLeft;
+		if(this.team != t) teamGrid = bansRight;
+		Log.format("DraftController getbanColumn (%s vs %s) = %s + %s", team, t, teamGrid, pickTurn);
 		for (Node node : teamGrid.getChildren()) {
-			if(GridPane.getColumnIndex(node) == pickTurn) {
-				return (ImageView) node; 
+			var col = GridPane.getColumnIndex(node);
+			if(col == null) col = 0;
+			if(col == pickTurn) {
+				return (ImageView) ((AnchorPane) node).getChildren().get(0);
 			}
 		}
 		return null;
@@ -243,22 +312,16 @@ public class DraftController {
 	private DraftRow getPickRow(Team t, int pickTurn) {
 		var teamGrid = teamLeft;
 		if(this.team != t) teamGrid = teamRight;
+		Log.format("DraftController getPickRow (%s vs %s) = %s + %s", team, t, teamGrid, pickTurn);
 		for (Node node : teamGrid.getChildren()) {
-			if(GridPane.getRowIndex(node) == pickTurn) {
+			var row = GridPane.getRowIndex(node);
+			if(row == null) row = 0;
+			if(row == pickTurn) {
 				return (DraftRow) node;
 			}
 		}
 		return null;
 	}
-	
-	/**
-	 * TODO Event handler for BanCreature message response
-	 */
-	@Subscribe 
-	public void receivebanMsg() { // BanCreature msg) {
-		
-	}
-	
 	
 	/**
 	 * When selecting an owned draft row, highlight its border
@@ -272,22 +335,45 @@ public class DraftController {
 	}
 
 	/**
-	 * Event handler for timer/turnstate message 
+	 * Coral handler for timer/turnstate message 
 	 */
 	@Subscribe
 	public void receiveTimerMsg(ChangeTurn msg) {
-//		if(msg.team == Team.A) {
-//			teamLeft.getCssMetaData().add(null);
-//		}
-//		teamLeft.getChildren()
-//		Coraline.lobby
-		var keyframe = new KeyFrame(Duration.seconds(1), ae -> {
-			var key = (KeyFrame) ae.getSource();
-			lblTime.setText(key.getTime().toSeconds() + "");
+		Coraline.lobby.turn(msg.turn);
+		
+		Platform.runLater(() -> {
+			for (Node node : bansLeft.getChildren()) {
+				node.getStyleClass().remove("selected");
+			}
+			for (Node node : bansRight.getChildren()) {
+				node.getStyleClass().remove("selected");
+			}
+			
+			if(Coraline.lobby.isBanPhase()) {
+				var node = getBanColumn(Coraline.lobby.getTeamPlaying(), Coraline.lobby.getTeamBanIndex());
+				node.getStyleClass().add("selected");
+			} else {
+				// var node = getPickRow(Coraline.lobby.getTeamPlaying(),
+				// Coraline.lobby.getTeamPickIndex());
+				// node.getStyleClass().add("selected");
+			}
+			
+			this.lblTime.setText("" + msg.turn);
+			
+			if(timeline != null) {
+				try {
+					var keyframe = new KeyFrame(Duration.seconds(1), ae -> {
+						var key = (KeyFrame) ae.getSource();
+						lblTime.setText(msg.turn + " - " + key.getTime().toSeconds());
+					});
+					timeline.stop();
+					timeline = new Timeline(keyframe);
+					timeline.play();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		});
-		timeline.stop();
-		timeline = new Timeline(keyframe);
-		timeline.play();
 	}
 	
 	

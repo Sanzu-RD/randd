@@ -4,6 +4,8 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 
+import com.souchy.randd.commons.opal.serialization.ObjectIdReader;
+import com.souchy.randd.commons.opal.serialization.UserReader;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.EbiShoalHTTP;
@@ -18,6 +20,8 @@ public class Opaline { //extends EbiShoalHTTP { //extends EbiCore {
 		conf = JsonConfig.readExternal(OpalineConf.class, "./modules/");
 		Log.info("Start Opaline on : " + conf.getTarget());
 		http = new EbiShoalHTTP(conf.getTarget(), conf.connectionTimeout, conf.readTimeout);
+		http.client.register(UserReader.class);
+		http.client.register(ObjectIdReader.class);
 	}
 	
 	public static final Test test = new Test();

@@ -24,7 +24,7 @@ public class MatchFound implements BBMessage {
 		try {
 			lobby.serialize(out);
 		}catch(Exception e) {
-			Log.info("", e);
+			Log.error("", e);
 		}
 		return out;
 	}

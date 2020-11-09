@@ -34,12 +34,11 @@ public final class Coral extends DeathShadowCore {
 		coral = this;
 		
 		this.port = 7000;
-		this.port += queue.ordinal();
 		this.queue = GameQueue.mock;
 		
 		if(args.length > 0) port = Integer.parseInt(args[0]); // override default port
 		if(args.length > 1) queue = GameQueue.valueOf(args[1]); // queue
-		
+		this.port += queue.ordinal();
 		
 		Log.info("Coral port " + port + " queue " + queue.toString());
 

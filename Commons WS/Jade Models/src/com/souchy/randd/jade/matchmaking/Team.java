@@ -5,4 +5,12 @@ public enum Team {
 	B,
 	/** C is Neutral */
 //	C,
+	
+	;
+	
+	public Team inverse() {
+		if(this == A) return B;
+		else return A;
+	}
+	
 }

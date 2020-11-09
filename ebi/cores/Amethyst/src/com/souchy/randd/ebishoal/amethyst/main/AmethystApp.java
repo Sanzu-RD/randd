@@ -81,6 +81,10 @@ public class AmethystApp extends Application {
 			return null;
 		}
 	}
+	
+	/**
+	 * Inject
+	 */
 	public <T extends Parent> T loadComponent(T controller, String name) {
 		try {
 			if(!name.endsWith(".fxml")) name += ".fxml";
@@ -91,12 +95,21 @@ public class AmethystApp extends Application {
 			//Log.info("["+name+"] scene url : " + url);
 
 			FXMLLoader fxmlLoader = new FXMLLoader(url);
-			fxmlLoader.setRoot(controller);
-			fxmlLoader.setController(controller);
+			try {
+//				if(fxmlLoader.getRoot() == null) fxmlLoader.setRoot(controller);
+			} catch (Exception e) {
+				Log.error("Amethyst unable to load the component ["+name+"] : " + e.getMessage());
+			}
+			try {
+				fxmlLoader.setController(controller);
+			} catch (Exception e) {
+				Log.error("Amethyst unable to load the component ["+name+"] : " + e.getMessage());
+			}
 			try {
 				fxmlLoader.load();
-			} catch (IOException exception) {
-				throw new RuntimeException(exception);
+			} catch (IOException e) {
+				Log.error("Amethyst unable to load the component ["+name+"] : ", e);
+//				throw new RuntimeException(exception);
 			}
 			return controller;
 //			var obj = FXMLLoader.load(url);

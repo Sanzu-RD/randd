@@ -1,10 +1,13 @@
 package com.souchy.randd.deathshadows.opal;
 
+import com.souchy.randd.commons.opal.serialization.ObjectIdWriter;
+import com.souchy.randd.commons.opal.serialization.UserWriter;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowHTTP;
 import com.souchy.randd.deathshadow.core.smoothrivers.SelfIdentify;
 import com.souchy.randd.deathshadow.core.smoothrivers.SmoothRivers;
+import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 
 /**
  * 
@@ -32,8 +35,7 @@ public final class Opal extends DeathShadowCore {
 		if(args.length > 1) ip = args[1];
 		
 		Log.info("Start Opal on : " + ip + ":" + port);
-		server = new DeathShadowHTTP(ip, port, getRootPackages());
-		
+		server = new DeathShadowHTTP(ip, port, getRootPackages(), UserWriter.class, ObjectIdWriter.class);
 		
 		rivers.connect(port);
 		SmoothRivers.sendPearl(new SelfIdentify(this));

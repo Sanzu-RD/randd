@@ -84,7 +84,6 @@ public class User implements BBSerializer, BBDeserializer {
 	public List<Integer> unlockedSpells = new ArrayList<>();
 	//public List<ObjectId> unlockedItems = new ArrayList<>();
 
-	
 
 	public static final String name__id = "_id";
 	public static final String name_username = "username";
@@ -107,7 +106,7 @@ public class User implements BBSerializer, BBDeserializer {
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 //		Log.info("serialize user 1");
-		writeString(out, _id.toHexString());
+		writeString(out, _id.toString());
 //		Log.info("serialize user 2");
 		out.writeByte(level.ordinal());
 //		Log.info("serialize user 3");
@@ -159,5 +158,9 @@ public class User implements BBSerializer, BBDeserializer {
 		return null;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("{ %s, %s, %s, %s }", _id, pseudo, username, password);
+	}
 	
 }
