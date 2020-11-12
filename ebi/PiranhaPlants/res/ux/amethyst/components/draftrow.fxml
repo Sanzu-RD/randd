@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxWidth="380.0" prefHeight="150.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxWidth="380.0" prefHeight="150.0" prefWidth="380.0" type="GridPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
       <ColumnConstraints minWidth="90.0" />
       <ColumnConstraints minWidth="10.0" />
@@ -25,11 +25,14 @@
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin></Label>
-      <ImageView fx:id="icon" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" GridPane.rowSpan="2">
+      <AnchorPane prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: gold; -fx-border-width: 1;" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
-      </ImageView>
+         <children>
+            <ImageView fx:id="icon" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
       <Button fx:id="btnPage" mnemonicParsing="false" style="-fx-font-size: 14;" text="A" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -53,4 +56,4 @@
          </GridPane.margin>
       </AnchorPane>
    </children>
-</GridPane>
+</fx:root>

@@ -30,7 +30,7 @@ public class Lobby implements BBSerializer, BBDeserializer {
 
 	public static final AttributeKey<Lobby> attrkey = AttributeKey.newInstance("jade.matchmaking.lobby");
 	
-	private static final int teamCount = 2;
+	public static final int teamCount = 2;
 	
 	/** game server info */
 	public String moonstoneInfo;
@@ -135,6 +135,12 @@ public class Lobby implements BBSerializer, BBDeserializer {
 			}
 		}
 		return -1;
+	}
+	public int totalPicks() {
+		return picksPerTeam * teamCount;
+	}
+	public int totalBans() {
+		return bansPerTeam * teamCount;
 	}
 	
 	public int picksPerPlayer() {

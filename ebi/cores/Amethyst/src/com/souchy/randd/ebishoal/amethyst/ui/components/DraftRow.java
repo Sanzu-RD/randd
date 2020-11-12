@@ -62,10 +62,29 @@ public class DraftRow extends GridPane {
 	 */
 	public JadeCreature creature = new JadeCreature();
 	public CreatureModel model;
+
+	public static DraftRow create() {
+//		var r = Amethyst.app.<DraftRow>loadComponent("draftrow"); // new DraftRow();
+		DraftRow r = new DraftRow();
+        try {
+            FXMLLoader loader = Amethyst.app.loader("draftrow");
+            loader.setController(r);
+			loader.setRoot(r);
+			loader.load();
+			Amethyst.core.bus.register(r);
+        } catch (IOException exc) {
+        	exc.printStackTrace();
+        }
+		return r;
+	}
 	
-	public DraftRow() throws Exception {
-//		Log.info("ctor draftrow");
-		Amethyst.app.loadComponent(this, "draftrow");
+	public DraftRow() {
+		try {
+			Log.info("draftrow ctor");
+//			Amethyst.app.loadComponent(this, "draftrow");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 //	public DraftRow(int creatureModelId) {
@@ -78,10 +97,13 @@ public class DraftRow extends GridPane {
 	
 	@FXML
 	public void initialize() throws Exception {
-		Amethyst.core.bus.register(this);
-		
+		Log.info("draftrow init");
 		this.name.setText("bambi");
-		
+	}
+	
+	public void clear() {
+		this.icon.setImage(null);
+		this.name.setText("");
 	}
 	
 	public void init(int creatureModelId) {

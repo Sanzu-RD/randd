@@ -1,36 +1,27 @@
 package com.souchy.randd.ebishoal.amethyst.ui.tabs;
 
-import java.io.File;
-import java.util.ResourceBundle;
-import java.util.Timer;
-
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.coral.draft.ChangeTurn;
 import com.souchy.randd.commons.coral.draft.SelectCreature;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
-import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.CreatureModel;
-import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.amethyst.main.Amethyst;
 import com.souchy.randd.ebishoal.amethyst.ui.components.DraftRow;
 import com.souchy.randd.ebishoal.coraline.Coraline;
-import com.souchy.randd.jade.matchmaking.GameQueue;
+import com.souchy.randd.jade.matchmaking.Lobby;
 import com.souchy.randd.jade.matchmaking.Team;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
-import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -167,63 +158,45 @@ public class DraftController {
 	
 	private void initTeams() throws Exception {
 		Platform.runLater(() -> {
-			
 			this.team = Coraline.lobby.team(Amethyst.user._id);
-			
 			Log.info("DraftController init team " + team);
 			
-			Team t = Team.A;
-			
-			// init bans 
-			bansLeft.getChildren().clear();
-			bansRight.getChildren().clear();
-			for(int i = 0; i < Coraline.lobby.bansPerTeam * 2; i++) {
-				var img = new ImageView();
-				img.setFitHeight(32);
-				img.setFitWidth(32);
-				var p = new AnchorPane(img);
-				p.getStyleClass().add("banborder");
-				if(t == Team.A) {
-					bansLeft.add(p, i % Coraline.lobby.bansPerTeam, 0); // .getChildren().add(p);
-				} else {
-					bansRight.add(p, i % Coraline.lobby.bansPerTeam, 0);
-//					bansRight.getChildren().add(p);
+			for(Team t : Team.values()) {
+				var bans = (t == this.team) ? bansLeft : bansRight;
+				var picks = (t == this.team) ? teamLeft : teamRight;
+//				bans.getChildren().clear();
+//				picks.getChildren().clear();
+				
+				// init bans 
+				for(int i = 0; i < Coraline.lobby.bansPerTeam; i++) {
+					var img = new ImageView();
+					img.setFitHeight(32);
+					img.setFitWidth(32);
+					var p = new AnchorPane(img);
+					p.getStyleClass().add("banborder");
+					p.setStyle("-fx-border-width: 1; -fx-border-color: gold;"); 
+					
+					bans.add(p, i, 0); 
 				}
-				t = t.inverse();
-			}
-			
-			// init picks
-			teamLeft.getChildren().clear();
-			teamRight.getChildren().clear();
-			int b = Coraline.lobby.bansPerTeam * 2;
-			for (int i = 0; i < Coraline.lobby.picksPerTeam * 2; i ++) {
-				try {
-					DraftRow row = new DraftRow();
-					row.turn = i + b;
+
+				// init picks
+				picks.getStyleClass().add("rowborder");
+				picks.setStyle("-fx-background-color: pink;");
+				for (int i = 0; i < Coraline.lobby.picksPerTeam; i++) {
+					DraftRow row = DraftRow.create(); // new DraftRow();
+//					DraftRow row = getPickRow(t, i);
+					row.clear();
+					row.turn = Coraline.lobby.totalBans() + i * Lobby.teamCount;
 					row.getStyleClass().add("rowborder");
-					if(t == Team.A) {
-//						teamLeft.getChildren().add(row);
-						teamLeft.add(row, 0, i % Coraline.lobby.picksPerTeam); 
-					} else {
-//						teamRight.getChildren().add(row);
-						teamRight.add(row, 0, i % Coraline.lobby.picksPerTeam); 
-					}
-					t = t.inverse();
-				} catch (Exception e) {
-					e.printStackTrace();
+					row.name.setText("bambi " + i);
+					row.setStyle("-fx-border-width: 1; -fx-border-color: gold; -fx-background-color: cyan;"); 
+					picks.add(row, 0, i);
+					
+					Log.info("draftrow team " + t + " pick id " + i);
 				}
 			}
-			// for(var c : teamLeft.getChildren()) {
-//				var row = (DraftRow) c;
-//				row.turn = t;
-//				t += 2;
-//			}
-//			t = Coraline.lobby.bansPerTeam * 2 + 1;
-//			for(var c : teamRight.getChildren()) {
-//				var row = (DraftRow) c;
-//				row.turn = t;
-//				t += 2;
-//			}
+
+
 		});
 	}
 	
@@ -278,20 +251,21 @@ public class DraftController {
 			// set turn
 			Coraline.lobby.turn(msg.turn);
 			msg.team = Coraline.lobby.getTeamPlaying();
+			
 			// enlève la picked creature de la creatureList
 			// ...
+			
 			// set ban or pick
 			if(Coraline.lobby.isBanPhase()) {
 				Log.info("select turn " + Coraline.lobby.turn() + ", team " + Coraline.lobby.getTeamPlaying() + ", ban " + Coraline.lobby.getTeamBanIndex());
 				var node = getBanColumn(msg.team, Coraline.lobby.getTeamBanIndex());
 				// set image + tooltip
-//				ResourceBundle b = ResourceBundle.getBundle("../res/i18n/creatures/bundle");
-//				var namestr = b.getString("creature." + creatureModelId + ".name");
 				node.setImage(new Image(AssetData.creatures.get(msg.modelid).getIconURL().toString()));
 			} else {
 				Log.info("select turn " + Coraline.lobby.turn() + ", team " + Coraline.lobby.getTeamPlaying() + ", pick " + Coraline.lobby.getTeamPickIndex());
 				var node = getPickRow(msg.team, Coraline.lobby.getTeamPickIndex());
 				node.init(msg.modelid);
+				node.getStyleClass().add("selected");
 			}
 		});
 	}

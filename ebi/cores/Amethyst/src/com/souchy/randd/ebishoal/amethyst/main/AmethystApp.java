@@ -82,6 +82,51 @@ public class AmethystApp extends Application {
 		}
 	}
 	
+	
+	public FXMLLoader loader(String name) {
+		if(!name.endsWith(".fxml")) name += ".fxml";
+		String devPath = "ux/amethyst/components/";
+		String deployPath = "res/" + devPath;
+		var url = FilesManager.getResource(devPath + name);
+		if(url == null) url = FilesManager.getResource(deployPath + name);
+		//Log.info("["+name+"] scene url : " + url);
+
+		FXMLLoader fxmlLoader = new FXMLLoader(url);
+		return fxmlLoader;
+	}
+	
+	public <T extends Parent> T loadComponent(String name) {
+		try {
+			if(!name.endsWith(".fxml")) name += ".fxml";
+			String devPath = "ux/amethyst/components/";
+			String deployPath = "res/" + devPath;
+			var url = FilesManager.getResource(devPath + name);
+			if(url == null) url = FilesManager.getResource(deployPath + name);
+			//Log.info("["+name+"] scene url : " + url);
+
+			FXMLLoader fxmlLoader = new FXMLLoader(url);
+//			try {
+//				fxmlLoader.setRoot(controller);
+//			} catch (Exception e) {
+//				Log.error("Amethyst unable to load the component ["+name+"] : " + e.getMessage());
+//			}
+//			try {
+//				fxmlLoader.setController(controller);
+//			} catch (Exception e) {
+//				Log.error("Amethyst unable to load the component ["+name+"] : " + e.getMessage());
+//			}
+			try {
+				return (T) fxmlLoader.load();
+			} catch (IOException e) {
+				Log.error("Amethyst unable to load the component ["+name+"] : ", e);
+			}
+			return null;
+//			return controller;
+		} catch (Exception e) {
+			Log.error("Amethyst unable to load the component ["+name+"] : ", e);
+			return null;
+		}
+	}
 	/**
 	 * Inject
 	 */
@@ -96,7 +141,7 @@ public class AmethystApp extends Application {
 
 			FXMLLoader fxmlLoader = new FXMLLoader(url);
 			try {
-//				if(fxmlLoader.getRoot() == null) fxmlLoader.setRoot(controller);
+				fxmlLoader.setRoot(controller);
 			} catch (Exception e) {
 				Log.error("Amethyst unable to load the component ["+name+"] : " + e.getMessage());
 			}
