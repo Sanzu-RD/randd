@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5fde4df8-f00d-4ace-8f34-b0ed776ce5f4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/com/souchy/randd/commons/diamond/models/CreatureModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/com/souchy/randd/commons/diamond/models/CreatureModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/com/souchy/randd/commons/diamond/statics/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/com/souchy/randd/commons/diamond/statics/Constants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sapphire/components/creaturesheet2.lml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amethyst/components/draftrow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/amethyst/components/draftrow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amethyst/tabs/champselectdraft.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/amethyst/tabs/champselectdraft.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/components/DraftRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/components/DraftRow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/tabs/DraftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/src/com/souchy/randd/ebishoal/amethyst/ui/tabs/DraftController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/amethyst/tabs/champselectdraft.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/amethyst/tabs/champselectdraft.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,65 +13,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sapphire/components/parameters.lml">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sapphire/components/creaturesheet2.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="24" column="75" selection-start-line="24" selection-start-column="75" selection-end-line="24" selection-end-column="75" />
+            <state relative-caret-position="620">
+              <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sapphire/components/creaturesheet.lml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="38" lean-forward="true" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sapphire/main.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3230">
-              <caret line="190" column="23" selection-start-line="190" selection-start-column="23" selection-end-line="190" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sapphire/components/playbar.lml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" selection-start-line="33" selection-end-line="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sapphire/components/chat.lml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sapphire/components/timeline.lml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="33" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sapphire/components/timer.lml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="68">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -124,14 +72,15 @@
         <option value="$PROJECT_DIR$/sapphire/components/quickoptions.lml" />
         <option value="$PROJECT_DIR$/sapphire/components/chat.lml" />
         <option value="$PROJECT_DIR$/sapphire/components/timeline.lml" />
+        <option value="$PROJECT_DIR$/sapphire/components/creaturesheet2.lml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="75" />
-    <option name="y" value="65" />
-    <option name="width" value="1471" />
-    <option name="height" value="896" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="1912" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -139,7 +88,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -162,11 +111,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1597593427681" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1605185293456" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
@@ -196,10 +145,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="75" y="65" width="1471" height="896" extended-state="1" />
+    <frame x="1912" y="-8" width="1936" height="1096" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20127569" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15351813" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -228,12 +177,12 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/amethyst/i18n/bundle_en.properties">
-      <provider editor-type-id="ResourceBundle" />
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="9" lean-forward="true" selection-start-column="9" selection-end-column="9" />
         </state>
       </provider>
+      <provider editor-type-id="ResourceBundle" />
     </entry>
     <entry file="file://$PROJECT_DIR$/amethyst/scenes/main.fxml">
       <provider selected="true" editor-type-id="text-editor">
@@ -317,7 +266,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sapphire/components/parameters.lml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="408">
           <caret line="24" column="75" selection-start-line="24" selection-start-column="75" selection-end-line="24" selection-end-column="75" />
         </state>
       </provider>
@@ -359,8 +308,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sapphire/components/creaturesheet.lml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="38" lean-forward="true" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+        <state relative-caret-position="68">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sapphire/components/creaturesheet2.lml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
         </state>
       </provider>
     </entry>
