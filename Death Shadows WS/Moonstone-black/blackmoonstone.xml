@@ -34,6 +34,15 @@
 
 
 	<target name="create_run_jar">
+
+		<!--
+		<ftp action="send" server="192.168.2.15" port="22" userid="souchy" password="z" dataTimeout="300" verbose="yes" systemTypeKey="UNIX" ignorenoncriticalerrors="true" remotedir="/home/souchy/release/deathshadows/test/">
+			<fileset>
+				<include name="${dir.jarfile}/blackmoonstone.jar" />
+			</fileset>
+		</ftp>
+		-->
+		
 		<jar destfile="${dir.jarfile}/blackmoonstone.jar">
 			<manifest>
 				<attribute name="Main-Class" value="com.souchy.randd.deathshadows.blackmoonstone.main.BlackMoonstone"/>
@@ -59,6 +68,10 @@
 			<fileset dir="${dir.git}/r and d/Death Shadows WS/Moonstone-black/bin"/>
 			<fileset dir="${dir.git}/r and d/Data WS/Creature Commons/bin"/>
 		</jar>
+		
+		
+		<scp verbose="false" sftp="true" trust="true" file="${dir.jarfile}/blackmoonstone.jar" todir="souchy:z@192.168.2.15:/home/souchy/release/deathshadows/" />
+
 
 		<copy file="${dir.git}/r and d/annotationprocessor.jar" todir="${dir.lib}"/>
 		<copy file="${dir.gitres}/libs other/net/netty-all-4.1.19.Final.jar" todir="${dir.lib}" />
