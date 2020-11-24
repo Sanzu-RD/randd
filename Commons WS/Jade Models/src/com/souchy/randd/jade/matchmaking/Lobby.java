@@ -172,6 +172,13 @@ public class Lobby implements BBSerializer, BBDeserializer {
 	public boolean isPickPhase() {
 		return !isBanPhase();
 	}
+	/** (bans + picks) * 2 */
+	public int maxTurn() {
+		return (bansPerTeam + picksPerTeam) * teamCount;
+	}
+	public boolean isPickbanOver() {
+		return turn >= maxTurn();
+	}
 	
 	/** get player id from turn index */
 	public ObjectId getPlayer(int turn) {

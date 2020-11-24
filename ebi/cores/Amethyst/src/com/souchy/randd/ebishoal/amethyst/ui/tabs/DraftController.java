@@ -174,14 +174,14 @@ public class DraftController {
 					img.setFitWidth(32);
 					var p = new AnchorPane(img);
 					p.getStyleClass().add("banborder");
-					p.setStyle("-fx-border-width: 1; -fx-border-color: gold;"); 
+//					p.setStyle("-fx-border-width: 1; -fx-border-color: gold;"); 
 					
 					bans.add(p, i, 0); 
 				}
 
 				// init picks
-				picks.getStyleClass().add("rowborder");
-				picks.setStyle("-fx-background-color: pink;");
+//				picks.getStyleClass().add("rowborder");
+//				picks.setStyle("-fx-background-color: pink;");
 				for (int i = 0; i < Coraline.lobby.picksPerTeam; i++) {
 					DraftRow row = DraftRow.create(); // new DraftRow();
 //					DraftRow row = getPickRow(t, i);
@@ -189,7 +189,7 @@ public class DraftController {
 					row.turn = Coraline.lobby.totalBans() + i * Lobby.teamCount;
 					row.getStyleClass().add("rowborder");
 					row.name.setText("bambi " + i);
-					row.setStyle("-fx-border-width: 1; -fx-border-color: gold; -fx-background-color: cyan;"); 
+//					row.setStyle("-fx-border-width: 1; -fx-border-color: gold; -fx-background-color: cyan;"); 
 					picks.add(row, 0, i);
 					
 					Log.info("draftrow team " + t + " pick id " + i);
@@ -205,7 +205,7 @@ public class DraftController {
 	 * @param e
 	 */
 	public void select(MouseEvent e) { 
-		Log.info("select");
+//		Log.info("select");
 		// get selected creature
 //		var filtered = creatureList.getChildren().filtered(i -> i.getEffect() != null);
 //		// be sure that a creature is selected
@@ -216,6 +216,14 @@ public class DraftController {
 //		var model = (CreatureModel) img.getProperties().get(CreatureModel.class);
 		var img = selected;
 		var model = selectedModel;
+
+		Log.info("select " + model);
+		
+		if(img == null || model == null) {
+			return;
+		}
+
+		if(Coraline.lobby.isPickbanOver()) return;
 		
 		// unselect
 //		var filtered = creatureList.getChildren().filtered(i -> i.getProperties().get(CreatureModel.class) == model);
@@ -225,7 +233,7 @@ public class DraftController {
 		selected = null;
 		selectedModel = null;
 		
-		Log.info("select " + model);
+		
 		
 		// send SelectCreature message
 		var msg = new SelectCreature();

@@ -1,7 +1,5 @@
 package com.souchy.randd.deathshadows.coral.handlers;
 
-import java.util.Arrays;
-
 import com.souchy.randd.commons.coral.draft.SelectCreature;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessageHandler;
@@ -16,7 +14,7 @@ import com.souchy.randd.jade.meta.User;
 import io.netty.channel.ChannelHandlerContext;
 
 public class SelectedCreatureHandler implements BBMessageHandler<SelectCreature> {
-
+	
 	@Override
 	public Class<SelectCreature> getMessageClass() {
 		return SelectCreature.class;
@@ -36,6 +34,9 @@ public class SelectedCreatureHandler implements BBMessageHandler<SelectCreature>
 
 			// ignore if the user is not the current player
 			if(lobby.getCurrentPlayer() != user._id) return;
+
+			// ignore if pick/ban phase is over
+			if(lobby.isPickbanOver()) return;
 			
 //			Log.format("Coral on select creature (%s), user %s, lobby %s", msg.modelid, user, lobby);
 			
@@ -46,6 +47,9 @@ public class SelectedCreatureHandler implements BBMessageHandler<SelectCreature>
 			// set turn on action
 			var action = new OnTurnEndAction(lobby);
 			
+			// end turn
+			lobby.pipe().push(action);
+			
 			// add new jade creature
 			var crea = new JadeCreature();
 			crea.creatureModelID = msg.modelid;
@@ -54,9 +58,15 @@ public class SelectedCreatureHandler implements BBMessageHandler<SelectCreature>
 			
 			// broadcast select to all lobby participants
 			Coral.broadcast(lobby, msg);
+			
 
-			// end turn
-			lobby.pipe().push(action);
+			// if pick/ban phase is over
+			if(lobby.isPickbanOver()) {
+//				asdf
+				// nothing to do actually ?
+				// client already knows what phase it is from the turn value
+			}
+			
 			
 		} catch (Exception e) {
 			Log.info("", e);
