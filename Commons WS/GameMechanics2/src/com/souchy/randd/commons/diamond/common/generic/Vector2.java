@@ -8,6 +8,8 @@ import io.netty.buffer.ByteBuf;
 
 public class Vector2 implements BBSerializer, BBDeserializer {
 	
+	public static final Vector2 ZERO = new Vector2(0, 0);
+	
 	public double x;
 	public double y;
 	

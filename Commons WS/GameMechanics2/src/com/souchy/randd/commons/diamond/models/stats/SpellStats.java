@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.souchy.randd.commons.diamond.common.Aoe;
 import com.souchy.randd.commons.diamond.common.AoeBuilders;
-import com.souchy.randd.commons.diamond.models.stats.base.BoolStat;
+import com.souchy.randd.commons.diamond.common.AoeBuilders.AoeBuilder;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.models.stats.base.ObjectStat;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
@@ -21,23 +20,26 @@ public class SpellStats implements BBSerializer, BBDeserializer { //extends Enty
 	
 	// cast costs
 	public Map<Resource, IntStat> costs = new HashMap<>();
+
+	// cell targetting conditions
+	public TargetConditionStat target = new TargetConditionStat();
 	
 	// cast ranges and pattern for the cast range
 	public IntStat minRangeRadius = new IntStat(0);
 	public IntStat maxRangeRadius = new IntStat(0);
-	public ObjectStat<Aoe> minRangePattern = new ObjectStat<Aoe>(AoeBuilders.single.get());
-	public ObjectStat<Aoe> maxRangePattern = new ObjectStat<Aoe>(AoeBuilders.single.get());
+	public ObjectStat<AoeBuilder> minRangePattern = new ObjectStat<AoeBuilder>(null);
+	public ObjectStat<AoeBuilder> maxRangePattern = new ObjectStat<AoeBuilder>(r -> AoeBuilders.circle.apply(r));
 	
 	// cast cooldowns
 	public IntStat cooldown = new IntStat(0);
 	public IntStat castPerTurn = new IntStat(0);
 	public IntStat castPerTarget = new IntStat(0);
 	
-	// cast line of sight
-	public BoolStat lineOfSight = new BoolStat(true);
 	
 	// publicly modifiable aoes (spells create their aoes and place them here so that other classes can modify them without knowing the spell .class)
 	public List<ObjectStat<Aoe>> aoes = new ArrayList<>();
+	
+	
 	
 
 	public SpellStats copy() {
@@ -52,16 +54,17 @@ public class SpellStats implements BBSerializer, BBDeserializer { //extends Enty
 		
 		s.minRangeRadius = minRangeRadius.copy();
 		s.maxRangeRadius = maxRangeRadius.copy();
-		s.minRangePattern = new ObjectStat<Aoe>(minRangePattern.base.copy());
-		if(minRangePattern.setter != null) s.minRangePattern.setter = minRangePattern.setter.copy();
-		s.maxRangePattern = new ObjectStat<Aoe>(maxRangePattern.base.copy());
-		if(maxRangePattern.setter != null) s.maxRangePattern.setter = maxRangePattern.setter.copy();
-
+		s.minRangePattern = new ObjectStat<AoeBuilder>(minRangePattern.base);
+		if(minRangePattern.setter != null) s.minRangePattern.setter = minRangePattern.setter; 
+		s.maxRangePattern = new ObjectStat<AoeBuilder>(maxRangePattern.base); 
+		if(maxRangePattern.setter != null) s.maxRangePattern.setter = maxRangePattern.setter; 
+		
 		s.cooldown = cooldown.copy();
 		s.castPerTurn = castPerTurn.copy();
 		s.castPerTarget = castPerTarget.copy();
 		
-		s.lineOfSight = lineOfSight.copy();
+//		s.lineOfSight = lineOfSight.copy();
+		s.target = target.copy();
 		
 		return s;
 	}
@@ -76,7 +79,8 @@ public class SpellStats implements BBSerializer, BBDeserializer { //extends Enty
 		castPerTurn.serialize(out);
 		castPerTarget.serialize(out);
 		
-		lineOfSight.serialize(out);
+//		lineOfSight.serialize(out);
+		target.serialize(out);
 
 		// costs
 		out.writeInt(costs.size());
@@ -108,7 +112,8 @@ public class SpellStats implements BBSerializer, BBDeserializer { //extends Enty
 		castPerTurn.deserialize(in);
 		castPerTarget.deserialize(in);
 		
-		lineOfSight.deserialize(in);
+//		lineOfSight.deserialize(in);
+		target.deserialize(in);
 
 		// costs
 		int costcount = in.readInt();
@@ -139,26 +144,14 @@ public class SpellStats implements BBSerializer, BBDeserializer { //extends Enty
 		// min range pattern
 		boolean hasbase = in.readBoolean();
 		boolean hassetter = in.readBoolean();
-		if(hasbase) {
-			minRangePattern.base = new Aoe(0, 0);
-			minRangePattern.base.deserialize(in);
-		}
-		if(hassetter) {
-			minRangePattern.setter = new Aoe(0, 0);
-			minRangePattern.setter.deserialize(in);
-		}
+		if(hasbase) minRangePattern.base = AoeBuilder.deserialize(in);
+		if(hassetter) minRangePattern.base = AoeBuilder.deserialize(in);
 		
 		// max range pattern
 		hasbase = in.readBoolean();
 		hassetter = in.readBoolean();
-		if(hasbase) {
-			maxRangePattern.base = new Aoe(0, 0);
-			maxRangePattern.base.deserialize(in);
-		}
-		if(hassetter) {
-			maxRangePattern.setter = new Aoe(0, 0);
-			maxRangePattern.setter.deserialize(in);
-		}
+		if(hasbase) minRangePattern.base = AoeBuilder.deserialize(in);
+		if(hassetter) minRangePattern.base = AoeBuilder.deserialize(in);
 		
 		return null;
 	}

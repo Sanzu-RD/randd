@@ -63,7 +63,15 @@ public class Highlight {
 	public static final Color spellBorderColor = new Color(0.1f, 0.1f, 0.8f, 0.9f);
 	public static final Material spellBorderMat = new Material(ColorAttribute.createDiffuse(spellBorderColor), new BlendingAttribute(1));
 	public static final Model spell = model("spell", spellMat, spellBorderMat);
+	
 
+	public static final Color spellLosColor = new Color(0.8f, 0.1f, 0.1f, 0.2f);
+	public static final Material spellLosMat = new Material(ColorAttribute.createDiffuse(spellLosColor), new BlendingAttribute(1));
+	public static final Color spellLosBorderColor = new Color(0.8f, 0.1f, 0.1f, 0.9f);
+	public static final Material spellLosBorderMat = new Material(ColorAttribute.createDiffuse(spellLosBorderColor), new BlendingAttribute(1));
+	public static final Model spellLos = model("spell", spellLosMat, spellLosBorderMat);
+
+	
 	public static final Color teamColor = new Color(0.1f, 0.1f, 0.8f, 0.2f);
 	public static final Material teamMat = new Material(ColorAttribute.createDiffuse(teamColor), new BlendingAttribute(1));
 	public static final Color teamBorderColor = new Color(0.1f, 0.1f, 0.8f, 0.9f);
@@ -145,6 +153,20 @@ public class Highlight {
 
 	public static List<ModelInstance> spell(List<Vector2> cells) {
 		return highlight(cells, spell);
+	}
+	public static List<ModelInstance> spell(List<Vector2> cells, List<Vector2> noLos) {
+		// remove current highlights 
+		clear();
+		// create new model instances
+		for (var v : cells) {
+			highlights.add(new ModelInstance(spell, (float) v.x, (float) v.y, floorHeight + floorOffset));
+		}
+		for (var v : noLos) {
+			highlights.add(new ModelInstance(spellLos, (float) v.x, (float) v.y, floorHeight + floorOffset));
+		}
+		// add instances to render list
+		SapphireWorld.world.instances.addAll(highlights);
+		return highlights;
 	}
 	
 	public static ModelInstance team(Team t) {

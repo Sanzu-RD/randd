@@ -47,6 +47,11 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 	/** Properties like pathing,  line of sights, ~~visibility~~, orientation */
 	public Targetting targeting;
 	
+	// parent - summoner id if this creature is a summon
+	public int summonerID = 0;
+	// children - summons ids
+	public List<Integer> summonsID = new ArrayList<>();
+	
 	/**
 	 * for deserializing
 	 */

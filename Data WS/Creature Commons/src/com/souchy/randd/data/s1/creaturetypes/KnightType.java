@@ -14,14 +14,13 @@ public final class KnightType extends CreatureTypeModel {
 		stats.resources.put(Resource.life, new IntStat(300));
 		
 		// affinities
-		stats.affinity.get(Elements.steel).inc = 10;
+//		stats.affinity.get(Elements.steel).inc = 10;
 		
 		// res
-		stats.resistance.get(Elements.steel).inc = 10;
-		stats.resistance.get(Elements.physical).inc = 10;
+//		stats.resistance.get(Elements.steel).inc = 10;
+//		stats.resistance.get(Elements.physical).inc = 10;
 		
-		
-		// passive is  global flat res
+		// passive is global flat res
 		stats.resistance.get(Elements.global).baseflat = 20;
 	}
 	

@@ -32,6 +32,7 @@ import com.kotcrab.vis.ui.FocusManager;
 import com.souchy.randd.commons.diamond.common.Aoe;
 import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.common.Pathfinding;
+import com.souchy.randd.commons.diamond.common.generic.BoolTable;
 import com.souchy.randd.commons.diamond.common.generic.Vector2;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.components.Position;
@@ -157,6 +158,30 @@ public class SapphireController extends CameraInputController {
 			var targetpos = getCursorWorldPos(Gdx.input.getX(), Gdx.input.getY());
 			Log.format("target %s, %s", Gdx.input.getX(), Gdx.input.getY());
 			Highlight.spell(List.of(new Vector2(targetpos.x, targetpos.y)));
+		});
+
+		addOnKeyUp(Keys.NUM_1, () -> {
+			var creature = SapphireGame.fight.creatures.first();
+//			var source = getCursorWorldPos(Gdx.input.getX(), Gdx.input.getY());
+			
+			
+			Aoe range = AoeBuilders.circle.apply(8);
+			range.source = creature.pos; // new Vector2(source.x, source.y);
+			
+			List<Vector2> los = new ArrayList<>();
+			List<Vector2> noLos = new ArrayList<>();
+			
+			range.foreach((i, j) -> {
+				var cell = new Vector2(i, j);
+				if(SapphireGame.fight.board.checkView(creature, cell)) {
+					los.add(cell);
+				} else {
+					noLos.add(cell);
+				}
+			});
+			
+			
+			Highlight.spell(los, noLos);
 		});
 		
 //		addOnKeyDown(Keys.H, () -> {

@@ -8,6 +8,7 @@ import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
+import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetingProperty;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
@@ -99,15 +100,57 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	public abstract void onCast(Creature caster, Cell target);
 	
 	/**
-	 * Check if the spell can be cast at all.
+	 * Check if the spell can be cast at all : checks costs, conditions
 	 */
-	public abstract boolean canCast(Creature caster);
+	public boolean canCast(Creature caster) {
+		for (var e : this.stats.costs.entrySet()) {
+			if(caster.stats.resources.get(e.getKey()).value() < e.getValue().value()) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	/**
 	 * Check if the spell can have a specific target. Notably used to create the
 	 * highlight preview to know whats cells are targetable
 	 */
-	public abstract boolean canTarget(Creature caster, Cell target);
+	public boolean canTarget(Creature caster, Cell target) {
+		// si la cellule est vide
+		if(!target.hasCreature()) {
+			// si on accepte une cellule vide
+			return stats.target.accepts(TargetingProperty.empty);
+		}
+		
+		// si la cellule a une ou plusieurs creatures
+		
+		// si on accepte une cellule pleine
+		if(!stats.target.accepts(TargetingProperty.full)) return false;
+		
+		var c = target.getCreatures().get(0);
+		
+		// si le target est le caster et qu'on accepte le self-target
+		if(caster == c && !stats.target.accepts(TargetingProperty.self)) return false;
+		
+		// si on accepte les alliés
+		if(caster.team == c.team && !stats.target.accepts(TargetingProperty.allies)) return false;
+		// si on accepte les ennemis
+		if(caster.team != c.team && !stats.target.accepts(TargetingProperty.enemies)) return false;
+		
+		// si on accepte les summoners
+		if(c.summonerID == 0 && !stats.target.accepts(TargetingProperty.summoners)) return false;
+		// si on accepte les summons
+		if(c.summonerID != 0 && !stats.target.accepts(TargetingProperty.summons)) return false;
+		
+		// si on a besoin d'une ligne de vue et qu'il y en a une
+		if(!this.get(Fight.class).board.checkView(caster, target.pos) && stats.target.accepts(TargetingProperty.needsLineOfSight)) return false;	
+		
+		// si la cellule est dans la portée
+		if(!this.get(Fight.class).board.checkRange(stats, caster.pos, target.pos)) return false;
+		
+		// si tout passe,  return true
+		return true;
+	}
 
 	/**
 	 * Copy spell with this : <br>

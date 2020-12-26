@@ -13,6 +13,13 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 
 public class Pathfinding {
 	
+	
+//	public static boolean checkView(Board board, Creature caster, Cell target) {
+//		return true;
+//	}
+	
+	
+	
 	public static List<Cell> possibleMovement(Board board, Creature caster){
 		var list = new ArrayList<Cell>();
 		

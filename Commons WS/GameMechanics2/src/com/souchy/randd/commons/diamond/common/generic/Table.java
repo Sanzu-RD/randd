@@ -34,6 +34,10 @@ public class Table<V> {
 		return map.size();
 	}
 	
+	public Vector2 center() {
+		return new Vector2(width() / 2, height() / 2);
+	}
+	
 	/**
 	 * @param x
 	 *            = column

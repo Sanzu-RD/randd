@@ -20,7 +20,7 @@ public class Mesmer extends CreatureModel {
 		stats.resources.put(Resource.mana, new IntStat(12)); 
 		stats.resources.put(Resource.move, new IntStat(6)); 
 
-		stats.affinity.get(Elements.psychic).inc = 30; 
+		stats.affinity.get(Elements.dark).inc = 30; 
 		return stats;
 	}
 	

@@ -1,10 +1,63 @@
 package com.souchy.randd.commons.diamond.common;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+import io.netty.buffer.ByteBuf;
+
 public class AoeBuilders {
+	
+	@FunctionalInterface
+	public static interface AoeBuilder extends BBSerializer {
+		public Aoe build(int a);
+
+		@Override
+		default ByteBuf serialize(ByteBuf out) {
+			try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+					ObjectOutputStream outputStream = new ObjectOutputStream(byteArrayOutputStream)) {
+				
+				outputStream.writeObject(this);
+				var bytes = byteArrayOutputStream.toByteArray();
+				
+				out.writeBoolean(true);
+				out.writeBytes(bytes);
+			} catch (Exception e) {
+				out.writeBoolean(false);
+			}
+			return out;
+		}
+		
+		
+		public static AoeBuilder deserialize(ByteBuf in) {
+			var success = in.readBoolean();
+			if(!success) return null;
+			byte[] bytes = new byte[in.readableBytes()];
+			in.readBytes(bytes);
+			
+//			byte[] value = p.getBinaryValue();
+	        try (ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+	             ObjectInputStream inputStream = new ObjectInputStream(byteArrayInputStream)) {
+	        	
+	        	
+//	            return (SerializableRunnable) inputStream.readObject();
+	            return (AoeBuilder) inputStream.readObject();
+	        } catch (Exception e) {
+	        	
+	        }
+	        return null;
+		}
+	}
+	@FunctionalInterface
+	public static interface AoeBuilder2 {
+		public Aoe build(int a, int b);
+	}
+	
 	
 	
 	public static Supplier<Aoe> single = () -> new Aoe(1, 1).fill();

@@ -20,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Blend;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -98,6 +99,8 @@ public class DraftController {
 		for (var model : DiamondModels.creatures.values()) {
 			String url = "";
 			try {
+				
+				new Blend();
 				
 				// creature pool
 				var data = AssetData.creatures.get(model.id());

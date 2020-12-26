@@ -5,28 +5,25 @@ import com.souchy.randd.commons.diamond.statics.stats.properties.StatProperty;
 
 public enum Elements implements Element, StatProperty {
 	
-//	public static enum asdf implements StatProperty {
-//		
-//	}
 
-	normal,
+//	normal,
 	
 	fire,
 	water,
 	earth,
-	nature,
+//	nature,
 	air,
 	
 	light,
 	dark,
 
-	physical,
-	steel,
-	ghost,
-	ice,
-	psychic,
-	electricity,
-	toxin,
+//	physical,
+//	steel,
+//	ghost,
+//	ice,
+//	psychic,
+//	electricity,
+//	toxin,
 	
 	;
 	

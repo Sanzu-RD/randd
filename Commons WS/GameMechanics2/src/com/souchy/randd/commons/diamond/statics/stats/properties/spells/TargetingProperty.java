@@ -9,10 +9,21 @@ import com.souchy.randd.commons.diamond.statics.stats.properties.StatProperty;
 */
 public enum TargetingProperty implements StatProperty {
 	
-	needsLineOfSight, empty, full, allies, enemies, summons, summoners;
+	// if you only want summons, then you deactivate summoners
+	// if you only want summoners, then you deactivate summons
+	needsLineOfSight, 
+	empty, full, 
+	allies, enemies, 
+	summoners, summons, 
+	self // si on peut targetter soi-même
+	;
 	
 	private TargetingProperty() {
 		StatPropertyID.register(this);
+	}
+	
+	public int bit() {
+		return (int) Math.pow(ordinal(), 2);
 	}
 	
 }
