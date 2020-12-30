@@ -4,6 +4,7 @@ module GameMechanics2 {
 	exports com.souchy.randd.commons.diamond.models.components;
 	exports com.souchy.randd.commons.diamond.effects.other;
 	exports com.souchy.randd.commons.diamond.models.stats;
+	exports com.souchy.randd.commons.diamond.models.stats.special;
 	exports com.souchy.randd.commons.diamond.models;
 	exports com.souchy.randd.commons.diamond.statics;
 	exports com.souchy.randd.commons.diamond.statusevents;

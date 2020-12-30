@@ -3,6 +3,7 @@ package com.souchy.randd.commons.tealwaters.ecs;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.google.common.eventbus.Subscribe;
@@ -40,11 +41,19 @@ public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Returns a copy of the member list
 	 */
-	public List<T> copy(){
-		return new ArrayList<>(family);
+	public List<T> all(){
+		return copy();
+	}
+	
+	/**
+	 * Returns a copy of the member list
+	 */
+	public List<T> copy() {
+		synchronized (family) {
+			return new ArrayList<>(family);
+		}
 	}
 	
 	/**
@@ -60,16 +69,20 @@ public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.
 	}
 	
 	/**
-	 * 
-	 * @param filter
-	 * @return
+	 * Returns a new list of members fitting the filter
 	 */
-	public List<T> where(Predicate<T> filter){
+	public List<T> where(Predicate<T> filter) {
 		var list = new ArrayList<T>();
 		foreach(c -> {
 			if(filter.test(c)) list.add(c);
 		});
 		return list;
+	}
+	/**
+	 * Returns a new list of members fitting the filter
+	 */
+	public List<T> list(Predicate<T> filter){
+		return where(filter);
 	}
 	
 	/**
@@ -83,6 +96,7 @@ public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.
 		}
 		return null;
 	}
+	
 	/**
 	 * Return the first member matching the filter or null if no member fits 
 	 */
@@ -97,7 +111,50 @@ public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.
 	}
 	
 	/**
-	 * 
+	 * Checks if any member matches the predicate by checking if <br> <code>first(pred) != null</code>
+	 */
+	public boolean any(Predicate<T> filter) {
+		return first(filter) != null;
+	}
+	
+	/**
+	 * Finds the member with the highest of a property
+	 */
+	public <V> T findMax(Function<T, Double> extractor) {
+		synchronized (family) {
+			double max = Double.MIN_VALUE;
+			T result = null;
+			for (var member : family) {
+				var val = extractor.apply(member);
+				if(val > max) {
+					 max = val;
+					 result = member;
+				}
+			}
+			return result;
+		}
+	}
+
+	/**
+	 * Finds the member with the lowest of a property
+	 */
+	public <V> T findMin(Function<T, Double> extractor) {
+		synchronized (family) {
+			double min = Double.MAX_VALUE;
+			T result = null;
+			for (var member : family) {
+				var val = extractor.apply(member);
+				if(val < min) {
+					 min = val;
+					 result = member;
+				}
+			}
+			return result;
+		}
+	}
+	
+	/**
+	 * Clear the list of members
 	 */
 	public void clear() {
 		synchronized(family) {
@@ -106,7 +163,7 @@ public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.
 	}
 	
 	/**
-	 * 
+	 * Dispose and clear
 	 */
 	@Override
 	public void dispose() {
@@ -115,17 +172,16 @@ public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.
 	}
 	
 	/**
-	 * 
-	 * @param entity
+	 * Adds a member to the list
 	 */
 	public void add(T entity) {
 		synchronized(family) {
 			family.add(entity);
 		}
 	}
+	
 	/**
-	 * 
-	 * @param entity
+	 * Removes a member from the list
 	 */
 	public void remove(T entity) {
 		synchronized(family) {

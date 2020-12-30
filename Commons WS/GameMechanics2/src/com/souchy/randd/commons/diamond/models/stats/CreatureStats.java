@@ -5,7 +5,9 @@ import java.util.Map;
 
 import com.souchy.randd.commons.diamond.models.stats.base.BoolStat;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.models.stats.special.HeightStat;
 import com.souchy.randd.commons.diamond.statics.Element;
+import com.souchy.randd.commons.diamond.statics.filters.Height;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
@@ -62,10 +64,16 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 	 * max number of summons
 	 */
 	public IntStat summons;
+	
 	/**
 	 * if creature is visible/invisible
 	 */
 	public BoolStat visible;
+	
+	/**
+	 * Z / height of the creature. ex: flying or burrowed under ground. Default is normal 'floor' level
+	 */
+	public HeightStat height;
 	
 	
 	public CreatureStats() {
@@ -80,6 +88,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		range = new IntStat(0);
 		summons = new IntStat(0);
 		visible = new BoolStat(true);
+		height = new HeightStat(Height.floor.bit());
 		// + peut-être une stat pour aoeRadiusModificator / AoeRange
 		
 		for(var v : Resource.values()) {
@@ -119,6 +128,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		s.range = range.copy();
 		s.summons = summons.copy();
 		s.visible = visible.copy();
+		s.height = height.copy();
 		
 		return s;
 	}
@@ -159,6 +169,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		range.serialize(out);
 		summons.serialize(out);
 		visible.serialize(out);
+		height.serialize(out);
 		return null;
 	}
 
@@ -188,6 +199,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		this.range.deserialize(in);
 		this.summons.deserialize(in);
 		this.visible.deserialize(in);
+		this.height.deserialize(in);
 		return null;
 	}
 

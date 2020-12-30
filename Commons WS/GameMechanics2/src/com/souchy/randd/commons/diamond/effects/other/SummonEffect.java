@@ -5,7 +5,7 @@ import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
-import com.souchy.randd.commons.diamond.models.stats.TargetConditionStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 
 public class SummonEffect extends Effect {

@@ -6,7 +6,7 @@ import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Status;
-import com.souchy.randd.commons.diamond.models.stats.TargetConditionStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
 import com.souchy.randd.commons.diamond.statusevents.status.RemoveStatusEvent;
 
 /** One-shot effect */

@@ -1,4 +1,4 @@
-package com.souchy.randd.commons.diamond.models.stats;
+package com.souchy.randd.commons.diamond.models.stats.special;
 
 import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetingProperty;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;

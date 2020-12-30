@@ -1,7 +1,7 @@
 package com.souchy.randd.commons.diamond.ext;
 
 
-import com.souchy.randd.commons.diamond.models.stats.Targetting;
+import com.souchy.randd.commons.diamond.models.stats.special.Targetting;
 import com.souchy.randd.commons.diamond.statics.properties.Targetability;
 
 public enum CellType {

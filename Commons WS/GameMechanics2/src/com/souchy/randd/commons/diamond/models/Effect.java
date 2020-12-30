@@ -2,7 +2,10 @@ package com.souchy.randd.commons.diamond.models;
 
 
 import com.souchy.randd.commons.diamond.common.Aoe;
-import com.souchy.randd.commons.diamond.models.stats.TargetConditionStat;
+import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.models.stats.special.HeightStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
+import com.souchy.randd.commons.diamond.statics.filters.Height;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 
@@ -24,11 +27,19 @@ public abstract class Effect extends Entity {
 	 * aoe 
 	 */
 	public Aoe aoe; 
+	
 	/** 
 	 * conditions to apply the effect to a target in the aoe 
 	 */
 	public TargetConditionStat targetConditions;
+	/**
+	 * Z / Height filter. The effect will only target creatures of the corresponding heights
+	 */
+	public HeightStat height = new HeightStat();
 
+	/**
+	 * Ctor
+	 */
 	public Effect(Fight f, Aoe aoe, TargetConditionStat targetConditions) {
 		super(f);
 		this.aoe = aoe;
@@ -48,7 +59,7 @@ public abstract class Effect extends Entity {
 	 */
 	public void apply(Creature source, Cell cellTarget) { // , Effect parent);
 		var board = cellTarget.get(Fight.class).board;
-
+		
 		// level 0 handlers 
 		var casterEvent = createAssociatedEvent(source, cellTarget);
 		interceptors(source, casterEvent); 
@@ -56,21 +67,27 @@ public abstract class Effect extends Entity {
 		prepareCaster(source, cellTarget);
 		if(casterEvent.intercepted) return;
 		
-		// for all cells in the AOE
+		// for all cells in the AOE, copy the event and the effect as a child
 		aoe.table.foreach((x, y) -> {
 			// if the coordinate isnt activated in the aoe
 			if(!aoe.table.get(x, y)) return;
-			
+
 			// project pos to board cell
 			Cell target = board.cells.get(cellTarget.pos.x - aoe.source.x + x, cellTarget.pos.y - aoe.source.y + y);
 			if(target == null) return;
 			
-			// un event différent par cell touchée (copy l'effet aussi)
-			var event = casterEvent.copy(); 
-			event.target = target;
-
-			// apply secondary effect
-			secondaryEffect(event);
+			// copy event and effect for each accepted height on the cell
+			for(Height h : Height.values()) {
+				if(!this.height.has(h)) continue;
+				
+				var event = casterEvent.copy(); 
+				event.target = target;
+				event.effect.height = h.stat();
+				
+				// apply secondary effect
+				secondaryEffect(event);
+			}
+			
 		});
 		
 		// level 0 reactor has access to all the copies of events & effects made in the Aoe
@@ -97,7 +114,7 @@ public abstract class Effect extends Entity {
 		
 		// apply
 		event.effect.apply0(event.source, event.target);
-
+		
 		// level 1 handlers
 		reactors(event.target, event); 
 		reactors(event.source, event);

@@ -5,11 +5,14 @@ import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
-import com.souchy.randd.commons.diamond.models.stats.TargetConditionStat;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 
-/** Dashes a set distance away from target cell (stopped by no-passthrough cells) */
+/** Dashes a set distance away from target cell (stopped by no-passthrough cells)
+ * 
+ * same thing as a DashDist with negative distance, except different text/flavor
+ */
 public class DashFrom extends Effect {
 
 	public IntStat distance;

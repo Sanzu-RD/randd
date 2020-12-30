@@ -8,7 +8,7 @@ import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Status;
-import com.souchy.randd.commons.diamond.models.stats.TargetConditionStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.status.AddStatusEvent;
 
@@ -57,7 +57,8 @@ public class AddStatusEffect extends Effect {
 //			// register in the eventpipeline if the status is either of interceptors/modifiers/reactors
 //			target.handlers.register(status);
 //		} else {
-			target.getCreatures().get(0).statuses.addStatus(status);
+			var creature = target.getCreature(height);
+			creature.statuses.addStatus(status);
 			// register in the eventpipeline if the status is either of interceptors/modifiers/reactors
 			this.get(Fight.class).statusbus.register(status);
 //			target.getCreatures().get(0).handlers.register(status);

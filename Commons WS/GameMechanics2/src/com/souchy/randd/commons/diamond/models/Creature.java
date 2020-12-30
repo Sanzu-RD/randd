@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.models.stats.CreatureStats;
-import com.souchy.randd.commons.diamond.models.stats.Targetting;
+import com.souchy.randd.commons.diamond.models.stats.special.Targetting;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
@@ -93,6 +93,10 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 	
 	public CreatureModel getModel() {
 		return DiamondModels.creatures.get(modelid);
+	}
+	
+	public Cell getCell() {
+		return get(Fight.class).board.get(pos);
 	}
 
 	@Override

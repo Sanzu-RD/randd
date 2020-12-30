@@ -67,6 +67,11 @@ public class Vector2 implements BBSerializer, BBDeserializer {
 		Vector2 v = (Vector2) o;
 		return v.x == x && v.y == y;
 	}
+	
+	public boolean same(Vector2 v) {
+		if(v == null) return false;
+		return v.x == x && v.y == y;
+	}
 
 	@Override
 	public String toString() {

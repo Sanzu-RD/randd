@@ -1,12 +1,18 @@
 package com.souchy.randd.data.s1.status;
 
+import com.souchy.randd.commons.diamond.effects.damage.Damage;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Status;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurnStartHandler;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 
 import io.netty.buffer.ByteBuf;
 
-public class Burning extends Status {
+public class Burning extends Status implements OnTurnStartHandler {
+	
+	public Damage dmg;
+	
 
 	public Burning(Fight f, int source, int target) {
 		super(f, source, target);
@@ -24,31 +30,26 @@ public class Burning extends Status {
 
 	@Override
 	public boolean fuse(Status s) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void onAdd() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onLose() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -67,6 +68,24 @@ public class Burning extends Status {
 //			s.effects.add(em.copy()); //fight));
 //		});
 		return s;
+	}
+
+	@Override
+	public HandlerType type() {
+		return HandlerType.Reactor;
+	}
+
+	@Override
+	public void onTurnStart(TurnStartEvent event) {
+		var fight = get(Fight.class);
+		var sourceCrea = fight.creatures.get(sourceEntityId);
+		var targetCrea = fight.creatures.get(targetEntityId);
+		
+		int creaID = fight.timeline.get(event.index);
+		if(targetEntityId == creaID) {
+			dmg.height.set(targetCrea.stats.height.single());
+			dmg.apply(sourceCrea, targetCrea.getCell());
+		}
 	}
 	
 }

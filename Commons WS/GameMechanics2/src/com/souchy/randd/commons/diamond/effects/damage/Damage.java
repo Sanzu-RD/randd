@@ -8,8 +8,8 @@ import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
-import com.souchy.randd.commons.diamond.models.stats.TargetConditionStat;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statusevents.damage.DmgEvent;
@@ -43,6 +43,11 @@ public class Damage extends Effect {
 	 * Pre-calculated target dmg (post-mitigation)
 	 */
 	public Map<Element, IntStat> targetDmg = new HashMap<>();
+
+	/**
+	 * Target creature, if there is one on the cell/height specified
+	 */
+	private Creature creature;
 	
 	/**
 	 * @param areaOfEffect - aoe
@@ -101,11 +106,11 @@ public class Damage extends Effect {
 	 */
 	public void prepareTarget(Creature caster, Cell cell) {
 		var crea = (Creature) caster;
-		var target = cell.hasCreature() ? cell.getCreatures().get(0) : null;
-		if(target == null) return;
+		creature = cell.getCreature(height); 
+		if(creature == null) return;
 		
 		var casterPen = crea.stats.penetration;
-		var targetRes = target.stats.resistance;
+		var targetRes = creature.stats.resistance;
 		var globalPen = crea.stats.penetration.get(Element.global);
 		var globalResistance = crea.stats.resistance.get(Element.global);
 		
@@ -133,8 +138,8 @@ public class Damage extends Effect {
 	 */
 	@Override
 	public void apply0(Creature caster, Cell cell) {
-		var target = cell.hasCreature() ? cell.getCreatures().get(0) : null;
-		if(target == null) return;
+		creature = cell.getCreature(height); 
+		if(creature == null) return;
 		
 		// Calcule le dommage total résultant du target dmg pré-calculé
 		double totalDmg = 0;
@@ -144,8 +149,8 @@ public class Damage extends Effect {
 		}
 		
 		// Applique les dégâts
-		var life =  target.stats.resources.get(Resource.life);
-		var shield =  target.stats.shield.get(Resource.life);
+		var life = creature.stats.resources.get(Resource.life);
+		var shield = creature.stats.shield.get(Resource.life);
 		
 		if(shield.fight >= totalDmg) {
 			shield.fight -= totalDmg;
@@ -156,7 +161,7 @@ public class Damage extends Effect {
 		} 
 		
 		if(life.value() <= 0) {
-			// die
+			// TODO die
 			// remove target from fight
 		}
 	}

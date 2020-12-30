@@ -1,4 +1,4 @@
-package com.souchy.randd.commons.diamond.effects.displacement;
+package com.souchy.randd.commons.diamond.effects.status;
 
 import com.souchy.randd.commons.diamond.common.Aoe;
 import com.souchy.randd.commons.diamond.models.Cell;
@@ -7,47 +7,37 @@ import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
 import com.souchy.randd.commons.diamond.statusevents.Event;
+import com.souchy.randd.commons.diamond.statusevents.status.RemoveGlyphEvent;
 
-/**
- * 'Teleport' effect between 2 creatures to exchange/switch their place
- * 
- * @author Blank
- * @date 23 mai 2020
- */
-public class Switch extends Effect {
+public class RemoveGlyphEffect extends Effect {
 
-	public Switch(Fight f, Aoe aoe, TargetConditionStat targetConditions) {
+	public RemoveGlyphEffect(Fight f, Aoe aoe, TargetConditionStat targetConditions) {
 		super(f, aoe, targetConditions);
 	}
 
 	@Override
 	public Event createAssociatedEvent(Creature source, Cell target) {
-		// TODO Auto-generated method stub
-		return null;
+		return new RemoveGlyphEvent(source, target, this);
 	}
 
 	@Override
 	public void prepareCaster(Creature caster, Cell aoeOrigin) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void prepareTarget(Creature caster, Cell target) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void apply0(Creature caster, Cell target) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public Effect copy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new RemoveGlyphEffect(get(Fight.class), aoe, targetConditions);
 	}
 	
 }

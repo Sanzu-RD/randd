@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.souchy.randd.commons.diamond.models.components.Position;
-import com.souchy.randd.commons.diamond.models.stats.Targetting;
+import com.souchy.randd.commons.diamond.models.stats.special.HeightStat;
+import com.souchy.randd.commons.diamond.models.stats.special.Targetting;
+import com.souchy.randd.commons.diamond.statics.filters.Height;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
@@ -34,31 +36,43 @@ public class Cell extends Entity implements BBSerializer, BBDeserializer {
 	public Targetting targeting;
 	
 	// main creature on the cell (ex si elle porte ou mange un autre creature (ex tahm kench/pandawa))
-	public List<Creature> creatures;
+//	public List<Creature> creatures;
 	
 	
 	public Cell(Fight f, int x, int y) {
 		super(f);
 		this.id = idCounter++;
 		this.pos = new Position(x, y);
-		this.creatures = new ArrayList<Creature>();
+//		this.creatures = new ArrayList<Creature>();
 		this.targeting = new Targetting();
 		add(targeting);
 	}
 	
-	
+	/**
+	 * Checks if there's any creatures on this cell
+	 */
 	public boolean hasCreature() {
-		return !getCreatures().isEmpty();
+		return get(Fight.class).creatures.any(c -> c.pos.same(this.pos));
 	}
-	public List<Creature> getCreatures() {
-//		for(Creature c : fight.timeline) {
-//			if(c.getCell() == this) return c;
-//		}
-//		return null;
-		return creatures;
-	}
-
 	
+	/** 
+	 * returns the first creature on the cell that has the specified height
+	 */
+	public Creature getCreature(Height h) {
+		return get(Fight.class).creatures.first(c -> c.pos.same(this.pos) && c.stats.height.has(h));
+	}
+	public Creature getCreature(HeightStat h) {
+		return getCreature(h.single());
+	}
+	
+	/** 
+	 * returns all creatures on this cell
+	 */
+	public List<Creature> getCreatures() {
+		return get(Fight.class).creatures.where(c -> c.pos == this.pos);
+	}
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T get(Class<T> c) {
 		if(c == Position.class) return (T) this.pos;
@@ -72,8 +86,11 @@ public class Cell extends Entity implements BBSerializer, BBDeserializer {
 		out.writeDouble(pos.x);
 		out.writeDouble(pos.y);
 		
-		// TODO serialize status ids, creatures ids, targeting
-		targeting.serialize(out);
+		// status 
+		this.statuses.serialize(out);
+		// targeting
+		this.targeting.serialize(out);
+		
 		return out;
 	}
 
@@ -83,8 +100,14 @@ public class Cell extends Entity implements BBSerializer, BBDeserializer {
 		id = in.readInt();
 		pos = new Position(in.readDouble(), in.readDouble());
 
-		// TODO deserialize status ids, creatures ids, targeting
-		targeting.deserialize(in);
+		// status
+		this.statuses = new StatusList(null);
+		this.statuses.deserialize(in);
+		
+		// targeting
+		this.targeting = new Targetting();
+		this.targeting.deserialize(in);
+		
 		return null;
 	}
 	

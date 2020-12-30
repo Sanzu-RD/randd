@@ -46,7 +46,6 @@ public class Fireball extends Spell {
 	@Override
 	public void onCast(Creature caster, Cell target) {
 		e1.apply(caster, target);
-		
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
-import com.souchy.randd.commons.diamond.models.stats.TargetConditionStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.displacement.PushEvent;
 
@@ -31,13 +31,18 @@ public class Push extends Effect {
 	public Cell resultCell;
 	
 	/**
+	 * Target creature, if there is one on the cell/height specified
+	 */
+	private Creature creature;
+	
+	/**
 	 * Ctor
 	 */
 	public Push(Fight f, Aoe aoe, TargetConditionStat targetConditions, int distance) {
 		super(f, aoe, targetConditions);
 		this.distance = distance;
 	}
-
+	
 	/**
 	 * rien de possible à préparer ici
 	 */
@@ -51,7 +56,9 @@ public class Push extends Effect {
 	 */
 	@Override
 	public void prepareTarget(Creature caster, Cell target) { 
-		if(!target.hasCreature()) return;
+		creature = target.getCreature(height);
+		if(creature == null) return;
+		
 		vector = target.pos.copy().sub(caster.pos);
 		var absx = Math.abs(vector.x);
 		var absy = Math.abs(vector.y);
@@ -65,33 +72,26 @@ public class Push extends Effect {
 		// else // déplacement diagonal ++/+-/--/-+
 		// vector = new Vector2(vector.x / absx, vector.y / absy); 
 		
-//		if(!target.hasCreature()) return;
-		var e = target.getCreatures().get(0);
 		// start from the min distance, then go outwards as much as possible
 		for (int i = 0; i > distance; i++) {
 			var targetPos = vector.copy().mult(distance);
-			var cell = target.get(Fight.class).board.cells.get(targetPos.x, targetPos.y);
+			var cell2 = target.get(Fight.class).board.cells.get(targetPos.x, targetPos.y);
 			// if the cell exists and can be walked on by the pushed entity
-			if(cell != null && e.targeting.canWalkOn(cell)) {
-				resultCell = cell;
-			} else if(!e.targeting.canWalkThrough(cell)) {
+			if(cell2 != null && creature.targeting.canWalkOn(cell2)) {
+				resultCell = cell2;
+			} else if(!creature.targeting.canWalkThrough(cell2)) {
 				return; // stop there if we hit an insurmountable object
 			}
 		}
 	}
 
-	/** 
-	 * Apply the push from the creature's cell to the resultCell 
-	 */ 
+	/**
+	 * Apply the push from the creature's cell to the resultCell
+	 */
 	@Override
 	public void apply0(Creature caster, Cell target) {
-		if(!target.hasCreature()) return;
-		var e = target.getCreatures().get(0);
-		var cell = get(Fight.class).board.cells.get(e.pos.x, e.pos.y);
-		if(cell != null) cell.creatures.remove(e);
-//		e.getCell().creatures.remove(e);
-		e.pos = resultCell.pos;
-		resultCell.creatures.add(e);
+		if(creature != null) 
+		creature.pos = resultCell.pos;
 	}
 	
 	@Override

@@ -7,7 +7,7 @@ import com.souchy.randd.commons.diamond.statics.stats.properties.StatProperty;
  * Activated bits mean they CAN be targeted <br> 
  * Empty means an empty cell while full means a cell with a creature on it
 */
-public enum TargetingProperty implements StatProperty {
+public enum TargetingProperty { //implements StatProperty {
 	
 	// if you only want summons, then you deactivate summoners
 	// if you only want summoners, then you deactivate summons
@@ -18,12 +18,13 @@ public enum TargetingProperty implements StatProperty {
 	self // si on peut targetter soi-même
 	;
 	
-	private TargetingProperty() {
-		StatPropertyID.register(this);
-	}
+//	private TargetingProperty() {
+//		StatPropertyID.register(this);
+//	}
 	
 	public int bit() {
-		return (int) Math.pow(ordinal(), 2);
+		return 1 << ordinal();
+//		return (int) Math.pow(ordinal(), 2);
 	}
 	
 }

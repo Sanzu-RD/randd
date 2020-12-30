@@ -1,4 +1,4 @@
-package com.souchy.randd.commons.diamond.models.stats;
+package com.souchy.randd.commons.diamond.models.stats.special;
 
 import java.util.HashMap;
 import java.util.Map;

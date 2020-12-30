@@ -427,8 +427,11 @@ public class SapphireController extends CameraInputController {
 	public boolean touchDragged(int x, int y, int pointer) {
 		var pos = getCursorWorldPos(x, y);
 		if(draggedEntity != null) {
-//			var epos = 
 			draggedEntity.get(Position.class).set(pos.x, pos.y);
+//			var epos =  draggedEntity.get(Position.class);
+//			SapphireGame.fight.board.get(epos).getCreatures().remove(draggedEntity);
+//			epos.set(pos.x, pos.y);
+//			SapphireGame.fight.board.get(epos).getCreatures().add((Creature) draggedEntity);
 			//Log.info("dragged entity " + epos);
 		}
 		SapphireWorld.world.cursor.transform.setTranslation(pos.add(0.5f, 0.5f, 0f));
