@@ -21,8 +21,12 @@ import com.kotcrab.vis.ui.widget.ScrollableTextArea;
 import com.kotcrab.vis.ui.widget.VisList;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
 import com.kotcrab.vis.ui.widget.VisTextField;
+import com.souchy.randd.commons.diamond.statusevents.Event;
+import com.souchy.randd.commons.diamond.statusevents.Handler;
+import com.souchy.randd.commons.diamond.statusevents.Handler.HandlerType;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
+import com.souchy.randd.commons.diamond.statusevents.status.AddGlyphEvent;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.util.DragAndResizeListener;
@@ -33,7 +37,7 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 
-public class Chat extends SapphireComponent {
+public class Chat extends SapphireComponent implements Handler {
 
 	@LmlActor("field")
 	public VisTextField field;
@@ -55,6 +59,23 @@ public class Chat extends SapphireComponent {
 	public Chat() {
 		Moonstone.bus.register(this);
 		SapphireGame.fight.bus.register(this);
+		SapphireGame.fight.statusbus.register(this);
+	}
+
+	@Subscribe
+	public void handleEffectEvent(Event event) {
+		if(!check(event)) return;
+		var msg =  event.testMessage();
+		if(msg == "") return;
+		addMsg(new ICM("effect", "fight", msg));
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public HandlerType type() {
+		return HandlerType.Reactor;
 	}
 
 	@Override
@@ -147,19 +168,19 @@ public class Chat extends SapphireComponent {
 		}
 	}
 
-	/** fight event */
-	@Subscribe
-	public void onTurnStart(TurnStartEvent e) {
-//		Log.info("chat turn start");
-		addMsg(new ICM("event", "system", String.format("fight %s turn %s sta %s", e.fight.id, e.turn, e.index)));
-	}
-
-	/** fight event */
-	@Subscribe
-	public void onTurnEnd(TurnEndEvent e) {
-//		Log.info("chat turn end");
-		addMsg(new ICM("event", "system", String.format("fight %s turn %s end %s", e.fight.id, e.turn, e.index)));
-	}
+//	/** fight event */
+//	@Subscribe
+//	public void onTurnStart(TurnStartEvent e) {
+////		Log.info("chat turn start");
+//		addMsg(new ICM("event", "system", String.format("fight %s turn %s sta %s", e.fight.id, e.turn, e.index)));
+//	}
+//
+//	/** fight event */
+//	@Subscribe
+//	public void onTurnEnd(TurnEndEvent e) {
+////		Log.info("chat turn end");
+//		addMsg(new ICM("event", "system", String.format("fight %s turn %s end %s", e.fight.id, e.turn, e.index)));
+//	}
 	
 	@Override
 	public String getTemplateId() {
@@ -175,7 +196,8 @@ public class Chat extends SapphireComponent {
 	@Override
 	public void dispose() {
 		Moonstone.bus.unregister(this);
-		SapphireGame.fight.bus.unregister(this);
+//		SapphireGame.fight.bus.unregister(this);
+		SapphireGame.fight.statusbus.unregister(this);
 	}
 
 

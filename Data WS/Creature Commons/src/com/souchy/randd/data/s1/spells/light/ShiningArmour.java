@@ -39,7 +39,7 @@ public class ShiningArmour extends Spell {
 	}
 
 	@Override
-	public void onCast(Creature caster, Cell target) {
+	public void cast(Creature caster, Cell target) {
 		// TODO Auto-generated method stub
 		
 	}

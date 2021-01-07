@@ -6,7 +6,7 @@ import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
-import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.displacement.PushEvent;
 
@@ -38,7 +38,7 @@ public class Push extends Effect {
 	/**
 	 * Ctor
 	 */
-	public Push(Fight f, Aoe aoe, TargetConditionStat targetConditions, int distance) {
+	public Push(Fight f, Aoe aoe, TargetTypeStat targetConditions, int distance) {
 		super(f, aoe, targetConditions);
 		this.distance = distance;
 	}

@@ -8,6 +8,7 @@ import com.souchy.randd.commons.diamond.models.CreatureModel;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
@@ -43,7 +44,7 @@ public class MockFight {
 	private static Creature testCreateCreature(Fight fight, int modelid, int... spellids) {
 		// jade customization
 		JadeCreature jade = new JadeCreature();
-		jade.affinities = new int[Elements.values().length];
+		jade.affinities = new int[Element.values.size()];
 		jade.affinities[Elements.air.ordinal()] = 30; // personalized 30% air affinity
 		jade.creatureModelID = modelid; 
 		jade.spellIDs = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -52,7 +53,7 @@ public class MockFight {
 		CreatureModel model = DiamondModels.creatures.get(jade.creatureModelID);
 //		Log.info("");
 		// override model stats
-		model.baseStats.resources.put(Resource.life, new IntStat(30)); 
+//		model.baseStats.resources.put(Resource.life, new IntStat(30)); 
 		// instance
 		Creature creature = new Creature(fight, model, jade, new Position(5, 5));
 		creature.stats.resources.get(Resource.life).fight = -150; 

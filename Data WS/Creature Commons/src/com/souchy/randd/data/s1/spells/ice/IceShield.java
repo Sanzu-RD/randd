@@ -23,6 +23,7 @@ public class IceShield extends Spell {
 	@Override
 	protected SpellStats initBaseStats() {
 		var stats = new SpellStats();
+		stats.maxRangeRadius.baseflat = 3;
 		return stats;
 	}
 
@@ -39,7 +40,7 @@ public class IceShield extends Spell {
 	}
 
 	@Override
-	public void onCast(Creature caster, Cell target) {
+	public void cast(Creature caster, Cell target) {
 		// TODO Auto-generated method stub
 		
 	}

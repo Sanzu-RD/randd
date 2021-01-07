@@ -1,6 +1,11 @@
 package com.souchy.randd.commons.diamond.effects.displacement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.souchy.randd.commons.diamond.common.Aoe;
+import com.souchy.randd.commons.diamond.common.Pathfinding;
+import com.souchy.randd.commons.diamond.common.Pathfinding.Node;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
@@ -8,46 +13,41 @@ import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 
-/**
- * 'Teleport' effect between 2 creatures to exchange/switch their place
- * 
- * @author Blank
- * @date 23 mai 2020
- */
-public class Switch extends Effect {
+public class Move extends Effect {
+	
+	public List<Node> path = new ArrayList<>();
 
-	public Switch(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
+	public Move(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
 		super(f, aoe, targetConditions);
 	}
 
 	@Override
 	public Event createAssociatedEvent(Creature source, Cell target) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void prepareCaster(Creature caster, Cell aoeOrigin) {
-		// TODO Auto-generated method stub
-		
+	public void prepareCaster(Creature caster, Cell target) {
+		this.path = Pathfinding.aStar(get(Fight.class).board, caster, caster.getCell(), target);
 	}
 
 	@Override
 	public void prepareTarget(Creature caster, Cell target) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void apply0(Creature caster, Cell target) {
-		// TODO Auto-generated method stub
+		// start with WalkEvent ? 
 		
+		// while not interrupted 
+		// step on every cell 1 at a time
+		// create an event for each cell -> EnterCellEvent, LeaveCellEvent
 	}
 
 	@Override
 	public Effect copy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Move(get(Fight.class), this.aoe, this.targetConditions);
 	}
 	
 }

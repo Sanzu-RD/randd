@@ -77,7 +77,8 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		this.stats = model.baseStats.copy(); 
 		// then add jade stats
 		for(int i = 0; i < Element.count(); i++) {
-			this.stats.affinity.get(Element.values.get(i)).inc += jade.affinities[i];
+			var ele = Element.values.get(i);
+			this.stats.affinity.get(ele).inc += jade.affinities[i];
 		}
 		
 		// copy chosen spells

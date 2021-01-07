@@ -18,7 +18,34 @@ public class Pathfinding {
 //		return true;
 //	}
 	
+
+	/** checks that 2 cells are in line */
+	public static boolean checkAlign(double x0, double y0, double x1, double y1) {
+		return x0 == x1 || y0 == y1;
+	}
+	public static boolean checkAlign(Vector2 p0, Vector2 p1) {
+		return checkAlign(p0.x, p0.y, p1.x, p1.y);
+	}
 	
+	/** checks that 2 cells are in diagonal */
+	public static boolean checkDiagonal(double x0, double y0, double x1, double y1) {
+		var dx = Math.abs(x1 - x1);
+		var dy = Math.abs(y1 - y1);
+		return dx == dy;
+	}
+	public static boolean checkDiagonal(Vector2 p0, Vector2 p1) {
+		return checkDiagonal(p0.x, p0.y, p1.x, p1.y);
+	}
+
+	/** checks on 4 axis that 2 cells are adjacent */
+	public static boolean checkAdjacent4(Vector2 p0, Vector2 p1) {
+		return checkAdjacent8(p0, p1) && checkAlign(p0, p1);
+	}
+	
+	/** checks on 8 axis that 2 cells touch */
+	public static boolean checkAdjacent8(Vector2 p0, Vector2 p1) {
+		return Math.abs(p0.x - p1.x) <= 1 && Math.abs(p0.y - p1.y) <= 1;
+	}
 	
 	public static List<Cell> possibleMovement(Board board, Creature caster){
 		var list = new ArrayList<Cell>();
@@ -26,8 +53,8 @@ public class Pathfinding {
 		return list;
 	}
 	
-	public static List<Cell> aStar(Board board, Creature caster, Cell source, Cell target) {
-		List<Cell> path = new ArrayList<>();
+	public static List<Node> aStar(Board board, Creature caster, Cell source, Cell target) {
+		List<Node> path = new ArrayList<>();
 		List<Node> closed = new ArrayList<>();
 		List<Node> open = new ArrayList<>();
 		
@@ -65,7 +92,8 @@ public class Pathfinding {
 			if(current.pos.equals(target.pos)) {
 				// foreach jusqu'au début en passant par les parents
 				while(current != null && current.pos.equals(source.pos) == false) {
-					path.add(board.get(current.pos.x, current.pos.y));
+//					path.add(board.get(current.pos.x, current.pos.y));
+					path.add(current);
 					current = current.parent;
 				}
 				return path; // reverse?
@@ -91,7 +119,7 @@ public class Pathfinding {
 				if(n == null || tentative_gScore < n.g) {
 					if(n == null) n = new Node();
 					else open.remove(n);
-
+					
 					// neighbor could be null if it's outside of the map
 					Cell neighbor = board.get(pos.x, pos.y);
 					
@@ -108,7 +136,9 @@ public class Pathfinding {
 					
 					if(neighbor == null) n.v += 1000;
 					else if(!caster.targeting.canWalkThrough(neighbor)) n.v += 1000;
-//					if(n.pos.equals(target.pos))  n.v -= 1000;
+					if(n.v >= 1000) n.valid = false;
+					
+					// if(n.pos.equals(target.pos)) n.v -= 1000;
 					
 					n.f = n.v + n.h;
 
@@ -220,6 +250,8 @@ public class Pathfinding {
 		
 		public Node parent;
 		public Vector2 pos;
+		
+		public boolean valid = true;
 		
 		public int compare(Node n) {
 			if(n.f > f) return 1;

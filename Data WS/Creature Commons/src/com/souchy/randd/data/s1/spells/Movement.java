@@ -1,6 +1,8 @@
-package com.souchy.randd.data.s1.spells.water;
+package com.souchy.randd.data.s1.spells;
 
 import com.google.common.collect.ImmutableList;
+import com.souchy.randd.commons.diamond.common.AoeBuilders;
+import com.souchy.randd.commons.diamond.effects.displacement.Move;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Fight;
@@ -8,59 +10,47 @@ import com.souchy.randd.commons.diamond.models.Spell;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
+import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 
-public class Bubble extends Spell {
+public class Movement extends Spell {
+	
+	public Move tp;
 
-	public Bubble(Fight f) {
+	public Movement(Fight f) {
 		super(f);
+		tp = new Move(f, AoeBuilders.single.get(), TargetType.empty.asStat());
 	}
 
 	@Override
 	public int modelid() {
-		return 8;
+		return 0;
 	}
 
 	@Override
 	protected SpellStats initBaseStats() {
 		var stats = new SpellStats();
+//		stats.costs.put(Resource.mana, new IntStat(0));
 		return stats;
 	}
 
 	@Override
 	protected ImmutableList<Element> initElements() {
-		// TODO Auto-generated method stub
-		return null;
+		return ImmutableList.of();
 	}
 
 	@Override
 	protected ImmutableList<CreatureType> initCreatureTypes() {
-		// TODO Auto-generated method stub
-		return null;
+		return ImmutableList.of();
 	}
 
 	@Override
 	public void cast(Creature caster, Cell target) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean canCast(Creature caster) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean canTarget(Creature caster, Cell target) {
-		// TODO Auto-generated method stub
-		return false;
+		tp.apply(caster, target);
 	}
 
 	@Override
 	public Spell copy(Fight fight) {
-		var s = new Bubble(fight);
-		s.stats = stats.copy();
-		return s;
+		return new Movement(fight);
 	}
 	
 }

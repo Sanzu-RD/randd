@@ -37,4 +37,10 @@ public class TurnEndEvent extends Event {
 		return new TurnEndEvent(this.fight, this.turn, this.index); // source, target, effect.copy());
 	}
 	
+	@Override
+	public String testMessage() {
+		if(this.level != 0) return "";
+		return String.format("fight %s turn %s end %s", fight.id, turn, index);
+	}
+	
 }

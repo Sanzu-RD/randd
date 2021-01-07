@@ -1,6 +1,9 @@
 package com.souchy.randd.data.s1.spells.fire;
 
+import java.util.HashMap;
+
 import com.google.common.collect.ImmutableList;
+import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.effects.damage.Damage;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
@@ -11,14 +14,19 @@ import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
+import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 
 public class Fireball extends Spell {
 
-	public Damage e1 = new Damage(null, null, null, null);
+	public Damage e1;
 	
 	public Fireball(Fight f) {
 		super(f);
+		var formula = new HashMap<Element, IntStat>();
+		formula.put(Elements.fire, new IntStat(50, 0, 10, 0));
+		e1 = new Damage(f, AoeBuilders.single.get(), TargetType.enemies.asStat(), formula);
 	}
 	
 	@Override
@@ -29,7 +37,8 @@ public class Fireball extends Spell {
 	@Override
 	protected SpellStats initBaseStats() {
 		var stats = new SpellStats();
-		stats.costs.put(Resource.mana, new IntStat(5));
+		stats.costs.put(Resource.mana, new IntStat(3));
+		stats.maxRangeRadius.baseflat = 8;
 		return stats;
 	}
 
@@ -44,18 +53,19 @@ public class Fireball extends Spell {
 	}
 
 	@Override
-	public void onCast(Creature caster, Cell target) {
+	public void cast(Creature caster, Cell target) {
+		Log.info("Fireball cast: " + caster + ", " + target);
 		e1.apply(caster, target);
 	}
 
 	@Override
 	public boolean canCast(Creature caster) {
-		return false;
+		return super.canCast(caster);
 	}
 
 	@Override
 	public boolean canTarget(Creature caster, Cell target) {
-		return false;
+		return super.canTarget(caster, target);
 	}
 	
 	@Override

@@ -19,7 +19,12 @@ public class testAoe {
 		var result = AoeBuilders.diag1.apply(6).table.or(aoe2.table);
 		
 		Log.info(result.toString());
+
+		result = AoeBuilders.cross.apply(2).table;
+		Log.info(result.toString());
 		
+		result = AoeBuilders.cross.apply(5).table;
+		Log.info(result.toString());
 		
 //		int x = 2, y = 0;
 //		

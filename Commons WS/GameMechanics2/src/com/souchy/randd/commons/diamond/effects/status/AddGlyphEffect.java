@@ -6,7 +6,7 @@ import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Status;
-import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.status.AddGlyphEvent;
 
@@ -14,7 +14,7 @@ public class AddGlyphEffect extends Effect {
 
 	public Status status;
 	
-	public AddGlyphEffect(Fight f, Aoe aoe, TargetConditionStat targetConditions) {
+	public AddGlyphEffect(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
 		super(f, aoe, targetConditions);
 	}
 

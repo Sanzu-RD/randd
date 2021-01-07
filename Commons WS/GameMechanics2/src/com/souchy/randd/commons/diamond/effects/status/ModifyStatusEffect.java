@@ -5,7 +5,7 @@ import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
-import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statusevents.status.ModifyStatusEvent;
 
 /** One-shot effect */
@@ -14,7 +14,7 @@ public class ModifyStatusEffect extends Effect {
 	// mods to add, but to which statuses if not all ? 
 	public int modStacks, modDuration;
 	
-	public ModifyStatusEffect(Fight f, Aoe aoe, TargetConditionStat targetConditions, int modStacks, int modDuration) {
+	public ModifyStatusEffect(Fight f, Aoe aoe, TargetTypeStat targetConditions, int modStacks, int modDuration) {
 		super(f, aoe, targetConditions);
 		this.modStacks = modStacks;
 		this.modDuration = modDuration;

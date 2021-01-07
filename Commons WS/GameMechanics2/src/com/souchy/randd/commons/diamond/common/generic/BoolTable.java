@@ -1,6 +1,11 @@
 package com.souchy.randd.commons.diamond.common.generic;
 
 import java.util.function.BiConsumer;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+import com.souchy.randd.commons.diamond.common.Pathfinding;
 
 public class BoolTable extends Table<Boolean> {
 	
@@ -38,6 +43,13 @@ public class BoolTable extends Table<Boolean> {
 			put(i, j, b);
 		});
 		return this;
+	}
+	
+	public void setIf(BiPredicate<Integer, Integer> predicate) {
+		foreach((i, j) -> {
+			if(predicate.test(i, j)) 
+				put(i, j, true);
+		});
 	}
 	
 	public BoolTable sub(BoolTable table) {

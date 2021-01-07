@@ -23,6 +23,7 @@ public class IceComet extends Spell {
 	@Override
 	protected SpellStats initBaseStats() {
 		var stats = new SpellStats();
+		stats.maxRangeRadius.baseflat = 5;
 		return stats;
 	}
 
@@ -39,7 +40,7 @@ public class IceComet extends Spell {
 	}
 
 	@Override
-	public void onCast(Creature caster, Cell target) {
+	public void cast(Creature caster, Cell target) {
 		// TODO Auto-generated method stub
 		
 	}

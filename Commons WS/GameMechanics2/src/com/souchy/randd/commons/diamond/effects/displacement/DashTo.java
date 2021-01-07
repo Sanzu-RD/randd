@@ -5,13 +5,13 @@ import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
-import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 
 /** Dash to the target cell (stopped by no-passthrough cells) */
 public class DashTo extends Effect {
 
-	public DashTo(Fight f, Aoe aoe, TargetConditionStat targetConditions) {
+	public DashTo(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
 		super(f, aoe, targetConditions);
 	}
 

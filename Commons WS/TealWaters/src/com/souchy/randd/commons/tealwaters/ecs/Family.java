@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.tealwaters.ecs.Engine.AddEntityEvent;
 import com.souchy.randd.commons.tealwaters.ecs.Engine.RemoveEntityEvent;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 /**
  * Synchronizes all access to a family of entities
@@ -196,7 +197,8 @@ public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.
 	@Subscribe
 	public void onAddedEntity(AddEntityEvent event) {
 		if (clazz.isInstance(event.entity)) {
-//			Log.info("Family " + this + " ("+clazz+") add " + event.entity);
+			if(this.getClass().getName().contains("CellSystem") == false)
+				Log.info("Family " + this + " ("+clazz+") add " + event.entity);
 			add(clazz.cast(event.entity));
 		}
 	}

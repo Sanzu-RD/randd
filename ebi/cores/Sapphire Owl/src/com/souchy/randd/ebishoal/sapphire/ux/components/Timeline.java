@@ -41,7 +41,6 @@ public class Timeline extends SapphireComponent {
 
 
 	public Timeline() {
-		
 		Moonstone.fight.bus.register(this);
 	}
 	

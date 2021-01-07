@@ -83,7 +83,7 @@ public class Burning extends Status implements OnTurnStartHandler {
 		
 		int creaID = fight.timeline.get(event.index);
 		if(targetEntityId == creaID) {
-			dmg.height.set(targetCrea.stats.height.single());
+			dmg.height.set(targetCrea.stats.height); //.single());
 			dmg.apply(sourceCrea, targetCrea.getCell());
 		}
 	}

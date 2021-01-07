@@ -16,7 +16,9 @@ public interface Element extends StatProperty {
 	public static Element global = new Element() {
 		{
 			StatPropertyID.register(this);
+			values.add(this);
 		}
+		
 		public String name() {
 			return "global";
 		}

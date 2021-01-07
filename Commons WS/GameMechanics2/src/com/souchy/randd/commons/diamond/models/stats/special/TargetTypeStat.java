@@ -1,6 +1,6 @@
 package com.souchy.randd.commons.diamond.models.stats.special;
 
-import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetingProperty;
+import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
@@ -13,7 +13,7 @@ import io.netty.buffer.ByteBuf;
  * @author Blank
  * @date 26 févr. 2020
  */
-public class TargetConditionStat implements BBSerializer, BBDeserializer {
+public class TargetTypeStat implements BBSerializer, BBDeserializer {
 	
 	/** By default : can target everything and need a line of sight */
 	public int base = all();
@@ -21,6 +21,16 @@ public class TargetConditionStat implements BBSerializer, BBDeserializer {
 	/** this overrides everything */
 //	public TargetConditionStat setter;
 	public int fight = all();
+	
+	public TargetTypeStat() {
+		
+	}
+	public TargetTypeStat(int val) {
+		this.base = fight = val;
+	}
+	public static TargetTypeStat from(int val) {
+		return new TargetTypeStat(val);
+	}
 	
 	public int value() {
 //		if(setter != null) return setter.value();
@@ -32,7 +42,7 @@ public class TargetConditionStat implements BBSerializer, BBDeserializer {
 	 */
 	public int all() {
 		int bits = 0;
-		for(var p : TargetingProperty.values())
+		for(var p : TargetType.values())
 			bits |= p.bit();
 		return bits;
 	}
@@ -43,20 +53,20 @@ public class TargetConditionStat implements BBSerializer, BBDeserializer {
 		return 0;
 	}
 
-	public boolean accepts(TargetingProperty p) {
+	public boolean accepts(TargetType p) {
 		return (value() & p.bit()) != 0;
 	}
 	
 	/**
 	 * Activates a target type in fight
 	 */
-	public void addFight(TargetingProperty p) {
+	public void addFight(TargetType p) {
 		this.fight |= p.bit();
 	}
 	/**
 	 * Deactivates a target type in fight
 	 */
-	public void removeFight(TargetingProperty p) {
+	public void removeFight(TargetType p) {
 		int val = p.bit();
 		if((this.fight & val) != 0) 
 			this.fight -= val;
@@ -76,8 +86,8 @@ public class TargetConditionStat implements BBSerializer, BBDeserializer {
 		return null;
 	}
 	
-	public TargetConditionStat copy() {
-		var copy = new TargetConditionStat();
+	public TargetTypeStat copy() {
+		var copy = new TargetTypeStat();
 		copy.base = base;
 		copy.fight = fight;
 		return copy;

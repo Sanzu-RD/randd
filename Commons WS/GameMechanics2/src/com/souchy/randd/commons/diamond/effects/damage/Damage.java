@@ -9,10 +9,11 @@ import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
-import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statusevents.damage.DmgEvent;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 /**
  * Damage always applies to the primary resource of the targets (ex: life)
@@ -54,7 +55,7 @@ public class Damage extends Effect {
 	 * @param targetConditions - what kind of targets should be affected
 	 * @param formula - base ratios for elemental dmg
 	 */
-	public Damage(Fight fight, Aoe areaOfEffect, TargetConditionStat targetConditions, Map<Element, IntStat> formula) {
+	public Damage(Fight fight, Aoe areaOfEffect, TargetTypeStat targetConditions, Map<Element, IntStat> formula) {
 		super(fight, areaOfEffect, targetConditions);
 		this.formula = formula;
 	}
@@ -92,12 +93,14 @@ public class Damage extends Effect {
 			// copy the base dmg formula which acts as ratios 
 			var f1 = formula.get(ele).copy();
 			// add caster stats to the base dmg ratios
-			f1.baseflat += /* globalAffinity.base + */globalAffinity.baseflat + /* affinity.base + */ affinity.baseflat;
-			f1.inc 	 	*= globalAffinity.inc + affinity.inc;
+			f1.baseflat += globalAffinity.baseflat + affinity.baseflat;
+			f1.inc 	 	+= globalAffinity.inc + affinity.inc; // *=
 			f1.incflat  += globalAffinity.incflat + affinity.incflat;
-			f1.more 	*= globalAffinity.more + affinity.more;
+			f1.more 	+= globalAffinity.more + affinity.more; // *=
 			// save the source dmg for later
 			this.sourceDmg.put(ele, f1);
+			
+			Log.info("Effect Damage prepareCaster : " + ele + " = " + f1.value());
 		}
 	}
 	
@@ -129,8 +132,10 @@ public class Damage extends Effect {
 			var finalDmg = sourceDmg * (1d + mitigation.more / 100d) * (1d + mitigation.inc / 100d) + mitigation.baseflat;
 			// save the target dmg for later
 			targetDmg.put(ele, new IntStat(finalDmg));
+
+			Log.info("Effect Damage prepareTarget : " + ele + " = " + finalDmg);
 		}
-		
+
 	}
 	
 	/**
@@ -147,18 +152,32 @@ public class Damage extends Effect {
 			// add to total dmg
 			totalDmg += targetDmg.get(ele).value();
 		}
+//		Log.info("Effect Damage apply0 totalDmg: " + totalDmg + ", on " + creature.id + " " + creature );
 		
 		// Applique les dégâts
 		var life = creature.stats.resources.get(Resource.life);
 		var shield = creature.stats.shield.get(Resource.life);
 		
+		int lifeBefore = life.value();
+		int shieldBefore = (int) shield.fight;
+		double shieldDmg = 0;
+		double lifeDmg = 0;
+		
 		if(shield.fight >= totalDmg) {
 			shield.fight -= totalDmg;
+			shieldDmg = totalDmg; // log
 		} else { 
+			shieldDmg = shield.fight; // log
+			lifeDmg = totalDmg - shieldDmg; // log
+			
 			totalDmg -= shield.fight;
 			shield.fight = 0;
 			life.fight -= totalDmg;
 		} 
+		
+		Log.info("Effect Damage apply0, creature [" + creature.id + "] dmg: (" + shieldDmg + ") " + lifeDmg 
+				+ ", before: (" + shieldBefore + ") " + lifeBefore
+				+ ", after: (" + shield.fight + ")" + life.value());
 		
 		if(life.value() <= 0) {
 			// TODO die

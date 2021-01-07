@@ -219,19 +219,7 @@ public class Board extends Entity {
 		return view;
 	}
 	
-	public boolean checkRange(SpellStats stats, Position caster,  Position target) { // int rangeMin, int rangeMax, boolean line, boolean diagonal,
-		// aoe portée max
-		Aoe range = stats.maxRangePattern.value().build(stats.maxRangeRadius.value());
-		var rangeCenter = range.table.center();
-		
-		// soustrais l'aoe portée min s'il existe
-		if(stats.minRangePattern.value() != null) {
-			Aoe minAoe = stats.minRangePattern.value().build(stats.minRangeRadius.value());
-			var minCenter = minAoe.table.center();
-			minAoe.move((int) (rangeCenter.x - minCenter.x), (int) (rangeCenter.y - minCenter.y));
-			range.sub(minAoe);
-		}
-		
+	public boolean checkRange(Aoe range, Position caster,  Position target) { // int rangeMin, int rangeMax, boolean line, boolean diagonal,
 		// vector de différence/distance entre la source et le target
 		var d = target.copy().sub(caster);
 		
@@ -241,27 +229,6 @@ public class Board extends Entity {
 		return isContained;
 	}
 	
-	/** checks that 2 cells are in line */
-	public boolean checkAlign(Position p0, Position p1) {
-		return p0.x == p1.x || p0.y == p1.y;
-	}
-	
-	/** checks that 2 cells are in diagonal */
-	public boolean checkDiagonal(Position p0, Position p1) {
-		var dx = Math.abs(p1.x - p0.x);
-		var dy = Math.abs(p1.y - p0.y);
-		return dx == dy;
-	}
-
-	/** checks on 4 axis that 2 cells are adjacent */
-	public boolean checkAdjacent4(Position p0, Position p1) {
-		return checkAdjacent8(p0, p1) && checkAlign(p0, p1);
-	}
-	
-	/** checks on 8 axis that 2 cells touch */
-	public boolean checkAdjacent8(Position p0, Position p1) {
-		return Math.abs(p0.x - p1.x) <= 1 && Math.abs(p0.y - p1.y) <= 1;
-	}
 	
 	
 }

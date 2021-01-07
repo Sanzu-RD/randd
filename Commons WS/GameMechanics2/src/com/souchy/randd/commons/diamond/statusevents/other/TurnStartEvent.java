@@ -37,4 +37,10 @@ public class TurnStartEvent extends Event {
 		return new TurnStartEvent(this.fight, this.turn, this.index); // source, target, effect.copy());
 	}
 	
+	@Override
+	public String testMessage() {
+		if(this.level != 0) return "";
+		return String.format("fight %s turn %s sta %s", fight.id, turn, index);
+	}
+	
 }

@@ -88,7 +88,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		range = new IntStat(0);
 		summons = new IntStat(0);
 		visible = new BoolStat(true);
-		height = new HeightStat(Height.floor.bit());
+		height = new HeightStat(Height.floor.bit);
 		// + peut-être une stat pour aoeRadiusModificator / AoeRange
 		
 		for(var v : Resource.values()) {

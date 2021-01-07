@@ -1,6 +1,7 @@
 package com.souchy.randd.data.s1.spells.ice;
 
 import com.google.common.collect.ImmutableList;
+import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Fight;
@@ -23,6 +24,8 @@ public class IceWall extends Spell {
 	@Override
 	protected SpellStats initBaseStats() {
 		var stats = new SpellStats();
+		stats.maxRangePattern.base = (r) -> AoeBuilders.cross.apply(r);
+		stats.maxRangeRadius.baseflat = 5;
 		return stats;
 	}
 
@@ -39,7 +42,7 @@ public class IceWall extends Spell {
 	}
 
 	@Override
-	public void onCast(Creature caster, Cell target) {
+	public void cast(Creature caster, Cell target) {
 		// TODO Auto-generated method stub
 		
 	}

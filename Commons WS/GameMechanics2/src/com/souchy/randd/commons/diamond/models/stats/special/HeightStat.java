@@ -43,6 +43,7 @@ public class HeightStat implements BBSerializer, BBDeserializer {
 	}
 	
 	public void set(Height h) {
+		this.base = h.bit;
 		this.fight = h.bit;
 	}
 	
@@ -52,7 +53,7 @@ public class HeightStat implements BBSerializer, BBDeserializer {
 	}
 	
 	public boolean has(Height h) {
-		return (value() & h.bit) != 0;
+		return (fight & h.bit) != 0;
 	}
 	
 	public void reset() {

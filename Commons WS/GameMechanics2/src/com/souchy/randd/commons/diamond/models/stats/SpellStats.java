@@ -9,7 +9,7 @@ import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.common.AoeBuilders.AoeBuilder;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.models.stats.base.ObjectStat;
-import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
@@ -23,12 +23,24 @@ public class SpellStats implements BBSerializer, BBDeserializer { //extends Enty
 	public Map<Resource, IntStat> costs = new HashMap<>();
 
 	// cell targetting conditions
-	public TargetConditionStat target = new TargetConditionStat();
+	public TargetTypeStat target = new TargetTypeStat();
 	
 	// cast ranges and pattern for the cast range
+	/**
+	 * Range minimale. 0 par défaut
+	 */
 	public IntStat minRangeRadius = new IntStat(0);
-	public IntStat maxRangeRadius = new IntStat(0);
+	/**
+	 * Range maximale. 1 par défaut
+	 */
+	public IntStat maxRangeRadius = new IntStat(1);
+	/**
+	 * Pattern de range maximale. null par défaut.
+	 */
 	public ObjectStat<AoeBuilder> minRangePattern = new ObjectStat<AoeBuilder>(null);
+	/**
+	 * Pattern de range maximale. Cercle par défaut.
+	 */
 	public ObjectStat<AoeBuilder> maxRangePattern = new ObjectStat<AoeBuilder>(r -> AoeBuilders.circle.apply(r));
 	
 	// cast cooldowns
@@ -39,7 +51,6 @@ public class SpellStats implements BBSerializer, BBDeserializer { //extends Enty
 	
 	// publicly modifiable aoes (spells create their aoes and place them here so that other classes can modify them without knowing the spell .class)
 	public List<ObjectStat<Aoe>> aoes = new ArrayList<>();
-	
 	
 	
 

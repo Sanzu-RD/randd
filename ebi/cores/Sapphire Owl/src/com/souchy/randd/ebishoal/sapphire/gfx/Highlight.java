@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.g3d.model.NodePart;
 import com.badlogic.gdx.graphics.g3d.utils.MeshBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
+import com.souchy.randd.commons.diamond.common.Pathfinding;
 import com.souchy.randd.commons.diamond.common.generic.Vector2;
 import com.souchy.randd.commons.diamond.ext.CellType;
 import com.souchy.randd.commons.diamond.statics.properties.Targetability;
@@ -46,6 +47,7 @@ public class Highlight {
 	private static final float borderRadius = 0.03f;
 	private static final float margin = 0.03f;
 
+	// Movements
 	public static final Color movementPossibleColor = new Color(0.1f, 0.8f, 0.1f, 0.5f);
 	public static final Material movementPossibleMat = new Material(ColorAttribute.createDiffuse(movementPossibleColor));
 	public static final Color movementPossibleBorderColor = new Color(0.1f, 0.8f, 0.1f, 0.7f);
@@ -58,20 +60,20 @@ public class Highlight {
 	public static final Material movementBorderMat = new Material(ColorAttribute.createDiffuse(movementBorderColor), new BlendingAttribute(1));
 	public static final Model movement = model("movement", movementMat, movementBorderMat);
 
+	// Spells
 	public static final Color spellColor = new Color(0.1f, 0.1f, 0.8f, 0.2f);
 	public static final Material spellMat = new Material(ColorAttribute.createDiffuse(spellColor), new BlendingAttribute(1));
 	public static final Color spellBorderColor = new Color(0.1f, 0.1f, 0.8f, 0.9f);
 	public static final Material spellBorderMat = new Material(ColorAttribute.createDiffuse(spellBorderColor), new BlendingAttribute(1));
 	public static final Model spell = model("spell", spellMat, spellBorderMat);
 	
-
 	public static final Color spellLosColor = new Color(0.8f, 0.1f, 0.1f, 0.2f);
 	public static final Material spellLosMat = new Material(ColorAttribute.createDiffuse(spellLosColor), new BlendingAttribute(1));
 	public static final Color spellLosBorderColor = new Color(0.8f, 0.1f, 0.1f, 0.9f);
 	public static final Material spellLosBorderMat = new Material(ColorAttribute.createDiffuse(spellLosBorderColor), new BlendingAttribute(1));
 	public static final Model spellLos = model("spell", spellLosMat, spellLosBorderMat);
 
-	
+	// Teams
 	public static final Color teamColor = new Color(0.1f, 0.1f, 0.8f, 0.2f);
 	public static final Material teamMat = new Material(ColorAttribute.createDiffuse(teamColor), new BlendingAttribute(1));
 	public static final Color teamBorderColor = new Color(0.1f, 0.1f, 0.8f, 0.9f);
@@ -81,7 +83,10 @@ public class Highlight {
 	public static final Model teamA = new ModelBuilder().createCylinder(1 - margin * 2 - borderRadius * 2, 0, 1 - margin * 2 - borderRadius * 2, 12, new Material(ColorAttribute.createDiffuse(1, 0, 0, 0.3f), new BlendingAttribute(1)), Usage.Position | Usage.Normal);
 	public static final Model teamB = new ModelBuilder().createCylinder(1 - margin * 2 - borderRadius * 2, 0, 1 - margin * 2 - borderRadius * 2, 12, new Material(ColorAttribute.createDiffuse(0, 0, 1, 0.3f), new BlendingAttribute(1)), Usage.Position | Usage.Normal);
 	
+	// Cell types
 	public static final Map<CellType, Model> cellTypes = new HashMap<>();
+	
+	
 	
 	/** static initialize */
 	public static void init() {
@@ -143,8 +148,18 @@ public class Highlight {
 		return highlights;
 	}
 	
-	public static List<ModelInstance> movementPossibilities(List<Vector2> cells) {
-		return highlight(cells, movementPossible);
+	public static List<ModelInstance> movementPossibilities(List<Pathfinding.Node> cells) {
+		// remove current highlights
+		clear();
+		// create new model instances
+		for (var v : cells) {
+			if(v.valid) highlights.add(new ModelInstance(movementPossible, (float) v.pos.x, (float) v.pos.y, floorHeight + floorOffset));
+			else highlights.add(new ModelInstance(movement, (float) v.pos.x, (float) v.pos.y, floorHeight + floorOffset));
+		}
+		// add instances to render list
+		SapphireWorld.world.instances.addAll(highlights);
+		return highlights;
+		// return highlight(cells, movementPossible);
 	}
 	
 	public static List<ModelInstance> movement(List<Vector2> cells) {

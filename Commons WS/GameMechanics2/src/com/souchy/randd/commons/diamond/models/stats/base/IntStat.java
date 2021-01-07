@@ -32,6 +32,12 @@ public class IntStat implements BBSerializer, BBDeserializer  { //implements Com
 	public IntStat(double base) {
 		this.baseflat = base;
 	}
+	public IntStat(double base, double inc, double incflat, double more) {
+		this.baseflat = base;
+		this.inc = inc;
+		this.incflat = incflat;
+		this.more = more;
+	}
 	
 	public int value() {
 		return max() + (int) fight;
@@ -42,9 +48,9 @@ public class IntStat implements BBSerializer, BBDeserializer  { //implements Com
 	public int max() {
 		if(setter != null) return setter.value();
 		var val = baseflat;
-		val *= (1.0 + inc / 100.0);
+		val += val * (inc / 100.0);
 		val += incflat;
-		val *= (1.0 + more / 100.0);
+		val += val * (more / 100.0);
 		return (int) val;
 	}
 	

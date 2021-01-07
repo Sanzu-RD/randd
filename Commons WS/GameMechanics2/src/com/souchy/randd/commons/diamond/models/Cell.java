@@ -54,23 +54,31 @@ public class Cell extends Entity implements BBSerializer, BBDeserializer {
 	public boolean hasCreature() {
 		return get(Fight.class).creatures.any(c -> c.pos.same(this.pos));
 	}
-	
+	/**
+	 * returns the first creature on the cell, or null if there is none
+	 */
+	public Creature getFirstCreature() {
+		return get(Fight.class).creatures.first(c -> c.pos.same(this.pos));
+	}
 	/** 
-	 * returns the first creature on the cell that has the specified height
+	 * returns the first creature on the cell that is on the specified height, or null if there is none
 	 */
 	public Creature getCreature(Height h) {
 		return get(Fight.class).creatures.first(c -> c.pos.same(this.pos) && c.stats.height.has(h));
 	}
+	/** 
+	 * returns the first creature on the cell that is on the specified height, or null if there is none
+	 */
 	public Creature getCreature(HeightStat h) {
 		return getCreature(h.single());
 	}
-	
 	/** 
 	 * returns all creatures on this cell
 	 */
 	public List<Creature> getCreatures() {
 		return get(Fight.class).creatures.where(c -> c.pos == this.pos);
 	}
+	
 	
 	@SuppressWarnings("unchecked")
 	@Override

@@ -4,10 +4,11 @@ package com.souchy.randd.commons.diamond.models;
 import com.souchy.randd.commons.diamond.common.Aoe;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.models.stats.special.HeightStat;
-import com.souchy.randd.commons.diamond.models.stats.special.TargetConditionStat;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statics.filters.Height;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 /**
  * 
@@ -31,16 +32,16 @@ public abstract class Effect extends Entity {
 	/** 
 	 * conditions to apply the effect to a target in the aoe 
 	 */
-	public TargetConditionStat targetConditions;
+	public TargetTypeStat targetConditions;
 	/**
 	 * Z / Height filter. The effect will only target creatures of the corresponding heights
 	 */
-	public HeightStat height = new HeightStat();
+	public HeightStat height = new HeightStat(Height.floor.bit);
 
 	/**
 	 * Ctor
 	 */
-	public Effect(Fight f, Aoe aoe, TargetConditionStat targetConditions) {
+	public Effect(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
 		super(f);
 		this.aoe = aoe;
 		this.targetConditions = targetConditions;
@@ -65,20 +66,29 @@ public abstract class Effect extends Entity {
 		interceptors(source, casterEvent); 
 		modifiers(source, casterEvent);
 		prepareCaster(source, cellTarget);
+//		Log.info("Effect Apply, intercepted? " + casterEvent.intercepted);
 		if(casterEvent.intercepted) return;
+
+//		Log.info("Effect.apply, height : " + height.value());
 		
 		// for all cells in the AOE, copy the event and the effect as a child
-		aoe.table.foreach((x, y) -> {
+		aoe.table.foreachTrue((i, j) -> {
 			// if the coordinate isnt activated in the aoe
-			if(!aoe.table.get(x, y)) return;
+//			if(!aoe.table.get(i, j)) return;
 
 			// project pos to board cell
-			Cell target = board.cells.get(cellTarget.pos.x - aoe.source.x + x, cellTarget.pos.y - aoe.source.y + y);
+			double x = aoe.projectX(i, cellTarget.pos.x);
+			double y = aoe.projectY(j, cellTarget.pos.y);
+			Cell target = board.get(x, y); // cellTarget.pos.x - aoe.source.x + i, cellTarget.pos.y - aoe.source.y + j);
+			
+			Log.info("Effect Apply, ij [" + i + "," + j + "] cell [" + x + ", " + y + "] = " + target);
+			
 			if(target == null) return;
 			
 			// copy event and effect for each accepted height on the cell
 			for(Height h : Height.values()) {
 				if(!this.height.has(h)) continue;
+				Log.info("Effect.apply, for height " + h); // + " has? " + this.height.has(h));
 				
 				var event = casterEvent.copy(); 
 				event.target = target;
@@ -89,6 +99,7 @@ public abstract class Effect extends Entity {
 			}
 			
 		});
+		Log.info("Effect.apply, going to reactors 0");
 		
 		// level 0 reactor has access to all the copies of events & effects made in the Aoe
 		reactors(source, casterEvent); 
@@ -105,6 +116,7 @@ public abstract class Effect extends Entity {
 	 *  </pre>
 	 */
 	public static void secondaryEffect(Event event) {
+		Log.info("Effect.secondaryEffect on level: " + event.level);
 		// level 1 handlers
 		interceptors(event.target, event); 	
 		modifiers(event.target, event);
@@ -116,27 +128,31 @@ public abstract class Effect extends Entity {
 		event.effect.apply0(event.source, event.target);
 		
 		// level 1 handlers
+		Log.info("Effect.secondaryEffect, going to reactors 1");
 		reactors(event.target, event); 
-		reactors(event.source, event);
+//		reactors(event.source, event);
 	}
 	
 	private static void interceptors(Entity e, Event tempEvent) {
 		if(tempEvent.intercepted) return;
-		e.get(Fight.class).statusbus.interceptors.post(tempEvent);
+		//e.get(Fight.class)
+		tempEvent.source.get(Fight.class).statusbus.interceptors.post(tempEvent);
 	}
-	private static void modifiers(Entity e, Event tempEvent) {
+	private static void modifiers(Entity e,  Event tempEvent) {
 		if(tempEvent.intercepted) return;
-		e.get(Fight.class).statusbus.modifiers.post(tempEvent);
+		//e.get(Fight.class)
+		tempEvent.source.get(Fight.class).statusbus.modifiers.post(tempEvent);
 	}
-	private static void reactors(Entity e, Event tempEvent) {
+	private static void reactors(Entity e,  Event tempEvent) {
 		if(tempEvent.intercepted) return;
-		e.get(Fight.class).statusbus.reactors.post(tempEvent);
+		//e.get(Fight.class)
+		tempEvent.source.get(Fight.class).statusbus.reactors.post(tempEvent);
 	}
 	
 	/**
 	 * Pre-calculation for the caster. Cell target is the origin of the aoe
 	 */
-	public abstract void prepareCaster(Creature caster, Cell aoeOrigin);
+	public abstract void prepareCaster(Creature caster, Cell target);
 	/**
 	 * Pre-calculation for the target. Cell target is any cell in the aoe.
 	 */

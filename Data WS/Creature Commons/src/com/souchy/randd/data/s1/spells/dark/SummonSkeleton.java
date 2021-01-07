@@ -54,7 +54,7 @@ public class SummonSkeleton extends Spell { //implements EbiSpellData {
 	}
 
 	@Override
-	public void onCast(Creature caster, Cell target) {
+	public void cast(Creature caster, Cell target) {
 		// TODO Auto-generated method stub
 		
 	}

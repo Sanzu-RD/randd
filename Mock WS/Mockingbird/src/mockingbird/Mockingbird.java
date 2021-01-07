@@ -16,7 +16,8 @@ public class Mockingbird {
 	public static void main(String[] args) {
 		Logging.registerLogModule(Mockingbird.class);
 		
-//		testAoe.main();
+		testAoe.main();
+		if(true) return;
 		
 		
 		var fight = new Fight();

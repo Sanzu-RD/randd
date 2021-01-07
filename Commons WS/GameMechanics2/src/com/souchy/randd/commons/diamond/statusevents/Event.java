@@ -59,4 +59,12 @@ public abstract class Event {
 	/** Create a new instance of the event subclass with the source, target and effect forced by the ctor */
 	public abstract Event copy0();
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public String testMessage() {
+		return "";
+	}
+	
 }

@@ -28,8 +28,8 @@ public enum Elements implements Element, StatProperty {
 	;
 	
 	private Elements() {
-		values.add(this);
 		StatPropertyID.register(this);
+		values.add(this);
 	}
 	
 }
