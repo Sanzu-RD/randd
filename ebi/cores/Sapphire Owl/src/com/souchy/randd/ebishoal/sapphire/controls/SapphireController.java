@@ -427,7 +427,7 @@ public class SapphireController extends CameraInputController {
 				if(currentActionID > 0) {
 					var caster = SapphireGame.fight.creatures.first();
 					var spell = SapphireGame.fight.spells.get(currentActionID);
-					spell.cast(caster, cell);
+					spell.cast0(caster, cell);
 				} else 
 				if (currentActionID == Action.MOVE) {
 //					var caster = SapphireGame.fight.creatures.first();

@@ -4,7 +4,6 @@ import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 
-@SuppressWarnings("preview")
 public class EventPipeline {
 	
 	
@@ -34,12 +33,12 @@ public class EventPipeline {
 	}
 	public void register(Handler handler) {
 		switch (handler.type()) {
-			case Interceptor : interceptors.register(handler); break;
-			case Modifier : modifiers.register(handler); break;
-			case Reactor : reactors.register(handler); break;
-//			case Interceptor -> interceptors.register(handler);
-//			case Modifier -> modifiers.register(handler);
-//			case Reactor -> reactors.register(handler);
+//			case Interceptor : interceptors.register(handler); break;
+//			case Modifier : modifiers.register(handler); break;
+//			case Reactor : reactors.register(handler); break;
+			case Interceptor -> interceptors.register(handler);
+			case Modifier -> modifiers.register(handler);
+			case Reactor -> reactors.register(handler);
 		}
 	}
 
@@ -53,12 +52,12 @@ public class EventPipeline {
 	public void unregister(Handler handler) {
 		// Status Remove Effect
 		switch (handler.type()) {
-			case Interceptor : interceptors.unregister(handler); break;
-			case Modifier : modifiers.unregister(handler); break;
-			case Reactor : reactors.unregister(handler); break;
-//			case Interceptor -> interceptors.unregister(handler);
-//			case Modifier -> modifiers.unregister(handler);
-//			case Reactor -> reactors.unregister(handler);
+//			case Interceptor : interceptors.unregister(handler); break;
+//			case Modifier : modifiers.unregister(handler); break;
+//			case Reactor : reactors.unregister(handler); break;
+			case Interceptor -> interceptors.unregister(handler);
+			case Modifier -> modifiers.unregister(handler);
+			case Reactor -> reactors.unregister(handler);
 		}
 	}
 	

@@ -109,7 +109,7 @@ public abstract class Status extends Entity implements BBSerializer, BBDeseriali
 	public abstract void onLose();
 	
 	/** create an instance of this status */
-	public abstract Status copy(Fight fight);
+	public abstract Status copy(Fight f);
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {

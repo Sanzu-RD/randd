@@ -53,7 +53,7 @@ public class Fireball extends Spell {
 	}
 
 	@Override
-	public void cast(Creature caster, Cell target) {
+	public void cast0(Creature caster, Cell target) {
 		Log.info("Fireball cast: " + caster + ", " + target);
 		e1.apply(caster, target);
 	}

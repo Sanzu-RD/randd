@@ -39,7 +39,7 @@ public class Bubble extends Spell {
 	}
 
 	@Override
-	public void cast(Creature caster, Cell target) {
+	public void cast0(Creature caster, Cell target) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -21,7 +21,7 @@
    <children>
       <HBox layoutX="2.0" layoutY="2.0" spacing="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <BorderPane>
+            <BorderPane HBox.hgrow="ALWAYS">
                <top>
                   <HBox id="filters" fx:id="filters" spacing="20.0" BorderPane.alignment="CENTER">
                      <children>

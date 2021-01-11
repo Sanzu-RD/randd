@@ -54,10 +54,10 @@ public class Burning extends Status implements OnTurnStartHandler {
 	}
 
 	@Override
-	public Status copy(Fight fight) {
+	public Status copy(Fight f) {
 //		FUCK
 //		the fight component qu'on mettrait sur le model pour copier est pas bon car le model est static dans DiamondModels
-		var s = new Burning(fight, sourceEntityId, targetEntityId);
+		var s = new Burning(f, sourceEntityId, targetEntityId);
 		s.canDebuff = canDebuff;
 		s.canRemove = canRemove;
 		s.stacks = stacks;

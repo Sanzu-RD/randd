@@ -10,6 +10,7 @@ import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
+import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
@@ -94,11 +95,22 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	public Spell getModel() {                       
 		return DiamondModels.spells.get(modelid());   
 	}                                               
+
+	/**
+	 * Actual casting action. Posts a CastSpellEvent then applies all effects.
+	 */
+	public void cast(Creature caster, Cell target) {
+		var event = new CastSpellEvent(caster, target, this);
+		get(Fight.class).statusbus.post(event);
+		if(!event.intercepted)
+			this.cast0(caster, target);
+	}
 	
 	/**
-	 * Actual casting action. Applies all effects.
+	 * Individual spell implementation of cast
 	 */
-	public abstract void cast(Creature caster, Cell target);
+	protected abstract void cast0(Creature caster, Cell target);
+	
 	
 	/**
 	 * Check if the spell can be cast at all : checks costs, conditions
@@ -176,6 +188,14 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	 * @return
 	 */
 	public abstract Spell copy(Fight fight);
+	
+	/**
+	 * Be careful not to use this on a spell model because they dont have a fight reference. <br>
+	 * Use spell.copy(Fight fight) instead in those cases.
+	 */
+	public Spell copy() {
+		return this.copy(get(Fight.class));
+	}
 	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
