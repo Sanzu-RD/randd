@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.components.Position;
+import com.souchy.randd.ebi.ammolite.Ammolite;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
@@ -43,34 +44,31 @@ public class SapphireScreen extends LapisScreen {
 	public SapphireScreen() {
 //		startPfx(null);
 	}
-
+	
 	@Override
-	public void resize(int width, int height) {
-		super.resize(width, height);
+	public void init() {
+		super.init();
+		// init FX player
+		new Ammolite(SapphireGame.fight, getEffekseer());
 	}
+
 
 	public void startPfx() {
-		startPfx(null);
-	}
-	public void startPfx(Creature c) {
-//		c = new Creature(null);
-//		c.pos = new Position(5, 0);
-//		timeStart = System.currentTimeMillis();
-		var pos  = new Position(5, 0);
-
-        var effect = new ParticleEffekseer(getEffekseer());
-        effect.setMagnification(0.3f);
-        try {
-//        	effect.load("fx/Sample/01_Pierre02/CosmicMist.efk", true);
-        	effect.load("fx/bleed/bleed.efk", true);
-//        	effect.load("fx/shock/shock.efk", true);
-//        	effect.setLocation(9.5f, 1.5f, -9.5f);
-        	effect.setLocation((float) pos.x + 0.5f, 1.5f, (float) -pos.y - 0.5f);
-//        	getEffekseer().addParticleEffekseer(effect);
-        	effect.play();
-
-        	c = SapphireGame.fight.creatures.first();
-        	var status = DiamondModels.statuses.get(1).copy(SapphireGame.fight);
+		try {
+			var c = SapphireGame.fight.creatures.first();
+			var pos = c.pos;
+			
+			var effect = new ParticleEffekseer(getEffekseer());
+//			effect.setMagnification(0.3f);
+			// effect.load("fx/Sample/01_Pierre02/CosmicMist.efk", true);
+			effect.load("fx/fire/fire.efk", true);
+			// effect.load("fx/shock/shock.efk", true);
+			// effect.setLocation(9.5f, 1.5f, -9.5f);
+			effect.setLocation((float) pos.x + 0.5f, 1.5f, (float) -pos.y - 0.5f);
+			// getEffekseer().addParticleEffekseer(effect);
+			effect.play();
+			
+			var status = DiamondModels.statuses.get(1).copy(SapphireGame.fight);
         	status.add(effect);
         	c.add(status);
         } catch (Exception e) {

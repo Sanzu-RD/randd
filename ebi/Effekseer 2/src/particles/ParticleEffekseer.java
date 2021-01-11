@@ -39,7 +39,7 @@ public class ParticleEffekseer {
 		this.play = play;
 	}
 	
-	protected void delete() {
+	public void delete() {
 		effekseerEffectCore.delete();
 	}
 	
@@ -81,7 +81,7 @@ public class ParticleEffekseer {
 		}
 		byte[] byt = handle.readBytes();
 		if(manager.effekseerManagerCore == null) {
-			throw new Exception("add particle on manager");
+			throw new Exception("add particle on null manager core");
 		}
 		try {
 			if(!effekseerEffectCore.Load(byt, byt.length, magnification, manager.effekseerManagerCore)) {

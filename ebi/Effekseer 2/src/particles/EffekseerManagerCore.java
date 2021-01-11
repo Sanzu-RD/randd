@@ -10,6 +10,8 @@ package particles;
 
 import com.badlogic.gdx.math.Matrix4;
 
+import particles.EffekseerCore.TypeOpenGL;
+
 class EffekseerManagerCore {
 	public transient long swigCPtr;
 	protected transient boolean swigCMemOwn;

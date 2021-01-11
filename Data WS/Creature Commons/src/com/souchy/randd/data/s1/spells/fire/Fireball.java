@@ -19,6 +19,8 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 
 public class Fireball extends Spell {
+	
+	public static final int fireballID = 1;
 
 	public Damage e1;
 	
@@ -31,7 +33,7 @@ public class Fireball extends Spell {
 	
 	@Override
 	public int modelid() {
-		return 1;
+		return fireballID;
 	}
 
 	@Override

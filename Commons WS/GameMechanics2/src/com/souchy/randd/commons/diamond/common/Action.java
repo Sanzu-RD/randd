@@ -54,7 +54,7 @@ public abstract class Action implements Supplier<Boolean> {
 		public void apply() {
 			// spell
 			if(id > 0) {
-				spell.cast0(casterC, cell);
+				spell.cast(casterC, cell);
 			} else
 			// movement
 			if(id == 0) {

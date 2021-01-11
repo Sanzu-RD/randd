@@ -21,12 +21,17 @@ public class CastSpellEvent extends Event {
 		return new CastSpellEvent(source, target, spell.copy());
 	}
 	
-
 	public interface OnCastSpellHandler extends Handler { // <OnEnterCellEvent> {
 		@Subscribe
 		public default void handle0(CastSpellEvent event) {
 			if(check(event)) onCastSpell(event);
 		}
+		
+		@Override
+		default HandlerType type() {
+			return HandlerType.Reactor;
+		}
+		
 		public void onCastSpell(CastSpellEvent event);
 	}
 	

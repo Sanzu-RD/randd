@@ -10,6 +10,7 @@ import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
+import com.souchy.randd.ebi.ammolite.Ammolite;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.RenderOptions;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
@@ -36,6 +37,7 @@ public class SapphireGame extends LapisGame {
 		SapphireGame.fight = Moonstone.fight; // = new Fight();
 		renderableEntitySystem = new SapphireEntitySystem(Moonstone.fight);
 		
+		
 		// init elements
 		Elements.values();
 		// models configurations (creatures, spells, statuses)
@@ -51,8 +53,9 @@ public class SapphireGame extends LapisGame {
 		LapisAssets.loadSounds(Gdx.files.internal("res/sounds/"));
 		LapisAssets.loadI18NBundles(Gdx.files.internal("res/i18n/"));
 
+		// init music player
 		music = new MusicPlayer();
-
+		
 		Highlight.init();
 		
 		// screen

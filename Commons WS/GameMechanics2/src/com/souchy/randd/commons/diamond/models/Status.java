@@ -111,6 +111,14 @@ public abstract class Status extends Entity implements BBSerializer, BBDeseriali
 	/** create an instance of this status */
 	public abstract Status copy(Fight f);
 
+	/**
+	 * Be careful not to use this on a status model because they dont have a fight reference. <br>
+	 * Use status.copy(Fight fight) instead in those cases.
+	 */
+	public Status copy() {
+		return this.copy(get(Fight.class));
+	}
+
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 		out.writeInt(modelID());
