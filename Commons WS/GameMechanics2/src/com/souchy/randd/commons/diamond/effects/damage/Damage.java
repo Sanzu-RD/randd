@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.souchy.randd.commons.diamond.common.Aoe;
+import com.souchy.randd.commons.diamond.common.AoeBuilders;
+import com.souchy.randd.commons.diamond.effects.resources.ResourceGainLoss;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
@@ -13,6 +15,7 @@ import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statusevents.damage.DmgEvent;
+import com.souchy.randd.commons.diamond.statusevents.resource.ResourceGainLossEvent;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
 /**
@@ -154,35 +157,34 @@ public class Damage extends Effect {
 		}
 //		Log.info("Effect Damage apply0 totalDmg: " + totalDmg + ", on " + creature.id + " " + creature );
 		
-		// Applique les dégâts
-		var life = creature.stats.resources.get(Resource.life);
+		// calcule les dégâts shield et life
 		var shield = creature.stats.shield.get(Resource.life);
 		
-		int lifeBefore = life.value();
-		int shieldBefore = (int) shield.fight;
 		double shieldDmg = 0;
 		double lifeDmg = 0;
 		
 		if(shield.fight >= totalDmg) {
-			shield.fight -= totalDmg;
-			shieldDmg = totalDmg; // log
+			shieldDmg = totalDmg;
 		} else { 
-			shieldDmg = shield.fight; // log
-			lifeDmg = totalDmg - shieldDmg; // log
-			
-			totalDmg -= shield.fight;
-			shield.fight = 0;
-			life.fight -= totalDmg;
+			shieldDmg = shield.fight; 
+			lifeDmg = totalDmg - shieldDmg;
 		} 
 		
-		Log.info("Effect Damage apply0, creature [" + creature.id + "] dmg: (" + shieldDmg + ") " + lifeDmg 
-				+ ", before: (" + shieldBefore + ") " + lifeBefore
-				+ ", after: (" + shield.fight + ")" + life.value());
+		var shields = new HashMap<Resource, Double>();
+		if(shieldDmg > 0) shields.put(Resource.life, -shieldDmg);
+
+		var resources = new HashMap<Resource, Double>();
+		if(lifeDmg > 0) resources.put(Resource.life, -lifeDmg);
 		
-		if(life.value() <= 0) {
-			// TODO die
-			// remove target from fight
-		}
+		
+		// applique les dégâts
+		var gainloss = new ResourceGainLoss(caster.get(Fight.class), AoeBuilders.single.get(), targetConditions.copy(), false, shields, resources);
+		gainloss.height = this.height.copy();
+		gainloss.apply(caster, cell);
+		
+//		var gainlosse = gainloss.createAssociatedEvent(caster, cell);
+//		Effect.secondaryEffect(gainlosse);
+//		caster.get(Fight.class).statusbus.post(new ResourceGainLossEvent(caster, cell, this); //, composite, Resource.life, -(int) (shieldDmg + lifeDmg)));
 	}
 
 	@Override

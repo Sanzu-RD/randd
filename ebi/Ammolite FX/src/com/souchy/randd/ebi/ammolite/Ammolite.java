@@ -7,6 +7,8 @@ import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.models.CreatureModel;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.statusevents.Event;
+import com.souchy.randd.commons.diamond.statusevents.damage.DmgEvent;
+import com.souchy.randd.commons.diamond.statusevents.damage.DmgEvent.OnDmgHandler;
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent.OnCastSpellHandler;
 import com.souchy.randd.commons.tealwaters.io.files.ClassDiscoverer.DefaultClassDiscoverer;
@@ -50,9 +52,11 @@ public class Ammolite implements OnCastSpellHandler {
 	
 	@Override
 	public void onCastSpell(CastSpellEvent event) {
-		spellsFX.get(event.spell.modelid()).play(event);
+		if(spellsFX.containsKey(event.spell.modelid()))
+			spellsFX.get(event.spell.modelid()).play(event);
 	}
 
+	
 //	@Subscribe
 //	public void handleEffectEvent(Event event) {
 //		if(!check(event)) return;

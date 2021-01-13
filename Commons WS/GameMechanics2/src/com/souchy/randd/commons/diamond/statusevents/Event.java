@@ -45,6 +45,7 @@ public abstract class Event {
 		this.effect = effect;
 		this.source = source;
 		this.target = target;
+		// add parent ? then we could set level, markedHandlers, intercepted and add this to parent's children
 	}
 	
 	public Event copy() {
@@ -65,6 +66,13 @@ public abstract class Event {
 	 */
 	public String testMessage() {
 		return "";
+	}
+	
+	/**
+	 * Gets the first creature on the cell matching the height of the effect, or null 
+	 */
+	public Creature getCreatureTarget() {
+		return effect.getCreatureTarget(target);
 	}
 	
 }

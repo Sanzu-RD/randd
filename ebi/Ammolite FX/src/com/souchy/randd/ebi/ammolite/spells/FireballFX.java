@@ -1,6 +1,7 @@
 package com.souchy.randd.ebi.ammolite.spells;
 
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.spells.fire.Fireball;
 import com.souchy.randd.ebi.ammolite.Ammolite;
 import com.souchy.randd.ebi.ammolite.SpellFXPlayer;
@@ -24,11 +25,6 @@ public class FireballFX extends SpellFXPlayer {
 		}
 	}
 	
-	public void dispose() {
-		effect.pause();
-		effect.delete();
-		effect = null;
-	}
 	
 	@Override
 	public void play(CastSpellEvent e) {
@@ -43,6 +39,13 @@ public class FireballFX extends SpellFXPlayer {
 		dispose();
 	}
 
+	public void dispose() {
+		Log.info("fireball fx dispose");
+		effect.pause();
+		effect.delete();
+		effect = null;
+	}
+	
 	@Override
 	public int modelid() {
 		return Fireball.fireballID;

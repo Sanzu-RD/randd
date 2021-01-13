@@ -9,7 +9,7 @@ import com.souchy.randd.commons.diamond.statusevents.Handler;
 
 public class ResourceUseEvent extends ResourceGainLossEvent {
 
-	public interface OnResourceUseHandler extends Handler { //<OnAddStatusEvent> {
+	public static interface OnResourceUseHandler extends OnResourceGainLossHandler { //<OnAddStatusEvent> {
 		@Subscribe
 		public default void handle0(ResourceUseEvent event) {
 			if(check(event)) onResourceUse(event);
@@ -18,7 +18,7 @@ public class ResourceUseEvent extends ResourceGainLossEvent {
 	}
 	
 	public ResourceUseEvent(Creature source, Cell target, Effect effect) {
-		super(source, target, effect);
+		super(source, target, effect, composite, res, delta);
 	}
 
 	@Override

@@ -5,7 +5,7 @@
 <entry key="gfx.background">true</entry>
 <entry key="sound.music">0</entry>
 <entry key="sound.general">4</entry>
-<entry key="functionality.centerline">true</entry>
+<entry key="functionality.centerline">false</entry>
 <entry key="gfx.blur">true</entry>
 <entry key="sound.ui">4</entry>
 <entry key="sound.ambiance">6</entry>

@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 public class DragAndResizeListener extends InputListener {
 	private static final int MOVE = 1 << 5;
@@ -56,7 +57,7 @@ public class DragAndResizeListener extends InputListener {
 //		if (isMovable && edge == 0 && y <= height && y >= height - padTop && x >= left && x <= right) 
 //			edge = MOVE;
 
-		//Log.info("edge : " + edge + ", x,y : [" + x + "," + y + "], sides : ["+top+","+right+","+left+","+bottom+"],  pad : [" + padTop + ", " + padLeft + ", " + padBottom + ", " + padRight + "]");
+		Log.info("edge : " + edge + ", x,y : [" + x + "," + y + "], sides : ["+top+","+right+","+left+","+bottom+"],  pad : [" + padTop + ", " + padLeft + ", " + padBottom + ", " + padRight + "]");
 
 		//Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
 //		if((edge & Align.left) != 0 || (edge & Align.right) != 0)
@@ -91,7 +92,7 @@ public class DragAndResizeListener extends InputListener {
 		Stage stage = table.getStage();
 		boolean clampPosition = keepWithinStage && stage != null && table.getParent() == stage.getRoot();
 
-		if ((edge & MOVE) != 0 && Gdx.input.isButtonPressed(Buttons.RIGHT)) {
+		if ((edge & MOVE) != 0 && (Gdx.input.isButtonPressed(Buttons.RIGHT) || Gdx.input.isButtonPressed(Buttons.LEFT))) {
 			float amountX = x - startX, amountY = y - startY;
 			windowX += amountX;
 			windowY += amountY;

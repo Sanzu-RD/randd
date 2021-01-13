@@ -1,61 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE creaturesheet SYSTEM "lml.dtd">
 
-<creaturesheet id="creaturesheet" align="left" defaultpad="5" width="225" height="250"  x="20" y="0" background="window-bg" debug="false">
+<creaturesheet id="creaturesheet" align="left" defaultpad="5" width="350" height="125" x="20" y="0" debug="false">
+    <!--   -->
 
-    <!-- Icon + Resources row-->
-    <table align="topleft" height="100" fill="true" debug="false">
-        <!-- Name & Close button-->
-        <table align="left" colspan="2" debug="false" fill="true">
-            <label id="name" align="left" fill="true" expandx="true" style="title" debug="false"/>
+    <table align="topleft" fill="true" debug="false">
+        <!-- height="100" -->
+
+        <!-- Status list -->
+        <table align="topleft" grow="true" debug="false" >
+            <visscrollpane id="scrollstatus" grow="true" style="list" >
+                <horizontalflow id="flowstatus">
+                </horizontalflow>
+            </visscrollpane>
         </table>
-        <button id="closeBtn" align="top">X</button>
         <:row/>
-        <!-- Icon -->
-        <stack width="64" height="64">
-            <image id="icon" /> <!-- style="$getCreatureModelIcon"/> <!- - textures.creatures.$getCreatureModelId -->
-            <image id="border" style="textures.borders.blackborder"/>
-        </stack>
-        <!-- Main Stats -->
-        <table padleft="10" expandx="true" defaultalign="left">
-            <image style="textures.borders.blackborder"/>
-            <label id="lifeShield" padright="10"/>
-            <label id="lifeCurrent" align="right"/>
-            <label value="/"/>
-            <label id="lifeMax"/>
+
+        <!-- main widget : icon, name, resources -->
+        <table debug="false">
+            <!-- name -->
+            <label id="name" align="left" fill="true" expandx="true" style="title" debug="false"/>
             <:row/>
-            <image style="textures.borders.blackborder"/>
-            <label id="manaShield" padright="10"/>
-            <label id="manaCurrent" align="right"/>
-            <label value="/"/>
-            <label id="manaMax"/>
-            <:row/>
-            <image style="textures.borders.blackborder"/>
-            <label id="moveShield" padright="10"/>
-            <label id="moveCurrent" align="right"/>
-            <label value="/"/>
-            <label id="moveMax"/>
+            <!-- icon -->
+            <stack width="64" height="64">
+                <roundImage id="icon" /> <!-- style="$getCreatureModelIcon"/> <!- - textures.creatures.$getCreatureModelId -->
+                <!--<image id="border" style="textures.borders.circle"/>-->
+            </stack>
+
+            <!-- resources -->
+            <table padleft="10" expandx="true" defaultalign="left" debug="false">
+                <roundImage style="textures.borders.blackborder"/>
+                <label id="lifeShield"  align="right" padright="10"/>
+                <label id="lifeCurrent" align="right"/>
+                <label value="/"/>
+                <label id="lifeMax"/>
+                <:row/>
+                <roundImage style="textures.borders.blackborder"/>
+                <label id="manaShield"  align="right" padright="10"/>
+                <label id="manaCurrent" align="right"/>
+                <label value="/"/>
+                <label id="manaMax"/>
+                <:row/>
+                <roundImage style="textures.borders.blackborder"/>
+                <label id="moveShield"  align="right" padright="10"/>
+                <label id="moveCurrent" align="right"/>
+                <label value="/"/>
+                <label id="moveMax"/>
+            </table>
         </table>
-    </table>
 
-    <:row expandx="true"/>
+        <!-- btn to retract/open contents -->
+        <button id="btnOpen" align="middle">></button>
 
-    <!-- Description / Passive row -->
-    <!--
-    <visscrollpane id="scrolldesc" align="topleft" height="100" style="list" growx="true" debug="false">
-        <scrollabletextarea id="areadesc" style="textArea" value="Description. Lorem ipsum dolor sit amet, consectetur adipiscing consectetur adipiscing consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua asdkjfnka.sdjfn kasjdnfkjsdanf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf ksajdbnfkjasbdf"/>
-    </visscrollpane>
+        <!-- retractable contents -->
+        <table id="details">
+            <!-- change page btn -->
+            <button id="pageBtn" align="middle">1/3</button>
+            <!-- maaaaybe a button to add another row of horizontalflow content to be able to see statuses and resistances at the same time -->
 
-    <:row/>
-    -->
-
-    <!-- Status list -->
-    <table align="topleft" grow="true" debug="false" >
-        <visscrollpane id="scrollstatus" grow="true" style="list" >
-            <horizontalflow id="flowstatus">
-
+            <!-- contents -->
+            <horizontalflow id="contentFlow">
+                <!-- resistances -->
+                <!-- spell list -->
+                <!-- status list -->
             </horizontalflow>
-        </visscrollpane>
+        </table>
+
     </table>
+
+    <button id="closeBtn" align="middle">×</button>
 
 </creaturesheet>

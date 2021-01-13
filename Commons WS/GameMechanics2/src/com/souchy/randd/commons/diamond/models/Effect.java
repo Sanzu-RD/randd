@@ -166,7 +166,14 @@ public abstract class Effect extends Entity {
 	 */
 	public abstract Effect copy();
 	
+
 	
+	/**
+	 * Gets the first creature on the cell matching the height of the effect, or null 
+	 */
+	public Creature getCreatureTarget(Cell target) {
+		return target.getCreature(height);
+	}
 	
 	
 }

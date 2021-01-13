@@ -3,10 +3,18 @@ package com.souchy.randd.ebishoal.sapphire.ux.components;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.github.czyzby.lml.annotation.LmlAction;
@@ -22,13 +30,47 @@ import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.util.DragAndResizeListener;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireAssets;
+import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 
 public class CreatureSheet extends SapphireComponent {
 
+	// ------------------------------------------------------------------------------------------------ static manager
+	private static final HashMap<Creature, CreatureSheet> openedSheets = new HashMap<>();
+
+	/**
+	 * Je pense que toutes les sheets devraient être créées d'avance et juste refreshed on toggle
+	 * @param c
+	 */
+	public static void toggle(Creature c) {
+		// si sheet déjà ouverte, delete de la map et du stage
+		if(openedSheets.containsKey(c)) {
+			openedSheets.get(c).remove();
+//			SapphireHud.single.getStage().getActors().removeValue(openedSheets.get(c), true);
+			openedSheets.remove(c);
+			return;
+		}
+		// sinon créé la sheet et ajoute à la map et au stage
+//		CreatureSheet sheet = LmlWidgets.createGroup(new CreatureSheet().getTemplateFile());
+		var sheet = new CreatureSheet();
+		sheet.refresh(c);
+		sheet.setPosition(Gdx.input.getX(), Gdx.input.getY());
+		openedSheets.put(c, sheet);
+		SapphireGame.gfx.hud.getStage().addActor(sheet);
+	}
+	
+	public static void updateSheet(Creature c) {
+		// si creature null ou la sheet n'est pas ouverte, rien à faire
+		if(c == null || !openedSheets.containsKey(c)) return;
+		openedSheets.get(c).refresh();
+	}
+	// ------------------------------------------------------------------------------------------------ instance
+	
+	
 	public Creature creature;
+	private boolean dragging;
 
 	@LmlActor("closeBtn")
 	public Button closeBtn;
@@ -73,29 +115,12 @@ public class CreatureSheet extends SapphireComponent {
 	//@LmlActor("")
 	public Array<StatusIcon> icons;
 
-	private static final HashMap<Creature, CreatureSheet> openedSheets = new HashMap<>();
 
-	/**
-	 * Je pense que toutes les sheets devraient être créées d'avance et juste refreshed on toggle
-	 * @param c
-	 */
-	public static void toggle(Creature c) {
-		// si sheet déjà ouverte, delete de la map et du stage
-		if(openedSheets.containsKey(c)) {
-			openedSheets.get(c).remove();
-//			SapphireHud.single.getStage().getActors().removeValue(openedSheets.get(c), true);
-			openedSheets.remove(c);
-			return;
-		}
-		// sinon créé la sheet et ajoute à la map et au stage
-//		CreatureSheet sheet = LmlWidgets.createGroup(new CreatureSheet().getTemplateFile());
-		var sheet = new CreatureSheet();
-		sheet.refresh(c);
-		sheet.setPosition(Gdx.input.getX(), Gdx.input.getY());
-		openedSheets.put(c, sheet);
-		SapphireGame.gfx.hud.getStage().addActor(sheet);
+	@Override
+	public String getTemplateId() {
+		return "creaturesheet";
 	}
-
+	
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -104,18 +129,13 @@ public class CreatureSheet extends SapphireComponent {
 
 	@Override
 	protected void onInit() {
-//		creature = SapphireGame.fight.teamA.get(0);
-
 		this.addListener(new DragAndResizeListener(this));
-
+		
+//		NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("res/textures/borders/border.9.png")), 10, 10, 10, 10);
+//		NinePatchDrawable background = new NinePatchDrawable(patch);
+//		this.setBackground(background);
+		
 		LapisUtil.onClick(closeBtn, this::close);
-
-//		scrolldesc.setOverscroll(false, false);
-//		scrolldesc.setFlickScroll(false);
-//		scrolldesc.setFadeScrollBars(false);
-//		scrolldesc.setScrollbarsOnTop(false);
-//		scrolldesc.setScrollingDisabled(true, false);
-//		scrolldesc.setScrollBarPositions(true, false);
 
 		scrollstatus.setOverscroll(false, false);
 		scrollstatus.setFlickScroll(false);
@@ -124,30 +144,9 @@ public class CreatureSheet extends SapphireComponent {
 		scrollstatus.setScrollingDisabled(true, false);
 		scrollstatus.setScrollBarPositions(true, false);
 
-//		areadesc.clearListeners();
-		//flowstatus.clearListeners();
-		//scrollstatus.clearListeners();
-
 		Lambda focusStatus = () -> getStage().setScrollFocus(scrollstatus);
-//		Lambda unfocusDesc = () -> {
-//			if(!areadesc.hasKeyboardFocus()) getStage().setScrollFocus(null);
-//		};
-//		Lambda focusDesc = () -> getStage().setScrollFocus(scrolldesc);
 		Lambda unfocusStatus = () -> getStage().setScrollFocus(null);
-//		LapisUtil.onHover(scrolldesc, focusDesc, unfocusDesc);
 		LapisUtil.onHover(scrollstatus, focusStatus, unfocusStatus);
-//		LapisUtil.onClick(areadesc, focusDesc);
-//		areadesc.addListener(areadesc.new ScrollTextAreaListener() {
-//			@Override
-//			public boolean keyTyped(InputEvent event, char character) {
-//				return true;
-//			}
-//			@Override
-//			public boolean keyDown(InputEvent event, int keycode) {
-//				return true;
-//			}
-//		});
-
 
 		refresh();
 	}
@@ -182,11 +181,6 @@ public class CreatureSheet extends SapphireComponent {
 		});
 	}
 
-	@Override
-	public String getTemplateId() {
-		return "creaturesheet";
-	}
-
 	@LmlAction("close")
 	public void close() {
 		try {
@@ -214,7 +208,7 @@ public class CreatureSheet extends SapphireComponent {
 //	@LmlAction("getCreatureModelIcon")
 	public String getCreatureModelIcon() { //Object actor) {
 		if(creature == null) return "";
-		var icon = AssetData.creatures.get(creature.modelid).icon;
+		var icon = AssetData.creatures.get(creature.modelid).icon + "_round";
 		icon = SapphireAssets.getCreatureIconPath(icon);
 //		icon = SapphireAssets.getSkinPath(icon);
 		Log.info("UI CreatureSheet getCreatureModelIcon " + creature.modelid + " " + icon);
@@ -293,7 +287,6 @@ public class CreatureSheet extends SapphireComponent {
 
 	@Override
 	public void resizeScreen(int w, int h, boolean centerCam) {
-		// TODO Auto-generated method stub
 
 	}
 

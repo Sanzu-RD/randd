@@ -30,6 +30,16 @@ public class JsonConfig {
 	@Exclude
 	protected Path rememberPath;
 	
+	public static <T> T readAny(Class<T> c, String path) {
+		try {
+			var p = Environment.fromRoot(path);
+			if(Files.exists(p)) return gson.fromJson(Files.readString(p), c);
+			else return null;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 	private static <T extends JsonConfig> String name(Class<T> c) {
 		return c.getSimpleName().toLowerCase().replace("config", "").replace("conf", "") + extension;
 	}

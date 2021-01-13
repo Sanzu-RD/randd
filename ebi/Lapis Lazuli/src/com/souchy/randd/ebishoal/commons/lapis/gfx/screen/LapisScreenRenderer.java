@@ -123,7 +123,7 @@ interface LapisScreenRenderer extends Screen {
 //		getEffekseer().Update(Gdx.graphics.getDeltaTime() / (1.0f / 60.0f));
 //		getEffekseer().DrawBack();
 //		getEffekseer().DrawFront();
-
+		
 		getEffekseer().draw(Gdx.graphics.getDeltaTime());
 	}
 	

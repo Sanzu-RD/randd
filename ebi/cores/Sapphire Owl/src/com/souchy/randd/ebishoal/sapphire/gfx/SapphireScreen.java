@@ -4,18 +4,28 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.components.Position;
+import com.souchy.randd.commons.diamond.statusevents.damage.DmgEvent;
+import com.souchy.randd.commons.diamond.statusevents.damage.DmgEvent.OnDmgHandler;
+import com.souchy.randd.commons.diamond.statusevents.resource.ResourceGainLossEvent;
+import com.souchy.randd.commons.diamond.statusevents.resource.ResourceGainLossEvent.OnResourceGainLossHandler;
 import com.souchy.randd.ebi.ammolite.Ammolite;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
+import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 import com.souchy.randd.ebishoal.sapphire.controls.SapphireController;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
@@ -42,7 +52,7 @@ public class SapphireScreen extends LapisScreen {
 //	public static ParticleEffekseer effect;
 
 	public SapphireScreen() {
-//		startPfx(null);
+
 	}
 	
 	@Override
@@ -187,6 +197,5 @@ public class SapphireScreen extends LapisScreen {
 				getModelBatch().render(model, getEnvironment());
 		});
 	}
-
 
 }

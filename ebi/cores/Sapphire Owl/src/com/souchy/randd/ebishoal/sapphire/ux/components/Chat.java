@@ -82,8 +82,8 @@ public class Chat extends SapphireComponent implements Handler {
 	protected void onInit() {
 
 		area.setItems(messages);
+		
 		scroll.scrollTo(0, 0, 0, 0);
-
 		scroll.setOverscroll(false, false);
 		scroll.setFlickScroll(false);
 		scroll.setFadeScrollBars(false);
@@ -93,13 +93,10 @@ public class Chat extends SapphireComponent implements Handler {
 		scroll.setScrollbarsVisible(true);
 		scroll.setForceScroll(false, true);
 		
-		Lambda focus = () -> {
-			//this.setColor(1, 1, 1, 1f);
-			getStage().setScrollFocus(scroll);
-		};
+		Lambda focus = () -> getStage().setScrollFocus(scroll);
+		
 		Lambda unfocus = () -> {
 			if(!area.hasKeyboardFocus() && !field.hasKeyboardFocus()) {
-				//this.setColor(1, 1, 1, 0.3f);
 				getStage().setScrollFocus(null);
 			}
 		};

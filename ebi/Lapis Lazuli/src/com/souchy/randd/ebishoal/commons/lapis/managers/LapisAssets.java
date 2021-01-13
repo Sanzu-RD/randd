@@ -3,19 +3,29 @@ package com.souchy.randd.ebishoal.commons.lapis.managers;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoaderParameter;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffect;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader.ParticleEffectLoadParameter;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.souchy.randd.commons.tealwaters.commons.Environment;
+import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
 /**
@@ -102,6 +112,44 @@ public class LapisAssets {
 		recurseFiles(dir, 
 				f -> f.name().endsWith(".mp3"), 
 				f -> assets.load(f.path(), Sound.class));
+		assets.finishLoading();
+	}
+	
+	public static void loadFonts(FileHandle dir) {
+//		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/myfont.ttf"));
+//		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+//		parameter.size = 12;
+//		BitmapFont font12 = generator.generateFont(parameter); // font size 12 pixels
+//		generator.dispose(); // don't forget to dispose to avoid memory leaks!
+		
+		
+		FileHandleResolver resolver = new InternalFileHandleResolver();
+		assets.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
+		assets.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
+		
+		var dmgParam = JsonConfig.readAny(FreeTypeFontParameter.class, "res/fonts/damage.param");
+		FreeTypeFontLoaderParameter dmgLoaderParam = new FreeTypeFontLoaderParameter();
+		dmgLoaderParam.fontFileName = "res/fonts/BADABB__.TTF";
+		dmgLoaderParam.fontParameters = dmgParam;
+		
+		assets.load("gen_damage.ttf", BitmapFont.class, dmgLoaderParam);
+		
+		/*
+		recurseFiles(dir, 
+				f -> f.name().toLowerCase().endsWith(".param"), // load bitmap fonts
+				f -> {
+					
+					assets.load(f.path(), BitmapFont.class);
+				});
+		
+		recurseFiles(dir, 
+				f -> f.name().toLowerCase().endsWith(".fnt"), // load bitmap fonts
+				f -> assets.load(f.path(), BitmapFont.class));
+
+		recurseFiles(dir, 
+				f -> f.name().toLowerCase().endsWith(".ttf"),  // load truetype fonts
+				f -> assets.load(f.path(), FreeTypeFontGenerator.class));
+		*/
 		assets.finishLoading();
 	}
 	

@@ -1,6 +1,7 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.deathebi.msg.GetSalt;
@@ -8,6 +9,7 @@ import com.souchy.randd.commons.diamond.common.BoardGenerator;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebi.ammolite.Ammolite;
@@ -52,6 +54,8 @@ public class SapphireGame extends LapisGame {
 		LapisAssets.loadMusics(Gdx.files.internal("res/music/"));
 		LapisAssets.loadSounds(Gdx.files.internal("res/sounds/"));
 		LapisAssets.loadI18NBundles(Gdx.files.internal("res/i18n/"));
+		LapisAssets.loadFonts(Gdx.files.internal("res/fonts/"));
+		
 
 		// init music player
 		music = new MusicPlayer();

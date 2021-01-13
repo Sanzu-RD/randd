@@ -104,6 +104,13 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 		get(Fight.class).statusbus.post(event);
 		if(!event.intercepted)
 			this.cast0(caster, target);
+		
+		// TODO effect pour les ResourceGainLoss pour les dmg, heal, mana cost, life cost, etc
+		
+//		var composite = ResourceComposite.noShield;
+//		var res = Resource.life;
+//		var cost = 0;
+//		caster.get(Fight.class).statusbus.post(new ResourceGainLossEvent(caster, target, this, composite, res, -(int) (cost)));
 	}
 	
 	/**
