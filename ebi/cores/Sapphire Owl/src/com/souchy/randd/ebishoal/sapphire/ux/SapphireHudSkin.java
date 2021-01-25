@@ -16,7 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.commons.diamond.ext.AssetData;
+import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.Spell;
+import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -37,11 +40,9 @@ public class SapphireHudSkin extends Skin {
 	public SapphireHudSkin(FileHandle file) {
 		super(file);
 
-		add("defaultTexture", new Texture(Gdx.files.internal("res/textures/default.png"), true)); //Gdx.files.absolute("G:/Assets/test/default.png"), true));
+		add("defaultTexture", new Texture(Gdx.files.internal("res/textures/default.png"), true)); 
 		
-		//this.getAll(Texture.class).values().forEach(t -> t.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear));
-
-		// Link all textures
+		// Link all textures by their name
 		LapisAssets.assets.getAssetNames().forEach(a -> {
 			if(a.contains("res/textures")) {
 				if(SapphireDevConfig.conf.logSkinResources)
@@ -53,8 +54,61 @@ public class SapphireHudSkin extends Skin {
 //			if(a.startsWith("i18n"))
 //				lml.addI18nBundle(a.substring(0, a.lastIndexOf("/")).replace("/", "."), SapphireResources.assets.get(a));
 		});
+		
+		// link all creature/spells/statuses texture icons by their model id and category
+		linkModelIcons();
+	}
+
+
+	public static Drawable getIcon(Creature c) {
+		return VisUI.getSkin().get("creatureIcon" + c.modelid, Drawable.class);
+	}
+	public static Drawable getIcon(Spell s) {
+		return VisUI.getSkin().get("spellIcon" + s.modelid(), Drawable.class);
+	}
+	public static Drawable getIcon(Status s) {
+		return VisUI.getSkin().get("statusIcon" + s.modelid(), Drawable.class);
 	}
 	
+	
+	/**
+	 * link all creature/spells/statuses texture icons by their model id and category
+	 */
+	public void linkModelIcons() {
+		for(var c : DiamondModels.creatures.values()) {
+			// set creature avatar
+			if(!AssetData.creatures.containsKey(c.id())) {
+				Log.error("SapphireHudSkin Missing creature icon for model id " + c.id());
+				continue;
+			}
+			var iconpath = AssetData.creatures.get(c.id()).icon;
+			var avatarPath = SapphireAssets.getCreatureIconPath(iconpath) + "_round";
+			var avatar = this.getDrawable(avatarPath);
+			add("creatureIcon" + c.id(), avatar);
+		}
+		for(var c : DiamondModels.spells.values()) {
+			// set spell icon
+			if(!AssetData.spells.containsKey(c.modelid())) {
+				Log.error("SapphireHudSkin Missing spell icon for model id " + c.modelid());
+				continue;
+			}
+			var iconpath = AssetData.spells.get(c.modelid()).icon;
+			var avatarPath = SapphireAssets.getSpellIconPath(iconpath) + "_round";
+			var avatar = this.getDrawable(avatarPath);
+			add("spellIcon" + c.modelid(), avatar);
+		}
+		for(var c : DiamondModels.statuses.values()) {
+			// set status icon
+			if(!AssetData.statuses.containsKey(c.modelid())) {
+				Log.error("SapphireHudSkin Missing status icon for model id " + c.modelid());
+				continue;
+			}
+			var iconpath = AssetData.statuses.get(c.modelid()).icon;
+			var avatarPath = SapphireAssets.getStatusIconPath(iconpath) + "_round";
+			var avatar = this.getDrawable(avatarPath);
+			add("statusIcon" + c.modelid(), avatar);
+		}
+	}
 
 	/**
 	 * When it's your turn on the current playing creature, show spells u can cast

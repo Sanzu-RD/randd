@@ -6,6 +6,7 @@ import com.github.czyzby.lml.annotation.LmlActor;
 import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireHudSkin;
 
 public class StatusIcon extends SapphireComponent { //Stack {
 //
@@ -45,12 +46,14 @@ public class StatusIcon extends SapphireComponent { //Stack {
 	public StatusIcon refresh(Status s) {
 		if(s != null)
 			this.status = s;
-		LapisUtil.setImage(icon, "textures.statuses." + "1"); // + status.getIconName());
+		if(status == null) return this;
+		icon.setDrawable(SapphireHudSkin.getIcon(s));
+//		LapisUtil.setImage(icon, "textures.statuses." + "1"); // + status.getIconName());
 		LapisUtil.setImage(border, "textures.borders.blackborder");
 //		LapisUtil.setText(stacks, status.stacks + "");
 //		LapisUtil.setText(duration, status.duration + "");
-		stacks.setText("1"); //status.stacks + "");
-		duration.setText("2"); //status.duration + "");
+		stacks.setText(status.stacks + "");
+		duration.setText(status.duration + "");
 
 		//var tip = new Tooltip<Actor>()
 

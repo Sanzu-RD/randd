@@ -29,8 +29,16 @@ import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.Handler.HandlerType;
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurnStartHandler;
 import com.souchy.randd.commons.diamond.statusevents.resource.ResourceGainLossEvent;
 import com.souchy.randd.commons.diamond.statusevents.resource.ResourceGainLossEvent.OnResourceGainLossHandler;
+import com.souchy.randd.commons.diamond.statusevents.status.AddStatusEvent;
+import com.souchy.randd.commons.diamond.statusevents.status.AddStatusEvent.OnAddStatusHandler;
+import com.souchy.randd.commons.diamond.statusevents.status.ModifyStatusEvent;
+import com.souchy.randd.commons.diamond.statusevents.status.ModifyStatusEvent.OnModifyStatusHandler;
+import com.souchy.randd.commons.diamond.statusevents.status.RemoveStatusEvent;
+import com.souchy.randd.commons.diamond.statusevents.status.RemoveStatusEvent.OnRemoveStatusHandler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.LapisShader;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
@@ -50,7 +58,7 @@ import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent.DisposeUIEvent;
 import com.souchy.randd.ebishoal.sapphire.ux.actions.ResourceDecalAction;
 import com.souchy.randd.ebishoal.sapphire.ux.components.CreatureSheet;
 
-public class SapphireHud extends LapisHud implements OnResourceGainLossHandler {
+public class SapphireHud extends LapisHud implements OnResourceGainLossHandler, /* OnTurnStartHandler, */ OnAddStatusHandler, OnRemoveStatusHandler, OnModifyStatusHandler {
 
 	public Chat chat;
 	public PlayBar playbar;
@@ -99,7 +107,7 @@ public class SapphireHud extends LapisHud implements OnResourceGainLossHandler {
 		chat = new Chat();
 		playbar = new PlayBar();
 		timeline = new Timeline();
-		new QuickOptions();
+//		new QuickOptions();
 		
 		parameters = new Parameters();
 		parameters.setVisible(false);
@@ -134,6 +142,14 @@ public class SapphireHud extends LapisHud implements OnResourceGainLossHandler {
 	}
 	
 
+	@Override
+	public HandlerType type() {
+		return HandlerType.Reactor;
+	}
+	
+	/**
+	 * Damage label 
+	 */
 	@Override
 	public void onResourceGainLoss(ResourceGainLossEvent e) {
 //		todo : damage font on a billboard?
@@ -189,9 +205,24 @@ public class SapphireHud extends LapisHud implements OnResourceGainLossHandler {
 		CreatureSheet.updateSheet(e.getCreatureTarget());
 	}
 	
+//	@Override
+//	public void onTurnStart(TurnStartEvent event) {
+//		CreatureSheet.updateAll();
+//	}
+
 	@Override
-	public HandlerType type() {
-		return HandlerType.Reactor;
+	public void onRemoveStatus(RemoveStatusEvent event) {
+		CreatureSheet.updateSheet(event.getCreatureTarget());
+	}
+
+	@Override
+	public void onAddStatus(AddStatusEvent event) {
+		CreatureSheet.updateSheet(event.getCreatureTarget());
+	}
+
+	@Override
+	public void onModifyStatus(ModifyStatusEvent event) {
+		CreatureSheet.updateSheet(event.getCreatureTarget());
 	}
 	
 }

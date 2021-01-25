@@ -49,10 +49,12 @@ public class FullUpdateHandler implements BBMessageHandler<FullUpdate> {
 		Moonstone.fight.creatures.clear();
 		Moonstone.fight.spells.clear();
 		Moonstone.fight.status.clear();
+		Moonstone.fight.effects.clear();
 		message.cells.forEach(c -> c.register(Moonstone.fight));
 		message.creatures.forEach(c -> c.register(Moonstone.fight));
 		message.spells.forEach(c -> c.register(Moonstone.fight));
 		message.status.forEach(c -> c.register(Moonstone.fight));
+//		message.effects.forEach(c -> c.register(Moonstone.fight));
 		
 		Moonstone.fight.timeline = new IndexedList<>(message.timeline, message.currentIndex, message.currentTurn);
 		

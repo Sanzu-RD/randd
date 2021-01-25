@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.souchy.randd.commons.diamond.models.CreatureModel;
+import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Spell;
 import com.souchy.randd.commons.diamond.models.Status;
+import com.souchy.randd.commons.tealwaters.commons.Bean;
 import com.souchy.randd.commons.tealwaters.io.files.ClassDiscoverer.DefaultClassDiscoverer;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
@@ -22,6 +24,7 @@ public class DiamondModels {
 	public static final Map<Integer, CreatureModel> creatures = new HashMap<>();
 	public static final Map<Integer, Spell> spells = new HashMap<>();
 	public static final Map<Integer, Status> statuses = new HashMap<>();
+	public static final Map<Integer, Effect> effects = new HashMap<>();
 
 	/**
 	 * @param packag : "com.souchy.randd.data.s1" depends on the season
@@ -55,13 +58,30 @@ public class DiamondModels {
 		statuslist.forEach(c -> {
 			try {
 				var model = c.getDeclaredConstructor(Fight.class, Integer.TYPE, Integer.TYPE).newInstance(null, 0, 0);
-				statuses.put(model.modelID(), model);
+				statuses.put(model.modelid(), model);
 				//Log.info("Diamond status model [" + model.id() + "] = " + model);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
 //		StatusSystem.family.clear(); // enlève les models de status du système d'instances
+		
+		
+		var effectlist = new DefaultClassDiscoverer<Effect>(Effect.class).explore(packag);
+		Log.info("Diamond effect models " + effectlist);
+		Bean<Integer> effectModelId = new Bean<>();
+		effectModelId.set(0);
+		effectlist.forEach(c -> {
+			try {
+				var model = c.getDeclaredConstructor(Fight.class, Integer.TYPE, Integer.TYPE).newInstance(null, 0, 0);
+				model.modelid = effectModelId.get();
+				effectModelId.set(effectModelId.get() + 1);
+				effects.put(model.modelid, model);
+				//Log.info("Diamond effect model [" + model.id() + "] = " + model);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 	}
 	
 }

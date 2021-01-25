@@ -1,11 +1,15 @@
 package com.souchy.randd.ebishoal.sapphire.ux.components;
 
+import java.util.List;
+
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Stack;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -27,6 +31,12 @@ public class PlayBar extends SapphireComponent {
 
 	@LmlActor("pageDownImage")
 	public Image pageDownImage;
+	
+	@LmlActor("content")
+	public Table content;
+	
+//	@LmlActor({ "spellStack0", "spellStack1", "spellStack2", "spellStack3", "spellStack4", "spellStack5", "spellStack6", "spellStack7" })
+//	public List<Stack> stacks;
 	
 	@Override
 	protected void onInit() {
@@ -81,6 +91,10 @@ public class PlayBar extends SapphireComponent {
 		
 		pageUp.addListener(btnShaderListener);
 		pageDown.addListener(btnShaderListener);
+		
+		for(var c : content.getChildren()) {
+			c.addListener(btnShaderListener);
+		}
 	}
 
 	@Override

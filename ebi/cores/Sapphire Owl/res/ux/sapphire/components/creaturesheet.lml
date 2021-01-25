@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE creaturesheet SYSTEM "lml.dtd">
 
-<creaturesheet id="creaturesheet" align="left" defaultpad="5" width="350" height="125" x="20" y="0" debug="false">
+<creaturesheet id="creaturesheet" align="left" defaultpad="5" width="380" height="160" x="20" y="0" debug="false">
     <!--   -->
 
     <table align="topleft" fill="true" debug="false">
@@ -59,11 +59,17 @@
             <!-- maaaaybe a button to add another row of horizontalflow content to be able to see statuses and resistances at the same time -->
 
             <!-- contents -->
-            <horizontalflow id="contentFlow">
+            <table id="contentFlow">
                 <!-- resistances -->
                 <!-- spell list -->
-                <!-- status list -->
-            </horizontalflow>
+                <:loop times="8">
+                    <stack width="55" height="55">
+                        <roundImage id="spellBg" style="textures.borders.spell_bg_round"/>
+                        <roundImage id="playingCreatureSpell{loop:index}" tooltip="Desecrate" style="playingCreatureSpell{loop:index}"/>
+                        <image id="spellBorder" style="textures.borders.ring_frame"/>
+                    </stack>
+                </:loop>
+            </table>
         </table>
 
     </table>

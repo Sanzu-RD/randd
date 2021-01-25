@@ -3,10 +3,19 @@ package com.souchy.randd.commons.diamond.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.souchy.randd.commons.diamond.common.AoeBuilders;
+import com.souchy.randd.commons.diamond.effects.status.ModifyStatusEffect;
+import com.souchy.randd.commons.diamond.effects.status.RemoveStatusEffect;
+import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
+import com.souchy.randd.commons.diamond.statusevents.Handler;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurnStartHandler;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import io.netty.buffer.ByteBuf;
 
@@ -32,7 +41,7 @@ import io.netty.buffer.ByteBuf;
  * @author Souchy
  *
  */
-public abstract class Status extends Entity implements BBSerializer, BBDeserializer {
+public abstract class Status extends Entity implements OnTurnStartHandler, Handler, BBSerializer, BBDeserializer {
 
 //	public static abstract class Passive extends Status {
 //		public Passive(Entity source) {
@@ -56,7 +65,7 @@ public abstract class Status extends Entity implements BBSerializer, BBDeseriali
 	/**
 	 * status model id
 	 */
-	public abstract int modelID();
+	public abstract int modelid();
 	/**
 	 * Create an instance of the status model implementation (ex Shocked, Burning) for deserialisation
 	 */
@@ -75,7 +84,7 @@ public abstract class Status extends Entity implements BBSerializer, BBDeseriali
 	
 	/** this or a toString() / description() ? */
 //	public List<Effect> tooltipEffects = new ArrayList<>();
-	public List<Integer> effects = new ArrayList<>();
+	public List<Effect> effects = new ArrayList<>();
 
 	
 	public Status(Fight f, int sourceEntityId, int targetEntityId) { // EntityRef source, EntityRef target
@@ -83,7 +92,16 @@ public abstract class Status extends Entity implements BBSerializer, BBDeseriali
 		this.id = idCounter++;
 		this.sourceEntityId = sourceEntityId;
 		this.targetEntityId = targetEntityId;
+		
+		// ne pas register les modèles
 		//source.fight.bus.register(this);
+//		f.statusbus.register(this);
+	}
+	
+	@Override
+	public void register(Engine engine) {
+		super.register(engine);
+		this.effects.forEach(e -> e.register(engine));
 	}
 	
 //	public Status(Fight fight, int sourceid, int targetid) {
@@ -97,7 +115,10 @@ public abstract class Status extends Entity implements BBSerializer, BBDeseriali
 	 * Fuse behaviour to affect stacks count, duration, both, or neither. 
 	 * @return True if fused. False means it doesnt fuse so you have 2 instances of the status with each their own duration and stacks
 	 */
-	public abstract boolean fuse(Status s);
+	public boolean fuse(Status s) {
+		genericFuseStrategy(s, true, true);
+		return true;
+	}
 	
 	/**
 	 * When THIS status is added to a statuslist
@@ -121,7 +142,7 @@ public abstract class Status extends Entity implements BBSerializer, BBDeseriali
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		out.writeInt(modelID());
+		out.writeInt(modelid());
 		out.writeInt(id);
 		// TODO Auto-generated method stub
 		return null;
@@ -134,16 +155,46 @@ public abstract class Status extends Entity implements BBSerializer, BBDeseriali
 		return null;
 	}
 	
-//	public String getIconName() {
-//		return Integer.toString(this.modelID());
-//	}
+	/**
+	 * helper to create and apply a ModifyStatusEffect for a basic fuse strategy
+	 */
+	protected void genericFuseStrategy(Status s, boolean stacks, boolean duration) {
+		var fight = get(Fight.class);
+		var mod = new ModifyStatusEffect(get(Fight.class), AoeBuilders.single.get(), TargetType.full.asStat(), this, stacks ? s.stacks : 0, duration ? s.duration : 0);
+		var sourceCrea = fight.creatures.get(sourceEntityId);
+		var targetCrea = fight.creatures.get(targetEntityId);
+		mod.height.set(targetCrea.stats.height);
+		mod.apply(sourceCrea, targetCrea.getCell());
+	}
 
-//	@Override
-//	public void dispose() {
-//		super.dispose();
-//		source = null;
-//		target = null;
-//		parentEffectId = null;
-//	}
+	/**
+	 * Décrémente la duration au tour de la source.
+	 * Un status spécial pourrait override ça pour spécifier le "lead" qu'il veut (décrémenter au tour du target ou autre)
+	 */
+	@Override
+	public void onTurnStart(TurnStartEvent event) {
+		// check que ça soit le tour de la SOURCE
+		var fight = event.fight;
+		int turnStartCreatureID = fight.timeline.get(event.index);
+		if(sourceEntityId == turnStartCreatureID) {
+			this.duration--;
+			if(duration == 0) {
+				expire();
+			}
+		}
+	}
+	
+	/**
+	 * Supprime le status
+	 */
+	protected void expire() {
+		var f = get(Fight.class);
+		var source = f.creatures.get(sourceEntityId);
+		var target = f.creatures.get(targetEntityId);
+		var e = new RemoveStatusEffect(f, AoeBuilders.single.get(), TargetType.full.asStat(), this);
+		e.apply(source, target.getCell());
+		e.dispose();
+	}
+	
 	
 }

@@ -85,6 +85,7 @@ public class Damage extends Effect {
 	 * Calcule les dégâts pré-mitigation du caster 
 	 */
 	public void prepareCaster(Creature caster, Cell aoeOrigin) {
+		reset();
 		var crea = (Creature) caster;
 		
 		var casterAffinity = crea.stats.affinity;
@@ -200,4 +201,9 @@ public class Damage extends Effect {
 		return effect;
 	}
 
+	public void reset() {
+		this.sourceDmg.clear();
+		this.targetDmg.clear();
+	}
+	
 }

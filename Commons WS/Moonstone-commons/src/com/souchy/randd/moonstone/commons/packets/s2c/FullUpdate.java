@@ -7,12 +7,14 @@ import com.souchy.randd.annotationprocessor.ID;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Spell;
 import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.commons.Deserializer;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.moonstone.commons.MoonstoneEbiLink;
 
 import io.netty.buffer.ByteBuf;
 
@@ -28,6 +30,7 @@ public class FullUpdate implements BBMessage {
 	public List<Creature> creatures = new ArrayList<>();
 	public List<Status> status = new ArrayList<>();
 	public List<Spell> spells = new ArrayList<>();
+//	public List<Effect> effects = new ArrayList<>();
 	public List<Integer> timeline = new ArrayList<>();
 	public int currentIndex = 0;
 	public int currentTurn = 0;
@@ -39,6 +42,7 @@ public class FullUpdate implements BBMessage {
 			this.creatures = fight.creatures.copy();
 			this.status = fight.status.copy();
 			this.spells = fight.spells.copy();
+//			this.effects = fight.effects.copy();
 			this.timeline = fight.timeline.copy();
 			this.currentIndex = fight.timeline.index();
 			this.currentTurn = fight.timeline.turn();
@@ -51,6 +55,7 @@ public class FullUpdate implements BBMessage {
 		out.writeInt(creatures.size());
 		out.writeInt(status.size());
 		out.writeInt(spells.size());
+//		out.writeInt(effects.size());
 		out.writeInt(timeline.size());
 		out.writeInt(currentIndex);
 		out.writeInt(currentTurn);
@@ -61,6 +66,7 @@ public class FullUpdate implements BBMessage {
 		creatures.forEach(c -> c.serialize(out));
 		status.forEach(c -> c.serialize(out));
 		spells.forEach(c -> c.serialize(out));
+//		effects.forEach(c -> c.serialize(out));
 		timeline.forEach(c -> out.writeInt(c));
 		
 		return out;
@@ -72,6 +78,7 @@ public class FullUpdate implements BBMessage {
 		int creaturecount = in.readInt();
 		int statuscount = in.readInt();
 		int spellcount = in.readInt();
+//		int effectcount = in.readInt();
 		int timelinecount = in.readInt();
 		this.currentIndex = in.readInt();
 		this.currentTurn = in.readInt();
@@ -79,29 +86,36 @@ public class FullUpdate implements BBMessage {
 		Log.info("FullUpdate read : " + String.join(", ", cellcount+"", creaturecount+"", statuscount+"", spellcount+"", timelinecount+""));
 		
 		for(int i = 0; i < cellcount; i++) {
-			var c = new Cell(null, 0, 0); // we dont have the fight object yet here... will need to set fight + register the entity in the engine later
+			var c = new Cell(MoonstoneEbiLink.fight, 0, 0); // we dont have the fight object yet here... will need to set fight + register the entity in the engine later
 			c.deserialize(in);
 			cells.add(c);
 		}
 		for(int i = 0; i < creaturecount; i++) {
-			var c = new Creature(null);
+			var c = new Creature(MoonstoneEbiLink.fight);
 			c.deserialize(in);
 			creatures.add(c);
 		}
 		for(int i = 0; i < statuscount; i++) {
 			var modelid = in.readInt();
 			var model = DiamondModels.statuses.get(modelid);
-			var s = model.copy(null);
+			var s = model.copy(MoonstoneEbiLink.fight);
 			s.deserialize(in);
 			status.add(s);
 		}
 		for(int i = 0; i < spellcount; i++) {
 			var modelid = in.readInt();
 			var model = DiamondModels.spells.get(modelid);
-			var s = model.copy(null);
+			var s = model.copy(MoonstoneEbiLink.fight);
 			s.deserialize(in);
 			spells.add(s);
 		}
+//		for(int i = 0; i < effectcount; i++) {
+//			var modelid = in.readInt();
+//			var model = DiamondModels.effects.get(modelid);
+//			var s = model.copy();
+//			s.deserialize(in);
+//			effects.add(s);
+//		}
 		for(int i = 0; i < timelinecount; i++) {
 			timeline.add(in.readInt());
 		}

@@ -14,6 +14,7 @@ import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 
 import io.netty.buffer.ByteBuf;
@@ -86,6 +87,12 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 		taggedCreatureTypes = initCreatureTypes();
 		taggedCreatures = null; // initCreatures();
 		// effects = initEffects();
+	}
+
+	@Override
+	public void register(Engine engine) {
+		super.register(engine);
+		this.effects.forEach(e -> e.register(engine));
 	}
 	
 	protected abstract SpellStats initBaseStats();

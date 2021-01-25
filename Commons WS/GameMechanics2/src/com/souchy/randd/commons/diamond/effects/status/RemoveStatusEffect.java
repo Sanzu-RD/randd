@@ -42,6 +42,7 @@ public class RemoveStatusEffect extends Effect {
 		target.statuses.removeStatus(status); //.remove(c);
 		// unregister from the pipeline if the status is either of interceptors/modifiers/reactors 
 		get(Fight.class).statusbus.unregister(status);
+		status.dispose();
 	}
 	
 	@Override

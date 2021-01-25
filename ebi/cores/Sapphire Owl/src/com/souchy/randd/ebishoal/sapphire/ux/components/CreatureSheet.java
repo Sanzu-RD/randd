@@ -13,12 +13,14 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
+import com.github.czyzby.lml.vis.parser.impl.tag.HorizontalFlowGroupLmlTag;
 import com.kotcrab.vis.ui.layout.HorizontalFlowGroup;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
 import com.souchy.randd.commons.diamond.ext.AssetData;
@@ -34,6 +36,7 @@ import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImage;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireHudSkin;
 
 public class CreatureSheet extends SapphireComponent {
 
@@ -60,7 +63,11 @@ public class CreatureSheet extends SapphireComponent {
 		openedSheets.put(c, sheet);
 		SapphireGame.gfx.hud.getStage().addActor(sheet);
 	}
-	
+	public static void updateAll() {
+		openedSheets.forEach((c, s) -> {
+			s.refresh();
+		});
+	}
 	public static void updateSheet(Creature c) {
 		// si creature null ou la sheet n'est pas ouverte, rien à faire
 		if(c == null || !openedSheets.containsKey(c)) return;
@@ -115,6 +122,9 @@ public class CreatureSheet extends SapphireComponent {
 	//@LmlActor("")
 	public Array<StatusIcon> icons;
 
+	
+	@LmlActor("contentFlow")
+	public Table content;
 
 	@Override
 	public String getTemplateId() {
@@ -155,9 +165,10 @@ public class CreatureSheet extends SapphireComponent {
 		refresh();
 	}
 	public void refresh() {
+		if(creature == null) return;
 		name.setText(getCreatureName());
 //		areadesc.setText(getDescription());
-		icon.setDrawable(LapisUtil.getImage(getCreatureModelIcon()));
+		icon.setDrawable(SapphireHudSkin.getIcon(creature)); //LapisUtil.getImage(getCreatureModelIcon()));
 
 		lifeShield.setText(getLifeShield());
 		lifeCurrent.setText(getLifeCurrent());
@@ -193,6 +204,11 @@ public class CreatureSheet extends SapphireComponent {
 		}
 	}
 
+	@LmlAction("nextPage")
+	public void nextPage() {
+		
+	}
+	
 	@LmlAction("getStatusCount")
 	public int getStatusCount() {
 		if(creature == null) return 0;

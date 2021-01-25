@@ -26,11 +26,11 @@ public class EventPipeline {
 	}
 	
 	/** StatusAdd effect : */
-	public void register(Status status) {
-		if(status instanceof Handler) {
-			register((Handler) status);
-		}
-	}
+//	public void register(Status status) {
+//		if(status instanceof Handler) {
+//			register((Handler) status);
+//		}
+//	}
 	public void register(Handler handler) {
 		switch (handler.type()) {
 //			case Interceptor : interceptors.register(handler); break;
@@ -43,12 +43,12 @@ public class EventPipeline {
 	}
 
 	/** StatusRemove effect : */
-	public void unregister(Status status) {
-		// Status Remove Effect
-		if(status instanceof Handler) {
-			unregister((Handler) status);
-		}
-	}
+//	public void unregister(Status status) {
+//		// Status Remove Effect
+//		if(status instanceof Handler) {
+//			unregister((Handler) status);
+//		}
+//	}
 	public void unregister(Handler handler) {
 		// Status Remove Effect
 		switch (handler.type()) {

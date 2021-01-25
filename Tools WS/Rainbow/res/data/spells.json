@@ -1,5 +1,13 @@
 [
 	{
+		"id": 0,
+		"comment": "Movement ability",
+		"icon":  "movement",
+		"casterAnim": "",
+		"casterFx": "",
+		"targetFx": ""
+	},
+	{
 		"id": 1,
 		"comment": "Fireball",
 		"icon":  "fireball",

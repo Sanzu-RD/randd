@@ -5,6 +5,7 @@ import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statusevents.status.ModifyStatusEvent;
 
@@ -13,11 +14,13 @@ public class ModifyStatusEffect extends Effect {
 	
 	// mods to add, but to which statuses if not all ? 
 	public int modStacks, modDuration;
+	public  Status target;
 	
-	public ModifyStatusEffect(Fight f, Aoe aoe, TargetTypeStat targetConditions, int modStacks, int modDuration) {
+	public ModifyStatusEffect(Fight f, Aoe aoe, TargetTypeStat targetConditions, Status target, int modStacks, int modDuration) {
 		super(f, aoe, targetConditions);
 		this.modStacks = modStacks;
 		this.modDuration = modDuration;
+		this.target = target;
 	}
 
 	@Override
@@ -31,18 +34,19 @@ public class ModifyStatusEffect extends Effect {
 	}
 
 	@Override
-	public void prepareTarget(Creature caster, Cell target) {
+	public void prepareTarget(Creature caster, Cell cell) {
 		
 	}
 
 	@Override
-	public void apply0(Creature caster, Cell target) {
-		
+	public void apply0(Creature caster, Cell cell) {
+		this.target.duration += modDuration;
+		this.target.stacks += modStacks;
 	}
 
 	@Override
 	public ModifyStatusEffect copy() {
-		return new ModifyStatusEffect(get(Fight.class), aoe, targetConditions, modStacks, modDuration);
+		return new ModifyStatusEffect(get(Fight.class), aoe, targetConditions, target, modStacks, modDuration);
 	}
 
 

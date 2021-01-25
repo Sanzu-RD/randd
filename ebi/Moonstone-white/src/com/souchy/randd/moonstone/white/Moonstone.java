@@ -14,6 +14,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 import com.souchy.randd.ebishoal.commons.EbiShoalTCP;
 import com.souchy.randd.jade.meta.User;
+import com.souchy.randd.moonstone.commons.MoonstoneEbiLink;
 
 import io.netty.util.AttributeKey;
 
@@ -28,6 +29,7 @@ public class Moonstone extends EbiShoalTCP { //implements OnTurnStartHandler, On
 	
 	public Moonstone(String ip, int port, EbiShoalCore core) throws Exception {
 		super(ip, port, core);
+//		MoonstoneEbiLink.fight = fight;
 		moon = this;
 //		Moonstone.bus = moon.bus;
 		fight.bus.register(this); //.statusbus.register(this);

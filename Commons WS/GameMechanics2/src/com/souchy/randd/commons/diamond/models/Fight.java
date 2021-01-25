@@ -10,6 +10,7 @@ import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
 import com.souchy.randd.commons.diamond.systems.CellSystem;
 import com.souchy.randd.commons.diamond.systems.CreatureSystem;
+import com.souchy.randd.commons.diamond.systems.EffectSystem;
 import com.souchy.randd.commons.diamond.systems.SpellSystem;
 import com.souchy.randd.commons.diamond.systems.StatusSystem;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
@@ -82,6 +83,7 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 	public CellSystem cells;
 	public SpellSystem spells;
 	public StatusSystem status;
+	public EffectSystem effects;
 	
 	
 	public Fight() {
@@ -91,6 +93,7 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 		this.cells = new CellSystem(this);
 		this.spells = new SpellSystem(this);
 		this.status = new StatusSystem(this);
+		this.effects = new EffectSystem(this);
 		
 		board = new Board(this);
 		

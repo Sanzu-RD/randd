@@ -91,7 +91,7 @@ public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 	private void removeProcess(Status s) {
     	s.onLose();
 		//s.target.fight.bus.post(new OnStatusLose(s));
-    	s.dispose();
+//    	s.dispose();
 	}
 	
 	public void forEach(Consumer<Status> c) {
@@ -111,7 +111,7 @@ public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 		out.writeInt(statuses.size());
 //		Log.info("write status size " + statuses.size());
 		statuses.forEach(status -> {
-			out.writeInt(status.modelID());
+			out.writeInt(status.modelid());
 			status.serialize(out);
 		});
 		return null;

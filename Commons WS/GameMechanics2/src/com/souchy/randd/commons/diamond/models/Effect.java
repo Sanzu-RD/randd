@@ -7,8 +7,13 @@ import com.souchy.randd.commons.diamond.models.stats.special.HeightStat;
 import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statics.filters.Height;
 import com.souchy.randd.commons.diamond.statusevents.Event;
+import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
+import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * 
@@ -19,7 +24,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
  * @author Blank
  *
  */
-public abstract class Effect extends Entity {
+public abstract class Effect extends Entity implements BBSerializer, BBDeserializer {
 
 	public int id;
 	public int modelid; // ? not sure
@@ -152,11 +157,15 @@ public abstract class Effect extends Entity {
 	/**
 	 * Pre-calculation for the caster. Cell target is the origin of the aoe
 	 */
-	public abstract void prepareCaster(Creature caster, Cell target);
+	public void prepareCaster(Creature caster, Cell target) {
+		
+	}
 	/**
 	 * Pre-calculation for the target. Cell target is any cell in the aoe.
 	 */
-	public abstract void prepareTarget(Creature caster, Cell target);
+	public void prepareTarget(Creature caster, Cell target) {
+		
+	}
 	/**
 	 * Apply the effect to a single target cell (this is called for each cell in the aoe)
 	 */
@@ -165,7 +174,10 @@ public abstract class Effect extends Entity {
 	 * Copy an effect so it can be modified independantly for each target
 	 */
 	public abstract Effect copy();
-	
+	/* *
+	 * Reset calculated data
+	 */
+//	public abstract reset();
 
 	
 	/**
@@ -175,5 +187,26 @@ public abstract class Effect extends Entity {
 		return target.getCreature(height);
 	}
 	
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		out.writeInt(id);
+		out.writeInt(modelid);
+		aoe.serialize(out);
+		targetConditions.serialize(out);
+		height.serialize(out);
+		return out;
+	}
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		id = in.readInt();
+		modelid = in.readInt();
+		aoe = new Aoe(0, 0);
+		aoe.deserialize(in);
+		targetConditions = new TargetTypeStat();
+		targetConditions.deserialize(in);
+		height = new HeightStat();
+		height.deserialize(in);
+		return null;
+	}
 	
 }

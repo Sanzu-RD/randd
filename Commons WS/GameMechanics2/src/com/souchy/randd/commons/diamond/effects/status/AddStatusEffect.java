@@ -23,30 +23,19 @@ public class AddStatusEffect extends Effect {
 		super(f, aoe, targetConditions);
 		this.statusBuilder = statusBuilder;
 	}
-
-	@Override
-	public Event createAssociatedEvent(Creature source, Cell target) {
-		return new AddStatusEvent(source, target, this);
-	}
-
-	@Override
-	public void prepareCaster(Creature caster, Cell aoeOrigin) {
-		
-	}
+	
 	
 	@Override
-	public void prepareTarget(Creature caster, Cell target) {
+	public void apply0(Creature source, Cell cell) {
+		var target = cell.getCreature(height);
 		
-	}
-	
-	@Override
-	public void apply0(Creature source, Cell target) {
 		// create status instance
 		var status = statusBuilder.get();
+		status.register(source.get(Fight.class));
 		status.sourceEntityId = source.id; //.ref();
 		status.targetEntityId = target.id; //.ref();
 		status.parentEffectId = this.id;
-		
+
 		// Add status. StatusList manages fusion by itsef
 		// FIXME add status to creature or cell 
 		// FIXME adding a status to a cell should trigger reactors to apply statuses on creatures 
@@ -57,13 +46,17 @@ public class AddStatusEffect extends Effect {
 //			// register in the eventpipeline if the status is either of interceptors/modifiers/reactors
 //			target.handlers.register(status);
 //		} else {
-			var creature = target.getCreature(height);
-			creature.statuses.addStatus(status);
+			target.statuses.addStatus(status);
 			// register in the eventpipeline if the status is either of interceptors/modifiers/reactors
-			this.get(Fight.class).statusbus.register(status);
+			source.get(Fight.class).statusbus.register(status);
 //			target.getCreatures().get(0).handlers.register(status);
 //		}
 		
+	}
+	
+	@Override
+	public Event createAssociatedEvent(Creature source, Cell target) {
+		return new AddStatusEvent(source, target, this);
 	}
 	
 	@Override

@@ -44,7 +44,10 @@ public class EffekseerManager implements Disposable {
 		} else {
 			effekseerManagerCore.Initialize(2000, EffekseerCore.TypeOpenGL.OPEN_GL3);
 		}
-		
+
+		if(camera instanceof PerspectiveCamera) {
+			effekseerManagerCore.setProjectionMatrix((camera).projection, (camera).view, true, 0, 0);
+		}
 		// matrix = (camera).view.cpy().rotate(Vector3.X, 90);
 	}
 	
@@ -55,7 +58,6 @@ public class EffekseerManager implements Disposable {
 //	public void setViewport(Viewport viewport) {
 //		this.viewport = viewport;
 //	}
-	
 	
 	
 	public void addParticleEffekseer(ParticleEffekseer effect) {
@@ -99,10 +101,10 @@ public class EffekseerManager implements Disposable {
 			
 		}
 		
-		if(camera instanceof PerspectiveCamera) {
-			effekseerManagerCore.setProjectionMatrix((camera).projection, (camera).view, true, 0, 0);
-		}
-		
+//		if(camera instanceof PerspectiveCamera) {
+//			effekseerManagerCore.setProjectionMatrix((camera).projection, (camera).view, true, 0, 0);
+//		}
+//		
 		effekseerManagerCore.Update(delta / (1.0f / 60.0f));
 		effekseerManagerCore.DrawBack();
 		effekseerManagerCore.DrawFront();

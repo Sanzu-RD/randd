@@ -6,6 +6,7 @@
  *
  */
 module com.souchy.randd.moonstone.Commons {
+	exports com.souchy.randd.moonstone.commons;
 	exports com.souchy.randd.moonstone.commons.packets;
 	exports com.souchy.randd.moonstone.commons.packets.c2s;
 	exports com.souchy.randd.moonstone.commons.packets.s2c;

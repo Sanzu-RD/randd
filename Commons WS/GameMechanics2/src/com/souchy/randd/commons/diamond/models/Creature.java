@@ -64,6 +64,7 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 	 */
 	public Creature(Fight fight, CreatureModel model, JadeCreature jade, Position pos) { // AzurCache dep, Vector2 pos) {
 		super(fight);
+//		Log.critical("CREATURE FIGHT =  " + fight);
 		this.id = idCounter++;
 		this.modelid = model.id();
 		this.pos = pos;
@@ -80,7 +81,6 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 			var ele = Element.values.get(i);
 			this.stats.affinity.get(ele).inc += jade.affinities[i];
 		}
-		
 		// copy chosen spells
 		for(int i : jade.spellIDs) {
 			var s = DiamondModels.spells.get(i);

@@ -13,7 +13,7 @@ public class Shocked extends Status {
 	}
 
 	@Override
-	public int modelID() {
+	public int modelid() {
 		return 1;
 	}
 
@@ -64,6 +64,11 @@ public class Shocked extends Status {
 	public Status copy(Fight f) {
 		var s = new Shocked(f, sourceEntityId, targetEntityId);
 		return s;
+	}
+
+	@Override
+	public HandlerType type() {
+		return HandlerType.Modifier;
 	}
 	
 }

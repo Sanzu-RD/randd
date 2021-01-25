@@ -24,8 +24,8 @@
     <!-- Page content (items, spells, affinities, resistances) -->
     <table id="content" defaultpad="1">
         <:loop times="8">
-            <stack width="55" height="55">
-                <roundImage id="spellBg" style="textures.borders.spell_bg_round"/>
+            <stack id="spellStack{loop:index}" width="55" height="55">
+                <roundImage id="spellBg{loop:index}" style="textures.borders.spell_bg_round"/>
                 <roundImage id="playingCreatureSpell{loop:index}" tooltip="Desecrate" style="playingCreatureSpell{loop:index}"/>
                 <image id="spellBorder" style="textures.borders.ring_frame"/>
             </stack>
