@@ -22,7 +22,7 @@ public class RootTagProvider extends TableLmlTagProvider {
 		public RootTag(LmlParser parser, LmlTag parentTag, StringBuilder rawTagData) {
 			super(parser, parentTag, rawTagData);
 			if(SapphireDevConfig.conf.logSapphireWidgets)
-				Log.info("attributes : " + String.join(", ", getAttributes()));
+				Log.info("RootTagProvider attributes : " + String.join(", ", getAttributes()));
 			// Set position from tags here since the lmlattribute is bugged
 			if(this.getAttribute("x") != null) 
 				getActor().setX(Integer.parseInt(this.getAttribute("x")));

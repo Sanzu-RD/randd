@@ -103,7 +103,7 @@ public abstract class Action implements Supplier<Boolean> {
 	public int cellY;
 	
 	/**
-	 * turn on which it was casted
+	 * turn (aka round, not index) on which it was casted
 	 */
 	public int turn;
 	

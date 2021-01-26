@@ -3,6 +3,7 @@ package com.souchy.randd.commons.diamond.statusevents;
 import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 public class EventPipeline {
 	
@@ -32,6 +33,7 @@ public class EventPipeline {
 //		}
 //	}
 	public void register(Handler handler) {
+		Log.format("EventPipeline register %s", handler);
 		switch (handler.type()) {
 //			case Interceptor : interceptors.register(handler); break;
 //			case Modifier : modifiers.register(handler); break;
@@ -50,6 +52,7 @@ public class EventPipeline {
 //		}
 //	}
 	public void unregister(Handler handler) {
+		Log.format("EventPipeline unregister %s", handler);
 		// Status Remove Effect
 		switch (handler.type()) {
 //			case Interceptor : interceptors.unregister(handler); break;

@@ -24,7 +24,7 @@ import io.netty.buffer.ByteBuf;
  * @author Blank
  *
  */
-public abstract class Effect extends Entity implements BBSerializer, BBDeserializer {
+public abstract class Effect /* extends Entity */ implements BBSerializer, BBDeserializer {
 
 	public int id;
 	public int modelid; // ? not sure
@@ -46,8 +46,8 @@ public abstract class Effect extends Entity implements BBSerializer, BBDeseriali
 	/**
 	 * Ctor
 	 */
-	public Effect(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
-		super(f);
+	public Effect(/* Fight f, */ Aoe aoe, TargetTypeStat targetConditions) {
+//		super(f);
 		this.aoe = aoe;
 		this.targetConditions = targetConditions;
 	}
@@ -86,14 +86,14 @@ public abstract class Effect extends Entity implements BBSerializer, BBDeseriali
 			double y = aoe.projectY(j, cellTarget.pos.y);
 			Cell target = board.get(x, y); // cellTarget.pos.x - aoe.source.x + i, cellTarget.pos.y - aoe.source.y + j);
 			
-			Log.info("Effect Apply, ij [" + i + "," + j + "] cell [" + x + ", " + y + "] = " + target);
+//			Log.info("Effect Apply, ij [" + i + "," + j + "] cell [" + x + ", " + y + "] = " + target);
 			
 			if(target == null) return;
 			
 			// copy event and effect for each accepted height on the cell
 			for(Height h : Height.values()) {
 				if(!this.height.has(h)) continue;
-				Log.info("Effect.apply, for height " + h); // + " has? " + this.height.has(h));
+//				Log.info("Effect.apply, for height " + h); // + " has? " + this.height.has(h));
 				
 				var event = casterEvent.copy(); 
 				event.target = target;
@@ -104,7 +104,7 @@ public abstract class Effect extends Entity implements BBSerializer, BBDeseriali
 			}
 			
 		});
-		Log.info("Effect.apply, going to reactors 0");
+//		Log.info("Effect.apply, going to reactors 0");
 		
 		// level 0 reactor has access to all the copies of events & effects made in the Aoe
 		reactors(source, casterEvent); 
@@ -121,7 +121,7 @@ public abstract class Effect extends Entity implements BBSerializer, BBDeseriali
 	 *  </pre>
 	 */
 	public static void secondaryEffect(Event event) {
-		Log.info("Effect.secondaryEffect on level: " + event.level);
+//		Log.info("Effect.secondaryEffect on level: " + event.level);
 		// level 1 handlers
 		interceptors(event.target, event); 	
 		modifiers(event.target, event);
@@ -133,7 +133,7 @@ public abstract class Effect extends Entity implements BBSerializer, BBDeseriali
 		event.effect.apply0(event.source, event.target);
 		
 		// level 1 handlers
-		Log.info("Effect.secondaryEffect, going to reactors 1");
+//		Log.info("Effect.secondaryEffect, going to reactors 1");
 		reactors(event.target, event); 
 //		reactors(event.source, event);
 	}

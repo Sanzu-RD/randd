@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -82,6 +83,12 @@ public class CreatureSheet extends SapphireComponent {
 	@LmlActor("closeBtn")
 	public Button closeBtn;
 
+	@LmlActor("btnOpen")
+	public TextButton btnOpen;
+
+	@LmlActor("pageBtn")
+	public TextButton pageBtn;
+
 //	@LmlActor("scrolldesc")
 //	public VisScrollPane scrolldesc;
 //	@LmlActor("areadesc")
@@ -125,7 +132,12 @@ public class CreatureSheet extends SapphireComponent {
 	
 	@LmlActor("contentFlow")
 	public Table content;
+	
+	// page
+	public int page = 0;
+	public static final int numberOfPages = 2;
 
+	
 	@Override
 	public String getTemplateId() {
 		return "creaturesheet";
@@ -146,6 +158,8 @@ public class CreatureSheet extends SapphireComponent {
 //		this.setBackground(background);
 		
 		LapisUtil.onClick(closeBtn, this::close);
+		LapisUtil.onClick(btnOpen, this::open);
+		LapisUtil.onClick(pageBtn, this::nextPage);
 
 		scrollstatus.setOverscroll(false, false);
 		scrollstatus.setFlickScroll(false);
@@ -165,6 +179,9 @@ public class CreatureSheet extends SapphireComponent {
 		refresh();
 	}
 	public void refresh() {
+		Gdx.app.postRunnable(this::refresh0);
+	}
+	public void refresh0() {
 		if(creature == null) return;
 		name.setText(getCreatureName());
 //		areadesc.setText(getDescription());
@@ -206,6 +223,16 @@ public class CreatureSheet extends SapphireComponent {
 
 	@LmlAction("nextPage")
 	public void nextPage() {
+		page++;
+		if(page >= numberOfPages) page = 0;
+		this.pageBtn.setText((page+1) + "/" + numberOfPages);
+	}
+	
+	@LmlAction("open")
+	public void open() {
+		this.content.setVisible(!this.content.isVisible());
+		if(this.content.isVisible()) this.btnOpen.setText("<");
+		else this.btnOpen.setText(">");
 		
 	}
 	
@@ -227,7 +254,7 @@ public class CreatureSheet extends SapphireComponent {
 		var icon = AssetData.creatures.get(creature.modelid).icon + "_round";
 		icon = SapphireAssets.getCreatureIconPath(icon);
 //		icon = SapphireAssets.getSkinPath(icon);
-		Log.info("UI CreatureSheet getCreatureModelIcon " + creature.modelid + " " + icon);
+//		Log.info("UI CreatureSheet getCreatureModelIcon " + creature.modelid + " " + icon);
 		return icon;
 	}
 
@@ -242,7 +269,7 @@ public class CreatureSheet extends SapphireComponent {
 		if(creature == null) return "null";
 		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
 		var name = i18n.get("creature." + creature.modelid + ".name");
-		Log.info("getCreatureName " + creature.modelid + " = " + name);
+//		Log.info("getCreatureName " + creature.modelid + " = " + name);
 		return name;
 	}
 	@LmlAction("getDescription")

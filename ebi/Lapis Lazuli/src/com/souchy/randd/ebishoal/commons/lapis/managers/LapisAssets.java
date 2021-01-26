@@ -127,12 +127,18 @@ public class LapisAssets {
 		assets.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
 		assets.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
 		
+		
 		var dmgParam = JsonConfig.readAny(FreeTypeFontParameter.class, "res/fonts/damage.param");
 		FreeTypeFontLoaderParameter dmgLoaderParam = new FreeTypeFontLoaderParameter();
 		dmgLoaderParam.fontFileName = "res/fonts/BADABB__.TTF";
 		dmgLoaderParam.fontParameters = dmgParam;
-		
 		assets.load("gen_damage.ttf", BitmapFont.class, dmgLoaderParam);
+
+		var normalParam = JsonConfig.readAny(FreeTypeFontParameter.class, "res/fonts/normal.param");
+		FreeTypeFontLoaderParameter normalLoaderParam = new FreeTypeFontLoaderParameter();
+		normalLoaderParam.fontFileName = "res/fonts/OptimusPrincepsSemiBold.ttf";
+		normalLoaderParam.fontParameters = normalParam;
+		assets.load("gen_normal.ttf", BitmapFont.class, normalLoaderParam);
 		
 		/*
 		recurseFiles(dir, 

@@ -24,8 +24,12 @@ public class Entity { // implements EntityF {
 	}
 	
 	public void dispose() {
+		var engine = get(Engine.class);
+		if(engine != null) {
+			engine.bus.unregister(this);
+			engine.remove(this);
+		}
 		components.clear();
-		get(Engine.class).remove(this);
 	}
 	
 	public void update(float delta) {

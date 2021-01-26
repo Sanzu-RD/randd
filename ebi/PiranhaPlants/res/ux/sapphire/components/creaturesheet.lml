@@ -50,12 +50,12 @@
         </table>
 
         <!-- btn to retract/open contents -->
-        <button id="btnOpen" align="middle">></button>
+        <textbutton id="btnOpen" align="middle">></textbutton>
 
         <!-- retractable contents -->
         <table id="details">
             <!-- change page btn -->
-            <button id="pageBtn" align="middle">1/3</button>
+            <textbutton id="pageBtn" align="middle">1/3</textbutton>
             <!-- maaaaybe a button to add another row of horizontalflow content to be able to see statuses and resistances at the same time -->
 
             <!-- contents -->
@@ -63,7 +63,7 @@
                 <!-- resistances -->
                 <!-- spell list -->
                 <:loop times="8">
-                    <stack width="55" height="55">
+                    <stack width="42" height="42">
                         <roundImage id="spellBg" style="textures.borders.spell_bg_round"/>
                         <roundImage id="playingCreatureSpell{loop:index}" tooltip="Desecrate" style="playingCreatureSpell{loop:index}"/>
                         <image id="spellBorder" style="textures.borders.ring_frame"/>

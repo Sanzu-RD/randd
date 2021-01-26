@@ -10,6 +10,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import io.netty.buffer.ByteBuf;
 
@@ -46,22 +47,20 @@ public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 		if(hasStatus(s.getClass())) {
 			fused = getFirst(s.getClass()).fuse(s); //.stackAdd(s.stacks);
 		} 
-		if(!fused){
+		if(fused) {
+			s.dispose();
+		} else {
 			//statuses.put(s.getClass(), s);
 			statuses.add(s);
 			s.onAdd();
 			//s.target.fight.bus.post(new OnStatusAdd(s));
+			
+			Log.format("StatusList add %s %s", s.id, s);
+			s.register(get(Fight.class));
+			get(Fight.class).statusbus.register(s);
 		}
 	}
 	
-//	public void remove(Class<? extends Status> s) {
-//		if(has(s)) {
-//			get(s).onLose();
-//			get(s).dispose();
-//			//statuses.remove(s.getClass()); 
-//			statuses.remove(s);
-//		}
-//	}
 
 	/** remove one status */
 	public void removeStatus(Status s) {
@@ -91,7 +90,7 @@ public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 	private void removeProcess(Status s) {
     	s.onLose();
 		//s.target.fight.bus.post(new OnStatusLose(s));
-//    	s.dispose();
+    	s.dispose();
 	}
 	
 	public void forEach(Consumer<Status> c) {

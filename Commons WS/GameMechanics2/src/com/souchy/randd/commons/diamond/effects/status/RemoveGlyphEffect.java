@@ -11,8 +11,8 @@ import com.souchy.randd.commons.diamond.statusevents.status.RemoveGlyphEvent;
 
 public class RemoveGlyphEffect extends Effect {
 
-	public RemoveGlyphEffect(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
-		super(f, aoe, targetConditions);
+	public RemoveGlyphEffect(Aoe aoe, TargetTypeStat targetConditions) {
+		super(aoe, targetConditions);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class RemoveGlyphEffect extends Effect {
 
 	@Override
 	public Effect copy() {
-		return new RemoveGlyphEffect(get(Fight.class), aoe, targetConditions);
+		return new RemoveGlyphEffect(aoe, targetConditions);
 	}
 	
 }

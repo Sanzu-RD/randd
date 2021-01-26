@@ -16,7 +16,10 @@ import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statusevents.damage.DmgEvent;
 import com.souchy.randd.commons.diamond.statusevents.resource.ResourceGainLossEvent;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Damage always applies to the primary resource of the targets (ex: life)
@@ -58,8 +61,8 @@ public class Damage extends Effect {
 	 * @param targetConditions - what kind of targets should be affected
 	 * @param formula - base ratios for elemental dmg
 	 */
-	public Damage(Fight fight, Aoe areaOfEffect, TargetTypeStat targetConditions, Map<Element, IntStat> formula) {
-		super(fight, areaOfEffect, targetConditions);
+	public Damage(Aoe areaOfEffect, TargetTypeStat targetConditions, Map<Element, IntStat> formula) {
+		super(areaOfEffect, targetConditions);
 		this.formula = formula;
 	}
 	
@@ -104,7 +107,7 @@ public class Damage extends Effect {
 			// save the source dmg for later
 			this.sourceDmg.put(ele, f1);
 			
-			Log.info("Effect Damage prepareCaster : " + ele + " = " + f1.value());
+//			Log.info("Effect Damage prepareCaster : " + ele + " = " + f1.value());
 		}
 	}
 	
@@ -137,7 +140,7 @@ public class Damage extends Effect {
 			// save the target dmg for later
 			targetDmg.put(ele, new IntStat(finalDmg));
 
-			Log.info("Effect Damage prepareTarget : " + ele + " = " + finalDmg);
+//			Log.info("Effect Damage prepareTarget : " + ele + " = " + finalDmg);
 		}
 
 	}
@@ -171,16 +174,16 @@ public class Damage extends Effect {
 			lifeDmg = totalDmg - shieldDmg;
 		} 
 		
-		var shields = new HashMap<Resource, Double>();
-		if(shieldDmg > 0) shields.put(Resource.life, -shieldDmg);
+		var shields = new HashMap<Resource, Integer>();
+		if(shieldDmg > 0) shields.put(Resource.life, (int) -shieldDmg);
 
-		var resources = new HashMap<Resource, Double>();
-		if(lifeDmg > 0) resources.put(Resource.life, -lifeDmg);
+		var resources = new HashMap<Resource, Integer>();
+		if(lifeDmg > 0) resources.put(Resource.life, (int) -lifeDmg);
 		
 		
 		// applique les dégâts
-		var gainloss = new ResourceGainLoss(caster.get(Fight.class), AoeBuilders.single.get(), targetConditions.copy(), false, shields, resources);
-		gainloss.height = this.height.copy();
+		var gainloss = new ResourceGainLoss(AoeBuilders.single.get(), targetConditions.copy(), false, shields, resources);
+		gainloss.height.set(this.height);
 		gainloss.apply(caster, cell);
 		
 //		var gainlosse = gainloss.createAssociatedEvent(caster, cell);
@@ -195,7 +198,7 @@ public class Damage extends Effect {
 
 	@Override
 	public Damage copy() {
-		var effect = new Damage(get(Fight.class), aoe, targetConditions, formula);
+		var effect = new Damage(aoe, targetConditions, formula);
 		this.sourceDmg.forEach((ele, stat) -> effect.sourceDmg.put(ele, stat.copy()));
 		this.targetDmg.forEach((ele, stat) -> effect.targetDmg.put(ele, stat.copy()));
 		return effect;
@@ -204,6 +207,21 @@ public class Damage extends Effect {
 	public void reset() {
 		this.sourceDmg.clear();
 		this.targetDmg.clear();
+	}
+	
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		super.serialize(out);
+		out.writeByte(formula.size());
+		
+		return out;
+	}
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		super.deserialize(in);
+		byte size = in.readByte();
+		
+		return null;
 	}
 	
 }

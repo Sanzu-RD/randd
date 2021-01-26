@@ -86,26 +86,26 @@ public class FullUpdate implements BBMessage {
 		Log.info("FullUpdate read : " + String.join(", ", cellcount+"", creaturecount+"", statuscount+"", spellcount+"", timelinecount+""));
 		
 		for(int i = 0; i < cellcount; i++) {
-			var c = new Cell(MoonstoneEbiLink.fight, 0, 0); // we dont have the fight object yet here... will need to set fight + register the entity in the engine later
+			var c = new Cell(null, 0, 0); // we dont have the fight object yet here... will need to set fight + register the entity in the engine later
 			c.deserialize(in);
 			cells.add(c);
 		}
 		for(int i = 0; i < creaturecount; i++) {
-			var c = new Creature(MoonstoneEbiLink.fight);
+			var c = new Creature(null);
 			c.deserialize(in);
 			creatures.add(c);
 		}
 		for(int i = 0; i < statuscount; i++) {
 			var modelid = in.readInt();
 			var model = DiamondModels.statuses.get(modelid);
-			var s = model.copy(MoonstoneEbiLink.fight);
+			var s = model.copy(null);
 			s.deserialize(in);
 			status.add(s);
 		}
 		for(int i = 0; i < spellcount; i++) {
 			var modelid = in.readInt();
 			var model = DiamondModels.spells.get(modelid);
-			var s = model.copy(MoonstoneEbiLink.fight);
+			var s = model.copy(null);
 			s.deserialize(in);
 			spells.add(s);
 		}

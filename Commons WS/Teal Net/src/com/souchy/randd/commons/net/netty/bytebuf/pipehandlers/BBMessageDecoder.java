@@ -27,19 +27,19 @@ public class BBMessageDecoder extends ByteToMessageDecoder  {
 
 	@Override
 	protected void decode(ChannelHandlerContext arg0, ByteBuf in, List<Object> out) throws Exception {
-		Log.info("decoder rcv");
+//		Log.info("decoder rcv");
 		int packetid = -1;
 		String s = null;
 		try {
-			ByteBuf data = in.readBytes(in.readableBytes());
+			ByteBuf inData = in.readBytes(in.readableBytes());
 			
-			packetid = data.readInt();
+			packetid = inData.readInt();
 			
 			if (msgFactories.has(packetid)) { // res.canHandle(packetid)){
 				var a = msgFactories.get(packetid).create();
-				BBMessage msg = a.deserialize(data);
-				
-				Log.info("decode msg : " + msg);
+				BBMessage msg = a.deserialize(inData);
+				inData.release();
+				Log.format("< msg %s : %s", packetid, msg);
 				
 				out.add(msg);
 				

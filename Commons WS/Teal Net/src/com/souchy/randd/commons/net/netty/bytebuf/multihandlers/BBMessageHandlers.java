@@ -40,7 +40,7 @@ public class BBMessageHandlers { // extends ResponsibilityManager<BBMessage, BBM
 	 */
 	public void handle(ChannelHandlerContext ctx, BBMessage msg) {
 		if (canHandle(msg)) {
-			Log.info("BBMessageHandlers handling message [" + msg + "] of ID [" + msg.getID() + "]");
+//			Log.info("BBMessageHandlers handling message [" + msg + "] of ID [" + msg.getID() + "]");
 			handlers.get(msg.getID()).handle(ctx, msg);
 		} else {
 			Log.error("BBMessageHandlers cant handle message [" + msg + "] of ID [" + msg.getID() + "]");

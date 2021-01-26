@@ -11,8 +11,8 @@ import com.souchy.randd.commons.diamond.statusevents.Event;
 /** Dash to the target cell (stopped by no-passthrough cells) */
 public class DashTo extends Effect {
 
-	public DashTo(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
-		super(f, aoe, targetConditions);
+	public DashTo(Aoe aoe, TargetTypeStat targetConditions) {
+		super(aoe, targetConditions);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class DashTo extends Effect {
 
 	@Override
 	public Effect copy() {
-		return new DashTo(get(Fight.class), this.aoe, this.targetConditions);
+		return new DashTo(this.aoe, this.targetConditions);
 	}
 	
 	/*

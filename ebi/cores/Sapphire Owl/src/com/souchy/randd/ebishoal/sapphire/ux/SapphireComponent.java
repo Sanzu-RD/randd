@@ -30,6 +30,7 @@ public abstract class SapphireComponent extends Table implements ActionContainer
 		SapphireOwl.core.bus.register(this);
 		this.setStage(stage);
 		init();
+//		Gdx.app.postRunnable(this::init);
 	}
 
 	protected abstract void onInit();

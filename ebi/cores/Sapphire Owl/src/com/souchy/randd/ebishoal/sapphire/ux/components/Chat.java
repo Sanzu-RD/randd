@@ -24,6 +24,7 @@ import com.kotcrab.vis.ui.widget.VisTextField;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 import com.souchy.randd.commons.diamond.statusevents.Handler.HandlerType;
+import com.souchy.randd.commons.diamond.statusevents.Handler.Reactor;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
 import com.souchy.randd.commons.diamond.statusevents.status.AddGlyphEvent;
@@ -37,7 +38,7 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 
-public class Chat extends SapphireComponent implements Handler {
+public class Chat extends SapphireComponent implements Reactor {
 
 	@LmlActor("field")
 	public VisTextField field;
@@ -58,7 +59,7 @@ public class Chat extends SapphireComponent implements Handler {
 
 	public Chat() {
 		Moonstone.bus.register(this);
-		SapphireGame.fight.bus.register(this);
+		//SapphireGame.fight.bus.register(this);
 		SapphireGame.fight.statusbus.register(this);
 	}
 
@@ -70,13 +71,6 @@ public class Chat extends SapphireComponent implements Handler {
 		addMsg(new ICM("effect", "fight", msg));
 	}
 
-	/**
-	 * 
-	 */
-	@Override
-	public HandlerType type() {
-		return HandlerType.Reactor;
-	}
 
 	@Override
 	protected void onInit() {
@@ -93,11 +87,13 @@ public class Chat extends SapphireComponent implements Handler {
 		scroll.setScrollbarsVisible(true);
 		scroll.setForceScroll(false, true);
 		
-		Lambda focus = () -> getStage().setScrollFocus(scroll);
+		Lambda focus = () -> {
+			if(getStage() != null) getStage().setScrollFocus(scroll);
+		};
 		
 		Lambda unfocus = () -> {
 			if(!area.hasKeyboardFocus() && !field.hasKeyboardFocus()) {
-				getStage().setScrollFocus(null);
+				if(getStage() != null) getStage().setScrollFocus(null);
 			}
 		};
 

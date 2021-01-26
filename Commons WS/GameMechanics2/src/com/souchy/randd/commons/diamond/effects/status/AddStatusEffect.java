@@ -1,6 +1,6 @@
 package com.souchy.randd.commons.diamond.effects.status;
 
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 import com.souchy.randd.commons.diamond.common.Aoe;
 import com.souchy.randd.commons.diamond.models.Cell;
@@ -17,25 +17,26 @@ public class AddStatusEffect extends Effect {
 	// pourrait avoir des int pour duration/stacks?
 	
 	/** status supplier to create a status instance on effect.apply */
-	private Supplier<Status> statusBuilder;
+	private Function<Fight, Status> statusBuilder;
 	
-	public AddStatusEffect(Fight f, Aoe aoe, TargetTypeStat targetConditions, Supplier<Status> statusBuilder) {
-		super(f, aoe, targetConditions);
+	public AddStatusEffect(Aoe aoe, TargetTypeStat targetConditions, Function<Fight, Status> statusBuilder) {
+		super(aoe, targetConditions);
 		this.statusBuilder = statusBuilder;
 	}
 	
 	
 	@Override
 	public void apply0(Creature source, Cell cell) {
+//		var f = source.get(Fight.class);
 		var target = cell.getCreature(height);
+		if(target == null) return;
 		
 		// create status instance
-		var status = statusBuilder.get();
-		status.register(source.get(Fight.class));
+		var status = statusBuilder.apply(null);
 		status.sourceEntityId = source.id; //.ref();
 		status.targetEntityId = target.id; //.ref();
 		status.parentEffectId = this.id;
-
+		
 		// Add status. StatusList manages fusion by itsef
 		// FIXME add status to creature or cell 
 		// FIXME adding a status to a cell should trigger reactors to apply statuses on creatures 
@@ -48,7 +49,7 @@ public class AddStatusEffect extends Effect {
 //		} else {
 			target.statuses.addStatus(status);
 			// register in the eventpipeline if the status is either of interceptors/modifiers/reactors
-			source.get(Fight.class).statusbus.register(status);
+//			f.statusbus.register(status);
 //			target.getCreatures().get(0).handlers.register(status);
 //		}
 		
@@ -61,7 +62,7 @@ public class AddStatusEffect extends Effect {
 	
 	@Override
 	public AddStatusEffect copy() {
-		return new AddStatusEffect(get(Fight.class), aoe, targetConditions, statusBuilder);
+		return new AddStatusEffect(aoe, targetConditions, statusBuilder);
 	}
 
 }

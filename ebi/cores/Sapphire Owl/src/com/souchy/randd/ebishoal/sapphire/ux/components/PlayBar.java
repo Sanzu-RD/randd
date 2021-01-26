@@ -56,7 +56,7 @@ public class PlayBar extends SapphireComponent {
 		var btnShaderListener = new ClickListener() {
 			@Override
 			public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-				Log.info("enter");
+//				Log.info("enter");
 				var light = 1.3f;
 				var actor = event.getTarget();
 				actor.setColor(light, light, light, actor.getColor().a);
@@ -64,7 +64,7 @@ public class PlayBar extends SapphireComponent {
 			}
 			@Override
 			public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-				Log.info("exit");
+//				Log.info("exit");
 				var actor = event.getTarget();
 				actor.setColor(1, 1, 1, actor.getColor().a);
 				super.exit(event, x, y, pointer, toActor);

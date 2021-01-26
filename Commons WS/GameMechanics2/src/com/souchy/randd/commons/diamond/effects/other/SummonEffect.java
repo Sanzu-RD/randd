@@ -10,8 +10,8 @@ import com.souchy.randd.commons.diamond.statusevents.Event;
 
 public class SummonEffect extends Effect {
 
-	public SummonEffect(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
-		super(f, aoe, targetConditions);
+	public SummonEffect(Aoe aoe, TargetTypeStat targetConditions) {
+		super(aoe, targetConditions);
 		// TODO Auto-generated constructor stub
 	}
 

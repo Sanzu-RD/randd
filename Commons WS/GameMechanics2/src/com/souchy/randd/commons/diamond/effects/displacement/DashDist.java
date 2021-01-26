@@ -14,8 +14,8 @@ public class DashDist extends Effect {
 
 	public IntStat distance;
 	
-	public DashDist(Fight f, Aoe aoe, TargetTypeStat targetConditions, int distance) {
-		super(f, aoe, targetConditions);
+	public DashDist(Aoe aoe, TargetTypeStat targetConditions, int distance) {
+		super(aoe, targetConditions);
 		this.distance = new IntStat(distance);
 	}
 
@@ -44,7 +44,7 @@ public class DashDist extends Effect {
 
 	@Override
 	public DashDist copy() {
-		var effect = new DashDist(get(Fight.class), aoe, targetConditions, 0);
+		var effect = new DashDist(aoe, targetConditions, 0);
 		effect.distance = this.distance.copy();
 		return effect;
 	}

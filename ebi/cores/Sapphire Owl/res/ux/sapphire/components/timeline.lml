@@ -4,21 +4,37 @@
 
 <timeline id="timeline" align="bottomright" x="20" y="100">
 
+    <!-- pointer -->
+    <image id="pointer" style="textures.icons.arrow-point-to-right"/>
+
+
     <table id="table" debug="false" defaultpad="3" defaultpadleft="10">
 
+        <!-- characters -->
         <:loop times="$getCreatureCount">
+
+            <!-- empty cell on the first column-->
+            <:cell width="42" height="42"/>
+
             <!--<container/>-->
-            <stack width="42" height="42">
-                <roundImage id="{loop:index}" />
+            <stack id="tl-stack-{loop:index}" width="42" height="42" align="right">
+                <image id="{loop:index}" />
                 <!--tooltip="$getCreatureName" style="$getCreatureIcon"/>-->
-                <image id="portraitBorder-{loop:index}" style="textures.borders.ring_frame"/>
+                <image id="portraitBorder-{loop:index}" style="textures.borders.blackborder"/>
             </stack>
 
             <!-- active ou désative row selon qu'on veuille la timeline verticale ou horizontale-->
             <:row/>
         </:loop>
 
+
+        <!-- empty cell on the first column-->
+        <!--<:cell/>-->
+        <!-- empty cell on the first column-->
+        <:cell/>
+        <!-- timer -->
         <label id="timer" value=""/>
+
     </table>
 
 </timeline>

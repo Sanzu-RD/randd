@@ -11,8 +11,8 @@ import com.souchy.randd.commons.diamond.statusevents.Event;
 /** Pull the first creature in line to the target cell (stopped by no-passthrough cells) */
 public class PullTo extends Effect {
 
-	public PullTo(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
-		super(f, aoe, targetConditions);
+	public PullTo(Aoe aoe, TargetTypeStat targetConditions) {
+		super(aoe, targetConditions);
 		// TODO Auto-generated constructor stub
 	}
 

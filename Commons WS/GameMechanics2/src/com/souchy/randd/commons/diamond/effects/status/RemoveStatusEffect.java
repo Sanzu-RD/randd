@@ -15,8 +15,8 @@ public class RemoveStatusEffect extends Effect {
 	// pourrait avoir des int pour duration/stacks?
 	private Status status; //Class<? extends Status> c;
 	
-	public RemoveStatusEffect(Fight f, Aoe aoe, TargetTypeStat targetConditions, Status status) {
-		super(f, aoe, targetConditions);
+	public RemoveStatusEffect(Aoe aoe, TargetTypeStat targetConditions, Status status) {
+		super(aoe, targetConditions);
 		this.status = status;
 	}
 
@@ -36,18 +36,22 @@ public class RemoveStatusEffect extends Effect {
 	}
 	
 	@Override
-	public void apply0(Creature source, Cell target) {
-		// Remove status 
+	public void apply0(Creature source, Cell cell) {
 		// FIXME : apply to cells and creatures and remove the whole aoe if the status is an aoe terrain effect (+ remove from all creatures in it)
+		
+		var target = cell.getCreature(this.height);
+		
+		// Remove status from list
 		target.statuses.removeStatus(status); //.remove(c);
-		// unregister from the pipeline if the status is either of interceptors/modifiers/reactors 
-		get(Fight.class).statusbus.unregister(status);
-		status.dispose();
+		// unregister status bus
+//		status.get(Fight.class).statusbus.unregister(status);
+		// unregister in fight
+//		status.dispose();
 	}
 	
 	@Override
 	public RemoveStatusEffect copy() {
-		return new RemoveStatusEffect(get(Fight.class), aoe, targetConditions, status);
+		return new RemoveStatusEffect(aoe, targetConditions, status);
 	}
 
 }

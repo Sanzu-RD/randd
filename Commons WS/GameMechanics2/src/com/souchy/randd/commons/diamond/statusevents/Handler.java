@@ -23,6 +23,12 @@ public interface Handler { //<E extends Event> {
 		Reactor;
 	}
 	
+	public static interface Reactor extends Handler {
+		@Override
+		public default HandlerType type() {
+			return HandlerType.Reactor;
+		}
+	}
 	
 //	@Subscribe
 	/**

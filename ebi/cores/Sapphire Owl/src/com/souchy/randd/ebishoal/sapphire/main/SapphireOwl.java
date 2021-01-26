@@ -92,7 +92,7 @@ public class SapphireOwl extends LapisCore {
 
 	@Override
 	public void addIcon(LwjglApplicationConfiguration config) {
-		config.addIcon("res/textures/appicon3.png", FileType.Internal); //.addIcon("G:/Assets/pack/fantasy bundle/tcgcardspack/Tex_krakken_icon.png", FileType.Absolute);
+		config.addIcon("res/textures/appicon4.png", FileType.Internal); //.addIcon("G:/Assets/pack/fantasy bundle/tcgcardspack/Tex_krakken_icon.png", FileType.Absolute);
 	}
 
 	

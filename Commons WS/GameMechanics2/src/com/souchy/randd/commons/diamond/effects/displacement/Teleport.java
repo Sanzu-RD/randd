@@ -11,8 +11,8 @@ import com.souchy.randd.commons.diamond.statusevents.Event;
 /** Teleport to the target cell */
 public class Teleport extends Effect {
 
-	public Teleport(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
-		super(f, aoe, targetConditions);
+	public Teleport(Aoe aoe, TargetTypeStat targetConditions) {
+		super(aoe, targetConditions);
 	}
 
 	@Override

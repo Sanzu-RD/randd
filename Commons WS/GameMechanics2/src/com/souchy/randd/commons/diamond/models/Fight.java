@@ -113,12 +113,10 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 //		Log.format("raw turn start %s %s", timeline.turn(), timeline.index());
 		var event = new TurnStartEvent(this, timeline.turn(), timeline.index());
 		statusbus.post(event);
-		bus.post(event);
 	}
 	public void endTurnTimer() {
 		var event = new TurnEndEvent(this, this.timeline.turn(), this.timeline.index());
 		this.statusbus.post(event);
-		this.bus.post(event);
 	}
 	
 	

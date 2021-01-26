@@ -11,8 +11,8 @@ import com.souchy.randd.commons.diamond.statusevents.Event;
 /** Pushes the first creature in line with the source to the target cell (stopped by no-passthrough cells) */
 public class PushTo extends Effect {
 
-	public PushTo(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
-		super(f, aoe, targetConditions);
+	public PushTo(Aoe aoe, TargetTypeStat targetConditions) {
+		super(aoe, targetConditions);
 	}
 
 	@Override

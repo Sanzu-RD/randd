@@ -14,8 +14,8 @@ public class AddGlyphEffect extends Effect {
 
 	public Status status;
 	
-	public AddGlyphEffect(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
-		super(f, aoe, targetConditions);
+	public AddGlyphEffect(Aoe aoe, TargetTypeStat targetConditions) {
+		super(aoe, targetConditions);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class AddGlyphEffect extends Effect {
 
 	@Override
 	public Effect copy() {
-		return new AddGlyphEffect(get(Fight.class), aoe, targetConditions);
+		return new AddGlyphEffect(aoe, targetConditions);
 	}
 	
 }

@@ -55,21 +55,31 @@ public class IndexedList<T> { // extends ArrayList<T> {
 		}
 	}
 
+	/**
+	 * Current value (ex: player id)
+	 */
 	public synchronized T current() {
 		return list.get(index);
 	}
 
+	/**
+	 * Current round
+	 */
 	public synchronized int turn() {
 		return turn;
 	}
 
+	/**
+	 * Current index in the line
+	 */
+	public synchronized int index() {
+		return index;
+	}
+	
 	public synchronized int indexOf(T t) {
 		return list.indexOf(t);
 	}
 
-	public synchronized int index() {
-		return index;
-	}
 
 	public synchronized void setTurn(int i) {
 		turn = i;

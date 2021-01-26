@@ -28,10 +28,11 @@ public class BBMessageEncoder extends MessageToByteEncoder<BBMessage> {
 
 	@Override
 	protected void encode(ChannelHandlerContext arg0, BBMessage msg, ByteBuf out) throws Exception {
-		Log.info("encode msg : " + msg);
+//		Log.info("encode msg : " + msg);
 		out.writeInt(msg.getID());
 		msg.serialize(out);
-		Log.info("encode msg done : " + msg);
+//		out.release();
+		Log.format("> msg %s : %s", msg.getID(), msg);
 	}
 
 }

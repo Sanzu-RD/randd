@@ -10,6 +10,7 @@ import com.souchy.randd.commons.diamond.common.Action.EndTurnAction;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.jade.Constants;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
+import com.souchy.randd.commons.diamond.statusevents.Handler.Reactor;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent.OnTurnEndHandler;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
@@ -28,7 +29,7 @@ import com.souchy.randd.moonstone.commons.packets.s2c.TurnStart;
 
 import io.netty.channel.Channel;
 
-public class BlackMoonstone extends DeathShadowCore { // implements OnTurnEndHandler, OnTurnStartHandler {
+public class BlackMoonstone extends DeathShadowCore implements Reactor { // implements OnTurnEndHandler, OnTurnStartHandler {
 	
 	/**
 	 * Static ref
@@ -64,14 +65,14 @@ public class BlackMoonstone extends DeathShadowCore { // implements OnTurnEndHan
 		if(Arrays.asList(args).contains("mock")) {
 			var fight = MockFight.createFight();
 			new FightChannelSystem(fight);
-			fight.bus.register(this); //.statusbus.register(this);
+			fight.statusbus.register(this); //.statusbus.register(this);
 			fight.startTurnTimer();
 			fights.put(fight.id, fight);
 		}
 		if(Arrays.asList(args).contains("mock")) {
 			var fight = MockFight.createFight();
 			new FightChannelSystem(fight);
-			fight.bus.register(this); //.statusbus.register(this);
+			fight.statusbus.register(this); //.statusbus.register(this);
 			fight.startTurnTimer();
 			fights.put(fight.id, fight);
 		}

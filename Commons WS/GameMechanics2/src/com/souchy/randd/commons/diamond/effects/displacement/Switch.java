@@ -16,8 +16,8 @@ import com.souchy.randd.commons.diamond.statusevents.Event;
  */
 public class Switch extends Effect {
 
-	public Switch(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
-		super(f, aoe, targetConditions);
+	public Switch(Aoe aoe, TargetTypeStat targetConditions) {
+		super(aoe, targetConditions);
 	}
 
 	@Override

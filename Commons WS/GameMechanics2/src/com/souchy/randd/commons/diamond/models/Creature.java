@@ -12,6 +12,7 @@ import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.matchmaking.Team;
@@ -72,7 +73,7 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		this.targeting.initCreature();
 		
 		this.spellbook = new ArrayList<>();
-		this.statuses = new StatusList(fight);
+		this.statuses = new StatusList(null);
 
 		// copy model stats into instance stats
 		this.stats = model.baseStats.copy(); 
@@ -90,6 +91,13 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 //			if(s != null) spellbook.add(s);
 		}
 
+	}
+	
+	@Override
+	public void register(Engine engine) {
+		if(engine == null) return;
+		super.register(engine);
+		statuses.register(engine);
 	}
 	
 	public CreatureModel getModel() {

@@ -21,20 +21,26 @@ import io.netty.buffer.ByteBuf;
 public class Burning extends Status implements OnTurnStartHandler {
 	
 	public Damage dmg;
-	
 
 	public Burning(Fight f, int source, int target) {
 		super(f, source, target);
 		var formula = new HashMap<Element, IntStat>();
 		formula.put(Elements.fire, new IntStat(10, 0, 0, 0));
-		dmg = new Damage(f, AoeBuilders.single.get(), TargetType.full.asStat(), formula);
+		dmg = new Damage(AoeBuilders.single.get(), TargetType.full.asStat(), formula);
 		this.effects.add(dmg);
+	}
+
+	
+	@Override
+	public int modelid() {
+		return 2;
 	}
 
 	@Override
 	public void onTurnStart(TurnStartEvent event) {
 		super.onTurnStart(event); // décrémente la duration
-		if(duration <= 0) return; // n'applique pas les effets si le status est terminé
+//		if(duration <= 0) return; // n'applique pas les effets si le status est terminé 
+		// scrath that, vu que c'est un effet qui arrive en début de tour, faut qu'il s'applique sur le dernier tick
 		
 		var fight = event.fight;
 		// check que ça soit le tour de la cible
@@ -47,11 +53,6 @@ public class Burning extends Status implements OnTurnStartHandler {
 		}
 	}
 	
-	@Override
-	public int modelid() {
-		return 2;
-	}
-
 	@Override
 	public Status create(Fight fight, int source, int target) {
 		return new Burning(fight, source, target);
@@ -72,17 +73,6 @@ public class Burning extends Status implements OnTurnStartHandler {
 	public void onLose() {
 		
 	}
-
-	@Override
-	public ByteBuf serialize(ByteBuf out) {
-		return null;
-	}
-
-	@Override
-	public BBMessage deserialize(ByteBuf in) {
-		return null;
-	}
-
 	@Override
 	public Status copy(Fight f) {
 //		FUCK
@@ -105,6 +95,16 @@ public class Burning extends Status implements OnTurnStartHandler {
 	@Override
 	public HandlerType type() {
 		return HandlerType.Reactor;
+	}
+
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		return null;
+	}
+
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		return null;
 	}
 
 	

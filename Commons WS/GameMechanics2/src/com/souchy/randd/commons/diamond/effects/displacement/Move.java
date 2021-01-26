@@ -17,8 +17,8 @@ public class Move extends Effect {
 	
 	public List<Node> path = new ArrayList<>();
 
-	public Move(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
-		super(f, aoe, targetConditions);
+	public Move(Aoe aoe, TargetTypeStat targetConditions) {
+		super(aoe, targetConditions);
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class Move extends Effect {
 
 	@Override
 	public void prepareCaster(Creature caster, Cell target) {
-		this.path = Pathfinding.aStar(get(Fight.class).board, caster, caster.getCell(), target);
+		this.path = Pathfinding.aStar(caster.get(Fight.class).board, caster, caster.getCell(), target);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class Move extends Effect {
 
 	@Override
 	public Effect copy() {
-		return new Move(get(Fight.class), this.aoe, this.targetConditions);
+		return new Move(this.aoe, this.targetConditions);
 	}
 	
 }

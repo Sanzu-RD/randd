@@ -16,9 +16,12 @@ import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
+import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.data.s1.status.Burning;
+
+import io.netty.buffer.ByteBuf;
 
 public class Fireball extends Spell {
 	
@@ -31,9 +34,9 @@ public class Fireball extends Spell {
 		super(f);
 		var formula = new HashMap<Element, IntStat>();
 		formula.put(Elements.fire, new IntStat(50, 0, 10, 0));
-		e1 = new Damage(f, AoeBuilders.single.get(), TargetType.full.asStat(), formula);
-		e2 = new AddStatusEffect(f, AoeBuilders.single.get(), TargetType.full.asStat(), () -> {
-			var b = new Burning(f, 0, 0);
+		e1 = new Damage(AoeBuilders.single.get(), TargetType.full.asStat(), formula);
+		e2 = new AddStatusEffect(AoeBuilders.single.get(), TargetType.full.asStat(), (ff) -> {
+			var b = new Burning(ff, 0, 0);
 			b.duration = 3;
 			b.stacks = 1;
 			b.canDebuff = true;
@@ -42,7 +45,6 @@ public class Fireball extends Spell {
 		});
 		this.effects.add(e1);
 		this.effects.add(e2);
-		Log.critical("FIREBALL FIGHT = " + f);
 	}
 	
 	@Override
@@ -89,8 +91,21 @@ public class Fireball extends Spell {
 	public Spell copy(Fight fight) {
 		var s = new Fireball(fight);
 		s.stats = stats.copy();
-		Log.critical("FIREBALL FIGHT COPY = " + fight);
+//		Log.critical("FIREBALL FIGHT COPY = " + fight);
 		return s;
 	}
+	@Override
+	public ByteBuf serialize(ByteBuf out) {
+		super.serialize(out);
+		
+		return out;
+	}
+	
+	@Override
+	public BBMessage deserialize(ByteBuf in) {
+		// TODO Auto-generated method stub
+		return super.deserialize(in);
+	}
+	
 	
 }

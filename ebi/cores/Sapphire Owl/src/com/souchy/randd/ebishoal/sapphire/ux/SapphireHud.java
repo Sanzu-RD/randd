@@ -58,7 +58,8 @@ import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent.DisposeUIEvent;
 import com.souchy.randd.ebishoal.sapphire.ux.actions.ResourceDecalAction;
 import com.souchy.randd.ebishoal.sapphire.ux.components.CreatureSheet;
 
-public class SapphireHud extends LapisHud implements OnResourceGainLossHandler, /* OnTurnStartHandler, */ OnAddStatusHandler, OnRemoveStatusHandler, OnModifyStatusHandler {
+public class SapphireHud extends LapisHud
+		implements OnResourceGainLossHandler, /* OnTurnStartHandler, */ OnAddStatusHandler, OnRemoveStatusHandler, OnModifyStatusHandler {
 
 	public Chat chat;
 	public PlayBar playbar;
@@ -69,11 +70,14 @@ public class SapphireHud extends LapisHud implements OnResourceGainLossHandler, 
 	
 	
 	private final LabelStyle styleDmgLife;
-	private final LabelStyle styleDmgComposite;
-	private final LabelStyle styleDmgShield;
+	private final LabelStyle styleDmgLifeComposite;
+	private final LabelStyle styleDmgLifeShield;
+	
 	private final LabelStyle styleDmgMana;
 	private final LabelStyle styleDmgMove;
 	private final LabelStyle styleDmgSpecial;
+	
+	public static LabelStyle styleNormal;
 	
 	public SapphireHud() {
 		// SpriteBatch, Viewport, Shader, Stage
@@ -83,14 +87,19 @@ public class SapphireHud extends LapisHud implements OnResourceGainLossHandler, 
 		batch.setShader(shader);
 		this.setStage(new Stage(viewport, batch));
 
+		// should be color for ressource type and border for shields
 		BitmapFont damageFont = LapisAssets.get("gen_damage.ttf");
 		styleDmgLife = new LabelStyle(damageFont, Color.WHITE);
-		styleDmgComposite = new LabelStyle(damageFont, Color.PURPLE);
-		styleDmgShield = new LabelStyle(damageFont, Color.BLUE);
+		styleDmgLifeComposite = new LabelStyle(damageFont, Color.WHITE);
+		styleDmgLifeShield = new LabelStyle(damageFont, Color.WHITE);
 		
 		styleDmgMana = new LabelStyle(damageFont, Color.CYAN);
 		styleDmgMove = new LabelStyle(damageFont, Color.GREEN);
 		styleDmgSpecial = new LabelStyle(damageFont, Color.ORANGE);
+		
+		BitmapFont normalFont = LapisAssets.get("gen_normal.ttf");
+		styleNormal = new LabelStyle(normalFont, Color.WHITE);
+		
 		
 		SapphireGame.fight.statusbus.reactors.register(this);
 	}
@@ -170,12 +179,12 @@ public class SapphireHud extends LapisHud implements OnResourceGainLossHandler, 
 		
 		var ef = (ResourceGainLoss) e.effect;
 		if(ef.shields.size() > 0 && ef.resources.size() > 0) {
-			if(ef.resources.containsKey(Resource.life)) style = styleDmgComposite;
+			if(ef.resources.containsKey(Resource.life)) style = styleDmgLifeComposite;
 			else if(ef.resources.containsKey(Resource.mana)) style = styleDmgLife;
 			else if(ef.resources.containsKey(Resource.move)) style = styleDmgMove;
 			else if(ef.resources.containsKey(Resource.special)) style = styleDmgSpecial;
 		} else if(ef.shields.size() > 0) {
-			if(ef.shields.containsKey(Resource.life)) style = styleDmgShield;
+			if(ef.shields.containsKey(Resource.life)) style = styleDmgLifeShield;
 			else if(ef.shields.containsKey(Resource.mana)) style = styleDmgMana;
 			else if(ef.shields.containsKey(Resource.move)) style = styleDmgMove;
 			else if(ef.shields.containsKey(Resource.special)) style = styleDmgSpecial;

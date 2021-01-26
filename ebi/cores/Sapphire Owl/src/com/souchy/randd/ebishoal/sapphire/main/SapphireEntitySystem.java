@@ -86,6 +86,7 @@ public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.Syste
 		if(event.entity instanceof Creature) {
 			Log.info("Sapphire Entity System on add " + event);
 			var crea = (Creature) event.entity;
+			Log.format("-----------model %s, Assets : %s", crea.modelid, AssetData.creatures.size());
 			var modelpath = AssetData.creatures.get(crea.modelid).models[0]; 
 			var model3d = LapisAssets.assets.<Model>get(modelpath);
 			var modelinstance = new ModelInstance(model3d);

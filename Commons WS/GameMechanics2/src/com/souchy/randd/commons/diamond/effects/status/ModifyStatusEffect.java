@@ -14,13 +14,13 @@ public class ModifyStatusEffect extends Effect {
 	
 	// mods to add, but to which statuses if not all ? 
 	public int modStacks, modDuration;
-	public  Status target;
+	public  Status status;
 	
-	public ModifyStatusEffect(Fight f, Aoe aoe, TargetTypeStat targetConditions, Status target, int modStacks, int modDuration) {
-		super(f, aoe, targetConditions);
+	public ModifyStatusEffect(Aoe aoe, TargetTypeStat targetConditions, Status target, int modStacks, int modDuration) {
+		super(aoe, targetConditions);
 		this.modStacks = modStacks;
 		this.modDuration = modDuration;
-		this.target = target;
+		this.status = target;
 	}
 
 	@Override
@@ -40,13 +40,13 @@ public class ModifyStatusEffect extends Effect {
 
 	@Override
 	public void apply0(Creature caster, Cell cell) {
-		this.target.duration += modDuration;
-		this.target.stacks += modStacks;
+		this.status.duration += modDuration;
+		this.status.stacks += modStacks;
 	}
 
 	@Override
 	public ModifyStatusEffect copy() {
-		return new ModifyStatusEffect(get(Fight.class), aoe, targetConditions, target, modStacks, modDuration);
+		return new ModifyStatusEffect(aoe, targetConditions, status, modStacks, modDuration);
 	}
 
 

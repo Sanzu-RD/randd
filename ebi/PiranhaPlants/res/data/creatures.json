@@ -3,13 +3,13 @@
 		"id": 1,
 		"comment": "Mesmer",
 		"models": ["res/models/creatures/Marian.g3dj"],
-		"icon": "mesmer"
+		"icon": "Mobs_joker_01"
 	},
 	{
 		"id": 2,
 		"comment": "Sungjin",
 		"models": ["res/models/creatures/Marian.g3dj"],
-		"icon": "1000"
+		"icon": "MonstersAvatarIcons_22"
 	},
 	{
 		"id": 3,

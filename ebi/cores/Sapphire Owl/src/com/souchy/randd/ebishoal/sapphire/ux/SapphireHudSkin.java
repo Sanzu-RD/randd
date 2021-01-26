@@ -63,6 +63,9 @@ public class SapphireHudSkin extends Skin {
 	public static Drawable getIcon(Creature c) {
 		return VisUI.getSkin().get("creatureIcon" + c.modelid, Drawable.class);
 	}
+	public static Drawable getIconRound(Creature c) {
+		return VisUI.getSkin().get("creatureIcon" + c.modelid + "_round", Drawable.class);
+	}
 	public static Drawable getIcon(Spell s) {
 		return VisUI.getSkin().get("spellIcon" + s.modelid(), Drawable.class);
 	}
@@ -82,9 +85,8 @@ public class SapphireHudSkin extends Skin {
 				continue;
 			}
 			var iconpath = AssetData.creatures.get(c.id()).icon;
-			var avatarPath = SapphireAssets.getCreatureIconPath(iconpath) + "_round";
-			var avatar = this.getDrawable(avatarPath);
-			add("creatureIcon" + c.id(), avatar);
+			add("creatureIcon" + c.id(), this.getDrawable(SapphireAssets.getCreatureIconPath(iconpath)));
+			add("creatureIcon" + c.id() + "_round", this.getDrawable(SapphireAssets.getCreatureIconPath(iconpath) + "_round"));
 		}
 		for(var c : DiamondModels.spells.values()) {
 			// set spell icon

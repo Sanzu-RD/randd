@@ -1,14 +1,18 @@
 package com.souchy.randd.commons.diamond.models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.souchy.randd.commons.diamond.common.Aoe;
+import com.souchy.randd.commons.diamond.common.AoeBuilders;
+import com.souchy.randd.commons.diamond.effects.resources.ResourceGainLoss;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
+import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
@@ -89,12 +93,6 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 		// effects = initEffects();
 	}
 
-	@Override
-	public void register(Engine engine) {
-		super.register(engine);
-		this.effects.forEach(e -> e.register(engine));
-	}
-	
 	protected abstract SpellStats initBaseStats();
 	protected abstract ImmutableList<Element> initElements();
 	protected abstract ImmutableList<CreatureType> initCreatureTypes();
@@ -113,7 +111,10 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 			this.cast0(caster, target);
 		
 		// TODO effect pour les ResourceGainLoss pour les dmg, heal, mana cost, life cost, etc
-		
+		var costs = new HashMap<Resource, Integer>();
+		this.stats.costs.forEach((r, i) -> costs.put(r, i.value()));
+		ResourceGainLoss.use(caster, costs);
+//		new ResourceGainLoss(AoeBuilders.single.get(), TargetType.full.asStat(), true, new HashMap<>(), new HashMap<>());
 //		var composite = ResourceComposite.noShield;
 //		var res = Resource.life;
 //		var cost = 0;
@@ -213,11 +214,12 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		out.writeInt(modelid()); // written in here but deserialize outside (in update packets) because we creaate the spell by copying a model so we need the modelid before deserializing the spell instance
+		out.writeInt(modelid()); // written in here but deserialize outside (in update packets) because we create the spell by copying a model so we need the modelid before deserializing the spell instance
 		
 		out.writeInt(id);
 		this.stats.serialize(out);
 		// serialize effects
+		this.effects.forEach(e -> e.serialize(out));
 		return out;
 	}
 	
@@ -226,6 +228,7 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 		this.id = in.readInt();
 		this.stats.deserialize(in);
 		// deserialize effects
+		this.effects.forEach(e -> e.deserialize(in));
 		return null;
 	}
 	

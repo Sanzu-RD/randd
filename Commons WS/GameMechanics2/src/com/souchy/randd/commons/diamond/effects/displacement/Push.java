@@ -38,8 +38,8 @@ public class Push extends Effect {
 	/**
 	 * Ctor
 	 */
-	public Push(Fight f, Aoe aoe, TargetTypeStat targetConditions, int distance) {
-		super(f, aoe, targetConditions);
+	public Push(Aoe aoe, TargetTypeStat targetConditions, int distance) {
+		super(aoe, targetConditions);
 		this.distance = distance;
 	}
 	
@@ -96,7 +96,7 @@ public class Push extends Effect {
 	
 	@Override
 	public Push copy() {
-		return new Push(get(Fight.class), aoe, targetConditions, distance);
+		return new Push(aoe, targetConditions, distance);
 	}
 
 	@Override

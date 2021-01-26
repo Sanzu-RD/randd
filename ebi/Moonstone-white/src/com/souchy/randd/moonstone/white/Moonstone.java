@@ -7,6 +7,7 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.common.Action.EndTurnAction;
 import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.diamond.statusevents.Handler.Reactor;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
@@ -18,7 +19,7 @@ import com.souchy.randd.moonstone.commons.MoonstoneEbiLink;
 
 import io.netty.util.AttributeKey;
 
-public class Moonstone extends EbiShoalTCP { //implements OnTurnStartHandler, OnTurnEndHandler { 
+public class Moonstone extends EbiShoalTCP implements Reactor { //implements OnTurnStartHandler, OnTurnEndHandler { 
 	
 	public static final AttributeKey<String[]> authKey = AttributeKey.newInstance("moonstone.white.auth");
 	
@@ -32,7 +33,7 @@ public class Moonstone extends EbiShoalTCP { //implements OnTurnStartHandler, On
 //		MoonstoneEbiLink.fight = fight;
 		moon = this;
 //		Moonstone.bus = moon.bus;
-		fight.bus.register(this); //.statusbus.register(this);
+		fight.statusbus.register(this); //.statusbus.register(this);
 	}
 	
 	public static void writes(BBMessage msg) {

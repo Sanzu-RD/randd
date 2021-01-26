@@ -13,8 +13,8 @@ import com.souchy.randd.commons.diamond.statusevents.Event;
  */
 public class Pull extends Effect {
 
-	public Pull(Fight f, Aoe aoe, TargetTypeStat targetConditions) {
-		super(f, aoe, targetConditions);
+	public Pull(Aoe aoe, TargetTypeStat targetConditions) {
+		super(aoe, targetConditions);
 		// TODO Auto-generated constructor stub
 	}
 

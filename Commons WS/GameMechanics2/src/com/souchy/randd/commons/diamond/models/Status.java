@@ -93,15 +93,10 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 		this.sourceEntityId = sourceEntityId;
 		this.targetEntityId = targetEntityId;
 		
+		Log.format("Status new %s, %s", this.id, this, f);
 		// ne pas register les modèles
 		//source.fight.bus.register(this);
 //		f.statusbus.register(this);
-	}
-	
-	@Override
-	public void register(Engine engine) {
-		super.register(engine);
-		this.effects.forEach(e -> e.register(engine));
 	}
 	
 //	public Status(Fight fight, int sourceid, int targetid) {
@@ -160,7 +155,7 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 	 */
 	protected void genericFuseStrategy(Status s, boolean stacks, boolean duration) {
 		var fight = get(Fight.class);
-		var mod = new ModifyStatusEffect(get(Fight.class), AoeBuilders.single.get(), TargetType.full.asStat(), this, stacks ? s.stacks : 0, duration ? s.duration : 0);
+		var mod = new ModifyStatusEffect(AoeBuilders.single.get(), TargetType.full.asStat(), this, stacks ? s.stacks : 0, duration ? s.duration : 0);
 		var sourceCrea = fight.creatures.get(sourceEntityId);
 		var targetCrea = fight.creatures.get(targetEntityId);
 		mod.height.set(targetCrea.stats.height);
@@ -168,17 +163,18 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 	}
 
 	/**
-	 * Décrémente la duration au tour de la source.
-	 * Un status spécial pourrait override ça pour spécifier le "lead" qu'il veut (décrémenter au tour du target ou autre)
+	 * Décrémente la duration au tour du target.
+	 * Un status spécial pourrait override ça pour spécifier le "lead" qu'il veut (décrémenter au tour de la source ou autre)
 	 */
 	@Override
 	public void onTurnStart(TurnStartEvent event) {
 		// check que ça soit le tour de la SOURCE
 		var fight = event.fight;
 		int turnStartCreatureID = fight.timeline.get(event.index);
-		if(sourceEntityId == turnStartCreatureID) {
+		if(targetEntityId == turnStartCreatureID) {
 			this.duration--;
-			if(duration == 0) {
+			Log.format("Status (%s) decrement duration %s %s", this.id, duration, this);
+			if(duration <= 0) {
 				expire();
 			}
 		}
@@ -188,13 +184,19 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 	 * Supprime le status
 	 */
 	protected void expire() {
+		Log.format("Status (%s) expire %s %s", this.id, duration, this);
 		var f = get(Fight.class);
 		var source = f.creatures.get(sourceEntityId);
 		var target = f.creatures.get(targetEntityId);
-		var e = new RemoveStatusEffect(f, AoeBuilders.single.get(), TargetType.full.asStat(), this);
+		var e = new RemoveStatusEffect(AoeBuilders.single.get(), TargetType.full.asStat(), this);
 		e.apply(source, target.getCell());
-		e.dispose();
 	}
 	
+	@Override
+	public void dispose() {
+		var f = this.get(Fight.class);
+		if(f != null && f.statusbus != null) f.statusbus.unregister(this);
+		super.dispose();
+	}
 	
 }
