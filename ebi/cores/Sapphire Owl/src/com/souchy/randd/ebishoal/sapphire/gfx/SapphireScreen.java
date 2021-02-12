@@ -33,7 +33,7 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireLmlParser;
 
-import particles.ParticleEffekseer;
+import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
 
 public class SapphireScreen extends LapisScreen {
 
@@ -74,7 +74,7 @@ public class SapphireScreen extends LapisScreen {
 			effect.load("fx/fire/fire.efk", true);
 			// effect.load("fx/shock/shock.efk", true);
 			// effect.setLocation(9.5f, 1.5f, -9.5f);
-			effect.setLocation((float) pos.x + 0.5f, 1.5f, (float) -pos.y - 0.5f);
+			effect.setPosition((float) pos.x + 0.5f, 1.5f, (float) -pos.y - 0.5f);
 			// getEffekseer().addParticleEffekseer(effect);
 			effect.play();
 			

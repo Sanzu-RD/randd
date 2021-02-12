@@ -20,20 +20,16 @@ public class Engine {
 
 	public final Map<Class<? extends System>, System> systems = new HashMap<>();
 	
-	/* *
-	 * might delete this and just let systems take care of entities..
-	 * @date 2020-07-04
-	 */
-//	public final List<Entity> entities = new ArrayList<>();
-	
-	public EventBus bus = new EventBus();
+	protected EventBus systemBus = new EventBus();
 	
 	public void add(System system) {
 		systems.put(system.getClass(), system); // .add(system);
+		systemBus.register(system);
 	}
 	
 	public void remove(System system) {
 		systems.remove(system.getClass()); // .remove(system);
+		systemBus.unregister(system);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -45,14 +41,15 @@ public class Engine {
 //		Log.info("engine add entity " + entity);
 //		synchronized(entities) {
 //			entities.add(entity);
-			bus.post(new AddEntityEvent(entity));
+			systemBus.post(new AddEntityEvent(entity));
 //		}
 	}
 	
 	public void remove(Entity entity) {
+		Log.info("engine remove entity " + entity);
 //		synchronized(entities) {
 //			entities.remove(entity);
-			bus.post(new RemoveEntityEvent(entity));
+			systemBus.post(new RemoveEntityEvent(entity));
 //		}
 	}
 

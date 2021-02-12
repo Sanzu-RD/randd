@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import com.badlogic.gdx.Gdx;
@@ -35,13 +36,16 @@ import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.common.Pathfinding;
 import com.souchy.randd.commons.diamond.common.generic.BoolTable;
 import com.souchy.randd.commons.diamond.common.generic.Vector2;
+import com.souchy.randd.commons.diamond.effects.resources.ResourceGainLoss;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Board;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.components.Position;
+import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
+import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -139,9 +143,15 @@ public class SapphireController extends CameraInputController {
 		addOnKeyDown(Keys.V, () -> {
 //			var creature = SapphireGame.fight.teamA.get(0)
 			var creature = SapphireGame.fight.creatures.first();
-			creature.stats.resources.get(Resource.life).fight += 10;
-			Log.info(creature.stats.resources.get(Resource.life).toString());
-			SapphireGame.gfx.hud.reload(); // SapphireHud.refresh();
+//			creature.stats.resources.get(Resource.life).fight += 10;
+//			Log.info(creature.stats.resources.get(Resource.life).toString());
+//			SapphireGame.gfx.hud.reload(); // SapphireHud.refresh();
+			
+			var res = new HashMap<Resource, Integer>();
+			res.put(Resource.life, 10);
+			new ResourceGainLoss(AoeBuilders.single.get(), TargetType.full.asStat(), false, new HashMap<>(), res)
+				.apply(creature, creature.getCell());
+			
 		});
 		
 		addOnKeyDown(Keys.X, () -> {
@@ -164,32 +174,18 @@ public class SapphireController extends CameraInputController {
 		addOnKeyDown(Keys.K, () -> {
 			RenderOptions.renderCache = !RenderOptions.renderCache;
 		});
+		addOnKeyDown(Keys.B, () -> {
+			RenderOptions.renderBackground = !RenderOptions.renderBackground;
+		});
 		addOnKeyDown(Keys.N, () -> {
 			var targetpos = getCursorWorldPos(Gdx.input.getX(), Gdx.input.getY());
 			Log.format("target %s, %s", Gdx.input.getX(), Gdx.input.getY());
 			Highlight.spell(List.of(new Vector2(targetpos.x, targetpos.y)));
 		});
 
-		addOnKeyUp(Keys.SLASH, () -> {
-			currentActionID = Action.MOVE;
-
-			var creature = SapphireGame.fight.creatures.first();
-			if(creature != null) {
-				targetEntity = creature;
-				
-				var mvm = creature.stats.resources.get(Resource.move).value();
-				Aoe aoe = AoeBuilders.circle.apply(mvm);
-//				aoe.source = getCursorCell().pos; //new Vector2(cellpos.x, cellpos.y);
-				
-				var test = new ArrayList<Pathfinding.Node>();
-
-				aoe.toBoard(getCursorCell().pos).forEach(v -> {
-					var path = Pathfinding.aStar(board(), creature, creature.getCell(), board().get(v));
-					test.add(path.get(path.size() - 1));
-				});
-				
-				Highlight.movementPossibilities(test);
-			}
+		addOnKeyUp(Keys.F, () -> {
+			if(targetEntity == null || targetEntity instanceof Creature == false) return;
+			highlightMove.accept((Creature) targetEntity);
 		});
 		
 		addOnKeyUp(Keys.NUM_1, () -> highlightSpellRange(0));
@@ -250,6 +246,31 @@ public class SapphireController extends CameraInputController {
 		addOnKeyUp(Keys.E, () -> zoom += 0.2f);
 		
 	}
+	
+
+	Consumer<Creature> highlightMove = (creature) -> {
+
+//		var creature = SapphireGame.fight.creatures.first();
+		if(creature != null) {
+			currentActionID = Action.MOVE;
+			targetEntity = creature;
+			draggedEntity = creature;
+			
+			var mvm = creature.stats.resources.get(Resource.move).value();
+			Aoe aoe = AoeBuilders.circle.apply(mvm);
+//			aoe.source = getCursorCell().pos; //new Vector2(cellpos.x, cellpos.y);
+			
+			var test = new ArrayList<Pathfinding.Node>();
+
+			// TODO
+//			aoe.toBoard(creature.pos).forEach(v -> {
+//				var path = Pathfinding.aStar(board(), creature, creature.getCell(), board().get(v));
+//				if(path.size() > 0) test.add(path.get(path.size() - 1));
+//			});
+//			Log.info("highlight move " + test);
+			Highlight.movementPossibilities(test);
+		}
+	};
 	
 	private void highlightSpellRange(int spellindex) {
 		var creature = SapphireGame.fight.creatures.first();
@@ -409,17 +430,24 @@ public class SapphireController extends CameraInputController {
 		// get pos & creature
 //		var cellpos = getCursorWorldPos(screenX, screenY);
 		var cell = getCursorCell();
+		targetEntity = null; //	targetEntity = cell;
 		
 		if(cell != null) {
 			Creature creature = cell.getFirstCreature();
+			targetEntity = creature;
 			// start drag
-			if(button == Buttons.MIDDLE) {
-				Log.info("touchdown " + cell.pos + " " + creature);
-				draggedEntity = creature;
-			} else
+//			if(button == Buttons.MIDDLE) {
+//				Log.info("touchdown " + cell.pos + " " + creature);
+//				draggedEntity = creature;
+//			} else
 			// toggle character sheet
-			if(button == Buttons.RIGHT && creature != null) {
-				CreatureSheet.toggle(creature);
+			if(button == Buttons.RIGHT) {
+				if(creature != null) {
+					CreatureSheet.toggle(creature);
+				} else {
+					currentActionID = Action.NONE;
+					Highlight.clear();
+				}
 			} else
 			// action
 			if (button == Buttons.LEFT) {
@@ -430,10 +458,17 @@ public class SapphireController extends CameraInputController {
 					spell.cast(caster, cell);
 				} else 
 				if (currentActionID == Action.MOVE) {
-//					var caster = SapphireGame.fight.creatures.first();
-//					var spell = SapphireGame.fight.spells.get(currentActionID);
-//					spell.cast(caster, cell);
+					if(draggedEntity != null) {
+						draggedEntity.get(Position.class).set(cell.pos.x, cell.pos.y);
+					}
+				} else
+				if(currentActionID == Action.NONE) {
+					if(creature != null) {
+						draggedEntity = creature;
+						highlightMove.accept(creature);
+					}
 				}
+				
 				currentActionID = Action.NONE;
 				Highlight.clear();
 			}

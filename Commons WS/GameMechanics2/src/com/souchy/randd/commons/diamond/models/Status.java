@@ -13,7 +13,6 @@ import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurn
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
-import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
@@ -118,14 +117,29 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 	/**
 	 * When THIS status is added to a statuslist
 	 */
-	public abstract void onAdd();
+	public void onAdd() {
+		
+	}
+	
 	/** 
 	 * When THIS status is lost from a statuslist
 	 */
-	public abstract void onLose();
+	public void onLose() {
+		
+	}
+	
+	
+	public Status copy(Fight f) {
+		var s = copy0(f); //create(f, sourceEntityId, targetEntityId);
+		s.canDebuff = canDebuff;
+		s.canRemove = canRemove;
+		s.stacks = stacks;
+		s.duration = duration;
+		return s;
+	}
 	
 	/** create an instance of this status */
-	public abstract Status copy(Fight f);
+	public abstract Status copy0(Fight f);
 
 	/**
 	 * Be careful not to use this on a status model because they dont have a fight reference. <br>

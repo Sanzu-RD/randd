@@ -16,12 +16,22 @@ public class AddStatusEffect extends Effect {
 	
 	// pourrait avoir des int pour duration/stacks?
 	
-	/** status supplier to create a status instance on effect.apply */
-	private Function<Fight, Status> statusBuilder;
+	/** 
+	 * Status supplier to create a new Status instance on each Effect.apply() and apply0
+	 * 
+	 */
+	public Function<Fight, Status> statusBuilder;
+	
+	/**
+	 * New status created for each copy of the effect on each target cell in Effect.apply/apply0
+	 */
+	public Status status;
 	
 	public AddStatusEffect(Aoe aoe, TargetTypeStat targetConditions, Function<Fight, Status> statusBuilder) {
 		super(aoe, targetConditions);
 		this.statusBuilder = statusBuilder;
+		this.status = statusBuilder.apply(null);
+		this.status.parentEffectId = this.id;
 	}
 	
 	
@@ -29,13 +39,15 @@ public class AddStatusEffect extends Effect {
 	public void apply0(Creature source, Cell cell) {
 //		var f = source.get(Fight.class);
 		var target = cell.getCreature(height);
-		if(target == null) return;
+		if(target == null) {
+			status.dispose();
+			return;
+		}
 		
 		// create status instance
-		var status = statusBuilder.apply(null);
+//		var status = statusBuilder.apply(null);
 		status.sourceEntityId = source.id; //.ref();
 		status.targetEntityId = target.id; //.ref();
-		status.parentEffectId = this.id;
 		
 		// Add status. StatusList manages fusion by itsef
 		// FIXME add status to creature or cell 

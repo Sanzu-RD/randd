@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.github.czyzby.lml.vis.parser.impl.tag.HorizontalFlowGroupLmlTag;
+import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.layout.HorizontalFlowGroup;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
 import com.souchy.randd.commons.diamond.ext.AssetData;
@@ -153,9 +154,11 @@ public class CreatureSheet extends SapphireComponent {
 	protected void onInit() {
 		this.addListener(new DragAndResizeListener(this));
 		
-//		NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("res/textures/borders/border.9.png")), 10, 10, 10, 10);
-//		NinePatchDrawable background = new NinePatchDrawable(patch);
-//		this.setBackground(background);
+//		this.setSkin(VisUI.getSkin());
+		NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("res/textures/borders/border.9.png")), 10, 10, 10, 10);
+		NinePatchDrawable background = new NinePatchDrawable(patch);
+		this.setBackground(background);
+
 		
 		LapisUtil.onClick(closeBtn, this::close);
 		LapisUtil.onClick(btnOpen, this::open);
@@ -233,7 +236,6 @@ public class CreatureSheet extends SapphireComponent {
 		this.content.setVisible(!this.content.isVisible());
 		if(this.content.isVisible()) this.btnOpen.setText("<");
 		else this.btnOpen.setText(">");
-		
 	}
 	
 	@LmlAction("getStatusCount")

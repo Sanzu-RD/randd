@@ -17,7 +17,6 @@ public abstract class System {
 		Log.info("System " + this + " register to " + engine);
 		this.engine = engine;
 		engine.add(this);
-		engine.bus.register(this);
 	}
 
 	public void dispose() {

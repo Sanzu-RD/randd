@@ -105,20 +105,19 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	 * Actual casting action. Posts a CastSpellEvent then applies all effects.
 	 */
 	public void cast(Creature caster, Cell target) {
-		var event = new CastSpellEvent(caster, target, this);
-		get(Fight.class).statusbus.post(event);
-		if(!event.intercepted)
-			this.cast0(caster, target);
-		
-		// TODO effect pour les ResourceGainLoss pour les dmg, heal, mana cost, life cost, etc
+		// Applique les couts en premier?
 		var costs = new HashMap<Resource, Integer>();
 		this.stats.costs.forEach((r, i) -> costs.put(r, i.value()));
 		ResourceGainLoss.use(caster, costs);
-//		new ResourceGainLoss(AoeBuilders.single.get(), TargetType.full.asStat(), true, new HashMap<>(), new HashMap<>());
-//		var composite = ResourceComposite.noShield;
-//		var res = Resource.life;
-//		var cost = 0;
-//		caster.get(Fight.class).statusbus.post(new ResourceGainLossEvent(caster, target, this, composite, res, -(int) (cost)));
+		
+		// puis cast le spell en créant une copie pour pouvoir la modifier
+		var event = new CastSpellEvent(caster, target, this.copy());
+		get(Fight.class).statusbus.interceptors.post(event); // permet l'interruption
+		get(Fight.class).statusbus.modifiers.post(event); // permet la modification 
+		if(!event.intercepted)
+			event.spell.cast0(caster, target);
+		get(Fight.class).statusbus.reactors.post(event); // permet la reaction 
+		event.spell.dispose(); // dispose de la copie
 	}
 	
 	/**

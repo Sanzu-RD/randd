@@ -55,6 +55,11 @@ public class SapphireHudSkin extends Skin {
 //				lml.addI18nBundle(a.substring(0, a.lastIndexOf("/")).replace("/", "."), SapphireResources.assets.get(a));
 		});
 		
+
+		NinePatch patch = new NinePatch(new Texture(Gdx.files.internal("res/textures/borders/border.9.png")), 10, 10, 10, 10);
+		NinePatchDrawable background = new NinePatchDrawable(patch);
+		add("backgroundBorder", background);
+		
 		// link all creature/spells/statuses texture icons by their model id and category
 		linkModelIcons();
 	}

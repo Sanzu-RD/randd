@@ -52,8 +52,5 @@ public class DeathShadowTCP extends NettyServer {
 		pipe.addLast(handler); 
 	}
 
-//	public Map<ObjectId, Channel> users(){
-//		return users;
-//	}
 	
 }

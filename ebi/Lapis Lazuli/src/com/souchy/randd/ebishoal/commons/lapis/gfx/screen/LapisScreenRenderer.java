@@ -21,7 +21,7 @@ import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 
-import particles.EffekseerManager;
+import br.com.johnathan.gdx.effekseer.api.EffekseerManager;
 
 @SuppressWarnings("deprecation")
 interface LapisScreenRenderer extends Screen {

@@ -2,14 +2,23 @@ package com.souchy.randd.commons.tealwaters.ecs;
 
 import java.util.HashMap;
 
+import com.google.common.eventbus.EventBus;
+
 /**
  * 
  * 
  * @author Blank
  * @date 10 juin 2020
  */
-public class Entity { // implements EntityF {
+public class Entity {
 	
+	/** inbound event to tell components to dispose */
+	protected static class DisposeEntityEvent { }
+	
+	/**
+	 * for inbound event propagation like proccing VFX when the entity receives an event
+	 */
+	protected EventBus componentBus = new EventBus();
 	public final HashMap<Class<?>, Object> components = new HashMap<>();
 	
 	public Entity(Engine engine) {
@@ -18,17 +27,20 @@ public class Entity { // implements EntityF {
 	
 	public void register(Engine engine) {
 		if(engine == null) return; // for models cases like Spell, Status
-		this.add(engine);
-		engine.bus.register(this);
+		this.add(engine); // put the engine object as its child class (ex: Fight)
+		components.put(Engine.class, engine); // put the engine class as Engine class
+		engine.systemBus.register(this);
 		engine.add(this);
 	}
 	
 	public void dispose() {
 		var engine = get(Engine.class);
 		if(engine != null) {
-			engine.bus.unregister(this);
+			engine.systemBus.unregister(this);
 			engine.remove(this);
 		}
+		componentBus.post(new DisposeEntityEvent());
+		components.values().forEach(c -> componentBus.unregister(c));
 		components.clear();
 	}
 	
@@ -40,8 +52,10 @@ public class Entity { // implements EntityF {
 	 * set a component
 	 */
 	public void add(Object component) {
-		if(component != null)
+		if(component != null) {
 			components.put(component.getClass(), component);
+			componentBus.register(component);
+		}
 	}
 
 	/**
@@ -57,7 +71,9 @@ public class Entity { // implements EntityF {
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T remove(Class<T> componentClass) {
-		return (T) components.remove(componentClass);
+		var component = (T) components.remove(componentClass);
+		componentBus.unregister(component);
+		return component;
 	}
 
 	/**
@@ -75,20 +91,11 @@ public class Entity { // implements EntityF {
 		return components.containsKey(componentClass);
 	}
 	
-
-//	/** fired after a component is added to the entity */
-//	public static class AddComponentEvent {
-//		public Component c;
-//		public AddComponentEvent(Component c) {
-//			this.c = c;
-//		}
-//	}
-//	/** fired after a component is removed from the entity */
-//	public static class RemoveComponentEvent {
-//		public Component c;
-//		public RemoveComponentEvent(Component c) {
-//			this.c = c;
-//		}
-//	}
+	/**
+	 * hashcode 
+	 */
+	public String hash() {
+		return Integer.toHexString(hashCode());
+	}
 	
 }

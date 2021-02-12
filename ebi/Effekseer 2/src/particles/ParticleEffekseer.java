@@ -99,7 +99,6 @@ public class ParticleEffekseer {
 		
 		for (int t = 0; t < 3; t++) {
 			for (int i = 0; i < effekseerEffectCore.GetTextureCount(textureTypes[t]); i++) {
-				
 				String pathh = null;
 				pathh = (new File(path)).getParent();
 				
@@ -108,7 +107,6 @@ public class ParticleEffekseer {
 				} else {
 					pathh = effekseerEffectCore.GetTexturePath(i, textureTypes[t]);
 				}
-				
 				FileHandle handle1 = null;
 				if(internalStorage) {
 					handle1 = Gdx.files.internal(pathh);

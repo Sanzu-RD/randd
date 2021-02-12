@@ -37,6 +37,12 @@ public class Burning extends Status implements OnTurnStartHandler {
 	}
 
 	@Override
+	public boolean fuse(Status s) {
+		genericFuseStrategy(s, false, true);
+		return true;
+	}
+	
+	@Override
 	public void onTurnStart(TurnStartEvent event) {
 		super.onTurnStart(event); // décrémente la duration
 //		if(duration <= 0) return; // n'applique pas les effets si le status est terminé 
@@ -59,36 +65,13 @@ public class Burning extends Status implements OnTurnStartHandler {
 	}
 
 	@Override
-	public boolean fuse(Status s) {
-		genericFuseStrategy(s, false, true);
-		return true;
-	}
-
-	@Override
-	public void onAdd() {
-		
-	}
-
-	@Override
-	public void onLose() {
-		
-	}
-	@Override
-	public Status copy(Fight f) {
+	public Status copy0(Fight f) {
 //		FUCK
 //		the fight component qu'on mettrait sur le model pour copier est pas bon car le model est static dans DiamondModels
 		var s = new Burning(f, sourceEntityId, targetEntityId);
-		s.canDebuff = canDebuff;
-		s.canRemove = canRemove;
-		s.stacks = stacks;
-		s.duration = duration;
 		s.dmg = dmg.copy();
 		s.dmg.reset();
-		// FIXME status copy effects
-//		effects.forEach(eid -> {
-//			var em = DiamondModels.effects.get(eid); // copy effects
-//			s.effects.add(em.copy()); //fight));
-//		});
+		s.effects.add(s.dmg);
 		return s;
 	}
 

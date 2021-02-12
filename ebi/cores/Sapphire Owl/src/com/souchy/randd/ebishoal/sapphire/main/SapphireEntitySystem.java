@@ -23,10 +23,11 @@ import com.souchy.randd.commons.tealwaters.ecs.Engine.AddEntityEvent;
 import com.souchy.randd.commons.tealwaters.ecs.Engine.RemoveEntityEvent;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.status.Shocked;
+import com.souchy.randd.ebi.ammolite.FXPlayer;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.Highlight;
 
-import particles.ParticleEffekseer;
+import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
 
 /**
  * Stores all renderables
@@ -48,26 +49,38 @@ public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.Syste
 	public void update(float delta) {
 		// Log.info("sapphire entity system update");
 		foreach(e -> {
-			var model = e.get(ModelInstance.class);
-			var pos = e.get(Position.class);
-			if(model == null || pos == null) return;
-			// Log.info("set sapphire entity model pos : " + pos + "; " + model);
-			model.transform.setTranslation(
-					(float) pos.x + 0.5f, 
-					(float) pos.y + 0.5f, 
-					1f
-			);
-			var anime = e.get(AnimationController.class);
-			if(anime != null) {
-				anime.update(delta);
-			}
-			var status = e.get(Shocked.class);
-			if(status != null) {
-				ParticleEffekseer effect = status.get(ParticleEffekseer.class);
-				if(effect != null) {
-		        	effect.setLocation((float) pos.x + 0.5f, 1.5f, (float) -pos.y - 0.5f);
+			
+			e.update(delta);
+			
+			// pas besoin d'update les fxplayer ici car on le fait déjà dans Ammolite Family
+//			var fx = e.get(FXPlayer.class);
+//			if(fx != null) fx.update(delta);
+			
+			if(e instanceof Creature) {
+				var model = e.get(ModelInstance.class);
+				var pos = e.get(Position.class);
+				if(model == null || pos == null) return;
+				// Log.info("set sapphire entity model pos : " + pos + "; " + model);
+				model.transform.setTranslation((float) pos.x + 0.5f, (float) pos.y + 0.5f, 1f);
+				var anime = e.get(AnimationController.class);
+				if(anime != null) {
+					anime.update(delta);
 				}
+				var status = e.get(Shocked.class);
+				if(status != null) {
+					ParticleEffekseer effect = status.get(ParticleEffekseer.class);
+					if(effect != null) {
+						effect.setPosition((float) pos.x + 0.5f, 1.5f, (float) -pos.y - 0.5f);
+					}
+				}
+			} else 
+			if (e instanceof Status) {
+				
+			} else 
+			if (e instanceof TerrainEffect) {
+					
 			}
+			
 		});
 	}
 	
@@ -75,7 +88,7 @@ public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.Syste
 		super.dispose();
 		clear();
 	}
-
+	
 	/**
 	 * this actually overrides the event handler from Family
 	 */
@@ -120,16 +133,18 @@ public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.Syste
 		} else 
 		if(event.entity instanceof TerrainEffect) {
 			add(event.entity);
-		}
+		} else 
+		if(event.entity instanceof Status) {
+			add(event.entity);
+		} 
 	}
 	
-//	@Subscribe
-//	public void onRemovedEntity(RemoveEntityEvent event) {
-//		if(event.entity instanceof Creature || event.entity instanceof TerrainEffect) {
-//			synchronized (SapphireEntitySystem.family) {
-//				family.remove(event.entity);
-//			}
-//		}
-//	}
+	@Subscribe
+	@Override
+	public void onRemovedEntity(RemoveEntityEvent event) {
+		if(event.entity instanceof Creature || event.entity instanceof TerrainEffect  || event.entity instanceof Status) {
+			remove(event.entity);
+		}
+	}
 	
 }

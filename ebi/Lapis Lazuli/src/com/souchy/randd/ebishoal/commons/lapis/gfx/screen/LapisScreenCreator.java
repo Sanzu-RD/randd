@@ -28,9 +28,7 @@ import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 
-import particles.EffekseerManager;
-import particles.OnAnimationComplete;
-import particles.ParticleEffekseer;
+import br.com.johnathan.gdx.effekseer.api.EffekseerManager;
 
 
 @SuppressWarnings({ "deprecation", "unused" })

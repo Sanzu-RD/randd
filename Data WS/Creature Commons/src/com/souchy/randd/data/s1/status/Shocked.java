@@ -18,21 +18,13 @@ public class Shocked extends Status {
 	}
 
 	@Override
+	public HandlerType type() {
+		return HandlerType.Modifier;
+	}
+	
+	@Override
 	public boolean fuse(Status s) {
-		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public void onAdd() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onLose() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -47,28 +39,15 @@ public class Shocked extends Status {
 		return null;
 	}
 
-//	@Override
-//	public Shocked create(Entity source, Entity target) {
-//		return new Shocked(source, target); 
-//		// need source + target. 
-//		// perhaps serialize {status id, sourceEntityId, targetEntityId, [custom status values]} ? 
-//		// and have an entityBag map for all entities including cells
-//	}
-
 	@Override
 	public Shocked create(Fight fight, int source, int target) {
 		return new Shocked(fight, source, target); 
 	}
 
 	@Override
-	public Status copy(Fight f) {
+	public Status copy0(Fight f) {
 		var s = new Shocked(f, sourceEntityId, targetEntityId);
 		return s;
-	}
-
-	@Override
-	public HandlerType type() {
-		return HandlerType.Modifier;
 	}
 	
 }

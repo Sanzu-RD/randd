@@ -35,5 +35,10 @@ public class CastSpellEvent extends Event {
 		public void onCastSpell(CastSpellEvent event);
 	}
 	
+	@Override
+	public String testMessage() {
+		return source.id + " casts " + spell.modelid() + " on " + target.pos;
+	}
+	
 	
 }

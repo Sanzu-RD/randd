@@ -8,6 +8,7 @@
 	<property name="dir.git" value="../../../../"/>
 	<!-- this is /GitPiranha/ -->
 	<property name="dir.gitres" value="${dir.git}/../Git/res"/>
+	<property name="dir.gitgdx" value="${dir.git}/../Git/libgdx"/>
 	<!-- <property name="dir.jarfile" value="G:/www/ebishoal"/> -->
 	<property name="dir.jarfile" value="${dir.git}/release/ebishoal"/>
 	<property name="dir.lib" value="${dir.jarfile}/lib/"/>
@@ -59,6 +60,7 @@
 			<fileset dir="${dir.git}/r and d/Commons WS/Moonstone-commons/bin"/>
 			<fileset dir="${dir.git}/r and d/ebi/Moonstone-white/bin"/>
 			<fileset dir="${dir.git}/r and d/ebi/Effekseer 2/bin"/>
+			<fileset dir="${dir.gitgdx}/ParticlesLibGDX/bin"/>
 		</jar>
 
 		<scp verbose="false" sftp="true" trust="true" file="${dir.jarfile}/sapphireowl.jar" todir="souchy:z@192.168.2.15:/home/souchy/release/ebishoal/" />
@@ -86,6 +88,7 @@
 
 		<!-- natives -->
 		<copy file="${dir.git}/r and d/ebi/Effekseer 2/effekseer.dll" todir="${dir.natives}"/>
+		<copy file="${dir.gitgdx}/ParticlesLibGDX/libs/gdxeffek.dll" todir="${dir.natives}"/>
 
 
 		<!-- config files -->

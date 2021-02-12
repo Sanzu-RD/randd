@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.effects.status.AddStatusEffect;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 
@@ -23,7 +24,12 @@ public class AddStatusEvent extends Event {
 
 	@Override
 	public AddStatusEvent copy0() {
-		return new AddStatusEvent(source, target, (AddStatusEffect) effect.copy());
+		var s = new AddStatusEvent(source, target, (AddStatusEffect) effect.copy());
+		return s;
+	}
+	
+	public Status getStatus() {
+		return ((AddStatusEffect) effect).status;
 	}
 
 	

@@ -8,10 +8,9 @@ import io.netty.buffer.ByteBuf;
 
 //import data.new1.ecs.Component;
 
-public class IntStat implements BBSerializer, BBDeserializer  { //implements Component {
+public class IntStat implements BBSerializer, BBDeserializer  { 
 	
 	/** flat value */
-	//public final double base;
 	public double baseflat;
 	/** % increase */
 	public double inc;
@@ -41,8 +40,6 @@ public class IntStat implements BBSerializer, BBDeserializer  { //implements Com
 	
 	public int value() {
 		return max() + (int) fight;
-		// val += fight;
-		// return (int) val;
 	}
 	
 	public int max() {

@@ -29,6 +29,7 @@ import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.Handler.HandlerType;
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent.OnCastSpellHandler;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurnStartHandler;
 import com.souchy.randd.commons.diamond.statusevents.resource.ResourceGainLossEvent;
@@ -233,5 +234,7 @@ public class SapphireHud extends LapisHud
 	public void onModifyStatus(ModifyStatusEvent event) {
 		CreatureSheet.updateSheet(event.getCreatureTarget());
 	}
+	
+
 	
 }
