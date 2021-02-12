@@ -66,7 +66,7 @@ public abstract class Action implements Supplier<Boolean> {
 	/**
 	 * id for ending turn is -2
 	 */
-	public static final int TURN_END = -1;
+	public static final int TURN_END = -2;
 	/**
 	 * id for moving is -1
 	 */
