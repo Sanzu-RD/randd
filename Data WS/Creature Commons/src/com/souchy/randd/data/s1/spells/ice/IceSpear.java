@@ -47,17 +47,6 @@ public class IceSpear extends Spell {
 		
 	}
 
-	@Override
-	public boolean canCast(Creature caster) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean canTarget(Creature caster, Cell target) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	@Override
 	public Spell copy(Fight fight) {

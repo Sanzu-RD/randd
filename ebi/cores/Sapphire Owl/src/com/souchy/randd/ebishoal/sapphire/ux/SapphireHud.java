@@ -69,6 +69,7 @@ public class SapphireHud extends LapisHud
 	
 	public boolean isLoaded = false;
 	
+	public Label cursorPos;
 	
 	private final LabelStyle styleDmgLife;
 	private final LabelStyle styleDmgLifeComposite;
@@ -121,7 +122,13 @@ public class SapphireHud extends LapisHud
 		
 		parameters = new Parameters();
 		parameters.setVisible(false);
+		
 
+		if(SapphireOwl.conf.functionality.showCursorPos) {
+			cursorPos = new Label("text", styleNormal);
+			this.getStage().addActor(cursorPos);
+		}
+		
 		isLoaded = true;
 	}
 	

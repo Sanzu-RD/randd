@@ -32,4 +32,11 @@ public enum Elements implements Element, StatProperty {
 		values.add(this);
 	}
 	
+	/**
+	 * helper to make spell ids
+	 */
+	public int thousand(int i) {
+		return (this.ordinal() + 1) * 1000 + i;
+	}
+	
 }

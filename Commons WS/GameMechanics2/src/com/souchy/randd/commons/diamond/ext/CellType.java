@@ -25,24 +25,33 @@ public enum CellType {
 	Type15(0, 0, 0, 0), // block/wall/column/pillar
 	;
 
-	public final boolean[] targetability = new boolean[8];
+//	public final boolean[] targetability = new boolean[4];
+	public final Targetting t = new Targetting();
 	private CellType(int canBeWalkedOn, int canBeWalkedThrough, int canBeCastedOn, int canBeCastedThrough) {
-		targetability[Targetability.CanBeWalkedOn.ordinal()] = canBeWalkedOn == 1;
-		targetability[Targetability.CanBeWalkedThrough.ordinal()] = canBeWalkedThrough == 1;
-		targetability[Targetability.CanBeCastedOn.ordinal()] = canBeCastedOn == 1;
-		targetability[Targetability.CanBeCastedThrough.ordinal()] = canBeCastedThrough == 1;
+//		targetability[Targetability.CanBeWalkedOn.ordinal()] = canBeWalkedOn == 1;
+//		targetability[Targetability.CanBeWalkedThrough.ordinal()] = canBeWalkedThrough == 1;
+//		targetability[Targetability.CanBeCastedOn.ordinal()] = canBeCastedOn == 1;
+//		targetability[Targetability.CanBeCastedThrough.ordinal()] = canBeCastedThrough == 1;
+
+		t.setBase(Targetability.CanBeWalkedOn, canBeWalkedOn == 1);
+		t.setBase(Targetability.CanBeWalkedThrough, canBeWalkedThrough == 1);
+		t.setBase(Targetability.CanBeCastedOn, canBeCastedOn == 1);
+		t.setBase(Targetability.CanBeCastedThrough, canBeCastedThrough == 1);
 	}
 	
 	
 	public static CellType get(Targetting t) {
 		for(var type : values()) {
-			if(t.targetability.get(Targetability.CanBeWalkedOn).value() != type.targetability[Targetability.CanBeWalkedOn.ordinal()]) continue;
-			if(t.targetability.get(Targetability.CanBeWalkedThrough).value() != type.targetability[Targetability.CanBeWalkedThrough.ordinal()]) continue;
-			if(t.targetability.get(Targetability.CanBeCastedOn).value() != type.targetability[Targetability.CanBeCastedOn.ordinal()]) continue;
-			if(t.targetability.get(Targetability.CanBeCastedThrough).value() != type.targetability[Targetability.CanBeCastedThrough.ordinal()]) continue;
-			return type;
+//			if(t.targetability.get(Targetability.CanBeWalkedOn).value() != type.targetability[Targetability.CanBeWalkedOn.ordinal()]) continue;
+//			if(t.targetability.get(Targetability.CanBeWalkedThrough).value() != type.targetability[Targetability.CanBeWalkedThrough.ordinal()]) continue;
+//			if(t.targetability.get(Targetability.CanBeCastedOn).value() != type.targetability[Targetability.CanBeCastedOn.ordinal()]) continue;
+//			if(t.targetability.get(Targetability.CanBeCastedThrough).value() != type.targetability[Targetability.CanBeCastedThrough.ordinal()]) continue;
+			
+			if(type.t.same(t))
+				return type;
 		}
 		return null;
 	}
+	
 	
 }

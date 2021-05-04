@@ -91,10 +91,10 @@ public class Highlight {
 	/** static initialize */
 	public static void init() {
 		for (var type : CellType.values()) {
-			float r = type.targetability[Targetability.CanBeWalkedOn.ordinal()] ? 1 : 0;
-			float g = type.targetability[Targetability.CanBeWalkedThrough.ordinal()] ? 1 : 0;
-			float b = type.targetability[Targetability.CanBeCastedOn.ordinal()] ? 1 : 0;
-			float a = type.targetability[Targetability.CanBeCastedThrough.ordinal()] ? 1 : 0.5f;
+			float r = type.t.can(Targetability.CanBeWalkedOn) ? 1 : 0;
+			float g = type.t.can(Targetability.CanBeWalkedThrough) ? 1 : 0;
+			float b = type.t.can(Targetability.CanBeCastedOn) ? 1 : 0;
+			float a = type.t.can(Targetability.CanBeCastedThrough) ? 1 : 0.5f;
 //			if(type.targetability[Targetability.CanBeCastedThrough.ordinal()]) {
 //				r *= 0.5f;
 //				g *= 0.5f;
@@ -141,7 +141,7 @@ public class Highlight {
 		clear();
 		// create new model instances
 		for (var v : cells) {
-			highlights.add(new ModelInstance(cellTypes.get(CellType.get(v.targeting)), (float) v.pos.x, (float) v.pos.y, floorHeight + floorOffset));
+			highlights.add(new ModelInstance(cellTypes.get(CellType.get(v.targetting)), (float) v.pos.x, (float) v.pos.y, floorHeight + floorOffset));
 		}
 		// add instances to render list
 		SapphireWorld.world.instances.addAll(highlights);

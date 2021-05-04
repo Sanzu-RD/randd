@@ -7,6 +7,7 @@ import java.util.Map;
 import com.souchy.randd.commons.diamond.common.Aoe;
 import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.common.AoeBuilders.AoeBuilder;
+import com.souchy.randd.commons.diamond.models.stats.base.BoolStat;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.models.stats.base.ObjectStat;
 import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
@@ -22,25 +23,17 @@ public class SpellStats implements BBSerializer, BBDeserializer { //extends Enty
 	// cast costs
 	public Map<Resource, IntStat> costs = new HashMap<>();
 
-	// cell targetting conditions
+	// cell targetting conditions, inclu lineofsight
 	public TargetTypeStat target = new TargetTypeStat();
 	
-	// cast ranges and pattern for the cast range
-	/**
-	 * Range minimale. 0 par défaut
-	 */
+	// cast ranges and patterns 
+	/** Range minimale. 0 par défaut */
 	public IntStat minRangeRadius = new IntStat(0);
-	/**
-	 * Range maximale. 1 par défaut
-	 */
+	/** Range maximale. 1 par défaut */
 	public IntStat maxRangeRadius = new IntStat(1);
-	/**
-	 * Pattern de range maximale. null par défaut.
-	 */
+	/** Pattern de range maximale. null par défaut. */
 	public ObjectStat<AoeBuilder> minRangePattern = new ObjectStat<AoeBuilder>(null);
-	/**
-	 * Pattern de range maximale. Cercle par défaut.
-	 */
+	/** Pattern de range maximale. Cercle par défaut. */
 	public ObjectStat<AoeBuilder> maxRangePattern = new ObjectStat<AoeBuilder>(r -> AoeBuilders.circle.apply(r));
 	
 	// cast cooldowns
@@ -49,6 +42,8 @@ public class SpellStats implements BBSerializer, BBDeserializer { //extends Enty
 	public IntStat castPerTarget = new IntStat(0);
 	
 	
+	// if the user can rotate the AOE manually or if it is based off the character's orientation
+	public BoolStat canRotate;
 	// publicly modifiable aoes (spells create their aoes and place them here so that other classes can modify them without knowing the spell .class)
 	public List<ObjectStat<Aoe>> aoes = new ArrayList<>();
 	
@@ -75,7 +70,7 @@ public class SpellStats implements BBSerializer, BBDeserializer { //extends Enty
 		s.castPerTurn = castPerTurn.copy();
 		s.castPerTarget = castPerTarget.copy();
 		
-//		s.lineOfSight = lineOfSight.copy();
+//		s.lineOfSight = lineOfSight.copy(); // maintenant inclu dans target v
 		s.target = target.copy();
 		
 		return s;

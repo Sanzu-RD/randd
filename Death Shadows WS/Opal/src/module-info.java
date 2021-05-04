@@ -5,6 +5,7 @@ module com.souchy.randd.deathshadows.opal {
 
 	opens com.souchy.randd.deathshadows.opal.api;
 	opens com.souchy.randd.deathshadows.opal.api.authentication;
+	opens com.souchy.randd.deathshadows.opal.api.data;
 	
 	
 	requires transitive com.souchy.randd.commons.Jade;

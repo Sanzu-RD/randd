@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="445.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="10.0" layoutY="10.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Group VBox.vgrow="NEVER">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../textures/spells/fireball.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="66.0" text="Fireball">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <GridPane fx:id="statsGrid" maxHeight="130.0" minHeight="130.0" prefHeight="130.0" VBox.vgrow="NEVER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="lblCost" text="Cost" />
+                  <Label fx:id="lblRange" text="Range" GridPane.rowIndex="1" />
+                  <Label fx:id="lblLOS" text="Line of sight" GridPane.rowIndex="2" />
+                  <Label fx:id="lblTarget" text="Targetability" GridPane.rowIndex="3" />
+                  <Label fx:id="lblUsePerTurn" text="Uses per turn" GridPane.rowIndex="4" />
+                  <Label fx:id="lblUsePerTarget" text="Uses per target" GridPane.rowIndex="5" />
+                  <Label fx:id="lblCooldown" text="Cooldown" GridPane.rowIndex="6" />
+                  <Label fx:id="cost" text="0" GridPane.columnIndex="1" />
+                  <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="range" text="0-1" />
+                        <Label fx:id="line" text="true" />
+                        <Label fx:id="diagonal" text="true" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="lineofsight" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="targetability" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="usesPerTurn" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="usesPerTarget" text="0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="cooldown" text="0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+               </children>
+            </GridPane>
+            <TextArea editable="false" maxHeight="120.0" minHeight="120.0" prefHeight="120.0" style="-fx-border-width: 0;" text="Occasione des dommages Feu. Les dommages sont doublés sur invocations.èjsa dfèjk asdfk;j sakjf k;ajsk dfkj asdfkj sadkfj aksd;j fkjas df kjndsafgkjndsfgkljnalsdkfjna;skj dfkj sdakj sdafklj sadkfj sdakfj asdkfj dsakjf asdkjf  ;kasdfj asdkfj aksdj fkjs dfkj dsafkj sadfkj sdakfj sdkj fkjds afkj sdafkj asdfk;j sadfk;jasd fadksjf kj asdfj kaskjd fdaksj dfs sadfkjn asdkfj asdkl dsaf" wrapText="true" VBox.vgrow="NEVER" />
+            <Label text="Effects" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <ListView prefHeight="150.0" prefWidth="366.0" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../css/commons.css" />
+      <URL value="@sheetspell.css" />
+   </stylesheets>
+</AnchorPane>

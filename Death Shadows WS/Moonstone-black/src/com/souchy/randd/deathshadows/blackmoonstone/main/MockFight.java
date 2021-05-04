@@ -18,9 +18,6 @@ import com.souchy.randd.jade.meta.JadeCreature;
 public class MockFight {
 
 	public static Fight createFight() {
-		// init elements and models
-		Elements.values(); 
-		DiamondModels.instantiate("com.souchy.randd.data.s1");
 		
 		// init fight with cells, creatures and spells
 		Fight fight = new Fight();
@@ -45,9 +42,9 @@ public class MockFight {
 		// jade customization
 		JadeCreature jade = new JadeCreature();
 		jade.affinities = new int[Element.values.size()];
-		jade.affinities[Elements.air.ordinal()] = 30; // personalized 30% air affinity
+		jade.affinities[Elements.water.ordinal()] = 30; // personalized 30% water affinity
 		jade.creatureModelID = modelid; 
-		jade.spellIDs = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		jade.spellIDs = new int[] { 1, 2, 3, 4, 5, 6, 2006, 8, 9 };
 		
 		// base model
 		CreatureModel model = DiamondModels.creatures.get(jade.creatureModelID);
@@ -55,7 +52,7 @@ public class MockFight {
 		// override model stats
 //		model.baseStats.resources.put(Resource.life, new IntStat(30)); 
 		// instance
-		Creature creature = new Creature(fight, model, jade, new Position(5, 5));
+		Creature creature = new Creature(fight, model, jade, new Position(0, 0));
 		creature.stats.resources.get(Resource.life).fight = -150; 
 		creature.stats.shield.get(Resource.life).fight = 200; 
 		

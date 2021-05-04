@@ -78,6 +78,14 @@
 		"casterAnim": "1",
 		"casterFx": "myeffect.pfx",
 		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 2006,
+		"comment": "Frost Dash",
+		"icon":  "frostdash",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
 	}
 
 ]

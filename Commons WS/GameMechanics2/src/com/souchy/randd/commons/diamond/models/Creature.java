@@ -46,7 +46,7 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 	public StatusList statuses;
 	
 	/** Properties like pathing,  line of sights, ~~visibility~~, orientation */
-	public Targetting targeting;
+	public Targetting targetting;
 	
 	// parent - summoner id if this creature is a summon
 	public int summonerID = 0;
@@ -54,23 +54,23 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 	public List<Integer> summonsID = new ArrayList<>();
 	
 	/**
-	 * for deserializing
+	 * for deserializing (Client)
 	 */
-	public Creature(Fight f) {
-		super(f);
+	public Creature() {
+		super(null);
 	}
 
 	/**
-	 * for initialisation
+	 * for initialisation (Server)
 	 */
 	public Creature(Fight fight, CreatureModel model, JadeCreature jade, Position pos) { // AzurCache dep, Vector2 pos) {
-		super(fight);
-//		Log.critical("CREATURE FIGHT =  " + fight);
+		super(null);
 		this.id = idCounter++;
 		this.modelid = model.id();
 		this.pos = pos;
-		this.targeting = new Targetting();
-		this.targeting.initCreature();
+		this.targetting = new Targetting();
+		this.targetting.initCreature();
+		add(targetting);
 		
 		this.spellbook = new ArrayList<>();
 		this.statuses = new StatusList(null);
@@ -91,8 +91,13 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 //			if(s != null) spellbook.add(s);
 		}
 
+		register(fight);
 	}
 	
+	/**
+	 * For creating on server, you register at the end of the ctor
+	 * For deserializing on client, you register in FullUpdateHandler
+	 */
 	@Override
 	public void register(Engine engine) {
 		if(engine == null) return;
@@ -136,7 +141,7 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		this.statuses.serialize(out);
 		
 		// targeting
-		this.targeting.serialize(out);
+		this.targetting.serialize(out);
 		
 		return null;
 	}
@@ -167,8 +172,9 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		this.statuses.deserialize(in);
 
 		// targeting
-		this.targeting = new Targetting();
-		this.targeting.deserialize(in);
+		this.targetting = new Targetting();
+		this.targetting.deserialize(in);
+		add(targetting);
 		
 		return null;
 	}

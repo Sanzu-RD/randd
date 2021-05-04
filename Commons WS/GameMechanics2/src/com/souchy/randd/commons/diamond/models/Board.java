@@ -102,10 +102,10 @@ public class Board extends Entity {
 	*/
 
 	public boolean checkView(Creature caster, Vector2 pos1) {
+		Vector2 pos0 = caster.pos;
 		boolean log = false;
 //		if(pos1.x == 4 && pos1.y == 7) log = true;
 		
-		Vector2 pos0 = caster.pos;
 		double dirY = pos1.y - pos0.y >= 0 ? 1 : -1;
 		double dirX = pos1.x - pos0.x >= 0 ? 1 : -1;
 		
@@ -160,7 +160,7 @@ public class Board extends Entity {
 				Cell cell = get(tx, ty);
 				if(log) System.out.println("test " + cell.pos);
 				if(!checkCellView(caster, cell)) {
-					if(log) System.out.println("return false 1");
+					if(log) System.out.println("return false 1 " + cell.pos);
 					return false;
 				}
 				y += dirY;
@@ -199,10 +199,11 @@ public class Board extends Entity {
 	 */
 	public boolean checkCellView(Creature caster, Cell c) {
 		if(caster == null || c == null) return false;
-		var view = caster.targeting.canCastThrough(c);
+		if(caster.pos.same(c.pos)) return true;
+		var view = caster.targetting.canCastThrough(c);
 		if(c.hasCreature()) {
 			for(var crea : c.getCreatures())
-				view &= caster.targeting.canCastThrough(crea);
+				view &= caster.targetting.canCastThrough(crea);
 		}
 		return view;
 	}
@@ -211,10 +212,10 @@ public class Board extends Entity {
 	 * Check if the caster can cast on the cell and on any creature on the cell
 	 */
 	public boolean checkCellViewOn(Creature caster, Cell c) {
-		var view = caster.targeting.canCastOn(c);
+		var view = caster.targetting.canCastOn(c);
 		if(c.hasCreature()) {
 			for(var crea : c.getCreatures())
-				view &= caster.targeting.canCastOn(crea);
+				view &= caster.targetting.canCastOn(crea);
 		}
 		return view;
 	}

@@ -44,18 +44,6 @@ public class IceComet extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public boolean canCast(Creature caster) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean canTarget(Creature caster, Cell target) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	@Override
 	public Spell copy(Fight fight) {

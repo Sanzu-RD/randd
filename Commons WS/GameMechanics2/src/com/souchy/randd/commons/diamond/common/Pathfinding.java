@@ -8,15 +8,62 @@ import com.souchy.randd.commons.diamond.common.generic.Vector2;
 import com.souchy.randd.commons.diamond.models.Board;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.diamond.models.stats.special.Targetting;
 import com.souchy.randd.commons.diamond.statics.properties.Orientation;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
 public class Pathfinding {
 	
 	
-//	public static boolean checkView(Board board, Creature caster, Cell target) {
-//		return true;
-//	}
+	/**
+	 * Return the furthest position possible to dash to 
+	 * Dashes are always in a line
+	 * 
+	 * @param allOrNothing : Si true, dash seulement sur la case target. Sinon essaie de dash le plus loin possible vers la case target même si elle est occupée.
+	 */
+	public static Vector2 dashFunction(Creature caster, Cell target, int distance, boolean allOrNothing, Targetting parameters) {
+		Board board = caster.get(Fight.class).board;
+		// Vecteur delta entre le target et la source
+		Vector2 p1 = caster.pos; //.getCell().pos;
+		Vector2 p2 = target.pos;
+		Vector2 delta = p2.copy().sub(p1); // delta en absolu
+
+		Orientation o = Orientation.getOrientation(delta); // vecteur unitaire de direction
+		
+		// if distance is not set, take the distance from the source to the target
+		if(distance == 0) {
+			delta = delta.abs();
+			delta = o.mult(delta, false); // vecteur de distance dans la bonne direction sur un seul axe
+			distance = (int) delta.abs().sum(); // distance 
+//			double dist = d.sum(); // distance 
+//			Vector2 end = d.copy().add(caster.pos); // start + dist = position d'arrivée maximale
+		}
+		
+		// dans un sens: détermine la cell sur laquelle on peut finir
+		// dans l'autre sens: détermine si on peut passer à travers
+		
+		Vector2 finalpos = p1.copy();
+		int ds = allOrNothing ? distance : 1; 
+		
+		for(; ds <= distance; ds++) {
+			Vector2 tp = o.mult(ds).add(p1);
+			// check if cell exists
+			var testCell = board.get(tp);
+			if(testCell == null)
+				continue;
+			// check if can walk on
+			if(/*caster.targeting*/parameters.canWalkOn(testCell)) {
+				finalpos = tp;
+			}
+			// check if can dash through
+			if(!/*caster.targeting*/parameters.canDashThrough(testCell)) {
+				break;
+			}
+		}
+		
+		return finalpos;
+	}
 	
 
 	/** checks that 2 cells are in line */
@@ -135,7 +182,7 @@ public class Pathfinding {
 					if(n.pos.equals(target.pos)) Log.format("add target %s %s", n.pos, n.f);
 					
 					if(neighbor == null) n.v += 1000;
-					else if(!caster.targeting.canWalkThrough(neighbor)) n.v += 1000;
+					else if(!caster.targetting.canWalkThrough(neighbor)) n.v += 1000;
 					if(n.v >= 1000) n.valid = false;
 					
 					// if(n.pos.equals(target.pos)) n.v -= 1000;
@@ -283,53 +330,28 @@ public class Pathfinding {
 		
 		return path;
 	}*/
-	
-	public Orientation getOrientationTo(Board b, Cell source, Cell target) {
-		double dx = target.pos.x - source.pos.x;
-		double dy = target.pos.y - source.pos.y;
+
+	public static Orientation getOrientation(double dx, double dy) {
 		Orientation horizontal = dx >= 0 ? Orientation.East : Orientation.West;
 		Orientation vertical = dy >= 0 ? Orientation.North : Orientation.South;
 		if(Math.abs(dx) >= (Math.abs(dy)))
 			return horizontal;
 		else
 			return vertical;
+	}
+	public static Orientation getOrientationTo(Board b, Cell source, Cell target) {
+		double dx = target.pos.x - source.pos.x;
+		double dy = target.pos.y - source.pos.y;
+		return getOrientation(dx, dy);
 	}
 	public static Orientation getOrientationTo(Board b, Vector2 source, Vector2 target) {
 		double dx = target.x - source.x;
 		double dy = target.y - source.y;
-		Orientation horizontal = dx >= 0 ? Orientation.East : Orientation.West;
-		Orientation vertical = dy >= 0 ? Orientation.North : Orientation.South;
-		if(Math.abs(dx) >= (Math.abs(dy)))
-			return horizontal;
-		else
-			return vertical;
+		return getOrientation(dx, dy);
 	}
 	
-	
-	/*public List<Cell> shortestEasy(Board b, Entity caster, Cell start, Cell goal, PathingMethod method) {
-		if(!goal.properties.canBeStoppedOn())
-			return null;
-		
-		List<Cell> path = new ArrayList<>();
-		path.add(start);
-		
-		boolean done = false;
-		int iter = 0;
-		
-		while(!done && iter < 1000) {
-			
-			var previous = path.get(path.size() - 1);
-			var next = getNearestAdjacent(b, caster, previous, goal, method);
-			if(next != null)
-				path.add(next);
-			else {
-				
-			}
-		}
-		
-		return path;
-	}*/
-	
+
+
 	public enum PathingMethod {
 		None(0),
 		Walk(1),
@@ -348,10 +370,10 @@ public class Pathfinding {
 		Cell nearest = null;
 		int dist = Integer.MAX_VALUE;
 		for(var o : Orientation.values()) {
-			var p = o.getPositionByDirection(target);
+			var p = o.add(target);
 			var c = b.cells.get(p.x, p.y);
-			var walk = method == PathingMethod.Walk && caster.targeting.canWalkThrough(c);
-			var cast = method == PathingMethod.Cast && caster.targeting.canCastThrough(c);
+			var walk = method == PathingMethod.Walk && caster.targetting.canWalkThrough(c);
+			var cast = method == PathingMethod.Cast && caster.targetting.canCastThrough(c);
 			// if needs to walk and can walk || if needs to cast and can cast
 			if(walk || cast) {
 				int d = manhattan(p, goal);
@@ -367,7 +389,7 @@ public class Pathfinding {
 	
 	
 	public static Vector2 getPositionByDirection(Vector2 target, Orientation o) {
-		return o.getPositionByDirection(target);
+		return o.add(target);
 	}
 	
 	
@@ -429,7 +451,7 @@ public class Pathfinding {
 				var pos = getPositionByDirection(current.pos, o);
 				var c = b.cells.get(pos.x, pos.y);
 				
-				var loc24 = c == end && caster.targeting.canWalkOn(c); // canWalkThroughEntity
+				var loc24 = c == end && caster.targetting.canWalkOn(c); // canWalkThroughEntity
 				
 				
 			}

@@ -15,4 +15,6 @@ public class SapphireDevConfig extends JsonConfig {
 	public boolean logLapisResource = false;
 	public boolean logSkinResources = false;
 	
+	public boolean debugCursorPos = true;
+	
 }

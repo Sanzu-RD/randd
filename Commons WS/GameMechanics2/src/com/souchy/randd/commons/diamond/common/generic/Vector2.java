@@ -18,15 +18,50 @@ public class Vector2 implements BBSerializer, BBDeserializer {
 		this.y = y;
 	}
 
+
+	public Vector2 set(Vector2 v) {
+		this.x = v.x;
+		this.y = v.y;
+		return this;
+	}
+	
 	public Vector2 set(double x, double y) {
 		this.x = x;
 		this.y = y;
+		return this;
+	}
+	
+	public Vector2 setX(double x) {
+		this.x = x;
+		return this;
+	}
+
+	public Vector2 setY(double y) {
+		this.y = y;
+		return this;
+	}
+	
+	public Vector2 set(int i, int j) {
+		this.x = i;
+		this.y = j;
 		return this;
 	}
 
 	public Vector2 add(int i, int j) {
 		x += i;
 		y += j;
+		return this;
+	}
+
+	public Vector2 add(double i, double j) {
+		x += i;
+		y += j;
+		return this;
+	}
+
+	public Vector2 add(Vector2 pos) {
+		x += pos.x;
+		y += pos.y;
 		return this;
 	}
 	
@@ -59,6 +94,12 @@ public class Vector2 implements BBSerializer, BBDeserializer {
 		y *= scl;
 		return this;
 	}
+
+	public Vector2 mult(double sclx, double scly) {
+		x *= sclx;
+		y *= scly;
+		return this;
+	}
 	
 	@Override
 	public boolean equals(Object o) {
@@ -67,10 +108,13 @@ public class Vector2 implements BBSerializer, BBDeserializer {
 		Vector2 v = (Vector2) o;
 		return v.x == x && v.y == y;
 	}
-	
-	public boolean same(Vector2 v) {
+	public boolean isEqual(Vector2 v) {
 		if(v == null) return false;
 		return v.x == x && v.y == y;
+	}
+	
+	public boolean same(Vector2 v) {
+		return isEqual(v);
 	}
 
 	@Override

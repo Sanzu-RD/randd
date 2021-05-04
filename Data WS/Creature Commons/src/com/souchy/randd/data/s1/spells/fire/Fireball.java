@@ -82,10 +82,6 @@ public class Fireball extends Spell {
 		return super.canCast(caster);
 	}
 
-	@Override
-	public boolean canTarget(Creature caster, Cell target) {
-		return super.canTarget(caster, target);
-	}
 	
 	@Override
 	public Spell copy(Fight fight) {

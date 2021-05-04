@@ -77,9 +77,10 @@ public class Push extends Effect {
 			var targetPos = vector.copy().mult(distance);
 			var cell2 = target.get(Fight.class).board.cells.get(targetPos.x, targetPos.y);
 			// if the cell exists and can be walked on by the pushed entity
-			if(cell2 != null && creature.targeting.canWalkOn(cell2)) {
+			if(cell2 != null && creature.targetting.canWalkOn(cell2)) {
 				resultCell = cell2;
-			} else if(!creature.targeting.canWalkThrough(cell2)) {
+			} else 
+			if(!creature.targetting.canWalkThrough(cell2)) {
 				return; // stop there if we hit an insurmountable object
 			}
 		}

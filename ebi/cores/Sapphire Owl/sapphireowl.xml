@@ -63,59 +63,66 @@
 			<fileset dir="${dir.gitgdx}/ParticlesLibGDX/bin"/>
 		</jar>
 
-		<scp verbose="false" sftp="true" trust="true" file="${dir.jarfile}/sapphireowl.jar" todir="souchy:z@192.168.2.15:/home/souchy/release/ebishoal/" />
 		
+		<parallel>
+			<!-- push jar to server -->
+			<scp verbose="false" sftp="true" trust="true" file="${dir.jarfile}/sapphireowl.jar" todir="souchy:z@192.168.2.15:/home/souchy/release/ebishoal/" />
+			
+			<!-- copy files to release folder -->
+			<sequential>
+				<!-- Delete libs -->
+				<!-- <delete dir="${dir.lib}"/> -->
+				<mkdir dir="${dir.lib}"/>
+				<!-- Delete res -->
+				<!-- <delete dir="${dir.res}"/> -->
+				<mkdir dir="${dir.res}"/>
+				<!-- Delete natives  -->
+				<!-- <delete dir="${dir.natives}"/>> -->
+				<mkdir dir="${dir.natives}"/>
+
+				<!-- res -->
+				<copy overwrite="true" todir="${dir.res}">
+					<fileset dir="${dir.git}/r and d/ebi/PiranhaPlants/res"/>
+				</copy>
+
+				<!-- data -->
+				<copy overwrite="true" todir="${dir.data}">
+					<fileset dir="${dir.buildfile}/data"/>
+				</copy>
+
+				<!-- natives -->
+				<copy file="${dir.git}/r and d/ebi/Effekseer 2/effekseer.dll" todir="${dir.natives}"/>
+				<copy file="${dir.gitgdx}/ParticlesLibGDX/libs/gdxeffek.dll" todir="${dir.natives}"/>
+
+
+				<!-- config files -->
+				<copy overwrite="true" file="${dir.buildfile}/lapis.properties" todir="${dir.jarfile}"/>
+				<copy overwrite="true" file="${dir.buildfile}/sapphireowl.conf" todir="${dir.jarfile}"/>
+
+
+				<!-- libs -->
+				<copy file="${dir.git}/r and d/annotationprocessor.jar" todir="${dir.lib}"/>
+				<copy file="${dir.gitres}/libs other/net/netty-all-4.1.19.Final.jar" todir="${dir.lib}"/>
+				<copy file="${dir.gitres}/libs other/guava-26.0-jre.jar" todir="${dir.lib}" />
+				<copy file="${dir.gitres}/libs other/guice-4.2.0-no_aop.jar" todir="${dir.lib}" />
+				<copy file="${dir.gitres}/libs other/gson-2.8.6.jar" todir="${dir.lib}"/>
+				<copy file="${dir.gitres}/libs other/reflections-0.9.11.jar" todir="${dir.lib}"/>
+				<copy file="${dir.gitres}/libs other/javassist.jar" todir="${dir.lib}"/>
+				<copy file="${dir.gitres}/libs other/bson-3.10.1.jar" todir="${dir.lib}"/>
+
+
+				<copy file="${dir.gitres}/libs gdx 2/gdx.jar" todir="${dir.lib}" />
+				<copy file="${dir.gitres}/libs gdx 2/gdx-natives.jar" todir="${dir.lib}" />
+				<copy file="${dir.gitres}/libs gdx 2/gdx-backend-lwjgl-natives.jar" todir="${dir.lib}" />
+				<copy file="${dir.gitres}/libs gdx 2/gdx-backend-lwjgl.jar" todir="${dir.lib}" />
+				<copy file="${dir.gitres}/libs gdx/vis-ui-1.3.0.jar" todir="${dir.lib}" />
+
+				<copy todir="${dir.lib}">
+					<fileset dir="${dir.gitres}/libs gdx/lml 1.9.1.9.6/lib/"/>
+				</copy>
+			</sequential>
+		</parallel>
+
 		
-		<!-- Delete libs -->
-		<!-- <delete dir="${dir.lib}"/> -->
-		<mkdir dir="${dir.lib}"/>
-		<!-- Delete res -->
-		<!-- <delete dir="${dir.res}"/> -->
-		<mkdir dir="${dir.res}"/>
-		<!-- Delete natives  -->
-		<!-- <delete dir="${dir.natives}"/>> -->
-		<mkdir dir="${dir.natives}"/>
-
-		<!-- res -->
-		<copy overwrite="true" todir="${dir.res}">
-			<fileset dir="${dir.git}/r and d/ebi/PiranhaPlants/res"/>
-		</copy>
-
-		<!-- data -->
-		<copy overwrite="true" todir="${dir.data}">
-			<fileset dir="${dir.buildfile}/data"/>
-		</copy>
-
-		<!-- natives -->
-		<copy file="${dir.git}/r and d/ebi/Effekseer 2/effekseer.dll" todir="${dir.natives}"/>
-		<copy file="${dir.gitgdx}/ParticlesLibGDX/libs/gdxeffek.dll" todir="${dir.natives}"/>
-
-
-		<!-- config files -->
-		<copy overwrite="true" file="${dir.buildfile}/lapis.properties" todir="${dir.jarfile}"/>
-		<copy overwrite="true" file="${dir.buildfile}/sapphireowl.conf" todir="${dir.jarfile}"/>
-
-
-		<!-- libs -->
-		<copy file="${dir.git}/r and d/annotationprocessor.jar" todir="${dir.lib}"/>
-		<copy file="${dir.gitres}/libs other/net/netty-all-4.1.19.Final.jar" todir="${dir.lib}"/>
-		<copy file="${dir.gitres}/libs other/guava-26.0-jre.jar" todir="${dir.lib}" />
-		<copy file="${dir.gitres}/libs other/guice-4.2.0-no_aop.jar" todir="${dir.lib}" />
-		<copy file="${dir.gitres}/libs other/gson-2.8.6.jar" todir="${dir.lib}"/>
-		<copy file="${dir.gitres}/libs other/reflections-0.9.11.jar" todir="${dir.lib}"/>
-		<copy file="${dir.gitres}/libs other/javassist.jar" todir="${dir.lib}"/>
-		<copy file="${dir.gitres}/libs other/bson-3.10.1.jar" todir="${dir.lib}"/>
-
-
-		<copy file="${dir.gitres}/libs gdx 2/gdx.jar" todir="${dir.lib}" />
-		<copy file="${dir.gitres}/libs gdx 2/gdx-natives.jar" todir="${dir.lib}" />
-		<copy file="${dir.gitres}/libs gdx 2/gdx-backend-lwjgl-natives.jar" todir="${dir.lib}" />
-		<copy file="${dir.gitres}/libs gdx 2/gdx-backend-lwjgl.jar" todir="${dir.lib}" />
-		<copy file="${dir.gitres}/libs gdx/vis-ui-1.3.0.jar" todir="${dir.lib}" />
-
-		<copy todir="${dir.lib}">
-			<fileset dir="${dir.gitres}/libs gdx/lml 1.9.1.9.6/lib/"/>
-		</copy>
-
 	</target>
 </project>

@@ -53,6 +53,9 @@ public class TargetTypeStat implements BBSerializer, BBDeserializer {
 		return 0;
 	}
 
+	/**
+	 * Checks if a flag is true
+	 */
 	public boolean accepts(TargetType p) {
 		return (value() & p.bit()) != 0;
 	}
@@ -71,7 +74,32 @@ public class TargetTypeStat implements BBSerializer, BBDeserializer {
 		if((this.fight & val) != 0) 
 			this.fight -= val;
 	}
+	public void setFight(TargetType p, boolean activate) {
+		removeFight(p);
+		if(activate) addFight(p);
+	}
+	
 
+	/**
+	 * Activates a target type in base
+	 */
+	public void addBase(TargetType p) {
+		this.base |= p.bit();
+	}
+	/**
+	 * Deactivates a target type in base
+	 */
+	public void removeBase(TargetType p) {
+		int val = p.bit();
+		if((this.base & val) != 0) 
+			this.base -= val;
+	}
+	public void setBase(TargetType p, boolean activate) {
+		removeBase(p);
+		if(activate) addBase(p);
+	}
+	
+	
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
 		out.writeInt(base);

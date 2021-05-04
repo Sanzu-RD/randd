@@ -79,7 +79,7 @@ public class MapData {
 	 */
 	//public CellModel[] typeModels;
 	
-	
+	/*
 	// first half of this would be in a board generator class (cell creation)
 	// then sapphireowl would extend the generator class to add model generation
 	public void generate(Fight f) {
@@ -106,13 +106,11 @@ public class MapData {
 			double qx = (double) models[i][j++];
 			double qy = (double) models[i][j++];
 			double qz = (double) models[i][j++];
-			*/
+			* /
 			//new Model("");
 		}
-		
-		
-		
 	}
+	*/
 	
 	
 }

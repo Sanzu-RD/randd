@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.common.Action.EndTurnAction;
+import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.jade.Constants;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
@@ -17,6 +18,7 @@ import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurnStartHandler;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserActiveEvent;
@@ -60,6 +62,10 @@ public class BlackMoonstone extends DeathShadowCore implements Reactor { // impl
 		server = new DeathShadowTCP(port, this);
 		fights = new HashMap<>();
 		server.auth.bus.register(this);
+
+		// init elements and models
+		Elements.values(); 
+		DiamondModels.instantiate("com.souchy.randd.data.s1");
 		
 		// create a mock fight for tests
 		if(Arrays.asList(args).contains("mock")) {

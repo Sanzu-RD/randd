@@ -23,7 +23,8 @@ public class DeathShadowHTTP {
 	public DeathShadowHTTP(String ip, int port, String[] rootPackages, Class<?>... registerClasses) {
 		this.ip = ip;
 		this.port = port;
-		rc = new ResourceConfig().packages(rootPackages); //getRootPackages())
+		rc = new ResourceConfig();
+		rc.packages(rootPackages); 
 		rc.registerClasses(registerClasses);
 		for(var c : rc.getClasses()) Log.info("Opal registered " + c);
 		start();

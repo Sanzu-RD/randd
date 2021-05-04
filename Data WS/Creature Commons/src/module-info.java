@@ -3,6 +3,7 @@ module CreatureCommons {
 	exports com.souchy.randd.data.s1.creatures;
 	exports com.souchy.randd.data.s1.creaturetypes;
 	exports com.souchy.randd.data.s1.status;
+	exports com.souchy.randd.data.s1.spells;
 
 //	exports com.souchy.randd.data.s1.spells.air;
 	exports com.souchy.randd.data.s1.spells.dark;

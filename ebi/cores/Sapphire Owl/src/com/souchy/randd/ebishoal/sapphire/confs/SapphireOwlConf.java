@@ -33,6 +33,7 @@ public class SapphireOwlConf extends JsonConfig {
 		public Color gridColor = Color.GRAY;
 		public boolean ruler = true;
 		public boolean lineofsight = true; 
+		public boolean showCursorPos = false;
 	}
 
 	/**

@@ -143,6 +143,19 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	 * highlight preview to know whats cells are targetable
 	 */
 	public boolean canTarget(Creature caster, Cell target) {
+		if(target == null) return false;
+		var board = this.get(Fight.class).board;
+		
+		// si la cellule est targetable (ex: pas un mur ou un trou)
+		if(!board.checkCellViewOn(caster, target)) return false;
+		
+		// si on a besoin d'une ligne de vue et qu'il n'y en a pas
+		if(stats.target.accepts(TargetType.needsLineOfSight) && !board.checkView(caster, target.pos)) return false;	
+		
+		// si la cellule est dans la portée
+//		if(!board.checkRange(getRange(), caster.pos, target.pos)) return false;
+		
+		
 		// si la cellule est vide
 		if(!target.hasCreature()) {
 			// si on accepte une cellule vide
@@ -150,32 +163,28 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 		}
 		
 		// si la cellule a une ou plusieurs creatures
+		{
+			// si on accepte une cellule pleine
+			if(!stats.target.accepts(TargetType.full)) return false;
+			
+			var c = target.getCreatures().get(0);
+			
+			// si le target est le caster et qu'on accepte le self-target
+			if(caster == c && !stats.target.accepts(TargetType.self)) return false;
+			
+			// si on accepte les alliés
+			if(caster.team == c.team && !stats.target.accepts(TargetType.allies)) return false;
+			// si on accepte les ennemis
+			if(caster.team != c.team && !stats.target.accepts(TargetType.enemies)) return false;
+			
+			// si on accepte les summoners
+			if(c.summonerID == 0 && !stats.target.accepts(TargetType.summoners)) return false;
+			// si on accepte les summons
+			if(c.summonerID != 0 && !stats.target.accepts(TargetType.summons)) return false;
+		}
 		
-		// si on accepte une cellule pleine
-		if(!stats.target.accepts(TargetType.full)) return false;
 		
-		var c = target.getCreatures().get(0);
-		
-		// si le target est le caster et qu'on accepte le self-target
-		if(caster == c && !stats.target.accepts(TargetType.self)) return false;
-		
-		// si on accepte les alliés
-		if(caster.team == c.team && !stats.target.accepts(TargetType.allies)) return false;
-		// si on accepte les ennemis
-		if(caster.team != c.team && !stats.target.accepts(TargetType.enemies)) return false;
-		
-		// si on accepte les summoners
-		if(c.summonerID == 0 && !stats.target.accepts(TargetType.summoners)) return false;
-		// si on accepte les summons
-		if(c.summonerID != 0 && !stats.target.accepts(TargetType.summons)) return false;
-		
-		// si on a besoin d'une ligne de vue et qu'il y en a une
-		if(!this.get(Fight.class).board.checkView(caster, target.pos) && stats.target.accepts(TargetType.needsLineOfSight)) return false;	
-		
-		// si la cellule est dans la portée
-		if(!this.get(Fight.class).board.checkRange(getRange(), caster.pos, target.pos)) return false;
-		
-		// si tout passe,  return true
+		// si tout passe, return true
 		return true;
 	}
 	
