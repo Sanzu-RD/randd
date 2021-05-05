@@ -45,7 +45,9 @@ Ammolite: Particle effects code for each spell, status..
 PiranhaPlants: Assets
 
 
-# Communication services (cores on death shadows and simple TCP clients on ebi shoal):
+# Communication services 
+(cores on death shadows and simple TCP clients on ebi shoal):
+
 Opal : HTTP API
 
 Moonstone: Game
