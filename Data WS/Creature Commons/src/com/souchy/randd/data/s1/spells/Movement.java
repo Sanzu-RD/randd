@@ -16,6 +16,7 @@ import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
+import com.souchy.randd.data.s1.status.Rooted;
 
 public class Movement extends Spell {
 	
@@ -23,6 +24,7 @@ public class Movement extends Spell {
 
 	public Movement(Fight f) {
 		super(f);
+		this.stats.target = TargetType.empty.asStat();
 		tp = new Move(AoeBuilders.single.get(), TargetType.empty.asStat());
 	}
 
@@ -46,6 +48,12 @@ public class Movement extends Spell {
 	@Override
 	protected ImmutableList<CreatureType> initCreatureTypes() {
 		return ImmutableList.of();
+	}
+	
+	@Override
+	public boolean canCast(Creature caster) {
+		if(caster.statuses.hasStatus(Rooted.class)) return false;
+		return super.canCast(caster);
 	}
 
 	@Override

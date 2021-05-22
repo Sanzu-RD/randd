@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5fde4df8-f00d-4ace-8f34-b0ed776ce5f4" name="Default Changelist" comment="" />
+    <list default="true" id="5fde4df8-f00d-4ace-8f34-b0ed776ce5f4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/com/souchy/randd/commons/diamond/models/Effect.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/com/souchy/randd/commons/diamond/models/Effect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/PearlMessaging/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/PearlMessaging/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/creatures/Mesmer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/creatures/Mesmer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/creatures/Sungjin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/creatures/Sungjin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/main/Elements.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/main/Elements.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/spells/Movement.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/spells/Movement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/status/Rooted.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/status/Rooted.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="ux" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -115,11 +126,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="1912" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
-    <option name="height" value="1096" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -149,13 +160,16 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1612316256225" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
@@ -189,16 +203,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1096" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12100213" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.122068234" />
+      <window_info id="Structure" order="1" sideWeight="0.5005417" side_tool="true" weight="0.122068234" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Favorites" order="6" sideWeight="0.5005417" side_tool="true" weight="0.122068234" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -381,9 +395,80 @@
   </component>
   <component name="masterDetails">
     <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>12</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>ux</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
       <state key="ProjectJDKs.UI">
         <settings>
           <last-edited>12</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
           <splitter-proportions>
             <option name="proportions">
               <list>

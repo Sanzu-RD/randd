@@ -6,7 +6,7 @@ import com.souchy.randd.commons.diamond.statics.stats.properties.StatProperty;
 public enum Elements implements Element, StatProperty {
 	
 
-//	normal,
+	normal,
 	
 	fire,
 	water,
@@ -14,8 +14,8 @@ public enum Elements implements Element, StatProperty {
 //	nature,
 	air,
 	
-	light,
-	dark,
+//	light,
+//	dark,
 
 //	physical,
 //	steel,

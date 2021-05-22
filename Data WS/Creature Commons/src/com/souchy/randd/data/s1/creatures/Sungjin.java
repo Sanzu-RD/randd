@@ -21,7 +21,7 @@ public class Sungjin extends CreatureModel {
 		stats.resources.put(Resource.move, new IntStat(6)); 
 
 		stats.affinity.get(Elements.water).inc = 30; //.put(Elements.water, new IntStat(30));
-		stats.affinity.get(Elements.dark).inc = 30; //.put(Elements.dark, new IntStat(30));
+//		stats.affinity.get(Elements.dark).inc = 30; //.put(Elements.dark, new IntStat(30));
 		return stats;
 	}
 	

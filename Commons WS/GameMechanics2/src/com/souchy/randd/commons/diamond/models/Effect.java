@@ -45,6 +45,8 @@ public abstract class Effect /* extends Entity */ implements BBSerializer, BBDes
 
 	/**
 	 * Ctor
+	 * @param aoe {@link AoeBuilders}
+	 * @param targetConditions
 	 */
 	public Effect(/* Fight f, */ Aoe aoe, TargetTypeStat targetConditions) {
 //		super(f);
