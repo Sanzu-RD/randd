@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.I18NBundle;
 import com.github.czyzby.lml.annotation.LmlAction;
 import com.github.czyzby.lml.annotation.LmlActor;
 import com.google.common.eventbus.Subscribe;
+import com.kotcrab.vis.ui.widget.VisLabel;
 import com.souchy.randd.commons.diamond.statusevents.Handler.Reactor;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -53,7 +54,7 @@ public class Timeline extends SapphireComponent implements Reactor {
 	@Override
 	protected void onInit() {
 		this.addListener(new DragAndResizeListener(this));
-		timer.setStyle(SapphireHud.styleNormal);
+//		timer.setStyle(SapphireHud.styleNormal);
 		refresh();
 	}
 	
@@ -69,7 +70,7 @@ public class Timeline extends SapphireComponent implements Reactor {
 		}, 0, 1, TimeUnit.SECONDS);
 		
 		// label + moving action
-		var lbl = new Label("New turn", SapphireHud.styleNormal);
+		var lbl = new VisLabel("New turn");
 		var a = new MoveByAction() {
 			@Override
 			public void end() {

@@ -37,7 +37,7 @@ public class DiamondModels {
 			try {
 				var model = c.getDeclaredConstructor().newInstance();
 				if(creatures.containsKey(model.id())) 
-					Log.error("Duplicate creature model id " + model.id() + " for class " + c.getSimpleName() + ". ");
+					Log.warning("Duplicate creature model id " + model.id() + " for class " + c.getSimpleName() + ". ");
 				else 
 					creatures.put(model.id(), model);
 			} catch (Exception e) {
@@ -51,7 +51,7 @@ public class DiamondModels {
 			try {
 				var model = c.getDeclaredConstructor(Fight.class).newInstance(new Object[] { null });
 				if(spells.containsKey(model.modelid()))
-					Log.error("Duplicate spell model id " + model.modelid() + " for class " + c.getSimpleName() + ". ");
+					Log.warning("Duplicate spell model id " + model.modelid() + " for class " + c.getSimpleName() + ". ");
 				else
 					spells.put(model.modelid(), model);
 //				Log.info("Diamond spell model [" + model.modelid() + "] = " + model);
@@ -66,7 +66,7 @@ public class DiamondModels {
 			try {
 				var model = c.getDeclaredConstructor(Fight.class, Integer.TYPE, Integer.TYPE).newInstance(null, 0, 0);
 				if(statuses.containsKey(model.modelid())) 
-					Log.error("Duplicate status model id " + model.modelid() + " for class " + c.getSimpleName() + ". ");
+					Log.warning("Duplicate status model id " + model.modelid() + " for class " + c.getSimpleName() + ". ");
 				else
 					statuses.put(model.modelid(), model);
 				//Log.info("Diamond status model [" + model.id() + "] = " + model);

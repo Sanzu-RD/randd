@@ -31,7 +31,7 @@ public class FireballFX extends FXPlayer<CastSpellEvent> {
 	public void update(float delta) {
 		if(fx == null) Log.info("update fireball null");
 		if(fx == null) return;
-		Log.info("update fireball fx @" + hash() + ", " + getTarget.get());
+//		Log.info("update fireball fx @" + hash() + ", " + getTarget.get());
 		fx.setPosition(getTarget.get().x, 0.5f, getTarget.get().y);
 	}
 

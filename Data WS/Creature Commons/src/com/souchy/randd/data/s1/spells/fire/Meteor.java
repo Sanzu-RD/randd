@@ -16,7 +16,7 @@ public class Meteor extends Spell {
 	public Meteor(Fight f) {
 		super(f);
 		
-		var d = new Damage(AoeBuilders.circle.apply(3))
+//		var d = new Damage(AoeBuilders.circle.apply(3));
 	}
 
 	@Override

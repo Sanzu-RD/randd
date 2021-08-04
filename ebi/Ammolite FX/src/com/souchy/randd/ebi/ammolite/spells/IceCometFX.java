@@ -40,6 +40,7 @@ public class IceCometFX extends FXPlayer<CastSpellEvent> {
 //			fx.load("fx/test.efk", true);
 
 			var diff = event.target.pos.copy().sub(event.source.pos);
+			Log.format("IceCometFX start %s, end %s, diff %s", event.source.pos, event.target.pos, diff);
 			interpolation = new FXInterpolationV2(83d / 100d, diff);
 			
 			if(false) testNodes();
@@ -58,8 +59,8 @@ public class IceCometFX extends FXPlayer<CastSpellEvent> {
 		//var diff = event.target.pos.copy().sub(event.source.pos);
 		//diff.mult(interpolation.percent());
 		var diff = interpolation.value();
-		
 		fx.setPosition(event.source.pos.x + diff.x, 0.5f, event.source.pos.y + diff.y); // getTarget.get().x, 0.5f, getTarget.get().y);
+//		Log.format("IceCometFX update [%f, %f, %f]", event.source.pos.x + diff.x, 0.5f, event.source.pos.y + diff.y);
 	}
 	
 	

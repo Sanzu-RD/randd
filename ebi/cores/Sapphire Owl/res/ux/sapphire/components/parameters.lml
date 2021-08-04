@@ -8,78 +8,89 @@
     <!DOCTYPE parameters SYSTEM "lml.dtd">
     -->
 
-<root id="parameters" fillparent="true" align="bottomleft" y="40" debug="false">
+<parameters id="parameters" fillparent="true" align="bottomleft" debug="false">
 
     <!--<table background="window-border-bg" align="center" >-->
-    <window id="window" style="dialog" align="center" debug="false" title="@i18n.parameters" closebutton="true" keepwithinstage="false" titlealign="center">
+    <table id="window" style="dialog" align="center" debug="false" background="window-border-bg">
         <!-- Name & Close button-->
-        <!--<table align="top" growx="true" debug="false">-->
-            <!--<label id="name" fill="true" expandx="true" padleft="10" value="@i18n.parameters"/>-->
-            <!--<visimagebutton onclick="$toggleVisibility" width="40" height="40" style="close-window" />-->
-        <!--</table>-->
-        <!--<:row/>-->
+        <table align="top" growx="true" debug="false">
+            <label id="name" value="@i18n.parameters" style="title" growx="true" textalign="center"/>
+            <visimagebutton onclick="$toggleVisibility" width="40" height="40" style="close-window" debug="false"/>
+        </table>
+        <:row/>
 
         <scrollpane id="scrollpane" debug="false" padtop="10" grow="true" align="top" style="list"
                     scrollingDisabledX="true" forceScrollY="true" fadeScrollbars="false" flickScroll="false">
 
-            <table id="content" debug="false" defaultpad="10" align="top" >
+            <table id="content" debug="false" defaultpad="10" align="top" padleft="20" padright="20" defaultspaceleft="30" defaultspacetop="30">
 
                 <!-- General -->
                 <table id="general" debug="false" defaultalign="left" align="top" growx="true">
-                    <label id="general" value="@i18n.general" colspan="2" align="center"/>
+                    <label id="general" value="@i18n.general" colspan="2" align="center" style="title" debug="false"/>
                     <:row/>
 
-                    <label id="general.locale" value="@i18n.general.locale"/>
+                    <label id="general.locale" value="@i18n.general.locale" growx="true"/>
                     <selectbox id="general.locale.value" selected="#prefs.general.locale" onchange="$onChangeVal"/>
                     <:row/>
                 </table>
 
 
                 <!-- Functionality -->
-                <table id="functionality" defaultalign="left" align="top" growx="true">
-                    <label id="functionality" value="@i18n.functionality" colspan="2" align="center"/>
+                <table id="functionality" debug="false" defaultalign="left" align="top" growx="true">
+                    <label id="functionality" value="@i18n.functionality" colspan="2" align="center" style="title"/>
                     <:row/>
 
-                    <label id="functionality.grid" value="@i18n.functionality.grid"/>
+                    <label id="functionality.grid" value="@i18n.functionality.grid" growx="true"/>
                     <checkbox id="functionality.grid.value" checked="#prefs.functionality.grid"
                               onchange="$onChangeVal"/>
                     <:row/>
-                    <label id="functionality.ruler" value="@i18n.functionality.ruler"/>
+                    
+                    <label id="functionality.ruler" value="@i18n.functionality.ruler" growx="true"/>
                     <checkbox id="functionality.ruler.value" checked="#prefs.functionality.ruler"
                               onchange="$onChangeVal"/>
                     <:row/>
-                    <label id="functionality.centerline" value="@i18n.functionality.centerline"/>
+                    
+                    <label id="functionality.centerline" value="@i18n.functionality.centerline" growx="true"/>
                     <checkbox id="functionality.centerline.value" checked="#prefs.functionality.centerline"
                               onchange="$onChangeVal"/>
                     <:row/>
-                    <label id="functionality.lineofsight" value="@i18n.functionality.lineofsight"/>
+                    
+                    <label id="functionality.lineofsight" value="@i18n.functionality.lineofsight" growx="true"/>
                     <checkbox id="functionality.lineofsight.value" checked="#prefs.functionality.lineofsight"
                               onchange="$onChangeVal"/>
                     <:row/>
+                    
+                    <label id="functionality.showCursorPos" value="@i18n.functionality.showCursorPos" growx="true"/>
+                    <checkbox id="functionality.showCursorPos.value" checked="#prefs.functionality.showCursorPos"
+                              onchange="$onChangeVal"/>
+                    <:row/>
+                    
+                    
                 </table>
 
                 <:row/>
 
                 <!-- UI -->
-                <table id="ui" defaultalign="left" align="top" growx="true">
-                    <label id="ui" value="@i18n.ui" colspan="2" align="center"/>
+                <table id="ui" defaultalign="left" align="top" growx="true" debug="false">
+                    <label id="ui" value="@i18n.ui" colspan="2" align="center" style="title" growx="true" textalign="center"/>
                     <:row/>
 
-                    <label id="sound.fx" value="@i18n.sound.fx"/>
+                    <label id="sound.fx" value="@i18n.sound.fx" growx="true"/>
                     <slider id="sound.fx.value" value="#prefs.sound.fx" onchange="$onChangeVal" min="0" max="10"
                             stepsize="1"/>
                     <:row/>
-                    <label id="ui.grid" value="@i18n.ui.grid"/>
-                    <checkbox id="ui.grid.value" checked="#prefs.ui.grid" onchange="$onChangeVal"/>
+
+                    <label id="ui.grid" value="@i18n.ui.grid" growx="true"/>
+                    <checkbox id="ui.grid.value" checked="#prefs.ui.grid" onchange="$onChangeVal" align="right"/>
                     <:row/>
                 </table>
 
                 <!-- Rendering -->
                 <table id="gfx" defaultalign="left" align="top" growx="true">
-                    <label id="gfx" value="@i18n.gfx" colspan="2" align="center"/>
+                    <label id="gfx" value="@i18n.gfx" colspan="2" align="center" style="title"/>
                     <:row/>
 
-                    <label id="gfx.postProcess" value="@i18n.gfx.postProcess"/>
+                    <label id="gfx.postProcess" value="@i18n.gfx.postProcess" growx="true"/>
                     <checkbox id="gfx.postProcess.value" checked="#prefs.gfx.postProcess" onchange="$onChangeVal"/>
                     <:row/>
                 </table>
@@ -88,40 +99,40 @@
 
                 <!-- Sound -->
                 <table id="sound" debug="false" defaultalign="left" align="top" growx="true">
-                    <label id="sound" value="@i18n.sound" colspan="2" align="center"/>
+                    <label id="sound" value="@i18n.sound" colspan="2" align="center" style="title"/>
                     <:row/>
 
-                    <label id="sound.general" value="@i18n.sound.general"/>
+                    <label id="sound.general" value="@i18n.sound.general" growx="true"/>
                     <slider id="sound.general.value" value="#prefs.sound.general" onchange="$onChangeVal" min="0"
                             max="10" stepsize="1"/>
                     <:row/>
-                    <label id="sound.music" value="@i18n.sound.music"/>
+                    <label id="sound.music" value="@i18n.sound.music" growx="true"/>
                     <slider id="sound.music.value" value="#prefs.sound.music" onchange="$onChangeVal" min="0" max="10"
                             stepsize="1"/>
                     <:row/>
-                    <label id="sound.ambiance" value="@i18n.sound.ambiance"/>
+                    <label id="sound.ambiance" value="@i18n.sound.ambiance" growx="true"/>
                     <slider id="sound.ambiance.value" value="#prefs.sound.ambiance" onchange="$onChangeVal" min="0"
                             max="10" stepsize="1"/>
                     <:row/>
-                    <label id="sound.fx" value="@i18n.sound.fx"/>
+                    <label id="sound.fx" value="@i18n.sound.fx" growx="true"/>
                     <slider id="sound.fx.value" value="#prefs.sound.fx" onchange="$onChangeVal" min="0" max="10"
                             stepsize="1"/>
                     <:row/>
-                    <label id="sound.ui" value="@i18n.sound.ui"/>
+                    <label id="sound.ui" value="@i18n.sound.ui" growx="true"/>
                     <slider id="sound.ui.value" value="#prefs.sound.ui" onchange="$onChangeVal" min="0" max="10"/>
                     <:row/>
                 </table>
 
                 <!-- Shortcuts -->
                 <table id="shortcut" defaultalign="left" align="top" growx="true">
-                    <label id="shortcut" value="@i18n.shortcut" colspan="2" align="center"/>
+                    <label id="shortcut" value="@i18n.shortcut" colspan="2" align="center" style="title"/>
                     <:row/>
 
-                    <label id="shortcut.refreshui" value="@i18n.shortcut.refreshui"/>
+                    <label id="shortcut.refreshui" value="@i18n.shortcut.refreshui" growx="true"/>
                     <textfield id="shortcut.refreshui.value" value="#prefs.shortcut.refreshui" onchange="$onChangeVal"/>
                     <:row/>
 
-                    <label id="shortcut.showentityproperties" value="@i18n.shortcut.showentityproperties"/>
+                    <label id="shortcut.showentityproperties" value="@i18n.shortcut.showentityproperties" growx="true"/>
                     <textfield id="shortcut.showentityproperties.value" value="#prefs.shortcut.showentityproperties"
                                onchange="$onChangeVal"/>
                     <:row/>
@@ -131,6 +142,6 @@
             </table>
         </scrollpane>
     <!--</table>-->
-    </window>
+    </table>
 
-</root>
+</parameters>

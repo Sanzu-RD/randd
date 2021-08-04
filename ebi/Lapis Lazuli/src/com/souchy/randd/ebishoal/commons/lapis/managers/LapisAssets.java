@@ -128,6 +128,7 @@ public class LapisAssets {
 		assets.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
 		
 		
+		
 		var dmgParam = JsonConfig.readAny(FreeTypeFontParameter.class, "res/fonts/damage.param");
 		FreeTypeFontLoaderParameter dmgLoaderParam = new FreeTypeFontLoaderParameter();
 		dmgLoaderParam.fontFileName = "res/fonts/BADABB__.TTF";
@@ -136,9 +137,19 @@ public class LapisAssets {
 
 		var normalParam = JsonConfig.readAny(FreeTypeFontParameter.class, "res/fonts/normal.param");
 		FreeTypeFontLoaderParameter normalLoaderParam = new FreeTypeFontLoaderParameter();
-		normalLoaderParam.fontFileName = "res/fonts/OptimusPrincepsSemiBold.ttf";
+		normalLoaderParam.fontFileName = "res/fonts/OptimusPrinceps.ttf";
 		normalLoaderParam.fontParameters = normalParam;
 		assets.load("gen_normal.ttf", BitmapFont.class, normalLoaderParam);
+		
+
+		var titleParam = JsonConfig.readAny(FreeTypeFontParameter.class, "res/fonts/title.param");
+		FreeTypeFontLoaderParameter titleLoaderParam = new FreeTypeFontLoaderParameter();
+		titleLoaderParam.fontFileName = "res/fonts/OptimusPrincepsSemiBold.ttf";
+		titleLoaderParam.fontParameters = titleParam;
+		assets.load("gen_title.ttf", BitmapFont.class, titleLoaderParam);
+
+//		Log.info("Environment root : " + Environment.root.toAbsolutePath());
+//		Log.critical("normal font params : " + normalParam);
 		
 		/*
 		recurseFiles(dir, 

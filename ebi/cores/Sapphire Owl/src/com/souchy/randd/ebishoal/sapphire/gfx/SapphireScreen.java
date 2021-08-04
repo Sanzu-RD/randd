@@ -110,11 +110,11 @@ public class SapphireScreen extends LapisScreen {
 //		}
 	}
 
-	@Override
-	public LineDrawing createLining(Camera cam, BoundingBox worldBB) {
-//		return super.createLining(cam, worldBB);
-		return null;
-	}
+//	@Override
+//	public LineDrawing createLining(Camera cam, BoundingBox worldBB) {
+////		return super.createLining(cam, worldBB);
+//		return null;
+//	}
 
 	@Override
 	public LapisHud createUI() {

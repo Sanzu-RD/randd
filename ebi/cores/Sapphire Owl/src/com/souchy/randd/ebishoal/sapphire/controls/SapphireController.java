@@ -107,6 +107,24 @@ public class SapphireController extends CameraInputController {
 			currentActionID = Action.NONE;
 			Highlight.clear();
 			
+			
+//			if(SapphireGame.gfx.hud.parameters.getStage() == null) {
+//				SapphireGame.gfx.hud.getStage().addActor(SapphireGame.gfx.hud.parameters);
+//				SapphireGame.gfx.hud.parameters.window.fadeIn();
+//			} else {
+//			}
+			if(SapphireGame.gfx.hud.parameters.isVisible()) {
+				Log.info("parameters close");
+				SapphireGame.gfx.hud.parameters.close();
+			} else {
+				Log.info("parameters open");
+				SapphireGame.gfx.hud.parameters.open();
+//				SapphireGame.gfx.hud.getStage().addActor(SapphireGame.gfx.hud.parameters);
+//				SapphireGame.gfx.hud.parameters.setVisible(true);
+//				SapphireGame.gfx.hud.parameters.window.fadeIn();
+			}
+			
+			/*
 			if(SapphireGame.gfx.hud.parameters != null) {
 				SapphireGame.gfx.hud.parameters.close();
 //				var t = (Table) SapphireGame.gfx.hud.parameters;
@@ -115,6 +133,7 @@ public class SapphireController extends CameraInputController {
 			} else {
 				SapphireGame.gfx.hud.parameters = new Parameters();
 			}
+			*/
 //			SapphireGame.gfx.hud.parameters.toggleVisibility()
 		});
 		addOnKeyDown(Keys.SPACE, () -> {
@@ -176,6 +195,9 @@ public class SapphireController extends CameraInputController {
 		});
 		addOnKeyDown(Keys.B, () -> {
 			RenderOptions.renderBackground = !RenderOptions.renderBackground;
+		});
+		addOnKeyUp(Keys.L, () -> {
+			RenderOptions.renderLines = !RenderOptions.renderLines;
 		});
 		addOnKeyDown(Keys.N, () -> {
 			var targetpos = getCursorWorldPos(Gdx.input.getX(), Gdx.input.getY());
@@ -240,9 +262,6 @@ public class SapphireController extends CameraInputController {
 			Vector3 up  = camera.up;
 			if(Gdx.input.isKeyPressed(ALT_LEFT)) translation.add(-up.y,  up.x, 0);
 			else rotationUnit.add(0, 0, -1f); // look right
-		});
-		addOnKeyUp(Keys.L, () -> {
-			var pos = getCursorWorldPos2();
 		});
 		
 		addOnKeyUp(Keys.Q, () -> zoom += -0.2f);

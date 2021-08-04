@@ -85,7 +85,7 @@ public class LineDrawing {
 		int toX = width;
 		int fromY = 0; // = -height
 		int toY = height;
-		int zPlane = 1;
+		int zPlane = 1; // met la grid au même niveau que le dessus des blocs
 		
 		// vertical
 		for (int x = withCross ? gap : fromX; x <= toX; x += gap) {

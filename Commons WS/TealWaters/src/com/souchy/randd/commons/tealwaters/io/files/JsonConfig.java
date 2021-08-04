@@ -34,8 +34,12 @@ public class JsonConfig {
 		try {
 			var p = Environment.fromRoot(path);
 			if(Files.exists(p)) return gson.fromJson(Files.readString(p), c);
-			else return null;
+			else {
+				Log.error("JsonConfig file does not exist : " + path);
+				return null;
+			}
 		} catch (Exception e) {
+			Log.error("JsonConfig cannot read file : " + path + ".\n", e);
 			return null;
 		}
 	}
@@ -58,7 +62,8 @@ public class JsonConfig {
 			config.save();
 			return config;
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			Log.error("JsonConfig cannot read file : " + path + ".\n", e);
 			return null;
 		}
 	}
@@ -72,7 +77,8 @@ public class JsonConfig {
 		try {
 			return read(c, p); //Paths.get(url.toURI())); 
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			Log.error("JsonConfig cannot read file : " + path + ".\n", e);
 			return null;
 		}
 	}
@@ -103,7 +109,8 @@ public class JsonConfig {
 			//Log.info("readExternal config : " + file);
 			return config;
 		} catch(Exception e) {
-			Log.warning("readExternal error : ", e);
+			//Log.warning("readExternal error : ", e);
+			Log.error("JsonConfig cannot read external file : " + chosenPath + ".\n", e);
 			return null;
 		}
 	}
@@ -115,7 +122,8 @@ public class JsonConfig {
 		try {
 			Files.writeString(rememberPath/*file.toPath()*/, content);
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			Log.error("JsonConfig cannot save : ", e);
 		}
 	}
 	

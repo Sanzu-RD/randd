@@ -19,5 +19,6 @@ module com.souchy.randd.deathshadows.nodes.pearl.PearlMessaging {
 	requires transitive com.souchy.randd.commons.TealNet;
 	requires transitive netty.all;
 	requires transitive GameMechanics2;
-	requires transitive com.souchy.randd.deathshadow.core;
+//	requires transitive com.souchy.randd.deathshadow.core;
+	requires transitive com.souchy.randd.commons.deathebi;
 }

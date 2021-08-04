@@ -1,10 +1,10 @@
 package com.souchy.randd.deathshadows.pearl;
 
+import com.souchy.randd.commons.deathebi.Core;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.deathshadow.core.DeathShadowCore;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.util.AttributeKey;
@@ -26,7 +26,7 @@ public class NodeInfo implements BBSerializer, BBDeserializer {
 	/**
 	 * Core class / type
 	 */
-	public Class<? extends DeathShadowCore> type;
+	public Class<? extends Core/*DeathShadowCore*/> type;
 	/**
 	 * Node server ip
 	 */
@@ -83,7 +83,7 @@ public class NodeInfo implements BBSerializer, BBDeserializer {
 		id = in.readLong();
 		var className = readString(in);
 		try {
-			type = (Class<? extends DeathShadowCore>) Class.forName(className);
+			type = (Class<? extends Core /*DeathShadowCore*/>) Class.forName(className);
 		} catch (ClassNotFoundException e) {
 			Log.error("NodeInfo deserialize core type not found for name [" + className + "]");
 		}

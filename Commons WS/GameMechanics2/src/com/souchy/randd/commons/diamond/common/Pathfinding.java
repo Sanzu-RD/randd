@@ -33,32 +33,34 @@ public class Pathfinding {
 		
 		// if distance is not set, take the distance from the source to the target
 		if(distance == 0) {
-			delta = delta.abs();
-			delta = o.mult(delta, false); // vecteur de distance dans la bonne direction sur un seul axe
-			distance = (int) delta.abs().sum(); // distance 
-//			double dist = d.sum(); // distance 
-//			Vector2 end = d.copy().add(caster.pos); // start + dist = position d'arrivée maximale
+			o.mult(delta, false); // vecteur de distance dans la bonne direction sur un seul axe (ex: [-5,6] x [-1,0] = [5,0])
+			delta.abs();
+			distance = (int) delta.sum(); // distance 
 		}
 		
 		// dans un sens: détermine la cell sur laquelle on peut finir
 		// dans l'autre sens: détermine si on peut passer à travers
 		
-		Vector2 finalpos = p1.copy();
 		int ds = allOrNothing ? distance : 1; 
 		
+		Vector2 testPos = caster.pos.copy();
+		Vector2 finalpos = caster.pos.copy();
+		
 		for(; ds <= distance; ds++) {
-			Vector2 tp = o.mult(ds).add(p1);
+//			Vector2 tp = o.mult(ds).add(p1);
+			testPos.add(o.x, o.y);
 			// check if cell exists
-			var testCell = board.get(tp);
+			var testCell = board.get(testPos);
 			if(testCell == null)
 				continue;
 			// check if can walk on
-			if(/*caster.targeting*/parameters.canWalkOn(testCell)) {
-				finalpos = tp;
+			if(parameters.canWalkOn(testCell)) { // caster.targeting
+				testPos.copyTo(finalpos);
 			}
 			// check if can dash through
-			if(!/*caster.targeting*/parameters.canDashThrough(testCell)) {
-				break;
+			if(!parameters.canDashThrough(testCell)) { //caster.targeting
+				// si on ne peut pas dash through une cell, on arrête de chercher puisqu'on ne peut pas aller plus loin.
+				break; 
 			}
 		}
 		

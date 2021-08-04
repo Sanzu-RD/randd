@@ -27,7 +27,7 @@ public class Mockingbird {
 		for(int i = 0; i < w; i++) {
 			for(int j = 0; j < h; j++) {
 				var cell = new Cell(fight, i, j);
-				cell.targeting.initCellFloor();
+				cell.targetting.initCellFloor();
 				b.cells.put(i, j, cell);
 			}
 		}
@@ -35,10 +35,10 @@ public class Mockingbird {
 //		b.cells.get(1, 1).targeting.setCan(Targetability.CanBeCastedThrough, false);
 //		b.cells.get(4, 4).targeting.setCan(Targetability.CanBeCastedThrough, false);
 //		b.cells.get(6, 6).targeting.setCan(Targetability.CanBeCastedThrough, false);
-		b.cells.get(4, 3).targeting.setCan(Targetability.CanBeCastedThrough, false);
-		b.cells.get(6, 7).targeting.setCan(Targetability.CanBeCastedThrough, false);
-		b.cells.get(6, 4).targeting.setCan(Targetability.CanBeCastedThrough, false);
-		b.cells.get(4, 6).targeting.setCan(Targetability.CanBeCastedThrough, false);
+		b.cells.get(4, 3).targetting.setCan(Targetability.CanBeCastedThrough, false);
+		b.cells.get(6, 7).targetting.setCan(Targetability.CanBeCastedThrough, false);
+		b.cells.get(6, 4).targetting.setCan(Targetability.CanBeCastedThrough, false);
+		b.cells.get(4, 6).targetting.setCan(Targetability.CanBeCastedThrough, false);
 //		b.cells.get(3, 5).targeting.setCan(Targetability.CanBeCastedThrough, false);
 //		b.cells.get(5, 8).targeting.setCan(Targetability.CanBeCastedThrough, false);
 //		b.cells.get(5, 3).targeting.setCan(Targetability.CanBeCastedThrough, false);
@@ -48,7 +48,7 @@ public class Mockingbird {
 		var result = new Table<Integer>(w, h, 0);
 		for(int i = 0; i < w; i++) {
 			for(int j = 0; j < h; j++) {
-				result.put(i, j, b.get(i, j).targeting.can(Targetability.CanBeCastedThrough) ? 0 : 3);
+				result.put(i, j, b.get(i, j).targetting.can(Targetability.CanBeCastedThrough) ? 0 : 3);
 			}
 		}
 		
@@ -165,7 +165,7 @@ public class Mockingbird {
 	
 	
 	private static boolean mockCheckCellView(Cell c) {
-		return c.targeting.can(Targetability.CanBeCastedThrough);
+		return c.targetting.can(Targetability.CanBeCastedThrough);
 	}
 	
 	

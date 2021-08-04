@@ -13,6 +13,10 @@ public class Vector2 implements BBSerializer, BBDeserializer {
 	public double x;
 	public double y;
 	
+	public Vector2() {
+		
+	}
+	
 	public Vector2(double x, double y) {
 		this.x = x;
 		this.y = y;
@@ -89,6 +93,12 @@ public class Vector2 implements BBSerializer, BBDeserializer {
 		return new Vector2(x, y);
 	}
 	
+	public Vector2 copyTo(Vector2 v) {
+		v.x = x;
+		v.y = y;
+		return v;
+	}
+	
 	public Vector2 mult(double scl) {
 		x *= scl;
 		y *= scl;
@@ -119,7 +129,7 @@ public class Vector2 implements BBSerializer, BBDeserializer {
 
 	@Override
 	public String toString() {
-		return "(" + x + "," + y + ")";
+		return "[" + x + "," + y + "]";
 	}
 
 	@Override

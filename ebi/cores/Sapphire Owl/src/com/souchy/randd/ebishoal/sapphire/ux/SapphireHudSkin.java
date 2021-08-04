@@ -2,12 +2,15 @@ package com.souchy.randd.ebishoal.sapphire.ux;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
@@ -36,10 +39,48 @@ import com.souchy.randd.moonstone.white.Moonstone;
  * @date 29 juill. 2019 (documented, but created before)
  */
 public class SapphireHudSkin extends Skin {
+
+	private final LabelStyle styleDmgLife;
+	private final LabelStyle styleDmgLifeComposite;
+	private final LabelStyle styleDmgLifeShield;
+	
+	private final LabelStyle styleDmgMana;
+	private final LabelStyle styleDmgMove;
+	private final LabelStyle styleDmgSpecial;
+	
+	public static LabelStyle styleNormal;
+	public static LabelStyle styleTitle;
 	
 	public SapphireHudSkin(FileHandle file) {
 		super(file);
 
+		// should be color for ressource type and border for shields
+		BitmapFont damageFont = LapisAssets.get("gen_damage.ttf");
+		styleDmgLife = new LabelStyle(damageFont, Color.WHITE);
+		styleDmgLifeComposite = new LabelStyle(damageFont, Color.WHITE);
+		styleDmgLifeShield = new LabelStyle(damageFont, Color.WHITE);
+		
+		styleDmgMana = new LabelStyle(damageFont, Color.CYAN);
+		styleDmgMove = new LabelStyle(damageFont, Color.GREEN);
+		styleDmgSpecial = new LabelStyle(damageFont, Color.ORANGE);
+		
+		BitmapFont normalFont = LapisAssets.get("gen_normal.ttf");
+		styleNormal = new LabelStyle(normalFont, Color.WHITE);
+
+		BitmapFont titleFont = LapisAssets.get("gen_title.ttf");
+		styleTitle = new LabelStyle(titleFont, Color.WHITE);
+		
+//		add("default", styleNormal);
+		add("title", styleTitle);
+		add("styleDmgLife", styleDmgLife);
+		add("styleDmgLifeComposite", styleDmgLifeComposite);
+		add("styleDmgLifeShield", styleDmgLifeShield);
+		add("styleDmgMana", styleDmgMana);
+		add("styleDmgMove", styleDmgMove);
+		add("styleDmgSpecial", styleDmgSpecial);
+		
+		
+		
 		add("defaultTexture", new Texture(Gdx.files.internal("res/textures/default.png"), true)); 
 		
 		// Link all textures by their name

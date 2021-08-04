@@ -7,6 +7,22 @@
 	</classpathentry>
 	<classpathentry kind="src" output="res" path="assets"/>
 	<classpathentry kind="src" path="data"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Ammolite FX"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-white"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SmoothRivers"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ParticlesLibGDX">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="ParticlesLibGDX/libs"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -21,23 +37,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LML"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DB"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Ammolite FX"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-white"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SmoothRivers"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ParticlesLibGDX">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="ParticlesLibGDX/libs"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="/DeathEbi-commons/bin"/>
+	<classpathentry kind="lib" path="/EbiShoalCore/bin"/>
 	<classpathentry kind="output" path="bin/"/>
 </classpath>

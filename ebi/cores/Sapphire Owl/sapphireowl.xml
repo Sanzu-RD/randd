@@ -4,7 +4,7 @@
 	<!--ANT 1.7 is required                                        -->
 	<!--define folder properties-->
 	<property name="dir.buildfile" value="."/>
-	<property name="dir.workspace" value="F:/Users/Souchy/Desktop/Robyn/eclipse-workspaces/hidden workspaces/r and d"/>
+	<property name="dir.workspace" value="C:/Robyn/eclipse-workspaces/hidden workspaces/r and d"/>
 	<property name="dir.git" value="../../../../"/>
 	<!-- this is /GitPiranha/ -->
 	<property name="dir.gitres" value="${dir.git}/../Git/res"/>

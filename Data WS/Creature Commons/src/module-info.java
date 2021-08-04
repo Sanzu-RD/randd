@@ -21,6 +21,9 @@ module CreatureCommons {
 //	exports com.souchy.randd.data.s1.spells.steel;
 //	exports com.souchy.randd.data.s1.spells.toxin;
 	exports com.souchy.randd.data.s1.spells.water;
+	exports com.souchy.randd.data.s1.creatures.flora;
+	exports com.souchy.randd.data.s1.creatures.flora.spells;
+//	exports com.souchy.randd.data.s1.creatures.flora.status;
 	
 	
 	

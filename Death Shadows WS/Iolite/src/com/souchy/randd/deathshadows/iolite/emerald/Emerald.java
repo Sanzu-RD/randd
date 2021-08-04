@@ -81,7 +81,11 @@ public final class Emerald {
 		client = MongoClients.create(settings);
 
 		Logging.streams.add(l -> {
-			Emerald.logs().insertOne(l);
+			try {
+				Emerald.logs().insertOne(l);
+			} catch (Exception e) {
+//				System.out.println(e);
+			}
 		});
 	}
 

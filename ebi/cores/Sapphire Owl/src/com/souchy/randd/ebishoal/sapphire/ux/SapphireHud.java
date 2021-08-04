@@ -23,7 +23,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.github.czyzby.lml.annotation.LmlAction;
 import com.google.common.eventbus.Subscribe;
+import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisCheckBox;
+import com.kotcrab.vis.ui.widget.VisLabel;
 import com.souchy.randd.commons.diamond.effects.resources.ResourceGainLoss;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statusevents.Event;
@@ -44,6 +46,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.LapisShader;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
+import com.souchy.randd.ebishoal.sapphire.confs.ConfigEvent;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireBatch;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
@@ -71,15 +74,6 @@ public class SapphireHud extends LapisHud
 	
 	public Label cursorPos;
 	
-	private final LabelStyle styleDmgLife;
-	private final LabelStyle styleDmgLifeComposite;
-	private final LabelStyle styleDmgLifeShield;
-	
-	private final LabelStyle styleDmgMana;
-	private final LabelStyle styleDmgMove;
-	private final LabelStyle styleDmgSpecial;
-	
-	public static LabelStyle styleNormal;
 	
 	public SapphireHud() {
 		// SpriteBatch, Viewport, Shader, Stage
@@ -89,21 +83,9 @@ public class SapphireHud extends LapisHud
 		batch.setShader(shader);
 		this.setStage(new Stage(viewport, batch));
 
-		// should be color for ressource type and border for shields
-		BitmapFont damageFont = LapisAssets.get("gen_damage.ttf");
-		styleDmgLife = new LabelStyle(damageFont, Color.WHITE);
-		styleDmgLifeComposite = new LabelStyle(damageFont, Color.WHITE);
-		styleDmgLifeShield = new LabelStyle(damageFont, Color.WHITE);
-		
-		styleDmgMana = new LabelStyle(damageFont, Color.CYAN);
-		styleDmgMove = new LabelStyle(damageFont, Color.GREEN);
-		styleDmgSpecial = new LabelStyle(damageFont, Color.ORANGE);
-		
-		BitmapFont normalFont = LapisAssets.get("gen_normal.ttf");
-		styleNormal = new LabelStyle(normalFont, Color.WHITE);
-		
 		
 		SapphireGame.fight.statusbus.reactors.register(this);
+		SapphireOwl.conf.bus.register(this);
 	}
 	
 	public void reload() {
@@ -120,14 +102,15 @@ public class SapphireHud extends LapisHud
 		timeline = new Timeline();
 //		new QuickOptions();
 		
-		parameters = new Parameters();
-		parameters.setVisible(false);
-		
-
-		if(SapphireOwl.conf.functionality.showCursorPos) {
-			cursorPos = new Label("text", styleNormal);
+//		if(SapphireOwl.conf.functionality.showCursorPos) {
+			cursorPos = new VisLabel("");
 			this.getStage().addActor(cursorPos);
-		}
+//		}
+		
+		parameters = new Parameters();
+//		parameters.remove();
+		parameters.setVisible(false);
+
 		
 		isLoaded = true;
 	}
@@ -164,6 +147,12 @@ public class SapphireHud extends LapisHud
 		return HandlerType.Reactor;
 	}
 	
+	@Subscribe
+	public void onConfigEvent(ConfigEvent e) {
+		Log.info("on config event " + SapphireOwl.conf.functionality.showCursorPos);
+		if(cursorPos != null) cursorPos.setVisible(SapphireOwl.conf.functionality.showCursorPos);
+	}
+	
 	/**
 	 * Damage label 
 	 */
@@ -171,7 +160,7 @@ public class SapphireHud extends LapisHud
 	public void onResourceGainLoss(ResourceGainLossEvent e) {
 //		todo : damage font on a billboard?
 		
-		LabelStyle style = styleDmgLife;
+		LabelStyle style = VisUI.getSkin().get("styleDmgLife", LabelStyle.class);
 //		style = switch(e.res) {
 //			case life -> switch(e.composite) {
 //				case composite -> styleDmgComposite;
@@ -183,7 +172,13 @@ public class SapphireHud extends LapisHud
 //			case special -> styleDmgSpecial;
 //			default -> styleDmgLife;
 //		};
-		
+
+		LabelStyle styleDmgLifeComposite = VisUI.getSkin().get("styleDmgLifeComposite", LabelStyle.class);
+		LabelStyle styleDmgLife = VisUI.getSkin().get("styleDmgLife", LabelStyle.class);
+		LabelStyle styleDmgMove = VisUI.getSkin().get("styleDmgMove", LabelStyle.class);
+		LabelStyle styleDmgSpecial = VisUI.getSkin().get("styleDmgSpecial", LabelStyle.class);
+		LabelStyle styleDmgLifeShield = VisUI.getSkin().get("styleDmgLifeShield", LabelStyle.class);
+		LabelStyle styleDmgMana = VisUI.getSkin().get("styleDmgMana", LabelStyle.class);
 		
 		var ef = (ResourceGainLoss) e.effect;
 		if(ef.shields.size() > 0 && ef.resources.size() > 0) {

@@ -9,4 +9,5 @@ public class RenderOptions {
 	public static boolean renderBackground = true;
 	public static boolean renderUI = true;
 	public static boolean cullback = true; // déjà setté dans les shader classes DefaultShader.Config et DepthShader.Config
+	public static boolean renderLines = false;
 }

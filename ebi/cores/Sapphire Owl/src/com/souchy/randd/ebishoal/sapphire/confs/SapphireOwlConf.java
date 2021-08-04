@@ -5,7 +5,9 @@ import java.util.Map;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.Color;
+import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
+import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers.Exclude;
 
 /**
  * 
@@ -14,6 +16,10 @@ import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
  */
 public class SapphireOwlConf extends JsonConfig {
 
+	@Exclude
+	public EventBus bus = new EventBus();
+	
+	
 	public GeneralConfig general = new GeneralConfig();
 	public FunctionalityConfig functionality = new FunctionalityConfig();
 	public ShortcutConfig shortcut = new ShortcutConfig();
@@ -28,9 +34,9 @@ public class SapphireOwlConf extends JsonConfig {
 	}
 
 	public static class FunctionalityConfig extends JsonConfig {
-		public boolean centerline = true;
-		public boolean grid = true;
 		public Color gridColor = Color.GRAY;
+		public boolean grid = true;
+		public boolean centerline = true;
 		public boolean ruler = true;
 		public boolean lineofsight = true; 
 		public boolean showCursorPos = false;
@@ -84,6 +90,13 @@ public class SapphireOwlConf extends JsonConfig {
 			if (keys.length > 1) {
 				setPref(field.get(container), key.substring(key.indexOf(".") + 1), val);
 			} else {
+				bus.post(new ConfigEvent() {
+					{
+						this.f = field;
+						this.oldValue = field.get(container);
+						this.newValue = val;
+					}
+				});
 				field.set(container, val);
 			}
 		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {

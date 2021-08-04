@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_jar" name="Create Runnable Jar for Project Sapphire Owl with libraries in sub-folder">
+	<!--this file was created by Eclipse Runnable JAR Export Wizard-->
+	<!--ANT 1.7 is required                                        -->
+	
+	<!--define folder properties-->
+	<property name="dir.buildfile" value="."/>
+	<property name="dir.workspace" value="C:/Robyn/eclipse-workspaces/hidden workspaces/r and d"/>
+	<property name="dir.git" value="../../../../"/>
+		
+	<!-- this is /GitPiranha/ -->
+	<property name="dir.gitres" value="${dir.git}/../Git/res"/>
+	<property name="dir.gitgdx" value="${dir.git}/../Git/libgdx"/>
+	
+	<!-- <property name="dir.jarfile" value="G:/www/ebishoal"/> -->
+	<property name="dir.jarfile" value="${dir.git}/release/ebishoal"/>
+	<property name="dir.lib" value="${dir.jarfile}/lib/"/>
+	<property name="dir.res" value="${dir.jarfile}/res"/>
+	<property name="dir.data" value="${dir.jarfile}/data"/>
+	<property name="dir.natives" value="${dir.jarfile}/natives"/>
+	<property name="dir.modules" value="${dir.jarfile}/modules"/>
+
+	<property name="jar.name" value="${project.name}" />
+	
+
+	<path id="build.classpath">
+		<fileset dir="${dir.lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<!-- convert classpath to a flat list/string for use in manifest task -->
+	<pathconvert property="mf.classpath" pathsep=" ">
+		<path refid="build.classpath" />
+		<mapper>
+			<chainedmapper>
+				<flattenmapper />
+				<globmapper from="*.jar" to="lib/*.jar" />
+			</chainedmapper>
+		</mapper>
+	</pathconvert>
+
+
+	<target name="create_jar">
+		<jar destfile="${dir.jarfile}/${jar.name}.jar">
+			<manifest>
+				<!-- <attribute name="Main-Class" value="com.souchy.randd.ebishoal.sapphire.main.SapphireOwl" /> -->
+				<attribute name="Class-Path" value=". ${mf.classpath}" />
+			</manifest>
+
+			<fileset dir="${dir.buildfile}/bin">
+				<include name="com/**"/>
+				<include name="module-info.class"/>
+			</fileset>
+
+		</jar>
+	
+		
+	</target>
+</project>

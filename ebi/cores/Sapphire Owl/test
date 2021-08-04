@@ -3,16 +3,16 @@
 <properties>
 <entry key="gfx.shadows">true</entry>
 <entry key="gfx.background">true</entry>
-<entry key="sound.music">0</entry>
+<entry key="sound.music">2</entry>
 <entry key="sound.general">4</entry>
-<entry key="functionality.centerline">false</entry>
+<entry key="functionality.centerline">true</entry>
 <entry key="functionality.showCursorPos">true</entry>
 <entry key="gfx.blur">true</entry>
 <entry key="sound.ui">4</entry>
-<entry key="sound.ambiance">6</entry>
-<entry key="sound.fx">3</entry>
+<entry key="sound.ambiance">7</entry>
+<entry key="sound.fx">5</entry>
 <entry key="functionality.grid">true</entry>
-<entry key="general.locale">fr</entry>
+<entry key="general.locale">en</entry>
 <entry key="functionality.lineofsight">true</entry>
 <entry key="gfx.postProcess">true</entry>
 <entry key="gfx.stencil">true</entry>

@@ -34,6 +34,7 @@ import com.souchy.randd.ebishoal.commons.lapis.util.DragAndResizeListener;
 import com.souchy.randd.ebishoal.commons.lapis.util.LapisUtil;
 import com.souchy.randd.moonstone.commons.packets.ICM;
 import com.souchy.randd.moonstone.white.Moonstone;
+import com.souchy.randd.ebishoal.sapphire.controls.Commands;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
@@ -140,7 +141,11 @@ public class Chat extends SapphireComponent implements Reactor {
 
 	@LmlAction("send")
 	public void sendMsg() {
-		Moonstone.writes(new ICM("default", Moonstone.user.pseudo, field.getText()));
+		if(field.getText().startsWith("/")) {
+			Commands.process(field.getText());
+		}else {
+			Moonstone.writes(new ICM("default", Moonstone.user.pseudo, field.getText()));
+		}
 		field.clearText();
 	}
 	
@@ -194,5 +199,10 @@ public class Chat extends SapphireComponent implements Reactor {
 	}
 
 
-
+	public void clearChat() {
+		messages.clear();
+		area.setItems(messages);
+	}
+	
+	
 }

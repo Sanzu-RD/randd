@@ -112,7 +112,7 @@ interface LapisScreenRenderer extends Screen {
 		spriteBatch.end();
 
 		// render lines
-		if(getLining() != null) getLining().renderLines();
+		if(RenderOptions.renderLines/* getLining() != null */) getLining().renderLines();
 		
 		// render UI
 		if(RenderOptions.renderUI) renderView(delta);
