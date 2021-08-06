@@ -48,9 +48,12 @@ public interface Handler { //<E extends Event> {
 	/**
 	 * Return true if the event must be processed by this handler.
 	 * Return false if the event must be ignored by this handler.
+	 * 
+	 * Add this handler to the list of marked handlers on the event
 	 */
 	public default boolean check(Event e) {
 		if(e.markedHandlers.contains(this)) return false;
+		e.markedHandlers.add(this);
 		return true;
 	}
 	

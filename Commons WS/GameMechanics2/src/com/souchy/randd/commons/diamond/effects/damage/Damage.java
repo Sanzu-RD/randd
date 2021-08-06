@@ -14,7 +14,7 @@ import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
-import com.souchy.randd.commons.diamond.statusevents.damage.DmgEvent;
+import com.souchy.randd.commons.diamond.statusevents.damage.DamageEvent;
 import com.souchy.randd.commons.diamond.statusevents.resource.ResourceGainLossEvent;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -115,14 +115,14 @@ public class Damage extends Effect {
 	 * Calcule les dégâts post-mitigation du target
 	 */
 	public void prepareTarget(Creature caster, Cell cell) {
-		var crea = (Creature) caster;
+		var creaSource = (Creature) caster;
 		creature = cell.getCreature(height); 
 		if(creature == null) return;
 		
-		var casterPen = crea.stats.penetration;
+		var casterPen = creaSource.stats.penetration;
 		var targetRes = creature.stats.resistance;
-		var globalPen = crea.stats.penetration.get(Element.global);
-		var globalResistance = crea.stats.resistance.get(Element.global);
+		var globalPen = creaSource.stats.penetration.get(Element.global);
+		var globalResistance = creature.stats.resistance.get(Element.global);
 		
 		// dmg = (baseflat + casterflat) * (1 + baseinc * casterinc) * (1 + basemore * castermore)
 		
@@ -192,8 +192,8 @@ public class Damage extends Effect {
 	}
 
 	@Override
-	public DmgEvent createAssociatedEvent(Creature caster, Cell target) {
-		return new DmgEvent(caster, target, this); 
+	public DamageEvent createAssociatedEvent(Creature caster, Cell target) {
+		return new DamageEvent(caster, target, this); 
 	}
 
 	@Override

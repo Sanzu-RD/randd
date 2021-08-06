@@ -10,6 +10,7 @@ import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.effects.resources.ResourceGainLoss;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
+import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
@@ -86,23 +87,40 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	public Spell(Fight f) {
 		super(f);
 		id = idCounter++;
-		stats = initBaseStats();
+		initBaseStats(new SpellStats());
 		taggedElements = initElements();
 		taggedCreatureTypes = initCreatureTypes();
 		taggedCreatures = null; // initCreatures();
 		// effects = initEffects();
 	}
-
-	protected abstract SpellStats initBaseStats();
+	
+	/**
+	 * Initialize spell's costs, range, targetting conditions / los, cooldown, aoes, etc <p>
+	 * <b>Important : <br>
+	 * stats.costs.put(Resource.mana, new IntStat(3)); <br>
+	 * stats.maxRangeRadius.baseflat = 10;</b>
+	 */
+	protected abstract void initBaseStats(SpellStats stats);
+	/**
+	 * @return ImmutableList.of(Elements.water) associated elements
+	 */
 	protected abstract ImmutableList<Element> initElements();
+	/**
+	 * @return ImmutableList.of() associated creature types
+	 */
 	protected abstract ImmutableList<CreatureType> initCreatureTypes();
+	
 	
 	public Spell getModel() {                       
 		return DiamondModels.spells.get(modelid());   
 	}                                               
 
 	/**
-	 * Actual casting action. Posts a CastSpellEvent then applies all effects.
+	 * Actual casting action. <p>
+	 * - <b>Copies the whole spell</b> <br>
+	 * - Sends CastSpellEvent to <b>interceptors and modifiers</b> <br>
+	 * - Casts the spell with <b>event.spell.cast0</b> <br>
+	 * - Sends CastSpellEvent to <b>reactors</b> <br>
 	 */
 	public void cast(Creature caster, Cell target) {
 		// Applique les couts en premier?
@@ -121,7 +139,8 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	}
 	
 	/**
-	 * Individual spell implementation of cast
+	 * Individual spell implementation of cast. <br>
+	 * The spell is a <b>copy</b> at this point.
 	 */
 	protected abstract void cast0(Creature caster, Cell target);
 	

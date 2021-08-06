@@ -8,24 +8,24 @@ import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
-public class DmgEvent extends Event {
+public class DamageEvent extends Event {
 	
 	/** interface for statuses to implement */
-	public interface OnDmgHandler extends Handler { //<OnDmgEvent> {
+	public interface OnDamageHandler extends Handler { //<OnDmgEvent> {
 		@Subscribe
-		public default void handle0(DmgEvent event) {
-			if(check(event)) onDmg(event);
+		public default void handle0(DamageEvent event) {
+			if(check(event)) onDamage(event);
 		}
-		public void onDmg(DmgEvent e);
+		public void onDamage(DamageEvent e);
 	}
 	
-	public DmgEvent(Creature caster, Cell target, Damage effect) {
+	public DamageEvent(Creature caster, Cell target, Damage effect) {
 		super(caster, target, effect);
 	}
 
 	@Override
-	public DmgEvent copy0() {
-		return new DmgEvent(source, target, (Damage) effect.copy());
+	public DamageEvent copy0() {
+		return new DamageEvent(source, target, (Damage) effect.copy());
 	}
 	
 	@Override

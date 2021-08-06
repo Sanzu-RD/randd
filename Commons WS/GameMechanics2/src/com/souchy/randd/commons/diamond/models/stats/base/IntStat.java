@@ -95,4 +95,20 @@ public class IntStat implements BBSerializer, BBDeserializer  {
 		return null;
 	}
 	
+	public void add(IntStat s) {
+		this.baseflat += s.baseflat;
+		this.inc += s.inc;
+		this.incflat += s.incflat;
+		this.more += s.more;
+		this.fight += s.fight;
+	}
+	
+	public void remove(IntStat s) {
+		this.baseflat -= s.baseflat;
+		this.inc -= s.inc;
+		this.incflat -= s.incflat;
+		this.more -= s.more;
+		this.fight -= s.fight;
+	}
+	
 }

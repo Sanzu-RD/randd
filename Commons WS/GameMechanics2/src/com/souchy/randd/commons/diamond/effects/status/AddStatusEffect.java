@@ -3,12 +3,14 @@ package com.souchy.randd.commons.diamond.effects.status;
 import java.util.function.Function;
 
 import com.souchy.randd.commons.diamond.common.Aoe;
+import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
+import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.status.AddStatusEvent;
 
@@ -27,6 +29,19 @@ public class AddStatusEffect extends Effect {
 	 */
 	public Status status;
 	
+	/**
+	 * 
+	 * @param aoe : AoeBuilders.single.get()
+	 * @param targetConditions : TargetType.full.asStat()
+	 * @param statusBuilder : <code> (ff) -> {
+			var b = new Burning(ff, 0, 0);
+			b.duration = 3;
+			b.stacks = 1;
+			b.canDebuff = true;
+			b.canRemove = true;
+			return b;
+		}</code>
+	 */
 	public AddStatusEffect(Aoe aoe, TargetTypeStat targetConditions, Function<Fight, Status> statusBuilder) {
 		super(aoe, targetConditions);
 		this.statusBuilder = statusBuilder;

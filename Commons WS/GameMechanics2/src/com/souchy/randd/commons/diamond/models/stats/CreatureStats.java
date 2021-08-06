@@ -22,6 +22,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 	 * resources 
 	 */
 	public Map<Resource, IntStat> resources;
+	public Map<Resource, IntStat> resourcesmax;
 	/** 
 	 * shields for each resources 
 	 */
@@ -68,7 +69,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 	/**
 	 * if creature is visible/invisible
 	 */
-	public BoolStat visible;
+	public BoolStat invisible;
 	
 	/**
 	 * Z / height of the creature. ex: flying or burrowed under ground. Default is normal 'floor' level
@@ -87,7 +88,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		healingRes = new IntStat(0);
 		range = new IntStat(0);
 		summons = new IntStat(0);
-		visible = new BoolStat(true);
+		invisible = new BoolStat(false);
 		height = new HeightStat(Height.floor.bit);
 		// + peut-être une stat pour aoeRadiusModificator / AoeRange
 		
@@ -127,7 +128,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		s.healingRes = healingRes.copy();
 		s.range = range.copy();
 		s.summons = summons.copy();
-		s.visible = visible.copy();
+		s.invisible = invisible.copy();
 		s.height = height.copy();
 		
 		return s;
@@ -138,10 +139,55 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		return resources.get(res).value();
 	}
 	public int getMax(Resource res) {
-		return resources.get(res).value();
+		return resources.get(res).max();
 	}
 	public int getMissing(Resource res) {
 		return (int) resources.get(res).fight;
+	}
+	
+	public void add(CreatureStats s) {
+		for (var r : Resource.values()) {
+			resources.get(r).add(resources.get(r));
+			resourcesmax.get(r).add(resourcesmax.get(r));
+			shield.get(r).add(shield.get(r));
+		}
+		
+		for (var r : Element.values) {
+			affinity.get(r).add(affinity.get(r));
+			resistance.get(r).add(resistance.get(r));
+			penetration.get(r).add(penetration.get(r));
+		}
+		
+		healingAffinity.add(s.healingAffinity);
+		healingRes.add(s.healingRes);
+		range.add(s.range);
+		summons.add(s.summons);
+		
+		invisible.replace(s.invisible.base);
+		
+		//s.height = height.copy(); // ne pas toucher à la height de la creature
+	}
+
+	public void remove(CreatureStats s) {
+		for (var r : Resource.values()) {
+			resources.get(r).remove(resources.get(r));
+			shield.get(r).remove(shield.get(r));
+		}
+		
+		for (var r : Element.values) {
+			affinity.get(r).remove(affinity.get(r));
+			resistance.get(r).remove(resistance.get(r));
+			penetration.get(r).remove(penetration.get(r));
+		}
+		
+		healingAffinity.remove(s.healingAffinity);
+		healingRes.remove(s.healingRes);
+		range.remove(s.range);
+		summons.remove(s.summons);
+		
+		invisible.reset();
+		
+		//s.height = height.copy(); // ne pas toucher à la height de la creature
 	}
 
 	@Override
@@ -168,7 +214,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		healingRes.serialize(out);
 		range.serialize(out);
 		summons.serialize(out);
-		visible.serialize(out);
+		invisible.serialize(out);
 		height.serialize(out);
 		return null;
 	}
@@ -198,7 +244,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		this.healingRes.deserialize(in);
 		this.range.deserialize(in);
 		this.summons.deserialize(in);
-		this.visible.deserialize(in);
+		this.invisible.deserialize(in);
 		this.height.deserialize(in);
 		return null;
 	}

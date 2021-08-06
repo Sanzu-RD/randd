@@ -49,8 +49,7 @@ public class Frostdash extends Spell {
 	}
 
 	@Override
-	protected SpellStats initBaseStats() {
-		var stats = new SpellStats();
+	protected void initBaseStats(SpellStats stats) {
 		stats.maxRangeRadius.baseflat = 5;
 		stats.maxRangePattern.base = r -> AoeBuilders.cross.apply(r);
 		
@@ -58,8 +57,6 @@ public class Frostdash extends Spell {
 		stats.target.fight = 0;
 		stats.target.setFight(TargetType.empty, true); 
 		stats.target.setBase(TargetType.empty, true); // only empty cells are accepted
-		
-		return stats;
 	}
 
 	@Override

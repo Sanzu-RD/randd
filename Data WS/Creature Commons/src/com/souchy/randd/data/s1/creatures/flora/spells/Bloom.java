@@ -22,9 +22,8 @@ public class Bloom extends Spell {
 	}
 
 	@Override
-	protected SpellStats initBaseStats() {
+	protected void initBaseStats(SpellStats stats) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

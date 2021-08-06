@@ -1,4 +1,4 @@
-package com.souchy.randd.data.s1.spells.ice;
+package com.souchy.randd.data.s1.spells.secondary.ice;
 
 import com.google.common.collect.ImmutableList;
 import com.souchy.randd.commons.diamond.models.Cell;
@@ -9,22 +9,20 @@ import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
 
-public class Hail extends Spell {
+public class IceComet extends Spell {
 
-	public Hail(Fight f) {
+	public IceComet(Fight f) {
 		super(f);
 	}
 
 	@Override
 	public int modelid() {
-		return 2;
+		return 4;
 	}
 
 	@Override
-	protected SpellStats initBaseStats() {
-		var stats = new SpellStats();
-		stats.maxRangeRadius.baseflat = 16;
-		return stats;
+	protected void initBaseStats(SpellStats stats) {
+		stats.maxRangeRadius.baseflat = 5;
 	}
 
 	@Override
@@ -44,12 +42,13 @@ public class Hail extends Spell {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public Spell copy(Fight fight) {
-		var s = new Hail(fight);
+		var s = new IceComet(fight);
 		s.stats = stats.copy();
 		return s;
 	}
+	
 	
 }

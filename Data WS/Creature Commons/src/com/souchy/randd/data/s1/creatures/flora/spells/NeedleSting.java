@@ -23,10 +23,10 @@ public class NeedleSting extends Spell {
 	}
 
 	@Override
-	protected SpellStats initBaseStats() {
+	protected void initBaseStats(SpellStats stats) {
 		// TODO Auto-generated method stub
-		return null;
 	}
+
 
 	@Override
 	protected ImmutableList<Element> initElements() {

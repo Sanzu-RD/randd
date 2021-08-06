@@ -34,10 +34,8 @@ public class Movement extends Spell {
 	}
 
 	@Override
-	protected SpellStats initBaseStats() {
-		var stats = new SpellStats();
-//		stats.costs.put(Resource.mana, new IntStat(0));
-		return stats;
+	protected void initBaseStats(SpellStats stats) {
+//		stats.costs.put(Resource.move, new IntStat(0));
 	}
 
 	@Override

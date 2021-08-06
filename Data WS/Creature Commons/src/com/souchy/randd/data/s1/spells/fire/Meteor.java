@@ -39,12 +39,9 @@ public class Meteor extends Spell {
 	}
 
 	@Override
-	protected SpellStats initBaseStats() {
-		var s = new SpellStats();
+	protected void initBaseStats(SpellStats stats) {
 //		s.costs.put(Resource.mana, new IntStat(5));
-		s.maxRangeRadius.baseflat = 10;
-		
-		return s;
+		stats.maxRangeRadius.baseflat = 10;
 	}
 
 	@Override

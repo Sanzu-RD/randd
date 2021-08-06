@@ -6,6 +6,7 @@ import java.util.List;
 import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.effects.status.ModifyStatusEffect;
 import com.souchy.randd.commons.diamond.effects.status.RemoveStatusEffect;
+import com.souchy.randd.commons.diamond.models.stats.CreatureStats;
 import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
@@ -85,6 +86,7 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 //	public List<Effect> tooltipEffects = new ArrayList<>();
 	public List<Effect> effects = new ArrayList<>();
 
+	public CreatureStats creatureStats;
 	
 	public Status(Fight f, int sourceEntityId, int targetEntityId) { // EntityRef source, EntityRef target
 		super(f);
@@ -106,11 +108,17 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 //	}
 
 	/**
-	 * Fuse behaviour to affect stacks count, duration, both, or neither. 
+	 * Fuse behaviour to affect stacks count, duration, both, or neither. <p>
+	 * 
+	 * <code> 
+	 * {@link Status#genericFuseStrategy(Status, boolean, boolean, boolean)}<br>
+	 *  genericFuseStrategy(s, true, true, true); <br>
+	 *	return true; 
+	 *	</code><p>
 	 * @return True if fused. False means it doesnt fuse so you have 2 instances of the status with each their own duration and stacks
 	 */
 	public boolean fuse(Status s) {
-		genericFuseStrategy(s, true, true);
+		genericFuseStrategy(s, true, true, true);
 		return true;
 	}
 	
@@ -118,7 +126,9 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 	 * When THIS status is added to a statuslist
 	 */
 	public void onAdd() {
-		
+//		var creature = this.get(Fight.class).creatures.get(targetEntityId);
+//		creature.stats.
+//		creature.stats.resistance.get(Element.global).more -= 50;
 	}
 	
 	/** 
@@ -167,9 +177,21 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 	/**
 	 * helper to create and apply a ModifyStatusEffect for a basic fuse strategy
 	 */
-	protected void genericFuseStrategy(Status s, boolean stacks, boolean duration) {
+	protected void genericFuseStrategy(Status s, boolean stacks, boolean duration, boolean addOrRefresh) {
 		var fight = get(Fight.class);
-		var mod = new ModifyStatusEffect(AoeBuilders.single.get(), TargetType.full.asStat(), this, stacks ? s.stacks : 0, duration ? s.duration : 0);
+		int finalstacks = this.stacks;
+		int finalduration = this.duration;
+		if(stacks) 
+			finalstacks = addOrRefresh ? finalstacks + s.stacks : 
+				(s.stacks > this.stacks ? s.stacks : this.stacks); // refresh takes the highest number
+		if(duration) 
+			finalduration = addOrRefresh ? finalduration + s.duration : 
+				(s.duration > this.duration ? s.duration : this.duration); // refresh takes the highest number
+		
+		applyFuseEffect(fight, finalstacks, finalduration);
+	}
+	protected void applyFuseEffect(Fight fight, int finalstacks, int finalduration) {
+		var mod = new ModifyStatusEffect(AoeBuilders.single.get(), TargetType.full.asStat(), this, finalstacks, finalduration);
 		var sourceCrea = fight.creatures.get(sourceEntityId);
 		var targetCrea = fight.creatures.get(targetEntityId);
 		mod.height.set(targetCrea.stats.height);

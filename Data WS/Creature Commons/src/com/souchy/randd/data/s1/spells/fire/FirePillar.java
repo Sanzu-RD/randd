@@ -38,11 +38,9 @@ public class FirePillar extends Spell {
 	}
 
 	@Override
-	protected SpellStats initBaseStats() {
-		var stats = new SpellStats();
+	protected void initBaseStats(SpellStats stats) {
 		stats.costs.put(Resource.mana, new IntStat(3));
 		stats.maxRangeRadius.baseflat = 8;
-		return stats;
 	}
 
 	@Override

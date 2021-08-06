@@ -20,23 +20,24 @@ import io.netty.buffer.ByteBuf;
 
 public class SpellStats implements BBSerializer, BBDeserializer { //extends Entyty {
 	
-	// cast costs
+	// cast costs ======================================================
 	public Map<Resource, IntStat> costs = new HashMap<>();
 
-	// cell targetting conditions, inclu lineofsight
+	// cell targetting conditions, inclu lineofsight ===================
 	public TargetTypeStat target = new TargetTypeStat();
 	
-	// cast ranges and patterns 
+	// cast ranges and patterns  =======================================
 	/** Range minimale. 0 par défaut */
 	public IntStat minRangeRadius = new IntStat(0);
 	/** Range maximale. 1 par défaut */
 	public IntStat maxRangeRadius = new IntStat(1);
 	/** Pattern de range maximale. null par défaut. */
 	public ObjectStat<AoeBuilder> minRangePattern = new ObjectStat<AoeBuilder>(null);
-	/** Pattern de range maximale. Cercle par défaut. */
+	/** Pattern de range maximale. Cercle par défaut. <br>
+	 * Example : stats.maxRangePattern.base = (t) -> AoeBuilders.cross.apply(t); */
 	public ObjectStat<AoeBuilder> maxRangePattern = new ObjectStat<AoeBuilder>(r -> AoeBuilders.circle.apply(r));
 	
-	// cast cooldowns
+	// cast cooldowns ==================================================
 	public IntStat cooldown = new IntStat(0);
 	public IntStat castPerTurn = new IntStat(0);
 	public IntStat castPerTarget = new IntStat(0);

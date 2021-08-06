@@ -36,8 +36,7 @@ public class Jab extends Spell {
 	}
 
 	@Override
-	protected SpellStats initBaseStats() {
-		return null;
+	protected void initBaseStats(SpellStats stats) {
 	}
 
 	@Override

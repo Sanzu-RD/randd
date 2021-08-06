@@ -1,7 +1,6 @@
-package com.souchy.randd.data.s1.spells.ice;
+package com.souchy.randd.data.s1.spells.secondary.light;
 
 import com.google.common.collect.ImmutableList;
-import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Fight;
@@ -10,23 +9,19 @@ import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
 
-public class IceSpear extends Spell {
+public class ShiningArmour extends Spell {
 
-	public IceSpear(Fight f) {
+	public ShiningArmour(Fight f) {
 		super(f);
 	}
 
 	@Override
 	public int modelid() {
-		return 5;
+		return 9;
 	}
 
 	@Override
-	protected SpellStats initBaseStats() {
-		var stats = new SpellStats();
-		stats.maxRangeRadius.baseflat = 2;
-		stats.maxRangePattern.base = (t) -> AoeBuilders.cross.apply(t);
-		return stats;
+	protected void initBaseStats(SpellStats stats) {
 	}
 
 	@Override
@@ -47,13 +42,23 @@ public class IceSpear extends Spell {
 		
 	}
 
-	
+	@Override
+	public boolean canCast(Creature caster) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canTarget(Creature caster, Cell target) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	@Override
 	public Spell copy(Fight fight) {
-		var s = new IceSpear(fight);
+		var s = new ShiningArmour(fight);
 		s.stats = stats.copy();
 		return s;
 	}
-	
 	
 }

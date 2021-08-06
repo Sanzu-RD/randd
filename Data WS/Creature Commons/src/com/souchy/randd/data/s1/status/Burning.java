@@ -36,11 +36,6 @@ public class Burning extends Status implements OnTurnStartHandler {
 		return 2;
 	}
 
-	@Override
-	public boolean fuse(Status s) {
-		genericFuseStrategy(s, false, true);
-		return true;
-	}
 	
 	@Override
 	public void onTurnStart(TurnStartEvent event) {

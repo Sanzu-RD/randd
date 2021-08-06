@@ -60,8 +60,8 @@ public class AoeBuilders {
 	}
 	
 	
-	private static Aoe singleaoe = new Aoe(1, 1).fill();
-	public static Supplier<Aoe> single = () -> singleaoe;
+//	private static Aoe singleaoe = new Aoe(1, 1).fill(); // can't do this because we're able to modify Aoes directly in SpellStats
+	public static Supplier<Aoe> single = () -> new Aoe(1, 1).fill();
 	public static Function<Integer, Aoe> lineH = (length) -> new Aoe(length, 1).fill();
 	public static Function<Integer, Aoe> lineV = (length) -> new Aoe(1, length).fill();
 	

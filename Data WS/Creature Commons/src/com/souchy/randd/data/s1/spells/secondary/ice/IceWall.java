@@ -1,6 +1,7 @@
-package com.souchy.randd.data.s1.spells.ice;
+package com.souchy.randd.data.s1.spells.secondary.ice;
 
 import com.google.common.collect.ImmutableList;
+import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Fight;
@@ -9,22 +10,21 @@ import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
 
-public class IceComet extends Spell {
+public class IceWall extends Spell {
 
-	public IceComet(Fight f) {
+	public IceWall(Fight f) {
 		super(f);
 	}
 
 	@Override
 	public int modelid() {
-		return 4;
+		return 6;
 	}
 
 	@Override
-	protected SpellStats initBaseStats() {
-		var stats = new SpellStats();
+	protected void initBaseStats(SpellStats stats) {
+		stats.maxRangePattern.base = (r) -> AoeBuilders.cross.apply(r);
 		stats.maxRangeRadius.baseflat = 5;
-		return stats;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class IceComet extends Spell {
 	
 	@Override
 	public Spell copy(Fight fight) {
-		var s = new IceComet(fight);
+		var s = new IceWall(fight);
 		s.stats = stats.copy();
 		return s;
 	}

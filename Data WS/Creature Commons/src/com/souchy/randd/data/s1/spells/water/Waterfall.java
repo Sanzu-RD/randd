@@ -19,7 +19,7 @@ import com.souchy.randd.data.s1.main.Elements;
 
 public class Waterfall extends Spell {
 
-	public static final int WaterfallID = Elements.water.makeid(1, 15);
+	public static final int modelid = Elements.water.makeid(1, 15);
 
 	public Damage e1;
 	
@@ -33,15 +33,13 @@ public class Waterfall extends Spell {
 	
 	@Override
 	public int modelid() {
-		return WaterfallID;
+		return modelid;
 	}
 
 	@Override
-	protected SpellStats initBaseStats() {
-		var stats = new SpellStats();
+	protected void initBaseStats(SpellStats stats) {
 		stats.costs.put(Resource.mana, new IntStat(5));
 		stats.maxRangeRadius.baseflat = 8;
-		return stats;
 	}
 
 	@Override

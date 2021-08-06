@@ -21,6 +21,9 @@ public class ResourceGainLoss extends Effect {
 	public final boolean isUse;
 	public final Map<Resource, Integer> shields, resources;
 	
+	/**
+	 * {@link Effect#Effect(Aoe, TargetTypeStat)}
+	 */
 	public ResourceGainLoss(Aoe aoe, TargetTypeStat targetConditions, boolean isUse, Map<Resource, Integer> shields, Map<Resource, Integer> resources) {
 		super(aoe, targetConditions);
 		this.isUse = isUse;

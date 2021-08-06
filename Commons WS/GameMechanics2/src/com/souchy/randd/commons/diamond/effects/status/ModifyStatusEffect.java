@@ -14,7 +14,7 @@ public class ModifyStatusEffect extends Effect {
 	
 	// mods to add, but to which statuses if not all ? 
 	public int modStacks, modDuration;
-	public  Status status;
+	public Status status;
 	
 	public ModifyStatusEffect(Aoe aoe, TargetTypeStat targetConditions, Status target, int modStacks, int modDuration) {
 		super(aoe, targetConditions);
@@ -40,8 +40,8 @@ public class ModifyStatusEffect extends Effect {
 
 	@Override
 	public void apply0(Creature caster, Cell cell) {
-		this.status.duration += modDuration;
-		this.status.stacks += modStacks;
+		this.status.duration = modDuration;
+		this.status.stacks = modStacks;
 	}
 
 	@Override

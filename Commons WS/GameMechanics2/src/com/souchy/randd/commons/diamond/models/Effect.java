@@ -6,6 +6,7 @@ import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.models.stats.special.HeightStat;
 import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statics.filters.Height;
+import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
@@ -45,8 +46,8 @@ public abstract class Effect /* extends Entity */ implements BBSerializer, BBDes
 
 	/**
 	 * Ctor
-	 * @param aoe {@link AoeBuilders}
-	 * @param targetConditions
+	 * @param aoe {@link AoeBuilders} : AoeBuilders.single.get()
+	 * @param targetConditions : TargetType.full.asStat()
 	 */
 	public Effect(/* Fight f, */ Aoe aoe, TargetTypeStat targetConditions) {
 //		super(f);
@@ -61,7 +62,9 @@ public abstract class Effect /* extends Entity */ implements BBSerializer, BBDes
 
 	
 	/**
-	 * apply the effect to the aoe around the target cell
+	 * <b>The spell is copied before</b> (spell.cast) <p>
+	 * 
+	 * Apply the effect to the aoe around the target cell
 	 * @param source
 	 * @param cellTarget
 	 */
@@ -72,7 +75,10 @@ public abstract class Effect /* extends Entity */ implements BBSerializer, BBDes
 		var casterEvent = createAssociatedEvent(source, cellTarget);
 		interceptors(source, casterEvent); 
 		modifiers(source, casterEvent);
+		
+		// [[[[[[[[[[[[[ PREPARE CASTER ]]]]]]]]]]]]]
 		prepareCaster(source, cellTarget);
+		
 //		Log.info("Effect Apply, intercepted? " + casterEvent.intercepted);
 		if(casterEvent.intercepted) return;
 
@@ -102,6 +108,7 @@ public abstract class Effect /* extends Entity */ implements BBSerializer, BBDes
 				event.effect.height = h.stat();
 				
 				// apply secondary effect
+				// [[[[[[[[[[[[[ PREPARE AND APPLY TO TARGET ]]]]]]]]]]]]]
 				secondaryEffect(event);
 			}
 			
@@ -113,6 +120,8 @@ public abstract class Effect /* extends Entity */ implements BBSerializer, BBDes
 	}
 
 	/**
+	 * <b>The spell is copied before</b> (spell.cast) <p>
+	 * 
 	 * Apply a copy of an effect event directly to a target without going through caster handlers. <br>
 	 * This can be used by handlers to apply other secondary/tertiary/.. effects. <br>
 	 * USE EFFECT.APPLY if you want to create a NEW effect.
@@ -129,9 +138,10 @@ public abstract class Effect /* extends Entity */ implements BBSerializer, BBDes
 		modifiers(event.target, event);
 		if(event.intercepted) return;
 		
+		//  [[[[[[[[[[[[[ PREPARE TARGET ]]]]]]]]]]]]]
 		event.effect.prepareTarget(event.source, event.target);
 		
-		// apply
+		//  [[[[[[[[[[[[[ APPLY TO TARGET ]]]]]]]]]]]]]
 		event.effect.apply0(event.source, event.target);
 		
 		// level 1 handlers
