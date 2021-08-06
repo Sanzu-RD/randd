@@ -60,8 +60,8 @@ public class AoeBuilders {
 	}
 	
 	
-	
-	public static Supplier<Aoe> single = () -> new Aoe(1, 1).fill();
+	private static Aoe singleaoe = new Aoe(1, 1).fill();
+	public static Supplier<Aoe> single = () -> singleaoe;
 	public static Function<Integer, Aoe> lineH = (length) -> new Aoe(length, 1).fill();
 	public static Function<Integer, Aoe> lineV = (length) -> new Aoe(1, length).fill();
 	
