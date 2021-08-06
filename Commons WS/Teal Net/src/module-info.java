@@ -15,5 +15,5 @@ module com.souchy.randd.commons.TealNet {
 	requires jersey.server;
 	requires com.google.common;
 	
-	requires transitive java.base;
+//	requires java.base;
 }

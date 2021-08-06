@@ -106,6 +106,24 @@ public class AoeBuilders {
 		}
 		return aoe;
 	};
+	
+
+	/** cone = half a circle = half a diamond */
+	public static Function<Integer, Aoe> cone = (radius) -> {
+		radius++;
+		int w = radius * 2; // - 1;
+		var aoe = new Aoe(w - 1, w - 1);
+		for (int i = -radius; i < 1; i++) {
+			for (int j = -radius; j < radius; j++) {
+				if(Math.abs(i) + Math.abs(j) <= radius - 1) {
+					aoe.table.put(i + radius - 1, j + radius - 1, true);
+				}
+			}
+		}
+		return aoe;
+	};
+	
+	
 	/** une moitié de cercle */
 	// public static Function<Integer, Aoe> cone = (radius) -> {
 	//

@@ -166,9 +166,8 @@ public class SapphireController extends CameraInputController {
 //			Log.info(creature.stats.resources.get(Resource.life).toString());
 //			SapphireGame.gfx.hud.reload(); // SapphireHud.refresh();
 			
-			var res = new HashMap<Resource, Integer>();
-			res.put(Resource.life, 10);
-			new ResourceGainLoss(AoeBuilders.single.get(), TargetType.full.asStat(), false, new HashMap<>(), res)
+			var res = Map.of(Resource.life, 10); //new HashMap<Resource, Integer>(); res.put(Resource.life, 10);
+			new ResourceGainLoss(AoeBuilders.single.get(), TargetType.full.asStat(), false, Map.of(), res)
 				.apply(creature, creature.getCell());
 			
 		});

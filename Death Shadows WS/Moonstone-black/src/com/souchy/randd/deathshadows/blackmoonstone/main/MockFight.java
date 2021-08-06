@@ -44,7 +44,7 @@ public class MockFight {
 		jade.affinities = new int[Element.values.size()];
 		jade.affinities[Elements.water.ordinal()] = 30; // personalized 30% water affinity
 		jade.creatureModelID = modelid; 
-		jade.spellIDs = new int[] { 1, 2, 3, 4, 5, 6, 2006, 8, 9 };
+		jade.spellIDs = new int[] { 1, 2, 3, 4, 5, 10, 2006, 8, 9 };
 		
 		// base model
 		CreatureModel model = DiamondModels.creatures.get(jade.creatureModelID);

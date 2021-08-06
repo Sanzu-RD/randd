@@ -77,11 +77,6 @@ public class Fireball extends Spell {
 		e2.apply(caster, target);
 	}
 
-	@Override
-	public boolean canCast(Creature caster) {
-		return super.canCast(caster);
-	}
-
 	
 	@Override
 	public Spell copy(Fight fight) {
@@ -90,18 +85,7 @@ public class Fireball extends Spell {
 //		Log.critical("FIREBALL FIGHT COPY = " + fight);
 		return s;
 	}
-	@Override
-	public ByteBuf serialize(ByteBuf out) {
-		super.serialize(out);
-		
-		return out;
-	}
-	
-	@Override
-	public BBMessage deserialize(ByteBuf in) {
-		// TODO Auto-generated method stub
-		return super.deserialize(in);
-	}
+
 	
 	
 }

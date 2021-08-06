@@ -1,61 +1,71 @@
 package com.souchy.randd.data.s1.spells.water;
 
+import java.util.HashMap;
+
 import com.google.common.collect.ImmutableList;
+import com.souchy.randd.commons.diamond.common.AoeBuilders;
+import com.souchy.randd.commons.diamond.effects.damage.Damage;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Spell;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
+import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
+import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
+import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
+import com.souchy.randd.data.s1.main.Elements;
 
+/**
+ * 1 small hit for a low cost
+ * 
+ * @author Blank
+ * @date 6 août 2021
+ */
 public class Bubble extends Spell {
 
+	public static final int bubbleID = Elements.water.makeid(1, 8);
+	
+	public Damage e1;
+	
 	public Bubble(Fight f) {
 		super(f);
+		var formula = new HashMap<Element, IntStat>();
+		formula.put(Elements.water, new IntStat(15, 0, 10, 0));
+		e1 = new Damage(AoeBuilders.single.get(), TargetType.full.asStat(), formula);
+		this.effects.add(e1);
 	}
 
 	@Override
 	public int modelid() {
-		return 8;
+		return bubbleID;
 	}
 
 	@Override
 	protected SpellStats initBaseStats() {
 		var stats = new SpellStats();
+		stats.costs.put(Resource.mana, new IntStat(1));
+		stats.maxRangeRadius.baseflat = 8;
 		return stats;
 	}
 
 	@Override
 	protected ImmutableList<Element> initElements() {
-		// TODO Auto-generated method stub
-		return null;
+		return ImmutableList.of(Elements.water);
 	}
 
 	@Override
 	protected ImmutableList<CreatureType> initCreatureTypes() {
-		// TODO Auto-generated method stub
-		return null;
+		return ImmutableList.of();
 	}
 
 	@Override
 	public void cast0(Creature caster, Cell target) {
-		// TODO Auto-generated method stub
-		
+		e1.apply(caster, target);
 	}
 
-	@Override
-	public boolean canCast(Creature caster) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean canTarget(Creature caster, Cell target) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	@Override
 	public Spell copy(Fight fight) {
 		var s = new Bubble(fight);

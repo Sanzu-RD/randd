@@ -1,52 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5fde4df8-f00d-4ace-8f34-b0ed776ce5f4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/Coral-commons/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/Coral-commons/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/com/souchy/randd/commons/diamond/common/Pathfinding.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/com/souchy/randd/commons/diamond/common/Pathfinding.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/com/souchy/randd/commons/diamond/common/generic/Vector2.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/com/souchy/randd/commons/diamond/common/generic/Vector2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/com/souchy/randd/commons/diamond/main/DiamondModels.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/GameMechanics2/src/com/souchy/randd/commons/diamond/main/DiamondModels.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/PearlMessaging/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/PearlMessaging/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/PearlMessaging/src/com/souchy/randd/deathshadows/pearl/NodeInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/PearlMessaging/src/com/souchy/randd/deathshadows/pearl/NodeInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/PearlMessaging/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/PearlMessaging/src/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/Teal Net/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/Teal Net/src/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/TealWaters/src/com/souchy/randd/commons/tealwaters/io/files/JsonConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/TealWaters/src/com/souchy/randd/commons/tealwaters/io/files/JsonConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Commons WS/TealWaters/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Commons WS/TealWaters/src/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/spells/fire/Meteor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/com/souchy/randd/data/s1/spells/fire/Meteor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Data WS/Creature Commons/src/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Death Shadows WS/Iolite/src/com/souchy/randd/deathshadows/iolite/emerald/Emerald.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Death Shadows WS/Iolite/src/com/souchy/randd/deathshadows/iolite/emerald/Emerald.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Death Shadows WS/Moonstone-black/blackmoonstone.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Death Shadows WS/Moonstone-black/blackmoonstone.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Mock WS/Mockingbird/src/mockingbird/Mockingbird.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Mock WS/Mockingbird/src/mockingbird/Mockingbird.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Tools WS/Rainbow/res/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Tools WS/Rainbow/res/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Tools WS/Rainbow/res/i18n/ux/bundle_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Tools WS/Rainbow/res/i18n/ux/bundle_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../../Tools WS/Rainbow/res/i18n/ux/bundle_fr.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../Tools WS/Rainbow/res/i18n/ux/bundle_fr.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Ammolite FX/src/com/souchy/randd/ebi/ammolite/spells/FireballFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Ammolite FX/src/com/souchy/randd/ebi/ammolite/spells/FireballFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Ammolite FX/src/com/souchy/randd/ebi/ammolite/spells/IceCometFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Ammolite FX/src/com/souchy/randd/ebi/ammolite/spells/IceCometFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Lapis Lazuli/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lapis Lazuli/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisScreenRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/LapisScreenRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/RenderOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/gfx/screen/RenderOptions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/lining/LineDrawing.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/lining/LineDrawing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/managers/LapisAssets.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lapis Lazuli/src/com/souchy/randd/ebishoal/commons/lapis/managers/LapisAssets.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../i18n/ux/bundle_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../i18n/ux/bundle_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../i18n/ux/bundle_fr.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../i18n/ux/bundle_fr.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sapphire/components/parameters.lml" beforeDir="false" afterPath="$PROJECT_DIR$/sapphire/components/parameters.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Amethyst/amethyst.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Amethyst/amethyst.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/i18n/ux/bundle_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/i18n/ux/bundle_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/i18n/ux/bundle_fr.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/i18n/ux/bundle_fr.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/sapphire/components/parameters.lml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/res/ux/sapphire/components/parameters.lml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/sapphireowl.conf" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/sapphireowl.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/sapphireowl.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/sapphireowl.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/confs/SapphireOwlConf.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/confs/SapphireOwlConf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/controls/SapphireController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/controls/SapphireController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/gfx/SapphireScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/SapphireComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/SapphireComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/SapphireHud.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/SapphireHud.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/components/Chat.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/components/Chat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/components/Parameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/src/com/souchy/randd/ebishoal/sapphire/ux/components/Parameters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../cores/Sapphire Owl/test" beforeDir="false" afterPath="$PROJECT_DIR$/../../../cores/Sapphire Owl/test" afterDir="false" />
-    </list>
+    <list default="true" id="5fde4df8-f00d-4ace-8f34-b0ed776ce5f4" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +151,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1928" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="-1928" y="-8" width="1936" height="1096" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49945828" visible="true" weight="0.12793177" />

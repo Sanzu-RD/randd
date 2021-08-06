@@ -64,7 +64,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 8,
+		"id": 1308,
 		"comment": "Bubble",
 		"icon":  "bubble",
 		"casterAnim": "1",
@@ -80,7 +80,55 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 2006,
+		"id": 10,
+		"comment": "meteor",
+		"icon":  "fireball",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 11,
+		"comment": "FirePillar",
+		"icon":  "firepillar",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 12,
+		"comment": "sun ball",
+		"icon":  "sunball",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 1313,
+		"comment": "frostbreath",
+		"icon":  "frostbreath",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 1314,
+		"comment": "waterpillar",
+		"icon":  "waterpillar",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 1315,
+		"comment": "waterfall",
+		"icon":  "waterfall",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 1316,
 		"comment": "Frost Dash",
 		"icon":  "frostdash",
 		"casterAnim": "1",

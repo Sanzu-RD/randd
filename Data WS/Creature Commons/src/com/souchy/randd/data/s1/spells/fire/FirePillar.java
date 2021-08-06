@@ -1,86 +1,75 @@
-package com.souchy.randd.data.s1.spells.ice;
+package com.souchy.randd.data.s1.spells.fire;
 
 import java.util.HashMap;
 
 import com.google.common.collect.ImmutableList;
 import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.effects.damage.Damage;
-import com.souchy.randd.commons.diamond.effects.displacement.DashTo;
-import com.souchy.randd.commons.diamond.effects.status.AddStatusEffect;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Spell;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
-import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
+import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
-import com.souchy.randd.data.s1.status.Burning;
 
-public class Frostdash extends Spell {
+public class FirePillar extends Spell {
 
-	public static final int frostdashID = Elements.water.thousand(6);
+	public static final int firepillarID = 11;
 
 	public Damage e1;
-	public DashTo e2;
 	
-	public Frostdash(Fight f) {
+	public FirePillar(Fight f) {
 		super(f);
-		
-		//this.stats.target.setBase(TargetType.needsLineOfSight, false); // everything already false by default
-		this.stats.target.base = 0;
-		this.stats.target.fight = 0;
-		this.stats.target.setFight(TargetType.empty, true); 
-		this.stats.target.setBase(TargetType.empty, true); // only empty cells are accepted
-
 		var formula = new HashMap<Element, IntStat>();
-		formula.put(Elements.water, new IntStat(50, 0, 10, 0));
+		formula.put(Elements.fire, new IntStat(50, 0, 10, 0));
 		e1 = new Damage(AoeBuilders.single.get(), TargetType.full.asStat(), formula);
-		e2 = new DashTo(AoeBuilders.single.get(), TargetType.empty.asStat());
-		
 		this.effects.add(e1);
-		this.effects.add(e2);
 	}
-
+	
 	@Override
 	public int modelid() {
-		return frostdashID;
+		return firepillarID;
 	}
 
 	@Override
 	protected SpellStats initBaseStats() {
 		var stats = new SpellStats();
-		stats.maxRangeRadius.baseflat = 5;
-		stats.maxRangePattern.base = r -> AoeBuilders.cross.apply(r);
+		stats.costs.put(Resource.mana, new IntStat(3));
+		stats.maxRangeRadius.baseflat = 8;
 		return stats;
 	}
 
 	@Override
 	protected ImmutableList<Element> initElements() {
-		return null;
+		return ImmutableList.of(Elements.fire);
 	}
 
 	@Override
 	protected ImmutableList<CreatureType> initCreatureTypes() {
-		return null;
+		return ImmutableList.of();
 	}
 
 	@Override
-	protected void cast0(Creature caster, Cell target) {
-		Log.info("Frostdash cast: " + caster + ", " + target);
+	public void cast0(Creature caster, Cell target) {
+		Log.info("FirePillar cast: " + caster + ", " + target);
 		e1.apply(caster, target);
-		e2.apply(caster, target);
 	}
 
+	
 	@Override
 	public Spell copy(Fight fight) {
-		var s = new Frostdash(fight);
+		var s = new FirePillar(fight);
 		s.stats = stats.copy();
+//		Log.critical("FirePillar FIGHT COPY = " + fight);
 		return s;
 	}
+
+	
 	
 }

@@ -11,8 +11,8 @@ public enum Elements implements Element, StatProperty {
 	fire,
 	water,
 	earth,
-//	nature,
 	air,
+//	nature,
 	
 //	light,
 //	dark,
@@ -35,8 +35,8 @@ public enum Elements implements Element, StatProperty {
 	/**
 	 * helper to make spell ids
 	 */
-	public int thousand(int i) {
-		return (this.ordinal() + 1) * 1000 + i;
+	public int makeid(int season, int i) {
+		return season * 1000 + (this.ordinal() + 1) * 100 + i;
 	}
 	
 }
