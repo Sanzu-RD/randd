@@ -22,19 +22,41 @@ public class MockFight {
 		// init fight with cells, creatures and spells
 		Fight fight = new Fight();
 		
-		var c1 = testCreateCreature(fight, 1);
-		c1.team = Team.A;
-		c1.pos.set(3, 17);
-		c1.add(new ObjectId("5efbf61f0856d10feb48c193"));
-//		c1.add(user);
+		// Team A
+		var ca1 = testCreateCreature(fight, 5, 1, 10, 11, 1501); // fiera
+		ca1.team = Team.A;
+		ca1.pos.set(3, 17);
+		ca1.add(new ObjectId("5efbf61f0856d10feb48c193"));
+		var ca2 = testCreateCreature(fight, 6, 2, 3, 4, 5, 6); // flora
+		ca2.team = Team.A;
+		ca2.pos.set(4, 17);
+		ca2.add(new ObjectId("5efbf61f0856d10feb48c193"));
+		var ca3 = testCreateCreature(fight, 7, 1308, 1313, 1314, 1315, 1316, 2, 3, 4, 5, 6); // naia
+		ca3.team = Team.A;
+		ca3.pos.set(5, 17);
+		ca3.add(new ObjectId("5efbf61f0856d10feb48c193"));
+		var ca4 = testCreateCreature(fight, 8, 1501); // orea
+		ca4.team = Team.A;
+		ca4.pos.set(6, 17);
+		ca4.add(new ObjectId("5efbf61f0856d10feb48c193"));
+
+		// Team B
+		var cb1 = testCreateCreature(fight, 1, 1, 2, 3, 4, 5, 10, 9); // mesmer
+		cb1.team = Team.B;
+		cb1.pos.set(15, 1);
+		cb1.add(new ObjectId("5efbf61f0856d10feb48c193"));
+		var cb2 = testCreateCreature(fight, 2, 1, 2, 3, 4, 5, 10, 9); // sungjin
+		cb2.team = Team.B;
+		cb2.pos.set(16, 1);
+		cb2.add(new ObjectId("5efbf61f0856d10feb48c193"));
 		
-		var c2 = testCreateCreature(fight, 2);
-		c2.team = Team.B;
-		c2.pos.set(15, 1);
-		c2.add(new ObjectId("5efbf61f0856d10feb48c193"));
-		
-		fight.timeline.add(c1.id);
-		fight.timeline.add(c2.id);
+		// Timeline
+		fight.timeline.add(ca1.id);
+		fight.timeline.add(cb1.id);
+		fight.timeline.add(ca2.id);
+		fight.timeline.add(cb2.id);
+		fight.timeline.add(ca3.id);
+		fight.timeline.add(ca4.id);
 		return fight;
 	}
 
@@ -44,7 +66,7 @@ public class MockFight {
 		jade.affinities = new int[Element.values.size()];
 		jade.affinities[Elements.water.ordinal()] = 30; // personalized 30% water affinity
 		jade.creatureModelID = modelid; 
-		jade.spellIDs = new int[] { 1, 2, 3, 4, 5, 10, 2006, 8, 9 };
+		jade.spellIDs = spellids;
 		
 		// base model
 		CreatureModel model = DiamondModels.creatures.get(jade.creatureModelID);

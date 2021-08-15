@@ -13,7 +13,7 @@ public class Luna extends CreatureModel {
 
 	@Override
 	public int id() {
-		return 13;
+		return 14;
 	}
 
 	@Override

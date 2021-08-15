@@ -33,7 +33,7 @@ public class EventPipeline {
 //		}
 //	}
 	public void register(Handler handler) {
-		Log.format("EventPipeline register %s", handler);
+		Log.format("EventPipeline register %s", handler.getClass());
 		switch (handler.type()) {
 //			case Interceptor : interceptors.register(handler); break;
 //			case Modifier : modifiers.register(handler); break;
@@ -52,7 +52,7 @@ public class EventPipeline {
 //		}
 //	}
 	public void unregister(Handler handler) {
-		Log.format("EventPipeline unregister %s", handler);
+		Log.format("EventPipeline unregister %s", handler.getClass());
 		// Status Remove Effect
 		switch (handler.type()) {
 //			case Interceptor : interceptors.unregister(handler); break;

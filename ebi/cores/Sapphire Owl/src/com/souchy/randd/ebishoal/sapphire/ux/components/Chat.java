@@ -154,7 +154,9 @@ public class Chat extends SapphireComponent implements Reactor {
 	public void addMsg(ICM icm) {
 //		Log.info("chat add msg");
 		try {
+			// write the index of the message inside its content for debug purposes
 			icm.content = messages.size + " " + icm.content;
+			
 			messages.add(icm);
 			if(messages.size > SapphireOwl.conf.general.maxChatMessages) 
 				messages.removeIndex(0);

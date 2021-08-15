@@ -93,6 +93,7 @@ public class FullUpdate implements BBMessage {
 		for(int i = 0; i < creaturecount; i++) {
 			var c = new Creature();
 			c.deserialize(in);
+			
 			creatures.add(c);
 		}
 		for(int i = 0; i < statuscount; i++) {

@@ -87,7 +87,7 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	public Spell(Fight f) {
 		super(f);
 		id = idCounter++;
-		initBaseStats(new SpellStats());
+		initBaseStats(stats = new SpellStats());
 		taggedElements = initElements();
 		taggedCreatureTypes = initCreatureTypes();
 		taggedCreatures = null; // initCreatures();

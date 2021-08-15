@@ -96,7 +96,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 12,
+		"id": 1501,
 		"comment": "sun ball",
 		"icon":  "sunball",
 		"casterAnim": "1",

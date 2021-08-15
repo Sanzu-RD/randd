@@ -49,6 +49,9 @@ public class SpellStats implements BBSerializer, BBDeserializer { //extends Enty
 	public List<ObjectStat<Aoe>> aoes = new ArrayList<>();
 	
 	
+	public void addAoe(Aoe aoe) {
+		aoes.add(new ObjectStat<Aoe>(aoe));
+	}
 
 	public SpellStats copy() {
 		final var s = new SpellStats();

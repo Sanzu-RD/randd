@@ -8,6 +8,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireOwlConf;
+import com.souchy.randd.ebishoal.sapphire.controls.Commands;
 import com.souchy.randd.moonstone.white.Moonstone;
 
 public class SapphireOwl extends LapisCore { 

@@ -62,6 +62,7 @@ public class Timeline extends SapphireComponent implements Reactor {
 	@Subscribe
 	public void onTurnStart(TurnStartEvent e) {
 		if(e.fight.future != null) e.fight.future.cancel(true);
+		if(this.getStage() == null) return;
 		
 		e.fight.future = e.fight.timer.scheduleAtFixedRate(() -> {
 			this.timer.setText(e.fight.time + "s"); // set timer text
@@ -94,7 +95,7 @@ public class Timeline extends SapphireComponent implements Reactor {
 	
 	private void refresh0() {
 		var index = SapphireGame.fight.timeline.index();
-		Log.format("UI Timeline refresh %s", index);
+//		Log.format("UI Timeline refresh %s", index);
 		
 		table.getChildren().forEach(a -> {
 			if(a instanceof Stack == false) return;
@@ -103,7 +104,7 @@ public class Timeline extends SapphireComponent implements Reactor {
 //			LapisUtil.setImage(img, getCreatureIcon(img));
 			getCreatureIcon(img);
 			
-			Log.format("Timeline img cell %s, %s", table.getCell(a).getColumn(), table.getCell(a).getRow());
+//			Log.format("Timeline img cell %s, %s", table.getCell(a).getColumn(), table.getCell(a).getRow());
 		});
 
 		// var c = table.getChild(e.index);
@@ -118,7 +119,7 @@ public class Timeline extends SapphireComponent implements Reactor {
 		});
 		
 		try {
-			Log.format("pointer at %s, %s", table.getCell(pointer).getColumn(), table.getCell(pointer).getRow());
+//			Log.format("pointer at %s, %s", table.getCell(pointer).getColumn(), table.getCell(pointer).getRow());
 		} catch (Exception e) {
 			
 		}

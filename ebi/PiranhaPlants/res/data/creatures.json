@@ -3,19 +3,25 @@
 		"id": 1,
 		"comment": "Mesmer",
 		"models": ["res/models/creatures/Marian.g3dj"],
-		"icon": "Mobs_joker_01"
+		"icon": "mesmer"
 	},
 	{
 		"id": 2,
 		"comment": "Sungjin",
 		"models": ["res/models/creatures/Marian.g3dj"],
-		"icon": "MonstersAvatarIcons_22"
+		"icon": "sungjin"
 	},
 	{
 		"id": 3,
 		"comment": "Megorya",
 		"models": ["res/models/creatures/Marian.g3dj"],
 		"icon": "megorya"
+	},
+	{
+		"id": 4,
+		"comment": "Desperya",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "desperya"
 	},
 	{
 		"id": 5,
@@ -36,10 +42,34 @@
 		"icon": "naia"
 	},
 	{
+		"id": 7,
+		"comment": "Naia",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "naia"
+	},
+	{
 		"id": 9,
 		"comment": "Aurelia",
 		"models": ["res/models/creatures/Marian.g3dj"],
 		"icon": "aurelia"
+	},
+	{
+		"id": 10,
+		"comment": "Fantasma",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "fantasma"
+	},
+	{
+		"id": 11,
+		"comment": "Listine",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "listine"
+	},
+	{
+		"id": 12,
+		"comment": "Goryo",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "goryo"
 	},
 	{
 		"id": 13,
@@ -48,22 +78,40 @@
 		"icon": "luna"
 	},
 	{
-		"id": 39,
+		"id": 14,
+		"comment": "Tsukuyo",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "tsukuyo"
+	},
+	{
+		"id": 15,
+		"comment": "Hero",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "hero"
+	},
+	{
+		"id": 40,
 		"comment": "Lilian",
 		"models": ["res/models/creatures/Marian.g3dj"],
 		"icon": "lilian"
 	},
 	{
-		"id": 40,
+		"id": 41,
 		"comment": "Marian",
 		"models": ["res/models/creatures/Marian.g3dj"],
 		"icon": "marian"
 	},
 	{
-		"id": 44,
+		"id": 45,
 		"comment": "Klaust",
 		"models": ["res/models/creatures/Marian.g3dj"],
 		"icon": "klaust"
+	},
+	{
+		"id": 27,
+		"comment": "Real",
+		"models": ["res/models/creatures/Marian.g3dj"],
+		"icon": "real"
 	}
 
 ]

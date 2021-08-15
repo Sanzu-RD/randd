@@ -1,4 +1,4 @@
-package com.souchy.randd.ebi.ammolite.spells;
+package com.souchy.randd.ebi.ammolite.spells.fire;
 
 import java.util.function.Supplier;
 

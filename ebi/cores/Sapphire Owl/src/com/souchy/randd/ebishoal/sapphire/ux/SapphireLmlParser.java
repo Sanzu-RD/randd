@@ -41,7 +41,7 @@ public class SapphireLmlParser extends DefaultLmlParser {
 	}
 	
 	public static void init() {
-		var config = JsonConfig.readExternal(SapphireOwlConf.class, "./");		
+		var config = SapphireOwl.conf; //JsonConfig.readExternal(SapphireOwlConf.class, "./");
 		
 		var prefs = loadPrefs();
 		

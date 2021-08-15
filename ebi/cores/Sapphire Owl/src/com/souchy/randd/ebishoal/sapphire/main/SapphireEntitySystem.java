@@ -107,6 +107,8 @@ public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.Syste
 			var animController = new AnimationController(modelinstance);
 			animController.setAnimation("CharacterArmature|Walk", -1);
 
+			/*
+			// Random colors
 			var rnd = new Random();
 			var baseColor = new Color(rnd.nextFloat(), rnd.nextFloat(), rnd.nextFloat(), 1f);
 					
@@ -117,7 +119,8 @@ public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.Syste
 			// hair darker
 			float ratio = 1f /  2f;
 			modelinstance.materials.get(5).set(ColorAttribute.createDiffuse(baseColor.mul(ratio, ratio, ratio, 1f)));
-
+			*/
+			
 			var teamHighlight = Highlight.team(crea.team);
 			
 			modelinstance.nodes.addAll(teamHighlight.nodes);

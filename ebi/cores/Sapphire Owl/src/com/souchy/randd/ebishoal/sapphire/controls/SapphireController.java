@@ -144,11 +144,11 @@ public class SapphireController extends CameraInputController {
 			translation.set(0, 0, 0);
 			rotationUnit.set(0, 0, 0);
 		});
-
+		
 		addOnKeyDown(Keys.C, () -> {
 			Moonstone.writes(new PassTurn());
 		});
-
+		
 		addOnKeyDown(RIGHT, () -> camera.rotate(45, 0, 0, 1));
 		addOnKeyDown(LEFT, () -> camera.rotate(45, 0, 0, -1));
 		addOnKeyDown(UP, () -> camera.rotate(45, -camera.up.y, camera.up.x, 0));
@@ -161,7 +161,7 @@ public class SapphireController extends CameraInputController {
 		addOnKeyDown(Keys.F3, () -> SapphireGame.gfx.hud.getStage().setDebugAll(!SapphireGame.gfx.hud.getStage().isDebugAll()));
 		addOnKeyDown(Keys.V, () -> {
 //			var creature = SapphireGame.fight.teamA.get(0)
-			var creature = SapphireGame.fight.creatures.first();
+			var creature = SapphireGame.getPlayingCreature(); //.fight.creatures.first();
 //			creature.stats.resources.get(Resource.life).fight += 10;
 //			Log.info(creature.stats.resources.get(Resource.life).toString());
 //			SapphireGame.gfx.hud.reload(); // SapphireHud.refresh();
@@ -294,7 +294,9 @@ public class SapphireController extends CameraInputController {
 	};
 	
 	private void highlightSpellRange(int spellindex) {
-		var creature = SapphireGame.fight.creatures.first();
+		var creature = SapphireGame.getPlayingCreature(); //.fight.creatures.first();
+		if(spellindex >= creature.spellbook.size()) return;
+		
 		var spellid = creature.spellbook.get(spellindex);
 		var spell = SapphireGame.fight.spells.get(spellid);
 		currentActionID = spellid;
@@ -304,7 +306,7 @@ public class SapphireController extends CameraInputController {
 		
 		Log.info("selected spell: " + spell.id + " " + spell.getClass().getSimpleName() + ", range: " + spell.stats.maxRangeRadius.value());
 		
-
+		
 		List<Vector2> los = new ArrayList<>();
 		List<Vector2> noLos = new ArrayList<>();
 		
@@ -475,7 +477,7 @@ public class SapphireController extends CameraInputController {
 			if (button == Buttons.LEFT) {
 				Log.info("SapphireController execute action " + currentActionID);
 				if(currentActionID > 0) {
-					var caster = SapphireGame.fight.creatures.first();
+					var caster = SapphireGame.getPlayingCreature(); //.fight.creatures.first();
 					var spell = SapphireGame.fight.spells.get(currentActionID);
 					if(spell.canCast(caster) && spell.canTarget(caster, cell)) 
 						spell.cast(caster, cell);

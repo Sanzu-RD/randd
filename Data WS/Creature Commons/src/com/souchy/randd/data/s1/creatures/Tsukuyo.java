@@ -7,13 +7,13 @@ import com.souchy.randd.commons.diamond.models.stats.CreatureStats;
  * 
  * 
  * @author Blank
- * @date 4 juill. 2020
+ * @date 9 août 2021
  */
-public class Flora extends CreatureModel {
+public class Tsukuyo extends CreatureModel {
 
 	@Override
 	public int id() {
-		return 6;
+		return 13;
 	}
 
 	@Override
@@ -21,6 +21,5 @@ public class Flora extends CreatureModel {
 		var stats = new CreatureStats();
 		return stats;
 	}
-	
 	
 }

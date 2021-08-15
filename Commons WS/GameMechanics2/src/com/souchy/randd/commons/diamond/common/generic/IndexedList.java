@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Predicate;
+
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 public class IndexedList<T> { // extends ArrayList<T> {
 
@@ -111,6 +114,26 @@ public class IndexedList<T> { // extends ArrayList<T> {
 	
 	public synchronized List<T> copy(){
 		return new ArrayList<>(list);
+	}
+	
+	/**
+	 * Find the next value that matches a predicate. Null if no value matches.
+	 * @param valueTester
+	 * @return
+	 */
+	public synchronized T findNext(Predicate<T> valueTester) {
+		int i = index;
+		int max = list.size() + index;
+		T v = null;
+		do {
+			v = get(i % list.size());
+			i++;
+			Log.format("Timeline.findNext, size=%s, i=%s, v=%s", list.size(), i-1, v);
+		} while (!valueTester.test(v) && i < max);
+		
+		if(i >= max) v = null; // si on n'a pas trouvé de match
+		
+		return v;
 	}
 	
 }

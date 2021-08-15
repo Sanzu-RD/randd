@@ -176,7 +176,7 @@ public class LapisAssets {
 		for (var d : dir.list()) {
 			if(d.isDirectory()) {
 				if(filter.test(d)) {
-//					Log.info("dtype: " + d.type().name() + ", d path : " + d.path());
+					Log.info("dtype: " + d.type().name() + ", d path : " + d.path());
 					action.accept(d);
 				} else {
 					recurseDirectories(d, filter, action);
@@ -190,7 +190,8 @@ public class LapisAssets {
 		for (var f : dir.list()) {
 			if(f.isDirectory()) {
 				recurseFiles(f, filter, action);
-			} else if(filter.test(f)) { 
+			} else 
+			if(filter.test(f)) { 
 //				Log.info("ftype: " + f.type().name() + ", f path : " + f.path());
 				action.accept(f);
 			}

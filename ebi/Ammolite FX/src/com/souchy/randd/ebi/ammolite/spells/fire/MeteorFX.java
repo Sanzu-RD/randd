@@ -1,4 +1,4 @@
-package com.souchy.randd.ebi.ammolite.spells;
+package com.souchy.randd.ebi.ammolite.spells.fire;
 
 import com.souchy.randd.commons.diamond.common.generic.Vector2;
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;

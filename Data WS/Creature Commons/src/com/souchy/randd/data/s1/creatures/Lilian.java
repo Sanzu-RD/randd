@@ -13,7 +13,7 @@ public class Lilian extends CreatureModel {
 
 	@Override
 	public int id() {
-		return 39;
+		return 40;
 	}
 
 	@Override

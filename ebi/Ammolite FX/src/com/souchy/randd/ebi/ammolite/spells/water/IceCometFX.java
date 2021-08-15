@@ -1,4 +1,4 @@
-package com.souchy.randd.ebi.ammolite.spells;
+package com.souchy.randd.ebi.ammolite.spells.water;
 
 import java.util.function.Supplier;
 
@@ -8,7 +8,7 @@ import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.data.s1.spells.ice.IceComet;
+import com.souchy.randd.data.s1.spells.secondary.ice.IceComet;
 import com.souchy.randd.ebi.ammolite.Ammolite;
 import com.souchy.randd.ebi.ammolite.FXPlayer;
 

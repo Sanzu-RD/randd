@@ -66,6 +66,7 @@ public class Burning extends Status implements OnTurnStartHandler {
 		var s = new Burning(f, sourceEntityId, targetEntityId);
 		s.dmg = dmg.copy();
 		s.dmg.reset();
+		s.effects.clear();
 		s.effects.add(s.dmg);
 		return s;
 	}
@@ -77,11 +78,15 @@ public class Burning extends Status implements OnTurnStartHandler {
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		return null;
+		super.serialize(out);
+		dmg.serialize(out);
+		return out;
 	}
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
+		super.deserialize(in);
+		dmg.deserialize(in);
 		return null;
 	}
 

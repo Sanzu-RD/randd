@@ -120,7 +120,7 @@ public class Parameters extends SapphireComponent {
 			}
 		});
 
-		Log.info("Parameters set close btn");
+//		Log.info("Parameters set close btn");
 
 //		VisImageButton closeButton = (VisImageButton) window.getTitleTable().getCells().get(1).getActor();
 //		closeButton.addListener(new ChangeListener() {
@@ -146,7 +146,7 @@ public class Parameters extends SapphireComponent {
 	}
 	
 	public void btnClose() {
-		Log.info("Parameters close btn21");
+//		Log.info("Parameters close btn21");
 		close();
 	}
 	
@@ -210,22 +210,22 @@ public class Parameters extends SapphireComponent {
 		var actor = (Actor) obj;
 		if(actor instanceof Slider) {
 			Slider slider = (Slider) actor;
-			Log.info("onChange Slider " + slider.getName() + " = " + (int) slider.getValue());
+//			Log.info("onChange Slider " + slider.getName() + " = " + (int) slider.getValue());
 			SapphireOwl.conf.setPref(slider.getName(), (int) slider.getValue());
 		} else if(actor instanceof VisCheckBox) {
 			VisCheckBox field = (VisCheckBox) actor;
 			SapphireOwl.conf.setPref(field.getName(), field.isChecked());
-			Log.info("onChange CheckBox " + field.getName() + " = " + field.isChecked());
+//			Log.info("onChange CheckBox " + field.getName() + " = " + field.isChecked());
 		} else if(actor instanceof TextField) {
 			TextField field = (TextField) actor;
 			SapphireOwl.conf.setPref(field.getName(), field.getText());
-			Log.info("onChange TextField " + field.getName() + " = " + field.getText());
+//			Log.info("onChange TextField " + field.getName() + " = " + field.getText());
 		} else if(actor instanceof SelectBox) {
 			SelectBox field = (SelectBox) actor;
 			SapphireOwl.conf.setPref(field.getName(), field.getSelected());
-			Log.info("onChange SelectBox " + field.getName() + " = " + field.getSelected());
+//			Log.info("onChange SelectBox " + field.getName() + " = " + field.getSelected());
 		} else {
-			Log.info("onChange : " + actor + " is " + actor.getClass());
+//			Log.info("onChange : " + actor + " is " + actor.getClass());
 		}
 		SapphireOwl.conf.save();
 	}

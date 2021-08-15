@@ -65,7 +65,7 @@ public class SapphireScreen extends LapisScreen {
 
 	public void startPfx() {
 		try {
-			var c = SapphireGame.fight.creatures.first();
+			var c = SapphireGame.getPlayingCreature(); //.fight.creatures.first();
 			var pos = c.pos;
 			
 			var effect = new ParticleEffekseer(getEffekseer());

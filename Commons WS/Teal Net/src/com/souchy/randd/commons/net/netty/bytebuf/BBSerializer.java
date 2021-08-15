@@ -15,6 +15,10 @@ public interface BBSerializer extends Serializer<ByteBuf, ByteBuf> {
 		return out;
 	}
 	
+//	public default ByteBuf writeObjectId(ByteBuf out, ObjectId o) {
+//		
+//	}
+	
 	public default ByteBuf writeInt(ByteBuf out, int i) {
 		out.writeInt(i);
 		return out;
@@ -25,7 +29,7 @@ public interface BBSerializer extends Serializer<ByteBuf, ByteBuf> {
 		return out;
 	}
 	
-	public default ByteBuf writeBoo(ByteBuf out, boolean b) {
+	public default ByteBuf writeBool(ByteBuf out, boolean b) {
 		out.writeBoolean(b);
 		return out;
 	}

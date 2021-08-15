@@ -1,4 +1,4 @@
-package com.souchy.randd.data.s1.spells.fire;
+package com.souchy.randd.data.s1.spells.air;
 
 import java.util.HashMap;
 
@@ -26,7 +26,7 @@ import com.souchy.randd.data.s1.main.Elements;
  */
 public class SunBall extends Spell {
 
-	public static final int sunballID = 12;
+	public static final int sunballID = Elements.air.makeid(1, 1);
 
 	public Damage e1;
 	

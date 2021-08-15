@@ -13,7 +13,7 @@ public class Klaust extends CreatureModel {
 
 	@Override
 	public int id() {
-		return 44;
+		return 45;
 	}
 
 	@Override

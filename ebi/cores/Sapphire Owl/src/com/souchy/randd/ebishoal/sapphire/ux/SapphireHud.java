@@ -27,6 +27,7 @@ import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.VisCheckBox;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.souchy.randd.commons.diamond.effects.resources.ResourceGainLoss;
+import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.Handler.HandlerType;
@@ -94,7 +95,9 @@ public class SapphireHud extends LapisHud
 		if(!isLoaded) SapphireLmlParser.parser.createView(this, getTemplateFile());
 
 		try {
-			SapphireHudSkin.play(SapphireGame.fight.creatures.first());
+			Creature creature = SapphireGame.getPlayingCreature(); 
+//			SapphireGame.fight.creatures.first();
+			SapphireHudSkin.play(creature);
 		} catch (Exception e) { }
 		
 		chat = new Chat();
@@ -158,8 +161,6 @@ public class SapphireHud extends LapisHud
 	 */
 	@Override
 	public void onResourceGainLoss(ResourceGainLossEvent e) {
-//		todo : damage font on a billboard?
-		
 		LabelStyle style = VisUI.getSkin().get("styleDmgLife", LabelStyle.class);
 //		style = switch(e.res) {
 //			case life -> switch(e.composite) {
