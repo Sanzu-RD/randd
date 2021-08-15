@@ -2,11 +2,15 @@ package com.souchy.randd.commons.diamond.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import org.bson.types.ObjectId;
 
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.models.stats.CreatureStats;
+import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.models.stats.special.Targetting;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
@@ -22,6 +26,22 @@ import io.netty.buffer.ByteBuf;
 
 public class Creature extends Entity implements BBSerializer, BBDeserializer {
 
+	/* *
+	 * User identification for ownership of a creature 
+	 * 
+	 * @author Blank
+	 * @date 9 août 2021
+	 */
+//	public static class CreatureOwner {
+//		/**
+//		 * based on Jade User's ObjectID _id;
+//		 */
+//		public String oid;
+//		public CreatureOwner(String oid) {
+//			this.oid = oid;
+//		}
+//	}
+	
 	private static int idCounter = 0;
 
 	/** entity id for identification and mostly retrival during deserialization */
@@ -65,6 +85,7 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 	 */
 	public Creature(Fight fight, CreatureModel model, JadeCreature jade, Position pos) { // AzurCache dep, Vector2 pos) {
 		super(null);
+		this.add(new ObjectId());
 		this.id = idCounter++;
 		this.modelid = model.id();
 		this.pos = pos;
@@ -76,7 +97,7 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		this.statuses = new StatusList(null);
 
 		// copy model stats into instance stats
-		this.stats = model.baseStats.copy(); 
+		this.stats = model.baseStats.copy(this); 
 		// then add jade stats
 		for(int i = 0; i < Element.count(); i++) {
 			var ele = Element.values.get(i);
@@ -122,6 +143,9 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
+		Log.format("Creature serialize : %s, %s, %s", this.get(ObjectId.class), id, modelid);
+//		writeString(out, this.get(CreatureOwner.class).oid);
+		writeString(out, this.get(ObjectId.class).toHexString());
 		out.writeInt(id);
 		out.writeInt(modelid); //model.id());
 		out.writeDouble(this.pos.x);
@@ -135,7 +159,7 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		out.writeInt(spellbook.size());
 		spellbook.forEach(s -> out.writeInt(s));
 //		Log.info("write spellbook " + spellbook.size());
-		Log.info("Creature serialize spells : " + String.join(",", spellbook.stream().map(i -> String.valueOf(i)).collect(Collectors.toList())) );
+//		Log.info("Creature serialize spells : " + String.join(",", spellbook.stream().map(i -> String.valueOf(i)).collect(Collectors.toList())) );
 
 		// status 
 		this.statuses.serialize(out);
@@ -148,13 +172,15 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
+//		this.get(CreatureOwner.class).oid = readString(in);
+		this.add(new ObjectId(readString(in)));
 		this.id = in.readInt();
 		this.modelid = in.readInt();
 		this.pos = new Position(in.readDouble(), in.readDouble());
 		this.team = Team.values()[in.readInt()];
 		
 		// stats
-		this.stats = new CreatureStats();
+		this.stats = new CreatureStats(this);
 		this.stats.deserialize(in);
 
 		// spells
@@ -178,5 +204,15 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		
 		return null;
 	}
+	
+	
+//	public IntStat intstat(Function<CreatureStats, IntStat> t) {
+//		var stat = t.apply(stats).copy();
+//		this.statuses.forEach(s -> {
+//			stat.add(t.apply(s.creatureStats));
+//		});
+//		asdf
+//		return stat;
+//	}
 	
 }

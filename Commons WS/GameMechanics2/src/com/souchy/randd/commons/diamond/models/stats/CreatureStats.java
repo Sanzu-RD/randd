@@ -2,7 +2,10 @@ package com.souchy.randd.commons.diamond.models.stats;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
+import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.stats.base.BoolStat;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.models.stats.special.HeightStat;
@@ -12,7 +15,6 @@ import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
-import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import io.netty.buffer.ByteBuf;
 
@@ -76,36 +78,64 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 	 */
 	public HeightStat height;
 	
+
+	private final Function<Function<CreatureStats, IntStat>, Function<Function<IntStat, Double>, Double>> compounder;
+	private final Function<Function<CreatureStats, BoolStat>, Function<Function<BoolStat, Boolean>, Boolean>> compounderBool;
+	
 	
 	public CreatureStats() {
+		this(null);
+	}
+	public CreatureStats(Creature c) {
+		if(c != null) {
+			compounder = (ps) -> {
+				return (fd) -> {
+					return fd.apply(ps.apply(this)) + c.statuses.sum((status) -> fd.apply(ps.apply(status.creatureStats)));
+				};
+			};
+	
+			compounderBool = (ps) -> {
+				return (fd) -> {
+					return fd.apply(ps.apply(this)) || (c.statuses.sum((status) -> fd.apply(ps.apply(status.creatureStats)) ? 1d : 0d) > 0);
+				};
+			};
+		} else {
+			compounder = null;
+			compounderBool = null;
+		}
+		
 		resources = new HashMap<>();
 		shield = new HashMap<>();
 		affinity = new HashMap<>();
 		resistance = new HashMap<>();
 		penetration = new HashMap<>();
 		
-		healingAffinity = new IntStat(0);
-		healingRes = new IntStat(0);
-		range = new IntStat(0);
-		summons = new IntStat(0);
-		invisible = new BoolStat(false);
+		healingAffinity = new IntStat(0, getCompounder(s -> s.healingAffinity));
+		healingRes = new IntStat(0, getCompounder(s -> s.healingRes));
+		range = new IntStat(0, getCompounder(s -> s.range));
+		summons = new IntStat(0, getCompounder(s -> s.summons));
+		invisible = new BoolStat(false, getCompounderBool(s -> s.invisible));
+		
 		height = new HeightStat(Height.floor.bit);
 		// + peut-être une stat pour aoeRadiusModificator / AoeRange
 		
-		for(var v : Resource.values()) {
-			resources.put(v, new IntStat(0));
-			shield.put(v, new IntStat(0));
+		for(var r : Resource.values()) {
+			resources.put(r, new IntStat(0, getCompounder(s -> s.resources.get(r))));
+			shield.put(r, new IntStat(0, getCompounder(s -> s.shield.get(r))));
 		}
 		for(var ele : Element.values) {
 			//Log.info("creature stat element : " + ele);
-			affinity.put(ele, new IntStat(0));
-			resistance.put(ele, new IntStat(0));
-			penetration.put(ele, new IntStat(0));
+			affinity.put(ele, new IntStat(0, getCompounder(s -> s.affinity.get(ele))));
+			resistance.put(ele, new IntStat(0, getCompounder(s -> s.resistance.get(ele))));
+			penetration.put(ele, new IntStat(0, getCompounder(s -> s.penetration.get(ele))));
 		}
 	}
-	
-	public CreatureStats copy() {
-		final var s = new CreatureStats();
+
+//	public CreatureStats copy() {
+//		return copy(null);
+//	}
+	public CreatureStats copy(Creature c) {
+		final var s = new CreatureStats(c);
 		
 		// resources.forEach((r, i) -> s.resources.put(r, i.copy()));
 		// shield.forEach((r, i) -> s.shield.put(r, i.copy()));
@@ -145,6 +175,15 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		return (int) resources.get(res).fight;
 	}
 	
+
+	private Function<Function<IntStat, Double>, Double> getCompounder(Function<CreatureStats, IntStat> f) {
+		return compounder == null ? null : compounder.apply(f);
+	}
+	private Function<Function<BoolStat, Boolean>, Boolean> getCompounderBool(Function<CreatureStats, BoolStat> f) {
+		return compounderBool == null ? null : compounderBool.apply(f);
+	}
+	
+	
 	public void add(CreatureStats s) {
 		for (var r : Resource.values()) {
 			resources.get(r).add(resources.get(r));
@@ -163,7 +202,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		range.add(s.range);
 		summons.add(s.summons);
 		
-		invisible.replace(s.invisible.base);
+//		invisible.replace(s.invisible.base);
 		
 		//s.height = height.copy(); // ne pas toucher à la height de la creature
 	}
@@ -185,7 +224,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		range.remove(s.range);
 		summons.remove(s.summons);
 		
-		invisible.reset();
+//		invisible.reset();
 		
 		//s.height = height.copy(); // ne pas toucher à la height de la creature
 	}

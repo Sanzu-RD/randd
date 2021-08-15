@@ -1,5 +1,7 @@
 package com.souchy.randd.commons.diamond.models.stats.base;
 
+import java.util.function.Function;
+
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
@@ -31,6 +33,10 @@ public class IntStat implements BBSerializer, BBDeserializer  {
 	public IntStat(double base) {
 		this.baseflat = base;
 	}
+	public IntStat(double base, Function<Function<IntStat, Double>, Double> compounder) {
+		this(base);
+		this.compounder = compounder;
+	}
 	public IntStat(double base, double inc, double incflat, double more) {
 		this.baseflat = base;
 		this.inc = inc;
@@ -39,20 +45,49 @@ public class IntStat implements BBSerializer, BBDeserializer  {
 	}
 	
 	public int value() {
-		return max() + (int) fight;
+		return max() + (int) realFight();
 	}
 	
 	public int max() {
 		if(setter != null) return setter.value();
-		var val = baseflat;
-		val += val * (inc / 100.0);
-		val += incflat;
-		val += val * (more / 100.0);
+		var val = realBaseflat();
+		val += val * (realInc() / 100.0);
+		val += realIncFlat();
+		val += val * (realMore() / 100.0);
 		return (int) val;
 	}
 	
+	private Function<Function<IntStat, Double>, Double> compounder;
+	public double realBaseflat() {
+		if(compounder != null)
+			return compounder.apply(s -> s.baseflat);
+		return baseflat;
+	}
+	public double realInc() {
+		if(compounder != null)
+			return compounder.apply(s -> s.inc);
+		return inc;
+	}
+	public double realIncFlat() {
+		if(compounder != null)
+			return compounder.apply(s -> s.incflat);
+		return incflat;
+	}
+	public double realMore() {
+		if(compounder != null)
+			return compounder.apply(s -> s.more);
+		return more;
+	}
+	public double realFight() {
+		if(compounder != null)
+			return compounder.apply(s -> s.fight);
+		return fight;
+	}
+	
+	
+	
 	public IntStat copy() {
-		var s = new IntStat(baseflat); //base);
+		var s = new IntStat(baseflat, compounder); //base);
 		s.baseflat = baseflat;
 		s.inc = inc;
 		s.incflat = incflat;

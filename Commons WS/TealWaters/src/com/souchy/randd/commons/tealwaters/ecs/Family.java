@@ -216,4 +216,14 @@ public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.
 		}
 	}
 	
+	/**
+	 * Map elements to another format
+	 * @return A new list of all elements in the wanted format
+	 */
+	public <R> List<R> map(Function<T, R> formatter) {
+		var l = new ArrayList<R>();
+		foreach(t -> l.add(formatter.apply(t)));
+		return l;
+	}
+	
 }

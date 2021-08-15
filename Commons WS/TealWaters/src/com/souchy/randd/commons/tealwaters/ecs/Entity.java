@@ -53,6 +53,10 @@ public class Entity {
 	 */
 	public void add(Object component) {
 		if(component != null) {
+			// unregister the previous component at this key if there was one
+			remove(component.getClass());
+			
+			// put the new component
 			components.put(component.getClass(), component);
 			componentBus.register(component);
 		}
@@ -71,8 +75,9 @@ public class Entity {
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T remove(Class<T> componentClass) {
+		if(componentClass == null) return null;
 		var component = (T) components.remove(componentClass);
-		componentBus.unregister(component);
+		if(component != null) componentBus.unregister(component);
 		return component;
 	}
 
@@ -81,7 +86,9 @@ public class Entity {
 	 */
 	public boolean remove(Object component) {
 		if(component == null) return false;
-		return components.remove(component.getClass(), component);
+		var removed = components.remove(component.getClass(), component);
+		componentBus.unregister(component);
+		return removed;
 	}
 
 	/**

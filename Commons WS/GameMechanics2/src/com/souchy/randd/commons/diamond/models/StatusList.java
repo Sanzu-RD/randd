@@ -3,6 +3,7 @@ package com.souchy.randd.commons.diamond.models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.souchy.randd.commons.diamond.main.DiamondModels;
@@ -94,8 +95,14 @@ public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 	}
 	
 	public void forEach(Consumer<Status> c) {
-		//statuses.values().forEach(s -> c.accept(s));
 		statuses.forEach(s -> c.accept(s));
+	}
+	public double sum(Function<Status, Double> f) {
+		double d = 0;
+		for(var s : statuses) {
+			d += f.apply(s);
+		}
+		return d;
 	}
 
 	public int size() {
