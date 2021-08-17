@@ -24,8 +24,8 @@ import com.souchy.randd.data.s1.status.Burning;
 import io.netty.buffer.ByteBuf;
 
 public class Fireball extends Spell {
-	
-	public static final int fireballID = 1;
+
+	public static final int modelid = Elements.fire.makeid(1, 1);
 
 	public Damage e1;
 	public AddStatusEffect e2;
@@ -49,7 +49,7 @@ public class Fireball extends Spell {
 	
 	@Override
 	public int modelid() {
-		return fireballID;
+		return modelid;
 	}
 
 	@Override
@@ -74,7 +74,6 @@ public class Fireball extends Spell {
 		e1.apply(caster, target);
 		e2.apply(caster, target);
 	}
-
 	
 	@Override
 	public Spell copy(Fight fight) {

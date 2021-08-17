@@ -60,7 +60,7 @@ public class Log {
 	}
 	
 	public static void info(String details, Throwable e) {
-		info(details + throwableToString(e));
+		info(details + "\n" + throwableToString(e));
 	}
 	
 	public static void warning(String details) {
@@ -68,7 +68,7 @@ public class Log {
 	}
 	
 	public static void warning(String details, Throwable e) {
-		warning(details + throwableToString(e));
+		warning(details + "\n" + throwableToString(e));
 	}
 	
 	public static void error(String details) {
@@ -76,7 +76,7 @@ public class Log {
 	}
 	
 	public static void error(String details, Throwable e) {
-		error(details + throwableToString(e));
+		error(details + "\n" + throwableToString(e));
 	}
 	
 	public static void critical(String details) {
@@ -84,7 +84,7 @@ public class Log {
 	}
 	
 	public static void critical(String details, Throwable e) {
-		critical(details + throwableToString(e));
+		critical(details + "\n" + throwableToString(e));
 	}
 
 	public static void deffered(String module, String details) {
@@ -99,7 +99,7 @@ public class Log {
 	private static String throwableToString(Throwable e) {
 		StringBuilder stackTrace = new StringBuilder();
 		
-		appendStackTrace(stackTrace, e,"", null);
+		appendStackTrace(stackTrace, e, "", null);
 		
 		// Print suppressed exceptions, if any
 		for (Throwable t : e.getSuppressed()) {

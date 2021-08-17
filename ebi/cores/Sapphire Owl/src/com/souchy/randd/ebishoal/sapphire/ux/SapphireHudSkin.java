@@ -187,12 +187,23 @@ public class SapphireHudSkin extends Skin {
 //		var i18nPath = SapphireResources.getI18nPath(model.getStrID());
 //		lml.addI18nBundle(prefix + "I18N", SapphireResources.assets.get(i18nPath));
 		
+
+		// set creature id / name
+		val = c.id;
+		lml.addArgument(prefix + camel("id", "current"), val);
+
+		val = c.modelid;
+		lml.addArgument(prefix + camel("model", "id", "current"), val);
+		
+
 		// set creature avatar
 		var iconpath = AssetData.creatures.get(model.id()).icon;
 		var avatarPath = SapphireAssets.getCreatureIconPath(iconpath) + "_round";
 //		avatarPath = SapphireAssets.getSkinPath(avatarPath) + "_round";
 		var avatar = VisUI.getSkin().getDrawable(avatarPath);
 		lml.getDefaultSkin().add(prefix + "Avatar", avatar); //new TextureRegionDrawable(new RoundTextureRegion(LapisAssets.get(avatarPath))));
+		
+		lml.addArgument(prefix + camel("icon", "current"), SapphireAssets.getCreatureIconPath(iconpath));
 		
 		//Log.info("c.spellbook : " + c.spellbook);
 
@@ -207,6 +218,8 @@ public class SapphireHudSkin extends Skin {
 				var img = VisUI.getSkin().getDrawable(iconPath);
 //				Log.info("spell icon : " + spellResource.icon + " -> " + iconpath + " -> " + img);
 				lml.getDefaultSkin().add(prefix + "Spell" + i, img);
+
+				lml.addArgument(prefix + "Spell" + i, SapphireAssets.getCreatureIconPath(iconpath));
 			}
 			i++;
 		}

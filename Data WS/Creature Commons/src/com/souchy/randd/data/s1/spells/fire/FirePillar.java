@@ -20,7 +20,7 @@ import com.souchy.randd.data.s1.main.Elements;
 
 public class FirePillar extends Spell {
 
-	public static final int firepillarID = 11;
+	public static final int modelid = Elements.fire.makeid(1, 2);
 
 	public Damage e1;
 	
@@ -34,7 +34,7 @@ public class FirePillar extends Spell {
 	
 	@Override
 	public int modelid() {
-		return firepillarID;
+		return modelid;
 	}
 
 	@Override
@@ -58,7 +58,6 @@ public class FirePillar extends Spell {
 		Log.info("FirePillar cast: " + caster + ", " + target);
 		e1.apply(caster, target);
 	}
-
 	
 	@Override
 	public Spell copy(Fight fight) {

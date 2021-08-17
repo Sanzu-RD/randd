@@ -92,6 +92,9 @@ public class BlackMoonstone extends DeathShadowCore implements Reactor { // impl
 		this.rivers.connect(port);
 		this.rivers.sendPearl(new SelfIdentify(this));
 		
+		Log.info("-------------------------------------------------------------------");
+		Log.info("---------------------- Blackmoonstone online ----------------------");
+		Log.info("-------------------------------------------------------------------");
 		
 		// block here to not just exit the program
 		if(!Arrays.asList(args).contains("async"))

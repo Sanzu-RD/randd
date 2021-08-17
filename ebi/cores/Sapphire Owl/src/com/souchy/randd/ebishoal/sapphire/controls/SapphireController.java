@@ -58,8 +58,8 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
-import com.souchy.randd.ebishoal.sapphire.ux.components.CreatureSheet;
 import com.souchy.randd.ebishoal.sapphire.ux.components.Parameters;
+import com.souchy.randd.ebishoal.sapphire.ux.components.sheets.CreatureSheet;
 import com.souchy.randd.moonstone.commons.packets.c2s.PassTurn;
 import com.souchy.randd.moonstone.white.Moonstone;
 

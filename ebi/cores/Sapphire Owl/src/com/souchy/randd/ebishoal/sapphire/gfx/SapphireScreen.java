@@ -99,14 +99,20 @@ public class SapphireScreen extends LapisScreen {
 			getShadowLight().direction.y = (float) (Math.cos(radian) / radius);
 			//getShadowLight().direction.z = -0.5f;
 		}
+		// controller
 		if(controller != null) controller.act(delta);
+		
+		// camera 
 		getCamera().update();
-
+		
+		// update playing creature cursor (highlights which creature is currently playing)
+		if(SapphireGame.playing != null) SapphireWorld.world.playingcursor.transform.setTranslation((float) SapphireGame.playing.pos.x + 0.5f, (float) SapphireGame.playing.pos.y + 0.5f, 1f);
+		
 		// update all engine's systems 	 //and entities
 		SapphireGame.fight.update(delta);
-
+		
 //		if(System.currentTimeMillis() - timeStart > 5000) {
-////			startPfx();
+//			startPfx();
 //		}
 	}
 

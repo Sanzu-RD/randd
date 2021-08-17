@@ -19,7 +19,7 @@ import com.souchy.randd.data.s1.main.Elements;
 
 public class Waterfall extends Spell {
 
-	public static final int modelid = Elements.water.makeid(1, 15);
+	public static final int modelid = Elements.water.makeid(1, 6);
 
 	public Damage e1;
 	

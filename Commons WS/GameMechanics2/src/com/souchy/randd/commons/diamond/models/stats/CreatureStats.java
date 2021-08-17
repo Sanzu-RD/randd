@@ -82,10 +82,16 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 	private final Function<Function<CreatureStats, IntStat>, Function<Function<IntStat, Double>, Double>> compounder;
 	private final Function<Function<CreatureStats, BoolStat>, Function<Function<BoolStat, Boolean>, Boolean>> compounderBool;
 	
-	
+
+	/**
+	 * null creature = pas de compounder = pour les bonus de status par exemple
+	 */
 	public CreatureStats() {
 		this(null);
 	}
+	/**
+	 * null creature = pas de compounder = pour les bonus de status par exemple
+	 */
 	public CreatureStats(Creature c) {
 		if(c != null) {
 			compounder = (ps) -> {
@@ -134,6 +140,10 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 //	public CreatureStats copy() {
 //		return copy(null);
 //	}
+	
+	/**
+	 * null creature = pas de compounder = pour les bonus de status par exemple
+	 */
 	public CreatureStats copy(Creature c) {
 		final var s = new CreatureStats(c);
 		

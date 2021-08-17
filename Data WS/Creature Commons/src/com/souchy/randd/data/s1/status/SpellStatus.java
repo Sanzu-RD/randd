@@ -11,7 +11,7 @@ public class SpellStatus extends Status {
 	/**
 	 * modelid of the spell that applied this buff
 	 */
-	protected int spellmodelid;
+	public int spellmodelid;
 	
 	public SpellStatus(Fight f, int sourceEntityId, int targetEntityId) {
 		super(f, sourceEntityId, targetEntityId);

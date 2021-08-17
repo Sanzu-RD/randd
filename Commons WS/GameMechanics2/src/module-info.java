@@ -1,6 +1,6 @@
 module GameMechanics2 {
 	exports data.new1;
-	exports gamemechanics.data;
+//	exports gamemechanics.data;
 	exports com.souchy.randd.commons.diamond.main;
 	exports com.souchy.randd.commons.diamond.common;
 	exports com.souchy.randd.commons.diamond.common.generic;
@@ -39,4 +39,5 @@ module GameMechanics2 {
 	requires transitive com.souchy.randd.commons.Jade;
 	requires transitive com.google.gson;
 	requires transitive com.souchy.randd.commons.TealNet;
+	requires java.base;
 }

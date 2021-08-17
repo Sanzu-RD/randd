@@ -19,8 +19,9 @@ import com.souchy.randd.data.s1.main.Elements;
 
 public class Meteor extends Spell {
 
-	public Damage e1;
+	public static final int modelid = Elements.fire.makeid(1, 7);
 	
+	public Damage e1;
 	
 	public Meteor(Fight f) {
 		super(f);
@@ -35,7 +36,7 @@ public class Meteor extends Spell {
 
 	@Override
 	public int modelid() {
-		return 10;
+		return modelid;
 	}
 
 	@Override

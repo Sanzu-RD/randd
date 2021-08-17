@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.sapphire.ux.components;
+package com.souchy.randd.ebishoal.sapphire.ux.components.sheets;
 
 import java.util.HashMap;
 
@@ -39,6 +39,7 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHudSkin;
+import com.souchy.randd.ebishoal.sapphire.ux.components.StatusIcon;
 
 public class CreatureSheet extends SapphireComponent {
 

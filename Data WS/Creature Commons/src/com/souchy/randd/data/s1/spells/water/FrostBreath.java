@@ -39,7 +39,7 @@ import com.souchy.randd.data.s1.status.SpellStatus;
  */
 public class FrostBreath extends Spell {
 
-	public static final int frostbreathID = Elements.water.makeid(1, 13);
+	public static final int modelid = Elements.water.makeid(1, 2);
 
 	public Damage e1;
 	public AddStatusEffect e2;
@@ -76,7 +76,7 @@ public class FrostBreath extends Spell {
 	
 	@Override
 	public int modelid() {
-		return frostbreathID;
+		return modelid;
 	}
 
 	@Override

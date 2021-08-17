@@ -58,10 +58,10 @@ import com.souchy.randd.ebishoal.sapphire.ux.components.Parameters;
 import com.souchy.randd.ebishoal.sapphire.ux.components.PlayBar;
 import com.souchy.randd.ebishoal.sapphire.ux.components.QuickOptions;
 import com.souchy.randd.ebishoal.sapphire.ux.components.Timeline;
+import com.souchy.randd.ebishoal.sapphire.ux.components.sheets.CreatureSheet;
 import com.souchy.randd.moonstone.white.Moonstone;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent.DisposeUIEvent;
 import com.souchy.randd.ebishoal.sapphire.ux.actions.ResourceDecalAction;
-import com.souchy.randd.ebishoal.sapphire.ux.components.CreatureSheet;
 
 public class SapphireHud extends LapisHud
 		implements OnResourceGainLossHandler, /* OnTurnStartHandler, */ OnAddStatusHandler, OnRemoveStatusHandler, OnModifyStatusHandler {

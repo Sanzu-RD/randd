@@ -47,6 +47,8 @@ public class SapphireWorld extends World {
 	
 	public ModelInstance cursor;
 
+
+	public ModelInstance playingcursor;
 	
 	public SapphireWorld() {
 		world = this;
@@ -58,7 +60,13 @@ public class SapphireWorld extends World {
 		var scale = 1f / 24f;
 		cursor.transform.setToTranslation(0, 0, 0).scale(scale, scale, scale).rotate(Vector3.X, 90);
 		this.instances.add(cursor);
-		
+
+		// Cursor
+//		Model cursorModel = LapisAssets.assets.get("res/models/tileselector.g3dj");  // res/models/creatures/Marian.g3dj");
+		playingcursor = new ModelInstance(cursorModel);
+		playingcursor.materials.get(0).set(ColorAttribute.createDiffuse(Color.TEAL));
+		playingcursor.transform.setToTranslation(0, 0, 0).scale(scale, scale, scale).rotate(Vector3.X, 90);
+		this.instances.add(playingcursor);
 		
         
         // World map

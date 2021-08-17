@@ -20,8 +20,8 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireOwlConf;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundImageLmlTagProvider;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
-import com.souchy.randd.ebishoal.sapphire.ux.components.CreatureSheet;
 import com.souchy.randd.ebishoal.sapphire.ux.components.Timeline;
+import com.souchy.randd.ebishoal.sapphire.ux.components.sheets.CreatureSheet;
 
 public class SapphireLmlParser extends DefaultLmlParser {
 	

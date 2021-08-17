@@ -74,10 +74,12 @@ public class Ammolite implements OnCastSpellHandler, OnAddStatusHandler {
 				var fx = p.getDeclaredConstructor(Engine.class).newInstance(nullEngine);
 				if(Spell.class.isAssignableFrom(fx.modelClass()))
 					spellsFX.put((Class<? extends Spell>) fx.modelClass(), fx);
-				if(Status.class.isAssignableFrom(fx.modelClass()))
-					statusFX.put((Class<? extends Status>) fx.modelClass(), fx);
+				else
 				if(TerrainEffect.class.isAssignableFrom(fx.modelClass()))
 					terrainFX.put((Class<? extends TerrainEffect>) fx.modelClass(), fx);
+				else
+				if(Status.class.isAssignableFrom(fx.modelClass()))
+					statusFX.put((Class<? extends Status>) fx.modelClass(), fx);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

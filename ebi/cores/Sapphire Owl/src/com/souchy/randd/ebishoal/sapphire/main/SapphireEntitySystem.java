@@ -13,9 +13,14 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.models.Creature;
+import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.diamond.models.TerrainEffect;
 import com.souchy.randd.commons.diamond.models.components.Position;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent.OnTurnEndHandler;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurnStartHandler;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 import com.souchy.randd.commons.tealwaters.ecs.Family;
@@ -26,6 +31,7 @@ import com.souchy.randd.data.s1.status.Shocked;
 import com.souchy.randd.ebi.ammolite.FXPlayer;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.Highlight;
+import com.souchy.randd.commons.diamond.statusevents.Handler.Reactor;
 
 import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
 
@@ -39,11 +45,14 @@ import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
  * @author Blank
  * @date 4 juill. 2020 - date was way before, maybe 1-2 month
  */
-public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.System {
+public class SapphireEntitySystem extends Family<Entity> implements Reactor, OnTurnStartHandler, OnTurnEndHandler { //data.new1.ecs.System {
 	
 	public SapphireEntitySystem(Engine engine) {
 		super(engine, Entity.class);
+		((Fight) engine).statusbus.register(this);
 	}
+	
+	private Creature playing;
 	
 	@Override
 	public void update(float delta) {
@@ -74,10 +83,10 @@ public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.Syste
 					}
 				}
 			} else 
-			if (e instanceof Status) {
+			if (e instanceof TerrainEffect) {
 				
 			} else 
-			if (e instanceof TerrainEffect) {
+			if (e instanceof Status) {
 					
 			}
 			
@@ -149,5 +158,20 @@ public class SapphireEntitySystem extends Family<Entity> { //data.new1.ecs.Syste
 			remove(event.entity);
 		}
 	}
+
+
+
+	@Override
+	public void onTurnStart(TurnStartEvent event) {
+		this.playing = SapphireGame.getPlayingCreature();
+	}
 	
+	@Override
+	public void onTurnEnd(TurnEndEvent event) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 }

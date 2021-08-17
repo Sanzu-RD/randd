@@ -2,6 +2,7 @@ package com.souchy.randd.commons.diamond.main;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.lang.reflect.Modifier;
 
 import com.souchy.randd.commons.diamond.models.CreatureModel;
 import com.souchy.randd.commons.diamond.models.Effect;
@@ -35,13 +36,16 @@ public class DiamondModels {
 		Log.info("Diamond creatures models " + creaturelist);
 		creaturelist.forEach(c -> {
 			try {
+				// if abstract class, dont try to instance it
+				if(Modifier.isAbstract(c.getModifiers())) return;
+				
 				var model = c.getDeclaredConstructor().newInstance();
 				if(creatures.containsKey(model.id())) 
 					Log.warning("Duplicate creature model id " + model.id() + " for class " + c.getSimpleName() + ". ");
 				else 
 					creatures.put(model.id(), model);
 			} catch (Exception e) {
-				e.printStackTrace();
+				Log.error("Diamond creature class exception : [" + c.getName() + "]", e);
 			}
 		});
 
@@ -49,6 +53,9 @@ public class DiamondModels {
 		Log.info("Diamond spell models " + spelllist);
 		spelllist.forEach(c -> {
 			try {
+				// if abstract class, dont try to instance it
+				if(Modifier.isAbstract(c.getModifiers())) return;
+				
 				var model = c.getDeclaredConstructor(Fight.class).newInstance(new Object[] { null });
 				if(spells.containsKey(model.modelid()))
 					Log.warning("Duplicate spell model id " + model.modelid() + " for class " + c.getSimpleName() + ". ");
@@ -56,7 +63,7 @@ public class DiamondModels {
 					spells.put(model.modelid(), model);
 //				Log.info("Diamond spell model [" + model.modelid() + "] = " + model);
 			} catch (Exception e) {
-				e.printStackTrace();
+				Log.error("Diamond spell class exception : [" + c.getName() + "]", e);
 			}
 		});
 
@@ -64,6 +71,9 @@ public class DiamondModels {
 		Log.info("Diamond status models " + statuslist);
 		statuslist.forEach(c -> {
 			try {
+				// if abstract class, dont try to instance it
+				if(Modifier.isAbstract(c.getModifiers())) return;
+				
 				var model = c.getDeclaredConstructor(Fight.class, Integer.TYPE, Integer.TYPE).newInstance(null, 0, 0);
 				if(statuses.containsKey(model.modelid())) 
 					Log.warning("Duplicate status model id " + model.modelid() + " for class " + c.getSimpleName() + ". ");
@@ -71,7 +81,7 @@ public class DiamondModels {
 					statuses.put(model.modelid(), model);
 				//Log.info("Diamond status model [" + model.id() + "] = " + model);
 			} catch (Exception e) {
-				e.printStackTrace();
+				Log.error("Diamond status class exception : [" + c.getName() + "]", e);
 			}
 		});
 //		StatusSystem.family.clear(); // enlève les models de status du système d'instances

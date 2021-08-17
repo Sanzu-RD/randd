@@ -28,7 +28,7 @@ import com.souchy.randd.data.s1.main.Elements;
  */
 public class WaterPillar extends Spell {
 
-	public static final int waterpillarID = Elements.water.makeid(1, 14);
+	public static final int waterpillarID = Elements.water.makeid(1, 7);
 
 	public Damage e1;
 	

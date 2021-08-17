@@ -15,7 +15,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
-import com.souchy.randd.ebishoal.sapphire.ux.components.CreatureSheet;
+import com.souchy.randd.ebishoal.sapphire.ux.components.sheets.CreatureSheet;
 import com.souchy.randd.moonstone.commons.packets.ICM;
 import com.souchy.randd.moonstone.white.Moonstone;
 

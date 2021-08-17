@@ -21,7 +21,7 @@ import com.souchy.randd.data.s1.status.Rooted;
 
 public class EntanglingRoots extends Spell {
 	
-	public static final int modelid = Elements.earth.makeid(1, 1);
+	public static final int modelid = Elements.earth.makeid(1, 2);
 	
 	public AddStatusEffect e1;
 	public ResourceGainLoss e2;
@@ -53,22 +53,25 @@ public class EntanglingRoots extends Spell {
 
 	@Override
 	protected ImmutableList<Element> initElements() {
-		return null;
+		return ImmutableList.of(Elements.earth);
 	}
 
 	@Override
 	protected ImmutableList<CreatureType> initCreatureTypes() {
-		return null;
+		return ImmutableList.of();
 	}
 
 	@Override
 	protected void cast0(Creature caster, Cell target) {
-		
+		e1.apply(caster, target);
+		e2.apply(caster, target);
 	}
 
 	@Override
 	public Spell copy(Fight fight) {
-		return null;
+		var s = new EntanglingRoots(fight);
+		s.stats = stats.copy();
+		return s;
 	}
 	
 }

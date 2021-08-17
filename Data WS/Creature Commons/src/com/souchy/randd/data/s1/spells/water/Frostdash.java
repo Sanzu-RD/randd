@@ -23,7 +23,7 @@ import com.souchy.randd.data.s1.status.Burning;
 
 public class Frostdash extends Spell {
 
-	public static final int frostdashID = Elements.water.makeid(1, 16);
+	public static final int modelid = Elements.water.makeid(1, 3);
 
 	public Damage e1;
 	public DashTo e2;
@@ -45,7 +45,7 @@ public class Frostdash extends Spell {
 
 	@Override
 	public int modelid() {
-		return frostdashID;
+		return modelid;
 	}
 
 	@Override

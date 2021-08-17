@@ -122,7 +122,7 @@ public class AssetData {
 			defaultIconURL = Environment.fromRoot("res/textures/default.png").toUri().toURL();
 			
 	//		var dir = Gdx.files.internal("data/");
-			Log.info("thing 1 : " + Environment.fromRoot("res/data/creatures.json"));
+			Log.info("AssetData thing 1 : " + Environment.fromRoot("res/data/creatures.json"));
 			
 			var creaturesFile = Environment.fromRoot("res/data/creatures.json"); //new File("data/creatures.json"); //dir.child("creatures.json");
 			var spellsFile = Environment.fromRoot("res/data/spells.json"); //new File("data/spells.json"); //dir.child("spells.json");
@@ -144,10 +144,10 @@ public class AssetData {
 			spellList.forEach(c -> spells.put(c.id, c));
 			statusList.forEach(c -> statuses.put(c.id, c));
 			
-			Log.info("loaded creatures json : " + creatures);
-			Log.info("loaded creature json " + creatures.get(1));
-			Log.info("loaded spells json : " + spells);
-			Log.info("loaded statuses json : " + statuses);
+			Log.info("AssetData loaded creatures json : " + creatures);
+			Log.info("AssetData loaded creature json " + creatures.get(1));
+			Log.info("AssetData loaded spells json : " + spells);
+			Log.info("AssetData loaded statuses json : " + statuses);
 			
 		} catch (Exception e) {
 			Log.error("", e);

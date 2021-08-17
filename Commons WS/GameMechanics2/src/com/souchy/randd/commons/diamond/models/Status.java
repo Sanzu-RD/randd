@@ -94,7 +94,7 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 		this.sourceEntityId = sourceEntityId;
 		this.targetEntityId = targetEntityId;
 		
-		Log.format("Status new %s, %s", this.id, this, f);
+		Log.format("Status new %s (%s), %s", this.id, this.modelid(), this, f);
 		// ne pas register les modèles
 		//source.fight.bus.register(this);
 //		f.statusbus.register(this);
@@ -145,6 +145,8 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 		s.canRemove = canRemove;
 		s.stacks = stacks;
 		s.duration = duration;
+		this.effects.forEach(e -> s.effects.add(e.copy()));
+		if(creatureStats != null) s.creatureStats = creatureStats.copy(null);
 		return s;
 	}
 	
