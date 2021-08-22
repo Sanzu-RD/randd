@@ -15,10 +15,11 @@ import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 import com.souchy.randd.data.s1.main.Elements;
+import com.souchy.randd.data.s1.spells.fire.FireStorm;
 
 public class Jab extends Spell {
-	
-	
+
+	public static final int modelid = Elements.normal.makeid(1, 1);
 
 	public Damage e1;
 	
@@ -32,7 +33,7 @@ public class Jab extends Spell {
 
 	@Override
 	public int modelid() {
-		return 100;
+		return modelid;
 	}
 
 	@Override
@@ -41,26 +42,24 @@ public class Jab extends Spell {
 
 	@Override
 	protected ImmutableList<Element> initElements() {
-		// TODO Auto-generated method stub
-		return null;
+		return ImmutableList.of(Elements.normal);
 	}
 
 	@Override
 	protected ImmutableList<CreatureType> initCreatureTypes() {
-		// TODO Auto-generated method stub
-		return null;
+		return ImmutableList.of();
 	}
 
 	@Override
 	protected void cast0(Creature caster, Cell target) {
-		// TODO Auto-generated method stub
-		
+		e1.apply(caster, target);
 	}
 
 	@Override
 	public Spell copy(Fight fight) {
-		// TODO Auto-generated method stub
-		return null;
+		var s = new Jab(fight);
+		s.stats = stats.copy();
+		return s;
 	}
 	
 }

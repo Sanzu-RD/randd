@@ -8,8 +8,12 @@ import com.souchy.randd.commons.diamond.models.Spell;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
+import com.souchy.randd.data.s1.creatures.flora.Flora;
+import com.souchy.randd.data.s1.main.Elements;
 
 public class VampireSeed extends Spell {
+
+	public static final int modelid = Elements.earth.makeid(1, Flora.modelid, 10);
 
 	public VampireSeed(Fight f) {
 		super(f);
@@ -18,8 +22,7 @@ public class VampireSeed extends Spell {
 
 	@Override
 	public int modelid() {
-		// TODO Auto-generated method stub
-		return 0;
+		return modelid;
 	}
 
 	@Override

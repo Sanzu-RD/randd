@@ -36,7 +36,7 @@ public abstract class TerrainEffect extends Status { //  extends Entity implemen
 	}
 	
 	/* mainly for deserialization */
-	public abstract TerrainEffect create(Fight fight, int entitySourceId, int entityTargetId);
+	public abstract TerrainEffect create(Fight fight, int sourceEntityId, int targetEntityId);
 	
 /*
 	@Override

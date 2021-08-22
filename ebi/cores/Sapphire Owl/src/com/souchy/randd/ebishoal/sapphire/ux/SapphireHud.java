@@ -237,6 +237,10 @@ public class SapphireHud extends LapisHud
 	public void onModifyStatus(ModifyStatusEvent event) {
 		CreatureSheet.updateSheet(event.getCreatureTarget());
 	}
+
+	public void debug() {
+		playbar.debug();
+	}
 	
 
 	

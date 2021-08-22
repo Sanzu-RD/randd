@@ -128,7 +128,7 @@ public class IndexedList<T> { // extends ArrayList<T> {
 		do {
 			v = get(i % list.size());
 			i++;
-			Log.format("Timeline.findNext, size=%s, i=%s, v=%s", list.size(), i-1, v);
+//			Log.format("Timeline.findNext, size=%s, i=%s, v=%s", list.size(), i-1, v);
 		} while (!valueTester.test(v) && i < max);
 		
 		if(i >= max) v = null; // si on n'a pas trouvé de match

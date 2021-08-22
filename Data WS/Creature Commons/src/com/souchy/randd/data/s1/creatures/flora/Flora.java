@@ -11,9 +11,11 @@ import com.souchy.randd.commons.diamond.models.stats.CreatureStats;
  */
 public class Flora extends CreatureModel {
 
+	public static final int modelid = 6;
+	
 	@Override
 	public int id() {
-		return 6;
+		return modelid;
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.model.MeshPart;
@@ -123,7 +124,7 @@ public class Meshing {
 			    	//Texture tex = new Texture(Gdx.files.absolute(m.textures[t]));
 			    	tex.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
 			    	var color = Color.valueOf(m.colorAttributes[t]);
-			    	var mat = new Material(TextureAttribute.createDiffuse(tex), ColorAttribute.createDiffuse(color));
+			    	var mat = new Material(TextureAttribute.createDiffuse(tex), ColorAttribute.createDiffuse(color), new BlendingAttribute(1f));
 			    	mat.id = m.textures[t] + m.colorAttributes[t];
 			    	root.materials.add(mat);
 				}

@@ -5,7 +5,9 @@ import com.souchy.randd.commons.diamond.models.stats.special.Targetting;
 import com.souchy.randd.commons.diamond.statics.properties.Targetability;
 
 public enum CellType {
+	/** normal cell */
 	Type00(1, 1, 1, 1), // normal cell
+	/** hole : can't move or target */
 	Type01(0, 0, 0, 1),  // hole : can't move or target
 	
 	Type02(0, 0, 1, 0),
@@ -22,6 +24,7 @@ public enum CellType {
 	Type13(1, 1, 0, 1),
 	Type14(1, 1, 1, 0), // // mist : can walk on/through, can cast on, but not through
 	
+	/** block/wall/column/pillar */
 	Type15(0, 0, 0, 0), // block/wall/column/pillar
 	;
 

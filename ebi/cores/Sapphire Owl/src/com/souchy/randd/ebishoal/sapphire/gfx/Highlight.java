@@ -27,6 +27,7 @@ import com.souchy.randd.commons.diamond.common.Pathfinding;
 import com.souchy.randd.commons.diamond.common.generic.Vector2;
 import com.souchy.randd.commons.diamond.ext.CellType;
 import com.souchy.randd.commons.diamond.statics.properties.Targetability;
+import com.souchy.randd.commons.tealwaters.commons.Pool;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 import com.souchy.randd.jade.matchmaking.Team;
@@ -45,40 +46,43 @@ public class Highlight {
 	private static final float floorOffset = 0.01f;
 	private static final float floorHeight = 1f;
 	private static final float borderRadius = 0.03f;
-	private static final float margin = 0.03f;
-
+	private static final float margin = 0.06f;
+	private static final float alpha = 0.2f;
+	private static final float saturation = 0.9f;
+	private static final float tone = 0.05f;
+	
 	// Movements
-	public static final Color movementPossibleColor = new Color(0.1f, 0.8f, 0.1f, 0.5f);
-	public static final Material movementPossibleMat = new Material(ColorAttribute.createDiffuse(movementPossibleColor));
-	public static final Color movementPossibleBorderColor = new Color(0.1f, 0.8f, 0.1f, 0.7f);
-	public static final Material movementPossibleBorderMat = new Material(ColorAttribute.createDiffuse(movementPossibleBorderColor));
-	public static final Model movementPossible = model("movement", movementPossibleMat, movementPossibleBorderMat);
+	public static final Color movementPossibleColor = new Color(tone, saturation, tone, 1f);
+	public static final Material movementPossibleMat = new Material(ColorAttribute.createDiffuse(movementPossibleColor), new BlendingAttribute(alpha));
+	public static final Color movementPossibleBorderColor = new Color(tone, saturation, tone, 1f);
+	public static final Material movementPossibleBorderMat = new Material(ColorAttribute.createDiffuse(movementPossibleBorderColor), new BlendingAttribute(alpha));
+	public static final Model movementPossible = model("movementpossible", movementPossibleMat, movementPossibleBorderMat);
 
-	public static final Color movementColor = new Color(0.1f, 0.6f, 0.1f, 0.2f);
+	public static final Color movementColor = new Color(tone, saturation, tone, alpha);
 	public static final Material movementMat = new Material(ColorAttribute.createDiffuse(movementColor), new BlendingAttribute(1));
-	public static final Color movementBorderColor = new Color(0.1f, 0.6f, 0.1f, 0.9f);
+	public static final Color movementBorderColor = new Color(tone, saturation, tone, alpha);
 	public static final Material movementBorderMat = new Material(ColorAttribute.createDiffuse(movementBorderColor), new BlendingAttribute(1));
 	public static final Model movement = model("movement", movementMat, movementBorderMat);
 
 	// Spells
-	public static final Color spellColor = new Color(0.1f, 0.1f, 0.8f, 0.2f);
+	public static final Color spellColor = new Color(tone, tone, saturation, alpha);
 	public static final Material spellMat = new Material(ColorAttribute.createDiffuse(spellColor), new BlendingAttribute(1));
-	public static final Color spellBorderColor = new Color(0.1f, 0.1f, 0.8f, 0.9f);
+	public static final Color spellBorderColor = new Color(tone, tone, saturation, alpha);
 	public static final Material spellBorderMat = new Material(ColorAttribute.createDiffuse(spellBorderColor), new BlendingAttribute(1));
-	public static final Model spell = model("spell", spellMat, spellBorderMat);
+	public static final Model spell = model("spellpossible", spellMat, spellBorderMat);
 	
-	public static final Color spellLosColor = new Color(0.8f, 0.1f, 0.1f, 0.2f);
+	public static final Color spellLosColor = new Color(saturation, tone, tone, alpha);
 	public static final Material spellLosMat = new Material(ColorAttribute.createDiffuse(spellLosColor), new BlendingAttribute(1));
-	public static final Color spellLosBorderColor = new Color(0.8f, 0.1f, 0.1f, 0.9f);
+	public static final Color spellLosBorderColor = new Color(saturation, tone, tone, alpha);
 	public static final Material spellLosBorderMat = new Material(ColorAttribute.createDiffuse(spellLosBorderColor), new BlendingAttribute(1));
-	public static final Model spellLos = model("spell", spellLosMat, spellLosBorderMat);
+	public static final Model spellLos = model("spelllos", spellLosMat, spellLosBorderMat);
 
-	// Teams
-	public static final Color teamColor = new Color(0.1f, 0.1f, 0.8f, 0.2f);
+	// Teams (added to entity components)
+	public static final Color teamColor = new Color(tone, tone, 0.8f, 0.2f);
 	public static final Material teamMat = new Material(ColorAttribute.createDiffuse(teamColor), new BlendingAttribute(1));
-	public static final Color teamBorderColor = new Color(0.1f, 0.1f, 0.8f, 0.9f);
+	public static final Color teamBorderColor = new Color(tone, tone, 0.8f, 0.9f);
 	public static final Material teamBorderMat = new Material(ColorAttribute.createDiffuse(teamBorderColor), new BlendingAttribute(1));
-	public static final Model team = model("spell", teamMat, teamBorderMat);
+	public static final Model team = model("team", teamMat, teamBorderMat);
 	
 	public static final Model teamA = new ModelBuilder().createCylinder(1 - margin * 2 - borderRadius * 2, 0, 1 - margin * 2 - borderRadius * 2, 12, new Material(ColorAttribute.createDiffuse(1, 0, 0, 0.3f), new BlendingAttribute(1)), Usage.Position | Usage.Normal);
 	public static final Model teamB = new ModelBuilder().createCylinder(1 - margin * 2 - borderRadius * 2, 0, 1 - margin * 2 - borderRadius * 2, 12, new Material(ColorAttribute.createDiffuse(0, 0, 1, 0.3f), new BlendingAttribute(1)), Usage.Position | Usage.Normal);
@@ -124,15 +128,43 @@ public class Highlight {
 	 * 
 	 * glyphs and traps should put their highlight instances as components in their entity (ECS)
 	 */
-	private static List<ModelInstance> highlights = new ArrayList<>();
+	private static Pool<ModelInstance> highlights = new Pool<>(); // movement
+
+	public static Pool<ModelInstance> highlightsM1 = new Pool<>(); // movement possibilities
+	private static Pool<ModelInstance> highlightsM2 = new Pool<>(); // movement path
+
+	private static Pool<ModelInstance> highlightsR1 = new Pool<>(); // spell cast range possible
+	private static Pool<ModelInstance> highlightsR2 = new Pool<>(); // spell cast range impossible (no los)
+
+	private static Pool<ModelInstance> highlightsS = new Pool<>(); // spell aoe
+	
 
 	public static boolean isActive() {
 		return highlights.size() > 0;
 	}
-	
+
+	public static void clearAll() {
+		SapphireWorld.world.instances.removeAll(highlights);
+		SapphireWorld.world.instances.removeAll(highlightsM1);
+		SapphireWorld.world.instances.removeAll(highlightsM2);
+		SapphireWorld.world.instances.removeAll(highlightsR1);
+		SapphireWorld.world.instances.removeAll(highlightsR2);
+		SapphireWorld.world.instances.removeAll(highlightsS);
+		highlights.clear();
+		highlightsM1.clear();
+		highlightsM2.clear();
+		highlightsR1.clear();
+		highlightsR2.clear();
+		highlightsS.clear();
+	}
 	public static void clear() {
 		SapphireWorld.world.instances.removeAll(highlights);
 		highlights.clear();
+	}
+	
+	public static void clear(Pool<ModelInstance> pool) {
+		SapphireWorld.world.instances.removeAll(pool);
+		pool.clear();
 	}
 	
 	public static List<ModelInstance> cellTypes(){
@@ -148,7 +180,9 @@ public class Highlight {
 		return highlights;
 	}
 	
-	public static List<ModelInstance> movementPossibilities(List<Pathfinding.Node> cells) {
+	
+	public static List<ModelInstance> movementPossibilities(List<Vector2> cells) { // Pathfinding.Node
+		/*
 		// remove current highlights
 		clear();
 		// create new model instances
@@ -160,16 +194,44 @@ public class Highlight {
 		SapphireWorld.world.instances.addAll(highlights);
 		return highlights;
 		// return highlight(cells, movementPossible);
+		*/
+		
+		//cells.removeIf(n -> !n.valid);
+		var vecs = cells; //cells.stream().map(n -> n.pos).collect(Collectors.toList());
+		highlight(highlightsM1, vecs, movementPossible);
+		
+		/*
+		SapphireWorld.world.instances.removeAll(highlightsM1);
+		int invalids = 0;
+		for(int i = 0; i < cells.size(); i++) {
+			var v = cells.get(i);
+			if(!v.valid) {
+				 invalids++;
+				 continue;
+			}
+			if(i - invalids < highlightsM1.size())
+				highlightsM1.get(i - invalids).transform.setToTranslation((float) v.pos.x, (float) v.pos.y, floorHeight + floorOffset);
+			else
+				highlightsM1.add(new ModelInstance(movementPossible, (float) v.pos.x, (float) v.pos.y, floorHeight + floorOffset));
+		}
+		SapphireWorld.world.instances.addAll(highlightsM1);
+		*/
+		
+		return highlightsM1; 
 	}
 	
 	public static List<ModelInstance> movement(List<Vector2> cells) {
-		return highlight(cells, movement);
+		highlight(highlightsM2, cells, movement);
+		return highlightsM2; // highlight(cells, movement);
 	}
 
+	
 	public static List<ModelInstance> spell(List<Vector2> cells) {
-		return highlight(cells, spell);
+		highlight(highlightsS, cells, spell);
+		return highlightsS; //highlight(cells, spell);
 	}
-	public static List<ModelInstance> spell(List<Vector2> cells, List<Vector2> noLos) {
+	public static List<ModelInstance> spellRange(List<Vector2> cells, List<Vector2> noLos) {
+		/*
 		// remove current highlights 
 		clear();
 		// create new model instances
@@ -182,6 +244,31 @@ public class Highlight {
 		// add instances to render list
 		SapphireWorld.world.instances.addAll(highlights);
 		return highlights;
+		*/
+
+		highlight(highlightsR1, cells, spell);
+		highlight(highlightsR2, noLos, spellLos);
+		
+		return highlightsM1; 
+	}
+	
+	private static void highlight(Pool<ModelInstance> pool, List<Vector2> cells, Model model) {
+		SapphireWorld.world.instances.removeAll(pool);
+		pool.clear();
+		for (int i = 0; i < cells.size(); i++) {
+			// Log.info("Highlight " + i);
+			var v = cells.get(i);
+			if(i < pool.poolSize()) {
+//				Log.format("Highlight " + i + " move (%s, %s, %s)", (float) v.x, (float) v.y, floorHeight + floorOffset);
+				//pool.get(i)
+				pool.obtain(i).transform.setToTranslation((float) v.x, (float) v.y, floorHeight + floorOffset);
+			} else {
+//				Log.format("Highlight " + i + " new (%s, %s, %s)", (float) v.x, (float) v.y, floorHeight + floorOffset);
+				//pool.add
+				pool.extend(new ModelInstance(model, (float) v.x, (float) v.y, floorHeight + floorOffset));
+			}
+		}
+		SapphireWorld.world.instances.addAll(pool);
 	}
 	
 	public static ModelInstance team(Team t) {
@@ -190,7 +277,11 @@ public class Highlight {
 		return null;
 	}
 	
-	public static List<ModelInstance> highlight(List<Vector2> cells, Model model) {
+	
+	
+	
+	
+	private static List<ModelInstance> highlight(List<Vector2> cells, Model model) {
 //		Gdx.gl.glEnable(GL20.GL_BLEND);
 //		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 //		Gdx.graphics.getGL20().glEnable(GL20.GL_BLEND); // Or GL20
@@ -242,6 +333,8 @@ public class Highlight {
 			model.meshParts.add(meshPart);
 			model.nodes.add(node);
 			
+			/*
+			// border
 			var c = vertices.length - vertexPropCount;
 			for (int i = 0; i < c + 1; i += vertexPropCount) {
 				int i2 = (i != c) ? i + vertexPropCount : 0;
@@ -285,6 +378,7 @@ public class Highlight {
 				model.meshParts.add(meshPartBorder);
 				model.nodes.add(nodeBorder);
 			}
+			*/
 //		});
 		return model;
     }

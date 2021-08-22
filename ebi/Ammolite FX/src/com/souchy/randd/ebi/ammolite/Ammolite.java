@@ -14,6 +14,8 @@ import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent.OnCastSpellHandler;
 import com.souchy.randd.commons.diamond.statusevents.status.AddStatusEvent;
 import com.souchy.randd.commons.diamond.statusevents.status.AddStatusEvent.OnAddStatusHandler;
+import com.souchy.randd.commons.diamond.statusevents.status.AddTerrainEvent;
+import com.souchy.randd.commons.diamond.statusevents.status.AddTerrainEvent.OnAddTerrainHandler;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.ecs.Family;
 import com.souchy.randd.commons.tealwaters.ecs.Engine.AddEntityEvent;
@@ -28,7 +30,7 @@ import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
  * @author Souchy
  * @date 11 janv. 2021
  */
-public class Ammolite implements OnCastSpellHandler, OnAddStatusHandler {
+public class Ammolite implements OnCastSpellHandler, OnAddStatusHandler, OnAddTerrainHandler {
 
 	/** updates fx on render */
 	public static class FXFamily extends Family<FXPlayer> {
@@ -68,8 +70,8 @@ public class Ammolite implements OnCastSpellHandler, OnAddStatusHandler {
 		new FXFamily(f);
 
 		Engine nullEngine = null;
-		var spellFxPlayers = new DefaultClassDiscoverer<FXPlayer>(FXPlayer.class).explore("com.souchy.randd.ebi.ammolite.spells");
-		spellFxPlayers.forEach(p -> {
+		var fxPlayers = new DefaultClassDiscoverer<FXPlayer>(FXPlayer.class).explore("com.souchy.randd.ebi.ammolite");
+		fxPlayers.forEach(p -> {
 			try {
 				var fx = p.getDeclaredConstructor(Engine.class).newInstance(nullEngine);
 				if(Spell.class.isAssignableFrom(fx.modelClass()))
@@ -105,6 +107,17 @@ public class Ammolite implements OnCastSpellHandler, OnAddStatusHandler {
 	@Override
 	public void onAddStatus(AddStatusEvent event) {
 		var fx = statusFX.get(event.getStatus().getClass());
+		if(fx == null) return;
+		
+		var inst = fx.copy(fight);
+		event.getStatus().add(inst);
+		inst.onCreation(event);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void onAddTerrain(AddTerrainEvent event) {
+		var fx = terrainFX.get(event.getStatus().getClass());
 		if(fx == null) return;
 		
 		var inst = fx.copy(fight);

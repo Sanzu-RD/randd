@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.ext.AssetData;
+import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Status;
@@ -31,6 +32,7 @@ import com.souchy.randd.data.s1.status.Shocked;
 import com.souchy.randd.ebi.ammolite.FXPlayer;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.Highlight;
+import com.souchy.randd.jade.Constants;
 import com.souchy.randd.commons.diamond.statusevents.Handler.Reactor;
 
 import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
@@ -45,36 +47,36 @@ import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
  * @author Blank
  * @date 4 juill. 2020 - date was way before, maybe 1-2 month
  */
-public class SapphireEntitySystem extends Family<Entity> implements Reactor, OnTurnStartHandler, OnTurnEndHandler { //data.new1.ecs.System {
+public class SapphireEntitySystem extends Family<Entity> implements Reactor { //data.new1.ecs.System {
 	
 	public SapphireEntitySystem(Engine engine) {
 		super(engine, Entity.class);
 		((Fight) engine).statusbus.register(this);
 	}
 	
-	private Creature playing;
+//	private Creature playing;
 	
 	@Override
 	public void update(float delta) {
 		// Log.info("sapphire entity system update");
+		
 		foreach(e -> {
 			
 			e.update(delta);
 			
 			// pas besoin d'update les fxplayer ici car on le fait déjà dans Ammolite Family
-//			var fx = e.get(FXPlayer.class);
-//			if(fx != null) fx.update(delta);
-			
+			// var fx = e.get(FXPlayer.class);
+			// if(fx != null) fx.update(delta);
+
+			float fxheight = Constants.floorZ;
 			if(e instanceof Creature) {
+				fxheight = Constants.floorZ + Constants.cellHalf;
+				/*
 				var model = e.get(ModelInstance.class);
 				var pos = e.get(Position.class);
 				if(model == null || pos == null) return;
 				// Log.info("set sapphire entity model pos : " + pos + "; " + model);
 				model.transform.setTranslation((float) pos.x + 0.5f, (float) pos.y + 0.5f, 1f);
-				var anime = e.get(AnimationController.class);
-				if(anime != null) {
-					anime.update(delta);
-				}
 				var status = e.get(Shocked.class);
 				if(status != null) {
 					ParticleEffekseer effect = status.get(ParticleEffekseer.class);
@@ -82,13 +84,43 @@ public class SapphireEntitySystem extends Family<Entity> implements Reactor, OnT
 						effect.setPosition((float) pos.x + 0.5f, 1.5f, (float) -pos.y - 0.5f);
 					}
 				}
+				*/
+			} else
+			if(e instanceof Cell) {
+
 			} else 
-			if (e instanceof TerrainEffect) {
+			if(e instanceof TerrainEffect) {
 				
 			} else 
-			if (e instanceof Status) {
+			if(e instanceof Status) {
 					
 			}
+			
+			// animation
+			var anime = e.get(AnimationController.class);
+			if(anime != null) anime.update(delta);
+						
+			// position model & fx
+			var pos = e.get(Position.class);
+			if(pos == null) return;
+			if(pos != null) {
+				var model = e.get(ModelInstance.class);
+				if(model != null) 
+					model.transform.setTranslation(
+						(float) pos.x + Constants.cellHalf, 
+						(float) pos.y + Constants.cellHalf, 
+						Constants.floorZ
+					);
+				
+				var effect = e.get(ParticleEffekseer.class);
+				if(effect != null) 
+					effect.setPosition(
+						(float) pos.x + Constants.cellHalf, 
+						fxheight, 
+						(float) -pos.y - Constants.cellHalf
+					);
+			}
+			
 			
 		});
 	}
@@ -143,6 +175,9 @@ public class SapphireEntitySystem extends Family<Entity> implements Reactor, OnT
 //				family.add(event.entity);
 //			}
 		} else 
+		if(event.entity instanceof Cell) {
+			add(event.entity);
+		} else 
 		if(event.entity instanceof TerrainEffect) {
 			add(event.entity);
 		} else 
@@ -154,23 +189,11 @@ public class SapphireEntitySystem extends Family<Entity> implements Reactor, OnT
 	@Subscribe
 	@Override
 	public void onRemovedEntity(RemoveEntityEvent event) {
-		if(event.entity instanceof Creature || event.entity instanceof TerrainEffect  || event.entity instanceof Status) {
+		if(event.entity instanceof Creature || event.entity instanceof Cell  || event.entity instanceof TerrainEffect  || event.entity instanceof Status) {
 			remove(event.entity);
 		}
 	}
 
-
-
-	@Override
-	public void onTurnStart(TurnStartEvent event) {
-		this.playing = SapphireGame.getPlayingCreature();
-	}
-	
-	@Override
-	public void onTurnEnd(TurnEndEvent event) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 

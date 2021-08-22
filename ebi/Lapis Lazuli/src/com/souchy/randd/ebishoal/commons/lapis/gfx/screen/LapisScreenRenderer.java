@@ -80,6 +80,14 @@ interface LapisScreenRenderer extends Screen {
 		{
 			// clear the screen with a transparent background for the fbo
 			clearScreen(0, 0, 0, 0);
+			
+			cleanSpriteBatch.begin();
+			{
+				if(RenderOptions.renderBackground) 
+					drawBackground(cleanSpriteBatch);
+			}
+			cleanSpriteBatch.end();
+			
 			// world
 			renderWorldContainer();
 			// particle effects
@@ -104,7 +112,7 @@ interface LapisScreenRenderer extends Screen {
 			// clear the screen with the getBackgroundColor()
 			clearScreen();
 			// start with the background
-			if(RenderOptions.renderBackground) drawBackground(spriteBatch);
+//			if(RenderOptions.renderBackground) drawBackground(spriteBatch);
 			// draw the world texture
 			spriteBatch.draw(fboRegion, 0, 0);
 			//else getSpriteBatch().draw(fboRegion, getViewport().getScreenX(), getViewport().getScreenY());
@@ -136,7 +144,7 @@ interface LapisScreenRenderer extends Screen {
 			try {
 				getView().render(delta);
 			} catch (Exception e) {
-				Log.error("view rendering error :\n", e);
+				Log.warning("view rendering error :\n", e);
 				getView().getStage().getBatch().end();
 			}
 		}

@@ -28,6 +28,7 @@ import com.souchy.randd.commons.diamond.statusevents.other.WalkEvent.OnWalkHandl
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.data.s1.status.Burning;
+import com.souchy.randd.jade.Constants;
 
 
 /**
@@ -38,43 +39,13 @@ import com.souchy.randd.data.s1.status.Burning;
  */
 public class BurningGlyph extends Spell {
 
-	/**
-	 * 
-	 * 
-	 * @author Blank
-	 * @date 17 août 2021
-	 */
-	/*
-	public static class BurningGlyphStatus extends Status {
-		public BurningGlyphStatus(Fight f, int sourceEntityId, int targetEntityId) {
-			super(f, sourceEntityId, targetEntityId);
-		}
-		@Override
-		public HandlerType type() {
-			return null;
-		}
-		@Override
-		public int modelid() {
-			return 0;
-		}
-		@Override
-		public Status create(Fight fight, int source, int target) {
-			return null;
-		}
-		@Override
-		public Status copy0(Fight f) {
-			return null;
-		}
-	}
-	*/
-
 	public static class BurningGlyphStatus extends TerrainEffect implements OnWalkHandler, OnEnterCellHandler, OnLeaveCellHandler, OnTurnStartHandler {
 		public BurningGlyphStatus(Fight fight, int sourceEntityId, int targetCellId) {
 			super(fight, sourceEntityId, targetCellId);
 		}
 		@Override
 		public int modelid() {
-			return 0;
+			return Constants.statusId(BurningGlyph.modelid);
 		}
 		@Override
 		public HandlerType type() {
@@ -107,7 +78,7 @@ public class BurningGlyph extends Spell {
 		}
 	}
 
-
+	
 	public static final int modelid = Elements.fire.makeid(1, 8);
 
 	public AddStatusEffect e1;

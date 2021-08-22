@@ -150,7 +150,11 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 		return s;
 	}
 	
-	/** create an instance of this status */
+	/** 
+	 * create an instance of this status <br>
+	 * 
+	 * all generic things are already copied
+	 */
 	public abstract Status copy0(Fight f);
 
 	/**
@@ -192,6 +196,7 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 		
 		applyFuseEffect(fight, finalstacks, finalduration);
 	}
+	
 	protected void applyFuseEffect(Fight fight, int finalstacks, int finalduration) {
 		var mod = new ModifyStatusEffect(AoeBuilders.single.get(), TargetType.full.asStat(), this, finalstacks, finalduration);
 		var sourceCrea = fight.creatures.get(sourceEntityId);

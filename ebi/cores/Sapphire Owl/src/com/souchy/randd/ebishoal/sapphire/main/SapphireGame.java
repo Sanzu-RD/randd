@@ -121,11 +121,12 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 
 	@Override
 	public void onTurnStart(TurnStartEvent e) {
-		Log.format("SapphireGame event fight %s turn %s start %s", e.fight.id, e.turn, e.index);
+//		Log.format("SapphireGame event fight %s turn %s start %s", e.fight.id, e.turn, e.index);
 		playing = SapphireGame.getPlayingCreature();
 		if(playing == null) return;
 		//gfx.hud.reload();
 		if(SapphireGame.gfx.hud != null) {
+			Log.info("SapphireGame turn start " + playing.id);
 			SapphireHudSkin.play(playing);
 			SapphireGame.gfx.hud.playbar.clear();
 			SapphireGame.gfx.hud.playbar = new PlayBar();
@@ -142,7 +143,7 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 	 */
 	@Override
 	public void onTurnEnd(TurnEndEvent e) {
-		Log.format("SapphireGame event fight %s turn %s end %s", e.fight.id, e.turn, e.index);
+//		Log.format("SapphireGame event fight %s turn %s end %s", e.fight.id, e.turn, e.index);
 		//gfx.hud.reload();
 	}
 
@@ -153,7 +154,7 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 		// find next playing creature 
 		var val = fight.timeline.findNext(cid -> 
 			// filter for ownership
-			SapphireGame.fight.creatures.get(cid).get(ObjectId.class).equals(Moonstone.user._id)
+			true //SapphireGame.fight.creatures.get(cid).get(ObjectId.class).equals(Moonstone.user._id)
 		);
 		Creature creature = SapphireGame.fight.creatures.get(val);
 		return creature;

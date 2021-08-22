@@ -21,6 +21,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
+import com.souchy.randd.jade.Constants;
 
 import io.netty.buffer.ByteBuf;
 
@@ -76,6 +77,10 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	
 	public int id;
 	public abstract int modelid();
+	
+	public int modelidWithoutSeason() {
+		return modelid() % (int) Math.pow(10, (int) Math.log10(modelid())) % (int) Math.pow(10, (int) Math.log10(modelid()));
+	}
 	
 	public final ImmutableList<CreatureType> taggedCreatureTypes;
 	public final ImmutableList<Class<CreatureModel>> taggedCreatures;

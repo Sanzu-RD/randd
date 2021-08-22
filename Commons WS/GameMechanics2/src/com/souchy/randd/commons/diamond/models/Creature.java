@@ -106,6 +106,7 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		// copy chosen spells
 		for(int i : jade.spellIDs) {
 			var s = DiamondModels.spells.get(i);
+			Log.info("Creature " + modelid + " add spell " + i + " " + s);
 			if(s != null) 
 				spellbook.add(s.copy(fight).id); //new SpellInstance(f, s)); // TODO create spell instances
 //			var s = dep.spells.get(i);

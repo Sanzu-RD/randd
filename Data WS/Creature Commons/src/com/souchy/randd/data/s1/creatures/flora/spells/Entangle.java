@@ -8,9 +8,13 @@ import com.souchy.randd.commons.diamond.models.Spell;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
+import com.souchy.randd.data.s1.creatures.flora.Flora;
+import com.souchy.randd.data.s1.main.Elements;
 
 public class Entangle extends Spell {
 
+	public static final int modelid = Elements.earth.makeid(1, Flora.modelid, 2);
+	
 	public Entangle(Fight f) {
 		super(f);
 		// TODO Auto-generated constructor stub
@@ -18,8 +22,7 @@ public class Entangle extends Spell {
 
 	@Override
 	public int modelid() {
-		// TODO Auto-generated method stub
-		return 0;
+		return modelid;
 	}
 
 	@Override

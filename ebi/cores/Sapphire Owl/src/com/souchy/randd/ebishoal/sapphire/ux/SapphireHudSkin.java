@@ -183,6 +183,15 @@ public class SapphireHudSkin extends Skin {
 		int i = 0;
 		int val = 0;
 		
+		try {
+			Log.format("SapphireHudSkin playset c [%s/%s] s [%s,%s]", c.id, c.modelid, 
+					SapphireGame.fight.spells.get(c.spellbook.get(0)).modelid(), 
+					SapphireGame.fight.spells.get(c.spellbook.get(1)).modelid()
+			);
+		} catch (Exception e) {
+			
+		}
+		
 		// set i18n
 //		var i18nPath = SapphireResources.getI18nPath(model.getStrID());
 //		lml.addI18nBundle(prefix + "I18N", SapphireResources.assets.get(i18nPath));
@@ -219,7 +228,7 @@ public class SapphireHudSkin extends Skin {
 //				Log.info("spell icon : " + spellResource.icon + " -> " + iconpath + " -> " + img);
 				lml.getDefaultSkin().add(prefix + "Spell" + i, img);
 
-				lml.addArgument(prefix + "Spell" + i, SapphireAssets.getCreatureIconPath(iconpath));
+				lml.addArgument(prefix + "Spell" + i, spell.modelid());
 			}
 			i++;
 		}

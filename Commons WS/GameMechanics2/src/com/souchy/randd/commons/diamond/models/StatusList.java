@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
@@ -104,12 +105,18 @@ public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 		}
 		return d;
 	}
-
+	
 	public int size() {
 		return statuses.size();
 	}
 	
-	
+	/**
+	 * Returns a list of ids of all statuses
+	 */
+	public String toString() {
+		//Integer.toString(s.id)
+		return statuses.stream().map(s -> "").collect(Collectors.joining(","));
+	}
 	
 
 	@Override
@@ -130,12 +137,19 @@ public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 		// deserialize tous les status
 		for(int i = 0; i < statusesSize; i++) {
 			int modelid = in.readInt();
+			var statusModel = DiamondModels.statuses.get(modelid);
+			var status = statusModel.create(this.get(Fight.class), 0, 0);
+			status.deserialize(in);
+			
+			/*
+			int modelid = in.readInt();
 			int sourceid = in.readInt();
 			int targetid = in.readInt();
 			
 			var statusModel = DiamondModels.statuses.get(modelid);
 			var status = statusModel.create(null, sourceid, targetid); //new EntityRef(this.fight, sourceid), new EntityRef(this.fight, targetid)); //this.fight, sourceid, targetid);
 			status.deserialize(in);
+			*/
 			
 			this.statuses.add(status);
 		}

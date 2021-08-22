@@ -108,6 +108,7 @@ public class Pathfinding {
 		List<Node> open = new ArrayList<>();
 		
 		if(source == null || target == null) return path;
+		if(!caster.targetting.canWalkOn(target)) return path;
 		
 		var start = new Node();
 		start.pos = source.pos;
@@ -181,7 +182,7 @@ public class Pathfinding {
 					n.h = euclidean(n.pos, target.pos);
 					n.v = current.v + 1;
 					
-					if(n.pos.equals(target.pos)) Log.format("add target %s %s", n.pos, n.f);
+					//if(n.pos.equals(target.pos)) Log.format("add target %s %s", n.pos, n.f);
 					
 					if(neighbor == null) n.v += 1000;
 					else if(!caster.targetting.canWalkThrough(neighbor)) n.v += 1000;

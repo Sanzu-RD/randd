@@ -8,8 +8,13 @@ import com.souchy.randd.commons.diamond.models.Spell;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
+import com.souchy.randd.data.s1.creatures.flora.Flora;
+import com.souchy.randd.data.s1.creatures.tsukuyo.Tsukuyo;
+import com.souchy.randd.data.s1.main.Elements;
 
 public class Bloom extends Spell {
+
+	public static final int modelid = Elements.earth.makeid(1, Flora.modelid, 1);
 
 	public Bloom(Fight f) {
 		super(f);
@@ -17,8 +22,7 @@ public class Bloom extends Spell {
 
 	@Override
 	public int modelid() {
-		// TODO Auto-generated method stub
-		return 0;
+		return modelid;
 	}
 
 	@Override

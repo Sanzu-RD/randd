@@ -10,9 +10,29 @@
 	
 	
 	
+	{
+		"id": 100001001,
+		"comment": "jab",
+		"icon":  "jab",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 100001002,
+		"comment": "uppercut",
+		"icon":  "uppercut",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	
+	
+	
+	
 	
 	{
-		"id": 1201,
+		"id": 100002001,
 		"comment": "Fireball",
 		"icon":  "fireball",
 		"casterAnim": "1",
@@ -20,7 +40,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1202,
+		"id": 100002002,
 		"comment": "FirePillar",
 		"icon":  "firepillar",
 		"casterAnim": "1",
@@ -28,7 +48,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1203,
+		"id": 100002003,
 		"comment": "firepunch",
 		"icon":  "firepunch",
 		"casterAnim": "1",
@@ -36,7 +56,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1204,
+		"id": 100002004,
 		"comment": "firestorm",
 		"icon":  "firestorm",
 		"casterAnim": "1",
@@ -44,7 +64,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1205,
+		"id": 100002005,
 		"comment": "firewall",
 		"icon":  "firewall",
 		"casterAnim": "1",
@@ -52,7 +72,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1206,
+		"id": 100002006,
 		"comment": "heatwave",
 		"icon":  "heatwave",
 		"casterAnim": "1",
@@ -60,9 +80,17 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1207,
+		"id": 100002007,
 		"comment": "meteor",
-		"icon":  "fireball",
+		"icon":  "meteor",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 100002008,
+		"comment": "burningglyph",
+		"icon":  "burningglyph",
 		"casterAnim": "1",
 		"casterFx": "myeffect.pfx",
 		"targetFx": "myeffect.pfx"
@@ -73,7 +101,7 @@
 	
 	
 	{
-		"id": 1301,
+		"id": 100003001,
 		"comment": "Bubble",
 		"icon":  "bubble",
 		"casterAnim": "1",
@@ -81,7 +109,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1302,
+		"id": 100003002,
 		"comment": "frostbreath",
 		"icon":  "frostbreath",
 		"casterAnim": "1",
@@ -89,7 +117,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1303,
+		"id": 100003003,
 		"comment": "FrostDash",
 		"icon":  "frostdash",
 		"casterAnim": "1",
@@ -97,7 +125,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1304,
+		"id": 100003004,
 		"comment": "rainpour",
 		"icon":  "rainpour",
 		"casterAnim": "1",
@@ -105,7 +133,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1305,
+		"id": 100003005,
 		"comment": "vortex",
 		"icon":  "vortex",
 		"casterAnim": "1",
@@ -113,7 +141,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1306,
+		"id": 100003006,
 		"comment": "waterfall",
 		"icon":  "waterfall",
 		"casterAnim": "1",
@@ -121,7 +149,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1307,
+		"id": 100003007,
 		"comment": "waterpillar",
 		"icon":  "waterpillar",
 		"casterAnim": "1",
@@ -134,7 +162,7 @@
 
 
 	{
-		"id": 1401,
+		"id": 100004001,
 		"comment": "earthwall",
 		"icon":  "earthwall",
 		"casterAnim": "1",
@@ -142,7 +170,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1402,
+		"id": 100004002,
 		"comment": "entanglingroots",
 		"icon":  "entanglingroots",
 		"casterAnim": "1",
@@ -150,7 +178,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1403,
+		"id": 100004003,
 		"comment": "sunnyday",
 		"icon":  "sunnyday",
 		"casterAnim": "1",
@@ -158,7 +186,7 @@
 		"targetFx": "myeffect.pfx"
 	},
 	{
-		"id": 1404,
+		"id": 100004004,
 		"comment": "treesummon",
 		"icon":  "treesummon",
 		"casterAnim": "1",
@@ -170,13 +198,59 @@
 
 	
 	{
-		"id": 1501,
+		"id": 100005001,
 		"comment": "sun ball",
 		"icon":  "sunball",
 		"casterAnim": "1",
 		"casterFx": "myeffect.pfx",
 		"targetFx": "myeffect.pfx"
 	},
+	
+	
+	
+	
+	
+	
+	
+	{
+		"id": 100131001,
+		"comment": "kunaithrow",
+		"icon":  "kunaithrow",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 100131002,
+		"comment": "kunairain",
+		"icon":  "kunairain",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 100131003,
+		"comment": "kunainova",
+		"icon":  "kunainova",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	{
+		"id": 100135004,
+		"comment": "mist",
+		"icon":  "mist",
+		"casterAnim": "1",
+		"casterFx": "myeffect.pfx",
+		"targetFx": "myeffect.pfx"
+	},
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

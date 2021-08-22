@@ -64,6 +64,11 @@ public class AddStatusEffect extends Effect {
 		status.sourceEntityId = source.id; //.ref();
 		status.targetEntityId = target.id; //.ref();
 		
+		// set the status pos to the creature's pos so that it can follow the creature (fx)
+		status.add(target.pos);
+		status.add(target);
+		
+		
 		// Add status. StatusList manages fusion by itsef
 		// FIXME add status to creature or cell 
 		// FIXME adding a status to a cell should trigger reactors to apply statuses on creatures 

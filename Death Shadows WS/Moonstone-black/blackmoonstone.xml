@@ -69,10 +69,6 @@
 			<fileset dir="${dir.git}/r and d/Data WS/Creature Commons/bin"/>
 		</jar>
 		
-		
-		<scp verbose="false" sftp="true" trust="true" file="${dir.jarfile}/blackmoonstone.jar" todir="souchy:z@192.168.2.15:/home/souchy/release/deathshadows/" />
-
-
 		<copy file="${dir.git}/r and d/annotationprocessor.jar" todir="${dir.lib}"/>
 		<copy file="${dir.gitres}/libs other/net/netty-all-4.1.19.Final.jar" todir="${dir.lib}" />
 		<copy file="${dir.gitres}/libs other/amqp-client-5.1.2.jar" todir="${dir.lib}" />
@@ -87,7 +83,11 @@
 		<copy file="${dir.gitres}/libs other/reflections-0.9.11.jar" todir="${dir.lib}"/>
 		<copy file="${dir.gitres}/libs other/javassist.jar" todir="${dir.lib}"/>
 		<copy file="${dir.gitres}/libs other/gson-2.8.6.jar" todir="${dir.lib}"/>
-
+		
+		<parallel>
+			<scp verbose="false" sftp="true" trust="true" file="${dir.jarfile}/blackmoonstone.jar" todir="souchy:z@192.168.2.15:/home/souchy/release/deathshadows/" />
+		</parallel>
+		
 
 	</target>
 </project>

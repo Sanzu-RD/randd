@@ -26,7 +26,9 @@ module CreatureCommons {
 	exports com.souchy.randd.data.s1.creatures.flora;
 	exports com.souchy.randd.data.s1.creatures.flora.spells;
 //	exports com.souchy.randd.data.s1.creatures.flora.status;
-	
+
+	exports com.souchy.randd.data.s1.creatures.tsukuyo;
+	exports com.souchy.randd.data.s1.creatures.tsukuyo.spells;
 	
 	
 	requires transitive GameMechanics2;
@@ -35,4 +37,5 @@ module CreatureCommons {
 	requires com.souchy.randd.AnnotationProcessor;
 	requires netty.all;
 	requires com.souchy.randd.commons.TealNet;
+	requires com.souchy.randd.commons.Jade;
 }

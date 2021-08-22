@@ -79,15 +79,15 @@
 	},
 	{
 		"id": 13,
-		"comment": "Luna",
-		"models": ["res/models/creatures/BaseWitch.g3dj"],
-		"icon": "luna"
-	},
-	{
-		"id": 14,
 		"comment": "Tsukuyo",
 		"models": ["res/models/creatures/BaseWitch.g3dj"],
 		"icon": "tsukuyo"
+	},
+	{
+		"id": 14,
+		"comment": "Luna",
+		"models": ["res/models/creatures/BaseWitch.g3dj"],
+		"icon": "Luna"
 	},
 	{
 		"id": 15,

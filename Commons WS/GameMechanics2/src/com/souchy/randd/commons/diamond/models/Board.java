@@ -8,6 +8,7 @@ import com.souchy.randd.commons.diamond.common.generic.Vector2;
 import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
+import com.souchy.randd.jade.Constants;
 
 public class Board extends Entity {
 	
@@ -127,7 +128,7 @@ public class Board extends Entity {
 
 		double x1Abs = pos1.x * dirX;
 		
-		double x = pos0.x + 0.5 * dirX;
+		double x = pos0.x + Constants.cellHalf * dirX;
 		double y = pos0.y;
 
 		double v0 = pos0.y;
@@ -145,9 +146,9 @@ public class Board extends Entity {
 			double l22 = 0;
 			if(dirY > 0) {
 				l21 = Math.round(y2);
-				l22 = Math.ceil(y2 - 0.5);
+				l22 = Math.ceil(y2 - Constants.cellHalf);
 			} else {
-				l21 = Math.ceil(y2 - 0.5);
+				l21 = Math.ceil(y2 - Constants.cellHalf);
 				l22 = Math.round(y2);
 			}
 			y = v0;
@@ -155,7 +156,7 @@ public class Board extends Entity {
 			if(log) System.out.println("a " + x + ", " + y + " // y2: " + y2 + " l21: " + l21 + ", l22: " + l22);
 			
 			while (y * dirY <= l22 * dirY) {
-				int tx = (int) (x - 0.5 * dirX);
+				int tx = (int) (x - Constants.cellHalf * dirX);
 				int ty = (int) y;
 				Cell cell = get(tx, ty);
 				if(log) System.out.println("test " + cell.pos);
@@ -171,7 +172,7 @@ public class Board extends Entity {
 		y = v0;
 		
 		while (y * dirY <= pos1.y * dirY) {
-			int tx = (int) (x - 0.5 * dirX);
+			int tx = (int) (x - Constants.cellHalf * dirX);
 			int ty = (int) y;
 			Cell cell = get(tx, ty);
 			if(!checkCellView(caster, cell)) {
@@ -182,7 +183,7 @@ public class Board extends Entity {
 		}
 		
 		{
-			int tx = (int) (x - 0.5 * dirX);
+			int tx = (int) (x - Constants.cellHalf * dirX);
 			int ty = (int) (y - dirY);
 			Cell cell = get(tx, ty);
 			if(!checkCellView(caster, cell)) {

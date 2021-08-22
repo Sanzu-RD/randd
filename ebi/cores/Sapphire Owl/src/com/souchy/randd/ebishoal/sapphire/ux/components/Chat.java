@@ -27,7 +27,7 @@ import com.souchy.randd.commons.diamond.statusevents.Handler.HandlerType;
 import com.souchy.randd.commons.diamond.statusevents.Handler.Reactor;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
-import com.souchy.randd.commons.diamond.statusevents.status.AddGlyphEvent;
+import com.souchy.randd.commons.diamond.statusevents.status.AddTerrainEvent;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.util.DragAndResizeListener;

@@ -88,6 +88,8 @@ public class LapisAssets {
 				d -> assets.load(d.path() + "/bundle", I18NBundle.class)
 		);
 		assets.finishLoading();
+		I18NBundle.setExceptionOnMissingKey(false);
+//		assets.getAll(I18NBundle.class, new Array<I18NBundle>()).forEach(i -> I18NBundle.setExceptionOnMissingKey(false));
 	}
 	
 	public static void loadParticleEffects(FileHandle dir, ParticleEffectLoadParameter params) {

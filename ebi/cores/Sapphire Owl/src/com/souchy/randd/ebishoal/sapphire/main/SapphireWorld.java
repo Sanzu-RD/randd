@@ -100,14 +100,14 @@ public class SapphireWorld extends World {
 	                    		assets.finishLoading();
 	                    		var model = assets.get(m.model, Model.class);
 	                    		model.materials.get(0).set(ColorAttribute.createDiffuse(Color.valueOf(m.colorAttributes[0])));
-//	                    		model.materials.get(0).set(new BlendingAttribute(0.4f)); // fonctionne
-//	                    		model.materials.get(0).set(ColorAttribute.createReflection(1, 1, 1, 1)); //  fontionne pas
+	                    		model.materials.get(0).set(new BlendingAttribute(0.5f)); // fonctionne
+	                    		model.materials.get(0).set(ColorAttribute.createReflection(1, 1, 1, 1)); //  fontionne pas
 	                    		model.materials.get(0).set(shine); 
 	                    		var inst = new ModelInstance(model);
 	                    		inst.transform
 	        					.translate(i * cellSize + cellSize * m.transform[0][0], j * cellSize + cellSize * m.transform[0][1], -cellSize + cellSize * m.transform[0][2])
 	        					.rotate(m.transform[1][0],  m.transform[1][1],  m.transform[1][2], 90)
-	        					.scale( m.transform[2][0],  m.transform[2][1],  m.transform[2][2]);
+	        					.scale (m.transform[2][0],  m.transform[2][1],  m.transform[2][2]);
 	                    		cache.add(inst);
 	                    	}
 	                    }

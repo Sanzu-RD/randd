@@ -59,9 +59,11 @@ public class DiamondModels {
 				var model = c.getDeclaredConstructor(Fight.class).newInstance(new Object[] { null });
 				if(spells.containsKey(model.modelid()))
 					Log.warning("Duplicate spell model id " + model.modelid() + " for class " + c.getSimpleName() + ". ");
-				else
+				else {
+
 					spells.put(model.modelid(), model);
-//				Log.info("Diamond spell model [" + model.modelid() + "] = " + model);
+				Log.info("Diamond spell model [" + model.modelid() + "] = " + model);
+				}
 			} catch (Exception e) {
 				Log.error("Diamond spell class exception : [" + c.getName() + "]", e);
 			}
