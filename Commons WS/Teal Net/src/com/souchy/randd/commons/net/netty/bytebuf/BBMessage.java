@@ -18,7 +18,7 @@ public interface BBMessage extends Message<ByteBuf, BBMessage>,
 // Factory<Deserializer<ByteBuf, BBMessage>>
 {
 
-	/** Initial capacity */
+	/** Initial capacity in bytes */
 //	public int getBufferCapacity();
 	public default int getBufferCapacity() {
 		return 0;

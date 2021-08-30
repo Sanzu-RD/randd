@@ -1,5 +1,7 @@
 package com.souchy.randd.ebi.ammolite.spells.air;
 
+import java.util.function.Supplier;
+
 import com.souchy.randd.commons.diamond.effects.status.AddTerrainEffect;
 import com.souchy.randd.commons.diamond.models.TerrainEffect;
 import com.souchy.randd.commons.diamond.models.components.Position;
@@ -21,7 +23,8 @@ public class MistFX extends FXPlayer<AddTerrainEvent> implements Reactor, OnEnte
 	
 	private ParticleEffekseer fx;
 	private TerrainEffect terrain;
-//	private Supplier<Position> getTarget; 
+	private Supplier<Position> getTarget;
+	private FXDuration fxDuration;
 	
 	public MistFX(Engine engine) {
 		super(engine);
@@ -31,57 +34,83 @@ public class MistFX extends FXPlayer<AddTerrainEvent> implements Reactor, OnEnte
 	public Class<?> modelClass() {
 		return MistEffect.class;
 	}
-
+	
 	@Override
 	public void onEnterCell(EnterCellEvent event) {
-//		pfx.setPosition(event.source.pos.x, 0, event.source.pos.y);
-//		pfx.play();
+		// pfx.setPosition(event.source.pos.x, 0, event.source.pos.y);
+		// pfx.play();
 	}
-
+	
 	@Override
 	public void onCreation(AddTerrainEvent e) {
 		try {
 			terrain = ((AddTerrainEffect) e.effect).terrain;
+			getTarget = () -> terrain.get(Position.class); // e.target.pos;
 			
-//			getTarget = () -> terrain.get(Position.class); //e.target.pos;
+			Log.info("MistFX creation @" + hash() + ", " + getTarget.get());
+			
+			
 			fx = Ammolite.particle();
+			if(fx == null) {
+				Log.error("MistFX creation fx == null");
+				dispose();
+				return;
+			}
 			fx.load("fx/air/mist.efk", true);
 			
 			terrain.add(fx);
 			
-			Log.info("MistFX play @" + fx.hashCode() + ", " +  terrain.get(Position.class)); //getTarget.get());
+			Log.info("MistFX play @" + hash() + ", " + getTarget.get()); // getTarget.get());
+			fxDuration = new FXDuration(60d / 100d);
 			fx.play();
-			fx.setOnAnimationComplete(() -> fx.play()); // this::dispose);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+			fx.setOnAnimationComplete(this::dispose); // this::dispose);
+		} catch (Exception ex) {
+			Log.error("", ex);
+		}
 		
-//		e.target.add(fx);
-//		fx.play();
+		// e.target.add(fx);
+		// fx.play();
 	}
-
+	
+	private void pause() {
+		//Log.format("MistFX @%s pause %s", hash(), getTarget.get());
+		if(fx != null) fx.pause();
+	}
+	
 	@Override
 	public void update(float delta) {
-		if(fx == null) Log.info("update MistFX null");
-		if(fx == null) return;
-//		Log.info("update fireball fx @" + hash() + ", " + getTarget.get());
-//		fx.setPosition(getTarget.get().x, 0.5f, getTarget.get().y);
+		//if(fx == null) Log.info("update MistFX null");
+		if(fx == null || fxDuration == null) return;
+		if(fxDuration.update(delta)) pause();
+		//Log.info("update MistFX @" + hash() + ", " + getTarget.get());
+		
+		//fx.setPosition(getTarget.get().x, 0.5f, getTarget.get().y);
+		
+//		var pos = getTarget.get();
+//		fx.setPosition(
+//			(float) pos.x + Constants.cellHalf, 
+//			fxheight, 
+//			(float) -pos.y - Constants.cellHalf
+//		);
 	}
-
+	
 	@Override
 	public void dispose() {
-		Log.info("MistFX dispose @" + fx.hashCode() + ", " +  terrain.get(Position.class)); //getTarget.get());
+		Log.info("MistFX dispose1 @" + hash()); // getTarget.get());
 		super.dispose();
-		fx.pause();
-		fx.delete();
-		fx = null;
-//		getTarget = null;
+		if(fx != null) {
+			fx.delete();
+			fx = null;
+			Log.info("MistFX dispose2 @" + hash());
+		}
+		terrain = null;
+		getTarget = null;
+		fxDuration = null;
 	}
-
+	
 	@Override
 	public void onRemoveTerrain(RemoveTerrainEvent event) {
 		dispose();
 	}
-
-
+	
 }

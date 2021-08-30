@@ -23,6 +23,10 @@ public abstract class System {
 		engine.remove(this);
 	}
 	
+	protected Engine getEngine() {
+		return engine;
+	}
+	
 	public abstract void update(float delta);
 	
 }

@@ -1,9 +1,12 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
+import java.util.function.Consumer;
+
 import org.bson.types.ObjectId;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.deathebi.msg.GetSalt;
 import com.souchy.randd.commons.diamond.ext.AssetData;
@@ -15,6 +18,7 @@ import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent.OnTurnEndHandler;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurnStartHandler;
+import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.RenderOptions;
@@ -33,19 +37,23 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 	public static Fight fight; // FIXME replace this with Moonstone.fight or use the reference for now i guess
 
 	public static SapphireScreen gfx;
-
+	
+	public static SapphireAssets assets;
+	
 	public static MusicPlayer music;
 
 	public static SapphireEntitySystem renderableEntitySystem;
 
 	public static Creature playing;
 	
+	
 	@Override
 	public void init() {
 		SapphireGame.fight = Moonstone.fight; // = new Fight();
 		SapphireGame.fight.statusbus.register(this);
+//		SapphireGame.fight.pipe.setPostRunnable(Gdx.app::postRunnable);
 		renderableEntitySystem = new SapphireEntitySystem(Moonstone.fight);
-
+		
 		// init elements
 		Elements.values();
 		// models configurations (creatures, spells, statuses)
@@ -61,7 +69,8 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 		LapisAssets.loadSounds(Gdx.files.internal("res/sounds/"));
 		LapisAssets.loadI18NBundles(Gdx.files.internal("res/i18n/"));
 		LapisAssets.loadFonts(Gdx.files.internal("res/fonts/"));
-
+		assets = new SapphireAssets();
+		
 		// init commands
 		Commands.init();
 
@@ -82,10 +91,12 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 
 		Log.info("data.creatures : " + DiamondModels.creatures);
 		
+		
 		// after assets have been loaded, log into moonstone then ask for fight data on
 		// JoinFight
 		if(Moonstone.moon != null) {
 			Moonstone.bus.register(this);
+			Moonstone.setPostRunnable(Gdx.app::postRunnable);
 			Moonstone.writes(new GetSalt(Moonstone.moon.channel.attr(Moonstone.authKey).get()[0]));
 		}
 	}
@@ -121,21 +132,21 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 
 	@Override
 	public void onTurnStart(TurnStartEvent e) {
-//		Log.format("SapphireGame event fight %s turn %s start %s", e.fight.id, e.turn, e.index);
+////		Log.format("SapphireGame event fight %s turn %s start %s", e.fight.id, e.turn, e.index);
 		playing = SapphireGame.getPlayingCreature();
-		if(playing == null) return;
-		//gfx.hud.reload();
-		if(SapphireGame.gfx.hud != null) {
-			Log.info("SapphireGame turn start " + playing.id);
-			SapphireHudSkin.play(playing);
-			SapphireGame.gfx.hud.playbar.clear();
-			SapphireGame.gfx.hud.playbar = new PlayBar();
-	//		SapphireGame.gfx.hud.playbar.refresh();
-		}
-		if(SapphireWorld.world != null && SapphireWorld.world.playingcursor != null) {
-			// 3d cursor
-//			SapphireWorld.world.playingcursor.transform.setTranslation((float) playing.pos.x + 0.5f, (float) playing.pos.y + 0.5f, 1f);
-		}
+//		if(playing == null) return;
+//		//gfx.hud.reload();
+//		if(SapphireGame.gfx.hud != null) {
+//			Log.info("SapphireGame turn start " + playing.id);
+//			SapphireHudSkin.play(playing);
+//			//SapphireGame.gfx.hud.playbar.clear();
+//			//SapphireGame.gfx.hud.playbar = new PlayBar();
+//			SapphireGame.gfx.hud.playbar.refresh();
+//		}
+//		if(SapphireWorld.world != null && SapphireWorld.world.playingcursor != null) {
+//			// 3d cursor
+////			SapphireWorld.world.playingcursor.transform.setTranslation((float) playing.pos.x + 0.5f, (float) playing.pos.y + 0.5f, 1f);
+//		}
 	}
 	
 	/**
@@ -156,6 +167,7 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 			// filter for ownership
 			true //SapphireGame.fight.creatures.get(cid).get(ObjectId.class).equals(Moonstone.user._id)
 		);
+		if(val == null) return null;
 		Creature creature = SapphireGame.fight.creatures.get(val);
 		return creature;
 	}

@@ -22,10 +22,13 @@ public class IndexedList<T> { // extends ArrayList<T> {
 
 	public List<T> list = new ArrayList<>();
 	
+//	private T defaultValue = null;
+	
 	public IndexedList() {
-		
+//		this.defaultValue = defaultValue;
 	}
 	public IndexedList(List<T> list, int index, int turn) {
+//		this.defaultValue = defaultValue;
 		this.list = list;
 		this.index = index;
 		this.turn = turn;
@@ -62,8 +65,15 @@ public class IndexedList<T> { // extends ArrayList<T> {
 	 * Current value (ex: player id)
 	 */
 	public synchronized T current() {
+		if(index < 0 || list.size() <= index) return null;
 		return list.get(index);
 	}
+	
+//	public synchronized T previous() {
+//		var i = index - 1;
+//		if(i < 0) i = list.size() - 1;
+//		return list.get(i);
+//	}
 
 	/**
 	 * Current round
@@ -122,6 +132,7 @@ public class IndexedList<T> { // extends ArrayList<T> {
 	 * @return
 	 */
 	public synchronized T findNext(Predicate<T> valueTester) {
+		if(size() == 0) return null;
 		int i = index;
 		int max = list.size() + index;
 		T v = null;

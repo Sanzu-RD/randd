@@ -93,7 +93,7 @@ interface LapisScreenRenderer extends Screen {
 			// particle effects
 			renderParticleEffectsContainer();
 			// particle effects effekseer... either i get fbo or transparency.... even the fire has straight lines at the bottom of particles and we dont have distortion in the shader
-			renderEffekseer();
+			renderEffekseer(delta);
 		}
 		getFBO().end();
 
@@ -126,13 +126,16 @@ interface LapisScreenRenderer extends Screen {
 		if(RenderOptions.renderUI) renderView(delta);
 	}
 	
-	public default void renderEffekseer() {
+	public default void renderEffekseer(float delta) {
 //		getEffekseer().SetViewProjectionMatrixWithSimpleWindow(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 //		getEffekseer().Update(Gdx.graphics.getDeltaTime() / (1.0f / 60.0f));
 //		getEffekseer().DrawBack();
 //		getEffekseer().DrawFront();
-		
-		getEffekseer().draw(Gdx.graphics.getDeltaTime());
+		//try {
+			getEffekseer().draw(delta); // Gdx.graphics.getDeltaTime());
+		//} catch (Exception e) {
+		//	Log.error("", e);
+		//}
 	}
 	
 	/**
@@ -144,7 +147,7 @@ interface LapisScreenRenderer extends Screen {
 			try {
 				getView().render(delta);
 			} catch (Exception e) {
-				Log.warning("view rendering error :\n", e);
+				Log.warning("view rendering error : " + e.getMessage());
 				getView().getStage().getBatch().end();
 			}
 		}
@@ -205,6 +208,7 @@ interface LapisScreenRenderer extends Screen {
 //		else 
 			// render the cache (static terrain)
 			if(RenderOptions.renderCache) getModelBatch().render(getWorld().cache, getEnvironment());
+			
 			// render dynamic instances (cursor, creatures, terrain effects like glyphs and traps, highlighting effects ..)
 			getModelBatch().render(getWorld().instances, getEnvironment());
 
@@ -213,6 +217,7 @@ interface LapisScreenRenderer extends Screen {
 		// render characters
 //		if(creatures) modelBatch.render(characters, env);
 	}
+	
 	/**
 	 * Emboxes the particle effects rendering
 	 */

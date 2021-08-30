@@ -60,9 +60,20 @@ public class MeteorFX extends FXPlayer<CastSpellEvent> {
 		fx.setPosition(event.source.pos.x + diff.x, 0.5f, event.source.pos.y + diff.y); // getTarget.get().x, 0.5f, getTarget.get().y);
 //		Log.format("IceCometFX update [%f, %f, %f]", event.source.pos.x + diff.x, 0.5f, event.source.pos.y + diff.y);
 		*/
-
-		fx.setPosition(event.target.pos.x, 0.5f, event.target.pos.y); 
+		
+		if(event != null)
+			fx.setPosition(event.target.pos.x, 0.5f, event.target.pos.y); 
 	}
 
+	@Override
+	public void dispose() {
+		Log.info("SimpleOnCastFX fx dispose @" + fx.hashCode());// + ", " + getTarget.get());
+		super.dispose();
+		fx.pause();
+		fx.delete();
+		fx = null;
+		event = null;
+		//getTarget = null;
+	}
 	
 }

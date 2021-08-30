@@ -76,7 +76,7 @@ public abstract class Effect /* extends Entity */ implements BBSerializer, BBDes
 		interceptors(source, casterEvent); 
 		modifiers(source, casterEvent);
 		
-		// [[[[[[[[[[[[[ PREPARE CASTER ]]]]]]]]]]]]]
+		// [[[[[[[[[[[[[ PREPARE CASTER ]]]]]]]]]]]]] on the original instance of the effect
 		prepareCaster(source, cellTarget);
 		
 //		Log.info("Effect Apply, intercepted? " + casterEvent.intercepted);
@@ -101,7 +101,7 @@ public abstract class Effect /* extends Entity */ implements BBSerializer, BBDes
 			// copy event and effect for each accepted height on the cell
 			for(Height h : Height.values()) {
 				if(!this.height.has(h)) continue;
-//				Log.info("Effect.apply, for height " + h); // + " has? " + this.height.has(h));
+				//Log.info("Effect.apply, for height " + h); // + " has? " + this.height.has(h));
 				
 				var event = casterEvent.copy(); 
 				event.target = target;
@@ -138,10 +138,10 @@ public abstract class Effect /* extends Entity */ implements BBSerializer, BBDes
 		modifiers(event.target, event);
 		if(event.intercepted) return;
 		
-		//  [[[[[[[[[[[[[ PREPARE TARGET ]]]]]]]]]]]]]
+		//  [[[[[[[[[[[[[ PREPARE TARGET ]]]]]]]]]]]]] on the copied instances of the effect
 		event.effect.prepareTarget(event.source, event.target);
 		
-		//  [[[[[[[[[[[[[ APPLY TO TARGET ]]]]]]]]]]]]]
+		//  [[[[[[[[[[[[[ APPLY TO TARGET ]]]]]]]]]]]]] on the copied instances of the effect
 		event.effect.apply0(event.source, event.target);
 		
 		// level 1 handlers

@@ -37,6 +37,9 @@ public class Engine {
 		return (T) systems.get(systemclass);
 	}
 	
+	/**
+	 * Sends an event to all Systems to add this entity
+	 */
 	public void add(Entity entity) {
 //		Log.info("engine add entity " + entity);
 //		synchronized(entities) {
@@ -44,7 +47,10 @@ public class Engine {
 			systemBus.post(new AddEntityEvent(entity));
 //		}
 	}
-	
+
+	/**
+	 * Sends an event to all Systems to remove this entity
+	 */
 	public void remove(Entity entity) {
 		Log.info("engine remove entity " + entity);
 //		synchronized(entities) {

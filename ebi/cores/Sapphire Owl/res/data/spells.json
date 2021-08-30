@@ -200,7 +200,7 @@
 	{
 		"id": 100005001,
 		"comment": "sun ball",
-		"icon":  "sunball",
+		"icon":  "fireball2",
 		"casterAnim": "1",
 		"casterFx": "myeffect.pfx",
 		"targetFx": "myeffect.pfx"

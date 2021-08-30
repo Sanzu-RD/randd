@@ -191,7 +191,6 @@ public class Timeline extends SapphireComponent implements Reactor {
 			actor.setDrawable(SapphireHudSkin.getIcon(creature));
 		}
 		
-		
 //		Log.info("Timeline.getCreatureIcon("+index+") = " + icon);
 		return icon;
 	}

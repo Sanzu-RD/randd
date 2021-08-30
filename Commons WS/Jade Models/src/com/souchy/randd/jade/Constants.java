@@ -35,6 +35,11 @@ public class Constants {
 	 */
 	public static final float floorZ = 1f;
 	/**
+	 * Offset for things like highlights and glyphs.
+	 */
+	public static final float floorOffset = 0.01f;
+	
+	/**
 	 * Width of a cell (1f)
 	 */
 	public static final float cellWidth = 1f;
@@ -64,12 +69,16 @@ public class Constants {
 	}
 	/**
 	 * spell id without the season and status digits for debugging
+	 * // exemple : 0100135004
+	 *                10000000
 	 */
 	public static final int simplifiedSpellId(int i) {
-		i %= Math.pow(10, (int) Math.log10(i)); // season 10 digit
-		i %= Math.pow(10, (int) Math.log10(i)); // season 01 digit
-		i %= Math.pow(10, (int) Math.log10(i)); // status digit
+		i %= 1000000;
+//		i %= Math.pow(10, (int) Math.floor(Math.log10(i))); // season 10 digit
+//		i %= Math.pow(10, (int) Math.floor(Math.log10(i))); // season 01 digit
+//		i %= Math.pow(10, (int) Math.floor(Math.log10(i))); // status digit
 		return i;
 	}
+	
 	
 }

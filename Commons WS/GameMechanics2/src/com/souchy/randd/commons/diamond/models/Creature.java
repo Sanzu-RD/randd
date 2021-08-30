@@ -13,6 +13,7 @@ import com.souchy.randd.commons.diamond.models.stats.CreatureStats;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.models.stats.special.Targetting;
 import com.souchy.randd.commons.diamond.statics.Element;
+import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
@@ -42,10 +43,10 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 //		}
 //	}
 	
-	private static int idCounter = 0;
+//	private static int idCounter = 0;
 
-	/** entity id for identification and mostly retrival during deserialization */
-	public int id;
+	/* * entity id for identification and mostly retrival during deserialization */
+//	public int id;
 	
 	/** creaturemodel's id */
 	public int modelid;
@@ -86,7 +87,7 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 	public Creature(Fight fight, CreatureModel model, JadeCreature jade, Position pos) { // AzurCache dep, Vector2 pos) {
 		super(null);
 		this.add(new ObjectId());
-		this.id = idCounter++;
+//		this.id = idCounter++;
 		this.modelid = model.id();
 		this.pos = pos;
 		this.targetting = new Targetting();
@@ -206,6 +207,13 @@ public class Creature extends Entity implements BBSerializer, BBDeserializer {
 		return null;
 	}
 	
+	/**
+	 * reset mana and movement points used
+	 */
+	public void resetUsableResources() {
+		stats.resources.get(Resource.mana).fight = 0;
+		stats.resources.get(Resource.move).fight = 0;
+	}
 	
 //	public IntStat intstat(Function<CreatureStats, IntStat> t) {
 //		var stat = t.apply(stats).copy();

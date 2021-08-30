@@ -39,7 +39,7 @@ public class KunaiRain extends Spell {
 
 	@Override
 	protected void initBaseStats(SpellStats stats) {
-		stats.costs.put(Resource.mana, new IntStat(3));
+		stats.costs.put(Resource.mana, new IntStat(0));
 		stats.maxRangeRadius.baseflat = 6;
 		//stats.maxRangePattern.base = (t) -> AoeBuilders.cross.apply(t); 
 	}

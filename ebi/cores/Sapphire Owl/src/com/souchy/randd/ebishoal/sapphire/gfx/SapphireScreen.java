@@ -189,8 +189,10 @@ public class SapphireScreen extends LapisScreen {
 		// render dynamic instances (creatures, terrain effects like glyphs and traps, highlighting effects ..)
 		SapphireGame.renderableEntitySystem.foreach(e -> {
 			var model = e.get(ModelInstance.class);
-			if (model != null)
+			if (model != null) {
+				//e.get() // TODO invisibility
 				getModelBatch().render(model, getEnvironment());
+			}
 		});
 	}
 

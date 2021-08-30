@@ -2,6 +2,7 @@ package com.souchy.randd.moonstone.white;
 
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -62,6 +63,14 @@ public class Moonstone extends EbiShoalTCP implements Reactor { //implements OnT
 //		Log.format("event fight %s turn %s end %s", e.fight.id, e.turn, e.index);
 	}
 
+	private static Consumer<Runnable> postRunnable;
+	public static void setPostRunnable(Consumer<Runnable> method) {
+		if(postRunnable != null) Log.critical("Moonstone.postRunnable can only be assigned once");
+		else postRunnable = method;
+	}
+//	public static void postRunnable(Runnable r) {
+//		if(postRunnable != null) postRunnable.accept(r);
+//	}
 	
 	// add fight object to here as fieldmember or ecs component ? 
 	// but the fight object is already an engine

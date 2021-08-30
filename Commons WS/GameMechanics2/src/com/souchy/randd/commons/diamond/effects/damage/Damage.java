@@ -41,20 +41,43 @@ public class Damage extends Effect {
 	 * Base ratios
 	 */
 	public Map<Element, IntStat> formula = new HashMap<>();
+	
+	
+	// 
 	/**
-	 * Pre-calculated source dmg (pre-mitigation)
+	 * Step 1 Pre-calculated source dmg (pre-mitigation)
 	 */
 	public Map<Element, IntStat> sourceDmg = new HashMap<>();
 
 	/**
-	 * Pre-calculated target dmg (post-mitigation)
+	 * Step 2 Pre-calculated target dmg (post-mitigation)
 	 */
 	public Map<Element, IntStat> targetDmg = new HashMap<>();
+	
 
+	/**
+	 * Step 3 total dmg 
+	 */
+	public double totalDmg = 0;
+	/**
+	 * Step 4 life damage
+	 */
+	public Map<Resource, Integer> resources = new HashMap<>();
+	/**
+	 * Step 4 shield damage
+	 */
+	public Map<Resource, Integer> shields = new HashMap<>();
+	
+
+	/**
+	 * Caster source creature
+	 */
+	private Creature caster;
 	/**
 	 * Target creature, if there is one on the cell/height specified
 	 */
-	private Creature creature;
+	private Creature creatureTarget;
+	
 	
 	/**
 	 * @param areaOfEffect - aoe
@@ -89,97 +112,30 @@ public class Damage extends Effect {
 	 */
 	public void prepareCaster(Creature caster, Cell aoeOrigin) {
 		reset();
-		var crea = (Creature) caster;
-		
-		var casterAffinity = crea.stats.affinity;
-		var globalAffinity = crea.stats.affinity.get(Element.global);
-		
-		// ajoute les stats du caster aux lignes de dégâts, puis calcule la value pour l'ajouter au totaldmg
-		for(var ele : formula.keySet()) {
-			var affinity = casterAffinity.get(ele);
-			// copy the base dmg formula which acts as ratios 
-			var f1 = formula.get(ele).copy();
-			// add caster stats to the base dmg ratios
-			f1.baseflat += globalAffinity.baseflat + affinity.baseflat;
-			f1.inc 	 	+= globalAffinity.inc + affinity.inc; // *=
-			f1.incflat  += globalAffinity.incflat + affinity.incflat;
-			f1.more 	+= globalAffinity.more + affinity.more; // *=
-			// save the source dmg for later
-			this.sourceDmg.put(ele, f1);
-			
-//			Log.info("Effect Damage prepareCaster : " + ele + " = " + f1.value());
-		}
+		this.caster = caster;
+		calculateCasterDamage();
 	}
 	
 	/**
 	 * Calcule les dégâts post-mitigation du target
 	 */
 	public void prepareTarget(Creature caster, Cell cell) {
-		var creaSource = (Creature) caster;
-		creature = cell.getCreature(height); 
-		if(creature == null) return;
-		
-		var casterPen = creaSource.stats.penetration;
-		var targetRes = creature.stats.resistance;
-		var globalPen = creaSource.stats.penetration.get(Element.global);
-		var globalResistance = creature.stats.resistance.get(Element.global);
-		
-		// dmg = (baseflat + casterflat) * (1 + baseinc * casterinc) * (1 + basemore * castermore)
-		
-		// ajoute les stats du caster aux lignes de dégâts, puis calcule la value pour l'ajouter au totaldmg
-		for(var ele : sourceDmg.keySet()) {
-			// damage coming out of the caster (pre-mitigation)
-			double sourceDmg = this.sourceDmg.get(ele).value(); //f1.value();
-			// compile pen vs res
-			var mitigation = new IntStat(sourceDmg);
-			mitigation.more = - targetRes.get(ele).more - globalResistance.more + casterPen.get(ele).more + globalPen.more;
-			mitigation.inc = - targetRes.get(ele).inc - globalResistance.inc + casterPen.get(ele).inc + globalPen.inc;
-			mitigation.baseflat = - targetRes.get(ele).baseflat - globalResistance.baseflat + casterPen.get(ele).baseflat + globalPen.baseflat;
-			// final damage taken by the target (post-mitigation)
-			var finalDmg = sourceDmg * (1d + mitigation.more / 100d) * (1d + mitigation.inc / 100d) + mitigation.baseflat;
-			// save the target dmg for later
-			targetDmg.put(ele, new IntStat(finalDmg));
+		creatureTarget = cell.getCreature(height); 
+		if(creatureTarget == null) return;
 
-//			Log.info("Effect Damage prepareTarget : " + ele + " = " + finalDmg);
-		}
-
+		calculateOnRes();
+		calculateTotal();
+		calculateResourceLoss();
 	}
+	
 	
 	/**
 	 * Mitigate then apply damage to a target
 	 */
 	@Override
 	public void apply0(Creature caster, Cell cell) {
-		creature = cell.getCreature(height); 
-		if(creature == null) return;
-		
-		// Calcule le dommage total résultant du target dmg pré-calculé
-		double totalDmg = 0;
-		for(var ele : targetDmg.keySet()) {
-			// add to total dmg
-			totalDmg += targetDmg.get(ele).value();
-		}
-//		Log.info("Effect Damage apply0 totalDmg: " + totalDmg + ", on " + creature.id + " " + creature );
-		
-		// calcule les dégâts shield et life
-		var shield = creature.stats.shield.get(Resource.life);
-		
-		double shieldDmg = 0;
-		double lifeDmg = 0;
-		
-		if(shield.fight >= totalDmg) {
-			shieldDmg = totalDmg;
-		} else { 
-			shieldDmg = shield.fight; 
-			lifeDmg = totalDmg - shieldDmg;
-		} 
-		
-		var shields = new HashMap<Resource, Integer>();
-		if(shieldDmg > 0) shields.put(Resource.life, (int) -shieldDmg);
-
-		var resources = new HashMap<Resource, Integer>();
-		if(lifeDmg > 0) resources.put(Resource.life, (int) -lifeDmg);
-		
+		creatureTarget = cell.getCreature(height); 
+		if(creatureTarget == null) return;
 		
 		// applique les dégâts
 		var gainloss = new ResourceGainLoss(AoeBuilders.single.get(), targetConditions.copy(), false, shields, resources);
@@ -201,6 +157,9 @@ public class Damage extends Effect {
 		var effect = new Damage(aoe, targetConditions, formula);
 		this.sourceDmg.forEach((ele, stat) -> effect.sourceDmg.put(ele, stat.copy()));
 		this.targetDmg.forEach((ele, stat) -> effect.targetDmg.put(ele, stat.copy()));
+		effect.totalDmg = this.totalDmg;
+		this.resources.forEach((res, val) -> effect.resources.put(res, val));
+		this.shields.forEach((res, val) -> effect.shields.put(res, val));
 		return effect;
 	}
 
@@ -216,6 +175,7 @@ public class Damage extends Effect {
 		
 		return out;
 	}
+	
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
 		super.deserialize(in);
@@ -224,4 +184,91 @@ public class Damage extends Effect {
 		return null;
 	}
 	
+	
+	
+	/**
+	 * Calculate damage for each element based on the caster's affinities
+	 */
+	private void calculateCasterDamage() {
+		var casterAffinity = caster.stats.affinity;
+		var globalAffinity = caster.stats.affinity.get(Element.global);
+		
+		// ajoute les stats du caster aux lignes de dégâts, puis calcule la value pour l'ajouter au totaldmg
+		for(var ele : formula.keySet()) {
+			var affinity = casterAffinity.get(ele);
+			// copy the base dmg formula which acts as ratios 
+			var f1 = formula.get(ele).copy();
+			// add caster stats to the base dmg ratios
+			f1.baseflat += globalAffinity.baseflat + affinity.baseflat;
+			f1.inc 	 	+= globalAffinity.inc + affinity.inc; // *=
+			f1.incflat  += globalAffinity.incflat + affinity.incflat;
+			f1.more 	+= globalAffinity.more + affinity.more; // *=
+			// save the source dmg for later
+			this.sourceDmg.put(ele, f1);
+			
+//			Log.info("Effect Damage prepareCaster : " + ele + " = " + f1.value());
+		}
+	}
+	
+	/**
+	 * Calculate damage for each element based on the target's resistances/mitigation
+	 */
+	private void calculateOnRes() {
+		var casterPen = caster.stats.penetration;
+		var targetRes = creatureTarget.stats.resistance;
+		var globalPen = caster.stats.penetration.get(Element.global);
+		var globalResistance = creatureTarget.stats.resistance.get(Element.global);
+		
+		// dmg = (baseflat + casterflat) * (1 + baseinc * casterinc) * (1 + basemore * castermore)
+		
+		// ajoute les stats du caster aux lignes de dégâts, puis calcule la value pour l'ajouter au totaldmg
+		for(var ele : sourceDmg.keySet()) {
+			// damage coming out of the caster (pre-mitigation)
+			double sourceDmg = this.sourceDmg.get(ele).value(); //f1.value();
+			// compile pen vs res
+			var mitigation = new IntStat(sourceDmg);
+			mitigation.more = - targetRes.get(ele).more - globalResistance.more + casterPen.get(ele).more + globalPen.more;
+			mitigation.inc = - targetRes.get(ele).inc - globalResistance.inc + casterPen.get(ele).inc + globalPen.inc;
+			mitigation.baseflat = - targetRes.get(ele).baseflat - globalResistance.baseflat + casterPen.get(ele).baseflat + globalPen.baseflat;
+			// final damage taken by the target (post-mitigation)
+			var finalDmg = sourceDmg * (1d + mitigation.more / 100d) * (1d + mitigation.inc / 100d) + mitigation.baseflat;
+			// save the target dmg for later
+			targetDmg.put(ele, new IntStat(finalDmg));
+
+//			Log.info("Effect Damage prepareTarget : " + ele + " = " + finalDmg);
+		}
+	}
+	
+	/**
+	 * Sums the elemental damage to a total
+	 */
+	private void calculateTotal() {
+		// Calcule le dommage total résultant du target dmg pré-calculé
+		for(var ele : targetDmg.keySet()) {
+			// add to total dmg
+			totalDmg += targetDmg.get(ele).value();
+		}
+//		Log.info("Effect Damage apply0 totalDmg: " + totalDmg + ", on " + creature.id + " " + creature );
+	}
+	
+	/**
+	 * Calculate the damage for each resource (life, shield..) on the target creature
+	 */
+	private void calculateResourceLoss() {
+		// calcule les dégâts shield et life
+		var shield = creatureTarget.stats.shield.get(Resource.life);
+		
+		double shieldDmg = 0;
+		double lifeDmg = 0;
+		
+		if(shield.fight >= totalDmg) {
+			shieldDmg = totalDmg;
+		} else { 
+			shieldDmg = shield.fight; 
+			lifeDmg = totalDmg - shieldDmg;
+		} 
+		
+		if(shieldDmg > 0) shields.put(Resource.life, (int) -shieldDmg);
+		if(lifeDmg > 0) resources.put(Resource.life, (int) -lifeDmg);
+	}
 }

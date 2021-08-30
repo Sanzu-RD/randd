@@ -31,6 +31,8 @@ module GameMechanics2 {
 	exports com.souchy.randd.commons.diamond.effects.status;
 	exports com.souchy.randd.commons.diamond.effects.resources;
 	exports com.souchy.randd.commons.diamond.effects.displacement;
+	
+	opens com.souchy.randd.commons.diamond.ext;
 
 	requires transitive netty.all;
 	requires transitive com.google.common;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chat SYSTEM "lml.dtd">
 
-<chat id="chat" align="bottomleft" x="20" y="15" width="400" height="200" debug="false" >
+<chat id="chat" align="bottomleft" x="20" y="15" width="500" height="200" debug="false" >
     <visscrollpane id="scroll" grow="true" padbottom="8" style="list" >
         <!--<scrollabletextarea debug="false" id="area" style="textArea"-->
                             <!--value="Description. Lorem ipsum dolor sit amet,-->

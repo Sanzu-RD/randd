@@ -21,6 +21,7 @@ import com.souchy.randd.commons.diamond.statusevents.other.EnterCellEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.EnterCellEvent.OnEnterCellHandler;
 import com.souchy.randd.commons.diamond.statusevents.other.LeaveCellEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.LeaveCellEvent.OnLeaveCellHandler;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.creatures.tsukuyo.Tsukuyo;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.jade.Constants;
@@ -28,44 +29,42 @@ import com.souchy.randd.jade.Constants;
 public class Mist extends Spell {
 	
 	public static class MistEffect extends TerrainEffect implements Reactor, OnEnterCellHandler, OnLeaveCellHandler {
+		public static final int modelid = Constants.statusId(Mist.modelid);
 		public MistEffect(Fight fight, int sourceEntityId, int targetCellId) {
 			super(fight, sourceEntityId, targetCellId);
-
 			this.duration = 2;
 			this.stacks = 1;
 			this.creatureStats = new CreatureStats();
 			this.creatureStats.invisible.base = true;
 		}
-		
 		@Override
 		public TerrainEffect create(Fight fight, int entitySourceId, int entityTargetId) {
 			return new MistEffect(fight, entitySourceId, entityTargetId);
 		}
-
 		@Override
 		public int modelid() {
-			return Constants.statusId(Mist.modelid);
+			return modelid;
 		}
-		
 		@Override
 		public Status copy0(Fight f) {
 			var e = new MistEffect(f, sourceEntityId, targetEntityId);
 			return e;
 		}
-
+		@Override
+		public boolean fuse(Status s) {
+			//genericFuseStrategy(s, false, false, false);
+			return false;
+		}
 		@Override
 		public void onEnterCell(EnterCellEvent event) {
+			Log.info("MistEffect onEnterCell");
 			event.source.statuses.addStatus(this);
 		}
 
 		@Override
 		public void onLeaveCell(LeaveCellEvent event) {
+			Log.info("MistEffect onLeaveCell");
 			event.source.statuses.removeStatus(this);
-		}
-		@Override
-		public boolean fuse(Status s) {
-			genericFuseStrategy(s, false, false, false);
-			return false;
 		}
 	}
 	
@@ -86,7 +85,7 @@ public class Mist extends Spell {
 
 	@Override
 	protected void initBaseStats(SpellStats stats) {
-		stats.costs.put(Resource.mana, new IntStat(3));
+		stats.costs.put(Resource.mana, new IntStat(0));
 		stats.maxRangeRadius.baseflat = 3;
 	}
 
@@ -102,6 +101,7 @@ public class Mist extends Spell {
 
 	@Override
 	public void cast0(Creature caster, Cell target) {
+		Log.info("Mist spell cast0");
 		e1.apply(caster, target);
 	}
 

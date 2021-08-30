@@ -1,8 +1,10 @@
 package com.souchy.randd.ebi.ammolite;
 
+import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.effects.status.AddStatusEffect;
 import com.souchy.randd.commons.diamond.models.Creature;
@@ -10,6 +12,8 @@ import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Spell;
 import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.diamond.models.TerrainEffect;
+import com.souchy.randd.commons.diamond.statusevents.Event;
+import com.souchy.randd.commons.diamond.statusevents.Handler.Reactor;
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent.OnCastSpellHandler;
 import com.souchy.randd.commons.diamond.statusevents.status.AddStatusEvent;
@@ -20,6 +24,7 @@ import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.ecs.Family;
 import com.souchy.randd.commons.tealwaters.ecs.Engine.AddEntityEvent;
 import com.souchy.randd.commons.tealwaters.io.files.ClassDiscoverer.DefaultClassDiscoverer;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 import br.com.johnathan.gdx.effekseer.api.EffekseerManager;
 import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
@@ -30,7 +35,8 @@ import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
  * @author Souchy
  * @date 11 janv. 2021
  */
-public class Ammolite implements OnCastSpellHandler, OnAddStatusHandler, OnAddTerrainHandler {
+@SuppressWarnings("unchecked")
+public class Ammolite implements Reactor, OnCastSpellHandler, OnAddStatusHandler, OnAddTerrainHandler {
 
 	/** updates fx on render */
 	public static class FXFamily extends Family<FXPlayer> {
@@ -46,12 +52,12 @@ public class Ammolite implements OnCastSpellHandler, OnAddStatusHandler, OnAddTe
 	
 	public static EffekseerManager manager;
 	public static Fight fight;
+	public static FXFamily family;
 	
 	public static Map<Class<? extends Spell>, FXPlayer> spellsFX = new HashMap<>();
 	public static Map<Class<? extends Status>, FXPlayer> statusFX = new HashMap<>();
 	public static Map<Class<? extends TerrainEffect>, FXPlayer> terrainFX = new HashMap<>();
 	
-	@SuppressWarnings("unchecked")
 	public Ammolite(Fight f, EffekseerManager manager) {
 		Ammolite.fight = f;
 		Ammolite.manager = manager;
@@ -66,13 +72,15 @@ public class Ammolite implements OnCastSpellHandler, OnAddStatusHandler, OnAddTe
 		ParticleEffekseer.worldOffsetY = 1f;
 		ParticleEffekseer.worldOffsetZ = -0.5f;
 		
-		
-		new FXFamily(f);
+		family = new FXFamily(f);
 
 		Engine nullEngine = null;
 		var fxPlayers = new DefaultClassDiscoverer<FXPlayer>(FXPlayer.class).explore("com.souchy.randd.ebi.ammolite");
 		fxPlayers.forEach(p -> {
 			try {
+				// if abstract class, dont try to instance it
+				if(Modifier.isAbstract(p.getModifiers())) return;
+				
 				var fx = p.getDeclaredConstructor(Engine.class).newInstance(nullEngine);
 				if(Spell.class.isAssignableFrom(fx.modelClass()))
 					spellsFX.put((Class<? extends Spell>) fx.modelClass(), fx);
@@ -93,36 +101,54 @@ public class Ammolite implements OnCastSpellHandler, OnAddStatusHandler, OnAddTe
 	}
 	
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public void onCastSpell(CastSpellEvent event) {
 		var fx = spellsFX.get(event.spell.getClass());
 		if(fx == null) return;
 		
 		var inst = fx.copy(fight);
-		inst.onCreation(event);
+
+		trigger(inst, event);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public void onAddStatus(AddStatusEvent event) {
+		if(event.getStatus() == null) {
+			Log.error("Ammolite onAddStatus %s", event);
+			return; 
+		}
 		var fx = statusFX.get(event.getStatus().getClass());
 		if(fx == null) return;
 		
 		var inst = fx.copy(fight);
 		event.getStatus().add(inst);
-		inst.onCreation(event);
-	}
 
-	@SuppressWarnings("unchecked")
+		trigger(inst, event);
+	}
+	
 	@Override
 	public void onAddTerrain(AddTerrainEvent event) {
+		// only accept the initial event as to not create an fx for every target(cell) 
+		// since we keep the same status for every cell, it should also be the same fx for the entireity of the terraineffect
+		if(event.level != 0)  return;
+		
 		var fx = terrainFX.get(event.getStatus().getClass());
 		if(fx == null) return;
 		
 		var inst = fx.copy(fight);
 		event.getStatus().add(inst);
-		inst.onCreation(event);
+
+		trigger(inst, event);
+	}
+	
+	private void trigger(FXPlayer inst, Event event) {
+		try {
+			Log.info("Ammolite create fx player on " + event);
+			Gdx.app.postRunnable(() -> inst.onCreation(event));
+			// inst.onCreation(event);
+		} catch (Exception e) {
+			Log.error("", e);
+		}
 	}
 	
 	

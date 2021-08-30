@@ -80,7 +80,7 @@
 	{
 		"id": 13,
 		"comment": "Tsukuyo",
-		"models": ["res/models/creatures/BaseWitch.g3dj"],
+		"models": ["res/models/creatures/Ninja_Female.g3dj"],
 		"icon": "tsukuyo"
 	},
 	{
@@ -94,6 +94,12 @@
 		"comment": "Hero",
 		"models": ["res/models/creatures/BaseWitch.g3dj"],
 		"icon": "hero"
+	},
+	{
+		"id": 27,
+		"comment": "Real",
+		"models": ["res/models/creatures/Real.g3dj"],
+		"icon": "real"
 	},
 	{
 		"id": 40,
@@ -112,12 +118,6 @@
 		"comment": "Klaust",
 		"models": ["res/models/creatures/BaseWitch.g3dj"],
 		"icon": "klaust"
-	},
-	{
-		"id": 27,
-		"comment": "Real",
-		"models": ["res/models/creatures/Real.g3dj"],
-		"icon": "real"
 	}
 
 ]

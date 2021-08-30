@@ -56,7 +56,10 @@ public class LapisAssets {
 	public static void loadTextures(FileHandle dir) {
 		recurseFiles(dir, 
 				f -> f.name().toLowerCase().endsWith(".png") || f.name().toLowerCase().endsWith(".jpg") || f.name().toLowerCase().endsWith(".jpeg") || f.name().toLowerCase().endsWith(".bmp"), 
-				f -> assets.load(f.path(), Texture.class, params)); // f.path().substring(f.path().indexOf("res/"), f.path().length())
+				f -> {
+					if(assets.contains(f.path())) assets.unload(f.path());
+					assets.load(f.path(), Texture.class, params);
+				}); // f.path().substring(f.path().indexOf("res/"), f.path().length())
 
 		try {
 			assets.finishLoading();
@@ -74,7 +77,10 @@ public class LapisAssets {
 	public static void loadModels(FileHandle dir) {
 		recurseFiles(dir, 
 				f -> f.name().endsWith(".g3dj"), 
-				f -> assets.load(f.path(), Model.class));
+				f -> {
+					if(assets.contains(f.path())) assets.unload(f.path());
+					assets.load(f.path(), Model.class);
+				});
 		try {
 			assets.finishLoading();
 		} catch (Exception e) {
@@ -85,11 +91,13 @@ public class LapisAssets {
 	public static void loadI18NBundles(FileHandle dir) {
 		recurseDirectories(dir, 
 				d -> d.list((f, n) -> n.startsWith("bundle") && n.endsWith(".properties")).length > 0,
-				d -> assets.load(d.path() + "/bundle", I18NBundle.class)
+				d -> {
+					if(assets.contains(d.path())) assets.unload(d.path());
+					assets.load(d.path() + "/bundle", I18NBundle.class);
+				}
 		);
 		assets.finishLoading();
 		I18NBundle.setExceptionOnMissingKey(false);
-//		assets.getAll(I18NBundle.class, new Array<I18NBundle>()).forEach(i -> I18NBundle.setExceptionOnMissingKey(false));
 	}
 	
 	public static void loadParticleEffects(FileHandle dir, ParticleEffectLoadParameter params) {
@@ -106,14 +114,20 @@ public class LapisAssets {
 	public static void loadMusics(FileHandle dir) {
 		recurseFiles(dir, 
 				f -> f.name().endsWith(".mp3"), 
-				f -> assets.load(f.path(), Music.class));
+				f -> {
+					if(assets.contains(f.path())) assets.unload(f.path());
+					assets.load(f.path(), Music.class);
+				});
 		assets.finishLoading();
 	}
 	
 	public static void loadSounds(FileHandle dir) {
 		recurseFiles(dir, 
 				f -> f.name().endsWith(".mp3"), 
-				f -> assets.load(f.path(), Sound.class));
+				f -> {
+					if(assets.contains(f.path())) assets.unload(f.path());
+					assets.load(f.path(), Sound.class);
+				});
 		assets.finishLoading();
 	}
 	

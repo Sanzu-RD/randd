@@ -5,13 +5,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+import com.souchy.randd.commons.diamond.common.Action;
 import com.souchy.randd.commons.diamond.common.Action.EndTurnAction;
+import com.souchy.randd.commons.diamond.common.Action.SpellAction;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.jade.Constants;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 import com.souchy.randd.commons.diamond.statusevents.Handler.Reactor;
+import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
+import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent.OnCastSpellHandler;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent.OnTurnEndHandler;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
@@ -27,11 +32,12 @@ import com.souchy.randd.deathshadow.core.smoothrivers.SelfIdentify;
 import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.jade.meta.UserLevel;
+import com.souchy.randd.moonstone.commons.packets.c2s.FightAction;
 import com.souchy.randd.moonstone.commons.packets.s2c.TurnStart;
 
 import io.netty.channel.Channel;
 
-public class BlackMoonstone extends DeathShadowCore implements Reactor { // implements OnTurnEndHandler, OnTurnStartHandler {
+public class BlackMoonstone extends DeathShadowCore implements Reactor, OnTurnStartHandler, OnTurnEndHandler, OnCastSpellHandler {
 	
 	/**
 	 * Static ref
@@ -59,28 +65,27 @@ public class BlackMoonstone extends DeathShadowCore implements Reactor { // impl
 		port = 443; // port changeant pour chaque node instance
 		if(args.length > 0) port = Integer.parseInt(args[0]);
 		
+		this.bus.register(this);
+		
 		server = new DeathShadowTCP(port, this);
 		fights = new HashMap<>();
 		server.auth.bus.register(this);
-
+		
 		// init elements and models
 		Elements.values(); 
 		DiamondModels.instantiate("com.souchy.randd.data.s1");
 		
 		// create a mock fight for tests
-		if(Arrays.asList(args).contains("mock")) {
-			var fight = MockFight.createFight();
-			new FightChannelSystem(fight);
-			fight.statusbus.register(this); //.statusbus.register(this);
-			fight.startTurnTimer();
-			fights.put(fight.id, fight);
-		}
-		if(Arrays.asList(args).contains("mock")) {
-			var fight = MockFight.createFight();
-			new FightChannelSystem(fight);
-			fight.statusbus.register(this); //.statusbus.register(this);
-			fight.startTurnTimer();
-			fights.put(fight.id, fight);
+		if (Arrays.asList(args).contains("mock")) {
+			for (int count = 0; count < 2; count++) {
+				var fight = MockFight.createFight();
+				new FightChannelSystem(fight);
+				fight.pipe.setBus(this.bus); // new EventBus();
+				// fight.pipe.bus.register(this); // register to pipeline actions
+				fight.statusbus.register(this); // register to fight events
+				fight.startTurnTimer();
+				fights.put(fight.id, fight);
+			}
 		}
 
 		// register node on pearl
@@ -88,7 +93,7 @@ public class BlackMoonstone extends DeathShadowCore implements Reactor { // impl
 //			int nodeid = 0; // get nodeid from idmaker queue
 //		 rivers.send("pearl", new SelfIdentify(nodeid));
 //		 });
-
+		
 		this.rivers.connect(port);
 		this.rivers.sendPearl(new SelfIdentify(this));
 		
@@ -110,7 +115,7 @@ public class BlackMoonstone extends DeathShadowCore implements Reactor { // impl
 
 	@Subscribe
 	public void onConnect(UserActiveEvent e) {
-		Log.info("black on connect : " + e.user.username);
+		Log.info("BlackMoonstone on connect : " + e.user.username);
 //		Fight fight = e.ctx.channel().attr(Fight.attrkey).get();
 //		var user = e.ctx.channel().attr(User.attrkey).get();
 //		fight.creatures.foreach(c -> c.add(user._id));
@@ -118,15 +123,14 @@ public class BlackMoonstone extends DeathShadowCore implements Reactor { // impl
 	
 	@Subscribe
 	public void onDisconnect(UserInactiveEvent e) {
-		Log.info("black on disconnect : " + e.user.username);
+		Log.info("BlackMoonstone on disconnect : " + e.user);
 		Fight fight = e.ctx.channel().attr(Fight.attrkey).get();
 		fight.get(FightChannelSystem.class).remove(e.ctx.channel());
 	}
 
-
-	@Subscribe
+	@Override
 	public void onTurnStart(TurnStartEvent e) {
-//		Log.format("event fight %s turn %s sta %s", e.fight.id, e.turn, e.index);
+		//Log.format("BlackMoonstone event fight %s turn %s sta %s " + e, e.fight.id, e.turn, e.index);
 		
 		if(e.fight.future != null) e.fight.future.cancel(true);
 		
@@ -140,10 +144,26 @@ public class BlackMoonstone extends DeathShadowCore implements Reactor { // impl
 
 		broadcast(e.fight, new TurnStart(e.turn, e.index, e.fight.time));
 	}
+
+	@Override
+	public void onTurnEnd(TurnEndEvent e) {
+		//Log.format("BlackMoonstone event fight %s turn %s end %s", e.fight.id, e.turn, e.index);
+	}
+	
+	
+	@Override
+	public void onCastSpell(CastSpellEvent event) {
+		//event.source.get(Fight.class).get(FightChannelSystem.class).broadcast(message);
+	}
 	
 	@Subscribe
-	public void onTurnEnd(TurnEndEvent e) {
-//		Log.format("event fight %s turn %s end %s", e.fight.id, e.turn, e.index);
+	public void onPipelineFightAction(SpellAction action) {
+		if(action != null) {
+			Log.info("BlackMoonstone on SpellAction");
+			if(action instanceof SpellAction)
+				action.fight.get(FightChannelSystem.class)
+					.broadcast(new FightAction(action.caster, action.turn, action.id, action.cellX, action.cellY));
+		}
 	}
 	
 	
@@ -162,9 +182,5 @@ public class BlackMoonstone extends DeathShadowCore implements Reactor { // impl
 				};
 	}
 
-//	@Override
-//	public HandlerType type() {
-//		return HandlerType.Reactor;
-//	}
 
 }

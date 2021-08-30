@@ -12,6 +12,14 @@ import com.google.common.eventbus.EventBus;
  */
 public class Entity {
 	
+	private static int idCounter = 0;
+	
+	/**
+	 * entity id for identification and mostly retrival during deserialization
+	 */
+	public int id;
+	
+	
 	/** inbound event to tell components to dispose */
 	protected static class DisposeEntityEvent { }
 	
@@ -22,22 +30,24 @@ public class Entity {
 	public final HashMap<Class<?>, Object> components = new HashMap<>();
 	
 	public Entity(Engine engine) {
+		this.id = idCounter++;
 		register(engine);
 	}
 	
 	public void register(Engine engine) {
 		if(engine == null) return; // for models cases like Spell, Status
+		if(this.get(Engine.class) != null) return; // pas register en double
 		this.add(engine); // put the engine object as its child class (ex: Fight)
-		components.put(Engine.class, engine); // put the engine class as Engine class
+		components.put(Engine.class, engine); // put the engine as Engine class as well (this.add() registers it as Fight.class)
 		engine.systemBus.register(this);
-		engine.add(this);
+		engine.add(this); // sends an event to all Systems to add this entity
 	}
 	
 	public void dispose() {
 		var engine = get(Engine.class);
 		if(engine != null) {
 			engine.systemBus.unregister(this);
-			engine.remove(this);
+			engine.remove(this); // sends an event to all Systems to remove this entity
 		}
 		componentBus.post(new DisposeEntityEvent());
 		components.values().forEach(c -> componentBus.unregister(c));

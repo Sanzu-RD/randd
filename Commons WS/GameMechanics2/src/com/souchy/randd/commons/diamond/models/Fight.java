@@ -11,6 +11,7 @@ import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
 import com.souchy.randd.commons.diamond.systems.CellSystem;
 import com.souchy.randd.commons.diamond.systems.CreatureSystem;
 import com.souchy.randd.commons.diamond.systems.EffectSystem;
+import com.souchy.randd.commons.diamond.systems.GameEntitySystem;
 import com.souchy.randd.commons.diamond.systems.SpellSystem;
 import com.souchy.randd.commons.diamond.systems.StatusSystem;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
@@ -19,6 +20,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.commons.ActionPipeline;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.matchmaking.Team;
 import io.netty.buffer.ByteBuf;
 import io.netty.util.AttributeKey;
@@ -79,6 +81,7 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 	
 	// systems hold and manage instances, theyre cool guys
 	// might want a system for Effects and have effect models with ids the same way as status/spells
+	public GameEntitySystem entities;
 	public CreatureSystem creatures;
 	public CellSystem cells;
 	public SpellSystem spells;
@@ -89,6 +92,7 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 	public Fight() {
 		super();
 		
+		this.entities = new GameEntitySystem(this);
 		this.creatures = new CreatureSystem(this);
 		this.cells = new CellSystem(this);
 		this.spells = new SpellSystem(this);
@@ -110,11 +114,20 @@ public class Fight extends Engine implements Identifiable<Integer>, BBSerializer
 	 * Will get cancelled by an EndTurnAction if a player passes his turn.
 	 */
 	public void startTurnTimer() {
-//		Log.format("raw turn start %s %s", timeline.turn(), timeline.index());
+		//Log.format("Fight startTurnTimer raw %s %s", timeline.turn(), timeline.index());
 		var event = new TurnStartEvent(this, timeline.turn(), timeline.index());
-		statusbus.post(event);
+		this.statusbus.post(event);
 	}
+	/**
+	 * 
+	 */
 	public void endTurnTimer() {
+		// reset mana and movement points // normalement devrait être dans EndTurnAction.class ou endTurnTimer en utilisant timeline.current();
+		// mais on le met ici temporairement pour debug côté client
+		var tid = timeline.current();
+		if(tid != null) creatures.get(tid).resetUsableResources();
+
+		//Log.format("Fight endTurnTimer raw %s %s", timeline.turn(), timeline.index());
 		var event = new TurnEndEvent(this, this.timeline.turn(), this.timeline.index());
 		this.statusbus.post(event);
 	}

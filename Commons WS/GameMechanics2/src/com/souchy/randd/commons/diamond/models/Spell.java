@@ -21,6 +21,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.Constants;
 
 import io.netty.buffer.ByteBuf;
@@ -133,14 +134,22 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 		this.stats.costs.forEach((r, i) -> costs.put(r, i.value()));
 		ResourceGainLoss.use(caster, costs);
 		
-		// puis cast le spell en créant une copie pour pouvoir la modifier
-		var event = new CastSpellEvent(caster, target, this.copy());
+		// Créé une copie du spell pour pouvoir le modifier dans l'eventpipeline
+		var spellcopy = this.copy();
+		// puis cast le spell 
+		var event = new CastSpellEvent(caster, target, spellcopy);
+		Log.format("Spell (%s) cast interceptors", spellcopy.hash());
 		get(Fight.class).statusbus.interceptors.post(event); // permet l'interruption
+		Log.format("Spell (%s) cast modificators", spellcopy.hash());
 		get(Fight.class).statusbus.modifiers.post(event); // permet la modification 
-		if(!event.intercepted)
-			event.spell.cast0(caster, target);
+		if(!event.intercepted) {
+			Log.format("Spell (%s) cast cast0", spellcopy.hash());
+			spellcopy.cast0(caster, target);
+		}
+		Log.format("Spell (%s) cast reactors", spellcopy.hash());
 		get(Fight.class).statusbus.reactors.post(event); // permet la reaction 
-		event.spell.dispose(); // dispose de la copie
+		Log.format("Spell (%s) cast dispose", spellcopy.hash());
+		spellcopy.dispose(); // dispose de la copie
 	}
 	
 	/**
@@ -168,17 +177,17 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	 */
 	public boolean canTarget(Creature caster, Cell target) {
 		if(target == null) return false;
+		
 		var board = this.get(Fight.class).board;
 		
 		// si la cellule est targetable (ex: pas un mur ou un trou)
 		if(!board.checkCellViewOn(caster, target)) return false;
-		
+
 		// si on a besoin d'une ligne de vue et qu'il n'y en a pas
 		if(stats.target.accepts(TargetType.needsLineOfSight) && !board.checkView(caster, target.pos)) return false;	
-		
+
 		// si la cellule est dans la portée
 //		if(!board.checkRange(getRange(), caster.pos, target.pos)) return false;
-		
 		
 		// si la cellule est vide
 		if(!target.hasCreature()) {
@@ -206,8 +215,7 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 			// si on accepte les summons
 			if(c.summonerID != 0 && !stats.target.accepts(TargetType.summons)) return false;
 		}
-		
-		
+
 		// si tout passe, return true
 		return true;
 	}

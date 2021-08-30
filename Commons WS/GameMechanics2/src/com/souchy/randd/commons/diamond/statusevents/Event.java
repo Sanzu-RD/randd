@@ -18,6 +18,10 @@ import com.souchy.randd.commons.diamond.models.Effect;
  */
 public abstract class Event {
 	
+	public enum EventLevel {
+		source,
+		target;
+	}
 	
 	// public final boolean canBeIntercepted;
 	public boolean intercepted;

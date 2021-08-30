@@ -26,7 +26,8 @@ import com.souchy.randd.deathshadows.smoothrivers.SmoothRivers;
 public abstract class Core {
 	
 	/**
-	 * Core events like packets which classes can listen to without being a full blown BBMessageHandler class
+	 * Core events like packets are thrown here. <br>
+	 * Classes can listen to them without being a full blown BBMessageHandler class <br>
 	 * Useful for UI updates for example
 	 */
 	public final EventBus bus = new EventBus();

@@ -5,7 +5,7 @@ import com.souchy.randd.commons.diamond.models.stats.CreatureStats;
 
 public class Real extends CreatureModel {
 
-	public static final int modelid = 13;
+	public static final int modelid = 27;
 
 	@Override
 	public int id() {

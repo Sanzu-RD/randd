@@ -45,14 +45,18 @@ public class AddStatusEffect extends Effect {
 	public AddStatusEffect(Aoe aoe, TargetTypeStat targetConditions, Function<Fight, Status> statusBuilder) {
 		super(aoe, targetConditions);
 		this.statusBuilder = statusBuilder;
+	}
+	
+	@Override
+	public void prepareTarget(Creature caster, Cell target) {
+		// maybe build the status here so it's a different instance for each target
 		this.status = statusBuilder.apply(null);
 		this.status.parentEffectId = this.id;
 	}
 	
-	
 	@Override
 	public void apply0(Creature source, Cell cell) {
-//		var f = source.get(Fight.class);
+		var f = source.get(Fight.class);
 		var target = cell.getCreature(height);
 		if(target == null) {
 			status.dispose();
@@ -79,7 +83,13 @@ public class AddStatusEffect extends Effect {
 //			// register in the eventpipeline if the status is either of interceptors/modifiers/reactors
 //			target.handlers.register(status);
 //		} else {
-			target.statuses.addStatus(status);
+			var regis = target.statuses.addStatus(status);
+			
+			if(regis) {
+				status.register(f);
+				f.statusbus.register(status);
+			}
+			
 			// register in the eventpipeline if the status is either of interceptors/modifiers/reactors
 //			f.statusbus.register(status);
 //			target.getCreatures().get(0).handlers.register(status);
@@ -94,7 +104,9 @@ public class AddStatusEffect extends Effect {
 	
 	@Override
 	public AddStatusEffect copy() {
-		return new AddStatusEffect(aoe, targetConditions, statusBuilder);
+		var eff = new AddStatusEffect(aoe, targetConditions, statusBuilder);
+		//eff.status = this.status; // not sure, maybe it should be a copy for actual statuses, contrarily to terraineffects
+		return eff;
 	}
 
 }

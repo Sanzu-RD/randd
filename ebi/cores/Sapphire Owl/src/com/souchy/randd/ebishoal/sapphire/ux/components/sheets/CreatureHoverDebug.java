@@ -6,7 +6,7 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
-import com.souchy.randd.ebishoal.sapphire.gfx.SapphireAssets;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireAssets;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireComponent;
 
 public class CreatureHoverDebug extends SapphireComponent {

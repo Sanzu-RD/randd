@@ -6,10 +6,12 @@ import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Spell;
+import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
+import com.souchy.randd.commons.tealwaters.commons.ActionPipeline.BaseAction;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
-public abstract class Action implements Supplier<Boolean> {
+public abstract class Action extends BaseAction implements Supplier<Boolean> {
 	
 	public static class EndTurnAction extends Action {
 		public EndTurnAction(Fight f) {
@@ -20,6 +22,7 @@ public abstract class Action implements Supplier<Boolean> {
 		public void apply() {
 			//Log.info("EndTurnAction apply");
 			synchronized(fight.timeline) {
+				//
 				fight.endTurnTimer();
 //				var event = new TurnEndEvent(fight, fight.timeline.turn(), fight.timeline.index());
 //				fight.statusbus.post(event);
@@ -30,28 +33,42 @@ public abstract class Action implements Supplier<Boolean> {
 		}
 	}
 	
-	public static class MoveAction {
+	public static class MoveAction extends Action {
+		public MoveAction(Fight f) {
+			super(f);
+		}
+		@Override
+		public void apply() {
+		}
 	}
 	
 	public static class SpellAction extends Action {
+		private final Creature casterC;
 		private final Spell spell;
 		private final Cell cell;
-		private final Creature casterC;
-		public SpellAction(Fight f) {
+		public SpellAction(Fight f, int id, int cellX, int cellY) {
 			super(f);
+			this.id = id;
+			this.cellX = cellX;
+			this.cellY = cellY;
+			casterC = fight.creatures.get(caster);
 			spell = fight.spells.get(id);
 			cell = fight.board.get(cellX, cellY);
-			casterC = fight.creatures.get(caster);
+			//Log.info("SpellAction cell : " + cell);
 		}
 		@Override
 		public boolean canApply() {
-			if(!super.canApply()) return false;
-			if(id > 0 && !(spell.canCast(casterC) && spell.canTarget(casterC, cell))) return false;
+			Log.format("SpellAction canApply : %s, %s, %s", super.canApply(), spell.canCast(casterC), spell.canTarget(casterC, cell));
+			if(!super.canApply()) 
+				return false;
+			if(id > 0 && !(spell.canCast(casterC) && spell.canTarget(casterC, cell)))
+				return false;
 //			if(id == 0 && )
 			return true;
 		}
 		@Override
 		public void apply() {
+			Log.format("SpellAction apply %s %s %s %s", spell.id, spell.getModel().getClass().getSimpleName(), casterC.getModel().getClass().getSimpleName(), cell.pos);
 			// spell
 			if(id > 0) {
 				spell.cast(casterC, cell);
@@ -62,6 +79,7 @@ public abstract class Action implements Supplier<Boolean> {
 			}
 		}
 	}
+	
 	
 	/**
 	 * id for ending turn is -2
@@ -86,7 +104,12 @@ public abstract class Action implements Supplier<Boolean> {
 	 * the action's caster / source (creature id)
 	 */
 	public int caster;
-
+	
+	/**
+	 * turn (aka round, not index) on which it was casted
+	 */
+	public int turn;
+	
 	/**
 	 * action id. 0 = walk (Action.MoveActionID), {1-...} = spells ids
 	 */
@@ -102,11 +125,6 @@ public abstract class Action implements Supplier<Boolean> {
 	 */
 	public int cellY;
 	
-	/**
-	 * turn (aka round, not index) on which it was casted
-	 */
-	public int turn;
-	
 	
 	public Action(Fight f) {
 		fight = f;
@@ -114,7 +132,7 @@ public abstract class Action implements Supplier<Boolean> {
 		turn = fight.timeline.turn();
 	}
 	
-
+	
 	@Override
 	public Boolean get() {
 		if(canApply()) {
@@ -135,5 +153,10 @@ public abstract class Action implements Supplier<Boolean> {
 	 * apply/resolve the action on the pipeline
 	 */
 	public abstract void apply();
+	
+	@Override
+	public String toString() {
+		return String.format("{ fight %s, turn %s, caster %s, action %s, cell [%s, %s] }", fight.id, turn, caster, id, cellX, cellY);
+	}
 	
 }

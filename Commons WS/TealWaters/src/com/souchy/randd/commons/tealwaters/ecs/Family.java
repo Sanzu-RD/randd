@@ -1,7 +1,9 @@
 package com.souchy.randd.commons.tealwaters.ecs;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -23,7 +25,7 @@ public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.
 	/**
 	 * might use CopyOnWriteArrayList ? 
 	 */
-	private final List<T> family = new ArrayList<>();
+	private final Set<T> family = new HashSet<>(); // List<T> family = new ArrayList<>();
 	private final Class<T> clazz;
 	
 	public Family(Engine engine, Class<T> clazz) {

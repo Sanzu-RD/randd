@@ -28,9 +28,10 @@ import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.confs.SapphireDevConfig;
-import com.souchy.randd.ebishoal.sapphire.gfx.SapphireAssets;
 import com.souchy.randd.ebishoal.sapphire.gfx.ui.roundImage.RoundTextureRegion;
+import com.souchy.randd.ebishoal.sapphire.main.SapphireAssets;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
+import com.souchy.randd.jade.Constants;
 import com.souchy.randd.moonstone.white.Moonstone;
 
 /**
@@ -80,7 +81,8 @@ public class SapphireHudSkin extends Skin {
 		add("styleDmgSpecial", styleDmgSpecial);
 		
 		
-		
+
+		add("defaultTexture", new Texture(Gdx.files.internal("res/textures/default.png"), true)); 
 		add("defaultTexture", new Texture(Gdx.files.internal("res/textures/default.png"), true)); 
 		
 		// Link all textures by their name
@@ -180,7 +182,7 @@ public class SapphireHudSkin extends Skin {
 	private static void set(String prefix, Creature c) {
 		var lml = SapphireLmlParser.parser.getData();
 		var model = c.getModel();
-		int i = 0;
+		//int i = 0;
 		int val = 0;
 		
 		try {
@@ -196,7 +198,7 @@ public class SapphireHudSkin extends Skin {
 //		var i18nPath = SapphireResources.getI18nPath(model.getStrID());
 //		lml.addI18nBundle(prefix + "I18N", SapphireResources.assets.get(i18nPath));
 		
-
+		
 		// set creature id / name
 		val = c.id;
 		lml.addArgument(prefix + camel("id", "current"), val);
@@ -217,18 +219,31 @@ public class SapphireHudSkin extends Skin {
 		//Log.info("c.spellbook : " + c.spellbook);
 
 		// set spell icons
-		for (var s : c.spellbook) {
+		for(int i = 0; i < Constants.numberOfSpells; i++) {
+			//lml.getDefaultSkin().remove(prefix + "Spell" + i, Drawable.class);
+			lml.getDefaultSkin().remove(prefix + "Spell" + i, TextureRegionDrawable.class);
+			lml.removeArgument(prefix + "Spell" + i);
+			
+			int s = i < c.spellbook.size() ? c.spellbook.get(i) : -1;
+		//for (var s : c.spellbook) {
 			String iconPath = "missing";
 			var spell = SapphireGame.fight.spells.get(s);
-			var spellResource = AssetData.spells.get(spell.modelid()); 
-			if (spellResource != null) {
-				iconPath = SapphireAssets.getSpellIconPath(spellResource.icon) + "_round";
+			var spellData = spell == null ? null : AssetData.spells.get(spell.modelid()); 
+			
+			if (spellData != null) {
+				iconPath = SapphireAssets.getSpellIconPath(spellData.icon) + "_round";
 //				iconPath = SapphireAssets.getSkinPath(iconPath) + "_round";
 				var img = VisUI.getSkin().getDrawable(iconPath);
-//				Log.info("spell icon : " + spellResource.icon + " -> " + iconpath + " -> " + img);
+				Log.info("SapphireHudSkin spell icon : " + spellData.icon + " -> " + iconpath + " -> " + img + " ------ " + prefix + "Spell" + i);
+				
 				lml.getDefaultSkin().add(prefix + "Spell" + i, img);
-
-				lml.addArgument(prefix + "Spell" + i, spell.modelid());
+				lml.addArgument(prefix + "Spell" + i, spellData.icon+"\n" +Constants.simplifiedSpellId(spell.modelid()));
+				
+			} else {
+				//Log.critical("SapphireHudSkin ---------------------");
+				//lml.getDefaultSkin().add(prefix + "Spell" + i, VisUI.getSkin().getDrawable(iconPath));
+				//lml.addArgument(prefix + "Spell" + i, "null");
+				if(spell != null) lml.addArgument(prefix + "Spell" + i, Constants.simplifiedSpellId(spell.modelid()));
 			}
 			i++;
 		}

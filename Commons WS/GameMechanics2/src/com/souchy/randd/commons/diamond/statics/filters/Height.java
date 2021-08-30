@@ -11,9 +11,9 @@ import com.souchy.randd.commons.diamond.models.stats.special.HeightStat;
  */
 public enum Height {
 	
-	under, // 0 = 1
-	floor, // 1 = 2
-	above; // 2 = 4
+	under, // 0 = 1 bit
+	floor, // 1 = 2 bit
+	above; // 2 = 4 bit
 	
 	public final int bit = 1 << ordinal();
 

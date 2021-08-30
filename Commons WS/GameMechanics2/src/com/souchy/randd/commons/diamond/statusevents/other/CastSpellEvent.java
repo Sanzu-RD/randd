@@ -9,6 +9,14 @@ import com.souchy.randd.commons.diamond.statusevents.Handler;
 
 public class CastSpellEvent extends Event {
 	
+	public interface OnCastSpellHandler extends Handler {
+		@Subscribe
+		public default void handle0(CastSpellEvent event) {
+			if(check(event)) onCastSpell(event);
+		}
+		public void onCastSpell(CastSpellEvent event);
+	}
+	
 	public Spell spell;
 
 	public CastSpellEvent(Creature source, Cell target, Spell spell) {
@@ -19,20 +27,6 @@ public class CastSpellEvent extends Event {
 	@Override
 	public CastSpellEvent copy0() {
 		return new CastSpellEvent(source, target, spell.copy());
-	}
-	
-	public interface OnCastSpellHandler extends Handler { // <OnEnterCellEvent> {
-		@Subscribe
-		public default void handle0(CastSpellEvent event) {
-			if(check(event)) onCastSpell(event);
-		}
-		
-		@Override
-		default HandlerType type() {
-			return HandlerType.Reactor;
-		}
-		
-		public void onCastSpell(CastSpellEvent event);
 	}
 	
 	@Override

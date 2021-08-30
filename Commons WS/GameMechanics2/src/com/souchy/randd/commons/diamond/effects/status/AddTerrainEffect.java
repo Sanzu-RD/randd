@@ -12,6 +12,7 @@ import com.souchy.randd.commons.diamond.models.TerrainEffect;
 import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statusevents.Event;
 import com.souchy.randd.commons.diamond.statusevents.status.AddTerrainEvent;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.commons.diamond.statusevents.status.AddStatusEvent;
 
 /**
@@ -53,31 +54,56 @@ public class AddTerrainEffect extends Effect {
 		this.statusBuilder = statusBuilder;
 //		this.status = statusBuilder.apply(null);
 //		this.status.parentEffectId = this.id;
+		Log.format("AddTerrainEffect %s ctor",  this.hashCode());
 	}
 	
 	@Override
 	public void prepareCaster(Creature caster, Cell target) {
-		this.terrain = statusBuilder.apply(caster.get(Fight.class));
+		var f = caster.get(Fight.class);
+		this.terrain = statusBuilder.apply(f);
 		this.terrain.parentEffectId = this.id;
+		this.terrain.sourceEntityId = caster.id; 
+
+		this.terrain.add(target);
+		this.terrain.add(target.pos);
+		this.terrain.add(aoe);
 		
-		terrain.sourceEntityId = caster.id; 
+		// register status to engine and status bus
+		terrain.register(f);
+		f.statusbus.register(terrain);
+		
+		Log.format("AddTerrainEffect %s prepareCaster %s %s",  this.hashCode(), terrain, caster.id);
 	}
 	
 	@Override
 	public void prepareTarget(Creature caster, Cell target) {
-		terrain.targetEntityId = target.id; 
+		try {
+			terrain.targetEntityId = target.id;
+			Log.format("AddTerrainEffect %s prepareTarget %s", this.hashCode(), target.id);
+		} catch (Exception e) {
+			Log.error("", e);
+		}
 	}
 	
 	@Override
 	public void apply0(Creature source, Cell cell) {
+		//Log.format("AddTerrainEffect %s apply0 %s, %s", this.hashCode(), source, cell);
 		var target = cell;
 		if(target == null) {
+			Log.format("AddTerrainEffect %s : cell == null -> terrain dispose", this.hashCode());
 			terrain.dispose();
 			return;
 		}
-		
-		target.statuses.addStatus(terrain);
-		
+		Log.format("AddTerrainEffect %s : addStatus to cell %s", this.hashCode(), target.pos);
+		try {
+			terrain.aoe.add(target);
+			target.statuses.addStatus(terrain);
+			
+			var crea = target.getCreature(this.height);
+			if(crea != null) crea.statuses.addStatus(terrain);
+		}catch(Exception e) {
+			Log.error("", e);
+		}
 	}
 	
 	@Override
@@ -87,7 +113,9 @@ public class AddTerrainEffect extends Effect {
 	
 	@Override
 	public AddTerrainEffect copy() {
-		return new AddTerrainEffect(aoe, targetConditions, statusBuilder);
+		var eff = new AddTerrainEffect(aoe, targetConditions, statusBuilder);
+		eff.terrain = terrain; // je pense qu'on veut utiliser la même instance du status pour toutes les cellules ? sinon on fera le statusBuilder.apply dans prepareTarget
+		return eff;
 	}
 
 	

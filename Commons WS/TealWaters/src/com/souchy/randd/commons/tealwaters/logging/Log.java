@@ -47,10 +47,14 @@ public class Log {
 		Logging.log(new Log(LogImportance.Info, details));
 	}
 	
-	public static void info(String details,  String... elements) {
-		info(details + " { " + String.join(", ", elements) + " }");
-	}
+//	public static void info(String details,  String... elements) {
+//		info(details + " { " + String.join(", ", elements) + " }");
+//	}
 
+	public static void info(String details,  Object... elements) {
+		info(String.format(details, elements));
+	}
+	
 	public static void format(String details,  Object... elements) {
 		info(String.format(details, elements));
 	}
@@ -73,6 +77,10 @@ public class Log {
 	
 	public static void error(String details) {
 		Logging.log(new Log(LogImportance.Error, details));
+	}
+
+	public static void error(String details, Object... elements) {
+		error(String.format(details, elements));
 	}
 	
 	public static void error(String details, Throwable e) {

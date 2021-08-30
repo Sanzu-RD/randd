@@ -8,6 +8,7 @@ import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statusevents.status.RemoveStatusEvent;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 
 /** One-shot effect */
 public class RemoveStatusEffect extends Effect {
@@ -40,9 +41,16 @@ public class RemoveStatusEffect extends Effect {
 		// FIXME : apply to cells and creatures and remove the whole aoe if the status is an aoe terrain effect (+ remove from all creatures in it)
 		
 		var target = cell.getCreature(this.height);
-		
+		if(target == null) {
+			Log.error("RemoveStatusEffect target null %s %s %s", this.height, cell.pos, this);
+			return;
+		}
 		// Remove status from list
-		target.statuses.removeStatus(status); //.remove(c);
+		var removed = target.statuses.removeStatus(status); //.remove(c);
+
+		// unregister status from engine, systems and status bus
+		if(removed) status.dispose();
+		
 		// unregister status bus
 //		status.get(Fight.class).statusbus.unregister(status);
 		// unregister in fight

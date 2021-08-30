@@ -44,33 +44,40 @@ public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 		//return statuses.get(c);
 	}
 	
-	public void addStatus(Status s) {
+	public boolean addStatus(Status s) {
+		//Log.format("StatusList %s", s);
 		boolean fused = false;
 		if(hasStatus(s.getClass())) {
 			fused = getFirst(s.getClass()).fuse(s); //.stackAdd(s.stacks);
 		} 
+		//Log.format("StatusList %s, %s", s, fused);
 		if(fused) {
 			s.dispose();
 		} else {
+			//Log.format("StatusList add1 %s %s", s.id, s);
 			//statuses.put(s.getClass(), s);
 			statuses.add(s);
 			s.onAdd();
 			//s.target.fight.bus.post(new OnStatusAdd(s));
 			
-			Log.format("StatusList add %s %s", s.id, s);
-			s.register(get(Fight.class));
-			get(Fight.class).statusbus.register(s);
+			Log.format("StatusList add2 %s %s", s.id, s);
+			
+//			s.register(get(Fight.class));
+//			get(Fight.class).statusbus.register(s);
+			return true;
 		}
+		return false;
 	}
 	
 
 	/** remove one status */
-	public void removeStatus(Status s) {
+	public boolean removeStatus(Status s) {
 		//remove(s.getClass()); 
 		var removed = statuses.remove(s);
 		if(removed) {
             removeProcess(s);
 		}
+		return removed;
 	}
 	/** remove all */
 	public void removeIf(Predicate<Status> filter) {
@@ -92,7 +99,7 @@ public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 	private void removeProcess(Status s) {
     	s.onLose();
 		//s.target.fight.bus.post(new OnStatusLose(s));
-    	s.dispose();
+    	//s.dispose();
 	}
 	
 	public void forEach(Consumer<Status> c) {
@@ -121,13 +128,14 @@ public class StatusList extends Entity implements BBSerializer, BBDeserializer {
 
 	@Override
 	public ByteBuf serialize(ByteBuf out) {
-		out.writeInt(statuses.size());
-//		Log.info("write status size " + statuses.size());
-		statuses.forEach(status -> {
-			out.writeInt(status.modelid());
-			status.serialize(out);
-		});
-		return null;
+//		out.writeInt(statuses.size());
+////		Log.info("write status size " + statuses.size());
+//		statuses.forEach(status -> {
+//			//out.writeInt(status.modelid());
+//			status.serialize(out);
+//		});
+		writeList(out, statuses);
+		return out;
 	}
 
 	@Override

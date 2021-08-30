@@ -16,13 +16,16 @@ public class EventPipeline {
 	// appliers		   // actually apply effect (reduce hp, displace a creature, send packets...)
 	// reactors		   // proc reaction effects propagation
 	
-	public EventBus interceptors = new EventBus("interceptors");
-	public EventBus modifiers = new EventBus("modifiers");
-	public EventBus reactors = new EventBus("reactors");
+	public EventBus interceptors = new EventBus(this.hashCode() + "interceptors");
+	public EventBus modifiers = new EventBus(this.hashCode() + "modifiers");
+	public EventBus reactors = new EventBus(this.hashCode() + "reactors");
 	
 	public <T extends Event> void post(T e) { // Entity target, T e) {
+		//Log.format("EventPipeline#%s post interceptors %s", this.hashCode(), e);
 		interceptors.post(e);
+		//Log.format("EventPipeline#%s post modifiers %s", this.hashCode(), e);
 		modifiers.post(e);
+		//Log.format("EventPipeline#%s post reactors %s", this.hashCode(), e);
 		reactors.post(e);
 	}
 	
@@ -33,7 +36,7 @@ public class EventPipeline {
 //		}
 //	}
 	public void register(Handler handler) {
-		Log.format("EventPipeline register %s", handler.getClass());
+		//Log.format("EventPipeline#%s register %s, %s", this.hashCode(), handler.type(), handler.getClass());
 		switch (handler.type()) {
 //			case Interceptor : interceptors.register(handler); break;
 //			case Modifier : modifiers.register(handler); break;

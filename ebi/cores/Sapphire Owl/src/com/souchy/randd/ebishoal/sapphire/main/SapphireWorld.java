@@ -75,6 +75,7 @@ public class SapphireWorld extends World {
         this.center = new Vector3(data.cellModels[0].length / 2f, data.cellModels.length / 2f, 0);
 
 		new EbiBoardGenerator().generate(Moonstone.fight, data);
+
 		
         if(true) {
         	// fonctionne, mais jsais pas si le shine fit avec mon environnement
@@ -105,7 +106,10 @@ public class SapphireWorld extends World {
 	                    		model.materials.get(0).set(shine); 
 	                    		var inst = new ModelInstance(model);
 	                    		inst.transform
-	        					.translate(i * cellSize + cellSize * m.transform[0][0], j * cellSize + cellSize * m.transform[0][1], -cellSize + cellSize * m.transform[0][2])
+	        					.translate(
+	        							i * cellSize + cellSize * m.transform[0][0], 
+	        							j * cellSize + cellSize * m.transform[0][1], 
+	        							   -cellSize + cellSize * m.transform[0][2])
 	        					.rotate(m.transform[1][0],  m.transform[1][1],  m.transform[1][2], 90)
 	        					.scale (m.transform[2][0],  m.transform[2][1],  m.transform[2][2]);
 	                    		cache.add(inst);

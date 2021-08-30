@@ -19,7 +19,7 @@ public class Board extends Entity {
 //		readMap();
 	}
 	
-	/**
+	/* *
 	 * Load json with cell properties (line of sight, walkable, ..)
 	 */
 //	public void readMap() { 
@@ -229,6 +229,12 @@ public class Board extends Entity {
 		var isContained = range.table.get((int) d.x, (int) d.y);
 		
 		return isContained;
+	}
+
+	public Cell get(Entity entity) {
+		var pos = entity.get(Position.class);
+		if(pos == null) return null;
+		return get(pos);
 	}
 	
 	

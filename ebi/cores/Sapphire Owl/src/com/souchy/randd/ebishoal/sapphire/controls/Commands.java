@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.I18NBundle;
+import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
@@ -40,7 +41,7 @@ public class Commands {
 		i18nStatus = LapisAssets.assets.get("res/i18n/status/bundle", I18NBundle.class);
 		
 
-		commands.put("missingCommand", (t) -> chat(i18n.get("chat.missingCommand")));
+		commands.put("missingCommand", Commands::missingCommand);
 		commands.put("clear", (t) -> SapphireGame.gfx.hud.chat.clearChat());
 		commands.put("debug", Commands::debug);
 
@@ -53,8 +54,28 @@ public class Commands {
 		commands.put("spells", Commands::spells);
 		commands.put("statuses", Commands::statuses);
 		
-		
 		commands.put("learn", Commands::learn);
+		
+		commands.put("reloadAssetModels", Commands::reloadAssetModels);
+		commands.put("reloadAssetTextures", Commands::reloadAssetTextures);
+		commands.put("reloadAssetData", Commands::reloadAssetData);
+		commands.put("reloadRenderables", Commands::reloadRenderables);
+		commands.put("rram", Commands::reloadAssetModels);
+		commands.put("rrat", Commands::reloadAssetTextures);
+		commands.put("rrad", Commands::reloadAssetData);
+		commands.put("rrr", Commands::reloadRenderables);
+
+		// to lowercase
+		var keys = commands.keySet().toArray();
+		var vals = commands.values().toArray();
+		for(int i = 0; i < commands.size(); i++) {
+			commands.remove(keys[i].toString());
+			commands.put(keys[i].toString().toLowerCase(), (Consumer<Object[]>) vals[i]);
+		}
+	}
+	
+	private static void missingCommand(Object... args) {
+		chat(i18n.get("chat.missingCommand"));
 	}
 	
 	private static void chat(String text, Object... args) {
@@ -65,14 +86,16 @@ public class Commands {
 		try {
 			Log.info("Command process : " + text);
 			
-			text = text.substring(1);
+			if(text.startsWith("/"))
+				text = text.substring(1);
+			text = text.toLowerCase();
 			
 			var args = text.split(" ");
 			
 			if(commands.containsKey(args[0]))
 				commands.get(args[0]).accept(args);
 			else
-				commands.get("missingCommand").accept(args);
+				process("missingCommand");
 		} catch(Exception e) {
 			Log.warning("", e);
 		}
@@ -87,17 +110,17 @@ public class Commands {
 	public static void creature(Object... args) {
 		var id = Integer.parseInt(args[1].toString());
 		var c = SapphireGame.fight.creatures.get(id);
-		chat("info creature: %s (%s) %s | spells %s | statuses %s", i18nCreatures.get("creature." + c.modelid + ".name"), c.modelid, c.id, c.spellbook, c.statuses);
+		chat("info creature: %s (%s)# %s | spells %s | statuses %s", i18nCreatures.get("creature." + c.modelid + ".name"), c.modelid, c.id, c.spellbook, c.statuses);
 	}
 	public static void spell(Object... args) {
 		var id = Integer.parseInt(args[1].toString());
 		var c = SapphireGame.fight.spells.get(id);
-		chat("info spell: %s (%s) %s | %s", i18nSpells.get("spell." + c.modelid() + ".name"), c.modelid(), c.id, "");
+		chat("info spell: %s (%s) #%s | %s", i18nSpells.get("spell." + c.modelid() + ".name"), c.modelid(), c.id, "");
 	}
 	public static void status(Object... args) {
 		var id = Integer.parseInt(args[1].toString());
 		var c = SapphireGame.fight.status.get(id);
-		chat("info status: %s (%s) %s | %s", i18nStatus.get("status." + c.modelid() + ".name"), c.modelid(), c.id, "");
+		chat("info status: %s (%s) #%s | stacks %s, duration %s, source %s, target %s", i18nStatus.get("status." + c.modelid() + ".name"), c.modelid(), c.id, c.stacks, c.duration, c.sourceEntityId, c.targetEntityId);
 	}
 	
 	public static void cell(Object... args) {
@@ -113,7 +136,7 @@ public class Commands {
 	}
 
 	public static void spells(Object... args) {
-		chat("all spells : %s", SapphireGame.fight.creatures.map(c -> c.id + " " + i18nSpells.get("spell." + c.modelid + ".name")));
+		chat("all spells : %s", SapphireGame.fight.spells.map(c -> c.id + " " + i18nSpells.get("spell." + c.modelid() + ".name")));
 	}
 
 	public static void statuses(Object... args) {
@@ -131,6 +154,21 @@ public class Commands {
 		CreatureSheet.updateSheet(creature);
 	}
 	
+	public static void reloadAssetModels(Object... args) {
+		LapisAssets.loadModels(Gdx.files.internal("res/models/"));
+	}
+	public static void reloadAssetTextures(Object... args) {
+		LapisAssets.loadTextures(Gdx.files.internal("res/textures/"));
+	}
+	
+	public static void reloadAssetData(Object... args) {
+		AssetData.loadResources();
+	}
 
+	public static void reloadRenderables(Object... args) {
+		reloadAssetModels();
+		reloadAssetData();
+		SapphireGame.renderableEntitySystem.foreach(SapphireGame.renderableEntitySystem::makeRenderable);
+	}
 	
 }

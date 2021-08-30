@@ -6,7 +6,10 @@ import java.util.List;
 import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.effects.status.ModifyStatusEffect;
 import com.souchy.randd.commons.diamond.effects.status.RemoveStatusEffect;
+import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.models.stats.CreatureStats;
+import com.souchy.randd.commons.diamond.models.stats.special.HeightStat;
+import com.souchy.randd.commons.diamond.statics.filters.Height;
 import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
@@ -14,6 +17,7 @@ import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurn
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
 import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
+import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
@@ -169,14 +173,22 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 	public ByteBuf serialize(ByteBuf out) {
 		out.writeInt(modelid());
 		out.writeInt(id);
-		// TODO Auto-generated method stub
-		return null;
+		out.writeInt(parentEffectId);
+		out.writeInt(sourceEntityId);
+		out.writeInt(targetEntityId);
+		out.writeInt(stacks);
+		out.writeInt(duration);
+		return out;
 	}
 
 	@Override
 	public BBMessage deserialize(ByteBuf in) {
 		this.id = in.readInt();
-		// TODO Auto-generated method stub
+		this.parentEffectId = in.readInt();
+		this.sourceEntityId = in.readInt();
+		this.targetEntityId = in.readInt();
+		this.stacks = in.readInt();
+		this.duration = in.readInt();
 		return null;
 	}
 	
@@ -198,11 +210,17 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 	}
 	
 	protected void applyFuseEffect(Fight fight, int finalstacks, int finalduration) {
-		var mod = new ModifyStatusEffect(AoeBuilders.single.get(), TargetType.full.asStat(), this, finalstacks, finalduration);
-		var sourceCrea = fight.creatures.get(sourceEntityId);
-		var targetCrea = fight.creatures.get(targetEntityId);
-		mod.height.set(targetCrea.stats.height);
-		mod.apply(sourceCrea, targetCrea.getCell());
+		try {
+			var mod = new ModifyStatusEffect(AoeBuilders.single.get(), TargetType.full.asStat(), this, finalstacks, finalduration);
+			var sourceCrea = fight.creatures.get(sourceEntityId);
+			var targetCrea = fight.entities.get(targetEntityId);
+			fight.board.get(targetCrea);
+			HeightStat hhh = targetCrea instanceof Creature ? ((Creature) targetCrea).stats.height : Height.floor.stat();
+			mod.height.set(hhh); // targetCrea.stats.height);
+			mod.apply(sourceCrea, fight.board.get(targetCrea)); // targetCrea.getCell());
+		} catch (Exception e) {
+			Log.error("", e);
+		}
 	}
 
 	/**
@@ -214,7 +232,8 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 		// check que ça soit le tour de la SOURCE
 		var fight = event.fight;
 		int turnStartCreatureID = fight.timeline.get(event.index);
-		if(targetEntityId == turnStartCreatureID) {
+		//Log.format("Status onTurnStart, %s, %s", sourceEntityId, turnStartCreatureID);
+		if(sourceEntityId == turnStartCreatureID) {
 			this.duration--;
 			Log.format("Status (%s) decrement duration %s %s", this.id, duration, this);
 			if(duration <= 0) {
@@ -227,18 +246,29 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 	 * Supprime le status
 	 */
 	protected void expire() {
-		Log.format("Status (%s) expire %s %s", this.id, duration, this);
-		var f = get(Fight.class);
-		var source = f.creatures.get(sourceEntityId);
-		var target = f.creatures.get(targetEntityId);
-		var e = new RemoveStatusEffect(AoeBuilders.single.get(), TargetType.full.asStat(), this);
-		e.apply(source, target.getCell());
+		try {
+			Log.format("Status (%s) expire %s %s", this.id, duration, this);
+			var f = get(Fight.class);
+			var source = f.creatures.get(sourceEntityId);
+			var target = f.entities.get(targetEntityId);
+			// var pos = target.get(Position.class);
+			// var cell = f.board.get(pos);
+			
+			var e = new RemoveStatusEffect(AoeBuilders.single.get(), TargetType.full.asStat(), this);
+			e.apply(source, f.board.get(target)); // target.getCell());
+		} catch (Exception e) {
+			Log.error("", e);
+		}
 	}
 	
+	/**
+	 * Remove from the engine, systems and the statusbus
+	 */
 	@Override
 	public void dispose() {
 		var f = this.get(Fight.class);
-		if(f != null && f.statusbus != null) f.statusbus.unregister(this);
+		if(f != null && f.statusbus != null) 
+			f.statusbus.unregister(this);
 		super.dispose();
 	}
 	

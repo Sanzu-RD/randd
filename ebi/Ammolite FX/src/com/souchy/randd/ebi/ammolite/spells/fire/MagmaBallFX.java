@@ -47,7 +47,8 @@ public class MagmaBallFX extends FXPlayer<CastSpellEvent> {
 	@Override
 	public void update(float delta) {
 //		Log.info("update Magma fx @" + hash());
-		effect.setPosition(getTarget.get().x, 0, getTarget.get().y);
+		if(effect != null)
+			effect.setPosition(getTarget.get().x, 0, getTarget.get().y);
 	}
 
 	@Override

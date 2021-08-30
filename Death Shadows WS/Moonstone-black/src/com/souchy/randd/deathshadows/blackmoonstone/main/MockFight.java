@@ -1,7 +1,11 @@
 package com.souchy.randd.deathshadows.blackmoonstone.main;
 
+import java.io.File;
+
 import org.bson.types.ObjectId;
 
+import com.souchy.randd.commons.diamond.common.BoardGenerator;
+import com.souchy.randd.commons.diamond.ext.MapData;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.CreatureModel;
@@ -10,6 +14,7 @@ import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
+import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.jade.matchmaking.Team;
@@ -21,6 +26,11 @@ public class MockFight {
 		
 		// init fight with cells, creatures and spells
 		Fight fight = new Fight();
+
+//		Log.info("MockFight path " + new File("").getAbsolutePath());
+        MapData data = MapData.read("bin/goulta7b.map"); //Gdx.files.internal(mapFolder + "goulta7b.map").path());
+		new BoardGenerator().generate(fight, data);
+		Log.info("MockFight board cell count : " + fight.board.cells.size());
 		
 		// Team A
 		var ca1 = testCreateCreature(fight, 5, 100002001, 100002002, 100002003, 100002004, 100002005, 100002006, 100002007, 100002008); // 1, 10, 11, 1501); // fiera// fiera
@@ -35,7 +45,7 @@ public class MockFight {
 		ca3.team = Team.A;
 		ca3.pos.set(9, 14);
 		ca3.add(new ObjectId("5efbf61f0856d10feb48c193"));
-		var ca4 = testCreateCreature(fight, 8, 100005001, 100005001); // orea
+		var ca4 = testCreateCreature(fight, 8, 100005001, 100001001, 100001002); // orea
 		ca4.team = Team.A;
 		ca4.pos.set(3, 9);
 		ca4.add(new ObjectId("5efbf61f0856d10feb48c193"));

@@ -15,6 +15,7 @@ import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.creatures.tsukuyo.Tsukuyo;
 import com.souchy.randd.data.s1.main.Elements;
 
@@ -38,7 +39,7 @@ public class KunaiThrow extends Spell {
 
 	@Override
 	protected void initBaseStats(SpellStats stats) {
-		stats.costs.put(Resource.mana, new IntStat(3));
+		stats.costs.put(Resource.mana, new IntStat(0));
 		stats.maxRangeRadius.baseflat = 6;
 		//stats.maxRangePattern.base = (t) -> AoeBuilders.cross.apply(t); 
 	}
@@ -55,6 +56,7 @@ public class KunaiThrow extends Spell {
 
 	@Override
 	public void cast0(Creature caster, Cell target) {
+		Log.info("KunaiThrow spell cast0");
 		e1.apply(caster, target);
 	}
 

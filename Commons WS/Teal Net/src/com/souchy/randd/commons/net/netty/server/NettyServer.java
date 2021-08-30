@@ -146,7 +146,7 @@ public class NettyServer {
 		public void channelActive(ChannelHandlerContext ctx) throws Exception {
 			Log.info("Channel active : " + ctx.channel());
 			channels.add(ctx.channel()); // register channel to all
-			super.channelInactive(ctx);
+			super.channelActive(ctx);
 		}
 		@Override
 		public void channelInactive(ChannelHandlerContext ctx) throws Exception {

@@ -36,7 +36,18 @@ public abstract class FXPlayer<T extends Event> extends Entity {
 	}
 	
 	
-	
+	public static class FXDuration {
+		private double duration = 0;
+		private double time = 0;
+		public FXDuration(double duration) {
+			this.duration = duration;
+		}
+		public boolean update(float delta) {
+			if(time >= duration) return true;
+			time += delta;
+			return false;
+		}
+	}
 	public static class FXInterpolation<R> {
 		private double duration = 0;
 		private double time = 0;

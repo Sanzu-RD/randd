@@ -53,7 +53,7 @@ public class LineDrawing {
 	}
 
 	public void createCross(){
-		createCross(Color.RED, Color.GREEN, Color.BLUE, 3000);
+		createCross(3000);
 	}
 	public void createCross(int length){
 		createCross(Color.RED, Color.GREEN, Color.BLUE, length);

@@ -48,12 +48,13 @@ public class IceCometFX extends FXPlayer<CastSpellEvent> {
 			fx.play();
 			fx.setOnAnimationComplete(this::dispose);
         } catch (Exception ex) {
-            ex.printStackTrace();
+        	Log.error("", ex);
         }
 	}
 	
 	@Override
 	public void update(float delta) {
+		if(interpolation == null) return;
 		interpolation.update(delta);
 		
 		//var diff = event.target.pos.copy().sub(event.source.pos);

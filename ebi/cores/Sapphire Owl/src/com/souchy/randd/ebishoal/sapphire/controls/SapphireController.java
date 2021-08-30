@@ -36,6 +36,7 @@ import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.common.Pathfinding;
 import com.souchy.randd.commons.diamond.common.generic.BoolTable;
 import com.souchy.randd.commons.diamond.common.generic.Vector2;
+import com.souchy.randd.commons.diamond.effects.displacement.Move;
 import com.souchy.randd.commons.diamond.effects.resources.ResourceGainLoss;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Board;
@@ -61,6 +62,7 @@ import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.ux.components.Parameters;
 import com.souchy.randd.ebishoal.sapphire.ux.components.sheets.CreatureSheet;
 import com.souchy.randd.jade.Constants;
+import com.souchy.randd.moonstone.commons.packets.c2s.FightAction;
 import com.souchy.randd.moonstone.commons.packets.c2s.PassTurn;
 import com.souchy.randd.moonstone.white.Moonstone;
 
@@ -180,10 +182,13 @@ public class SapphireController extends CameraInputController {
 //		});
 		
 		addOnKeyDown(Keys.X, () -> {
-			this.currentActionID = Action.MOVE;
 			if(targetEntity == null) targetEntity = SapphireGame.playing;
-			
 			var c = targetEntity;
+			if(c == null) {
+				Log.error("SapphireController key X : move c null");
+				return;
+			}
+			this.currentActionID = Action.MOVE;
 			var casterpos = c.get(Position.class);
 			var targetpos = getCursorCell();
 			var start = Moonstone.fight.board.get(casterpos.x, casterpos.y);
@@ -302,7 +307,7 @@ public class SapphireController extends CameraInputController {
 //				var path = Pathfinding.aStar(board(), creature, creature.getCell(), board().get(v));
 //				if(path.size() > 0) test.add(path.get(path.size() - 1));
 //			});
-			Log.info("highlight move " + test);
+			//Log.info("highlight move " + test);
 			Highlight.movementPossibilities(test);
 		}
 	};
@@ -468,11 +473,14 @@ public class SapphireController extends CameraInputController {
 		// get pos & creature
 //		var cellpos = getCursorWorldPos(screenX, screenY);
 		var cell = getCursorCell();
-		targetEntity = null; //	targetEntity = cell;
+		//targetEntity = null; //	targetEntity = cell;
 		
 		if(cell != null) {
 			Creature creature = cell.getFirstCreature();
-			targetEntity = creature;
+//			if(creature != null && currentActionID == Action.MOVE) {
+//				currentActionID = Action.NONE;
+//			}
+//			targetEntity = creature;
 			// start drag
 //			if(button == Buttons.MIDDLE) {
 //				Log.info("touchdown " + cell.pos + " " + creature);
@@ -496,17 +504,23 @@ public class SapphireController extends CameraInputController {
 				if(currentActionID > 0) {
 					var caster = SapphireGame.getPlayingCreature(); //.fight.creatures.first();
 					var spell = SapphireGame.fight.spells.get(currentActionID);
-					if(spell.canCast(caster) && spell.canTarget(caster, cell)) 
-						spell.cast(caster, cell);
+					if(SapphireGame.fight.timeline.current() == caster.id) {
+						// if(spell.canCast(caster) && spell.canTarget(caster, cell))
+						// spell.cast(caster, cell);
+						Moonstone.writes(
+								new FightAction(caster.id, SapphireGame.fight.timeline.turn(), currentActionID, (int) cell.pos.x, (int) cell.pos.y));
+					}
 				} else 
 				if (currentActionID == Action.MOVE) {
-					if(targetEntity != null) {
-						targetEntity.get(Position.class).set(cell.pos.x, cell.pos.y);
+					if(targetEntity != null) { 
+						//targetEntity.get(Position.class).set(cell.pos.x, cell.pos.y);
+						var move = new Move(AoeBuilders.single.get(), TargetType.empty.asStat());
+						move.apply((Creature) targetEntity, cell);
 					} else
 					if(draggedEntity != null) {
 						draggedEntity.get(Position.class).set(cell.pos.x, cell.pos.y);
 					} else {
-						SapphireGame.playing.get(Position.class).set(cell.pos.x, cell.pos.y);
+						if(SapphireGame.playing != null) SapphireGame.playing.get(Position.class).set(cell.pos.x, cell.pos.y);
 					}
 				} else
 				if(currentActionID == Action.NONE) {
@@ -579,7 +593,7 @@ public class SapphireController extends CameraInputController {
 				var crea = cell.getFirstCreature();
 				highlightMove.accept(crea); //(Creature) SapphireGame.getPlayingCreature());
 			} else
-			if(cell != null && moved && currentActionID == Action.MOVE) {
+			if(cell != null && moved && currentActionID == Action.MOVE && targetEntity != null) {
 				var c = targetEntity;
 				var casterpos = c.get(Position.class);
 				var start = Moonstone.fight.board.get(casterpos.x, casterpos.y);
