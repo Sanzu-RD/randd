@@ -11,11 +11,11 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LML"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ParticlesLibGDX"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

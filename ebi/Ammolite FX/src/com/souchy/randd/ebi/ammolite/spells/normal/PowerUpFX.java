@@ -45,7 +45,8 @@ public class PowerUpFX extends FXPlayer<CastSpellEvent> {
 	
 	@Override
 	public void update(float delta) {
-		effect.setPosition(getTarget.get().x, 0, getTarget.get().y);
+		if(effect != null && getTarget != null) 
+			effect.setPosition(getTarget.get().x, 0, getTarget.get().y);
 	}
 	
 	@Override

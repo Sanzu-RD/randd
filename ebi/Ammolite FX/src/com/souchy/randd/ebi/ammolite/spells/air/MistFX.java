@@ -61,13 +61,12 @@ public class MistFX extends FXPlayer<AddTerrainEvent> implements Reactor, OnEnte
 			terrain.add(fx);
 			
 			Log.info("MistFX play @" + hash() + ", " + getTarget.get()); // getTarget.get());
-			fxDuration = new FXDuration(60d / 100d);
+			fxDuration = new FXDuration(70d / 100d);
 			fx.play();
 			fx.setOnAnimationComplete(this::dispose); // this::dispose);
 		} catch (Exception ex) {
 			Log.error("", ex);
 		}
-		
 		// e.target.add(fx);
 		// fx.play();
 	}
@@ -81,7 +80,10 @@ public class MistFX extends FXPlayer<AddTerrainEvent> implements Reactor, OnEnte
 	public void update(float delta) {
 		//if(fx == null) Log.info("update MistFX null");
 		if(fx == null || fxDuration == null) return;
-		if(fxDuration.update(delta)) pause();
+		
+		if(fxDuration.update(delta)) 
+			pause();
+		
 		//Log.info("update MistFX @" + hash() + ", " + getTarget.get());
 		
 		//fx.setPosition(getTarget.get().x, 0.5f, getTarget.get().y);

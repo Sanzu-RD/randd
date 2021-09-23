@@ -29,6 +29,7 @@ import com.souchy.randd.deathshadow.core.DeathShadowTCP;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserActiveEvent;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserInactiveEvent;
 import com.souchy.randd.deathshadow.core.smoothrivers.SelfIdentify;
+import com.souchy.randd.deathshadow.core.smoothrivers.SmoothRivers;
 import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
 import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.jade.meta.UserLevel;
@@ -95,7 +96,7 @@ public class BlackMoonstone extends DeathShadowCore implements Reactor, OnTurnSt
 //		 });
 		
 		this.rivers.connect(port);
-		this.rivers.sendPearl(new SelfIdentify(this));
+		SmoothRivers.sendPearl(new SelfIdentify(this));
 		
 		Log.info("-------------------------------------------------------------------");
 		Log.info("---------------------- Blackmoonstone online ----------------------");

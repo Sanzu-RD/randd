@@ -48,6 +48,13 @@ public abstract class FXPlayer<T extends Event> extends Entity {
 			return false;
 		}
 	}
+	
+	/**
+	 * Interpolation d'une valeur (multiplicateur double ou vecteur par exemple) basé sur un temps / durée.
+	 * @param <R>
+	 * @author Blank
+	 * @date 8 sept. 2021
+	 */
 	public static class FXInterpolation<R> {
 		private double duration = 0;
 		private double time = 0;
@@ -63,7 +70,7 @@ public abstract class FXPlayer<T extends Event> extends Entity {
 			time += delta;
 		}
 		public double percent() {
-			return time / duration;
+			return Math.min(1d, time / duration);
 		}
 		public R value() {
 			if(multiplier == null) return null;
@@ -71,12 +78,24 @@ public abstract class FXPlayer<T extends Event> extends Entity {
 		}
 	}
 
+	/**
+	 * Interpole un double basé sur un temps / durée
+	 * 
+	 * @author Blank
+	 * @date 8 sept. 2021
+	 */
 	public static class FXInterpolationD extends FXInterpolation<Double> {
 		public FXInterpolationD(double duration, double v) {
 			super(duration);
 			multiplier = (f) -> v * f;
 		}
 	}
+	/**
+	 * Interpole un vecteur2 basé sur un temps / durée
+	 * 
+	 * @author Blank
+	 * @date 8 sept. 2021
+	 */
 	public static class FXInterpolationV2 extends FXInterpolation<Vector2> {
 		public FXInterpolationV2(double duration, Vector2 v) {
 			super(duration);
