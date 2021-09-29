@@ -52,15 +52,19 @@ public class LapisAssets {
 		else return assets.get(rootDir + filePath);
 	}
 	
-	
-	public static void loadTextures(FileHandle dir) {
-		recurseFiles(dir, 
+	/**
+	 * Can accept a dir or a file
+	 */
+	public static void loadTextures(FileHandle... handles) {
+		for(var handle : handles) {
+			recurseFiles(handle, 
 				f -> f.name().toLowerCase().endsWith(".png") || f.name().toLowerCase().endsWith(".jpg") || f.name().toLowerCase().endsWith(".jpeg") || f.name().toLowerCase().endsWith(".bmp"), 
 				f -> {
 					if(assets.contains(f.path())) assets.unload(f.path());
 					assets.load(f.path(), Texture.class, params);
-				}); // f.path().substring(f.path().indexOf("res/"), f.path().length())
-
+				}
+			);
+		}
 		try {
 			assets.finishLoading();
 		} catch (Exception e) {
@@ -74,13 +78,19 @@ public class LapisAssets {
 		}
 	}
 	
-	public static void loadModels(FileHandle dir) {
-		recurseFiles(dir, 
+	/**
+	 * accepts directories or files
+	 */
+	public static void loadModels(FileHandle... handles) {
+		for(var handle : handles) {
+			recurseFiles(handle, 
 				f -> f.name().endsWith(".g3dj"), 
 				f -> {
 					if(assets.contains(f.path())) assets.unload(f.path());
 					assets.load(f.path(), Model.class);
-				});
+				}
+			);
+		}
 		try {
 			assets.finishLoading();
 		} catch (Exception e) {
@@ -88,50 +98,60 @@ public class LapisAssets {
 		}
 	}
 	
-	public static void loadI18NBundles(FileHandle dir) {
-		recurseDirectories(dir, 
+	public static void loadI18NBundles(FileHandle... handles) {
+		for(var handle : handles) {
+			recurseDirectories(handle, 
 				d -> d.list((f, n) -> n.startsWith("bundle") && n.endsWith(".properties")).length > 0,
 				d -> {
 					if(assets.contains(d.path())) assets.unload(d.path());
 					assets.load(d.path() + "/bundle", I18NBundle.class);
 				}
-		);
+			);
+		}
 		assets.finishLoading();
 		I18NBundle.setExceptionOnMissingKey(false);
 	}
 	
-	public static void loadParticleEffects(FileHandle dir, ParticleEffectLoadParameter params) {
-		recurseFiles(dir, 
-				f -> f.name().endsWith(".pfx"), 
-				f -> assets.load(f.path(), ParticleEffect.class, params));
-		try {
-			assets.finishLoading();
-		} catch (Exception e) {
-			Log.warning("unable to load a pfx : ", e);
-		}
-	}
+//	public static void loadParticleEffects(ParticleEffectLoadParameter params, FileHandle... handles) {
+//		for(var handle : handles) {
+//			recurseFiles(handle, 
+//					f -> f.name().endsWith(".pfx"), 
+//					f -> assets.load(f.path(), ParticleEffect.class, params));
+//		}
+//		try {
+//			assets.finishLoading();
+//		} catch (Exception e) {
+//			Log.warning("unable to load a pfx : ", e);
+//		}
+//	}
 
-	public static void loadMusics(FileHandle dir) {
-		recurseFiles(dir, 
+	public static void loadMusics(FileHandle... handles) {
+		for(var handle : handles) {
+			recurseFiles(handle, 
 				f -> f.name().endsWith(".mp3"), 
 				f -> {
 					if(assets.contains(f.path())) assets.unload(f.path());
 					assets.load(f.path(), Music.class);
-				});
+				}
+			);
+		}
 		assets.finishLoading();
 	}
 	
-	public static void loadSounds(FileHandle dir) {
-		recurseFiles(dir, 
+	public static void loadSounds(FileHandle... handles) {
+		for(var handle : handles) {
+			recurseFiles(handle, 
 				f -> f.name().endsWith(".mp3"), 
 				f -> {
 					if(assets.contains(f.path())) assets.unload(f.path());
 					assets.load(f.path(), Sound.class);
-				});
+				}
+			);
+		}
 		assets.finishLoading();
 	}
 	
-	public static void loadFonts(FileHandle dir) {
+	public static void loadFonts(FileHandle... handles) {
 //		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/myfont.ttf"));
 //		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 //		parameter.size = 12;
@@ -202,16 +222,27 @@ public class LapisAssets {
 	}
 	
 	private static void recurseFiles(FileHandle dir, Predicate<FileHandle> filter, Consumer<FileHandle> action) {
-//		Log.info("dirtype: " + dir.type().name() + ", dir path : " + dir.path());
-		for (var f : dir.list()) {
-			if(f.isDirectory()) {
+		if(dir.isDirectory()) {
+			for (var f : dir.list()) {
 				recurseFiles(f, filter, action);
-			} else 
-			if(filter.test(f)) { 
+			}
+		} else {
+			if(filter.test(dir)) { 
 //				Log.info("ftype: " + f.type().name() + ", f path : " + f.path());
-				action.accept(f);
+				action.accept(dir);
 			}
 		}
+		
+//		Log.info("dirtype: " + dir.type().name() + ", dir path : " + dir.path());
+//		for (var f : dir.list()) {
+//			if(f.isDirectory()) {
+//				recurseFiles(f, filter, action);
+//			} else 
+//			if(filter.test(f)) { 
+////				Log.info("ftype: " + f.type().name() + ", f path : " + f.path());
+//				action.accept(f);
+//			}
+//		}
 	}
 	
 	

@@ -84,8 +84,8 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 		gfx.init();
 		
 		// pfx
-		ParticleEffectLoader.ParticleEffectLoadParameter params = new ParticleEffectLoader.ParticleEffectLoadParameter(gfx.getPfxSystem().getBatches());
-		LapisAssets.loadParticleEffects(Gdx.files.internal("res/fx/"), params);
+//		ParticleEffectLoader.ParticleEffectLoadParameter params = new ParticleEffectLoader.ParticleEffectLoadParameter(gfx.getPfxSystem().getBatches());
+//		LapisAssets.loadParticleEffects(Gdx.files.internal("res/fx/"), params);
 
 		Log.info("LapisResources : { " + String.join(", ", LapisAssets.assets.getAssetNames()) + " }");
 
@@ -99,14 +99,6 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 			Moonstone.setPostRunnable(Gdx.app::postRunnable);
 			Moonstone.writes(new GetSalt(Moonstone.moon.channel.attr(Moonstone.authKey).get()[0]));
 		}
-	}
-
-	@Override
-	public void render() {
-		// render 3D
-		if (screen != null) screen.render(Gdx.graphics.getDeltaTime());
-		// render UI
-		if(RenderOptions.renderUI && gfx.hud.isLoaded) gfx.renderView(Gdx.graphics.getDeltaTime());
 	}
 
 

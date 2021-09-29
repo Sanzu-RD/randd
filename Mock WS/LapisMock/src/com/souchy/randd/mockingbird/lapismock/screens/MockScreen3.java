@@ -131,8 +131,8 @@ public class MockScreen3 extends BaseScreen {
 		LapisAssets.loadModels(Gdx.files.internal(internal+"models/"));
 		LapisAssets.loadTextures(Gdx.files.internal(internal+"textures/"));
 		LapisAssets.loadI18NBundles(Gdx.files.internal(internal+"i18n/"));
-		LapisAssets.loadParticleEffects(Gdx.files.internal(internal+"fx/"), params);
-		LapisAssets.loadParticleEffects(Gdx.files.absolute(pfxTestPath), params);
+//		LapisAssets.loadParticleEffects(Gdx.files.internal(internal+"fx/"), params);
+//		LapisAssets.loadParticleEffects(Gdx.files.absolute(pfxTestPath), params);
 		LapisAssets.loadModels(Gdx.files.absolute(blender));
 		LapisAssets.loadTextures(Gdx.files.absolute(assettests));
 		

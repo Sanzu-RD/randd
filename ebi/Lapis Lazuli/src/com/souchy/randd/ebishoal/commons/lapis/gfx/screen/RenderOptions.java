@@ -2,6 +2,7 @@ package com.souchy.randd.ebishoal.commons.lapis.gfx.screen;
 
 public class RenderOptions {
 	
+	/** Render the ModelCache (ie. map terrain) */
 	public static boolean renderCache = true;
 	public static boolean activateShadows = true;
 	public static boolean onlyShadowMap = false;
