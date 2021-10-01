@@ -21,14 +21,14 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.souchy.jeffekseer.EffectManager;
+import com.souchy.jeffekseer.Jeffekseer;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.LapisShader;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
-
-import br.com.johnathan.gdx.effekseer.api.EffekseerManager;
 
 
 @SuppressWarnings({ "deprecation", "unused" })
@@ -187,11 +187,12 @@ interface LapisScreenCreator {
 	/**
 	 * Create Effekseer particle system
 	 */
-	public default EffekseerManager createEffekseer(Camera camera, Viewport viewport) {
-		EffekseerManager.InitializeEffekseer();
-		var manager = new EffekseerManager(camera);
+	public default EffectManager createEffekseer(Camera camera, Viewport viewport) {
+		return Jeffekseer.newManager();
+//		EffekseerManager.InitializeEffekseer();
+//		var manager = new EffectManager(camera);
 //		manager.setViewport(viewport);
-		return manager;
+//		return manager;
 	}
 	
 }

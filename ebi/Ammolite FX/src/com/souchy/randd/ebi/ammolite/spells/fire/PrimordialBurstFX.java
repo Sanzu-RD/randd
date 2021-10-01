@@ -15,15 +15,11 @@ import com.souchy.randd.data.s1.spells.fire.Fireball;
 import com.souchy.randd.data.s1.spells.secondary.ice.IceSpear;
 import com.souchy.randd.ebi.ammolite.Ammolite;
 import com.souchy.randd.ebi.ammolite.FXPlayer;
+import com.souchy.randd.ebi.ammolite.spells.SimpleOnCastFX;
 
-import br.com.johnathan.gdx.effekseer.api.ParameterTranslationType;
-import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
 
-public class PrimordialBurstFX extends FXPlayer<CastSpellEvent> {
+public class PrimordialBurstFX extends SimpleOnCastFX {
 
-	private Supplier<Position> getTarget; 
-	private ParticleEffekseer effect;
-	
 	public PrimordialBurstFX(Engine engine) {
 		super(engine);
 	}
@@ -35,13 +31,9 @@ public class PrimordialBurstFX extends FXPlayer<CastSpellEvent> {
 	
 	@Override
 	public void onCreation(CastSpellEvent e) {
-		Log.info("Primordial Burst play");
 		try {
-			getTarget = () -> e.source.pos;
-			effect = Ammolite.particle();
-			effect.load("fx/fire/fireball wip.efk", true);
-
-			
+			super.onCreation(e);
+			/*
 			Log.info("Node root " + effect.getNode().GetName());
 			var posType = ParameterTranslationType.swigToEnum(effect.getNode().GetPositionType());
 			var pos = effect.getNode().GetPosition(posType);
@@ -69,28 +61,17 @@ public class PrimordialBurstFX extends FXPlayer<CastSpellEvent> {
 				pos = effect.getNode().GetPosition(posType);
 				Log.format("Node " + n + " pos ("+posType.swigValue()+") : " + String.join(", ", pos.stream().map(f -> Float.toString(f)).collect(Collectors.toList())));
 			}
+			*/
 
-			
-			effect.play();
-			effect.setOnAnimationComplete(this::dispose);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 	}
-	
-	@Override
-	public void update(float delta) {
-//		Log.info("update Primordial Burst fx @" + hash());4
-		effect.setPosition(getTarget.get().x, 0.5f, getTarget.get().y);
-	}
+
 
 	@Override
-	public void dispose() {
-		Log.info("Primordial Burst fx dispose @" + hash());
-		super.dispose();
-		effect.pause();
-		effect.delete();
-		effect = null;
+	protected String getFxPath() {
+		return "fx/fire/fireball wip.efk";
 	}
 	
 	

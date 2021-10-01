@@ -2,6 +2,10 @@ package com.souchy.randd.ebi.ammolite.spells;
 
 import java.util.function.Supplier;
 
+import com.badlogic.gdx.Gdx;
+import com.souchy.jeffekseer.Effect;
+import com.souchy.jeffekseer.FXLoader;
+import com.souchy.jeffekseer.Jeffekseer;
 import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
@@ -9,12 +13,10 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebi.ammolite.Ammolite;
 import com.souchy.randd.ebi.ammolite.FXPlayer;
 
-import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
-
 public abstract class SimpleOnCastFX extends FXPlayer<CastSpellEvent> {
 
 	protected Supplier<Position> getTarget; 
-	protected ParticleEffekseer fx;
+	protected Effect fx; // ParticleEffekseer fx;
 	
 	public SimpleOnCastFX(Engine engine) {
 		super(engine);
@@ -27,33 +29,39 @@ public abstract class SimpleOnCastFX extends FXPlayer<CastSpellEvent> {
 	protected abstract String getFxPath();
 	
 	@Override
-	public void update(float delta) {
-		if(fx == null) Log.info("update SimpleOnCastFX null");
-		if(fx == null) return;
-//		Log.info("update SimpleOnCastFX @" + hash() + ", " + getTarget.get());
-		fx.setPosition(getTarget.get().x, 0.5f, getTarget.get().y);
-	}
-
-	@Override
 	public void onCreation(CastSpellEvent e) {
 		try {
 			getTarget = () -> e.target.pos;
-			fx = Ammolite.particle();
-			fx.load(getFxPath(), true);
+			fx = Ammolite.manager.loadEffect(getFxPath(), 1);
 			
+			if(fx == null) {
+				Log.info("SimpleOnCastFX play null");
+				dispose();
+				return;
+			}
 			Log.info("SimpleOnCastFX play @" + fx.hashCode() + ", " + getTarget.get());
 			
 			fx.play();
-			fx.setOnAnimationComplete(this::dispose);
+			fx.onComplete = this::dispose; //fx.setOnAnimationComplete(this::dispose);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 	}
 	
 	@Override
+	public void update(float delta) {
+		if(fx == null) Log.info("update SimpleOnCastFX null");
+		if(fx == null) dispose();
+		if(fx == null) return;
+//		Log.info("update SimpleOnCastFX @" + hash() + ", " + getTarget.get());
+		fx.setPosition((float) getTarget.get().x, (float) getTarget.get().y, 0);
+	}
+
+	@Override
 	public void dispose() {
-		Log.info("SimpleOnCastFX fx dispose @" + fx.hashCode() + ", " + getTarget.get());
 		super.dispose();
+		if(fx == null) return;
+		Log.info("SimpleOnCastFX fx dispose @" + fx.hashCode() + ", " + getTarget.get());
 		//fx.pause();
 		fx.delete();
 		fx = null;

@@ -1,7 +1,9 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.souchy.jeffekseer.FXLoader;
 import com.souchy.randd.commons.deathebi.msg.GetSalt;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -28,6 +30,12 @@ public class SapphireOwl extends LapisCore {
 	
 	public static void main(String[] args) throws Exception {
 		LapisCore.arguments(args);
+
+		FXLoader.read = (s) -> {
+	        var handle = Gdx.files.internal(s);
+	        byte[] byt = handle.readBytes();
+	        return byt;
+		};
 		
 		// init les messages & messagehandlers
 		core = new SapphireOwl(args);

@@ -2,6 +2,7 @@ package com.souchy.randd.ebi.ammolite.spells.air;
 
 import java.util.function.Supplier;
 
+import com.souchy.jeffekseer.Effect;
 import com.souchy.randd.commons.diamond.effects.status.AddTerrainEffect;
 import com.souchy.randd.commons.diamond.models.TerrainEffect;
 import com.souchy.randd.commons.diamond.models.components.Position;
@@ -17,11 +18,10 @@ import com.souchy.randd.data.s1.creatures.tsukuyo.spells.Mist.MistEffect;
 import com.souchy.randd.ebi.ammolite.Ammolite;
 import com.souchy.randd.ebi.ammolite.FXPlayer;
 
-import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
 
 public class MistFX extends FXPlayer<AddTerrainEvent> implements Reactor, OnEnterCellHandler, OnRemoveTerrainHandler {
 	
-	private ParticleEffekseer fx;
+	private Effect fx;
 	private TerrainEffect terrain;
 	private Supplier<Position> getTarget;
 	private FXDuration fxDuration;
@@ -50,20 +50,21 @@ public class MistFX extends FXPlayer<AddTerrainEvent> implements Reactor, OnEnte
 			Log.info("MistFX creation @" + hash() + ", " + getTarget.get());
 			
 			
-			fx = Ammolite.particle();
-			if(fx == null) {
-				Log.error("MistFX creation fx == null");
-				dispose();
-				return;
-			}
-			fx.load("fx/air/mist.efk", true);
+//			fx = Ammolite.particle();
+//			if(fx == null) {
+//				Log.error("MistFX creation fx == null");
+//				dispose();
+//				return;
+//			}
+//			fx.load("fx/air/mist.efk", true);
+			fx = Ammolite.manager.loadEffect("fx/air/mist.efk", 1);
 			
 			terrain.add(fx);
 			
 			Log.info("MistFX play @" + hash() + ", " + getTarget.get()); // getTarget.get());
 			fxDuration = new FXDuration(70d / 100d);
 			fx.play();
-			fx.setOnAnimationComplete(this::dispose); // this::dispose);
+			fx.onComplete = this::dispose; 
 		} catch (Exception ex) {
 			Log.error("", ex);
 		}
@@ -73,7 +74,7 @@ public class MistFX extends FXPlayer<AddTerrainEvent> implements Reactor, OnEnte
 	
 	private void pause() {
 		//Log.format("MistFX @%s pause %s", hash(), getTarget.get());
-		if(fx != null) fx.pause();
+		if(fx != null) fx.pause(true);
 	}
 	
 	@Override
@@ -86,7 +87,7 @@ public class MistFX extends FXPlayer<AddTerrainEvent> implements Reactor, OnEnte
 		
 		//Log.info("update MistFX @" + hash() + ", " + getTarget.get());
 		
-		//fx.setPosition(getTarget.get().x, 0.5f, getTarget.get().y);
+		fx.setPosition(getTarget.get().x, getTarget.get().y, 0);
 		
 //		var pos = getTarget.get();
 //		fx.setPosition(

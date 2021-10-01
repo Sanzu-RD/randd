@@ -33,7 +33,6 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireLmlParser;
 
-import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
 
 public class SapphireScreen extends LapisScreen {
 
@@ -60,30 +59,6 @@ public class SapphireScreen extends LapisScreen {
 		super.init();
 		// init FX player
 		new Ammolite(SapphireGame.fight, getEffekseer());
-	}
-
-
-	public void startPfx() {
-		try {
-			var c = SapphireGame.getPlayingCreature(); //.fight.creatures.first();
-			var pos = c.pos;
-			
-			var effect = new ParticleEffekseer(getEffekseer());
-//			effect.setMagnification(0.3f);
-			// effect.load("fx/Sample/01_Pierre02/CosmicMist.efk", true);
-			effect.load("fx/fire/fire.efk", true);
-			// effect.load("fx/shock/shock.efk", true);
-			// effect.setLocation(9.5f, 1.5f, -9.5f);
-			effect.setPosition((float) pos.x + 0.5f, 1.5f, (float) -pos.y - 0.5f);
-			// getEffekseer().addParticleEffekseer(effect);
-			effect.play();
-			
-			var status = DiamondModels.statuses.get(1).copy(SapphireGame.fight);
-        	status.add(effect);
-        	c.add(status);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 	}
 
 	@Override

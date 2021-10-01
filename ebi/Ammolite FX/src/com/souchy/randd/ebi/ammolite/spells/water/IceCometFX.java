@@ -3,6 +3,8 @@ package com.souchy.randd.ebi.ammolite.spells.water;
 import java.util.function.Supplier;
 
 import com.google.common.primitives.Floats;
+import com.souchy.jeffekseer.Effect;
+import com.souchy.jeffekseer.Jeffekseer;
 import com.souchy.randd.commons.diamond.common.generic.Vector2;
 import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
@@ -12,13 +14,10 @@ import com.souchy.randd.data.s1.spells.secondary.ice.IceComet;
 import com.souchy.randd.ebi.ammolite.Ammolite;
 import com.souchy.randd.ebi.ammolite.FXPlayer;
 
-import br.com.johnathan.gdx.effekseer.api.ParameterTranslationType;
-import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
-
 public class IceCometFX extends FXPlayer<CastSpellEvent> {
 
 	private CastSpellEvent event;
-	private ParticleEffekseer fx;
+	private Effect fx;
 	private FXInterpolation<Vector2> interpolation;
 	
 	public IceCometFX(Engine engine) {
@@ -35,18 +34,17 @@ public class IceCometFX extends FXPlayer<CastSpellEvent> {
 		try {
 			this.event = e;
 			Log.format("FX IceComet create");
-			fx = Ammolite.particle();
-			fx.load("fx/comet/comet.efk", true);
+			fx = Ammolite.manager.loadEffect("fx/comet/comet.efk", 1);
 //			fx.load("fx/test.efk", true);
 
 			var diff = event.target.pos.copy().sub(event.source.pos);
 			Log.format("IceCometFX start %s, end %s, diff %s", event.source.pos, event.target.pos, diff);
 			interpolation = new FXInterpolationV2(83d / 100d, diff);
 			
-			if(false) testNodes();
+			//if(false) testNodes();
 			
 			fx.play();
-			fx.setOnAnimationComplete(this::dispose);
+			fx.onComplete = this::dispose;
         } catch (Exception ex) {
         	Log.error("", ex);
         }
@@ -60,11 +58,11 @@ public class IceCometFX extends FXPlayer<CastSpellEvent> {
 		//var diff = event.target.pos.copy().sub(event.source.pos);
 		//diff.mult(interpolation.percent());
 		var diff = interpolation.value();
-		fx.setPosition(event.source.pos.x + diff.x, 0.5f, event.source.pos.y + diff.y); // getTarget.get().x, 0.5f, getTarget.get().y);
+		fx.setPosition((float) (event.source.pos.x + diff.x), (float) (event.source.pos.y + diff.y), 0); // getTarget.get().x, 0.5f, getTarget.get().y);
 //		Log.format("IceCometFX update [%f, %f, %f]", event.source.pos.x + diff.x, 0.5f, event.source.pos.y + diff.y);
 	}
 	
-	
+	/*
 	private void testNodes() {
 		try {
 
@@ -119,5 +117,5 @@ public class IceCometFX extends FXPlayer<CastSpellEvent> {
 		}
 	}
 	
-	
+	*/
 }

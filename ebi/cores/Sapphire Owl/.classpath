@@ -7,22 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" output="res" path="assets"/>
 	<classpathentry kind="src" path="data"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX2"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LML"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DB"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
-	<classpathentry kind="lib" path="/DeathEbi-commons/bin"/>
-	<classpathentry kind="lib" path="/EbiShoalCore/bin"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SmoothRivers"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-commons"/>
@@ -34,6 +18,17 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-white"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Ammolite FX"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ParticlesLibGDX"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LML"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DB"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
+	<classpathentry kind="lib" path="/DeathEbi-commons/bin"/>
+	<classpathentry kind="lib" path="/EbiShoalCore/bin"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
 	<classpathentry kind="output" path="bin/"/>
 </classpath>

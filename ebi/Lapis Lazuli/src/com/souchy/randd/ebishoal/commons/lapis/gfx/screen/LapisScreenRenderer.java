@@ -16,12 +16,13 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.czyzby.lml.parser.impl.AbstractLmlView;
+import com.souchy.jeffekseer.EffectManager;
+import com.souchy.jeffekseer.Jeffekseer;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 
-import br.com.johnathan.gdx.effekseer.api.EffekseerManager;
 
 @SuppressWarnings("deprecation")
 interface LapisScreenRenderer extends Screen {
@@ -48,7 +49,7 @@ interface LapisScreenRenderer extends Screen {
 	public InputProcessor getInputProcessor();
 	public Environment getEnvironment();
 	public LapisDSL getShadowLight();
-	public EffekseerManager getEffekseer();
+	public EffectManager getEffekseer();
 	
 	
 	public default void clearScreen(float r, float g, float b, float a) {
@@ -127,12 +128,24 @@ interface LapisScreenRenderer extends Screen {
 	}
 	
 	public default void renderEffekseer(float delta) {
+		// update effects life
+		getEffekseer().act(delta);
+		// set view projection matrix
+		float[] p = getCamera().projection.val;
+		float[] v = getCamera().view.val; 
+		if(Jeffekseer.yUp) v = getCamera().view.rotate(Vector3.X, 90).val;
+		getEffekseer().setViewProjectionMatrix(p, v);
+		// manager render effects
+		getEffekseer().Update(delta / (1.0f / 60.0f)); // 60 fps
+		getEffekseer().DrawBack();
+		getEffekseer().DrawFront();
+		
 //		getEffekseer().SetViewProjectionMatrixWithSimpleWindow(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 //		getEffekseer().Update(Gdx.graphics.getDeltaTime() / (1.0f / 60.0f));
 //		getEffekseer().DrawBack();
 //		getEffekseer().DrawFront();
 		//try {
-			getEffekseer().draw(delta); // Gdx.graphics.getDeltaTime());
+//			getEffekseer().draw(delta); // Gdx.graphics.getDeltaTime());
 		//} catch (Exception e) {
 		//	Log.error("", e);
 		//}
@@ -148,7 +161,7 @@ interface LapisScreenRenderer extends Screen {
 				getView().render(delta);
 			} catch (Exception e) {
 				Log.warning("view rendering error : " + e.getMessage());
-				getView().getStage().getBatch().end();
+				//getView().getStage().getBatch().end();
 			}
 		}
 	}

@@ -47,7 +47,6 @@ import com.souchy.randd.commons.diamond.statusevents.displacement.MoveStartEvent
 import com.souchy.randd.commons.diamond.statusevents.displacement.MoveStopEvent;
 import com.souchy.randd.commons.diamond.statusevents.displacement.MoveStopEvent.OnMoveStopHandler;
 
-import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
 
 /**
  * Stores all renderables
@@ -129,12 +128,12 @@ public class SapphireEntitySystem extends Family<Entity> implements Reactor, OnC
 					}
 				}
 				
-				var effect = e.get(ParticleEffekseer.class);
+				var effect = e.get(com.souchy.jeffekseer.Effect.class);
 				if(effect != null) {
 					effect.setPosition(
 						pos.x, 
-						fxheight, 
-						pos.y
+						pos.y, 
+						fxheight
 					);
 				}
 			}

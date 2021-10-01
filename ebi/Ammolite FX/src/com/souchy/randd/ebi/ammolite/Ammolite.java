@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.google.common.eventbus.Subscribe;
+import com.souchy.jeffekseer.EffectManager;
+import com.souchy.jeffekseer.Jeffekseer;
 import com.souchy.randd.commons.diamond.effects.status.AddStatusEffect;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Fight;
@@ -26,9 +28,6 @@ import com.souchy.randd.commons.tealwaters.ecs.Engine.AddEntityEvent;
 import com.souchy.randd.commons.tealwaters.io.files.ClassDiscoverer.DefaultClassDiscoverer;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
-import br.com.johnathan.gdx.effekseer.api.EffekseerManager;
-import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
-
 /**
  * EbiShoal Library to play Visual and Audio FX
  * 
@@ -45,12 +44,16 @@ public class Ammolite implements Reactor, OnCastSpellHandler, OnAddStatusHandler
 		}
 		@Override
 		public void update(float delta) {
-			foreach(s -> s.update(delta));
+			try {
+				foreach(s -> s.update(delta));
+			} catch(Exception e) {
+				Log.info("Fucking concurrent synchronized ", e);
+			}
 		}
 	}
 
 	
-	public static EffekseerManager manager;
+	public static EffectManager manager;
 	public static Fight fight;
 	public static FXFamily family;
 	
@@ -58,19 +61,21 @@ public class Ammolite implements Reactor, OnCastSpellHandler, OnAddStatusHandler
 	public static Map<Class<? extends Status>, FXPlayer> statusFX = new HashMap<>();
 	public static Map<Class<? extends TerrainEffect>, FXPlayer> terrainFX = new HashMap<>();
 	
-	public Ammolite(Fight f, EffekseerManager manager) {
+	public Ammolite(Fight f, EffectManager manager) {
 		Ammolite.fight = f;
 		Ammolite.manager = manager;
+
+		Jeffekseer.yUp = true;
+		Jeffekseer.worldScaleX = 1f;
+		Jeffekseer.worldScaleY = 1f;
+		Jeffekseer.worldScaleZ = 1f;
+		
+		Jeffekseer.worldOffsetX = 0.5f;
+		Jeffekseer.worldOffsetY = 0.5f;
+		Jeffekseer.worldOffsetZ = 1f;
 		
 		f.statusbus.reactors.register(this);
 
-		ParticleEffekseer.worldScaleX = 1f;
-		ParticleEffekseer.worldScaleY = 1f;
-		ParticleEffekseer.worldScaleZ = -1f;
-		
-		ParticleEffekseer.worldOffsetX = 0.5f;
-		ParticleEffekseer.worldOffsetY = 1f;
-		ParticleEffekseer.worldOffsetZ = -0.5f;
 		
 		family = new FXFamily(f);
 
@@ -96,9 +101,9 @@ public class Ammolite implements Reactor, OnCastSpellHandler, OnAddStatusHandler
 		});
 	}
 	
-	public static ParticleEffekseer particle() {
-		return new ParticleEffekseer(Ammolite.manager);
-	}
+//	public static ParticleEffekseer particle() {
+//		return new ParticleEffekseer(Ammolite.manager);
+//	}
 	
 	
 	@Override

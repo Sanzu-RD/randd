@@ -17,6 +17,5 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ParticlesLibGDX"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

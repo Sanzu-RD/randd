@@ -12,8 +12,6 @@ import com.souchy.randd.ebi.ammolite.Ammolite;
 import com.souchy.randd.ebi.ammolite.FXPlayer;
 import com.souchy.randd.ebi.ammolite.spells.SimpleOnCastFX;
 
-import br.com.johnathan.gdx.effekseer.api.ParticleEffekseer;
-
 public class FireballFX extends SimpleOnCastFX {
 
 	public FireballFX(Engine engine) {

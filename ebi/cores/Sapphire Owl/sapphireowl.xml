@@ -5,8 +5,8 @@
 	<!--define folder properties-->
 	<property name="dir.buildfile" value="."/>
 	<property name="dir.workspace" value="C:/Robyn/eclipse-workspaces/hidden workspaces/r and d"/>
-	<property name="dir.git" value="../../../../"/>
 	<!-- this is /GitPiranha/ -->
+	<property name="dir.git" value="../../../../"/>
 	<property name="dir.gitres" value="${dir.git}/../Git/res"/>
 	<property name="dir.gitgdx" value="${dir.git}/../Git/libgdx"/>
 	<!-- <property name="dir.jarfile" value="G:/www/ebishoal"/> -->
@@ -42,7 +42,7 @@
 				<attribute name="Main-Class" value="com.souchy.randd.ebishoal.sapphire.main.SapphireOwl" />
 				<attribute name="Class-Path" value=". ./res/ ./data/ ./natives/ ${mf.classpath}" />
 			</manifest>
-
+			
 			<fileset dir="${dir.buildfile}/bin">
 				<include name="com/**"/>
 				<include name="module-info.class"/>
@@ -59,8 +59,9 @@
 			<fileset dir="${dir.git}/r and d/Commons WS/GameMechanics2/bin"/>
 			<fileset dir="${dir.git}/r and d/Commons WS/Moonstone-commons/bin"/>
 			<fileset dir="${dir.git}/r and d/ebi/Moonstone-white/bin"/>
-			<fileset dir="${dir.git}/r and d/ebi/Effekseer 2/bin"/>
-			<fileset dir="${dir.gitgdx}/ParticlesLibGDX/bin"/>
+			<!-- <fileset dir="${dir.git}/r and d/ebi/Effekseer 2/bin"/> -->
+			<!-- <fileset dir="${dir.gitgdx}/ParticlesLibGDX/bin"/> -->
+			<fileset dir="${dir.gitgdx}/EffekseerForMultiLanguages/examples/Jeffekseer//bin"/>
 		</jar>
 
 		
@@ -89,16 +90,17 @@
 				<copy overwrite="true" todir="${dir.data}">
 					<fileset dir="${dir.buildfile}/data"/>
 				</copy>
-
+				
 				<!-- natives -->
-				<copy file="${dir.git}/r and d/ebi/Effekseer 2/effekseer.dll" todir="${dir.natives}"/>
-				<copy file="${dir.gitgdx}/ParticlesLibGDX/libs/gdxeffek.dll" todir="${dir.natives}"/>
+				<!-- <copy file="${dir.git}/r and d/ebi/Effekseer 2/effekseer.dll" todir="${dir.natives}"/> -->
+				<!-- <copy file="${dir.gitgdx}/ParticlesLibGDX/libs/gdxeffek.dll" todir="${dir.natives}"/> -->
+				<copy file="${dir.gitgdx}/EffekseerForMultiLanguages/examples/Jeffekseer/EffekseerNativeForJava.dll" todir="${dir.natives}"/>
 
-
-				<!-- config files -->
+				
+				<!-- config files -->	
 				<copy overwrite="true" file="${dir.buildfile}/lapis.properties" todir="${dir.jarfile}"/>
 				<copy overwrite="true" file="${dir.buildfile}/sapphireowl.conf" todir="${dir.jarfile}"/>
-
+				
 
 				<!-- libs -->
 				<copy file="${dir.git}/r and d/annotationprocessor.jar" todir="${dir.lib}"/>
@@ -117,6 +119,10 @@
 				<copy file="${dir.gitres}/libs gdx 2/gdx-backend-lwjgl.jar" todir="${dir.lib}" />
 				<copy file="${dir.gitres}/libs gdx/vis-ui-1.3.0.jar" todir="${dir.lib}" />
 
+				<copy file="${dir.gitres}/libs gdx 2/gdx.jar" todir="${dir.lib}" />
+
+				<copy file="${dir.gitgdx}/EffekseerForMultiLanguages/examples/Jeffekseer/jeffekseer.jar" todir="${dir.lib}"/>
+				
 				<copy todir="${dir.lib}">
 					<fileset dir="${dir.gitres}/libs gdx/lml 1.9.1.9.6/lib/"/>
 				</copy>

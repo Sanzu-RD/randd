@@ -37,6 +37,5 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Amethyst"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Sapphire Owl"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Effekseer 2"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

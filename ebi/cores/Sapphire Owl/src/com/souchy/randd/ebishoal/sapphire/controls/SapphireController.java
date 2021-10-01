@@ -159,7 +159,6 @@ public class SapphireController extends CameraInputController {
 
 		addOnKeyDown(Keys.R, () -> SapphireGame.gfx.resetCamera());
 		addOnKeyDown(Keys.T, () -> SapphireGame.gfx.topView());
-		addOnKeyDown(Keys.P, () -> SapphireGame.gfx.startPfx());
 		addOnKeyDown(Keys.M, SapphireGame.music::togglePlayPause);
 		addOnKeyDown(Keys.F3, () -> SapphireGame.gfx.hud.getStage().setDebugAll(!SapphireGame.gfx.hud.getStage().isDebugAll()));
 		addOnKeyDown(Keys.V, () -> {
