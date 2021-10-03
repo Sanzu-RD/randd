@@ -44,8 +44,8 @@ import com.souchy.randd.commons.diamond.statusevents.status.ModifyStatusEvent.On
 import com.souchy.randd.commons.diamond.statusevents.status.RemoveStatusEvent;
 import com.souchy.randd.commons.diamond.statusevents.status.RemoveStatusEvent.OnRemoveStatusHandler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.lapis.gfx.LapisShader;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.shaders.LapisShader;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.sapphire.confs.ConfigEvent;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireBatch;

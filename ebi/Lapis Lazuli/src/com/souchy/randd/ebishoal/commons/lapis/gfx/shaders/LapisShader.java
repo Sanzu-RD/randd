@@ -1,4 +1,4 @@
-package com.souchy.randd.ebishoal.commons.lapis.gfx;
+package com.souchy.randd.ebishoal.commons.lapis.gfx.shaders;
 
 import com.badlogic.gdx.Gdx;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="module-info.java|mockingbird/MockingMoonstone.java|mockingbird/MockingEffekseer.java|mockingbird/MockingMoonstoneBlack.java|mockingbird/MockingSapphire.java|mockingbird/testEmerald.java" kind="src" path="src"/>
+	<classpathentry excluding="module-info.java|mockingbird/MockingMoonstone.java|mockingbird/MockingEffekseer.java|mockingbird/MockingMoonstoneBlack.java|mockingbird/MockingSapphire.java|mockingbird/testEmerald.java|mockingbird/EffekseerJohn.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="effekseer"/>
 	<classpathentry kind="src" output="data" path="datadata"/>
 	<classpathentry kind="src" output="res" path="assets"/>

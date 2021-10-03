@@ -2,10 +2,7 @@ package com.souchy.randd.ebi.ammolite.spells;
 
 import java.util.function.Supplier;
 
-import com.badlogic.gdx.Gdx;
 import com.souchy.jeffekseer.Effect;
-import com.souchy.jeffekseer.FXLoader;
-import com.souchy.jeffekseer.Jeffekseer;
 import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.statusevents.other.CastSpellEvent;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
@@ -16,7 +13,7 @@ import com.souchy.randd.ebi.ammolite.FXPlayer;
 public abstract class SimpleOnCastFX extends FXPlayer<CastSpellEvent> {
 
 	protected Supplier<Position> getTarget; 
-	protected Effect fx; // ParticleEffekseer fx;
+	protected Effect fx; 
 	
 	public SimpleOnCastFX(Engine engine) {
 		super(engine);
@@ -41,8 +38,9 @@ public abstract class SimpleOnCastFX extends FXPlayer<CastSpellEvent> {
 			}
 			Log.info("SimpleOnCastFX play @" + fx.hashCode() + ", " + getTarget.get());
 			
+			fx.onComplete = this::dispose;
 			fx.play();
-			fx.onComplete = this::dispose; //fx.setOnAnimationComplete(this::dispose);
+			fx.setPosition((float) getTarget.get().x, (float) getTarget.get().y, 0);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

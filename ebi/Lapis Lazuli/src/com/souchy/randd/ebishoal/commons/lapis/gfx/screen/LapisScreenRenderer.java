@@ -159,9 +159,12 @@ interface LapisScreenRenderer extends Screen {
 		if(getView() != null) {
 			try {
 				getView().render(delta);
+			}  catch (IllegalStateException e) {
+				Log.warning("LapisRenderer renderView IllegalStatException : ", e);
+				if(getView().getStage().getBatch().isDrawing())
+					getView().getStage().getBatch().end();
 			} catch (Exception e) {
-				Log.warning("view rendering error : " + e.getMessage());
-				//getView().getStage().getBatch().end();
+				Log.critical("LapisRenderer renderView error : ", e);
 			}
 		}
 	}

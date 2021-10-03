@@ -5,11 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
-import com.google.common.eventbus.Subscribe;
 import com.souchy.jeffekseer.EffectManager;
 import com.souchy.jeffekseer.Jeffekseer;
-import com.souchy.randd.commons.diamond.effects.status.AddStatusEffect;
-import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Spell;
 import com.souchy.randd.commons.diamond.models.Status;
@@ -24,7 +21,6 @@ import com.souchy.randd.commons.diamond.statusevents.status.AddTerrainEvent;
 import com.souchy.randd.commons.diamond.statusevents.status.AddTerrainEvent.OnAddTerrainHandler;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.ecs.Family;
-import com.souchy.randd.commons.tealwaters.ecs.Engine.AddEntityEvent;
 import com.souchy.randd.commons.tealwaters.io.files.ClassDiscoverer.DefaultClassDiscoverer;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
@@ -34,7 +30,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
  * @author Souchy
  * @date 11 janv. 2021
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class Ammolite implements Reactor, OnCastSpellHandler, OnAddStatusHandler, OnAddTerrainHandler {
 
 	/** updates fx on render */

@@ -24,7 +24,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.jeffekseer.EffectManager;
 import com.souchy.jeffekseer.Jeffekseer;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.lapis.gfx.LapisShader;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.shaders.LapisShader;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
