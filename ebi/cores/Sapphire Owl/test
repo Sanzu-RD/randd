@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<entry key="gfx.shadows">true</entry>
+<entry key="shortcut.buttonAction">0</entry>
 <entry key="gfx.background">true</entry>
+<entry key="gfx.shadows">true</entry>
+<entry key="shortcut.buttonInfo">1</entry>
 <entry key="sound.music">2</entry>
 <entry key="sound.general">4</entry>
 <entry key="functionality.centerline">true</entry>
@@ -14,8 +16,8 @@
 <entry key="functionality.grid">true</entry>
 <entry key="general.locale">en</entry>
 <entry key="functionality.lineofsight">true</entry>
-<entry key="gfx.postProcess">true</entry>
 <entry key="gfx.stencil">true</entry>
+<entry key="gfx.postProcess">true</entry>
 <entry key="functionality.ruler">true</entry>
 <entry key="gfx.backgroundnPath"></entry>
 <entry key="general.maxChatMessages">100</entry>

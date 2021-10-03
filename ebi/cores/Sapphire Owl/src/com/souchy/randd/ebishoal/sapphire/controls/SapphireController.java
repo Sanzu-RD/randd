@@ -1,65 +1,45 @@
 package com.souchy.randd.ebishoal.sapphire.controls;
 
-import static com.badlogic.gdx.Input.Keys.A;
-import static com.badlogic.gdx.Input.Keys.ALT_LEFT;
-import static com.badlogic.gdx.Input.Keys.CONTROL_LEFT;
-import static com.badlogic.gdx.Input.Keys.D;
-import static com.badlogic.gdx.Input.Keys.DOWN;
-import static com.badlogic.gdx.Input.Keys.E;
-import static com.badlogic.gdx.Input.Keys.LEFT;
-import static com.badlogic.gdx.Input.Keys.Q;
-import static com.badlogic.gdx.Input.Keys.RIGHT;
-import static com.badlogic.gdx.Input.Keys.S;
-import static com.badlogic.gdx.Input.Keys.SHIFT_LEFT;
-import static com.badlogic.gdx.Input.Keys.UP;
-import static com.badlogic.gdx.Input.Keys.W;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.google.common.collect.HashBasedTable;
 import com.kotcrab.vis.ui.FocusManager;
 import com.souchy.randd.commons.diamond.common.Action;
 import com.souchy.randd.commons.diamond.common.Aoe;
 import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.common.Pathfinding;
-import com.souchy.randd.commons.diamond.common.generic.BoolTable;
 import com.souchy.randd.commons.diamond.common.generic.Vector2;
 import com.souchy.randd.commons.diamond.effects.displacement.Move;
 import com.souchy.randd.commons.diamond.effects.resources.ResourceGainLoss;
-import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Board;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.components.Position;
-import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.RenderOptions;
+import com.souchy.randd.ebishoal.sapphire.controls.KeyCombination.KeyCombinationArray;
 import com.souchy.randd.ebishoal.sapphire.gfx.Highlight;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
-import com.souchy.randd.ebishoal.sapphire.main.SapphireEntitySystem;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
-import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
-import com.souchy.randd.ebishoal.sapphire.ux.components.Parameters;
 import com.souchy.randd.ebishoal.sapphire.ux.components.sheets.CreatureSheet;
 import com.souchy.randd.jade.Constants;
 import com.souchy.randd.moonstone.commons.packets.c2s.FightAction;
@@ -67,10 +47,6 @@ import com.souchy.randd.moonstone.commons.packets.c2s.PassTurn;
 import com.souchy.randd.moonstone.white.Moonstone;
 
 public class SapphireController extends CameraInputController {
-
-//	public Vector3 old = Vector3.Zero.cpy();
-//	private Vector3 target = Vector3.Zero.cpy();
-//	private Vector3 temp = Vector3.Zero.cpy();
 
 	public boolean activateBaseCamControl = false;
 
@@ -81,32 +57,23 @@ public class SapphireController extends CameraInputController {
 	private Vector3 rotation = Vector3.Zero.cpy();
 	private float zoom = 0;
 
-//	private Vector3 axisZ = new Vector3(0, 0, 1);
-//	private Vector3 axisXY = new Vector3(-1, 1, 0).nor();
-
 	private Entity draggedEntity;
 	private Entity targetEntity;
-
-
-	/** <int keycode, lamba action> */
-	public Map<Integer, Lambda> onKeyDown = new HashMap<>();
-	/** <int keycode, lamba action> */
-	public Map<Integer, Lambda> onKeyUp = new HashMap<>();
-
-
-	public void addOnKeyDown(int keycode, Lambda action) {
-		onKeyDown.put(keycode, action);
-	}
-	public void addOnKeyUp(int keycode, Lambda action) {
-		onKeyUp.put(keycode, action);
-	}
 	
 	private int currentActionID = Action.NONE;
 
 	public SapphireController(Camera camera) {
 		super(camera);
+		initCombos();
+	}
 
-		addOnKeyDown(Keys.ESCAPE, () -> {
+	public com.google.common.collect.Table<Integer, Integer, Lambda> keyCombos = HashBasedTable.create();
+	public LinkedList<Integer> keyBuffer = new LinkedList<>();
+	
+	public void initCombos() {
+		keyCombos.clear();
+
+		putCombo(SapphireOwl.conf.shortcut.cancel, () -> {
 			currentActionID = Action.NONE;
 			Highlight.clearAll();
 			
@@ -139,7 +106,7 @@ public class SapphireController extends CameraInputController {
 			*/
 //			SapphireGame.gfx.hud.parameters.toggleVisibility()
 		});
-		addOnKeyDown(Keys.SPACE, () -> {
+		putCombo(SapphireOwl.conf.shortcut.refreshui, () -> {
 			SapphireGame.gfx.resetCamera();
 			SapphireGame.gfx.hud.reload(); //.refresh();
 			//GlobalLML.lml().reloadViews();
@@ -148,20 +115,18 @@ public class SapphireController extends CameraInputController {
 			rotationUnit.set(0, 0, 0);
 		});
 		
-		addOnKeyDown(Keys.C, () -> {
-			Moonstone.writes(new PassTurn());
-		});
+		putCombo(SapphireOwl.conf.shortcut.passTurn, () -> Moonstone.writes(new PassTurn()));
 		
-		addOnKeyDown(RIGHT, () -> camera.rotate(45, 0, 0, 1));
-		addOnKeyDown(LEFT, () -> camera.rotate(45, 0, 0, -1));
-		addOnKeyDown(UP, () -> camera.rotate(45, -camera.up.y, camera.up.x, 0));
-		addOnKeyDown(DOWN, () -> camera.rotate(45, camera.up.y, -camera.up.x, 0));
+		putCombo(SapphireOwl.conf.shortcut.rotateUpX, () -> camera.rotate(45, -camera.up.y, camera.up.x, 0));
+		putCombo(SapphireOwl.conf.shortcut.rotateDownX, () -> camera.rotate(45, camera.up.y, -camera.up.x, 0));
+		putCombo(SapphireOwl.conf.shortcut.rotateRightX, () -> camera.rotate(45, 0, 0, 1));
+		putCombo(SapphireOwl.conf.shortcut.rotateLeftX, () -> camera.rotate(45, 0, 0, -1));
 
-		addOnKeyDown(Keys.R, () -> SapphireGame.gfx.resetCamera());
-		addOnKeyDown(Keys.T, () -> SapphireGame.gfx.topView());
-		addOnKeyDown(Keys.M, SapphireGame.music::togglePlayPause);
-		addOnKeyDown(Keys.F3, () -> SapphireGame.gfx.hud.getStage().setDebugAll(!SapphireGame.gfx.hud.getStage().isDebugAll()));
-		addOnKeyDown(Keys.V, () -> {
+		putCombo(SapphireOwl.conf.shortcut.camReset, () -> SapphireGame.gfx.resetCamera());
+		putCombo(SapphireOwl.conf.shortcut.camTopView, () -> SapphireGame.gfx.topView());
+		putCombo(SapphireOwl.conf.shortcut.musicToggle, SapphireGame.music::togglePlayPause);
+		putCombo(SapphireOwl.conf.shortcut.debugUI, () -> SapphireGame.gfx.hud.getStage().setDebugAll(!SapphireGame.gfx.hud.getStage().isDebugAll()));
+		putCombo(SapphireOwl.conf.shortcut.testGainLife, () -> {
 //			var creature = SapphireGame.fight.teamA.get(0)
 			var creature = SapphireGame.getPlayingCreature(); //.fight.creatures.first();
 //			creature.stats.resources.get(Resource.life).fight += 10;
@@ -180,7 +145,7 @@ public class SapphireController extends CameraInputController {
 //			highlightMove.accept((Creature) SapphireGame.getPlayingCreature());
 //		});
 		
-		addOnKeyDown(Keys.X, () -> {
+		putCombo(SapphireOwl.conf.shortcut.testMove, () -> {
 			if(targetEntity == null) targetEntity = SapphireGame.playing;
 			var c = targetEntity;
 			if(c == null) {
@@ -207,84 +172,33 @@ public class SapphireController extends CameraInputController {
 //			Highlight.movement(list.stream().map(c -> (Vector2) c.pos).collect(Collectors.toList()));
 		});
 		
-		addOnKeyDown(Keys.J, () -> {
+		putCombo(SapphireOwl.conf.shortcut.highlightCells, () -> {
 			if(Highlight.isActive()) Highlight.clear();
 			else Highlight.cellTypes();
 		});
-		addOnKeyDown(Keys.K, () -> {
-			RenderOptions.renderCache = !RenderOptions.renderCache;
-		});
-		addOnKeyDown(Keys.B, () -> {
-			RenderOptions.renderBackground = !RenderOptions.renderBackground;
-		});
-		addOnKeyUp(Keys.L, () -> {
-			RenderOptions.renderLines = !RenderOptions.renderLines;
-		});
-		addOnKeyDown(Keys.N, () -> {
-			var targetpos = getCursorWorldPos(Gdx.input.getX(), Gdx.input.getY());
-			Log.format("target %s, %s", Gdx.input.getX(), Gdx.input.getY());
-			Highlight.spell(List.of(new Vector2(targetpos.x, targetpos.y)));
-		});
-
+		putCombo(SapphireOwl.conf.shortcut.renderCache, () -> RenderOptions.renderCache = !RenderOptions.renderCache);
+		putCombo(SapphireOwl.conf.shortcut.renderBackground, () -> RenderOptions.renderBackground = !RenderOptions.renderBackground);
+		putCombo(SapphireOwl.conf.shortcut.renderLines, () -> RenderOptions.renderLines = !RenderOptions.renderLines);
 		
-		addOnKeyUp(Keys.NUM_1, () -> highlightSpellRange(0));
-		addOnKeyUp(Keys.NUM_2, () -> highlightSpellRange(1));
-		addOnKeyUp(Keys.NUM_3, () -> highlightSpellRange(2));
-		addOnKeyUp(Keys.NUM_4, () -> highlightSpellRange(3));
-		addOnKeyUp(Keys.NUM_5, () -> highlightSpellRange(4));
-		addOnKeyUp(Keys.NUM_6, () -> highlightSpellRange(5));
-		addOnKeyUp(Keys.NUM_7, () -> highlightSpellRange(6));
-		addOnKeyUp(Keys.NUM_8, () -> highlightSpellRange(7));
-		
-		addOnKeyDown(Keys.W, () -> {
-			Vector3 up  = camera.up;
-			if(Gdx.input.isKeyPressed(ALT_LEFT)) translation.add( up.x,  up.y, 0);
-			else rotationUnit.add(-1, 1, 0); // look up
-		});
-		addOnKeyDown(Keys.S, () -> {
-			Vector3 up  = camera.up;
-			if(Gdx.input.isKeyPressed(ALT_LEFT)) translation.add(-up.x, -up.y, 0);
-			else rotationUnit.add( 1, -1, 0); // look down
-		});
-		addOnKeyDown(Keys.A, () -> {
-			Vector3 up  = camera.up;
-			if(Gdx.input.isKeyPressed(ALT_LEFT)) translation.add(-up.y,  up.x, 0);
-			else rotationUnit.add(0, 0, -1f); // look left
-		});
-		addOnKeyDown(Keys.D, () -> {
-			Vector3 up  = camera.up;
-			if(Gdx.input.isKeyPressed(ALT_LEFT)) translation.add( up.y, -up.x, 0);
-			else rotationUnit.add(0, 0,  1f); // look right
-		});
-		addOnKeyDown(Keys.Q, () -> zoom += 0.2f);
-		addOnKeyDown(Keys.E, () -> zoom += -0.2f);
-
-		
-		addOnKeyUp(Keys.W, () -> {
-			Vector3 up  = camera.up;
-			if(Gdx.input.isKeyPressed(ALT_LEFT)) translation.add( -up.x,  -up.y, 0);
-			else rotationUnit.add( 1, -1, 0); // look up
-		});
-		addOnKeyUp(Keys.S, () -> {
-			Vector3 up  = camera.up;
-			if(Gdx.input.isKeyPressed(ALT_LEFT)) translation.add( up.x,  up.y, 0);
-			else rotationUnit.add(-1,  1, 0); // look down
-		});
-		addOnKeyUp(Keys.A, () -> {
-			Vector3 up  = camera.up;
-			if(Gdx.input.isKeyPressed(ALT_LEFT)) translation.add( up.y, -up.x, 0);
-			else rotationUnit.add(0, 0,  1f); // look left
-		});
-		addOnKeyUp(Keys.D, () -> {
-			Vector3 up  = camera.up;
-			if(Gdx.input.isKeyPressed(ALT_LEFT)) translation.add(-up.y,  up.x, 0);
-			else rotationUnit.add(0, 0, -1f); // look right
-		});
-		
-		addOnKeyUp(Keys.Q, () -> zoom += -0.2f);
-		addOnKeyUp(Keys.E, () -> zoom += 0.2f);
-		
+		putCombo(SapphireOwl.conf.shortcut.spell0, () -> highlightSpellRange(0));
+		putCombo(SapphireOwl.conf.shortcut.spell1, () -> highlightSpellRange(1));
+		putCombo(SapphireOwl.conf.shortcut.spell2, () -> highlightSpellRange(2));
+		putCombo(SapphireOwl.conf.shortcut.spell3, () -> highlightSpellRange(3));
+		putCombo(SapphireOwl.conf.shortcut.spell4, () -> highlightSpellRange(4));
+		putCombo(SapphireOwl.conf.shortcut.spell5, () -> highlightSpellRange(5));
+		putCombo(SapphireOwl.conf.shortcut.spell6, () -> highlightSpellRange(6));
+		putCombo(SapphireOwl.conf.shortcut.spell7, () -> highlightSpellRange(7));
+		putCombo(SapphireOwl.conf.shortcut.spell8, () -> highlightSpellRange(8));
+		putCombo(SapphireOwl.conf.shortcut.spell9, () -> highlightSpellRange(9));
 	}
+	private void putCombo(KeyCombinationArray arr, Lambda l) {
+		for(var c : arr.combinations) putCombo(c, l);
+	}
+	private void putCombo(KeyCombination c, Lambda l) {
+		keyCombos.put(c.key1, c.key2, l);
+		keyCombos.put(c.key2, c.key1, l);
+	}
+	
 	
 
 	Consumer<Creature> highlightMove = (creature) -> {
@@ -349,30 +263,50 @@ public class SapphireController extends CameraInputController {
 		Vector3 up  = camera.up;
 		Vector3 dir = camera.direction;
 		Vector3 pos = camera.position;
-
-		/*
+		
 		translation.set(0, 0, 0);
 		rotation.set(0, 0, 0);
+		rotationUnit.set(0, 0, 0);
+		
+//		if(Gdx.input.isKeyPressed(ALT_LEFT)) {
+//			// Translation XY
+//			if(Gdx.input.isKeyPressed(W)) translation.add( up.x,  up.y, 0);
+//			if(Gdx.input.isKeyPressed(S)) translation.add(-up.x, -up.y, 0);
+//			if(Gdx.input.isKeyPressed(A)) translation.add(-up.y,  up.x, 0);
+//			if(Gdx.input.isKeyPressed(D)) translation.add( up.y, -up.x, 0);
+//		} else {
+//			// Rotation X
+//			if(Gdx.input.isKeyPressed(W)) rotationUnit.add(-1,  1, 0); // look up
+//			if(Gdx.input.isKeyPressed(S)) rotationUnit.add( 1, -1, 0); // look down
+//			// Rotation Z
+//			if(Gdx.input.isKeyPressed(A)) rotationUnit.add(0, 0, -1f); // look left
+//			if(Gdx.input.isKeyPressed(D)) rotationUnit.add(0, 0,  1f); // look right
+//		}
 
-		if(Gdx.input.isKeyPressed(ALT_LEFT)) {
-			// Translation XY
-			if(Gdx.input.isKeyPressed(W)) translation.add( up.x,  up.y, 0);
-			if(Gdx.input.isKeyPressed(S)) translation.add(-up.x, -up.y, 0);
-			if(Gdx.input.isKeyPressed(A)) translation.add(-up.y,  up.x, 0);
-			if(Gdx.input.isKeyPressed(D)) translation.add( up.y, -up.x, 0);
-		} else {
-			// Rotation X
-			if(Gdx.input.isKeyPressed(W)) rotation.add(-up.y, up.x, 0); // look up
-			if(Gdx.input.isKeyPressed(S)) rotation.add( up.y, -up.x, 0); // look down
-			// Rotation Z
-			if(Gdx.input.isKeyPressed(A)) rotation.add(0, 0, -1f); // look left
-			if(Gdx.input.isKeyPressed(D)) rotation.add(0, 0,  1f); // look right
-		}
+		// Translation XY
+		if(SapphireOwl.conf.shortcut.translateUpFree.isPressed()) translation.add( up.x,  up.y, 0);
+		if(SapphireOwl.conf.shortcut.translateDownFree.isPressed()) translation.add(-up.x, -up.y, 0);
+		if(SapphireOwl.conf.shortcut.translateLeftFree.isPressed()) translation.add(-up.y,  up.x, 0);
+		if(SapphireOwl.conf.shortcut.translateRightFree.isPressed()) translation.add( up.y, -up.x, 0);
+		// Rotation XZ
+		if(SapphireOwl.conf.shortcut.rotateUpFree.isPressed()) rotationUnit.add(-1,  1, 0); // look up
+		if(SapphireOwl.conf.shortcut.rotateDownFree.isPressed()) rotationUnit.add( 1, -1, 0); // look down
+		if(SapphireOwl.conf.shortcut.rotateLeftFree.isPressed()) rotationUnit.add(0, 0, -1f); // look left
+		if(SapphireOwl.conf.shortcut.rotateRightFree.isPressed()) rotationUnit.add(0, 0,  1f); // look right
+		
 		// Zoom
-		if(Gdx.input.isKeyPressed(CONTROL_LEFT) || Gdx.input.isKeyPressed(Q)) scrolledFloat(0.2f);
-		if(Gdx.input.isKeyPressed(SHIFT_LEFT) || Gdx.input.isKeyPressed(E)) scrolledFloat(-0.2f);
-		*/
-
+		//if(Gdx.input.isKeyPressed(CONTROL_LEFT) || Gdx.input.isKeyPressed(Q)) 
+		if(SapphireOwl.conf.shortcut.zoomInFree.isPressed()) 
+			scrolledFloat(0.2f);
+		//if(Gdx.input.isKeyPressed(SHIFT_LEFT) || Gdx.input.isKeyPressed(E)) 
+		if(SapphireOwl.conf.shortcut.zoomOutFree.isPressed())
+			scrolledFloat(-0.2f);
+		
+		
+		
+		// keep it a unit vector even if we move in two directions at the same time
+		rotationUnit.limit(1);
+		
 		scrolledFloat(zoom);
 
 		// p = le point qu'on regarde avec la caméra
@@ -422,18 +356,26 @@ public class SapphireController extends CameraInputController {
 			SapphireGame.gfx.getShadowLight().zoom(cam.viewportWidth, cam.viewportHeight);
 	}
 
+	
 	/**
 	 * one-hit keydown events
 	 */
 	@SuppressWarnings("preview")
 	@Override
 	public boolean keyDown(int keycode) {
-		var lambda = onKeyDown.get(keycode);
-		if(lambda != null) {
-			lambda.call();
-			return true;
-		}
-
+		if(keycode == Keys.H && Gdx.input.isKeyPressed(Keys.CONTROL_LEFT)&& Gdx.input.isKeyPressed(Keys.ALT_LEFT)) 
+			initCombos();
+		
+		if(keyBuffer.size() == 2) keyBuffer.poll();
+		keyBuffer.offer(keycode); 
+		
+		var key1 = keyBuffer.peekFirst();
+		var key2 = keyBuffer.peekLast();
+		Lambda c = keyCombos.get(key1, key2);
+		//Log.info("keyDown (%s) (%s, %s) = %s", keycode, key1, key2, c);
+		if(c != null) c.call();
+		else Log.error("keyDown (%s) (%s, %s) = %s", keycode, key1, key2, c);
+		
 		if(!activateBaseCamControl) return true;
 		return super.keyDown(keycode);
 	}
@@ -441,11 +383,7 @@ public class SapphireController extends CameraInputController {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		var lambda = onKeyUp.get(keycode);
-		if(lambda != null) {
-			lambda.call();
-			return true;
-		}
+		keyBuffer.removeFirstOccurrence(keycode);
 
 		if(!activateBaseCamControl) return true;
 		return super.keyUp(keycode);
@@ -486,8 +424,8 @@ public class SapphireController extends CameraInputController {
 //				draggedEntity = creature;
 //			} else
 			// toggle character sheet
-			if(button == Buttons.RIGHT) {
-				if(Gdx.input.isKeyPressed(Keys.CONTROL_LEFT)) {
+			if(button == SapphireOwl.conf.shortcut.buttonInfo) { //Buttons.RIGHT) {
+				if(SapphireOwl.conf.shortcut.targetCellModifier.isPressed()) { //Gdx.input.isKeyPressed(Keys.CONTROL_LEFT)) {
 					Commands.cell("", cell.id);
 				} else 
 				if(creature != null) {
@@ -498,7 +436,7 @@ public class SapphireController extends CameraInputController {
 				}
 			} else
 			// action
-			if (button == Buttons.LEFT) {
+			if (button == SapphireOwl.conf.shortcut.buttonAction) { //Buttons.LEFT) {
 				Log.info("SapphireController execute action " + currentActionID);
 				if(currentActionID > 0) {
 					var caster = SapphireGame.getPlayingCreature(); //.fight.creatures.first();

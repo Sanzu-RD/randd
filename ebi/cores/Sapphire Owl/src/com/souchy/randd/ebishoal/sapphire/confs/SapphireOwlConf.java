@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers.Exclude;
+import com.souchy.randd.ebishoal.sapphire.controls.KeyCombination;
+import com.souchy.randd.ebishoal.sapphire.controls.KeyCombination.KeyCombinationArray;
 
 /**
  * 
@@ -46,7 +48,64 @@ public class SapphireOwlConf extends JsonConfig {
 	 *  have to process {@link Keys} and {@link Buttons}
 	 */
 	public static class ShortcutConfig extends JsonConfig {
-		public String[] refreshui = new String[] { "SPACE" };
+		public int buttonAction = Buttons.LEFT;
+		public int buttonInfo = Buttons.RIGHT;
+		public KeyCombination targetCellModifier = new KeyCombination(Keys.CONTROL_LEFT);
+		
+		
+		public KeyCombinationArray refreshui = new KeyCombinationArray(new KeyCombination(Keys.SPACE));
+		public KeyCombinationArray cancel = new KeyCombinationArray(new KeyCombination(Keys.ESCAPE));
+		public KeyCombinationArray passTurn = new KeyCombinationArray(new KeyCombination(Keys.C));
+		public KeyCombinationArray camReset = new KeyCombinationArray(new KeyCombination(Keys.R));
+		public KeyCombinationArray camTopView = new KeyCombinationArray(new KeyCombination(Keys.T));
+		public KeyCombinationArray musicToggle = new KeyCombinationArray(new KeyCombination(Keys.M));
+		public KeyCombinationArray debugUI = new KeyCombinationArray(new KeyCombination(Keys.F3));
+		
+		public KeyCombinationArray testGainLife = new KeyCombinationArray(new KeyCombination(Keys.V));
+		public KeyCombinationArray testMove = new KeyCombinationArray(new KeyCombination(Keys.X));
+
+		public KeyCombinationArray highlightCells = new KeyCombinationArray(new KeyCombination(Keys.J));
+
+		public KeyCombinationArray renderCache = new KeyCombinationArray(new KeyCombination(Keys.K));
+		public KeyCombinationArray renderBackground = new KeyCombinationArray(new KeyCombination(Keys.B));
+		public KeyCombinationArray renderLines = new KeyCombinationArray(new KeyCombination(Keys.L));
+		
+		public KeyCombinationArray rotateUpFree = new KeyCombinationArray();
+		public KeyCombinationArray rotateDownFree = new KeyCombinationArray();
+		public KeyCombinationArray rotateLeftFree = new KeyCombinationArray();
+		public KeyCombinationArray rotateRightFree = new KeyCombinationArray();
+		
+		public KeyCombinationArray rotateUpX = new KeyCombinationArray(new KeyCombination(Keys.W));
+		public KeyCombinationArray rotateDownX = new KeyCombinationArray(new KeyCombination(Keys.S));
+		public KeyCombinationArray rotateLeftX = new KeyCombinationArray(new KeyCombination(Keys.A));
+		public KeyCombinationArray rotateRightX = new KeyCombinationArray(new KeyCombination(Keys.D));
+		
+		public KeyCombinationArray translateUpFree = new KeyCombinationArray(new KeyCombination(Keys.W, Keys.ALT_LEFT));
+		public KeyCombinationArray translateDownFree = new KeyCombinationArray(new KeyCombination(Keys.S, Keys.ALT_LEFT));
+		public KeyCombinationArray translateLeftFree = new KeyCombinationArray(new KeyCombination(Keys.A, Keys.ALT_LEFT));
+		public KeyCombinationArray translateRightFree = new KeyCombinationArray(new KeyCombination(Keys.D, Keys.ALT_LEFT));
+		
+		public KeyCombinationArray translateUpX = new KeyCombinationArray();
+		public KeyCombinationArray translateDownX = new KeyCombinationArray();
+		public KeyCombinationArray translateLeftX = new KeyCombinationArray();
+		public KeyCombinationArray translateRightX = new KeyCombinationArray();
+		
+		public KeyCombinationArray zoomInFree = new KeyCombinationArray(new KeyCombination(Keys.Q), new KeyCombination(Keys.CONTROL_LEFT));
+		public KeyCombinationArray zoomOutFree = new KeyCombinationArray(new KeyCombination(Keys.E), new KeyCombination(Keys.SHIFT_LEFT));
+		
+		public KeyCombinationArray zoomInX = new KeyCombinationArray();
+		public KeyCombinationArray zoomOutX = new KeyCombinationArray();
+
+		public KeyCombinationArray spell0 = new KeyCombinationArray(new KeyCombination(Keys.NUM_1));
+		public KeyCombinationArray spell1 = new KeyCombinationArray(new KeyCombination(Keys.NUM_2));
+		public KeyCombinationArray spell2 = new KeyCombinationArray(new KeyCombination(Keys.NUM_3));
+		public KeyCombinationArray spell3 = new KeyCombinationArray(new KeyCombination(Keys.NUM_4));
+		public KeyCombinationArray spell4 = new KeyCombinationArray(new KeyCombination(Keys.NUM_5));
+		public KeyCombinationArray spell5 = new KeyCombinationArray(new KeyCombination(Keys.NUM_6));
+		public KeyCombinationArray spell6 = new KeyCombinationArray(new KeyCombination(Keys.NUM_7));
+		public KeyCombinationArray spell7 = new KeyCombinationArray(new KeyCombination(Keys.NUM_8));
+		public KeyCombinationArray spell8 = new KeyCombinationArray(new KeyCombination(Keys.NUM_9));
+		public KeyCombinationArray spell9 = new KeyCombinationArray(new KeyCombination(Keys.NUM_0));
 		
 	}
 	
