@@ -1,19 +1,68 @@
 package com.souchy.randd.mockingbird.lapismock.screens;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
+import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.math.Vector3;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.RenderOptions;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.shaders.LapisShader;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.SSAOShader;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.SSAOShader.SSAOShaderProvider;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.AdvancedShader;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.AdvancedShader.AdvancedShaderProvider;
 
 public class MockScreen6 extends SapphireSetupScreen {
 
+	private FrameBuffer ssaoFBO;
+	private ModelBatch ssaoModelBatch;
+
+	private SSAOShaderProvider shadersSsao;
+	private AdvancedShaderProvider shadersAdv;
+	
+	public MockScreen6() {
+		Log.info("MockScreen 6 a");
+		shadersSsao = new SSAOShaderProvider();
+		ssaoFBO = new FrameBuffer(Format.Intensity, Gdx.graphics.getWidth(), Gdx.graphics.getWidth(), false);
+		ssaoModelBatch = new ModelBatch(shadersSsao);
+		Log.info("MockScreen 6 b");
+	}
 	
 	@Override
-	protected void act(float delta) {
-		super.act(delta);
+	public ModelBatch createWorldBatch() {
+		shadersAdv = new AdvancedShaderProvider();
+		Log.info("create world batch " + shadersAdv);
+		return new ModelBatch(shadersAdv); //LapisShader.getVertexShader("base"), LapisShader.getFragmentShader("base"))); 
 	}
+	
+	@Override
+	public ModelBatch createWorldShadowBatch() {
+		return super.createWorldShadowBatch();
+	}
+	
+	public void renderSSAO(float delta) {
+		ssaoFBO.begin();
+		// clear the screen with a transparent background for the fbo
+		clearScreen(0, 0, 0, 0);
+		// world
+		{
+			// render the cache (static terrain)
+			if(RenderOptions.renderCache) ssaoModelBatch.render(getWorld().cache, getEnvironment());
+			// render dynamic instances (cursor, creatures, terrain effects like glyphs and traps, highlighting effects ..)
+			ssaoModelBatch.render(getWorld().instances, getEnvironment());
+		}
+		ssaoFBO.end();
+	}
+	
 	
 	/**
 	 * this is equivalent to LapisScreen.render
@@ -23,10 +72,8 @@ public class MockScreen6 extends SapphireSetupScreen {
 		// update input controller
 		if(getInputProcessor() != null && getInputProcessor() instanceof CameraInputController) 
 			((CameraInputController) getInputProcessor()).update();
-		
 		// act
 		act(delta);
-		
 		bigblockrender(delta);
 	}
 	
@@ -40,6 +87,12 @@ public class MockScreen6 extends SapphireSetupScreen {
 		if(RenderOptions.activateShadows) renderShadowsContainer();
 		if(RenderOptions.cullback) Gdx.gl.glCullFace(GL20.GL_BACK);
 		
+		// render ssao fbo
+		renderSSAO(delta);
+		// transfer the ssao fbo result to the regular advanced shader
+		if(shadersAdv.getShader() != null) 
+			shadersAdv.getShader().ussao.ssaoTex.texture = ssaoFBO.getColorBufferTexture();
+		
 		// render world and pfx in an FBO for later post-process
 		getFBO().begin();
 		{
@@ -52,7 +105,7 @@ public class MockScreen6 extends SapphireSetupScreen {
 					drawBackground(cleanSpriteBatch);
 			}
 			cleanSpriteBatch.end();
-			
+			//Log.info("renderWorld " + getModelBatch().getShaderProvider().getClass());
 			// world
 			renderWorldContainer();
 			// particle effects
@@ -90,5 +143,7 @@ public class MockScreen6 extends SapphireSetupScreen {
 		// render UI
 		if(RenderOptions.renderUI) renderView(delta);
 	}
+	
+
 	
 }

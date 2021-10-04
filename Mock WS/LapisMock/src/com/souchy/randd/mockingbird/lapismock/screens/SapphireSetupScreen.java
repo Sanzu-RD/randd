@@ -30,7 +30,6 @@ import com.souchy.randd.ebishoal.sapphire.main.MusicPlayer;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
-import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
 
 public class SapphireSetupScreen extends SapphireScreen {
 

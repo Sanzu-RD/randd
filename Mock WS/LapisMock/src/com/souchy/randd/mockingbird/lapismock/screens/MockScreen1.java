@@ -54,7 +54,7 @@ public class MockScreen1 implements Screen {
         cam.near = 1f;
         cam.far = 300f;
         cam.update();
-
+        
         environment = new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
@@ -92,7 +92,7 @@ public class MockScreen1 implements Screen {
 		var renderable = new Renderable();
 		instance.getRenderable(renderable);
 		renderable.environment = environment;
-		renderable.worldTransform.idt();
+		//renderable.worldTransform.idt();
 		return renderable;
 	}
 	
@@ -115,19 +115,21 @@ public class MockScreen1 implements Screen {
         camController.update();
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);// | (Gdx.graphics.getBufferFormat().coverageSampling ? GL20.GL_COVERAGE_BUFFER_BIT_NV : 0));
-
-        /*modelBatch.begin(cam);
+        
+        /*
+        modelBatch.begin(cam);
         modelBatch.render(cache, shader);
-        //for (ModelInstance instance : instances)
-        //	modelBatch.render(instance, shader);
-        //renderables.forEach(r -> modelBatch.render(r, shader));
-        //modelBatch.render(cache, environment);
-        modelBatch.end();*/
+//        for (ModelInstance instance : instances)
+//        	modelBatch.render(instance, shader);
+//        renderables.forEach(r -> modelBatch.render(r));
+//        modelBatch.render(cache, environment);
+        modelBatch.end();
+        */
 
         renderContext.begin();
         shader.begin(cam, renderContext);
         renderables.forEach(r -> shader.render(r));
-        //shader.render(renderable);
+//        shader.render(renderable);
         shader.end();
         renderContext.end();
 
