@@ -270,21 +270,6 @@ public class SapphireController extends CameraInputController {
 		translation.set(0, 0, 0);
 		rotation.set(0, 0, 0);
 		rotationUnit.set(0, 0, 0);
-		
-//		if(Gdx.input.isKeyPressed(ALT_LEFT)) {
-//			// Translation XY
-//			if(Gdx.input.isKeyPressed(W)) translation.add( up.x,  up.y, 0);
-//			if(Gdx.input.isKeyPressed(S)) translation.add(-up.x, -up.y, 0);
-//			if(Gdx.input.isKeyPressed(A)) translation.add(-up.y,  up.x, 0);
-//			if(Gdx.input.isKeyPressed(D)) translation.add( up.y, -up.x, 0);
-//		} else {
-//			// Rotation X
-//			if(Gdx.input.isKeyPressed(W)) rotationUnit.add(-1,  1, 0); // look up
-//			if(Gdx.input.isKeyPressed(S)) rotationUnit.add( 1, -1, 0); // look down
-//			// Rotation Z
-//			if(Gdx.input.isKeyPressed(A)) rotationUnit.add(0, 0, -1f); // look left
-//			if(Gdx.input.isKeyPressed(D)) rotationUnit.add(0, 0,  1f); // look right
-//		}
 
 		// Translation XY
 		if(SapphireOwl.conf.shortcut.translateUpFree.isPressed()) translation.add( up.x,  up.y, 0);
@@ -300,10 +285,8 @@ public class SapphireController extends CameraInputController {
 		}
 		
 		// Zoom
-		//if(Gdx.input.isKeyPressed(CONTROL_LEFT) || Gdx.input.isKeyPressed(Q)) 
 		if(SapphireOwl.conf.shortcut.zoomInFree.isPressed()) 
 			scrolledFloat(0.2f);
-		//if(Gdx.input.isKeyPressed(SHIFT_LEFT) || Gdx.input.isKeyPressed(E)) 
 		if(SapphireOwl.conf.shortcut.zoomOutFree.isPressed())
 			scrolledFloat(-0.2f);
 		
