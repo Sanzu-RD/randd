@@ -276,8 +276,8 @@ public class SapphireController extends CameraInputController {
 		if(SapphireOwl.conf.shortcut.translateDownFree.isPressed()) translation.add(-up.x, -up.y, 0);
 		if(SapphireOwl.conf.shortcut.translateLeftFree.isPressed()) translation.add(-up.y,  up.x, 0);
 		if(SapphireOwl.conf.shortcut.translateRightFree.isPressed()) translation.add( up.y, -up.x, 0);
+		// Rotation XZ only if there's no translation (sorry)
 		if(translation.isZero()) {
-			// Rotation XZ
 			if(SapphireOwl.conf.shortcut.rotateUpFree.isPressed()) rotationUnit.add(-1,  1, 0); // look up
 			if(SapphireOwl.conf.shortcut.rotateDownFree.isPressed()) rotationUnit.add( 1, -1, 0); // look down
 			if(SapphireOwl.conf.shortcut.rotateLeftFree.isPressed()) rotationUnit.add(0, 0, -1f); // look left
@@ -291,9 +291,8 @@ public class SapphireController extends CameraInputController {
 			scrolledFloat(-0.2f);
 		
 		
-		
 		// keep it a unit vector even if we move in two directions at the same time
-		rotationUnit.limit(1);
+		rotationUnit.nor();
 		
 		scrolledFloat(zoom);
 
