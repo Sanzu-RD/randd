@@ -98,7 +98,7 @@ public abstract class Status extends Entity implements OnTurnStartHandler, Handl
 		this.sourceEntityId = sourceEntityId;
 		this.targetEntityId = targetEntityId;
 		
-		Log.format("Status new %s (%s), %s", this.id, this.modelid(), this, f);
+		//Log.format("Status new %s (%s), %s", this.id, this.modelid(), this, f);
 		// ne pas register les modèles
 		//source.fight.bus.register(this);
 //		f.statusbus.register(this);

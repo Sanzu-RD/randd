@@ -212,7 +212,7 @@ public class LapisAssets {
 		for (var d : dir.list()) {
 			if(d.isDirectory()) {
 				if(filter.test(d)) {
-					Log.info("dtype: " + d.type().name() + ", d path : " + d.path());
+					//Log.info("dtype: " + d.type().name() + ", d path : " + d.path());
 					action.accept(d);
 				} else {
 					recurseDirectories(d, filter, action);

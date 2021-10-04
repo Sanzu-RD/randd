@@ -33,7 +33,7 @@ public class DiamondModels {
 //		if(init == true) return; // happens in MockFight when I creaate 2 fights
 		init = true;
 		var creaturelist = new DefaultClassDiscoverer<CreatureModel>(CreatureModel.class).explore(packag);
-		Log.info("Diamond creatures models " + creaturelist);
+		//Log.info("Diamond creatures models " + creaturelist);
 		creaturelist.forEach(c -> {
 			try {
 				// if abstract class, dont try to instance it
@@ -50,7 +50,7 @@ public class DiamondModels {
 		});
 
 		var spelllist = new DefaultClassDiscoverer<Spell>(Spell.class).explore(packag);
-		Log.info("Diamond spell models " + spelllist);
+		//Log.info("Diamond spell models " + spelllist);
 		spelllist.forEach(c -> {
 			try {
 				// if abstract class, dont try to instance it
@@ -60,9 +60,8 @@ public class DiamondModels {
 				if(spells.containsKey(model.modelid()))
 					Log.warning("Duplicate spell model id " + model.modelid() + " for class " + c.getSimpleName() + ". ");
 				else {
-
 					spells.put(model.modelid(), model);
-				Log.info("Diamond spell model [" + model.modelid() + "] = " + model);
+					//Log.info("Diamond spell model [" + model.modelid() + "] = " + model);
 				}
 			} catch (Exception e) {
 				Log.error("Diamond spell class exception : [" + c.getName() + "]", e);
@@ -70,7 +69,7 @@ public class DiamondModels {
 		});
 
 		var statuslist = new DefaultClassDiscoverer<Status>(Status.class).explore(packag);
-		Log.info("Diamond status models " + statuslist);
+		//Log.info("Diamond status models " + statuslist);
 		statuslist.forEach(c -> {
 			try {
 				// if abstract class, dont try to instance it
