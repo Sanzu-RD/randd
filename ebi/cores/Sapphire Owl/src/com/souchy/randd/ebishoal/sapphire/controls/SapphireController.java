@@ -78,37 +78,40 @@ public class SapphireController extends CameraInputController {
 			Highlight.clearAll();
 			
 			
-//			if(SapphireGame.gfx.hud.parameters.getStage() == null) {
-//				SapphireGame.gfx.hud.getStage().addActor(SapphireGame.gfx.hud.parameters);
-//				SapphireGame.gfx.hud.parameters.window.fadeIn();
-//			} else {
-//			}
-			if(SapphireGame.gfx.hud.parameters.isVisible()) {
-				Log.info("parameters close");
-				SapphireGame.gfx.hud.parameters.close();
-			} else {
-				Log.info("parameters open");
-				SapphireGame.gfx.hud.parameters.open();
-//				SapphireGame.gfx.hud.getStage().addActor(SapphireGame.gfx.hud.parameters);
-//				SapphireGame.gfx.hud.parameters.setVisible(true);
-//				SapphireGame.gfx.hud.parameters.window.fadeIn();
+			if(SapphireGame.gfx.hud != null) {
+//				if(SapphireGame.gfx.hud.parameters.getStage() == null) {
+//					SapphireGame.gfx.hud.getStage().addActor(SapphireGame.gfx.hud.parameters);
+//					SapphireGame.gfx.hud.parameters.window.fadeIn();
+//				} else {
+//				}
+				if(SapphireGame.gfx.hud.parameters.isVisible()) {
+					Log.info("parameters close");
+					SapphireGame.gfx.hud.parameters.close();
+				} else {
+					Log.info("parameters open");
+					SapphireGame.gfx.hud.parameters.open();
+//					SapphireGame.gfx.hud.getStage().addActor(SapphireGame.gfx.hud.parameters);
+//					SapphireGame.gfx.hud.parameters.setVisible(true);
+//					SapphireGame.gfx.hud.parameters.window.fadeIn();
+				}
+				/*
+				if(SapphireGame.gfx.hud.parameters != null) {
+					SapphireGame.gfx.hud.parameters.close();
+//					var t = (Table) SapphireGame.gfx.hud.parameters;
+//					var w = (VisWindow) t;
+//					w.fadeOut();
+				} else {
+					SapphireGame.gfx.hud.parameters = new Parameters();
+				}
+				*/
+//				SapphireGame.gfx.hud.parameters.toggleVisibility()
 			}
 			
-			/*
-			if(SapphireGame.gfx.hud.parameters != null) {
-				SapphireGame.gfx.hud.parameters.close();
-//				var t = (Table) SapphireGame.gfx.hud.parameters;
-//				var w = (VisWindow) t;
-//				w.fadeOut();
-			} else {
-				SapphireGame.gfx.hud.parameters = new Parameters();
-			}
-			*/
-//			SapphireGame.gfx.hud.parameters.toggleVisibility()
 		});
 		putCombo(SapphireOwl.conf.shortcut.refreshui, () -> {
 			SapphireGame.gfx.resetCamera();
-			SapphireGame.gfx.hud.reload(); //.refresh();
+			if(SapphireGame.gfx.hud != null) 
+				SapphireGame.gfx.hud.reload(); //.refresh();
 			//GlobalLML.lml().reloadViews();
 			// reset camera movement vectors just in case. 
 			translation.set(0, 0, 0);
@@ -124,7 +127,7 @@ public class SapphireController extends CameraInputController {
 
 		putCombo(SapphireOwl.conf.shortcut.camReset, () -> SapphireGame.gfx.resetCamera());
 		putCombo(SapphireOwl.conf.shortcut.camTopView, () -> SapphireGame.gfx.topView());
-		putCombo(SapphireOwl.conf.shortcut.musicToggle, SapphireGame.music::togglePlayPause);
+		putCombo(SapphireOwl.conf.shortcut.musicToggle, () -> SapphireGame.music.togglePlayPause());
 		putCombo(SapphireOwl.conf.shortcut.debugUI, () -> SapphireGame.gfx.hud.getStage().setDebugAll(!SapphireGame.gfx.hud.getStage().isDebugAll()));
 		putCombo(SapphireOwl.conf.shortcut.testGainLife, () -> {
 //			var creature = SapphireGame.fight.teamA.get(0)
@@ -288,11 +291,13 @@ public class SapphireController extends CameraInputController {
 		if(SapphireOwl.conf.shortcut.translateDownFree.isPressed()) translation.add(-up.x, -up.y, 0);
 		if(SapphireOwl.conf.shortcut.translateLeftFree.isPressed()) translation.add(-up.y,  up.x, 0);
 		if(SapphireOwl.conf.shortcut.translateRightFree.isPressed()) translation.add( up.y, -up.x, 0);
-		// Rotation XZ
-		if(SapphireOwl.conf.shortcut.rotateUpFree.isPressed()) rotationUnit.add(-1,  1, 0); // look up
-		if(SapphireOwl.conf.shortcut.rotateDownFree.isPressed()) rotationUnit.add( 1, -1, 0); // look down
-		if(SapphireOwl.conf.shortcut.rotateLeftFree.isPressed()) rotationUnit.add(0, 0, -1f); // look left
-		if(SapphireOwl.conf.shortcut.rotateRightFree.isPressed()) rotationUnit.add(0, 0,  1f); // look right
+		if(translation.isZero()) {
+			// Rotation XZ
+			if(SapphireOwl.conf.shortcut.rotateUpFree.isPressed()) rotationUnit.add(-1,  1, 0); // look up
+			if(SapphireOwl.conf.shortcut.rotateDownFree.isPressed()) rotationUnit.add( 1, -1, 0); // look down
+			if(SapphireOwl.conf.shortcut.rotateLeftFree.isPressed()) rotationUnit.add(0, 0, -1f); // look left
+			if(SapphireOwl.conf.shortcut.rotateRightFree.isPressed()) rotationUnit.add(0, 0,  1f); // look right
+		}
 		
 		// Zoom
 		//if(Gdx.input.isKeyPressed(CONTROL_LEFT) || Gdx.input.isKeyPressed(Q)) 
@@ -334,7 +339,7 @@ public class SapphireController extends CameraInputController {
 		return super.scrolled(amount);
 	}
 	private void scrolledFloat(float amount) {
-		var viewport = SapphireGame.gfx.getViewport();
+		//var viewport = SapphireGame.gfx.getViewport();
 		var cam = SapphireGame.gfx.getCamera();
 //		var ratio = viewport.getWorldWidth() / viewport.getWorldHeight();
 //		viewport.setWorldWidth(viewport.getWorldWidth() + amount);
@@ -374,7 +379,7 @@ public class SapphireController extends CameraInputController {
 		Lambda c = keyCombos.get(key1, key2);
 		//Log.info("keyDown (%s) (%s, %s) = %s", keycode, key1, key2, c);
 		if(c != null) c.call();
-		else Log.error("keyDown (%s) (%s, %s) = %s", keycode, key1, key2, c);
+		//else Log.error("keyDown (%s) (%s, %s) = %s", keycode, key1, key2, c); // not an error because of camera translation/rotation/zoom in act()
 		
 		if(!activateBaseCamControl) return true;
 		return super.keyDown(keycode);
@@ -399,7 +404,7 @@ public class SapphireController extends CameraInputController {
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		
 		// remove focus from UI
-		var s = (SapphireScreen) SapphireOwl.game.getScreen();
+		var s = SapphireGame.gfx; // (SapphireScreen) SapphireOwl.game.getScreen();
 		if(s.getView() != null) {
 //			Log.info("unfocus");
 			FocusManager.resetFocus(s.getView().getStage());
@@ -508,7 +513,7 @@ public class SapphireController extends CameraInputController {
 	public boolean mouseMoved(int x, int y) {
 		
 		var pos = getCursorWorldPos(x, y);
-		var cell = SapphireGame.fight.board.get(pos.x, pos.y);
+		var cell = (SapphireGame.fight == null) ? null : SapphireGame.fight.board.get(pos.x, pos.y); // check useful for mocking tests where we dont have a fight
 
 		boolean moved = false;
 		if(cell != null && !cell.pos.equals(lastPos)) {
@@ -572,6 +577,7 @@ public class SapphireController extends CameraInputController {
 
 
 	private Cell getCursorCell() {
+		if(SapphireGame.fight == null) return null; // check useful for mocking tests where we dont have a fight
 		var pos = getCursorWorldPos();
 		return SapphireGame.fight.board.get(pos.x, pos.y);
 	}

@@ -57,8 +57,6 @@ public class SapphireScreen extends LapisScreen {
 	@Override
 	public void init() {
 		super.init();
-		// init FX player
-		new Ammolite(SapphireGame.fight, getEffekseer());
 	}
 
 	@Override
@@ -81,7 +79,8 @@ public class SapphireScreen extends LapisScreen {
 		getCamera().update();
 		
 		// update playing creature cursor (highlights which creature is currently playing)
-		if(SapphireGame.playing != null) SapphireWorld.world.playingcursor.transform.setTranslation((float) SapphireGame.playing.pos.x + 0.5f, (float) SapphireGame.playing.pos.y + 0.5f, 1f);
+		if(SapphireGame.playing != null) 
+			SapphireWorld.world.playingcursor.transform.setTranslation((float) SapphireGame.playing.pos.x + 0.5f, (float) SapphireGame.playing.pos.y + 0.5f, 1f);
 		
 		// update all engine's systems 	 //and entities
 		SapphireGame.fight.update(delta);

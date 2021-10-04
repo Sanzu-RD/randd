@@ -66,11 +66,10 @@ import com.github.czyzby.lml.vis.util.VisLml;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
-import com.souchy.randd.mockingbird.lapismock.BaseScreen;
-import com.souchy.randd.mockingbird.lapismock.CustomGreedyMesh;
-import com.souchy.randd.mockingbird.lapismock.GreedyMeshMaker;
-import com.souchy.randd.mockingbird.lapismock.World;
 import com.souchy.randd.mockingbird.lapismock.shaders.PostProcessingFBO;
+import com.souchy.randd.mockingbird.lapismock.worlds.CustomGreedyMesh;
+import com.souchy.randd.mockingbird.lapismock.worlds.GreedyMeshMaker;
+import com.souchy.randd.mockingbird.lapismock.worlds.World;
 
 @SuppressWarnings("deprecation")
 public class MockScreen3 extends BaseScreen {

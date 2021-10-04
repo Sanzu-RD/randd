@@ -70,15 +70,15 @@ public class SapphireOwlConf extends JsonConfig {
 		public KeyCombinationArray renderBackground = new KeyCombinationArray(new KeyCombination(Keys.B));
 		public KeyCombinationArray renderLines = new KeyCombinationArray(new KeyCombination(Keys.L));
 		
-		public KeyCombinationArray rotateUpFree = new KeyCombinationArray();
-		public KeyCombinationArray rotateDownFree = new KeyCombinationArray();
-		public KeyCombinationArray rotateLeftFree = new KeyCombinationArray();
-		public KeyCombinationArray rotateRightFree = new KeyCombinationArray();
+		public KeyCombinationArray rotateUpFree = new KeyCombinationArray(new KeyCombination(Keys.W));
+		public KeyCombinationArray rotateDownFree = new KeyCombinationArray(new KeyCombination(Keys.S));
+		public KeyCombinationArray rotateLeftFree = new KeyCombinationArray(new KeyCombination(Keys.A));
+		public KeyCombinationArray rotateRightFree = new KeyCombinationArray(new KeyCombination(Keys.D));
 		
-		public KeyCombinationArray rotateUpX = new KeyCombinationArray(new KeyCombination(Keys.W));
-		public KeyCombinationArray rotateDownX = new KeyCombinationArray(new KeyCombination(Keys.S));
-		public KeyCombinationArray rotateLeftX = new KeyCombinationArray(new KeyCombination(Keys.A));
-		public KeyCombinationArray rotateRightX = new KeyCombinationArray(new KeyCombination(Keys.D));
+		public KeyCombinationArray rotateUpX = new KeyCombinationArray(new KeyCombination(Keys.UP));
+		public KeyCombinationArray rotateDownX = new KeyCombinationArray(new KeyCombination(Keys.DOWN));
+		public KeyCombinationArray rotateLeftX = new KeyCombinationArray(new KeyCombination(Keys.LEFT));
+		public KeyCombinationArray rotateRightX = new KeyCombinationArray(new KeyCombination(Keys.RIGHT));
 		
 		public KeyCombinationArray translateUpFree = new KeyCombinationArray(new KeyCombination(Keys.W, Keys.ALT_LEFT));
 		public KeyCombinationArray translateDownFree = new KeyCombinationArray(new KeyCombination(Keys.S, Keys.ALT_LEFT));

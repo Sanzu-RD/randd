@@ -12,7 +12,7 @@ import com.badlogic.gdx.files.FileHandle;
  * @author Blank
  * @date 26 nov. 2019
  */
-class LapisFiles implements Files {
+public class LapisFiles implements Files {
 
 	public static final String externalPath = System.getProperty("user.home") + File.separator;
 	public static final String localPath = new File("").getAbsolutePath() + File.separator;

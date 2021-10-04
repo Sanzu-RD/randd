@@ -21,6 +21,7 @@ import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurn
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
+import com.souchy.randd.ebi.ammolite.Ammolite;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.RenderOptions;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
@@ -82,6 +83,8 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 		// screen
 		gfx = new SapphireScreen();
 		gfx.init();
+		// init FX player
+		new Ammolite(SapphireGame.fight, gfx.getEffekseer());
 		
 		// pfx
 //		ParticleEffectLoader.ParticleEffectLoadParameter params = new ParticleEffectLoader.ParticleEffectLoadParameter(gfx.getPfxSystem().getBatches());

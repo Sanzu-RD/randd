@@ -4,8 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.Shader;
 import com.badlogic.gdx.graphics.g3d.utils.RenderContext;
-import com.souchy.randd.mockingbird.lapismock.BaseScreen;
-import com.souchy.randd.mockingbird.lapismock.World;
+import com.souchy.randd.mockingbird.lapismock.worlds.World;
 
 public class MockScreen2 extends BaseScreen {
 

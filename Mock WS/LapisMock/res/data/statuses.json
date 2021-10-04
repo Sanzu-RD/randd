@@ -1,0 +1,64 @@
+[
+	{
+		"id": 1,
+		"comment": "chill",
+		"icon":  "b_03",
+		"patch10": "",
+		"centerTexture": ""
+	},
+	{
+		"id": 2,
+		"comment": "burning",
+		"icon":  "r_16",
+		"patch10": "",
+		"centerTexture": ""
+	},
+	{
+		"id": 3,
+		"comment": "shocked",
+		"icon":  "b_17",
+		"patch10": "",
+		"centerTexture": ""
+	},
+	{
+		"id": 4,
+		"comment": "something rooted with ronces",
+		"icon":  "g_01",
+		"patch10": "",
+		"centerTexture": ""
+	},
+	{
+		"id": 5,
+		"comment": "sleeping",
+		"icon":  "b_27",
+		"patch10": "",
+		"centerTexture": ""
+	},
+	{
+		"id": 6,
+		"comment": "protected mind",
+		"icon":  "b_25",
+		"patch10": "",
+		"centerTexture": ""
+	},
+	
+	
+	{
+		"id": 110135004,
+		"comment": "mist",
+		"icon":  "b_25",
+		"patch10": "",
+		"centerTexture": ""
+	},
+	{
+		"id": 110002008,
+		"comment": "burning glyph",
+		"icon":  "b_25",
+		"patch10": "",
+		"centerTexture": ""
+	}
+	
+	
+	
+
+]
