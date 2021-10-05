@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g3d.shaders.BaseShader;
 import com.badlogic.gdx.graphics.g3d.shaders.BaseShader.Uniform;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config;
 import com.badlogic.gdx.graphics.g3d.utils.TextureDescriptor;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
 
 @SuppressWarnings({ "unchecked", "rawtypes", "unused" })
@@ -20,10 +21,11 @@ public class SsaoGenUniforms implements UniformsModule {
 	public int sampleSize = 64;
 	//protected TextureDescriptor resultDesc;
 	protected TextureDescriptor noiseDesc;
-	public Vector3[] samples = new Vector3[(int) sampleSize];
+	public float[] samples = new float[(int) sampleSize * 3];
+	//public Vector3[] samples = new Vector3[(int) sampleSize * 3];
 	// ------------- SSAO uniforms
 	// would be final but I create it in hemisphereSamples
-	protected int[] u_samples;
+	protected int u_samples;
 	protected int u_noiseTexture;
 	
 	public SsaoGenUniforms(BaseShader s) {
@@ -35,9 +37,11 @@ public class SsaoGenUniforms implements UniformsModule {
 	@Override 
 	public void bind(BaseShader s, Renderable renderable, Config config, final Attributes attributes) {
 		// bind sample size 64
-		if(u_samples != null)
-			for(int i = 0; i < sampleSize; i++) 
-				s.set(u_samples[i], samples[i]);
+		//if(u_samples != null)
+//			for(int i = 0; i < sampleSize; i++) 
+//				s.set(u_samples[i], samples[i]);
+
+			s.program.setUniform3fv(u_samples, samples, 0, samples.length);
 		// bind noise desc
 		if(u_noiseTexture != 0) 
 			s.set(u_noiseTexture, noiseDesc);
@@ -49,7 +53,7 @@ public class SsaoGenUniforms implements UniformsModule {
 	
 	private void hemisphereSamples(BaseShader s) {
 		var rnd = new Random();
-		u_samples = new int[sampleSize];
+//		u_samples = new int[sampleSize];
 		// random samples
 		for(int i = 0; i < sampleSize; i++) {
 			var vec = new Vector3(rnd.nextFloat() * 2 - 1, rnd.nextFloat() * 2 - 1, rnd.nextFloat());
@@ -58,9 +62,12 @@ public class SsaoGenUniforms implements UniformsModule {
 			
 			float scale = (float) i / (float) sampleSize;
 			vec.scl(lerp(0.1f, 1.0f, scale * scale)); // lerp towards the center
-			//shader.setVec3("samples["+i+"]", vec); // add the vector to the shader
 			
-			u_samples[i] = s.register(new Uniform("u_samples["+i+"]"));
+			samples[3*i+0] = vec.x;
+			samples[3*i+1] = vec.y;
+			samples[3*i+2] = vec.z;
+			//u_samples[i] = s.register(new Uniform("u_samples["+i+"]"));
+			u_samples =  s.register(new Uniform("u_samples[0]"));
 		}
 	}
 	

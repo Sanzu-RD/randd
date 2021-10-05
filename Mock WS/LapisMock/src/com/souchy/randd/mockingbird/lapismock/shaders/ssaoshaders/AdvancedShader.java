@@ -37,6 +37,9 @@ public class AdvancedShader extends ExtendableShader {
 		public void setSSAO(Texture ssaoTex) {
 			for(var shader : shaders) ((AdvancedShader)shader).ussao.ssaoTex.texture = ssaoTex;
 		}
+		public void clear() {
+			this.shaders.clear();
+		}
 	}
 	
 	

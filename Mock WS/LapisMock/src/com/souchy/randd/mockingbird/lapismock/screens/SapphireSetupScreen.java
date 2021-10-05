@@ -33,7 +33,7 @@ import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 
 public class SapphireSetupScreen extends SapphireScreen {
 
-	private SapphireController controller;
+	protected SapphireController controller;
 	
 	// light cycle
 	private float time = 0; // current time
