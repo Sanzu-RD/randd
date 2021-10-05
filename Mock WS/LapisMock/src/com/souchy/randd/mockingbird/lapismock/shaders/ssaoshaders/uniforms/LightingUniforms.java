@@ -99,6 +99,7 @@ public class LightingUniforms implements UniformsModule {
 		u_shadowMapProjViewTrans = s.register(new Uniform("u_shadowMapProjViewTrans"));
 		u_shadowTexture = s.register(new Uniform("u_shadowTexture"));
 		u_shadowPCFOffset = s.register(new Uniform("u_shadowPCFOffset"));
+		
 		u_ambientCubemap = lighting ? s.register(Inputs.ambientCube, new Setters.ACubemap(config.numDirectionalLights,
 			config.numPointLights)) : -1;
 		u_environmentCubemap = environmentCubemap ? s.register(Inputs.environmentCubemap, Setters.environmentCubemap) : -1;
@@ -113,6 +114,7 @@ public class LightingUniforms implements UniformsModule {
 		this.spotLights = new SpotLight[lighting && config.numSpotLights > 0 ? config.numSpotLights : 0];
 		for (int i = 0; i < spotLights.length; i++)
 			spotLights[i] = new SpotLight();
+		
 	}
 
 	@Override

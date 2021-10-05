@@ -9,13 +9,18 @@ import com.badlogic.gdx.graphics.g3d.Attributes;
 import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.graphics.g3d.Shader;
 import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.CubemapAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.DepthTestAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.IntAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.shaders.BaseShader;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config;
 import com.badlogic.gdx.graphics.g3d.utils.RenderContext;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.GlobalUniforms;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.LightingUniforms;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.MaterialUniforms;
@@ -23,6 +28,8 @@ import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.Objec
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.UniformsModule;
 
 public class ExtendableShader extends BaseShader {
+//	protected static long implementedFlags = BlendingAttribute.Type | TextureAttribute.Diffuse | ColorAttribute.Diffuse
+//		| ColorAttribute.Specular | FloatAttribute.Shininess;
 	// --------------
 	/** The attributes that this shader supports */
 	protected final long attributesMask;
@@ -60,10 +67,16 @@ public class ExtendableShader extends BaseShader {
 		final Attributes attributes = combineAttributes(renderable);
 		this.config = config;
 		this.program = shaderProgram;
-		
+//		this.lighting = renderable.environment != null;
+//		this.environmentCubemap = attributes.has(CubemapAttribute.EnvironmentMap)
+//			|| (lighting && attributes.has(CubemapAttribute.EnvironmentMap));
+//		this.shadowMap = lighting && renderable.environment.shadowMap != null;
 		this.renderable = renderable;
 		attributesMask = attributes.getMask() | optionalAttributes;
 		vertexMask = renderable.meshPart.mesh.getVertexAttributes().getMaskWithSizePacked();
+
+//		if (!config.ignoreUnimplemented && (implementedFlags & attributesMask) != attributesMask)
+//			throw new GdxRuntimeException("Some attributes not implemented yet (" + attributesMask + ")");
 		
 		if(global()) modules.add(uglobal = new GlobalUniforms(this));
 		if(object()) modules.add(uobject = new ObjectUniforms(this, renderable, config));
@@ -132,13 +145,12 @@ public class ExtendableShader extends BaseShader {
 	}
 	
 	@Override
-	public boolean canRender(Renderable instance) {
+	public boolean canRender(Renderable renderable) {
 		final long renderableMask = combineAttributeMasks(renderable);
 		return (attributesMask == (renderableMask | optionalAttributes))
 			&& (vertexMask == renderable.meshPart.mesh.getVertexAttributes().getMaskWithSizePacked()) 
 			&& (renderable.environment != null) == lighting();
 	}
-
 	private final static Attributes tmpAttributes = new Attributes();
 	// TODO: Perhaps move responsibility for combining attributes to RenderableProvider?
 	private static final Attributes combineAttributes (final Renderable renderable) {

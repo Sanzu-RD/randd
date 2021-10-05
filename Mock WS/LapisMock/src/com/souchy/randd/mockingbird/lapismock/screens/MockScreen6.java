@@ -9,8 +9,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
+import com.badlogic.gdx.graphics.g3d.utils.BaseShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
+import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Vector3;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -19,6 +21,7 @@ import com.souchy.randd.ebishoal.commons.lapis.gfx.shaders.LapisShader;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.SSAOShader;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.SSAOShader.SSAOShaderProvider;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.AdvancedShader;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.AdvancedShader.ASDProvider;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.AdvancedShader.AdvancedShaderProvider;
 
 public class MockScreen6 extends SapphireSetupScreen {
@@ -30,6 +33,7 @@ public class MockScreen6 extends SapphireSetupScreen {
 	private AdvancedShaderProvider shadersAdv;
 	
 	public MockScreen6() {
+		super();
 		Log.info("MockScreen 6 a");
 		shadersSsao = new SSAOShaderProvider();
 		ssaoFBO = new FrameBuffer(Format.Intensity, Gdx.graphics.getWidth(), Gdx.graphics.getWidth(), false);
@@ -39,9 +43,17 @@ public class MockScreen6 extends SapphireSetupScreen {
 	
 	@Override
 	public ModelBatch createWorldBatch() {
-		shadersAdv = new AdvancedShaderProvider();
-		Log.info("create world batch " + shadersAdv);
-		return new ModelBatch(shadersAdv); //LapisShader.getVertexShader("base"), LapisShader.getFragmentShader("base"))); 
+//		String vert = Gdx.files.internal("shaders/ssao/default.vertex.glsl").readString();
+//		String frag = Gdx.files.internal("shaders/ssao/default.fragment.glsl").readString();
+//		vert = LapisShader.getVertexShader("base");
+//		frag = LapisShader.getFragmentShader("base");
+		shadersAdv = new AdvancedShaderProvider(); // null;
+//		provider = new AdvancedShaderProvider(vert, frag);
+//		provider = new DefaultShaderProvider(vert, frag);
+//		provider = new ASDProvider(vert, frag);
+		Log.info("MockScreen create world batch " + shadersAdv);
+		return new ModelBatch(shadersAdv);
+		//return new ModelBatch(new DefaultShaderProvider(LapisShader.getVertexShader("base"), LapisShader.getFragmentShader("base"))); 
 	}
 	
 	@Override
@@ -88,10 +100,11 @@ public class MockScreen6 extends SapphireSetupScreen {
 		if(RenderOptions.cullback) Gdx.gl.glCullFace(GL20.GL_BACK);
 		
 		// render ssao fbo
-		renderSSAO(delta);
-		// transfer the ssao fbo result to the regular advanced shader
-		if(shadersAdv.getShader() != null) 
-			shadersAdv.getShader().ussao.ssaoTex.texture = ssaoFBO.getColorBufferTexture();
+//		renderSSAO(delta);
+//		// transfer the ssao fbo result to the regular advanced shader
+////		if(shadersAdv.getShader() != null) 
+////			shadersAdv.getShader().ussao.ssaoTex.texture = ssaoFBO.getColorBufferTexture();
+//		shadersAdv.setSSAO(ssaoFBO.getColorBufferTexture());
 		
 		// render world and pfx in an FBO for later post-process
 		getFBO().begin();
@@ -105,7 +118,6 @@ public class MockScreen6 extends SapphireSetupScreen {
 					drawBackground(cleanSpriteBatch);
 			}
 			cleanSpriteBatch.end();
-			//Log.info("renderWorld " + getModelBatch().getShaderProvider().getClass());
 			// world
 			renderWorldContainer();
 			// particle effects
