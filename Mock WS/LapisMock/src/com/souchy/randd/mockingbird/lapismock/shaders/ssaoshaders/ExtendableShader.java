@@ -84,7 +84,7 @@ public class ExtendableShader extends BaseShader {
 		if(lighting()) modules.add(ulighting = new LightingUniforms(this, renderable, config, attributes));
 	}
 	// --------------
-	private boolean global() {
+	protected boolean global() {
 		return true;
 	}
 	protected boolean object() {

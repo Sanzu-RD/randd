@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Setters;
 
 public class GlobalUniforms implements UniformsModule {
 	// Global uniforms
-	public final int u_projTrans;
-	public final int u_viewTrans;
-	public final int u_projViewTrans;
+	public final int u_projTrans; // camera.projection
+	public final int u_viewTrans; // camera.view
+	public final int u_projViewTrans; // camera.combined
 	public final int u_cameraPosition;
 	public final int u_cameraDirection;
 	public final int u_cameraUp;

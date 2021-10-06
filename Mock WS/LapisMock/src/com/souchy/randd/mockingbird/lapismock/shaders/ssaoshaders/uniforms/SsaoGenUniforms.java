@@ -7,15 +7,21 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g3d.Attributes;
 import com.badlogic.gdx.graphics.g3d.Renderable;
+import com.badlogic.gdx.graphics.g3d.environment.ShadowMap;
 import com.badlogic.gdx.graphics.g3d.shaders.BaseShader;
 import com.badlogic.gdx.graphics.g3d.shaders.BaseShader.Uniform;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config;
 import com.badlogic.gdx.graphics.g3d.utils.TextureDescriptor;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
+import com.souchy.randd.mockingbird.lapismock.screens.MockScreen6;
 
 @SuppressWarnings({ "unchecked", "rawtypes", "unused" })
 public class SsaoGenUniforms implements UniformsModule {
+	
+	/** reference to the shadow map from the environment, made by a directional light */
+	public TextureDescriptor depthMap;
 	
 	// ------------- SSAO data
 	public int sampleSize = 64;
@@ -26,25 +32,34 @@ public class SsaoGenUniforms implements UniformsModule {
 	// ------------- SSAO uniforms
 	// would be final but I create it in hemisphereSamples
 	protected int u_samples;
+	protected int u_samplesSize;
 	protected int u_noiseTexture;
+	protected int u_depthMap;
+	protected int u_depthMapTrans;
 	
-	public SsaoGenUniforms(BaseShader s) {
+	public SsaoGenUniforms(BaseShader s, TextureDescriptor depthMap) {
+		this.depthMap = MockScreen6.depthMap; // depthMap;
+		u_depthMap = s.register(new Uniform("u_depthMap"));
+		u_depthMapTrans = s.register(new Uniform("u_depthMapTrans"));
+		
 		/* create our data and register our uniforms */
+		u_samplesSize = s.register(new Uniform("u_samplesSize"));
+		u_samples =  s.register(new Uniform("u_samples[0]"));
 		hemisphereSamples(s);
+		u_noiseTexture = s.register(new Uniform("u_noiseTexture"));
 		noiseTexture(s);
 	}
 
 	@Override 
 	public void bind(BaseShader s, Renderable renderable, Config config, final Attributes attributes) {
-		// bind sample size 64
-		//if(u_samples != null)
-//			for(int i = 0; i < sampleSize; i++) 
-//				s.set(u_samples[i], samples[i]);
-
-			s.program.setUniform3fv(u_samples, samples, 0, samples.length);
+		// depth map
+		s.set(u_depthMap, depthMap);
+		s.set(u_depthMapTrans, new Matrix4()); //depthMap.getProjViewTrans()); // TODO u_depthMapTrans ?
+		// bind samples size 64
+		s.set(u_samplesSize, sampleSize);
+		s.program.setUniform3fv(u_samples, samples, 0, samples.length);
 		// bind noise desc
-		if(u_noiseTexture != 0) 
-			s.set(u_noiseTexture, noiseDesc);
+		s.set(u_noiseTexture, noiseDesc);
 	}
 	
 	private float lerp(float a, float b, float f) {
@@ -67,12 +82,10 @@ public class SsaoGenUniforms implements UniformsModule {
 			samples[3*i+1] = vec.y;
 			samples[3*i+2] = vec.z;
 			//u_samples[i] = s.register(new Uniform("u_samples["+i+"]"));
-			u_samples =  s.register(new Uniform("u_samples[0]"));
 		}
 	}
 	
 	private void noiseTexture(BaseShader s) {
-		u_noiseTexture = s.register(new Uniform("u_noiseTexture"));
 		var rnd = new Random();
 		// noise texture
 		noiseDesc = new TextureDescriptor();

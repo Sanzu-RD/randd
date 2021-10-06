@@ -9,10 +9,10 @@ import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Setters;
 public class ObjectUniforms implements UniformsModule {
 	
 	// Object uniforms
-	public final int u_worldTrans;
-	public final int u_viewWorldTrans;
-	public final int u_projViewWorldTrans;
-	public final int u_normalMatrix;
+	public final int u_worldTrans; // renderable.worldTransform
+	public final int u_viewWorldTrans; // camera.view * renderable.worldTransform
+	public final int u_projViewWorldTrans; // camera.combined * renderable.worldTransform
+	public final int u_normalMatrix; // (renderable.worldTransform).inv().transpose()
 	public final int u_bones;
 	
 	public ObjectUniforms(BaseShader s, Renderable renderable, Config config) {
