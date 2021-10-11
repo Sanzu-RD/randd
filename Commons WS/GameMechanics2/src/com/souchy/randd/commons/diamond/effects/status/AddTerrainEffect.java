@@ -54,7 +54,7 @@ public class AddTerrainEffect extends Effect {
 		this.statusBuilder = statusBuilder;
 //		this.status = statusBuilder.apply(null);
 //		this.status.parentEffectId = this.id;
-		Log.format("AddTerrainEffect %s ctor",  this.hashCode());
+		Log.debug("AddTerrainEffect %s ctor", this.hashCode());
 	}
 	
 	@Override
@@ -72,14 +72,14 @@ public class AddTerrainEffect extends Effect {
 		terrain.register(f);
 		f.statusbus.register(terrain);
 		
-		Log.format("AddTerrainEffect %s prepareCaster %s %s",  this.hashCode(), terrain, caster.id);
+		Log.debug("AddTerrainEffect %s prepareCaster %s %s", this.hashCode(), terrain, caster.id);
 	}
 	
 	@Override
 	public void prepareTarget(Creature caster, Cell target) {
 		try {
 			terrain.targetEntityId = target.id;
-			Log.format("AddTerrainEffect %s prepareTarget %s", this.hashCode(), target.id);
+			Log.debug("AddTerrainEffect %s prepareTarget %s", this.hashCode(), target.id);
 		} catch (Exception e) {
 			Log.error("", e);
 		}

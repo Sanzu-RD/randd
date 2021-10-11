@@ -135,7 +135,7 @@ public class MockScreen3 extends BaseScreen {
 		LapisAssets.loadModels(Gdx.files.absolute(blender));
 		LapisAssets.loadTextures(Gdx.files.absolute(assettests));
 		
-		Log.info("assets : { " + String.join(", ", LapisAssets.assets.getAssetNames()) + " }");
+		Log.info("assets : { " + String.join(", ", LapisAssets.getAssetNames()) + " }");
 		
 		String vert = Gdx.files.internal("data/shaders/default.vertex.glsl").readString();
 		String frag = Gdx.files.internal("data/shaders/default.fragment.glsl").readString();

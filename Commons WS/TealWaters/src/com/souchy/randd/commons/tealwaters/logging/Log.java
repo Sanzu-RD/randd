@@ -5,8 +5,12 @@ import java.time.ZonedDateTime;
 public class Log {
 	
 	public static enum LogImportance {
-		// Default,
-		Info, Warning, Error, Critical,
+		// 1,     2,     4,     8,       16,     32
+		Debug, Verbose, Info, Warning, Error, Critical;
+		public byte pow() {
+			return (byte) Math.pow(2, ordinal());
+		}
+		public static int filter = Debug.pow() | Verbose.pow() | Info.pow() | Warning.pow() | Error.pow() | Critical.pow();
 	}
 	
 	public ZonedDateTime date; // Instant
@@ -43,6 +47,21 @@ public class Log {
 		Logging.log(new Log(importance, details));
 	}
 	
+
+	public static void debug(String details) {
+		Logging.log(new Log(LogImportance.Debug, details));
+	}
+	public static void debug(String details, Object... elements) {
+		debug(String.format(details, elements));
+	}
+	
+	public static void verbose(String details) {
+		Logging.log(new Log(LogImportance.Verbose, details));
+	}
+	public static void verbose(String details, Object... elements) {
+		verbose(String.format(details, elements));
+	}
+	
 	public static void info(String details) {
 		Logging.log(new Log(LogImportance.Info, details));
 	}
@@ -51,11 +70,11 @@ public class Log {
 //		info(details + " { " + String.join(", ", elements) + " }");
 //	}
 
-	public static void info(String details,  Object... elements) {
+	public static void info(String details, Object... elements) {
 		info(String.format(details, elements));
 	}
 	
-	public static void format(String details,  Object... elements) {
+	public static void format(String details, Object... elements) {
 		info(String.format(details, elements));
 	}
 	

@@ -11,17 +11,25 @@ import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoaderParameter;
+import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffect;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader.ParticleEffectLoadParameter;
+import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.souchy.randd.commons.tealwaters.commons.Environment;
@@ -38,18 +46,62 @@ public class LapisAssets {
 	/**
 	 * Assets of everything for everything Load everything into this
 	 */
-	public final static AssetManager assets = new AssetManager();
-	public static String rootDir = "";
+	public static final AssetManager assets = new AssetManager();
+
+	public static final Model defaultModel;
+	public static final Texture defaultTexture;
+	private static final TextureParameter textureParams = new TextureParameter();
 	
-	private static final TextureParameter params = new TextureParameter();
+	public static String rootDir = "";
+	public static boolean blocking = true;
+	
+	
 	static {
-		params.genMipMaps = true;
+		textureParams.genMipMaps = true;
+		textureParams.minFilter = TextureFilter.MipMapLinearLinear;
+		textureParams.magFilter = TextureFilter.MipMapLinearLinear;
 		rootDir = Environment.root.toString().replace("\\", "/") + "/";
+		
+		var mat = new Material(ColorAttribute.createDiffuse(Color.FIREBRICK), new BlendingAttribute(1));
+		defaultModel = new ModelBuilder().createCylinder(0.5f, 1.5f, 0.5f, 16, mat, Usage.Position | Usage.Normal);
+		//defaultModel.nodes.get(0).id = "defaultModel";
+		
+		var pix = new Pixmap(10, 10, Format.RGBA8888);
+		pix.drawCircle(5, 5, 3);
+		defaultTexture = new Texture(pix);
 	}
 	
-	public static <T> T get(String filePath) {
-		if(assets.getAssetNames().contains(filePath, false)) return assets.get(filePath);
-		else return assets.get(rootDir + filePath);
+	public static <T> T get(String path) {
+		if(assets.isLoaded(path))
+			return assets.get(path);
+		if(assets.isLoaded(rootDir + path))
+			return assets.get(rootDir + path);
+		return null;
+		
+//		if(assets.getAssetNames().contains(path, false)) 
+//			return assets.get(path);
+//		else 
+//			return assets.get(rootDir + path);
+	}
+
+	public static <T> T get(String path, Class<T> c) {
+		if(assets.isLoaded(path, c))
+			return assets.get(path, c);
+		if(assets.isLoaded(rootDir + path, c))
+			return assets.get(rootDir + path, c);
+		if(c == Texture.class)
+			return (T) defaultTexture;
+		if(c == Model.class)
+			return (T) defaultModel;
+		return null;
+	}
+	
+	public static Array<String> getAssetNames(){
+		return assets.getAssetNames();
+	}
+	
+	public static <T> Array<T> getAll(Class<T> type, Array<T> out) {
+		return assets.getAll(type, out);
 	}
 	
 	/**
@@ -61,21 +113,22 @@ public class LapisAssets {
 				f -> f.name().toLowerCase().endsWith(".png") || f.name().toLowerCase().endsWith(".jpg") || f.name().toLowerCase().endsWith(".jpeg") || f.name().toLowerCase().endsWith(".bmp"), 
 				f -> {
 					if(assets.contains(f.path())) assets.unload(f.path());
-					assets.load(f.path(), Texture.class, params);
+					assets.load(f.path(), Texture.class, textureParams);
 				}
 			);
 		}
 		try {
-			assets.finishLoading();
+			if(blocking) assets.finishLoading();
 		} catch (Exception e) {
 			Log.warning("unable to load a texture : ", e);
 		}
-		var textures = assets.getAll(Texture.class, new Array<>());
-		try {
-			textures.forEach(t -> t.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear));
-		} catch(Exception e) {
-			Log.error("", e);
-		}
+		
+//		var textures = assets.getAll(Texture.class, new Array<>());
+//		try {
+//			textures.forEach(t -> t.setFilter(TextureFilter.MipMapLinearLinear, TextureFilter.MipMapLinearLinear));
+//		} catch(Exception e) {
+//			Log.error("", e);
+//		}
 	}
 	
 	/**
@@ -92,13 +145,14 @@ public class LapisAssets {
 			);
 		}
 		try {
-			assets.finishLoading();
+			if(blocking) assets.finishLoading();
 		} catch (Exception e) {
 			Log.warning("unable to load a model : ", e);
 		}
 	}
 	
 	public static void loadI18NBundles(FileHandle... handles) {
+		I18NBundle.setExceptionOnMissingKey(false);
 		for(var handle : handles) {
 			recurseDirectories(handle, 
 				d -> d.list((f, n) -> n.startsWith("bundle") && n.endsWith(".properties")).length > 0,
@@ -108,8 +162,7 @@ public class LapisAssets {
 				}
 			);
 		}
-		assets.finishLoading();
-		I18NBundle.setExceptionOnMissingKey(false);
+		if(blocking) assets.finishLoading();
 	}
 	
 //	public static void loadParticleEffects(ParticleEffectLoadParameter params, FileHandle... handles) {
@@ -135,7 +188,7 @@ public class LapisAssets {
 				}
 			);
 		}
-		assets.finishLoading();
+		if(blocking) assets.finishLoading();
 	}
 	
 	public static void loadSounds(FileHandle... handles) {
@@ -148,7 +201,7 @@ public class LapisAssets {
 				}
 			);
 		}
-		assets.finishLoading();
+		if(blocking) assets.finishLoading();
 	}
 	
 	public static void loadFonts(FileHandle... handles) {
@@ -203,7 +256,7 @@ public class LapisAssets {
 				f -> f.name().toLowerCase().endsWith(".ttf"),  // load truetype fonts
 				f -> assets.load(f.path(), FreeTypeFontGenerator.class));
 		*/
-		assets.finishLoading();
+		if(blocking) assets.finishLoading();
 	}
 	
 
@@ -244,7 +297,6 @@ public class LapisAssets {
 //			}
 //		}
 	}
-	
 	
 	
 }

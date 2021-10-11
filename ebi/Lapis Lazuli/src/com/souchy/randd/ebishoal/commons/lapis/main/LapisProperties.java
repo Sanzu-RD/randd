@@ -55,7 +55,7 @@ public class LapisProperties implements PropertyConfig {
 	@Override
 	public void load() {
 		PropertyConfig.super.load();
-		Log.info("root = " + root.get());
+		Log.verbose("root = " + root.get());
 		
 //		for(var field : config.getClass().getFields()) {
 //			var val = properties.get(field.getName());
@@ -77,7 +77,7 @@ public class LapisProperties implements PropertyConfig {
 		config.preferencesFileType = preferencesFileType.get();
 		
 		var file = new LwjglFileHandle(new File(preferencesDirectory.get(), "sapphire"), preferencesFileType.get());
-		Log.info("pref file : " + file.file().getAbsolutePath());
+		Log.verbose("pref file : " + file.file().getAbsolutePath());
 		
 		
 		
@@ -86,7 +86,7 @@ public class LapisProperties implements PropertyConfig {
 		title.addListener((e) -> {
 			 config.title = (String) e.getNewValue();
 			 Gdx.graphics.setTitle(config.title);
-			 System.out.println("setting config title : " + e.getNewValue());
+			 //System.out.println("setting config title : " + e.getNewValue());
 		});
 		fpsFocused.addListener((e) -> config.foregroundFPS = (int) e.getNewValue());
 		fpsBackground.addListener((e) -> config.backgroundFPS = (int) e.getNewValue());

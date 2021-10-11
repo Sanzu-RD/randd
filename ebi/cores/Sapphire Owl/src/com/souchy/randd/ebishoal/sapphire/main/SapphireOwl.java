@@ -41,12 +41,13 @@ public class SapphireOwl extends LapisCore {
 		core = new SapphireOwl(args);
 		
 		// si active le net
-		if(args.length > 4) {
-			var ip = args[1]; // "localhost";
-			var port = Integer.parseInt(args[2]); // 443;
-			var username = args[3];
-			var password = args[4];
-			var fightid = Integer.parseInt(args[5]);
+		if(args.length > 5) {
+			int i = 2;
+			var ip = args[i++]; // "localhost";
+			var port = Integer.parseInt(args[i++]); // 443;
+			var username = args[i++];
+			var password = args[i++];
+			var fightid = Integer.parseInt(args[i++]);
 			
 			try {
 				Log.info("SapphireOwl connect to moonstone (" + ip + ":" + port + ")  ");

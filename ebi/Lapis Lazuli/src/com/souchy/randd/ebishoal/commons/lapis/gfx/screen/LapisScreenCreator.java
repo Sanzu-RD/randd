@@ -49,7 +49,7 @@ interface LapisScreenCreator {
 	}
 	
 	public default Texture createBackground() {
-		return LapisAssets.assets.get("res/textures/Tex_krakken.PNG"); //new Texture(Gdx.files.internal("res/textures/Tex_krakken.PNG"));
+		return LapisAssets.get("res/textures/Tex_krakken.PNG"); //new Texture(Gdx.files.internal("res/textures/Tex_krakken.PNG"));
 	}
 	
 	/**

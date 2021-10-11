@@ -86,13 +86,13 @@ public class SapphireHudSkin extends Skin {
 		add("defaultTexture", new Texture(Gdx.files.internal("res/textures/default.png"), true)); 
 		
 		// Link all textures by their name
-		LapisAssets.assets.getAssetNames().forEach(a -> {
+		LapisAssets.getAssetNames().forEach(a -> {
 			if(a.contains("res/textures")) {
 				if(SapphireDevConfig.conf.logSkinResources)
 					Log.info("hud skin asset : " + a);
 				var str = a.substring(a.indexOf("textures"), a.lastIndexOf(".")).replace("/", "."); // enlève le res/, enlève l'extension, et remplace / par .
-				add(str, LapisAssets.assets.get(a));
-				add(str + "_round", new TextureRegionDrawable(new RoundTextureRegion(LapisAssets.assets.get(a))));
+				add(str, LapisAssets.get(a));
+				add(str + "_round", new TextureRegionDrawable(new RoundTextureRegion(LapisAssets.get(a))));
 			}
 //			if(a.startsWith("i18n"))
 //				lml.addI18nBundle(a.substring(0, a.lastIndexOf("/")).replace("/", "."), SapphireResources.assets.get(a));
@@ -180,6 +180,7 @@ public class SapphireHudSkin extends Skin {
 	 * Take resources from the AssetManager and sets them into the hud skin to be displayed (textures like creature avatar, spell icons and data like resistances)
 	 */
 	private static void set(String prefix, Creature c) {
+		if(c == null) return;
 		var lml = SapphireLmlParser.parser.getData();
 		var model = c.getModel();
 		//int i = 0;

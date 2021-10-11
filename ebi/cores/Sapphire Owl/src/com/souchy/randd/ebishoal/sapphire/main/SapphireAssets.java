@@ -28,22 +28,22 @@ public class SapphireAssets {
 	}
 	
 	public static I18NBundle getI18N_UX() {
-		return LapisAssets.assets.get("res/i18n/ux/bundle", I18NBundle.class);
+		return LapisAssets.get("res/i18n/ux/bundle", I18NBundle.class);
 	}
 	public static I18NBundle getI18N_Creatures() {
-		return LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
+		return LapisAssets.get("res/i18n/creatures/bundle", I18NBundle.class);
 	}
 	public static I18NBundle getI18N_Spells() {
-		return LapisAssets.assets.get("res/i18n/spells/bundle", I18NBundle.class);
+		return LapisAssets.get("res/i18n/spells/bundle", I18NBundle.class);
 	}
 	public static I18NBundle getI18N_Status() {
-		return LapisAssets.assets.get("res/i18n/status/bundle", I18NBundle.class);
+		return LapisAssets.get("res/i18n/status/bundle", I18NBundle.class);
 	}
 	public static I18NBundle getI18N_Elements() {
-		return LapisAssets.assets.get("res/i18n/elements/bundle", I18NBundle.class);
+		return LapisAssets.get("res/i18n/elements/bundle", I18NBundle.class);
 	}
 	public static I18NBundle getI18N_Effects() {
-		return LapisAssets.assets.get("res/i18n/effects/bundle", I18NBundle.class);
+		return LapisAssets.get("res/i18n/effects/bundle", I18NBundle.class);
 	}
 	
 //	public static I18N i18n;

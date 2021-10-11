@@ -64,7 +64,7 @@ public class BlackMoonstone extends DeathShadowCore implements Reactor, OnTurnSt
 		super(args);
 		moon = this;
 		port = 443; // port changeant pour chaque node instance
-		if(args.length > 0) port = Integer.parseInt(args[0]);
+		if(args.length > 1) port = Integer.parseInt(args[1]);
 		
 		this.bus.register(this);
 		

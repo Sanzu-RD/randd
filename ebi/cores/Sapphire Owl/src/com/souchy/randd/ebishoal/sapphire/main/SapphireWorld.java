@@ -24,6 +24,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.Meshing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
+import com.souchy.randd.jade.Constants;
 import com.souchy.randd.moonstone.white.Moonstone;
 
 public class SapphireWorld extends World {
@@ -46,28 +47,43 @@ public class SapphireWorld extends World {
 	 */
 	
 	public ModelInstance cursor;
-
-
 	public ModelInstance playingcursor;
+	private boolean loaded;
+	
+	public void finishLoading() {
+		if(cursor == null || !loaded) loadCursor();
+	}
+	
+	private void loadCursor() {
+//		LapisAssets.finishLoadingAsset("res/models/tileselector.g3dj");
+		Model cursorModel = LapisAssets.get("res/models/tileselector.g3dj", Model.class);  // res/models/creatures/Marian.g3dj");
+		loaded = (cursorModel != LapisAssets.defaultModel);
+		
+		var scale = loaded ? 1f / 24f : 1f;
+		if(cursor == null || loaded) {
+			if(cursor != null) {
+				instances.remove(cursor);
+				instances.remove(playingcursor);
+			}
+			// Cursor
+			cursor = new ModelInstance(cursorModel);
+			cursor.materials.get(0).set(ColorAttribute.createDiffuse(Color.TEAL));
+			cursor.transform.setToTranslation(0, 0, 0).scale(scale, scale, scale).rotate(Vector3.X, 90);
+			this.instances.add(cursor);
+			// Playing Cursor
+			playingcursor = new ModelInstance(cursorModel);
+			playingcursor.materials.get(0).set(ColorAttribute.createDiffuse(Color.TEAL));
+			playingcursor.transform.setToTranslation(0, 0, 0).scale(scale, scale, scale).rotate(Vector3.X, 90);
+			this.instances.add(playingcursor);
+		}
+
+	}
 	
 	public SapphireWorld() {
+		SapphireGame.profiler.poll("SapphireWorld enter");
 		world = this;
 		
-		// Cursor
-		Model cursorModel = LapisAssets.assets.get("res/models/tileselector.g3dj");  // res/models/creatures/Marian.g3dj");
-		cursor = new ModelInstance(cursorModel);
-		cursor.materials.get(0).set(ColorAttribute.createDiffuse(Color.TEAL));
-		var scale = 1f / 24f;
-		cursor.transform.setToTranslation(0, 0, 0).scale(scale, scale, scale).rotate(Vector3.X, 90);
-		this.instances.add(cursor);
-
-		// Cursor
-//		Model cursorModel = LapisAssets.assets.get("res/models/tileselector.g3dj");  // res/models/creatures/Marian.g3dj");
-		playingcursor = new ModelInstance(cursorModel);
-		playingcursor.materials.get(0).set(ColorAttribute.createDiffuse(Color.TEAL));
-		playingcursor.transform.setToTranslation(0, 0, 0).scale(scale, scale, scale).rotate(Vector3.X, 90);
-		this.instances.add(playingcursor);
-		
+		loadCursor();
         
         // World map
         String mapFolder = "res/maps/"; //"F:/Users/Souchy/Desktop/Robyn/eclipse-workspaces/hidden workspaces/r and d/Maps/data/maps/";
@@ -75,7 +91,7 @@ public class SapphireWorld extends World {
         this.center = new Vector3(data.cellModels[0].length / 2f, data.cellModels.length / 2f, 0);
 
 		new EbiBoardGenerator().generate(Moonstone.fight, data);
-
+		SapphireGame.profiler.poll("SapphireWorld map");
 		
         if(true) {
         	// fonctionne, mais jsais pas si le shine fit avec mon environnement
@@ -89,6 +105,8 @@ public class SapphireWorld extends World {
             greed.materials.forEach(m -> m.set(shine));
     		cache.add(new ModelInstance(greed));
     		// add every other models as instances
+
+    		SapphireGame.profiler.poll("SapphireWorld greed");
     		
     		// adds singular models
     		if(true) {
@@ -97,9 +115,12 @@ public class SapphireWorld extends World {
 	                    for(int j = 0; j < layer.length; j++) {
 	                    	var m = data.getModel(layer[i][j]);
 	                    	if(m != null && !m.isVoxel()) {
+//	                    		if(!LapisAssets.assets.isLoaded(m.model))
+//	                    			LapisAssets.assets.finishLoadingAsset(m.model);
+//	                    		var model = LapisAssets.assets.get(m.model, Model.class);
 	                    		assets.load(m.model, Model.class);
-	                    		assets.finishLoading();
-	                    		var model = assets.get(m.model, Model.class);
+	                    		assets.finishLoadingAsset(m.model); //.finishLoading();
+	                    		var model = assets.get(m.model, Model.class); 
 	                    		model.materials.get(0).set(ColorAttribute.createDiffuse(Color.valueOf(m.colorAttributes[0])));
 	                    		model.materials.get(0).set(new BlendingAttribute(0.5f)); // fonctionne
 	                    		model.materials.get(0).set(ColorAttribute.createReflection(1, 1, 1, 1)); //  fontionne pas
@@ -121,7 +142,8 @@ public class SapphireWorld extends World {
 	    		generateModels.accept(data.layer0Models);
 	    		generateModels.accept(data.cellModels);
 	    		generateModels.accept(data.layer2Models);
-	    		
+
+	    		SapphireGame.profiler.poll("SapphireWorld layers");
     		}
     		if(false) {
         		// water plane
@@ -133,6 +155,11 @@ public class SapphireWorld extends World {
             cache.end();
         } 
         
+	}
+	
+	
+	public void update() {
+		
 	}
 
 	
@@ -234,6 +261,15 @@ public class SapphireWorld extends World {
 		return /* cellHighlighterInst = */ new ModelInstance(highlight);
 	}
 	
+
+	public void translateCursor(float x, float y, float z) {
+		if(SapphireWorld.world.cursor != null)
+			SapphireWorld.world.cursor.transform.setTranslation(x + Constants.cellHalf, y + Constants.cellHalf, Constants.floorZ);
+	}
+	public void translatePlayingCursor(float x, float y, float z) {
+		if(SapphireWorld.world.playingcursor != null)
+			SapphireWorld.world.playingcursor.transform.setTranslation(x + Constants.cellHalf, y + Constants.cellHalf, Constants.floorZ);
+	}
 	
 	/*
     private Model createModel(Color color) {

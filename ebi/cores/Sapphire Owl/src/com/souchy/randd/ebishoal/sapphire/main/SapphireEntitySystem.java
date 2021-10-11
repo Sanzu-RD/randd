@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g3d.utils.AnimationController;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController.AnimationDesc;
 import com.badlogic.gdx.graphics.g3d.utils.AnimationController.AnimationListener;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.utils.Array;
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.models.Cell;
@@ -116,6 +117,10 @@ public class SapphireEntitySystem extends Family<Entity> implements Reactor, OnC
 			if(pos != null) {
 				var model = e.get(ModelInstance.class);
 				if(model != null) {
+					if(LapisAssets.defaultModel == model.model) {
+						makeRenderable(e);
+					}
+					
 					model.transform.setTranslation(
 							(float) pos.x + Constants.cellHalf, 
 							(float) pos.y + Constants.cellHalf, 
@@ -174,10 +179,16 @@ public class SapphireEntitySystem extends Family<Entity> implements Reactor, OnC
 //			Log.info("Sapphire Entity System makeRenderable " + entity);
 
 			var crea = (Creature) entity;
-			Log.format("-----------model %s, Assets : %s", crea.modelid, AssetData.creatures.size());
+			Log.debug("-----------model %s, Assets : %s", crea.modelid, AssetData.creatures.size());
 			
 			var modelpath = AssetData.creatures.get(crea.modelid).models[0]; 
-			var model3d = LapisAssets.assets.<Model>get(modelpath);
+			var model3d = LapisAssets.get(modelpath, Model.class);
+			
+			if(LapisAssets.defaultModel == model3d && entity.has(ModelInstance.class)) {
+				// si le bon model n'est toujours pas chargé et que l'entité a déjà une modelinstance
+				return;
+			}
+			
 			var modelinstance = new ModelInstance(model3d);
 			modelinstance.transform.rotate(1, 0, 0, 90); // l'exportation blender en "Z up" ne suffit pas malheureusement/apparemment.
 
@@ -187,7 +198,8 @@ public class SapphireEntitySystem extends Family<Entity> implements Reactor, OnC
 			//modelinstance.transform.scale(0.4f, 0.4f, 0.4f);
 			
 			var animController = new AnimationController(modelinstance);
-			animController.setAnimation("CharacterArmature|Idle", -1);
+			if(model3d != LapisAssets.defaultModel) 
+				animController.setAnimation("CharacterArmature|Idle", -1);
 			
 			/*
 			// Random colors

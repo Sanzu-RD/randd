@@ -33,6 +33,7 @@ public final class Logging {
 		currentFile = createFile();
 		createSysoutStream();
 		createFileSteam();
+		Log.info("Log filter = " + Log.LogImportance.filter);
 	}
 
 	// ---------------------------------------------------------------------------
@@ -63,6 +64,7 @@ public final class Logging {
 	private static void createSysoutStream() {
 		/** Sysout output stream */
 		streams.add(l -> {
+			if((LogImportance.filter & l.importance.pow()) == 0) return;
 			var msg = l.toString(); //"["+l.date+"]\t["+rootModule+"]\t[" + l.importance + "] : " + l.details;
 			if(l.importance.ordinal() < LogImportance.Error.ordinal()) System.out.println(msg);
 			else System.err.println(msg);

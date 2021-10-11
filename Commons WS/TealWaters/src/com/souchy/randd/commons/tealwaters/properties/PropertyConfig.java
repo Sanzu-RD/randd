@@ -17,6 +17,8 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import com.souchy.randd.commons.tealwaters.logging.Log;
+
 /**
  * Implémente cette interface en créant des fields de type Property. ex :
  * Property nameOfAProp; Property nameOfAnotherProp;
@@ -41,7 +43,7 @@ public interface PropertyConfig {
 		try {
 			// in = FilesManager.get().getResourceAsStream(getPath());s
 			File f = getFile(); // new File(getPath());
-			System.out.println("load : " + f.getAbsolutePath());
+			Log.verbose("load : " + f.getAbsolutePath());
 
 			InputStream in = new FileInputStream(f);
 			getProperties().load(in);
@@ -53,7 +55,7 @@ public interface PropertyConfig {
 		}
 
 		List<String> propstrings = getProperties().entrySet().stream().map(e -> e.getKey() + " = " + e.getValue()).collect(Collectors.toList());
-		System.out.println("load : " + "[" + String.join(", ", propstrings) + "]");
+		Log.verbose("PropertyConfig load : " + "[" + String.join(", ", propstrings) + "]");
 	}
 
 	default void save() {

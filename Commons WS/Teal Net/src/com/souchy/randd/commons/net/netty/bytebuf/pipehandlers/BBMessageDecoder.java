@@ -22,7 +22,7 @@ public class BBMessageDecoder extends ByteToMessageDecoder  {
 
 	public BBMessageDecoder(BBMessageFactories factory) {
 		this.msgFactories = factory;
-		Log.info("new decoder");
+		//Log.info("new decoder");
 	}
 
 	@Override

@@ -41,7 +41,7 @@ public class CreatureHoverDebug extends SapphireComponent {
 	}
 	
 	private I18NBundle getI18n() {
-		return LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
+		return LapisAssets.get("res/i18n/creatures/bundle", I18NBundle.class);
 	}
 
 	@LmlAction("getCreatureId")

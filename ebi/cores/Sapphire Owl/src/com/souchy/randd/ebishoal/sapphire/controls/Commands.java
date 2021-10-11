@@ -35,10 +35,10 @@ public class Commands {
 //		var bundle = Gdx.files.internal("res/i18n/ux/bundle");
 //		var locale = new Locale(SapphireOwl.conf.general.locale);
 //		i18n = I18NBundle.createBundle(bundle, locale, "UTF-8");
-		i18n = LapisAssets.assets.get("res/i18n/ux/bundle", I18NBundle.class);
-		i18nCreatures = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
-		i18nSpells = LapisAssets.assets.get("res/i18n/spells/bundle", I18NBundle.class);
-		i18nStatus = LapisAssets.assets.get("res/i18n/status/bundle", I18NBundle.class);
+		i18n = LapisAssets.get("res/i18n/ux/bundle", I18NBundle.class);
+		i18nCreatures = LapisAssets.get("res/i18n/creatures/bundle", I18NBundle.class);
+		i18nSpells = LapisAssets.get("res/i18n/spells/bundle", I18NBundle.class);
+		i18nStatus = LapisAssets.get("res/i18n/status/bundle", I18NBundle.class);
 		
 
 		commands.put("missingCommand", Commands::missingCommand);

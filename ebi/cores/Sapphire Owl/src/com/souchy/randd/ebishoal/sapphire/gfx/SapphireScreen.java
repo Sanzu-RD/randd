@@ -80,11 +80,14 @@ public class SapphireScreen extends LapisScreen {
 		
 		// update playing creature cursor (highlights which creature is currently playing)
 		if(SapphireGame.playing != null) 
-			SapphireWorld.world.playingcursor.transform.setTranslation((float) SapphireGame.playing.pos.x + 0.5f, (float) SapphireGame.playing.pos.y + 0.5f, 1f);
+			SapphireWorld.world.translatePlayingCursor((float) SapphireGame.playing.pos.x, (float) SapphireGame.playing.pos.y, 0);
 		
 		// update all engine's systems 	 //and entities
 		SapphireGame.fight.update(delta);
 		
+		// load assets
+		LapisAssets.assets.update();
+		SapphireWorld.world.finishLoading();
 //		if(System.currentTimeMillis() - timeStart > 5000) {
 //			startPfx();
 //		}
@@ -98,6 +101,7 @@ public class SapphireScreen extends LapisScreen {
 
 	@Override
 	public LapisHud createUI() {
+		SapphireGame.profiler.poll("SapphireScreen go createHud");
 		SapphireLmlParser.init();
 		hud = new SapphireHud();
 		hud.reload();

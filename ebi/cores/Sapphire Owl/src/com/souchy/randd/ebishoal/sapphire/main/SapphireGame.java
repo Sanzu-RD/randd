@@ -19,6 +19,7 @@ import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent.OnTurnEn
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurnStartHandler;
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
+import com.souchy.randd.commons.tealwaters.commons.Profiler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebi.ammolite.Ammolite;
@@ -47,7 +48,7 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 
 	public static Creature playing;
 	
-	
+	public static Profiler profiler;
 	@Override
 	public void init() {
 		SapphireGame.fight = Moonstone.fight; // = new Fight();
@@ -63,34 +64,46 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 		DiamondModels.instantiate("com.souchy.randd.data.s1");
 
 		// load asssets
+		profiler = new Profiler();
 		//LapisResources.loadResources(SapphireOwl.data);
-		LapisAssets.loadTextures(Gdx.files.internal("res/textures/"));
-		LapisAssets.loadModels(Gdx.files.internal("res/models/"));
-		LapisAssets.loadMusics(Gdx.files.internal("res/music/"));
-		LapisAssets.loadSounds(Gdx.files.internal("res/sounds/"));
 		LapisAssets.loadI18NBundles(Gdx.files.internal("res/i18n/"));
 		LapisAssets.loadFonts(Gdx.files.internal("res/fonts/"));
+		LapisAssets.loadMusics(Gdx.files.internal("res/music/"));
+		LapisAssets.loadSounds(Gdx.files.internal("res/sounds/"));
+		LapisAssets.blocking = false;
+//		new Thread(() -> LapisAssets.loadTextures(Gdx.files.internal("res/textures/"))).run();
+//		new Thread(() -> LapisAssets.loadModels(Gdx.files.internal("res/models/"))).run();
+		LapisAssets.loadTextures(Gdx.files.internal("res/textures/"));
+		LapisAssets.loadModels(Gdx.files.internal("res/models/"));
+		LapisAssets.blocking = true;
+		//new Thread(() -> LapisAssets.assets.finishLoading()).run();
+		profiler.poll("LapisAssets");
 		assets = new SapphireAssets();
 		
 		// init commands
 		Commands.init();
+		profiler.poll("commands");
 
 		// init music player
 		music = new MusicPlayer();
+		profiler.poll("music");
 		
 		Highlight.init();
-		
+		profiler.poll("highlights");
+
 		// screen
 		gfx = new SapphireScreen();
 		gfx.init();
+		profiler.poll("SapphireScreen");
 		// init FX player
 		new Ammolite(SapphireGame.fight, gfx.getEffekseer());
+		profiler.poll("Ammolite");
 		
 		// pfx
 //		ParticleEffectLoader.ParticleEffectLoadParameter params = new ParticleEffectLoader.ParticleEffectLoadParameter(gfx.getPfxSystem().getBatches());
 //		LapisAssets.loadParticleEffects(Gdx.files.internal("res/fx/"), params);
 
-		Log.info("LapisResources : { " + String.join(", ", LapisAssets.assets.getAssetNames()) + " }");
+		Log.info("LapisResources : { " + String.join(", ", LapisAssets.getAssetNames()) + " }");
 
 		Log.info("data.creatures : " + DiamondModels.creatures);
 		
@@ -101,9 +114,10 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 			Moonstone.bus.register(this);
 			Moonstone.setPostRunnable(Gdx.app::postRunnable);
 			Moonstone.writes(new GetSalt(Moonstone.moon.channel.attr(Moonstone.authKey).get()[0]));
+			profiler.poll("Moonstone");
 		}
 	}
-
+	
 
 	@Override
 	public SapphireScreen getStartScreen() {

@@ -14,7 +14,7 @@ public abstract class System {
 	private final Engine engine;
 	
 	public System(Engine engine) {
-		Log.info("System " + this + " register to " + engine);
+		Log.verbose("System " + this + " register to " + engine);
 		this.engine = engine;
 		engine.add(this);
 	}

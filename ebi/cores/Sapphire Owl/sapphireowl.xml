@@ -66,8 +66,26 @@
 
 		
 		<parallel>
-			<!-- push jar to server -->
-			<scp verbose="false" sftp="true" trust="true" file="${dir.jarfile}/sapphireowl.jar" todir="souchy:z@192.168.2.15:/home/souchy/release/ebishoal/" />
+			
+			<trycatch property="foo" reference="bar">
+			  <try>
+			    <fail>Error uploading sapphireowl.jar to server</fail>
+				<!-- push jar to server -->
+				<scp verbose="false" sftp="true" trust="true" file="${dir.jarfile}/sapphireowl.jar" todir="souchy:z@192.168.2.15:/home/souchy/release/ebishoal/" />
+			  </try>
+
+			  <catch>
+			    <!--<echo>In &lt;catch&gt;.</echo>-->
+			  	<echo>${foo}</echo>
+			  </catch>
+
+			  <finally>
+			    <!--<echo>In &lt;finally&gt;.</echo>-->
+			  </finally>
+			</trycatch>
+			
+			
+			
 			
 			<!-- copy files to release folder -->
 			<sequential>

@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.czyzby.lml.parser.impl.AbstractLmlView;
 import com.souchy.jeffekseer.EffectManager;
+import com.souchy.randd.commons.tealwaters.commons.Profiler;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
@@ -93,8 +94,11 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	 * Creates the camera, environment, world, UI, model batches, fbo and sprite batch
 	 */
 	public void init() {
+		var profiler = new Profiler();
+		profiler.poll("LapisScreen");
 		// create world
 		world = createWorld(); //new World(env);
+		profiler.poll("LapisScreen create world");
 		//worldBB = world.getBoundingBox();
 		//worldCenter = world.getCenter(); //getWorldBB().getCenter(new Vector3());
 		
@@ -102,6 +106,7 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 		cam = createCam(false);
 		viewport = createViewport(cam);
 		resetCamera();
+		profiler.poll("LapisScreen create cam");
 
 		// create environment lights
 		env = createEnvironment();
@@ -110,31 +115,39 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 			env.shadowMap = shadowLight;
 			env.add(shadowLight);
 		}
+		profiler.poll("LapisScreen create env");
 
 		// create model batches
 		modelBatch = createWorldBatch();
 		shadowBatch = createWorldShadowBatch();
+		profiler.poll("LapisScreen create batches");
 		
 		// create particle effects system
 		pfxSystem = createPfxSystem(getCamera());
 		pfxBatch = createPfxBatch();
 		effekseerManager = createEffekseer(getCamera(), getViewport());
+		profiler.poll("LapisScreen create pfx");
 		
 		// create FBO and its sprite batch renderer for post process
 		fbo = createFBO(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		ppBatch = createSpriteBatch();
+		profiler.poll("LapisScreen create fbo pp");
 		
 		// create UI
 		view = createUI();
+		profiler.poll("LapisScreen create ui");
 
 		// create controller 
 		inputProcessor = createInputProcessor();
+		profiler.poll("LapisScreen create input");
 		
 		// create lining
 		lining = createLining(getCamera(), new BoundingBox(Vector3.Zero, getWorldCenter().cpy().scl(3))); //getWorldBB());
+		profiler.poll("LapisScreen create lining");
 		
 		// create background image
 		background = createBackground();
+		profiler.poll("LapisScreen create bkg");
 	}
 	
 	public void resetCamera() {

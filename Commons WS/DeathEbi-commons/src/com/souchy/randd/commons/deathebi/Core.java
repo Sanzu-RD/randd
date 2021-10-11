@@ -60,6 +60,8 @@ public abstract class Core {
 		// init microservices with their messages and handlers
 		// start application
 		
+		Log.LogImportance.filter = Integer.parseInt(args[0]);
+		
 		Logging.registerLogModule(this.getClass());
 		discoverMesssages();
 //		this.bus = new EventBus();
@@ -93,11 +95,11 @@ public abstract class Core {
 		msgFactories.populate(ClassInstanciator.list(msgClasses)); 
 		msgHandlers.populate(ClassInstanciator.list(handlerClasses));
 		// Log check what handler handles what message
-		Log.info("--");
-		this.msgFactories.foreach(e -> Log.info("Microservice init message ["+e.getKey()+"] ["+e.getValue().getClass().getSimpleName()+"]"));
-		Log.info("--");
-		this.msgHandlers.foreach(h -> Log.info("Microservice init handler ["+h.getID()+"] ["+h.getClass().getSimpleName()+"] handles ["+h.getMessageClass().getSimpleName()+"]"));
-		Log.info("--");
+		Log.verbose("--");
+		this.msgFactories.foreach(e -> Log.verbose("Microservice init message ["+e.getKey()+"] ["+e.getValue().getClass().getSimpleName()+"]"));
+		Log.verbose("--");
+		this.msgHandlers.foreach(h -> Log.verbose("Microservice init handler ["+h.getID()+"] ["+h.getClass().getSimpleName()+"] handles ["+h.getMessageClass().getSimpleName()+"]"));
+		Log.verbose("--");
 	}
 	
 	public BBMessageFactories getMessages() {

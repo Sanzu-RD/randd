@@ -161,7 +161,7 @@ public class Timeline extends SapphireComponent implements Reactor {
 		if(SapphireGame.fight != null) {
 			var creatureid = SapphireGame.fight.timeline.get(index);
 			var creature = SapphireGame.fight.creatures.first(c -> c.id == creatureid);
-			I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
+			I18NBundle i18n = LapisAssets.get("res/i18n/creatures/bundle", I18NBundle.class);
 			name = i18n.get("creature." + creature.modelid + ".name");
 		}
 //		Log.info("Timeline.getCreatureName("+index+") = " + name);

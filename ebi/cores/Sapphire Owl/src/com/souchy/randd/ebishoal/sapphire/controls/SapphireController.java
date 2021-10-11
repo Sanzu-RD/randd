@@ -484,7 +484,7 @@ public class SapphireController extends CameraInputController {
 			SapphireGame.gfx.hud.cursorPos.setPosition(x, Gdx.graphics.getHeight() - y);
 		}
 		// 3d cursor
-		SapphireWorld.world.cursor.transform.setTranslation(pos.add(0.5f, 0.5f, 0f));
+		SapphireWorld.world.translateCursor(pos.x, pos.y, pos.z);
 
 		if(!activateBaseCamControl) return true;
 		return super.touchDragged(x, y, pointer);
@@ -510,7 +510,8 @@ public class SapphireController extends CameraInputController {
 			SapphireGame.gfx.hud.cursorPos.setPosition(x, Gdx.graphics.getHeight() - y);
 		}
 		// 3d cursor
-		SapphireWorld.world.cursor.transform.setTranslation(pos.x + Constants.cellHalf, pos.y + Constants.cellHalf, Constants.floorZ);
+		SapphireWorld.world.translateCursor(pos.x, pos.y, 0);
+			
 
 		try {
 			if(cell != null && moved && cell.hasCreature()) {

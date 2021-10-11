@@ -77,29 +77,31 @@ public class SapphireHud extends LapisHud
 	
 	
 	public SapphireHud() {
+		SapphireGame.profiler.pop();
 		// SpriteBatch, Viewport, Shader, Stage
 		var batch = new SapphireBatch();
 		var viewport = new ScreenViewport();
 		var shader = new ShaderProgram(LapisShader.getVertexShader("ui"), LapisShader.getFragmentShader("ui"));
 		batch.setShader(shader);
 		this.setStage(new Stage(viewport, batch));
-
+		SapphireGame.profiler.poll("SapphireHud");
 		
 		SapphireGame.fight.statusbus.reactors.register(this);
 		SapphireOwl.conf.bus.register(this);
 	}
 	
 	public void reload() {
+		SapphireGame.profiler.pop();
 		SapphireOwl.core.bus.post(new DisposeUIEvent());
 		this.getStage().clear();
-		if(!isLoaded) SapphireLmlParser.parser.createView(this, getTemplateFile());
 
-		try {
-			Creature creature = SapphireGame.getPlayingCreature(); 
-//			SapphireGame.fight.creatures.first();
-			SapphireHudSkin.play(creature);
-		} catch (Exception e) { }
+		SapphireHudSkin.play(SapphireGame.getPlayingCreature());
+//		try {
+//			Creature creature = SapphireGame.getPlayingCreature(); 
+//			SapphireHudSkin.play(creature);
+//		} catch (Exception e) { }
 		
+		if(!isLoaded) SapphireLmlParser.parser.createView(this, getTemplateFile());
 		chat = new Chat();
 		playbar = new PlayBar();
 		timeline = new Timeline();
@@ -116,6 +118,7 @@ public class SapphireHud extends LapisHud
 
 		
 		isLoaded = true;
+		SapphireGame.profiler.poll("SapphireHud reload");
 	}
 	
 	

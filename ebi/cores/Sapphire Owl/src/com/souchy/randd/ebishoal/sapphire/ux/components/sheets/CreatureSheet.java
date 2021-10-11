@@ -270,7 +270,7 @@ public class CreatureSheet extends SapphireComponent {
 	@LmlAction("getCreatureName")
 	public String getCreatureName() {
 		if(creature == null) return "null";
-		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
+		I18NBundle i18n = LapisAssets.get("res/i18n/creatures/bundle", I18NBundle.class);
 		var name = i18n.get("creature." + creature.modelid + ".name");
 //		Log.info("getCreatureName " + creature.modelid + " = " + name);
 		return name;
@@ -278,7 +278,7 @@ public class CreatureSheet extends SapphireComponent {
 	@LmlAction("getDescription")
 	public String getDescription() {
 		if(creature == null) return "null";
-		I18NBundle i18n = LapisAssets.assets.get("res/i18n/creatures/bundle", I18NBundle.class);
+		I18NBundle i18n = LapisAssets.get("res/i18n/creatures/bundle", I18NBundle.class);
 		return i18n.get("creature."+creature.modelid+".description");
 	}
 

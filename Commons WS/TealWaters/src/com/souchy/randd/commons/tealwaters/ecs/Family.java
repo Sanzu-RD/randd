@@ -200,7 +200,7 @@ public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.
 	public void onAddedEntity(AddEntityEvent event) {
 		if (clazz.isInstance(event.entity)) {
 			if(this.getClass().getName().contains("CellSystem") == false)
-				Log.info("Family " + this.getClass().getSimpleName() + " ("+clazz.getSimpleName()+") add " + event.entity);
+				Log.verbose("Family " + this.getClass().getSimpleName() + " ("+clazz.getSimpleName()+") add " + event.entity);
 			add(clazz.cast(event.entity));
 		}
 	}
@@ -213,7 +213,7 @@ public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.
 	public void onRemovedEntity(RemoveEntityEvent event) {
 		if (clazz.isInstance(event.entity)) {
 			if(this.getClass().getName().contains("CellSystem") == false)
-				Log.info("Family " + this.getClass().getSimpleName() + " ("+clazz.getSimpleName()+") remove " + event.entity);
+				Log.verbose("Family " + this.getClass().getSimpleName() + " ("+clazz.getSimpleName()+") remove " + event.entity);
 			remove(clazz.cast(event.entity));
 		}
 	}
