@@ -1,5 +1,6 @@
 package com.souchy.randd.ebishoal.sapphire.main;
 
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 import org.bson.types.ObjectId;
@@ -143,6 +144,16 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 	public void onTurnStart(TurnStartEvent e) {
 ////		Log.format("SapphireGame event fight %s turn %s start %s", e.fight.id, e.turn, e.index);
 		playing = SapphireGame.getPlayingCreature();
+
+		if(e.fight.future != null) e.fight.future.cancel(true);
+		e.fight.future = e.fight.timer.scheduleAtFixedRate(() -> {
+			//this.timer.setText(e.fight.time + "s"); // set timer text
+//			if(gfx.hud.timeline != null) 
+				gfx.hud.timeline.timer.setText(e.fight.time + "s");
+			if(e.fight.time > 0) e.fight.time--;
+			else e.fight.future.cancel(true);
+		}, 0, 1, TimeUnit.SECONDS);
+		
 //		if(playing == null) return;
 //		//gfx.hud.reload();
 //		if(SapphireGame.gfx.hud != null) {

@@ -61,30 +61,25 @@ public class Timeline extends SapphireComponent implements Reactor {
 
 	@Subscribe
 	public void onTurnStart(TurnStartEvent e) {
-		if(e.fight.future != null) e.fight.future.cancel(true);
 		if(this.getStage() == null) return;
 		
-		e.fight.future = e.fight.timer.scheduleAtFixedRate(() -> {
-			this.timer.setText(e.fight.time + "s"); // set timer text
-			if(e.fight.time > 0) e.fight.time--;
-			else e.fight.future.cancel(true);
-		}, 0, 1, TimeUnit.SECONDS);
-		
-		// label + moving action
-		var lbl = new VisLabel("New turn");
-		var a = new MoveByAction() {
-			@Override
-			public void end() {
-				this.actor.remove(); // enlève l'actor du stage
-				this.actor = null;
-			}
-		};
-		a.setAmountY(20);
-		a.setDuration(1);
-		lbl.setAlignment(Align.bottomRight);
-		lbl.setPosition(this.getX() - lbl.getWidth(), this.getY() - 40);
-		lbl.addAction(a);
-		this.getStage().addActor(lbl);
+		// "New turn" label + moving action
+		{
+			var lbl = new VisLabel("New turn");
+			var a = new MoveByAction() {
+				@Override
+				public void end() {
+					this.actor.remove(); // enlève l'actor du stage
+					this.actor = null;
+				}
+			};
+			a.setAmountY(20);
+			a.setDuration(1);
+			lbl.setAlignment(Align.bottomRight);
+			lbl.setPosition(this.getX() - lbl.getWidth(), this.getY() - 40);
+			lbl.addAction(a);
+			this.getStage().addActor(lbl);
+		}
 		
 		refresh();
 	}
@@ -94,6 +89,8 @@ public class Timeline extends SapphireComponent implements Reactor {
 	}
 	
 	private void refresh0() {
+		timer.setText(SapphireGame.fight.time + "s");
+		
 		var index = SapphireGame.fight.timeline.index();
 //		Log.format("UI Timeline refresh %s", index);
 		

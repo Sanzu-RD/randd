@@ -92,18 +92,17 @@ public class SapphireHud extends LapisHud
 	
 	public void reload() {
 		SapphireGame.profiler.pop();
+		
 		SapphireOwl.core.bus.post(new DisposeUIEvent());
 		this.getStage().clear();
 
-		SapphireHudSkin.play(SapphireGame.getPlayingCreature());
-//		try {
-//			Creature creature = SapphireGame.getPlayingCreature(); 
-//			SapphireHudSkin.play(creature);
-//		} catch (Exception e) { }
+		var playing = SapphireGame.getPlayingCreature();
+		SapphireHudSkin.play(playing);
 		
 		if(!isLoaded) SapphireLmlParser.parser.createView(this, getTemplateFile());
 		chat = new Chat();
 		playbar = new PlayBar();
+		playbar.refresh(playing);
 		timeline = new Timeline();
 //		new QuickOptions();
 		

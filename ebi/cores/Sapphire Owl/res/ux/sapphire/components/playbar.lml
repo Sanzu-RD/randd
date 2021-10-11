@@ -32,8 +32,8 @@
 				<roundImage id="spellBg{loop:index}" style="textures.borders.spell_bg_round" />
 				<!-- spell icon -->
 				<roundImage id="playingCreatureSpell{loop:index}" name="playingCreatureSpell{loop:index}" tooltip="Desecrate" style="playingCreatureSpell{loop:index}" />
-				<!-- <:notNull {playingCreatureSpell{loop:index}}>
-				</:notNull> -->
+				<!--  <:notNull test="{playingCreatureSpell{loop:index}}">
+					</:notNull>-->
 				<!-- border on top -->
 				<image id="spellBorder" style="textures.borders.ring_frame" />
 				<!-- id label -->

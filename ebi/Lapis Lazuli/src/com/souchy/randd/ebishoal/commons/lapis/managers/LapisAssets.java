@@ -46,7 +46,7 @@ public class LapisAssets {
 	/**
 	 * Assets of everything for everything Load everything into this
 	 */
-	public static final AssetManager assets = new AssetManager();
+	private static final AssetManager assets = new AssetManager();
 
 	public static final Model defaultModel;
 	public static final Texture defaultTexture;
@@ -67,8 +67,24 @@ public class LapisAssets {
 		//defaultModel.nodes.get(0).id = "defaultModel";
 		
 		var pix = new Pixmap(10, 10, Format.RGBA8888);
-		pix.drawCircle(5, 5, 3);
+		pix.setColor(Color.FIREBRICK);
+		//pix.drawCircle(4, 4, 3);
+		//pix.drawRectangle(0, 0, 10, 10);
+		pix.drawLine(0, 0, 9, 9);
+		pix.drawLine(0, 9, 9, 0);
 		defaultTexture = new Texture(pix);
+	}
+	
+	public AssetManager hack() {
+		return assets;
+	}
+	
+	private static boolean finishedLoading = false;
+	public static boolean update() {
+		//assets.update(); 
+		if(finishedLoading) return false;
+		finishedLoading = assets.update(); //assets.isFinished();
+		return finishedLoading;
 	}
 	
 	public static <T> T get(String path) {
@@ -261,6 +277,7 @@ public class LapisAssets {
 	
 
 	private static void recurseDirectories(FileHandle dir, Predicate<FileHandle> filter, Consumer<FileHandle> action) {
+		finishedLoading = false;
 //		Log.info("dirtype: " + dir.type().name() + ", dir path : " + dir.path());
 		for (var d : dir.list()) {
 			if(d.isDirectory()) {
@@ -275,6 +292,7 @@ public class LapisAssets {
 	}
 	
 	private static void recurseFiles(FileHandle dir, Predicate<FileHandle> filter, Consumer<FileHandle> action) {
+		finishedLoading = false;
 		if(dir.isDirectory()) {
 			for (var f : dir.list()) {
 				recurseFiles(f, filter, action);
@@ -297,6 +315,5 @@ public class LapisAssets {
 //			}
 //		}
 	}
-	
 	
 }

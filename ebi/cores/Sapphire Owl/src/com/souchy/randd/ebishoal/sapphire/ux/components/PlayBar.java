@@ -176,12 +176,18 @@ public class PlayBar extends SapphireComponent implements Reactor, OnTurnStartHa
 
 
 	public void refresh() {
-		var c = playing;
+		refresh(playing);
+	}
+	public void refresh(Creature c) {
+		//var c = playing;
 		int i = 0;
+		if(c == null) return;
+		//SapphireHudSkin.play(playing);
+		//if(true) return;
 		
 		// set creature avatar
-		var iconpath = AssetData.creatures.get(playing.modelid).icon;
-		var avatarPath = SapphireAssets.getCreatureIconPath(iconpath) + "_round";
+		var avatarName = AssetData.creatures.get(c.modelid).icon;
+		var avatarPath = SapphireAssets.getCreatureIconPath(avatarName) + "_round";
 		var avatarDrawable = VisUI.getSkin().getDrawable(avatarPath);
 		this.avatar.setDrawable(avatarDrawable);
 		

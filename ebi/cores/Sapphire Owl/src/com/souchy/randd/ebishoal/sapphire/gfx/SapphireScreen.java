@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.components.Position;
@@ -31,6 +32,7 @@ import com.souchy.randd.ebishoal.sapphire.controls.SapphireController;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireWorld;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireHud;
+import com.souchy.randd.ebishoal.sapphire.ux.SapphireHudSkin;
 import com.souchy.randd.ebishoal.sapphire.ux.SapphireLmlParser;
 
 
@@ -85,9 +87,12 @@ public class SapphireScreen extends LapisScreen {
 		// update all engine's systems 	 //and entities
 		SapphireGame.fight.update(delta);
 		
-		// load assets
-		LapisAssets.assets.update();
-		SapphireWorld.world.finishLoading();
+		// load assets and (one-shot proc) if finished
+		if(LapisAssets.update()) {
+			((SapphireHudSkin) VisUI.getSkin()).finishLoading(); 
+			hud.reload();
+			SapphireWorld.world.finishLoading();
+		}
 //		if(System.currentTimeMillis() - timeStart > 5000) {
 //			startPfx();
 //		}
