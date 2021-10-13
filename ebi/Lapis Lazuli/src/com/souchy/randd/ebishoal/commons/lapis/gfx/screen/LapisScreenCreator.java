@@ -102,7 +102,7 @@ interface LapisScreenCreator {
 	}
 	
 	public default LapisDSL createShadowLight(Viewport viewport) {
-		Log.info("viewport world w " + viewport.getWorldWidth());
+		Log.debug("viewport world width " + viewport.getWorldWidth());
 		int shadowMapWidth = Gdx.graphics.getWidth();
 		int shadowMapHeight = Gdx.graphics.getHeight(); 
 		float shadowViewportWidth = viewport.getWorldWidth(); 

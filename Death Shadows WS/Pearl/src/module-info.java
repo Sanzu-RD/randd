@@ -16,5 +16,5 @@ module com.souchy.randd.deathshadows.Pearl {
 	requires transitive netty.all;
 	requires transitive com.souchy.randd.deathshadows.iolite;
 	requires transitive com.souchy.randd.deathshadow.core;
-	requires com.souchy.randd.commons.deathebi;
+	requires transitive com.souchy.randd.commons.deathebi;
 }

@@ -12,6 +12,10 @@ public class Profiler {
 	public Profiler() {
 		start = System.currentTimeMillis();
 	}
+	public Profiler(LogImportance importance) {
+		this();
+		this.level = importance;
+	}
 	
 	public long pop() {
 		var t = System.currentTimeMillis() - start;

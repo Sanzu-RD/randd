@@ -97,7 +97,7 @@ void main() {
 	}
 	
 	
-	//if (finalColor.a  < 0.5) discard;
+	//if (finalColor.a < 0.5) discard;
 	gl_FragColor = finalColor;
 	//gl_FragColor = vec4(1, 0, 0, 1);
 }

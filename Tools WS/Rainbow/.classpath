@@ -3,6 +3,25 @@
 	<classpathentry excluding="com/souchy/randd/tools/rainbow/ui/MainController.java|module-info.java" kind="src" path="src"/>
 	<classpathentry kind="src" output="res" path="assets"/>
 	<classpathentry kind="src" output="res" path="plants"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/BlueBeryl"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Beryl-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Opaline"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Opal-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-white"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Coraline"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Coral-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Amethyst"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Pearl-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Sapphire Owl"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PiranhaPlants"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SmoothRivers"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -18,33 +37,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RabbitMQ"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Tigase.Server"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/BlueBeryl"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Beryl-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Opaline"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Opal-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-white"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Coraline"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Coral-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Amethyst"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Coral"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DeathShadowCore"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/GreenBeryl"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Moonstone-black"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Opal"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Pearl"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Pearl-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Sapphire Owl"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Iolite"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/PiranhaPlants"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SmoothRivers"/>
+	<classpathentry kind="lib" path="C:/Robyn/GitPiranha/release/deathshadows/pearl.jar" sourcepath="C:/Robyn/GitPiranha/r and d/Death Shadows WS/Pearl/src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

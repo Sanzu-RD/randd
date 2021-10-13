@@ -1,0 +1,43 @@
+{
+  "size": 20,
+  "mono": false,
+  "hinting": "AutoMedium",
+  "color": {
+    "r": 1.0,
+    "g": 1.0,
+    "b": 1.0,
+    "a": 1.0
+  },
+  "gamma": 1.8,
+  "renderCount": 2,
+  "borderWidth": 0.0,
+  "borderColor": {
+    "r": 0.0,
+    "g": 0.0,
+    "b": 0.0,
+    "a": 1.0
+  },
+  "borderStraight": false,
+  "borderGamma": 1.8,
+  "shadowOffsetX": 0,
+  "shadowOffsetY": 0,
+  "shadowColor": {
+    "r": 0.0,
+    "g": 0.0,
+    "b": 0.0,
+    "a": 0.75
+  },
+  "spaceX": 0,
+  "spaceY": 0,
+  "padTop": 0,
+  "padLeft": 0,
+  "padBottom": 0,
+  "padRight": 0,
+  "characters": "\u0000ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890\"!`?\u0027.,;:()[]{}\u003c\u003e|/@\\^$€-%+\u003d#_\u0026~* ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ",
+  "kerning": true,
+  "flip": false,
+  "genMipMaps": false,
+  "minFilter": "Nearest",
+  "magFilter": "Nearest",
+  "incremental": false
+}

@@ -40,6 +40,22 @@
 		"icon":  "b_25",
 		"patch10": "",
 		"centerTexture": ""
+	},
+	
+	
+	{
+		"id": 110135004,
+		"comment": "mist",
+		"icon":  "b_25",
+		"patch10": "",
+		"centerTexture": ""
+	},
+	{
+		"id": 110002008,
+		"comment": "burning glyph",
+		"icon":  "b_25",
+		"patch10": "",
+		"centerTexture": ""
 	}
 	
 	

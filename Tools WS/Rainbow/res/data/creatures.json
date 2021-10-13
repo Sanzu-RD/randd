@@ -1,68 +1,122 @@
 [
 	{
+		"id": 0,
+		"comment": "Blender export settings : fbx, scale=0.01, Up=Z",
+		"models": ["res/models/creatures/BaseWitch.g3dj"],
+		"icon": "marian"
+	},
+	{
 		"id": 1,
 		"comment": "Mesmer",
-		"models": ["res/models/creatures/Marian.g3dj"],
-		"icon": "Mobs_joker_01"
+		"models": ["res/models/creatures/BaseWitch.g3dj"],
+		"icon": "mesmer"
 	},
 	{
 		"id": 2,
 		"comment": "Sungjin",
-		"models": ["res/models/creatures/Marian.g3dj"],
-		"icon": "MonstersAvatarIcons_22"
+		"models": ["res/models/creatures/BaseWitch.g3dj"],
+		"icon": "sungjin"
 	},
 	{
 		"id": 3,
 		"comment": "Megorya",
-		"models": ["res/models/creatures/Marian.g3dj"],
+		"models": ["res/models/creatures/BaseWitch.g3dj"],
 		"icon": "megorya"
+	},
+	{
+		"id": 4,
+		"comment": "Desperya",
+		"models": ["res/models/creatures/BaseWitch.g3dj"],
+		"icon": "desperya"
 	},
 	{
 		"id": 5,
 		"comment": "Fiera",
-		"models": ["res/models/creatures/Marian.g3dj"],
+		"models": ["res/models/creatures/Fiera.g3dj"],
 		"icon": "fiera"
 	},
 	{
 		"id": 6,
 		"comment": "Flora",
-		"models": ["res/models/creatures/Marian.g3dj"],
+		"models": ["res/models/creatures/Flora.g3dj"],
 		"icon": "flora"
 	},
 	{
 		"id": 7,
 		"comment": "Naia",
-		"models": ["res/models/creatures/Marian.g3dj"],
+		"models": ["res/models/creatures/Naia.g3dj"],
 		"icon": "naia"
+	},
+	{
+		"id": 8,
+		"comment": "Orea",
+		"models": ["res/models/creatures/Orea.g3dj"],
+		"icon": "orea"
 	},
 	{
 		"id": 9,
 		"comment": "Aurelia",
-		"models": ["res/models/creatures/Marian.g3dj"],
+		"models": ["res/models/creatures/Aurelia.g3dj"],
 		"icon": "aurelia"
 	},
 	{
-		"id": 13,
-		"comment": "Luna",
-		"models": ["res/models/creatures/Marian.g3dj"],
-		"icon": "luna"
+		"id": 10,
+		"comment": "Fantasma",
+		"models": ["res/models/creatures/Fantasma.g3dj"],
+		"icon": "fantasma"
 	},
 	{
-		"id": 39,
-		"comment": "Lilian",
-		"models": ["res/models/creatures/Marian.g3dj"],
-		"icon": "lilian"
+		"id": 11,
+		"comment": "Listine",
+		"models": ["res/models/creatures/BaseWitch.g3dj"],
+		"icon": "listine"
+	},
+	{
+		"id": 12,
+		"comment": "Goryo",
+		"models": ["res/models/creatures/BaseWitch.g3dj"],
+		"icon": "goryo"
+	},
+	{
+		"id": 13,
+		"comment": "Tsukuyo",
+		"models": ["res/models/creatures/Ninja_Female.g3dj"],
+		"icon": "tsukuyo"
+	},
+	{
+		"id": 14,
+		"comment": "Luna",
+		"models": ["res/models/creatures/BaseWitch.g3dj"],
+		"icon": "Luna"
+	},
+	{
+		"id": 15,
+		"comment": "Hero",
+		"models": ["res/models/creatures/BaseWitch.g3dj"],
+		"icon": "hero"
+	},
+	{
+		"id": 27,
+		"comment": "Real",
+		"models": ["res/models/creatures/Real.g3dj"],
+		"icon": "real"
 	},
 	{
 		"id": 40,
+		"comment": "Lilian",
+		"models": ["res/models/creatures/BaseWitch.g3dj"],
+		"icon": "lilian"
+	},
+	{
+		"id": 41,
 		"comment": "Marian",
-		"models": ["res/models/creatures/Marian.g3dj"],
+		"models": ["res/models/creatures/BaseWitch.g3dj"],
 		"icon": "marian"
 	},
 	{
-		"id": 44,
+		"id": 45,
 		"comment": "Klaust",
-		"models": ["res/models/creatures/Marian.g3dj"],
+		"models": ["res/models/creatures/BaseWitch.g3dj"],
 		"icon": "klaust"
 	}
 

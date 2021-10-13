@@ -5,13 +5,9 @@ import java.io.IOException;
 
 import com.google.common.eventbus.Subscribe;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.deathshadows.blackmoonstone.main.BlackMoonstone;
-import com.souchy.randd.deathshadows.coral.main.Coral;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.AskCreate;
 import com.souchy.randd.deathshadows.nodes.pearl.messaging.AskNodes;
-import com.souchy.randd.deathshadows.opal.Opal;
 import com.souchy.randd.deathshadows.pearl.NodeInfo;
-import com.souchy.randd.deathshadows.pearl.main.Pearl;
 import com.souchy.randd.tools.rainbow.main.Rainbow;
 import com.souchy.randd.tools.rainbow.main.RainbowApp;
 import com.souchy.randd.tools.rainbow.ui.events.Connected;
@@ -20,6 +16,7 @@ import com.souchy.randd.tools.rainbow.ui.events.RefreshEvent;
 import com.souchy.randd.tools.rainbow.ui.tools.Anchors;
 import com.souchy.randd.ebishoal.amethyst.main.Amethyst;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireOwl;
+import com.souchy.randd.deathshadows.pearl.main.Pearl;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -147,17 +144,17 @@ public class Layout { //extends BorderPane {
 
 			btnKill.setOnAction(e -> Rainbow.core.bus.post(new Kill()));
 			
-			btnMoonstone.setOnAction(e -> Rainbow.client.write(new AskCreate(BlackMoonstone.class.getSimpleName())));
-			btnCoral.setOnAction(e -> Rainbow.client.write(new AskCreate(Coral.class.getSimpleName())));
-			btnOpal.setOnAction(e -> Rainbow.client.write(new AskCreate(Opal.class.getSimpleName())));
+			btnMoonstone.setOnAction(e -> Rainbow.client.write(new AskCreate("BlackMoonstone"))); //BlackMoonstone.class.getSimpleName())));
+			btnCoral.setOnAction(e -> Rainbow.client.write(new AskCreate("BlackMoonstone"))); //Coral.class.getSimpleName())));
+			btnOpal.setOnAction(e -> Rainbow.client.write(new AskCreate("BlackMoonstone"))); //Opal.class.getSimpleName())));
 //			btnBeryl.setOnAction(e -> Rainbow.client.write(new AskCreate(GreenBeryl.class.getSimpleName()))));
 			btnAmethyst.setOnAction(e -> Pearl.createProcess(Amethyst.class, ""));
 			btnSapphire.setOnAction(e -> Pearl.createProcess(SapphireOwl.class, ""));
 
 
-			btnMoonstoneMock.setOnAction(e -> Rainbow.client.write(new AskCreate(BlackMoonstone.class.getSimpleName(), "mock")));
-			btnCoralMock.setOnAction(e -> Rainbow.client.write(new AskCreate(Coral.class.getSimpleName())));
-			btnOpalMock.setOnAction(e -> Rainbow.client.write(new AskCreate(Opal.class.getSimpleName())));
+			btnMoonstoneMock.setOnAction(e -> Rainbow.client.write(new AskCreate("BlackMoonstone", "mock"))); //BlackMoonstone.class.getSimpleName(), "mock")));
+			btnCoralMock.setOnAction(e -> Rainbow.client.write(new AskCreate("BlackMoonstone"))); //Coral.class.getSimpleName())));
+			btnOpalMock.setOnAction(e -> Rainbow.client.write(new AskCreate("BlackMoonstone"))); //Opal.class.getSimpleName())));
 //			btnBerylMock.setOnAction(e -> Rainbow.client.write(new AskCreate(GreenBeryl.class.getSimpleName()))));
 			btnAmethystMock.setOnAction(e -> Pearl.createProcess(Amethyst.class, ""));
 			btnSapphireMock.setOnAction(e -> Pearl.createProcess(SapphireOwl.class, "prod localhost 6000 souchy z 1"));

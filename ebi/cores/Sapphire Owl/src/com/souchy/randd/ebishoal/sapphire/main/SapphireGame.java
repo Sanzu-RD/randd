@@ -22,6 +22,7 @@ import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent.OnTurn
 import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.commons.Profiler;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.commons.tealwaters.logging.Log.LogImportance;
 import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebi.ammolite.Ammolite;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.RenderOptions;
@@ -65,7 +66,7 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 		DiamondModels.instantiate("com.souchy.randd.data.s1");
 
 		// load asssets
-		profiler = new Profiler();
+		profiler = new Profiler(LogImportance.Debug);
 		//LapisResources.loadResources(SapphireOwl.data);
 		LapisAssets.loadI18NBundles(Gdx.files.internal("res/i18n/"));
 		LapisAssets.loadFonts(Gdx.files.internal("res/fonts/"));
