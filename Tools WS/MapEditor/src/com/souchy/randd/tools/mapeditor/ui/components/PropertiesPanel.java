@@ -21,8 +21,8 @@ import com.kotcrab.vis.ui.widget.VisSplitPane;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import com.souchy.randd.commons.tealwaters.properties.Property;
-import com.souchy.randd.tools.mapeditor.MapEditorCore;
-import com.souchy.randd.tools.mapeditor.MapEditorGame;
+import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
+import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 
 public class PropertiesPanel extends VisSplitPane  implements Component {
 	
@@ -38,40 +38,11 @@ public class PropertiesPanel extends VisSplitPane  implements Component {
 		
 		//Color charcoal = new Color(47 / 255f, 47 / 255f, 47 / 255f, 1);
 		
+		Skin skin = VisUI.getSkin(); // MapEditorGame.skin;//new Skin(Gdx.files.internal("res/uiskin.json"));
+//		table.setSkin(skin);
 		
-		Skin skin = MapEditorGame.skin;//new Skin(Gdx.files.internal("res/uiskin.json"));
-		table.setSkin(skin);
-		
-		/*
-		Texture honkongTex = new Texture(Gdx.files.internal("fonts/hongkonghustle-hiero-100_00.png"), true); // true enables mipmaps
-		honkongTex.setFilter(TextureFilter.MipMapLinearNearest, TextureFilter.Linear); // linear filtering in nearest mipmap image
-		BitmapFont hongkongFont = new BitmapFont(Gdx.files.internal("fonts/hongkonghustle-hiero-100.fnt"), new TextureRegion(honkongTex), false);
-		LabelStyle hongkong = new LabelStyle();
-		hongkong.font = hongkongFont;*/
-		//
 
-		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-		parameter.size = 23;
-		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/GeosansLight.ttf"));
-		BitmapFont font = generator.generateFont(parameter);
-		font.setColor(Color.PINK);
-		generator.dispose();
-		/*
-		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-		parameter.size = 18;
-		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Romance-Fatal-Serif-Std.ttf"));
-		BitmapFont romance = generator.generateFont(parameter);
-		romance.setColor(Color.PINK);
-		generator.dispose();
-
-		//skin.add("default-font", romance, BitmapFont.class);
-		//VisUI.getSkin().remove("default-font", BitmapFont.class);
-		//VisUI.getSkin().add("default-font", romance, BitmapFont.class);
-		VisUI.getSkin().get(Label.LabelStyle.class).font = romance; // -> lui marche
-		//VisUI.getSkin().getFont("default-font").getData().scale(1.5f);
-		 */
-
-		VisUI.getSkin().get(Label.LabelStyle.class).font = font; // -> lui marche
+		//VisUI.getSkin().get(Label.LabelStyle.class).font = font; // -> lui marche
 		VisLabel ta = new VisLabel("Properties");
 	//	ta.getStyle().font = romance;
 	//	ta.setFontScale(1.5f);
@@ -86,8 +57,8 @@ public class PropertiesPanel extends VisSplitPane  implements Component {
 		table.add(titleEntry);
 		table.row();
 		
-		table.add(new VisLabel("Width")).width(125); // new Label("Width", skin)
-		table.add(new NumberEntryField("40")).width(125);
+		table.add(new VisLabel("Width")); //.width(125); // new Label("Width", skin)
+		table.add(new NumberEntryField("40")); //.width(125);
 		table.row();
 		
 		table.add(new VisLabel("Height"));

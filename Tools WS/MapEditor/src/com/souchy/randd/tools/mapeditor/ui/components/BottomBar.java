@@ -8,7 +8,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
-import com.souchy.randd.tools.mapeditor.MapEditorGame;
+import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
+import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 
 public class BottomBar extends VisTable implements Component {
 
@@ -53,12 +54,16 @@ public class BottomBar extends VisTable implements Component {
 	public void act(float delta) {
 		super.act(delta);
 		fps.setText(Gdx.graphics.getFramesPerSecond() + "");
-		pos.setText(MapEditorGame.screen.getCam().position + "");
-		dir.setText(MapEditorGame.screen.getCam().direction + "");
-
+		pos.setText(MapEditorGame.screen.getCamera().position + "");
+		dir.setText(MapEditorGame.screen.getCamera().direction + "");
+		
 		pack();
+		if(MapEditorCore.debug) this.setPosition(0, 10);
+		else 
 		this.setPosition(0, 0);
 		this.setWidth(getStage().getWidth());
+		
+		if(MapEditorCore.debug) this.setColor(1, 0, 0, 0.5f);
 	}
 
 	@Override

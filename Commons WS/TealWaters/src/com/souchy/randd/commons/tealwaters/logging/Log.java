@@ -10,6 +10,7 @@ public class Log {
 		public byte pow() {
 			return (byte) Math.pow(2, ordinal());
 		}
+		/** total = 63 */
 		public static int filter = Debug.pow() | Verbose.pow() | Info.pow() | Warning.pow() | Error.pow() | Critical.pow();
 	}
 	

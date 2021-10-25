@@ -75,7 +75,7 @@ public class LapisAssets {
 		defaultTexture = new Texture(pix);
 	}
 	
-	public AssetManager hack() {
+	public static AssetManager hack() {
 		return assets;
 	}
 	
@@ -85,6 +85,19 @@ public class LapisAssets {
 		if(finishedLoading) return false;
 		finishedLoading = assets.update(); //assets.isFinished();
 		return finishedLoading;
+	}
+	
+	/**
+	 * Returns true if an asset with the specified name and type is loading, queued to be loaded, or has been loaded. 
+	 */
+	public static boolean contains(String path, @SuppressWarnings("rawtypes") Class type) {
+		return assets.contains(path, type) || assets.contains(rootDir + path, type);
+	}
+	/**
+	 * whether the asset is loaded 
+	 */
+	public static boolean isLoaded(String path, @SuppressWarnings("rawtypes") Class type) {
+		return assets.isLoaded(path, type) || assets.isLoaded(rootDir + path, type);
 	}
 	
 	public static <T> T get(String path) {

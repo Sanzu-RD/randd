@@ -350,12 +350,17 @@ public class SapphireController extends CameraInputController {
 	@SuppressWarnings("preview")
 	@Override
 	public boolean keyDown(int keycode) {
-		if(keycode == Keys.H && Gdx.input.isKeyPressed(Keys.CONTROL_LEFT)&& Gdx.input.isKeyPressed(Keys.ALT_LEFT)) 
+		// CTRL+ALT+H : hard code shortcut to init/reset key combos
+		if(keycode == Keys.H && Gdx.input.isKeyPressed(Keys.CONTROL_LEFT) && Gdx.input.isKeyPressed(Keys.ALT_LEFT)) 
 			initCombos();
 		
+		// if the buffer is already full, remove the head
 		if(keyBuffer.size() == 2) keyBuffer.poll();
+		
+		// add the key to the buffer
 		keyBuffer.offer(keycode); 
 		
+		// get the lambda associated to the key combo then call it if not null
 		var key1 = keyBuffer.peekFirst();
 		var key2 = keyBuffer.peekLast();
 		Lambda c = keyCombos.get(key1, key2);

@@ -5,7 +5,9 @@ import java.io.FileFilter;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
@@ -16,8 +18,12 @@ import com.kotcrab.vis.ui.widget.file.FileChooser;
 import com.kotcrab.vis.ui.widget.file.FileChooser.Mode;
 import com.kotcrab.vis.ui.widget.file.FileChooser.SelectionMode;
 import com.kotcrab.vis.ui.widget.file.FileChooserAdapter;
-import com.souchy.randd.situationtest.models.map.MapData;
-import com.souchy.randd.tools.mapeditor.MapEditorGame;
+import com.souchy.randd.commons.diamond.ext.MapData;
+import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
+import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
+import com.souchy.randd.tools.mapeditor.main.MapWorld;
+import com.souchy.randd.tools.mapeditor.ui.*;
 
 public class TopBar extends MenuBar implements Component {
 	
@@ -25,25 +31,33 @@ public class TopBar extends MenuBar implements Component {
 	@SuppressWarnings("deprecation")
 	public TopBar() {
 		
-		FileChooser.setFavoritesPrefsName("com.your.package.here.filechooser");
+		FileChooser.setDefaultPrefsName("com.souchy.randd.tools.mapeditor.filechooser");
 		
 		createFileMenu();
 		createToolMenu();
 		
+		
 		getTable().padLeft(5);
 		getTable().padTop(3);
 		getTable().padBottom(3);
-		
+
 		//getTable().setBackground(MapEditorGame.skin.newDrawable("white"));
 		//getTable().setColor(Color.DARK_GRAY);
 		///getTable().pack();
+
+		getTable().pack();
+		getTable().setPosition(0, Gdx.graphics.getHeight(), Align.topLeft);
 	}
 	
 	@Override
 	public void resize(float width, float height) {
 		getTable().pack();
 		getTable().setWidth(width);
-		//getTable().setHeight(27);
+//		getTable().setHeight(50);
+//		Log.debug("TopBar resize : screen %s, bar %s", height, getTable().getHeight());
+		
+		if(MapEditorCore.debug) height -= 10;
+		if(MapEditorCore.debug) this.getTable().setColor(1, 1, 1, 0.5f);
 		getTable().setPosition(0, height, Align.topLeft);
 	}
 	
@@ -56,7 +70,7 @@ public class TopBar extends MenuBar implements Component {
 			@Override public void clicked(InputEvent event, float x, float y) {
 				FileChooser fileChooser = new FileChooser(Mode.OPEN);
 				fileChooser.setSelectionMode(SelectionMode.FILES);
-				fileChooser.setDirectory(Gdx.files.internal("data/maps/").file());
+				fileChooser.setDirectory(Gdx.files.internal("res/maps").file()); // data/maps/
 				fileChooser.setFileFilter(new FileFilter() {
 					@Override
 					public boolean accept(File file) {
@@ -72,7 +86,7 @@ public class TopBar extends MenuBar implements Component {
 						System.out.println("");*/
 						
 						MapEditorGame.currentFile.set(files.get(0));
-						MapEditorGame.loadMap();
+						MapEditorGame.screen.world.gen(); //MapEditorGame.loadMap();
 					}
 				});
 				getTable().getStage().addActor(fileChooser.fadeIn());
@@ -85,7 +99,7 @@ public class TopBar extends MenuBar implements Component {
 			@Override public void clicked(InputEvent event, float x, float y) {
 				MapEditorGame.currentFile.set(null);
 				MapEditorGame.currentMap.set(new MapData());
-				MapEditorGame.loadMap();
+				//MapEditorGame.loadMap();
 			}
 		});
 		file.addItem(neww);
@@ -105,7 +119,7 @@ public class TopBar extends MenuBar implements Component {
 					saveAs();
 				} else {
 					//MapEditorGame.cache.set(MapEditorGame.currentFile.get().name(), MapEditorGame.currentMap.get());
-					MapEditorGame.mapCache.set(MapEditorGame.currentFile.get().file().getPath(), MapEditorGame.currentMap.get());
+					//MapEditorGame.mapCache.set(MapEditorGame.currentFile.get().file().getPath(), MapEditorGame.currentMap.get());
 					MapEditorGame.properties.save();
 				}
 			}
@@ -124,7 +138,7 @@ public class TopBar extends MenuBar implements Component {
 				//System.out.println("Files : " + String.join(", ", Arrays.asList(files.items).stream().map(f -> f.name()).collect(Collectors.toList())));
 
 				MapEditorGame.currentFile.set(files.get(0));
-				MapEditorGame.mapCache.set(MapEditorGame.currentFile.get().file().getPath(), MapEditorGame.currentMap.get());
+				//MapEditorGame.mapCache.set(MapEditorGame.currentFile.get().file().getPath(), MapEditorGame.currentMap.get());
 				//fileChooser.remove();
 			}
 		});
@@ -134,12 +148,23 @@ public class TopBar extends MenuBar implements Component {
 	private void createToolMenu() {
 		Menu tools = new Menu("Tool");
 		this.addMenu(tools); 
+		
 		MenuItem options = new MenuItem("Options");
 		options.align(Align.left);
 		tools.addItem(options);
 		options.addListener(new ClickListener() {
 			@Override public void clicked(InputEvent event, float x, float y) {
-				System.out.println("option!!");
+				Log.info("TopBar click option menu");
+			}
+		});
+
+		MenuItem shaders = new MenuItem("Shaders");
+		shaders.align(Align.left);
+		tools.addItem(shaders);
+		shaders.addListener(new ClickListener() {
+			@Override public void clicked(InputEvent event, float x, float y) {
+				//Log.info("TopBar click option menu");
+				
 			}
 		});
 	}

@@ -25,7 +25,6 @@ import com.souchy.randd.commons.tealwaters.io.files.ClassDiscoverer.DefaultClass
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
-import com.souchy.randd.ebishoal.sapphire.gfx.SapphireHud;
 
 import com.kotcrab.vis.ui.VisUI;
 

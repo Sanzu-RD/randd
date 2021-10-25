@@ -104,13 +104,13 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 		
 		// create camera
 		cam = createCam(false);
-		viewport = createViewport(cam);
+		viewport = createViewport(getCamera());
 		resetCamera();
 		profiler.poll("LapisScreen create cam");
 
 		// create environment lights
 		env = createEnvironment();
-		shadowLight = createShadowLight(viewport);
+		shadowLight = createShadowLight(getViewport());
 		if(getShadowLight() != null) {
 			env.shadowMap = shadowLight;
 			env.add(shadowLight);
@@ -215,7 +215,8 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	protected abstract void act(float delta);
 	
 	
-	@Override public void resize(int width, int height) {
+	@Override 
+	public void resize(int width, int height) {
 //		Log.info("resize : " + width + ", " + height);
 		// resize le FBO
 		if(fbo != null) fbo = createFBO(width, height);
@@ -241,13 +242,15 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	
 	@Override
 	public void dispose() {
-		world.dispose();
+		getWorld().dispose();
 		getView().dispose();
 		getSpriteBatch().dispose();
 		getModelBatch().dispose();
 		getShadowBatch().dispose();
-		getEffekseer().dispose();
-		EffekseerBackendCore.Terminate();
+		if(getEffekseer() != null) {
+			getEffekseer().dispose();
+			EffekseerBackendCore.Terminate();
+		}
 	}
 
 	@Override

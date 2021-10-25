@@ -33,7 +33,7 @@ public class LapisFiles implements Files {
 
 	@Override
 	public FileHandle classpath (String path) {
-		return getFileHandle(path, FileType.Classpath); //new LwjglFileHandle(/* rootPrefix + */ path, FileType.Classpath);
+		return new LwjglFileHandle(/* rootPrefix + */ path, FileType.Classpath); // getFileHandle(path, FileType.Classpath); //new LwjglFileHandle(/* rootPrefix + */ path, FileType.Classpath);
 	}
 
 	@Override

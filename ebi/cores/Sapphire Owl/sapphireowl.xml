@@ -67,7 +67,7 @@
 		
 		<parallel>
 			
-			<trycatch property="foo" reference="bar">
+			<trycatch> <!-- property="foo" reference="bar"> -->
 			  <try>
 			    <fail>Error uploading sapphireowl.jar to server</fail>
 				<!-- push jar to server -->
@@ -76,7 +76,7 @@
 
 			  <catch>
 			    <!--<echo>In &lt;catch&gt;.</echo>-->
-			  	<echo>${foo}</echo>
+			  	<!--<echo>${foo}</echo>-->
 			  </catch>
 
 			  <finally>

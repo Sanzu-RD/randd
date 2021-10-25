@@ -30,7 +30,7 @@
 			"colorAttributes": [ "ffffffff", "ffffffff", "ffffffff", "ffffffff", "ffffffff", "ffffffff" ]
 		},
 		{
-			"model": "res/models/decor/cube.obj",
+			"model": "res/models/decor/cube.g3dj",
 			"transform":[
 				[ 0.50f, 0.00f, 2.25f ], 
 				[ 0.00f, 0.00f, 0.00f ], 
@@ -41,7 +41,7 @@
 			"colorAttributes": [ "ffffffff" ]
 		},
 		{
-			"model": "res/models/decor/cube.obj",
+			"model": "res/models/decor/cube.g3dj",
 			"transform":[
 				[ 0.50f, 0.00f, 2.25f ], 
 				[ 0.00f, 0.00f, 0.00f ], 
@@ -52,7 +52,7 @@
 			"colorAttributes": [ "ffffffff" ]
 		},
 		{
-			"model": "res/models/decor/cube.obj",
+			"model": "res/models/decor/cube.g3dj",
 			"transform":[
 				[ 1.00f, 0.00f, 2.25f ], 
 				[ 0.00f, 0.00f, 0.00f ], 
@@ -63,7 +63,7 @@
 			"colorAttributes": [ "ffffffff" ]
 		},
 		{
-			"model": "res/models/decor/pinetree.obj",
+			"model": "res/models/decor/pinetree.g3dj",
 			"transform":[
 				[ 0.5f, 0.5f, 2.00f ], 
 				[ 1.00f, 0.00f, 0.00f ], 
@@ -92,7 +92,7 @@
 	],
 	"decorations": [
 		{
-			"model": "res/models/decor/pinetree.obj",
+			"model": "res/models/decor/pinetree.g3dj",
 			"transform":[
 				[ 0.5f, 0.5f, 1f ], 
 				[ 1.00f, 0.00f, 0.00f ], 

@@ -17,16 +17,23 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.souchy.randd.tools.mapeditor.MapEditorGame;
-import com.souchy.randd.tools.mapeditor.ui.EditorScreenHud;
+import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
+import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorScreenHud;
 
-public class Controls3d extends InputListener {
+public class Controls3d extends CameraInputController {
 	
+	public Controls3d(Camera camera) {
+		super(camera);
+		this.cam = camera;
+	}
+
 	private Camera cam;
 	
 	private Vector3 ut = Vector3.Zero.cpy();
@@ -35,17 +42,12 @@ public class Controls3d extends InputListener {
 	private float previousX;
 	private float previousY;
 	
-	private float translationSpeed = 0.05f;
-	private float rotationSpeed = 0.05f;
+	private float translationSpeed = 10;
+	private float rotationSpeed = 60;
 	private float zoomSpeed = 5;
 	
-	public Controls3d(Camera cam) {
-		this.cam = cam;
-	}
 	
 	public void update(float delta) {
-
-		
 		//long currentTime = System.currentTimeMillis();
 		//long delta = currentTime - previousTime;
 		
@@ -72,14 +74,14 @@ public class Controls3d extends InputListener {
 		if(Gdx.input.isKeyPressed(LEFT)) ur.add(0, 0, -1f); // look left
 		if(Gdx.input.isKeyPressed(RIGHT)) ur.add(0, 0, 1f); // look right
 		
-		// p = le point qu'on regarde avec la cam�ra
+		// p = le point qu'on regarde avec la caméra
 		float scl = Math.abs(cam.position.z / dir.z);
 		Vector3 p = new Vector3(dir.x * scl + pos.x, dir.y * scl + pos.y, 0); // new Vector3((float)GridMap.width/2, (float)GridMap.height/2, 0); // -> si on
 																				// voulait tjrs tourner autour du point central
 		//System.out.println("delta : " + delta);
-		float angle = rotationSpeed * delta * 2000;
+		float angle = rotationSpeed * delta; // * 2000;
 		
-		float distance = translationSpeed * delta * 2000;
+		float distance = translationSpeed * delta; // * 2000;
 		Vector3 movement = ut.scl(distance);
 		
 		cam.position.add(movement);
@@ -89,13 +91,13 @@ public class Controls3d extends InputListener {
 		ut.set(0, 0, 0);
 		ur.set(0, 0, 0);
 	}
-	
+
 	@Override
-	public void touchDragged(InputEvent event, float x, float y, int pointer) {
-		super.touchDragged(event, x, y, pointer);
-		Rectangle space = ((EditorScreenHud)MapEditorGame.screen.getHud()).getDrawingSpace();
+	public boolean touchDragged(float x, float y, int pointer) {
+		super.touchDragged(x, y, pointer);
+		Rectangle space = MapEditorGame.screen.hud.getDrawingSpace();
 		if(space.contains(x, y) == false) {
-			return; // pas dans la zone
+			return false; // pas dans la zone
 		}
 		
 		//System.out.println("touch Dragged [" + x + "," + y + "]");
@@ -104,11 +106,12 @@ public class Controls3d extends InputListener {
 		Vector3 dir = cam.direction;
 		Vector3 pos = cam.position;
 		
+		// delta entre le dernier point dragged de la souris et le présent
 		float dx = x - previousX;
 		float dy = y - previousY;
 		
 		
-		// p = le point qu'on regarde avec la cam�ra
+		// p = le point qu'on regarde avec la caméra
 		float scl = Math.abs(cam.position.z / dir.z);
 		Vector3 target = new Vector3(dir.x * scl + pos.x, dir.y * scl + pos.y, 0);
 		
@@ -128,12 +131,12 @@ public class Controls3d extends InputListener {
 		}
 		// System.out.println("code : " + event.getKeyCode());
 		if(Gdx.input.isButtonPressed(Buttons.LEFT)) { // event.getButton() == Buttons.RIGHT) { //
-			if(dy > 0) ur.add(up.y, -up.x, 0); // look down
-			if(dy < 0) ur.add(-up.y, up.x, 0); // look up
+			if(dy < 0) ur.add(up.y, -up.x, 0); // look down
+			if(dy > 0) ur.add(-up.y, up.x, 0); // look up
 			if(dx > 0) ur.add(0, 0, -1f); // look left
 			if(dx < 0) ur.add(0, 0, 1f); // look right
 			
-			float angle = rotationSpeed * 5;// * (Math.abs(dx) + Math.abs(dx)); // * delta;
+			float angle = rotationSpeed / 10f;// * 5;// * (Math.abs(dx) + Math.abs(dx)); // * delta;
 			cam.rotateAround(target, ur, angle);
 		}
 		
@@ -146,23 +149,30 @@ public class Controls3d extends InputListener {
 		previousY = y;
 		ut.set(0, 0, 0);
 		ur.set(0, 0, 0);
+		return true;
 	}
 	
 	@Override
-	public boolean keyDown(InputEvent event, int keycode) {
+	public boolean keyDown(int keycode) {
 		// System.out.println("key down " + keycode);
 
 		if(keycode == Keys.SPACE) { //Gdx.input.isKeyPressed(Keys.SPACE)) {
 			//cam.position.set(0, 0, 60);
 			//cam.direction.set(0, 0, -1);
 			//cam.up.set(0, 1, 0);
-			MapEditorGame.screen.resetCam();
+			MapEditorGame.screen.resetCamera();
+			//MapEditorGame.screen.hud.dispose();
+			//MapEditorGame.screen.hud = new EditorScreenHud();
 		}
-		return true; // super.keyDown(event, keycode);
+		if(keycode == Keys.P) {
+			Log.debug("Controls3d point at [%s, %s]", Gdx.input.getX(), Gdx.input.getY());
+		}
+		
+		return super.keyDown(keycode); // super.keyDown(event, keycode);
 	}
-	
+
 	@Override
-	public boolean mouseMoved(InputEvent event, float x, float y) {
+	public boolean mouseMoved(int x, int y) {
 		// System.out.println("mouse Moved");
 		
 		Vector3 t = cam.unproject(new Vector3(x, y, 0));
@@ -184,14 +194,14 @@ public class Controls3d extends InputListener {
 			//	System.out.println(v);
 			}
 			if(scl > far) {
-				return super.mouseMoved(event, x, y);
+				return super.mouseMoved(x, y);
 			}
 		}
 		
 	}
 	
 	@Override
-	public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+	public boolean touchDown(float x, float y, int pointer, int button) {
 		// System.out.println("touch Down " + event.getKeyCode() + " / " +
 		
 		previousX = x;
@@ -199,8 +209,9 @@ public class Controls3d extends InputListener {
 		return true; // super.touchDown(event, x, y, pointer, button);
 	}
 	
+	/*
 	@Override
-	public boolean scrolled(InputEvent event, float x, float y, int amount) {
+	public boolean scrolled(int amount) {
 		// System.out.println("scrolled " + event.getScrollAmount() + " = " + amount);
 		
 		Vector3 p = cam.direction.cpy().scl(amount * -zoomSpeed);
@@ -208,5 +219,38 @@ public class Controls3d extends InputListener {
 		cam.update();
 		return true; // super.scrolled(event, x, y, amount);
 	}
+	*/
+	
+
+	@Override
+	public boolean scrolled(int amount) {
+		scrolledFloat(amount);
+		//if(!activateBaseCamControl) return true;
+		//return super.scrolled(amount);
+		return true;
+	}
+	private void scrolledFloat(float amount) {
+		//var viewport = SapphireGame.gfx.getViewport();
+		var cam = MapEditorGame.screen.getCamera();
+//		var ratio = viewport.getWorldWidth() / viewport.getWorldHeight();
+//		viewport.setWorldWidth(viewport.getWorldWidth() + amount);
+//		viewport.setWorldHeight( viewport.getWorldWidth() / ratio);
+//		Log.info("viewport 1 : " + viewport.getWorldWidth() + "; " + viewport.getWorldHeight());
+//		Log.info("cam 1 : " + cam.viewportWidth + "; " + cam.viewportHeight);
+
+		var ratio = cam.viewportWidth / cam.viewportHeight;
+		cam.viewportWidth += amount;
+		cam.viewportHeight = cam.viewportWidth / ratio;
+		if (autoUpdate)
+			camera.update();
+		
+//		Log.info("viewport 2 : " + viewport.getWorldWidth() + "; " + viewport.getWorldHeight());
+//		Log.info("cam 2 : " + cam.viewportWidth + "; " + cam.viewportHeight);
+
+		// resize le viewport de la shadowlight pour sa shadowmap
+		if(MapEditorGame.screen.getShadowLight() != null)
+			MapEditorGame.screen.getShadowLight().zoom(cam.viewportWidth, cam.viewportHeight);
+	}
+	
 	
 }

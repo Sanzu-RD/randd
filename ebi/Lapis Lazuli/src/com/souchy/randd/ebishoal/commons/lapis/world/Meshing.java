@@ -124,7 +124,11 @@ public class Meshing {
 			    	//Texture tex = new Texture(Gdx.files.absolute(m.textures[t]));
 			    	tex.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
 			    	var color = Color.valueOf(m.colorAttributes[t]);
-			    	var mat = new Material(TextureAttribute.createDiffuse(tex), ColorAttribute.createDiffuse(color), new BlendingAttribute(1f));
+			    	var mat = new Material(
+			    			TextureAttribute.createDiffuse(tex), 
+			    			ColorAttribute.createDiffuse(color), 
+			    			new BlendingAttribute(1f)
+			    	);
 			    	mat.id = m.textures[t] + m.colorAttributes[t];
 			    	root.materials.add(mat);
 				}

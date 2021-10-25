@@ -17,6 +17,7 @@ public class EditorProperties implements PropertyConfig {
 	public Property<Float> directionalBrightness;
 	public Property<Boolean> showGrid;
 	public Property<Integer> directionalLightCount;
+	public Property<String> lastMap;
 	
 	
 	public EditorProperties() {

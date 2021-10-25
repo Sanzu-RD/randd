@@ -94,7 +94,7 @@ interface LapisScreenRenderer extends Screen {
 			// particle effects
 			renderParticleEffectsContainer();
 			// particle effects effekseer... either i get fbo or transparency.... even the fire has straight lines at the bottom of particles and we dont have distortion in the shader
-			renderEffekseer(delta);
+			if(getEffekseer() != null) renderEffekseer(delta);
 		}
 		getFBO().end();
 
@@ -103,6 +103,9 @@ interface LapisScreenRenderer extends Screen {
 		Texture tex = (RenderOptions.onlyShadowMap && getShadowLight() != null) ? getShadowLight().getFrameBuffer().getColorBufferTexture() : getFBO().getColorBufferTexture();
 		var fboRegion = new TextureRegion(tex);
 		fboRegion.flip(false, true);
+		
+		//Log.debug("LapisScreenRenderer [%s, %s, %s, %s]", fboRegion.getRegionX(), fboRegion.getRegionY(), fboRegion.getRegionWidth(), fboRegion.getRegionHeight());
+		//fboRegion.setRegionWidth(fboRegion.getRegionWidth() - 300);
 		
 		// sprite batch with post processing or not 
 		var spriteBatch = RenderOptions.activatePP ? getSpriteBatch() : cleanSpriteBatch;

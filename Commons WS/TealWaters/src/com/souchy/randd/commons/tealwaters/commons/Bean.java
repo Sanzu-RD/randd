@@ -5,7 +5,7 @@ import java.beans.PropertyChangeSupport;
 
 public class Bean<T> {
 
-    private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    protected final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     public void addListener(PropertyChangeListener listener) {
         this.pcs.addPropertyChangeListener(listener);
