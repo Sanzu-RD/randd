@@ -331,13 +331,18 @@ public class SapphireHudSkin extends Skin {
 			TextureRegion textureRegion = getRegion(name);
 			if(textureRegion instanceof AtlasRegion) {
 				AtlasRegion region = (AtlasRegion) textureRegion;
-				if(region.splits != null) 
+				if(region.findValue("split") != null) 
 					drawable = new NinePatchDrawable(getPatch(name));
-				else if(region.rotate || region.packedWidth != region.originalWidth || region.packedHeight != region.originalHeight)
+				else 
+				if(region.rotate || region.packedWidth != region.originalWidth || region.packedHeight != region.originalHeight)
 					drawable = new SpriteDrawable(getSprite(name));
 			}
 			if(drawable == null) 
 				drawable = new TextureRegionDrawable(textureRegion);
+//			if (drawable == null) { // this comes from new version of Skin.class, but I can't access scale so can't use it
+//				drawable = new TextureRegionDrawable(textureRegion);
+//				if (scale != 1) scale(drawable);
+//			}
 		} catch (GdxRuntimeException ignored) {
 		}
 		

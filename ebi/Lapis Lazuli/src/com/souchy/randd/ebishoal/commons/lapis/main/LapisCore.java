@@ -2,6 +2,8 @@ package com.souchy.randd.ebishoal.commons.lapis.main;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 
@@ -19,7 +21,7 @@ import com.souchy.randd.ebishoal.commons.EbiShoalCore;
  */
 public abstract class LapisCore extends EbiShoalCore {
 
-	private LwjglApplicationConfiguration config;
+	private Lwjgl3ApplicationConfiguration config;
 	private LapisProperties properties;
 	private LapisGame game;
 
@@ -34,7 +36,7 @@ public abstract class LapisCore extends EbiShoalCore {
 	}
 	
 	public void start() {
-	    new LwjglApplication(game, config);
+	    new Lwjgl3Application(game, config);
 	}
 
 	/**
@@ -42,7 +44,7 @@ public abstract class LapisCore extends EbiShoalCore {
 	 */
 	//@Override
 	public void init() throws Exception {
-		config = new LwjglApplicationConfiguration();
+		config = new Lwjgl3ApplicationConfiguration();
 		addIcon(config);
 		properties = new LapisProperties(config);
 		properties.load();
@@ -75,7 +77,7 @@ public abstract class LapisCore extends EbiShoalCore {
 	/*
 	 * Example : config.addIcon("G:\\Assets\\pack\\fantasy bundle\\tcgcardspack\\Tex_krakken_icon.png", FileType.Absolute);
 	 */
-	public abstract void addIcon(LwjglApplicationConfiguration config);
+	public abstract void addIcon(Lwjgl3ApplicationConfiguration config);
 
 
 	protected static void arguments(String[] args) {

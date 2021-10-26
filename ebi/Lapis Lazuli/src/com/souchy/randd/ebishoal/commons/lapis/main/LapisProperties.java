@@ -12,14 +12,14 @@ import java.util.function.Supplier;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Files.FileType;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglFileHandle;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.commons.tealwaters.properties.Property;
 import com.souchy.randd.commons.tealwaters.properties.PropertyConfig;
 
 /**
- * Pour {@link com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration}
+ * Pour {@link com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration}
  * 
  * @author Blank
  */
@@ -44,9 +44,9 @@ public class LapisProperties implements PropertyConfig {
 	public Property<Files.FileType> preferencesFileType; // = FileType.External;
 	
 	
-	private LwjglApplicationConfiguration config;
+	private Lwjgl3ApplicationConfiguration config;
 	
-	public LapisProperties(LwjglApplicationConfiguration config) {
+	public LapisProperties(Lwjgl3ApplicationConfiguration config) {
 		this.config = config;
 		this.properties = new Properties();
 		this.file = new File("lapis.properties"); 
@@ -65,38 +65,46 @@ public class LapisProperties implements PropertyConfig {
 //				e1.printStackTrace();
 //			}
 //		}
+//		config.width = width.get();
+//		config.height = height.get();
+//		config.title = title.get();
+//		config.foregroundFPS = fpsFocused.get();
+//		config.backgroundFPS = fpsBackground.get();
+//		config.samples = samples.get();
+//		config.vSyncEnabled = vsync.get();
+//		config.preferencesDirectory = preferencesDirectory.get();
+//		config.preferencesFileType = preferencesFileType.get();
 		
-		config.width = width.get();
-		config.height = height.get();
-		config.title = title.get();
-		config.foregroundFPS = fpsFocused.get();
-		config.backgroundFPS = fpsBackground.get();
-		config.samples = samples.get();
-		config.vSyncEnabled = vsync.get();
-		config.preferencesDirectory = preferencesDirectory.get();
-		config.preferencesFileType = preferencesFileType.get();
+		config.setWindowedMode(width.get(), height.get());
+		config.setTitle(title.get());
+		config.setForegroundFPS(fpsFocused.get());
+		config.setIdleFPS(fpsBackground.get());
+		config.useVsync(vsync.get());
+		config.setPreferencesConfig(preferencesDirectory.get(), preferencesFileType.get());
+		config.setBackBufferConfig(8, 8, 8, 8, 16, 0, samples.get());
 		
 		var file = new LwjglFileHandle(new File(preferencesDirectory.get(), "sapphire"), preferencesFileType.get());
 		Log.verbose("pref file : " + file.file().getAbsolutePath());
 		
 		
 		
-		width.addListener((e) -> config.width = (int) e.getNewValue());
-		height.addListener((e) -> config.height = (int) e.getNewValue());
+		width.addListener((e) -> config.setWindowedMode((int) e.getNewValue(), height.get()));
+		height.addListener((e) -> config.setWindowedMode(width.get(), (int) e.getNewValue()));
 		title.addListener((e) -> {
-			 config.title = (String) e.getNewValue();
-			 Gdx.graphics.setTitle(config.title);
+//			 config.title = (String) e.getNewValue();
+			 config.setTitle((String) e.getNewValue());
+			 Gdx.graphics.setTitle((String) e.getNewValue());
 			 //System.out.println("setting config title : " + e.getNewValue());
 		});
-		fpsFocused.addListener((e) -> config.foregroundFPS = (int) e.getNewValue());
-		fpsBackground.addListener((e) -> config.backgroundFPS = (int) e.getNewValue());
-		samples.addListener((e) -> config.samples = (int) e.getNewValue());
+		fpsFocused.addListener((e) -> config.setForegroundFPS((int) e.getNewValue()));
+		fpsBackground.addListener((e) -> config.setIdleFPS((int) e.getNewValue()));
+		samples.addListener((e) -> config.setBackBufferConfig(8, 8, 8, 8, 16, 0, samples.get()));
 		vsync.addListener((e) -> {
-			config.vSyncEnabled = (boolean) e.getNewValue();
-			Gdx.graphics.setVSync(config.vSyncEnabled);
+			config.useVsync((boolean) e.getNewValue());
+			Gdx.graphics.setVSync((boolean) e.getNewValue());
 		});
-		width.addListener((e) -> config.preferencesDirectory = (String) e.getNewValue());
-		width.addListener((e) -> config.preferencesFileType = (FileType) e.getNewValue());
+		preferencesDirectory.addListener((e) -> config.setPreferencesConfig(preferencesDirectory.get(), preferencesFileType.get()));
+		preferencesFileType.addListener((e) -> config.setPreferencesConfig(preferencesDirectory.get(), preferencesFileType.get()));
 	}
 	
 	@Override

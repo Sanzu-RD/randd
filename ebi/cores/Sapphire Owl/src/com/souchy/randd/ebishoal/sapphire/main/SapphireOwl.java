@@ -3,6 +3,7 @@ package com.souchy.randd.ebishoal.sapphire.main;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.souchy.jeffekseer.FXLoader;
 import com.souchy.randd.commons.deathebi.msg.GetSalt;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
@@ -101,9 +102,10 @@ public class SapphireOwl extends LapisCore {
 	}
 
 	@Override
-	public void addIcon(LwjglApplicationConfiguration config) {
-		config.addIcon("res/textures/appicon4.png", FileType.Internal); //.addIcon("G:/Assets/pack/fantasy bundle/tcgcardspack/Tex_krakken_icon.png", FileType.Absolute);
+	public void addIcon(Lwjgl3ApplicationConfiguration config) {
+		config.setWindowIcon(FileType.Internal, "res/textures/appicon4.png");
 	}
+
 
 	
 }
