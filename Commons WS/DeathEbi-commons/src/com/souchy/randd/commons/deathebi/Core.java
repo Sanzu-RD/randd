@@ -59,8 +59,8 @@ public abstract class Core {
 		// init smooth rivers on localhost:port from conf if smoothrivers is enabled in the conf
 		// init microservices with their messages and handlers
 		// start application
-		
-		Log.LogImportance.filter = Integer.parseInt(args[0]);
+		if(args.length > 0)
+			Log.LogImportance.filter = Integer.parseInt(args[0]);
 		
 		Logging.registerLogModule(this.getClass());
 		discoverMesssages();
