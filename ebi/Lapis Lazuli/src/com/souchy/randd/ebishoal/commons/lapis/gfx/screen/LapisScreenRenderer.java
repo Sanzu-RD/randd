@@ -42,6 +42,7 @@ interface LapisScreenRenderer extends Screen {
 	public FrameBuffer getFBO();
 	public SpriteBatch getSpriteBatch();
 	public AbstractLmlView getView();
+	public ImGuiHud getImGui();
 	
 	public Camera getCamera();
 	public Viewport getViewport();
@@ -128,6 +129,7 @@ interface LapisScreenRenderer extends Screen {
 		
 		// render UI
 		if(RenderOptions.renderUI) renderView(delta);
+		
 	}
 	
 	public default void renderEffekseer(float delta) {
@@ -169,6 +171,9 @@ interface LapisScreenRenderer extends Screen {
 			} catch (Exception e) {
 				Log.critical("LapisRenderer renderView error : ", e);
 			}
+		}
+		if(getImGui() != null) {
+			getImGui().render(delta);
 		}
 	}
 	

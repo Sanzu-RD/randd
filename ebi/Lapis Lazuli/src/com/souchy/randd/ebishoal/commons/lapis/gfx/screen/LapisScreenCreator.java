@@ -38,6 +38,14 @@ interface LapisScreenCreator {
 	 * Create LML UI
 	 */
 	public LapisHud createUI();
+
+	/**
+	 * Create ImGUI UI
+	 */
+	public default ImGuiHud createImGui() {
+		return null;
+	}
+	
 	
 	/**
 	 * Create line drawing utility
@@ -194,5 +202,7 @@ interface LapisScreenCreator {
 //		manager.setViewport(viewport);
 //		return manager;
 	}
+	
+	
 	
 }

@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.github.czyzby.lml.parser.impl.AbstractLmlView;
 import com.souchy.jeffekseer.EffectManager;
 import com.souchy.randd.commons.tealwaters.commons.Profiler;
+import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shadows.LapisDSL;
 import com.souchy.randd.ebishoal.commons.lapis.lining.LineDrawing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
@@ -68,6 +69,7 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	// UI -------------------------------------
 	// ----------------------------------------
 	private LapisHud view;
+	private ImGuiHud imGuiHud;
 	
 	// ----------------------------------------
 	// OTHER -------------------------------------
@@ -135,6 +137,8 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 		
 		// create UI
 		view = createUI();
+		imGuiHud = createImGui();
+		if(imGuiHud != null) imGuiHud.create();
 		profiler.poll("LapisScreen create ui");
 
 		// create controller 
@@ -219,7 +223,12 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	public void resize(int width, int height) {
 //		Log.info("resize : " + width + ", " + height);
 		// resize le FBO
-		if(fbo != null) fbo = createFBO(width, height);
+		if(fbo != null) 
+			try {
+				fbo = createFBO(width, height);
+			} catch(Exception e) {
+				Log.error("", e);
+			}
 		// resize la sprite batch du fbo / post processing
 		if(getSpriteBatch() != null) getSpriteBatch().getProjectionMatrix().setToOrtho2D(0, 0, width, height);
 		// resize le viewport du world
@@ -242,15 +251,16 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	
 	@Override
 	public void dispose() {
-		getWorld().dispose();
-		getView().dispose();
-		getSpriteBatch().dispose();
-		getModelBatch().dispose();
-		getShadowBatch().dispose();
+		if(getWorld() != null) getWorld().dispose();
+		if(getModelBatch() != null) getModelBatch().dispose();
+		if(getShadowBatch() != null) getShadowBatch().dispose();
 		if(getEffekseer() != null) {
 			getEffekseer().dispose();
 			EffekseerBackendCore.Terminate();
 		}
+		if(getSpriteBatch() != null) getSpriteBatch().dispose();
+		if(getView() != null) getView().dispose();
+		if(getImGui() != null) getImGui().dispose();
 	}
 
 	@Override
@@ -336,6 +346,12 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	@Override
 	public EffectManager getEffekseer() {
 		return effekseerManager;
+	}
+	
+	
+	@Override
+	public ImGuiHud getImGui() {
+		return imGuiHud;
 	}
 	
 }
