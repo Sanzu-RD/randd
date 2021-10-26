@@ -221,12 +221,9 @@ public class Controls3d extends CameraInputController {
 	}
 	*/
 	
-
 	@Override
-	public boolean scrolled(int amount) {
-		scrolledFloat(amount);
-		//if(!activateBaseCamControl) return true;
-		//return super.scrolled(amount);
+	public boolean scrolled(float amountX, float amountY) {
+		scrolledFloat(amountY);
 		return true;
 	}
 	private void scrolledFloat(float amount) {

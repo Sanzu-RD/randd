@@ -52,7 +52,7 @@ public class PropertiesPanel extends VisSplitPane  implements Component {
 
 		var titleEntry = new VisTextField();
 		titleEntry.setName("title");
-		linkStringProperty(titleEntry, MapEditorCore.core.getProperties().title);
+		//linkStringProperty(titleEntry, MapEditorCore.core.getProperties().title);
 		table.add(new VisLabel("Title"));
 		table.add(titleEntry);
 		table.row();

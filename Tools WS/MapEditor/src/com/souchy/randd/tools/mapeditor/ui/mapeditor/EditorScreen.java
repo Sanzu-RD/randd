@@ -48,12 +48,18 @@ public class EditorScreen extends LapisScreen {
 	private float time = 0; // current time
 	private float previousSplit = 0;
 	
+	
+	public EditorImGuiHud imgui;
+	
 	@Override
 	public void init() {
 		super.init();
 		
 		//Shader s;
 		shaderp = new ShaderProgram(Gdx.files.internal("shaders/passthrough.vsh"), Gdx.files.internal("shaders/passthrough.fsh"));
+		
+		imgui = new EditorImGuiHud();
+		imgui.create();
 	}
 
 	@Override
@@ -84,16 +90,12 @@ public class EditorScreen extends LapisScreen {
 		}
 		previousSplit = currSplit;
 	}
-	
-	@Override
-	public LapisHud createUI() {
-		return hud = new EditorScreenHud();
-	}
+
 	
 	@Override
 	public void renderWorld() {
 		// tint world
-		Color color = Color.PINK;
+//		Color color = Color.PINK;
 //		clearScreen(color.r, color.g, color.b, color.a);
 		super.renderWorld();
 	}
@@ -105,6 +107,13 @@ public class EditorScreen extends LapisScreen {
 		// Met le glViewport normal pour dessiner le Hud par la suite
 	    //Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		super.renderView(delta);
+		
+		imgui.render(delta);
+	}
+	
+	@Override
+	public LapisHud createUI() {
+		return hud = new EditorScreenHud();
 	}
 	
 	@Override
