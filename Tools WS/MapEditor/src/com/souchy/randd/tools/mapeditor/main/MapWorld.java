@@ -281,7 +281,7 @@ public class MapWorld extends World {
 		pos.add(Constants.cellHalf, 0, Constants.cellHalf);
 		var temp = new Vector3();
 		for(var inst : instances)
-			if(inst != cursor && inst.transform.getTranslation(temp).equals(pos))
+			if(inst != cursor && inst != MapEditorGame.screen.controller.selectedInstance && inst.transform.getTranslation(temp).equals(pos))
 				return inst;
 		return null;
 	}

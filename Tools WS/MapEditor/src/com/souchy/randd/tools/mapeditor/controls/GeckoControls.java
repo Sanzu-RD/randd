@@ -59,7 +59,6 @@ public class GeckoControls extends Controls3d {
 		super.initCombos();
 		Log.info("Controls 3d initCombos " + config);
 		keys.putCombo(config.cancel, () -> { 
-			Log.info("cancel");
 			MapWorld.world.instances.remove(selectedInstance);
 			selectedInstance = null;
 			selectedModel = null;
@@ -72,13 +71,10 @@ public class GeckoControls extends Controls3d {
 		});
 		keys.putCombo(config.controls3d.camTopView, MapEditorGame.screen::topView);
 		keys.putCombo(new KeyCombination(Keys.FORWARD_DEL), () -> {
-			Log.info("del");
 			// delete instance at position
 			var pos = getCursorWorldPos();
 			pos.z = this.cursorZ;
 			MapWorld.world.removeInstanceAt(pos);
-			// also delete instance ??
-			selectedInstance = null;
 		});
 		keys.putCombo(new KeyCombination(Keys.NUM_1), () -> {
 			// add instance at positionl
@@ -236,7 +232,7 @@ public class GeckoControls extends Controls3d {
 		var worldpos = getCursorWorldPos();
 		MapWorld.world.translateCursor(worldpos.x, worldpos.y, this.cursorZ);
 		if(selectedInstance != null) {
-			worldpos.add(Constants.cellHalf, 0, Constants.cellHalf);
+			worldpos.add(Constants.cellHalf, 0, Constants.cellHalf + this.cursorZ - this.floorHeight);
 			selectedInstance.transform.setTranslation(worldpos.x, worldpos.y, worldpos.z);
 		}
 	}
@@ -244,7 +240,7 @@ public class GeckoControls extends Controls3d {
 	
 	public void dropNewInstance(Vector3 worldpos) {
 		var inst = new ModelInstance(selectedModel);
-		worldpos.add(Constants.cellHalf, 0, Constants.cellHalf);
+		worldpos.add(Constants.cellHalf, 0, Constants.cellHalf + this.cursorZ - this.floorHeight);
 		inst.transform.setTranslation(worldpos.x, worldpos.y, worldpos.z);
 		MapWorld.world.instances.add(inst);
 	}
