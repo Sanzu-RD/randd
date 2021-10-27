@@ -22,6 +22,7 @@ import com.souchy.randd.commons.tealwaters.commons.Bean;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.tools.mapeditor.configs.EditorProperties;
+import com.souchy.randd.tools.mapeditor.controls.Commands;
 import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorScreen;
 
 public class MapEditorGame extends LapisGame {
@@ -47,6 +48,8 @@ public class MapEditorGame extends LapisGame {
 		LapisAssets.blocking = false;
 		properties = new EditorProperties();
 		properties.load();
+		
+		Commands.initCommands();
 		
 		VisUI.load();
 		skin = VisUI.getSkin(); // Skin(); // new Skin(Gdx.files.internal("ui/common/uiskin.json"));

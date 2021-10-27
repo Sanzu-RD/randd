@@ -30,7 +30,7 @@ import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.RenderOptions;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
-import com.souchy.randd.tools.mapeditor.listeners.Controls3d;
+import com.souchy.randd.tools.mapeditor.controls.GeckoControls;
 import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 import com.souchy.randd.tools.mapeditor.main.MapWorld;
@@ -39,7 +39,7 @@ public class EditorScreen extends LapisScreen {
 	
 	public EditorScreenHud hud;
 	public MapWorld world;
-	public Controls3d controller;
+	public GeckoControls controller;
 	
 	//ModelInstance tree;
 	ShaderProgram shaderp;
@@ -65,7 +65,7 @@ public class EditorScreen extends LapisScreen {
 	@Override
 	protected void act(float delta) {
 		// controller
-		if(controller != null) controller.update(delta);
+		if(controller != null) controller.act(delta);
 		// camera 
 		getCamera().update();
 
@@ -77,7 +77,8 @@ public class EditorScreen extends LapisScreen {
 			MapWorld.world.finish();
 			Log.info("EditorScreen finished loading assets");
 		}
-
+		
+		/*
 		// dessine le monde 3D dans la drawingSpace seulement
 		Rectangle drawingSpace = hud.getDrawingSpace();
 	    //Gdx.gl.glViewport((int) drawingSpace.x, (int) drawingSpace.y, (int) drawingSpace.width, (int) drawingSpace.height);
@@ -89,6 +90,7 @@ public class EditorScreen extends LapisScreen {
 			MapEditorGame.screen.getViewport().update((int) drawingSpace.width, (int) drawingSpace.height); //drawingSpace[2], drawingSpace[3], false);
 		}
 		previousSplit = currSplit;
+		*/
 	}
 
 	
@@ -103,11 +105,11 @@ public class EditorScreen extends LapisScreen {
 	@Override
 	public void renderView(float delta) {
 		//getViewport().apply();
-		
 		// Met le glViewport normal pour dessiner le Hud par la suite
 	    //Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		super.renderView(delta);
 		
+		
+		super.renderView(delta);
 		imgui.render(delta);
 	}
 	
@@ -118,6 +120,8 @@ public class EditorScreen extends LapisScreen {
 	
 	@Override
 	public void resize(int width, int height) {
+		super.resize(width, height);
+		/*
 		// resize le hud à la bonne dimension avant pour pouvoir calculer la zone de dessin 3D correctement
 //		getHud().resize(width, height);
 //		Rectangle drawingSpace = hud.getDrawingSpace();
@@ -154,8 +158,9 @@ public class EditorScreen extends LapisScreen {
 
 		RenderOptions.activatePP = true;
 		Log.debug("EditorScreen resize : full [%s, %s], 3d [%s, %s], cam [%s, %s]", width, height, w, h, getCamera().viewportWidth, getCamera().viewportHeight);
+		*/
 	}
-
+	
 
 	@Override
 	public World createWorld() {
@@ -208,7 +213,7 @@ public class EditorScreen extends LapisScreen {
 	public InputProcessor createInputProcessor() {
 		var multi = new InputMultiplexer();
 		if(getView() != null) multi.addProcessor(getView().getStage());
-		multi.addProcessor(controller = new Controls3d(getCamera()));
+		multi.addProcessor(controller = new GeckoControls(getCamera()));
 		return multi;
 	}
 	

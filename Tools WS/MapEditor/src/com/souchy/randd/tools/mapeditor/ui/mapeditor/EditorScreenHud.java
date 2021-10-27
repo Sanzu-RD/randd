@@ -19,10 +19,8 @@ import com.souchy.randd.tools.mapeditor.ui.components.TopBar;
 
 public class EditorScreenHud extends LapisHud {
 	
-
 	public PropertiesPanel properties;
 	//private EditorLayoutPanel layout;
-
 	public TopBar top;
 	public BottomBar bottom;
 	
@@ -34,30 +32,15 @@ public class EditorScreenHud extends LapisHud {
 //		batch.setShader(shader);
 		this.setStage(new Stage(viewport, batch));
 		
-		//getStage().setDebugAll(true);
-		
-//		Texture t = new Texture(Gdx.files.absolute("F:\\Users\\Souchy\\Desktop\\Robyn\\Git\\res\\assets\\textures\\galaxy-red-stars-red-space.jpg"));
-//		Image a = new Image(t);
-//		//getDrawingSpace();
-//		a.setBounds(0, 0, Gdx.graphics.getWidth(),  Gdx.graphics.getHeight());
-//		getStage().addActor(a);
-		
 		top = new TopBar();
 		bottom = new BottomBar();
 		properties = new PropertiesPanel();
-		getStage().addActor(top.getTable());
-		getStage().addActor(bottom);
-		getStage().addActor(properties);
-		//getStage().addActor(actor);
 		
-		
-		/*
-		VisTable root = new VisTable();
-		getStage().addActor(root);
-		root.add(top.getTable());
-		root.row();
-		root.add(properties);
-		root.row();*/
+		if(false) {
+			getStage().addActor(top.getTable());
+			getStage().addActor(bottom);
+			getStage().addActor(properties);
+		}
 	}
 	
 	@Override
@@ -67,6 +50,7 @@ public class EditorScreenHud extends LapisHud {
 		super.resize(width, height, centerCamera);
 		if(true) resizeThis(width, height, centerCamera);
 	}
+	
 	private void resizeThis(int width, int height, boolean centerCamera) {
 		top.resize(width, height); // la menubar est spéciale ...
 		

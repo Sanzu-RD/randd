@@ -84,7 +84,7 @@ public class Commands {
 	
 	public static void process(String text) {
 		try {
-			Log.info("Command process : " + text);
+			Log.verbose("Command process : " + text);
 			
 			if(text.startsWith("/"))
 				text = text.substring(1);
@@ -97,7 +97,7 @@ public class Commands {
 			else
 				process("missingCommand");
 		} catch(Exception e) {
-			Log.warning("", e);
+			Log.info("", e);
 		}
 	}
 	

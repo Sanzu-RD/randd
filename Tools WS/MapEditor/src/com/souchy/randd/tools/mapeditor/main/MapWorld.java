@@ -1,5 +1,7 @@
 package com.souchy.randd.tools.mapeditor.main;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.Gdx;
@@ -15,9 +17,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
-import com.souchy.randd.commons.diamond.ext.CellData;
 import com.souchy.randd.commons.diamond.ext.MapData;
-import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.Meshing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
@@ -25,13 +25,46 @@ import com.souchy.randd.jade.Constants;
 
 public class MapWorld extends World {
 
-	private static final int cellSize = (int) Constants.cellWidth;
 	public static MapWorld world;
+	private static final int cellSize = (int) Constants.cellWidth;
+	
+
+	private boolean loaded;
+	public ModelInstance cursor;
+	/**
+	 * This is just for the ObjectsTree view
+	 */
+	public List<ModelInstance> cachedInstances = new ArrayList<>();
 	
 	public MapWorld() {
 		world = this;
 	}
+
+//	public void finishLoading() {
+//		if(cursor == null || !loaded) loadCursor();
+//	}
 	
+	public void loadCursor() {
+		String modelPath = "res/models/tileselector.g3dj";
+		if(!LapisAssets.contains(modelPath, Model.class)) 
+			LapisAssets.loadModels(Gdx.files.internal(modelPath));
+		Model cursorModel = LapisAssets.get(modelPath, Model.class);  // res/models/creatures/Marian.g3dj");
+		loaded = (cursorModel != LapisAssets.defaultModel);
+
+		var scale = loaded ? 1f / 24f : 1f;
+		if(cursor == null || loaded) {
+			if(cursor != null) {
+				instances.remove(cursor);
+			}
+			// Cursor
+			cursor = new ModelInstance(cursorModel);
+			cursor.materials.get(0).set(ColorAttribute.createDiffuse(Color.TEAL));
+			cursor.transform.setToTranslation(0, 0, 0).scale(scale, scale, scale).rotate(Vector3.X, 90);
+			this.instances.add(cursor);
+		}
+
+	}
+
 	public void tree() {
 		String name = "tree1";
 		FileHandle file = Gdx.files.internal("g3d/object_models/" + name + ".g3dj");
@@ -56,7 +89,6 @@ public class MapWorld extends World {
 		tree.transform.rotateRad(Vector3.X, (float) (Math.PI/2));
 		instances.add(tree);
 	}
-
 	/*
 	public static void loadMap() {
 		float cellSize = Constants.cellWidth;
@@ -131,6 +163,7 @@ public class MapWorld extends World {
 	public void finish() {
 		if(loading == false) return;
 		loading = false;
+		loadCursor();
 		var data = MapEditorGame.currentMap.get();
         cache.begin();
     	// create greedy mesh for texture-type cells
@@ -188,6 +221,7 @@ public class MapWorld extends World {
 		generateModels.accept(data.layer2Models);
 	}
 	
+
 	
 	private static ModelInstance testModelGenerator(int id) {
 		float cellSize = Constants.cellWidth;
@@ -222,6 +256,41 @@ public class MapWorld extends World {
 			case 4: return mat4;
 			default: return mat1;
 		}
+	}
+
+	
+	
+	public void translateCursor(float x, float y, float z) {
+		if(world.cursor != null)
+			world.cursor.transform.setTranslation(x + Constants.cellHalf, y + Constants.cellHalf, z);
+	}
+	
+	public void addInstance(String modelPath, Vector3 pos) {
+		var model = LapisAssets.get(modelPath, Model.class);
+		if(model != LapisAssets.defaultModel){
+			var inst = new ModelInstance(model);
+			pos.add(Constants.cellHalf, 0, Constants.cellHalf);
+			inst.transform.translate(pos);
+			MapWorld.world.instances.add(inst);
+		} else 
+		if(!LapisAssets.contains(modelPath, Model.class)) {
+			LapisAssets.loadModels(Gdx.files.internal(modelPath));
+		}
+	}
+	public ModelInstance getAt(Vector3 pos) {
+		pos.add(Constants.cellHalf, 0, Constants.cellHalf);
+		var temp = new Vector3();
+		for(var inst : instances)
+			if(inst != cursor && inst.transform.getTranslation(temp).equals(pos))
+				return inst;
+		return null;
+	}
+	
+	public void removeInstanceAt(Vector3 pos) {
+		instances.remove(getAt(pos));
+		//pos.add(Constants.cellHalf, 0, Constants.cellHalf);
+		//var temp = new Vector3();
+		//instances.removeIf(inst -> inst != cursor && inst.transform.getTranslation(temp).equals(pos));
 	}
 
 	

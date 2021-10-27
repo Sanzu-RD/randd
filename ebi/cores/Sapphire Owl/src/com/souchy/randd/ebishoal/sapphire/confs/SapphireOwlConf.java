@@ -1,5 +1,6 @@
 package com.souchy.randd.ebishoal.sapphire.confs;
 
+import java.lang.reflect.Field;
 import java.util.Map;
 
 import com.badlogic.gdx.Input.Keys;
@@ -8,8 +9,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.google.common.eventbus.EventBus;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers.Exclude;
-import com.souchy.randd.ebishoal.sapphire.controls.KeyCombination;
-import com.souchy.randd.ebishoal.sapphire.controls.KeyCombination.KeyCombinationArray;
+import com.souchy.randd.ebishoal.commons.lapis.util.KeyCombination;
+import com.souchy.randd.ebishoal.commons.lapis.util.KeyCombination.KeyCombinationArray;
 
 /**
  * 
@@ -134,7 +135,6 @@ public class SapphireOwlConf extends JsonConfig {
 		//public boolean play = true; pause at sound = 0
 	}
 	
-
 
 	public void setPref(String key, Object val) {
 		setPref(this, key, val);

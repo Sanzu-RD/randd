@@ -106,7 +106,6 @@ public class LapisAssets {
 		if(assets.isLoaded(rootDir + path))
 			return assets.get(rootDir + path);
 		return null;
-		
 //		if(assets.getAssetNames().contains(path, false)) 
 //			return assets.get(path);
 //		else 
@@ -123,6 +122,15 @@ public class LapisAssets {
 		if(c == Model.class)
 			return (T) defaultModel;
 		return null;
+	}
+	
+	public static <T> String getName(T asset) {
+		return assets.getAssetFileName(asset);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public static Class getType(String fileName) {
+		return assets.getAssetType(fileName);
 	}
 	
 	public static Array<String> getAssetNames(){
@@ -328,5 +336,6 @@ public class LapisAssets {
 //			}
 //		}
 	}
+	
 	
 }

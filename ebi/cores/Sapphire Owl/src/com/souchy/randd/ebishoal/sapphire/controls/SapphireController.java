@@ -34,7 +34,8 @@ import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.ecs.Entity;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.RenderOptions;
-import com.souchy.randd.ebishoal.sapphire.controls.KeyCombination.KeyCombinationArray;
+import com.souchy.randd.ebishoal.commons.lapis.util.KeyCombination;
+import com.souchy.randd.ebishoal.commons.lapis.util.KeyCombination.KeyCombinationArray;
 import com.souchy.randd.ebishoal.sapphire.gfx.Highlight;
 import com.souchy.randd.ebishoal.sapphire.gfx.SapphireScreen;
 import com.souchy.randd.ebishoal.sapphire.main.SapphireGame;
@@ -541,7 +542,9 @@ public class SapphireController extends CameraInputController {
 
 	private Vector3 getCursorWorldPos(int x, int y) {
 		var floorHeight = Constants.floorZ;
-		Ray ray = camera.getPickRay(x, y);
+		var vp = SapphireGame.gfx.getViewport();
+		//Ray ray = camera.getPickRay(x, y);
+		Ray ray = camera.getPickRay(x, y, vp.getScreenX(), vp.getScreenY(), vp.getScreenWidth(), vp.getScreenHeight());
 		var distance = (floorHeight - ray.origin.z) / ray.direction.z;
 		Vector3 v = new Vector3();
 		v.set(ray.direction).scl(distance).add(ray.origin);
