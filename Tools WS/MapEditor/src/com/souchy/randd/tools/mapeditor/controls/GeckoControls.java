@@ -79,6 +79,7 @@ public class GeckoControls extends Controls3d {
 		keys.putCombo(new KeyCombination(Keys.NUM_1), () -> {
 			// add instance at positionl
 			String modelPath = "res/models/decor/cube.g3dj";
+			modelPath = "res/models/shapes/cube2.g3dj";
 			var pos = getCursorWorldPos();
 			pos.z = this.cursorZ;
 			MapWorld.world.addInstance(modelPath, pos);
@@ -148,7 +149,7 @@ public class GeckoControls extends Controls3d {
 
 		var previousworldpos = getCursorWorldPos(previousX, previousY);
 		var worldpos = getCursorWorldPos(x, y);
-		Log.info("" + previousworldpos + " -> " + worldpos);
+//		Log.info("" + previousworldpos + " -> " + worldpos);
 		if(Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && selectedModel != null) {
 			if(!previousworldpos.equals(worldpos)) {
 				dropNewInstance(worldpos);

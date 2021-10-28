@@ -49,7 +49,7 @@ public class EditorImGuiHud extends ImGuiHud {
 		components.add(tree = new ObjectsTree());
 		components.add(explorer = new AssetExplorer());
 		components.add(console = new Console());
-		
+		//removeContainer(console);
 	}
 	
 	public void showContainer(Container c) {

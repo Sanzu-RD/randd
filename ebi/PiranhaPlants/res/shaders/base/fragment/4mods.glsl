@@ -117,7 +117,7 @@ void shadowMapRender(){
 
 
 void mods(){
-
+	
 	// checkers shader
 	if(activateCheckers){
 		modCheckers();
@@ -129,7 +129,7 @@ void mods(){
 	}
 	// transparency fade out on the main terrain blocks
 	if(true && v_pos.z >= 0 && v_pos.z <= 1){
-		gl_FragColor = vec4(gl_FragColor.r, gl_FragColor.g, gl_FragColor.b, clamp(v_pos.z, 0, 1));
+		gl_FragColor.a *= clamp(v_pos.z, 0, 1);  //= vec4(gl_FragColor.r, gl_FragColor.g, gl_FragColor.b, gl_FragColor.a * clamp(v_pos.z, 0, 1));
 	}
 	
 	// water shader
@@ -143,4 +143,14 @@ void mods(){
 		shadowMapRender();
 	}
 	#endif
+	
+	
+	#ifdef dissolveFlag
+		//gl_FragColor = vec4(0,1,0,1);
+		//#ifdef diffuseTextureFlag
+			gl_FragColor = dissolve(gl_FragColor);
+		//	gl_FragColor = vec4(1,0,0,1);
+		//#endif //diffuseTextureFlag
+	#endif // dissolveFlag
+	
 }

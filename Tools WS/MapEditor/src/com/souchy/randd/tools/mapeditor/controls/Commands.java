@@ -5,11 +5,15 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveIntensityAttribute;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveMaterial;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
+import com.souchy.randd.tools.mapeditor.main.MapWorld;
 
 public class Commands {
 	
@@ -56,7 +60,7 @@ public class Commands {
 		}
 		public static void process(String text) {
 			try {
-				//Log.verbose("Command process : " + text);
+				Log.verbose("Command process : " + text);
 				
 				// remove the "/" if present, but not needed
 				if(text.startsWith("/"))
@@ -90,13 +94,6 @@ public class Commands {
 	}
 
 	public static void initCommands() {
-		LapisCommands.add("reloadAssetModels", Commands::reloadAssetModels);
-		LapisCommands.add("reloadAssetTextures", Commands::reloadAssetTextures);
-		LapisCommands.add("reloadAssetData", Commands::reloadAssetData);
-		LapisCommands.add("rram", Commands::reloadAssetModels);
-		LapisCommands.add("rrat", Commands::reloadAssetTextures);
-		LapisCommands.add("rrad", Commands::reloadAssetData);
-		LapisCommands.add("load", Commands::load);
 		LapisCommands.setClearChat(o -> {
 			MapEditorGame.screen.imgui.console.messages.clear();
 			MapEditorGame.screen.imgui.console.messages.add("");
@@ -106,6 +103,16 @@ public class Commands {
 			MapEditorGame.screen.imgui.console.messages.add((String) o[1]);
 			Log.info("chat x");
 		});
+		LapisCommands.add("reloadAssetModels", Commands::reloadAssetModels);
+		LapisCommands.add("reloadAssetTextures", Commands::reloadAssetTextures);
+		LapisCommands.add("reloadAssetData", Commands::reloadAssetData);
+		LapisCommands.add("rram", Commands::reloadAssetModels);
+		LapisCommands.add("rrat", Commands::reloadAssetTextures);
+		LapisCommands.add("rrad", Commands::reloadAssetData);
+		LapisCommands.add("load", Commands::load);
+		LapisCommands.add("diss", Commands::dissolve);
+		LapisCommands.add("d", Commands::dissolve);
+		LapisCommands.add("r", Commands::resetShaders);
 	}
 	
 	
@@ -132,6 +139,18 @@ public class Commands {
 		AssetData.loadResources();
 	}
 
+	public static void dissolve(Object... args) {
+		DissolveMaterial diss = new DissolveMaterial(Color.PINK, 0.1f, 0.5f);
+		for(var i : MapWorld.world.instances) {
+			i.materials.get(0).set(diss);
+			i.userData = i.nodes.get(0).id;
+			//i.materials.get(0).set(diss.intensity);
+			//Log.info("material dissovle intensity type " + i.materials.get(0).get(DissolveIntensityAttribute.DissolveIntensityType));
+		}
+	}
 	
+	public static void resetShaders(Object... args) {
+		MapEditorGame.screen.provider.reset();
+	}
 	
 }

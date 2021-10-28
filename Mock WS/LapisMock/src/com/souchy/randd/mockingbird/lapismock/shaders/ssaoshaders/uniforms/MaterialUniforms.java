@@ -70,14 +70,14 @@ public class MaterialUniforms implements UniformsModule {
 		for (final Attribute attr : attributes) {
 			final long t = attr.type;
 			if (BlendingAttribute.is(t)) {
-				s.context.setBlending(true, ((BlendingAttribute)attr).sourceFunction, ((BlendingAttribute)attr).destFunction);
-				s.set(u_opacity, ((BlendingAttribute)attr).opacity);
+				s.context.setBlending(true, ((BlendingAttribute) attr).sourceFunction, ((BlendingAttribute) attr).destFunction);
+				s.set(u_opacity, ((BlendingAttribute) attr).opacity);
 			} else if ((t & IntAttribute.CullFace) == IntAttribute.CullFace)
-				cullFace = ((IntAttribute)attr).value;
+				cullFace = ((IntAttribute) attr).value;
 			else if ((t & FloatAttribute.AlphaTest) == FloatAttribute.AlphaTest)
-				s.set(u_alphaTest, ((FloatAttribute)attr).value);
+				s.set(u_alphaTest, ((FloatAttribute) attr).value);
 			else if ((t & DepthTestAttribute.Type) == DepthTestAttribute.Type) {
-				DepthTestAttribute dta = (DepthTestAttribute)attr;
+				DepthTestAttribute dta = (DepthTestAttribute) attr;
 				depthFunc = dta.depthFunc;
 				depthRangeNear = dta.depthRangeNear;
 				depthRangeFar = dta.depthRangeFar;

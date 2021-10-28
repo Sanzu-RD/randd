@@ -190,6 +190,11 @@ varying vec3 v_ambientLight;
 #endif // lightingFlag
 
 void main() {
+	#ifdef dissolveFlag
+		dissolveVertex();
+	#endif // dissolveFlag
+
+
 	#ifdef diffuseTextureFlag
 		v_diffuseUV = u_diffuseUVTransform.xy + a_texCoord0 * u_diffuseUVTransform.zw;
 	#endif //diffuseTextureFlag

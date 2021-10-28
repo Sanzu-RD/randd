@@ -395,6 +395,10 @@ void main() {
 		}
 	}
 	
+	#ifdef dissolveFlag
+		gl_FragColor = dissolve(gl_FragColor);
+	#endif // dissovleFlag
+	
 	
 	// transparency fade out on the main terrain blocks
 	if(true && v_pos.z >= 0 && v_pos.z <= 1){

@@ -16,6 +16,9 @@ import com.badlogic.gdx.graphics.g3d.Shader;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalShadowLight;
+import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
+import com.badlogic.gdx.graphics.g3d.utils.DefaultShaderProvider;
+import com.badlogic.gdx.graphics.g3d.utils.ShaderProvider;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -28,8 +31,16 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisScreen;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.RenderOptions;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.shaders.LapisShader;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.ExtendableShader;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.ExtendableShader.ShadeProvider;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveBorderColorAttribute;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveBorderWidthAttribute;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveIntensityAttribute;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveMaterial;
 import com.souchy.randd.tools.mapeditor.controls.GeckoControls;
 import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
@@ -44,9 +55,10 @@ public class EditorScreen extends LapisScreen {
 	//ModelInstance tree;
 	ShaderProgram shaderp;
 
-	private float period = 5; // period time in seconds
+	// light cycle
 	private float time = 0; // current time
-	private float previousSplit = 0;
+	private float period = 30; // period time in seconds
+	private double radius = 2; // circle radius
 	
 	
 	public EditorImGuiHud imgui;
@@ -58,12 +70,57 @@ public class EditorScreen extends LapisScreen {
 		//Shader s;
 		shaderp = new ShaderProgram(Gdx.files.internal("shaders/passthrough.vsh"), Gdx.files.internal("shaders/passthrough.fsh"));
 		
+		new DefaultShaderProvider(LapisShader.getVertexShader("base"), LapisShader.getFragmentShader("base"));
+		
 		imgui = new EditorImGuiHud();
 		imgui.create();
+		
+	}
+	
+	public ShadeProvider provider;
+	
+	@Override
+	public ModelBatch createWorldBatch() {
+		
+		return new ModelBatch(provider = new ShadeProvider(r -> {
+			var conf = new ExtendableShader.ExtendableConfig();
+			conf.add(new DissolveUniforms());
+	//		conf.vertexShader = LapisShader.getVertexShader("base");
+	//		conf.fragmentShader = LapisShader.getFragmentShader("base");
+			conf.compile("base");
+			
+	//		Log.warning("Vertex : " + conf.vertexShader);
+		
+			return new ExtendableShader(r, conf);
+		}));
+		//return new ModelBatch(new DefaultShaderProvider(LapisShader.getVertexShader("base"), LapisShader.getFragmentShader("base"))); 
 	}
 
 	@Override
 	protected void act(float delta) {
+		// update lights
+		time += delta;
+		if(time >= period) time = 0;
+		double radian = ((period - time) / period) * 2 * Math.PI;
+		if(getShadowLight() != null) {
+			getShadowLight().direction.x = (float) (Math.sin(radian) / radius);
+			getShadowLight().direction.y = (float) (Math.cos(radian) / radius);
+			//getShadowLight().direction.z = -0.5f;
+		}
+		for(var inst : MapWorld.world.instances) {
+			var attr = inst.materials.get(0).get(DissolveIntensityAttribute.DissolveIntensityType);
+			if(attr != null){
+				DissolveIntensityAttribute intensity = (DissolveIntensityAttribute) attr;
+				intensity.value = (float) Math.sin(time * -1f); //time * 2f / period;
+
+				//var col = (DissolveBorderColorAttribute) inst.materials.get(0).get(DissolveBorderColorAttribute.DissolveBorderColorType);
+				//col.color.set(Color.CYAN);
+
+				//var width = (DissolveBorderWidthAttribute) inst.materials.get(0).get(DissolveBorderWidthAttribute.DissolveBorderWidthType);
+				//width.value = 0.03f;
+			}
+		}
+		
 		// controller
 		if(controller != null) controller.act(delta);
 		// camera 
@@ -93,7 +150,6 @@ public class EditorScreen extends LapisScreen {
 		*/
 	}
 
-	
 	@Override
 	public void renderWorld() {
 		// tint world
@@ -251,7 +307,7 @@ public class EditorScreen extends LapisScreen {
 	
 	@Override
 	public Color getBackgroundColor() {
-		return Color.BLACK;
+		return Color.FIREBRICK;
 	}
 	
 	@Override

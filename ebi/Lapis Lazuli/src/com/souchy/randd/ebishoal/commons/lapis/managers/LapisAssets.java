@@ -50,7 +50,7 @@ public class LapisAssets {
 
 	public static final Model defaultModel;
 	public static final Texture defaultTexture;
-	private static final TextureParameter textureParams = new TextureParameter();
+	public static final TextureParameter textureParams = new TextureParameter();
 	
 	public static String rootDir = "";
 	public static boolean blocking = true;
@@ -337,5 +337,18 @@ public class LapisAssets {
 //		}
 	}
 	
+	/**
+	 * For quick testing purposes only
+	 */
+	public static <T> T oneShot(String filePath, Class<T> c) {
+		var loader = new AssetManager();
+		if(c == Texture.class) {
+			loader.load(filePath, Texture.class, LapisAssets.textureParams);
+		} else {
+			loader.load(filePath, c);
+		}
+		loader.finishLoading();
+		return loader.<T>get(filePath);
+	}
 	
 }

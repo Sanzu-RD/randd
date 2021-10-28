@@ -2,6 +2,8 @@ package com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
@@ -18,9 +20,15 @@ import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.shaders.BaseShader;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config;
+import com.badlogic.gdx.graphics.g3d.utils.BaseShaderProvider;
 import com.badlogic.gdx.graphics.g3d.utils.RenderContext;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.commons.lapis.gfx.shaders.LapisShader;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveBorderColorAttribute;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveIntensityAttribute;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.GlobalUniforms;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.LightingUniforms;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.MaterialUniforms;
@@ -28,6 +36,37 @@ import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.Objec
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.UniformsModule;
 
 public class ExtendableShader extends BaseShader {
+	public static class ShadeProvider extends BaseShaderProvider {
+		private Function<Renderable, Shader> builder;
+		public ShadeProvider(Function<Renderable, Shader> builder) {
+			this.builder = builder;
+		}
+		public void reset() {
+			this.shaders.clear();
+		}
+		@Override
+		protected Shader createShader(Renderable renderable) {
+			return builder.apply(renderable); // new ExtendableShader(renderable);
+		}
+		@Override
+		public Shader getShader(Renderable renderable) {
+			//Log.info("provider getShader");
+			return super.getShader(renderable);
+		}
+	}
+	public static class ExtendableConfig extends Config {
+		List<UniformsModule> modules = new ArrayList<>();
+		public void add(UniformsModule module) {
+			modules.add(module);
+		}
+		public void compile(String shaderName) {
+			var modulesVerts = modules.stream().map(m -> m.vertex()).toArray(String[]::new); //.toArray(new String[0]);
+			var modulesFrags = modules.stream().map(m -> m.fragment()).toArray(String[]::new);
+			this.vertexShader = LapisShader.getVertexShader(shaderName, modulesVerts);
+			this.fragmentShader = LapisShader.getFragmentShader(shaderName, modulesFrags);
+		}
+	}
+	
 //	protected static long implementedFlags = BlendingAttribute.Type | TextureAttribute.Diffuse | ColorAttribute.Diffuse
 //		| ColorAttribute.Specular | FloatAttribute.Shininess;
 	// --------------
@@ -49,15 +88,17 @@ public class ExtendableShader extends BaseShader {
 	private Renderable renderable;
 	// --------------
 	/** Ctor */
-	public ExtendableShader (final Renderable renderable) {
-		this(renderable, new Config());
-	}
+//	public ExtendableShader (final Renderable renderable) {
+//		this(renderable, new Config());
+//	}
 	public ExtendableShader (final Renderable renderable, final Config config) {
-		this(renderable, config, DefaultShader.createPrefix(renderable, config));
+		this(renderable, config, DefaultShader.createPrefix(renderable, config) + createPrefix(renderable, config));
 	}
 	public ExtendableShader (final Renderable renderable, final Config config, final String prefix) {
-		this(renderable, config, prefix, config.vertexShader != null ? config.vertexShader : DefaultShader.getDefaultVertexShader(),
-			config.fragmentShader != null ? config.fragmentShader : DefaultShader.getDefaultFragmentShader());
+		this(renderable, config, prefix, 
+				config.vertexShader != null ? config.vertexShader : DefaultShader.getDefaultVertexShader(),
+				config.fragmentShader != null ? config.fragmentShader : DefaultShader.getDefaultFragmentShader()
+			);
 	}
 	public ExtendableShader (final Renderable renderable, final Config config, final String prefix, final String vertexShader,
 		final String fragmentShader) {
@@ -82,6 +123,10 @@ public class ExtendableShader extends BaseShader {
 		if(object()) modules.add(uobject = new ObjectUniforms(this, renderable, config));
 		if(material()) modules.add(umaterial = new MaterialUniforms(this));
 		if(lighting()) modules.add(ulighting = new LightingUniforms(this, renderable, config, attributes));
+		
+		if(config instanceof ExtendableConfig ext) modules.addAll(ext.modules);
+
+		for(var module : modules) module.register(this);
 	}
 	// --------------
 	protected boolean global() {
@@ -96,16 +141,44 @@ public class ExtendableShader extends BaseShader {
 	protected boolean lighting() {
 		return true;
 	}
+	// -------------
+	/** add a module and return this */
+//	public ExtendableShader add(UniformsModule module) {
+//		modules.add(module);
+//		program = new ShaderProgram(
+//			module.vertex() + this.program.getVertexShaderSource(), 
+//			module.fragment() + this.program.getFragmentShaderSource()
+//		);
+//		//Log.info("Extendable shader add vertex : " + module.vertex());
+//		//Log.info("Extendable shader add fragment : " + module.fragment());
+//		module.register(this);
+//		return this;
+//	}
 	// --------------
 	@Override
 	public void init() {
 		final ShaderProgram program = this.program; 
 		this.program = null;
+		//Log.info("modules : " + modules.stream().map(m -> m.getClass().getSimpleName()).reduce((a, b) -> a + ", " + b));
+		//Log.info("Fragment : " + program.getFragmentShaderSource());
 		init(program, renderable);
 		renderable = null;
 		
+		//var diss = (DissolveUniforms) modules.get(modules.size()-1);
+//		Log.info("ExtendableShader dissolvecolor alias " + this.getUniformAlias(diss.u_dissolveIntensity)); 
+
+		//Log.info("ExShader has " + this.has(diss.u_dissolveIntensity));
+		//Log.info("ExShader has " + this.has((int) DissolveUniforms.DissolveIntensityAttribute.DissolveIntensityType));
+		//Log.info("ExShader loc " + this.program.fetchUniformLocation("u_dissolveIntensity", false));
+		
+		
 		//if(lighting()) ulighting.init(this);
 		for(var module : modules) module.init(this);
+	}
+	@Override
+	public void init(ShaderProgram program, Renderable renderable) {
+		// TODO Auto-generated method stub
+		super.init(program, renderable);
 	}
 	
 	@Override
@@ -147,6 +220,28 @@ public class ExtendableShader extends BaseShader {
 	@Override
 	public boolean canRender(Renderable renderable) {
 		final long renderableMask = combineAttributeMasks(renderable);
+		
+		//Log.info("canRender " + renderable);
+		var rhas = (renderableMask & DissolveIntensityAttribute.DissolveIntensityType) > 0;
+		var shas = (attributesMask & DissolveIntensityAttribute.DissolveIntensityType) > 0;
+		if(rhas) {
+			//Log.info("canRender has dissolve intensity " + renderable.hashCode());
+		} else {
+			//Log.info("canRender has not dissolve intensity " + renderable.hashCode());
+		}
+		if(shas) {
+			//Log.info("shader has dissolve intensity " + hashCode());
+		} else {
+			//Log.info("shader has not dissolve intensity " + hashCode());
+		}
+		if(rhas && shas) {
+			//Log.info("both have dissolve intensity " + renderable.hashCode());
+		} else 
+		if (rhas && !shas) {
+			Log.info("only renderable has dissolve intensity" + hashCode() + ", " + this.modules.stream().anyMatch(m -> m instanceof DissolveUniforms));
+		}
+		
+		
 		return (attributesMask == (renderableMask | optionalAttributes))
 			&& (vertexMask == renderable.meshPart.mesh.getVertexAttributes().getMaskWithSizePacked()) 
 			&& (renderable.environment != null) == lighting();
@@ -166,5 +261,14 @@ public class ExtendableShader extends BaseShader {
 		return mask;
 	}
 	
+	
+	private static final String createPrefix(Renderable r, Config c) {
+		String str = "";
+		if(r.material.has(DissolveIntensityAttribute.DissolveIntensityType)) {
+			str += "#define dissolveFlag\n";
+			Log.warning("Define dissolve flag prefix ! ");
+		}
+		return str;
+	}
 	
 }

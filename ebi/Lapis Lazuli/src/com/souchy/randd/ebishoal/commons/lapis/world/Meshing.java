@@ -123,11 +123,12 @@ public class Meshing {
 					Texture tex = assets.get(m.textures[t], Texture.class);
 			    	//Texture tex = new Texture(Gdx.files.absolute(m.textures[t]));
 			    	tex.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+			    	tex.setAnisotropicFilter(8f);
 			    	var color = Color.valueOf(m.colorAttributes[t]);
 			    	var mat = new Material(
-			    			TextureAttribute.createDiffuse(tex), 
-			    			ColorAttribute.createDiffuse(color), 
-			    			new BlendingAttribute(1f)
+			    		TextureAttribute.createDiffuse(tex), 
+			    		ColorAttribute.createDiffuse(color), 
+			    		new BlendingAttribute(1f)
 			    	);
 			    	mat.id = m.textures[t] + m.colorAttributes[t];
 			    	root.materials.add(mat);
@@ -273,10 +274,10 @@ public class Meshing {
 		
 		Vector3 normal = getNormal(side);
 		var vertices = new float[] {
-				 botLeft.x + face.origin[0],  botLeft.y + face.origin[1],  botLeft.z + face.origin[2],	normal.x, normal.y, normal.z, face.texCoord[0] * 1, face.texCoord[3] * height,
+				 botLeft.x + face.origin[0],  botLeft.y + face.origin[1],  botLeft.z + face.origin[2],	normal.x, normal.y, normal.z, face.texCoord[0] * 1, 	face.texCoord[3] * height,
 				botRight.x + face.origin[0], botRight.y + face.origin[1], botRight.z + face.origin[2],  normal.x, normal.y, normal.z, face.texCoord[2] * width, face.texCoord[3] * height,
 				topRight.x + face.origin[0], topRight.y + face.origin[1], topRight.z + face.origin[2],	normal.x, normal.y, normal.z, face.texCoord[2] * width, face.texCoord[1] * 1,
-				 topLeft.x + face.origin[0],  topLeft.y + face.origin[1],  topLeft.z + face.origin[2], 	normal.x, normal.y, normal.z, face.texCoord[0] * 1, face.texCoord[1] * 1
+				 topLeft.x + face.origin[0],  topLeft.y + face.origin[1],  topLeft.z + face.origin[2], 	normal.x, normal.y, normal.z, face.texCoord[0] * 1, 	face.texCoord[1] * 1
 		};
     	var indices = new short[] {0,   1,   2,       2,   3,   0};
     	if(backface) indices = new short[] { indices[5], indices[4], indices[3], indices[2], indices[1], indices[0] }; // flip l'array

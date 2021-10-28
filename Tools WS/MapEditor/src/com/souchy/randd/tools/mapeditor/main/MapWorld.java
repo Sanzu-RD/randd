@@ -22,6 +22,8 @@ import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.Meshing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 import com.souchy.randd.jade.Constants;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveMaterial;
 
 public class MapWorld extends World {
 
@@ -168,13 +170,17 @@ public class MapWorld extends World {
         cache.begin();
     	// create greedy mesh for texture-type cells
         var greed = Meshing.greedy(data, cellSize, GL20.GL_TRIANGLES);
-        //greed.materials.forEach(m -> m.set(shine));
-		cache.add(new ModelInstance(greed));
+        // add dissolve to the main material
+        // if we added the material to the list of mats, we would need to apply it to the mesh parts
+        var greedInstance = new ModelInstance(greed);
+        //greedInstance.materials.get(0).set(new DissolveUniforms.DissolveMaterial(Color.PINK, 0.1f, 0.5f));
+		cache.add(greedInstance);
 		genModels(data);
 		cache.end();
 	}
 	
 	private void genModels(MapData data) {
+		var dissolve = new DissolveUniforms.DissolveMaterial(Color.PINK, 0.1f, 0.5f);
 		Consumer<int[][]> generateModels = layer -> {
             for(int i = 0; i < layer[0].length; i++) {
                 for(int j = 0; j < layer.length; j++) {
@@ -195,12 +201,14 @@ public class MapWorld extends World {
                     	var blend = new BlendingAttribute(0.5f); // fonctionne
                     	var reflection = ColorAttribute.createReflection(1, 1, 1, 1); //  fontionne pas
                     	
-                		model.materials.get(0).set(albedo);
-                		model.materials.get(0).set(blend);
-                		model.materials.get(0).set(reflection);
-                		model.materials.get(0).set(shine); 
-                		
                 		var inst = new ModelInstance(model);
+                		
+                		inst.materials.get(0).set(albedo);
+                		inst.materials.get(0).set(blend);
+                		inst.materials.get(0).set(reflection);
+                		inst.materials.get(0).set(shine); 
+                		//inst.materials.get(0).set(dissolve);
+                		
                 		inst.transform
     					.translate(
     							i * cellSize + cellSize * m.transform[0][0], 
@@ -267,8 +275,19 @@ public class MapWorld extends World {
 	
 	public void addInstance(String modelPath, Vector3 pos) {
 		var model = LapisAssets.get(modelPath, Model.class);
+		
+		//model = new ModelBuilder().createCylinder(0.5f, 1, 1, 16, new DissolveMaterial(), Usage.Position | Usage.Normal | Usage.TextureCoordinates | Usage.ColorPacked);
+		
+		
 		if(model != LapisAssets.defaultModel){
 			var inst = new ModelInstance(model);
+
+			inst.materials.get(0).set(ColorAttribute.createDiffuse(Color.PURPLE));
+			inst.materials.get(0).set(new BlendingAttribute(1));
+			inst.materials.get(0).set(new DissolveMaterial());
+			
+			//inst.nodes.get(0).parts.get(0).meshPart.mesh.getVertexAttribute(0);
+			
 			pos.add(Constants.cellHalf, 0, Constants.cellHalf);
 			inst.transform.translate(pos);
 			MapWorld.world.instances.add(inst);
