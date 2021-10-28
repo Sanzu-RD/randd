@@ -1,14 +1,6 @@
 
 
 void main() {
-
-	// use the diffuse texture coords for dissolve
-	#ifdef dissolveFlag
-		//#ifdef diffuseTextureFlag
-			dissolveVertex(a_texCoord0);
-		//#endif //diffuseTextureFlag
-	#endif // dissolveFlag
-	
 	
 	#ifdef diffuseTextureFlag
 		v_diffuseUV = u_diffuseUVTransform.xy + a_texCoord0 * u_diffuseUVTransform.zw;
@@ -67,8 +59,10 @@ void main() {
 	#endif
 
 	// pass the pos to the fragment shader // couldnt i just use gl_Position??
+	// pos in the world
 	v_pos =  pos;
 
+	// pos on the screen
 	gl_Position = u_projViewTrans * pos;
 
 	#ifdef shadowMapFlag
@@ -169,4 +163,26 @@ void main() {
 			}
 		#endif // numPointLights
 	#endif // lightingFlag
+	
+	
+	
+	// use the diffuse texture coords for dissolve
+	#ifdef dissolveFlag
+		//#ifdef diffuseTextureFlag
+			// object coords (makes every block the same unless we play with uv transform)
+			if(false){
+				dissolveVertex(a_texCoord0);
+			} 
+			// world coords (every block on the same position will dissolve the same way in that axis, but blocks on the same plane will be different and continuous)
+			else {
+				if(abs(v_normal.x) >= 0.9f){
+					dissolveVertex(v_pos.yz);
+				} else if(abs(v_normal.y) >= 0.9f){
+					dissolveVertex(v_pos.xz);
+				} else if(abs(v_normal.z) >= 0.9f){
+					dissolveVertex(v_pos.xy);
+				}
+			}
+		//#endif //diffuseTextureFlag
+	#endif // dissolveFlag
 }

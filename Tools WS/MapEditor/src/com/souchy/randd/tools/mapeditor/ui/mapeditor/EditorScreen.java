@@ -41,6 +41,7 @@ import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.Disso
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveBorderWidthAttribute;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveIntensityAttribute;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveMaterial;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveTextureAttribute;
 import com.souchy.randd.tools.mapeditor.controls.GeckoControls;
 import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
@@ -118,6 +119,10 @@ public class EditorScreen extends LapisScreen {
 
 				//var width = (DissolveBorderWidthAttribute) inst.materials.get(0).get(DissolveBorderWidthAttribute.DissolveBorderWidthType);
 				//width.value = 0.03f;
+
+				DissolveTextureAttribute tex = (DissolveTextureAttribute) inst.materials.get(0).get(DissolveTextureAttribute.DissolveTextureType);
+				tex.offsetU = time * 2;
+				tex.offsetV = time * 2;
 			}
 		}
 		

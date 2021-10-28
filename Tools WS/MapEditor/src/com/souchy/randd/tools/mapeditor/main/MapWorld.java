@@ -173,14 +173,16 @@ public class MapWorld extends World {
         // add dissolve to the main material
         // if we added the material to the list of mats, we would need to apply it to the mesh parts
         var greedInstance = new ModelInstance(greed);
-        //greedInstance.materials.get(0).set(new DissolveUniforms.DissolveMaterial(Color.PINK, 0.1f, 0.5f));
+		var dissolve = new DissolveUniforms.DissolveMaterial(Color.BLACK, 0.05f, 0.5f);
+        greedInstance.materials.get(0).set(dissolve);
+		
 		cache.add(greedInstance);
 		genModels(data);
 		cache.end();
 	}
 	
 	private void genModels(MapData data) {
-		var dissolve = new DissolveUniforms.DissolveMaterial(Color.PINK, 0.1f, 0.5f);
+		var dissolve = new DissolveUniforms.DissolveMaterial(Color.CYAN, 0.05f, 0.5f);
 		Consumer<int[][]> generateModels = layer -> {
             for(int i = 0; i < layer[0].length; i++) {
                 for(int j = 0; j < layer.length; j++) {
@@ -207,7 +209,7 @@ public class MapWorld extends World {
                 		inst.materials.get(0).set(blend);
                 		inst.materials.get(0).set(reflection);
                 		inst.materials.get(0).set(shine); 
-                		//inst.materials.get(0).set(dissolve);
+                		inst.materials.get(0).set(dissolve);
                 		
                 		inst.transform
     					.translate(

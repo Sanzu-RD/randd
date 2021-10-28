@@ -140,7 +140,7 @@ public class Commands {
 	}
 
 	public static void dissolve(Object... args) {
-		DissolveMaterial diss = new DissolveMaterial(Color.PINK, 0.1f, 0.5f);
+		DissolveMaterial diss = new DissolveMaterial(Color.CYAN, 0.05f, 0.5f);
 		for(var i : MapWorld.world.instances) {
 			i.materials.get(0).set(diss);
 			i.userData = i.nodes.get(0).id;

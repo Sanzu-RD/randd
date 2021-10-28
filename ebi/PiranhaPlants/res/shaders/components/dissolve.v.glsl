@@ -17,8 +17,8 @@ void dissolveVertex(vec2 texCoords){
 	
 	
 	
-	v_dissolveUV = texCoords; // u_dissolveUVTransform.xy + texCoords * u_dissolveUVTransform.zw; // texCoords; // a_texCoord0
-	//v_dissolveUV /= 10;
+	v_dissolveUV = u_dissolveUVTransform.xy + texCoords * u_dissolveUVTransform.zw; // texCoords; // a_texCoord0
+	v_dissolveUV /= 10;
 	
 	// v_diffuseUV = u_diffuseUVTransform.xy + a_texCoord0 * u_diffuseUVTransform.zw;
 }
