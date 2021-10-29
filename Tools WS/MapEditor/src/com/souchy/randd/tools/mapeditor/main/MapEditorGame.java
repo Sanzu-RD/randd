@@ -67,9 +67,8 @@ public class MapEditorGame extends LapisGame {
 	
 	@Override
 	public void dispose() {
-		properties.save(); // save on exit
-		screen.dispose();
 		super.dispose();
+		properties.save(); // save on exit
 	}
 	
 	@Override
