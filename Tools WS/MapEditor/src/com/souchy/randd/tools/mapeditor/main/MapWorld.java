@@ -17,13 +17,9 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
-<<<<<<< HEAD
-import com.souchy.randd.commons.diamond.ext.MapData;
-=======
 import com.souchy.randd.commons.mapio.CellData;
 import com.souchy.randd.commons.mapio.MapData;
 import com.souchy.randd.commons.tealwaters.logging.Log;
->>>>>>> master
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.Meshing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;

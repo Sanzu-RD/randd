@@ -3,12 +3,9 @@ package com.souchy.randd.tools.mapeditor.main;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-<<<<<<< HEAD
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-=======
->>>>>>> master
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 
@@ -35,7 +32,6 @@ public class MapEditorCore { //extends LapisCore {
 	    new Lwjgl3Application(game, config);
 	 }
 
-<<<<<<< HEAD
 	private static Lwjgl3ApplicationConfiguration getDefaultConfiguration() {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setTitle("HiddenEditor");
@@ -53,18 +49,5 @@ public class MapEditorCore { //extends LapisCore {
 		config.setWindowIcon("res/textures/91757405.jpg");
 		return config;
 	}
-=======
-
-	@Override
-	protected LapisGame createGame() {
-		return game = new MapEditorGame();
-	}
-	
-	@Override
-	public void addIcon(LwjglApplicationConfiguration config) {
-		config.addIcon("res/textures/appicon4.png", FileType.Internal);
-	}
-
->>>>>>> master
 	
 }
