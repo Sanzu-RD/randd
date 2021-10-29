@@ -18,7 +18,7 @@ import com.kotcrab.vis.ui.widget.file.FileChooser;
 import com.kotcrab.vis.ui.widget.file.FileChooser.Mode;
 import com.kotcrab.vis.ui.widget.file.FileChooser.SelectionMode;
 import com.kotcrab.vis.ui.widget.file.FileChooserAdapter;
-import com.souchy.randd.commons.diamond.ext.MapData;
+import com.souchy.randd.commons.mapio.MapData;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;

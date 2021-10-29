@@ -140,6 +140,11 @@ public class LapisAssets {
 	public static <T> Array<T> getAll(Class<T> type, Array<T> out) {
 		return assets.getAll(type, out);
 	}
+
+	public static void dispose() {
+		assets.dispose();
+	}
+	
 	
 	/**
 	 * Can accept a dir or a file
@@ -296,6 +301,7 @@ public class LapisAssets {
 		if(blocking) assets.finishLoading();
 	}
 	
+	
 
 	private static void recurseDirectories(FileHandle dir, Predicate<FileHandle> filter, Consumer<FileHandle> action) {
 		finishedLoading = false;
@@ -337,6 +343,7 @@ public class LapisAssets {
 //		}
 	}
 	
+<<<<<<< HEAD
 	/**
 	 * For quick testing purposes only
 	 */
@@ -350,5 +357,7 @@ public class LapisAssets {
 		loader.finishLoading();
 		return loader.<T>get(filePath);
 	}
+=======
+>>>>>>> master
 	
 }

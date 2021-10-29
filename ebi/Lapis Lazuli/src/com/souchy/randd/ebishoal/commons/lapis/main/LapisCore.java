@@ -3,7 +3,7 @@ package com.souchy.randd.ebishoal.commons.lapis.main;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.ebishoal.commons.EbiShoalCore;
+//import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 
 /**
  * 
@@ -17,7 +17,7 @@ import com.souchy.randd.ebishoal.commons.EbiShoalCore;
  * @author Souchy
  *
  */
-public abstract class LapisCore extends EbiShoalCore {
+public abstract class LapisCore { // extends EbiShoalCore {
 
 	private LwjglApplicationConfiguration config;
 	private LapisProperties properties;
@@ -29,7 +29,7 @@ public abstract class LapisCore extends EbiShoalCore {
 	 * @inheritDoc
 	 */
 	public LapisCore(String[] args) throws Exception {
-		super(args);
+		//super(args);
 		init();
 	}
 	
@@ -78,7 +78,7 @@ public abstract class LapisCore extends EbiShoalCore {
 	public abstract void addIcon(LwjglApplicationConfiguration config);
 
 
-	protected static void arguments(String[] args) {
+	public static void arguments(String[] args) {
 		Log.info("Lapis args : " + String.join(", ", args));
 		//if(args.length > 0) Environment.root = Paths.get(args[0]); // first arg = root folder
 		if(args.length > 1) isEclipse = args[1].contentEquals("eclipse"); // second arg = isEclipse

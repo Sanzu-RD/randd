@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.souchy.randd.commons.tealwaters.commons.Environment;
+import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 
 
 public abstract class LapisGame extends Game {
@@ -66,5 +67,12 @@ public abstract class LapisGame extends Game {
 	 */
 	public abstract Screen getStartScreen();
 	
+	
+	@Override
+	public void dispose() {
+		super.dispose();
+		if(screen != null) screen.dispose();
+		LapisAssets.dispose();
+	}
 	
 }

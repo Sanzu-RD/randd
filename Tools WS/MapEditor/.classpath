@@ -11,9 +11,12 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LML"/>
+<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/imgui"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGdx1.10"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/lwjgl3"/>
+=======
+>>>>>>> master
 	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/PiranhaPlants"/>
@@ -22,6 +25,10 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
+<<<<<<< HEAD
 	<classpathentry combineaccessrules="false" kind="src" path="/LapisMock"/>
+=======
+	<classpathentry combineaccessrules="false" kind="src" path="/MapIO"/>
+>>>>>>> master
 	<classpathentry kind="output" path="bin"/>
 </classpath>
