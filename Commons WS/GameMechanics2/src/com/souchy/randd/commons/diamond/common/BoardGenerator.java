@@ -1,10 +1,10 @@
 package com.souchy.randd.commons.diamond.common;
 
 import com.souchy.randd.commons.diamond.ext.CellType;
-import com.souchy.randd.commons.diamond.ext.MapData;
 import com.souchy.randd.commons.diamond.models.Board;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Fight;
+import com.souchy.randd.commons.mapio.MapData;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 
 public class BoardGenerator {

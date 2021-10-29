@@ -14,15 +14,20 @@ import com.souchy.randd.ebishoal.sapphire.confs.SapphireOwlConf;
 import com.souchy.randd.ebishoal.sapphire.controls.Commands;
 import com.souchy.randd.moonstone.white.Moonstone;
 
+/**
+ * Core now separated from Lapis
+ * 
+ * @author Blank
+ * @date 29 oct. 2021
+ */
 public class SapphireOwl extends EbiShoalCore { 
-
 
 	/**
 	 * would be final if we didnt instantiate i
 	 */
 	public static SapphireOwl core;
 	public static SapphireOwlConf conf;
-	public static final SapphireGame game = new SapphireGame();
+	public static SapphireGame game;
 	/**
 	 * net comm
 	 */
@@ -65,11 +70,11 @@ public class SapphireOwl extends EbiShoalCore {
 
 		
 		new SapphireOwl(args);
+		new SapphireLapis(args).start();
 	}
 
 	public SapphireOwl(String[] args) throws Exception {
 		super(args);
-		new SapphireLapis(args).start();
 	}
 	
 	
@@ -79,7 +84,13 @@ public class SapphireOwl extends EbiShoalCore {
 	}
 	
 	
-	private class SapphireLapis extends LapisCore {
+	/**
+	 * Start Lapis engine
+	 * 
+	 * @author Blank
+	 * @date 29 oct. 2021
+	 */
+	private static class SapphireLapis extends LapisCore {
 		public SapphireLapis(String[] args) throws Exception {
 			super(args);
 		}
@@ -99,18 +110,14 @@ public class SapphireOwl extends EbiShoalCore {
 			// 		pour les rendre global
 			
 		}
-		
 		@Override
 		protected LapisGame createGame() {
-			return game;
+			return game = new SapphireGame();
 		}
-	
-		
 		@Override
 		public SapphireGame getGame() {
 			return game;
 		}
-	
 		@Override
 		public void addIcon(LwjglApplicationConfiguration config) {
 			config.addIcon("res/textures/appicon4.png", FileType.Internal); //.addIcon("G:/Assets/pack/fantasy bundle/tcgcardspack/Tex_krakken_icon.png", FileType.Absolute);

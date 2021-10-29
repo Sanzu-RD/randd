@@ -17,7 +17,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.kotcrab.vis.ui.VisUI;
-import com.souchy.randd.commons.diamond.ext.MapData;
+import com.souchy.randd.commons.mapio.MapData;
 import com.souchy.randd.commons.tealwaters.commons.Bean;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;

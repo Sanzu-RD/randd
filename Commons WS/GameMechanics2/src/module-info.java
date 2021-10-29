@@ -33,7 +33,8 @@ module GameMechanics2 {
 	exports com.souchy.randd.commons.diamond.effects.displacement;
 	
 	opens com.souchy.randd.commons.diamond.ext;
-
+	
+	
 	requires transitive netty.all;
 	requires transitive com.google.common;
 	requires transitive com.souchy.randd.commons.TealWaters;
@@ -42,4 +43,5 @@ module GameMechanics2 {
 	requires transitive com.google.gson;
 	requires transitive com.souchy.randd.commons.TealNet;
 	requires java.base;
+	requires MapIO;
 }

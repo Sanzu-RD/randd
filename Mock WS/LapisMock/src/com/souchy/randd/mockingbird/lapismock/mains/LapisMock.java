@@ -38,12 +38,7 @@ public class LapisMock extends LapisCore {
 	protected LapisGame createGame() {
 		return new MockGame();
 	}
-	
-	@Override
-	protected String[] getRootPackages() {
-		return new String[] { "com.souchy.randd.mockingbird.lapismock" };
-	}
-	
+
 	public MockGame getGame() {
 		return (MockGame) super.getGame();
 	}

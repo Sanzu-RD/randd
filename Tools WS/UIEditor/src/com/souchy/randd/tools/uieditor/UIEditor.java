@@ -32,11 +32,6 @@ public class UIEditor extends LapisCore {
 		config.addIcon("res/textures/Tex_krakken.PNG", FileType.Internal);
 	}
 	
-	@Override
-	public String[] getRootPackages() {
-		return new String[]{ "com.souchy.randd.tools.uieditor" };
-	}
-	
 	private static class UIEditorGame extends LapisGame {
 		@Override
 		public void init() {

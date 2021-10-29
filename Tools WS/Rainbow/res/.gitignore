@@ -1,7 +1,3 @@
-/data/
-/delete/
-/fonts/
-/ux/
 /fx/
 /i18n/
 /maps/
@@ -11,3 +7,4 @@
 /textures/
 /materials/
 /sounds/
+/ux/

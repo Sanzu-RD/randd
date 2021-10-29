@@ -194,6 +194,10 @@ public class SapphireGame extends LapisGame implements Reactor, OnTurnEndHandler
 	}
 
 
+	@Override
+	public void dispose() {
+		super.dispose();
+	}
 	
 
 }
