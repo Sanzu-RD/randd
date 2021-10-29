@@ -2,21 +2,6 @@
 <classpath>
 	<classpathentry excluding="data/CreatureData.java|data/CreatureResources.java|data/CreatureSkin.java|data/EbiCreatureData.java|data/EbiCreatureTypeI18N.java|data/EbiSpellData.java|data/SpellData.java|data/new1/CreatureModelCache.java|gamemechanics/stats/StatModifier.java|gamemechanics/stats/StatTable.java|gamemechanics/stats/BaseSpellCost.java|gamemechanics/stats/ConversionType.java|data/SpellDiscoverer.java|gamemechanics/oldstats/BaseSpellCost.java|gamemechanics/oldstats/ConversionType.java|gamemechanics/oldstats/StatModifier.java|gamemechanics/oldstats/StatTable.java|gamemechanics/old/stats/|data/ao/|data/o/|data/new1/timed/Buff.java|data/new1/timed/BuffList.java|gamemechanics/statics/creatures/|gamemechanics/statics/stats/properties/Element.java|gamemechanics/main/DefaultMechanicsModule.java|gamemechanics/models/Item.java|gamemechanics/common/Constants.java|data/new1/ItemCache.java|data/new1/spellstats/imp/MinRange.java|data/new1/timed/TimedEffect.java|gamemechanics/statics/stats/Stats.java|gamemechanics/events/new1/EventInterceptor.java|gamemechanics/events/new1/EventModifier.java|gamemechanics/events/new1/EventReactor.java|gamemechanics/common/EffectPipeline.java|gamemechanics/statics/properties/Targeting.java|gamemechanics/statics/filters/AoePattern.java|gamemechanics/statics/stats/StatMod.java|gamemechanics/statics/stats/StatModConverter.java|gamemechanics/events/OnActionResolved.java|gamemechanics/events/OnCanCastActionCheck.java|gamemechanics/events/OnDeath.java|gamemechanics/events/OnEleDmgInstance.java|gamemechanics/events/OnEnterCell.java|gamemechanics/events/OnLeaveCell.java|gamemechanics/events/OnLifeDmgInstance.java|gamemechanics/events/OnManaDmgInstance.java|gamemechanics/events/OnRoundEnd.java|gamemechanics/events/OnRoundStart.java|gamemechanics/events/OnTurnEnd.java|gamemechanics/events/OnTurnStart.java|gamemechanics/events/OnVisibilityCheck.java|gamemechanics/events/OnWalk.java|gamemechanics/events/old/OnActionResolved.java|gamemechanics/events/old/OnCanCastActionCheck.java|gamemechanics/events/old/OnDeath.java|gamemechanics/events/old/OnEleDmgInstance.java|gamemechanics/events/old/OnEnterCell.java|gamemechanics/events/old/OnLeaveCell.java|gamemechanics/events/old/OnLifeDmgInstance.java|gamemechanics/events/old/OnManaDmgInstance.java|gamemechanics/events/old/OnRoundEnd.java|gamemechanics/events/old/OnRoundStart.java|gamemechanics/events/old/OnTurnEnd.java|gamemechanics/events/old/OnTurnStart.java|gamemechanics/events/old/OnVisibilityCheck.java|gamemechanics/events/old/OnWalk.java|data/modules/|a/|data/new1/SpellCache.java|gamemechanics/events/new1/ExShocked.java|gamemechanics/models/StatusModel.java|gamemechanics/models/FightEntity.java|gamemechanics/models/entities/Entity.java|redisdata/|data/new1/ecs/Component.java|gamemechanics/statusevents/old/|gamemechanics/statusevents/new1/ExShocked.java|gamemechanics/statics/stats/properties/Type.java|gamemechanics/statics/stats/properties/spells/SpellProperty.java|gamemechanics/statics/stats/properties/creatures/CreatureProperty.java|gamemechanics/data/effects/damage/DmgEffect.java|gamemechanics/data/effects/other/InvisibilityEffect.java|gamemechanics/data/effects/other/SlowEffect.java|gamemechanics/data/effects/other/StatEffect.java|gamemechanics/effects/damage/DmgEffect.java|gamemechanics/effects/other/InvisibilityEffect.java|gamemechanics/effects/other/SlowEffect.java|gamemechanics/effects/other/StatEffect.java|gamemechanics/statusevents/ExShocked.java|com/souchy/randd/commons/diamond/effects/other/InvisibilityEffect.java|com/souchy/randd/commons/diamond/effects/other/SlowEffect.java|com/souchy/randd/commons/diamond/effects/other/StatEffect.java|com/souchy/randd/commons/diamond/effects/damage/DmgEffect.java|com/souchy/randd/commons/diamond/common/EffectPipeline.java|com/souchy/randd/commons/diamond/statusevents/ExShocked.java|com/souchy/randd/commons/diamond/statics/stats/properties/spells/SpellProperty.java|com/souchy/randd/commons/diamond/statics/stats/properties/creatures/CreatureProperty.java|com/souchy/randd/commons/diamond/main/DefaultMechanicsModule.java|com/souchy/randd/commons/diamond/statics/properties/Targeting.java|com/souchy/randd/commons/diamond/effects/displacement/DashFrom.java|com/souchy/randd/commons/diamond/effects/resources/ResourceLoss.java|com/souchy/randd/commons/diamond/statusevents/other/CastStatusEvent.java|com/souchy/randd/commons/diamond/statusevents/resource/ResourceUseEvent.java|com/souchy/randd/commons/diamond/effects/resources/ResourceUse.java" kind="src" path="src"/>
 	<classpathentry excluding="gamemechanics/data/effects/buff/|gamemechanics/data/effects/other/StatEffect.java|gamemechanics/data/effects/other/InvisibilityEffect.java|gamemechanics/data/effects/other/SlowEffect.java|gamemechanics/data/spells/Walk.java|gamemechanics/data/status/|gamemechanics/data/spells/|gamemechanics/data/maps/|gamemechanics/data/effects/damage/DmgEffect.java|gamemechanics/data/BurningGlyph.java" kind="src" path="data"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -42,5 +27,21 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/MapIO"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
