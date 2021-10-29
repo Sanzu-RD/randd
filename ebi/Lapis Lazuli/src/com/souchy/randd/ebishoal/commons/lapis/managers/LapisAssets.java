@@ -343,7 +343,6 @@ public class LapisAssets {
 //		}
 	}
 	
-<<<<<<< HEAD
 	/**
 	 * For quick testing purposes only
 	 */
@@ -357,7 +356,5 @@ public class LapisAssets {
 		loader.finishLoading();
 		return loader.<T>get(filePath);
 	}
-=======
->>>>>>> master
 	
 }
