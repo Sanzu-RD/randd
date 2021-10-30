@@ -35,6 +35,7 @@ import com.souchy.randd.jade.Constants;
 import com.souchy.randd.tools.mapeditor.imgui.components.Console;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 import com.souchy.randd.tools.mapeditor.main.MapWorld;
+import com.souchy.randd.tools.mapeditor.actions.Actions;
 
 import imgui.ImGui;
 
@@ -42,10 +43,10 @@ public class GeckoControls extends Controls3d {
 	
 	public float cursorZ = Constants.floorZ;
 
-	public Model selectedModel = null;
-	public ModelInstance selectedInstance = null;
-	
-	
+	private Model selectedModel = null;
+	private ModelInstance selectedInstance = null;
+	public ControlsConfig confFull;
+
 	public GeckoControls(Camera camera) {
 		super(camera, MapEditorGame.screen.getViewport());
 		this.floorHeight = Constants.floorZ;
@@ -53,23 +54,23 @@ public class GeckoControls extends Controls3d {
 	
 	@Override
 	public void initCombos() {
-		var config = JsonConfig.readExternal(ControlsConfig.class, "./modules/");
-		this.conf = config.controls3d;
+		this.confFull = JsonConfig.readExternal(ControlsConfig.class, "./modules/");
+		this.conf = confFull.controls3d;
 		
 		super.initCombos();
-		Log.info("Controls 3d initCombos " + config);
-		keys.putCombo(config.cancel, () -> { 
-			MapWorld.world.instances.remove(selectedInstance);
-			selectedInstance = null;
-			selectedModel = null;
+		Log.info("Controls 3d initCombos " + confFull);
+		keys.putCombo(confFull.cancel, () -> { 
+			MapWorld.world.instances.remove(getSelectedInstance());
+			this.setSelectedInstance(null);
+			this.setSelectedModel(null);
 		});
-		keys.putCombo(config.musicToggle, () -> { });
-		keys.putCombo(config.controls3d.camReset, () -> {
+		keys.putCombo(confFull.musicToggle, () -> { });
+		keys.putCombo(confFull.controls3d.camReset, () -> {
 			MapEditorGame.screen.resetCamera();
 			this.cursorZ = Constants.floorZ;
 			updateCursor();
 		});
-		keys.putCombo(config.controls3d.camTopView, MapEditorGame.screen::topView);
+		keys.putCombo(confFull.controls3d.camTopView, MapEditorGame.screen::topView);
 		keys.putCombo(new KeyCombination(Keys.FORWARD_DEL), () -> {
 			// delete instance at position
 			var pos = getCursorWorldPos();
@@ -78,13 +79,19 @@ public class GeckoControls extends Controls3d {
 		});
 		keys.putCombo(new KeyCombination(Keys.NUM_1), () -> {
 			// add instance at positionl
+			String modelPath = "res/models/shapes/cube2.g3dj";
+			var model = LapisAssets.get(modelPath, Model.class);
+			selectBrushModel(model);
+		});
+		keys.putCombo(new KeyCombination(Keys.CONTROL_LEFT, Keys.NUM_1), () -> {
+			// add instance at positionl
 			String modelPath = "res/models/decor/cube.g3dj";
 			modelPath = "res/models/shapes/cube2.g3dj";
 			var pos = getCursorWorldPos();
 			pos.z = this.cursorZ;
 			MapWorld.world.addInstance(modelPath, pos);
 		});
-		keys.putCombo(new KeyCombination(Keys.NUM_2), () -> {
+		keys.putCombo(new KeyCombination(Keys.CONTROL_LEFT, Keys.NUM_2), () -> {
 			// add instance at position
 			String modelPath = "res/models/decor/pinetree.g3dj";
 			var pos = getCursorWorldPos();
@@ -106,6 +113,8 @@ public class GeckoControls extends Controls3d {
 				console.add(console.input.get());
 			}
 		});
+		keys.putCombo(new KeyCombination(Keys.R), () -> Commands.resetShaders());
+		keys.putCombo(new KeyCombination(Keys.R, Keys.CONTROL_LEFT), Actions::resetConf);
 	}
 
 	private boolean imguiLayer() {
@@ -150,7 +159,7 @@ public class GeckoControls extends Controls3d {
 		var previousworldpos = getCursorWorldPos(previousX, previousY);
 		var worldpos = getCursorWorldPos(x, y);
 //		Log.info("" + previousworldpos + " -> " + worldpos);
-		if(Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && selectedModel != null) {
+		if(Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && getSelectedModel() != null) {
 			if(!previousworldpos.equals(worldpos)) {
 				dropNewInstance(worldpos);
 			}
@@ -191,7 +200,22 @@ public class GeckoControls extends Controls3d {
 			} else {
 				// drop it there
 				//selectedModel = null;
-				selectedInstance = null;
+//				selectedInstance = null;
+				var last = getSelectedInstance();
+				if(last != null) {
+					setSelectedInstance(null);
+					setProperties(last);
+				} else {
+					var pos = this.getCursorWorldPos();
+					var pick = MapWorld.world.getAt(pos);
+					if(button == this.confFull.buttonAction) {
+						setSelectedInstance(pick);
+					} else 
+					if(button == this.confFull.buttonInfo) {
+						setProperties(pick);
+					}
+				}
+				
 			}
 		}
 		dragged = false;
@@ -232,18 +256,56 @@ public class GeckoControls extends Controls3d {
 		// 3d cursor
 		var worldpos = getCursorWorldPos();
 		MapWorld.world.translateCursor(worldpos.x, worldpos.y, this.cursorZ);
-		if(selectedInstance != null) {
+		if(getSelectedInstance() != null) {
 			worldpos.add(Constants.cellHalf, 0, Constants.cellHalf + this.cursorZ - this.floorHeight);
-			selectedInstance.transform.setTranslation(worldpos.x, worldpos.y, worldpos.z);
+			getSelectedInstance().transform.setTranslation(worldpos.x, worldpos.y, worldpos.z);
 		}
 	}
 	
 	
 	public void dropNewInstance(Vector3 worldpos) {
-		var inst = new ModelInstance(selectedModel);
+		var inst = new ModelInstance(getSelectedModel());
 		worldpos.add(Constants.cellHalf, 0, Constants.cellHalf + this.cursorZ - this.floorHeight);
 		inst.transform.setTranslation(worldpos.x, worldpos.y, worldpos.z);
 		MapWorld.world.instances.add(inst);
+	}
+	
+	
+
+	
+	public ModelInstance getSelectedInstance() {
+		return selectedInstance;
+	}
+	public void setSelectedInstance(ModelInstance selectedInstance) {
+		this.selectedInstance = selectedInstance;
+		//if(selectedInstance != null) // dont remove the properties when unselecting/placing an object i think
+			setProperties(selectedInstance); 
+	}
+	public void setProperties(ModelInstance selectedInstance) {
+		if(selectedInstance != null)
+			MapEditorGame.screen.imgui.settings.props.mats = selectedInstance.materials;
+		else
+			MapEditorGame.screen.imgui.settings.props.mats = null;
+	}
+
+	public Model getSelectedModel() {
+		return selectedModel;
+	}
+
+	public void setSelectedModel(Model selectedModel) {
+		this.selectedModel = selectedModel;
+	}
+
+	public static void selectBrushModel(Model model) {
+		// remove the previous instance
+		if(MapEditorGame.screen.controller.getSelectedInstance() != null)
+			MapWorld.world.instances.remove(MapEditorGame.screen.controller.getSelectedInstance());
+		// create new instance
+		ModelInstance instance = new ModelInstance(model);
+		MapEditorGame.screen.controller.setSelectedInstance(instance);
+		MapEditorGame.screen.controller.setSelectedModel(model);
+		MapWorld.world.instances.add(instance);
+		MapEditorGame.screen.controller.updateCursor();
 	}
 	
 }

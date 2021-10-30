@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.badlogic.gdx.Input.Keys;
+import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
+import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.tools.mapeditor.configs.EditorConf.HudConfig.ComponentConfig;
 import com.souchy.randd.tools.mapeditor.imgui.IGStyle;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiComponent;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiComponent.Container;
@@ -11,18 +14,22 @@ import com.souchy.randd.tools.mapeditor.imgui.components.AssetExplorer;
 import com.souchy.randd.tools.mapeditor.imgui.components.BottomBar;
 import com.souchy.randd.tools.mapeditor.imgui.components.Console;
 import com.souchy.randd.tools.mapeditor.imgui.components.ObjectsTree;
+import com.souchy.randd.tools.mapeditor.imgui.components.Settings;
 import com.souchy.randd.tools.mapeditor.imgui.components.TopBar;
+import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 
 import imgui.ImGui;
 import imgui.flag.ImGuiKey;
 
 public class EditorImGuiHud extends ImGuiHud {
 	
+	
 	public TopBar top;
 	public BottomBar bottom;
 	public ObjectsTree tree;
 	public AssetExplorer explorer;
 	public Console console;
+	public Settings settings;
 	
 	/**
 	 * Thread-safe list of components to draw in the loop.
@@ -32,6 +39,7 @@ public class EditorImGuiHud extends ImGuiHud {
 	@Override
 	public void create() {
 		super.create();
+		
 		Container.defaultClose = this::removeContainer;
 		Container.defaultShow = this::showContainer;
 		
@@ -49,6 +57,7 @@ public class EditorImGuiHud extends ImGuiHud {
 		components.add(tree = new ObjectsTree());
 		components.add(explorer = new AssetExplorer());
 		components.add(console = new Console());
+		components.add(settings = new Settings());
 		//removeContainer(console);
 	}
 	
@@ -58,6 +67,7 @@ public class EditorImGuiHud extends ImGuiHud {
 	}
 	public void removeContainer(Container c) {
 		c.showContainer.set(false); // déjà fait par imgui, mais si on veut enlever un container manuellement
+		c.dispose(); // save config
 		this.components.remove(c);
 	}
 	
@@ -66,6 +76,20 @@ public class EditorImGuiHud extends ImGuiHud {
 	public void renderContent(float delta) {
 		for(var c : components)
 			c.render(delta);
+	}
+	
+	@Override
+	public void resizeScreen(int screenW, int screenH) {
+		for(var c : components)
+			c.resizeScreen(screenW, screenH);
+	}
+	
+	@Override
+	public void dispose() {
+		//Log.info("ImGui dispose");
+		for(var c : components)
+			c.dispose();
+		super.dispose();
 	}
 	
 }

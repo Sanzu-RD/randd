@@ -49,14 +49,19 @@ public class ImGuiHud {
 		GLFW.glfwPollEvents();
 	}
 	
+	public void renderContent(float delta) {
+		
+	}
+	
+	public void resizeScreen(int screenW, int screenH) {
+		
+	}
+	
 	public void dispose() {
 		imGuiGl3.dispose();
 		imGuiGlfw.dispose();
 		ImGui.destroyContext();
 	}
 	
-	public void renderContent(float delta) {
-		
-	}
 	
 }

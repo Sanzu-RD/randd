@@ -14,6 +14,7 @@ import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.Disso
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveMaterial;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 import com.souchy.randd.tools.mapeditor.main.MapWorld;
+import com.souchy.randd.tools.mapeditor.actions.Actions;
 
 public class Commands {
 	
@@ -113,6 +114,7 @@ public class Commands {
 		LapisCommands.add("diss", Commands::dissolve);
 		LapisCommands.add("d", Commands::dissolve);
 		LapisCommands.add("r", Commands::resetShaders);
+		LapisCommands.add("rs", o -> Actions.resetConf());
 	}
 	
 	

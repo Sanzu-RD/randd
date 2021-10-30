@@ -2,6 +2,7 @@ package com.souchy.randd.tools.mapeditor.main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -65,17 +66,23 @@ public class MapEditorGame extends LapisGame {
 		screen.resetCamera();
 	}
 	
-	@Override
-	public void dispose() {
-		super.dispose();
-		properties.save(); // save on exit
-	}
 	
 	@Override
 	public Screen getStartScreen() {
 		return screen;
 	}
-
 	
+	@Override
+	public void dispose() {
+		super.dispose();
+		properties.save(); // save on exit
+		if(!MapEditorCore.conf.reset) {
+			MapEditorCore.conf.gfx.width = Gdx.graphics.getWidth();
+			MapEditorCore.conf.gfx.height = Gdx.graphics.getHeight();
+			MapEditorCore.conf.gfx.x = ((Lwjgl3Graphics) Gdx.graphics).getWindow().getPositionX();
+			MapEditorCore.conf.gfx.y = ((Lwjgl3Graphics) Gdx.graphics).getWindow().getPositionY();
+			MapEditorCore.conf.save(); // save on exit
+		}
+	}
 	
 }

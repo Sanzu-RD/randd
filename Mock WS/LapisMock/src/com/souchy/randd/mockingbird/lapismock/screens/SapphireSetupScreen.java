@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.souchy.randd.commons.diamond.ext.AssetData;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.tealwaters.commons.Environment;
+import com.souchy.randd.commons.tealwaters.commons.Profiler;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
@@ -45,6 +46,7 @@ public class SapphireSetupScreen extends SapphireScreen {
 		Gdx.files = new LapisFiles(Environment.root.toString());
 		
 		SapphireGame.gfx = this;
+		SapphireGame.profiler = new Profiler();
 
 		LapisAssets.loadTextures(Gdx.files.internal("res/textures/Tex_krakken.PNG"));
 		LapisAssets.loadModels(Gdx.files.internal("res/models/tileselector.g3dj"));

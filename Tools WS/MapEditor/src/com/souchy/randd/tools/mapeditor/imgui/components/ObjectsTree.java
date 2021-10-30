@@ -21,8 +21,12 @@ public class ObjectsTree extends Container { // implements ImGuiComponent
 	public ObjectsTree() {
 		super();
 		this.title = "Object Tree";
-		this.size = new int[] { 200, 400 };
-		this.position = new int[] { 20, 100 };
+	}
+	
+	@Override
+	protected void applyDefaults() {
+		this.size = new int[] { 150, 300 };
+		this.position = new int[] { 10, 250 };
 	}
 	
 	@Override
@@ -46,7 +50,6 @@ public class ObjectsTree extends Container { // implements ImGuiComponent
 		
 		
 	}
-	
 	
 	
 

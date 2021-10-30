@@ -57,8 +57,10 @@ public class TopBar implements ImGuiComponent {
     				MapEditorGame.screen.imgui.explorer.show();
     			}
     			if(ImGui.menuItem("Console view")) {
-    				MapEditorGame.screen.imgui.console = new Console();
     				MapEditorGame.screen.imgui.console.show();
+    			}
+    			if(ImGui.menuItem("Settings view")) {
+    				MapEditorGame.screen.imgui.settings.show();
     			}
     			ImGui.endMenu();
     		}

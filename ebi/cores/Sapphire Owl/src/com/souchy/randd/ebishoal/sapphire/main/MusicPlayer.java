@@ -45,7 +45,8 @@ public class MusicPlayer {
 			tracks.forEach(m -> m.setOnCompletionListener(this::onTrackComplete));
 			
 			// get a track
-			music = tracks.get(currentIndex);
+			if(currentIndex > 0 && currentIndex < tracks.size) 
+				music = tracks.get(currentIndex);
 		}
 		return true;
 	}

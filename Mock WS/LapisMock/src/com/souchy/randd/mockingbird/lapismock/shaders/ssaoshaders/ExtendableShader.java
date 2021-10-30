@@ -161,6 +161,7 @@ public class ExtendableShader extends BaseShader {
 		this.program = null;
 		//Log.info("modules : " + modules.stream().map(m -> m.getClass().getSimpleName()).reduce((a, b) -> a + ", " + b));
 		//Log.info("Fragment : " + program.getFragmentShaderSource());
+//		Log.info("Vertex : " + program.getVertexShaderSource());
 		init(program, renderable);
 		renderable = null;
 		
@@ -238,7 +239,7 @@ public class ExtendableShader extends BaseShader {
 			//Log.info("both have dissolve intensity " + renderable.hashCode());
 		} else 
 		if (rhas && !shas) {
-			Log.info("only renderable has dissolve intensity" + hashCode() + ", " + this.modules.stream().anyMatch(m -> m instanceof DissolveUniforms));
+			//Log.info("only renderable has dissolve intensity" + hashCode() + ", " + this.modules.stream().anyMatch(m -> m instanceof DissolveUniforms));
 		}
 		
 		

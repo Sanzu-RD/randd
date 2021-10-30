@@ -62,6 +62,7 @@ public class EditorScreen extends LapisScreen {
 	private double radius = 2; // circle radius
 	
 	
+	public ShadeProvider provider;
 	public EditorImGuiHud imgui;
 	
 	@Override
@@ -78,7 +79,11 @@ public class EditorScreen extends LapisScreen {
 		
 	}
 	
-	public ShadeProvider provider;
+	@Override
+	public void dispose() {
+		super.dispose();
+		imgui.dispose();
+	}
 	
 	@Override
 	public ModelBatch createWorldBatch() {
@@ -112,15 +117,17 @@ public class EditorScreen extends LapisScreen {
 			var attr = inst.materials.get(0).get(DissolveIntensityAttribute.DissolveIntensityType);
 			if(attr != null){
 				DissolveIntensityAttribute intensity = (DissolveIntensityAttribute) attr;
-				intensity.value = (float) Math.sin(time * -1f); //time * 2f / period;
+				intensity.value = (float) Math.sin(time * -1f) + 0.5f; //time * 2f / period;
 
 				//var col = (DissolveBorderColorAttribute) inst.materials.get(0).get(DissolveBorderColorAttribute.DissolveBorderColorType);
 				//col.color.set(Color.CYAN);
 
 				//var width = (DissolveBorderWidthAttribute) inst.materials.get(0).get(DissolveBorderWidthAttribute.DissolveBorderWidthType);
 				//width.value = 0.03f;
-
-				DissolveTextureAttribute tex = (DissolveTextureAttribute) inst.materials.get(0).get(DissolveTextureAttribute.DissolveTextureType);
+			}
+			var attrdissTex = inst.materials.get(0).get(DissolveTextureAttribute.DissolveTextureType);
+			if(attrdissTex != null) {
+				DissolveTextureAttribute tex = (DissolveTextureAttribute) attrdissTex;
 				tex.offsetU = time * 2;
 				tex.offsetV = time * 2;
 			}
@@ -182,6 +189,8 @@ public class EditorScreen extends LapisScreen {
 	@Override
 	public void resize(int width, int height) {
 		super.resize(width, height);
+		imgui.resizeScreen(width, height);
+		
 		/*
 		// resize le hud à la bonne dimension avant pour pouvoir calculer la zone de dessin 3D correctement
 //		getHud().resize(width, height);

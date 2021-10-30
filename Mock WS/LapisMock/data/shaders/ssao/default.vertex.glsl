@@ -195,8 +195,10 @@ varying vec3 v_ambientLight;
 
 void main() {
 
-    //v_ssaoUV = u_ssaoUVTransform.xy + a_texCoord0 * u_ssaoUVTransform.zw;
-    v_ssaoUV = a_texCoord0;
+	#ifdef diffuseTextureFlag
+	    //v_ssaoUV = u_ssaoUVTransform.xy + a_texCoord0 * u_ssaoUVTransform.zw;
+	    v_ssaoUV = a_texCoord0;
+	#endif //diffuseTextureFlag
     
     
 	#ifdef diffuseTextureFlag

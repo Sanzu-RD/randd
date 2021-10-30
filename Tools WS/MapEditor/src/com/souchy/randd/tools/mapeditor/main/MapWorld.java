@@ -175,8 +175,8 @@ public class MapWorld extends World {
         // add dissolve to the main material
         // if we added the material to the list of mats, we would need to apply it to the mesh parts
         var greedInstance = new ModelInstance(greed);
-		var dissolve = new DissolveUniforms.DissolveMaterial(Color.BLACK, 0.05f, 0.5f);
-        greedInstance.materials.get(0).set(dissolve);
+//		var dissolve = new DissolveUniforms.DissolveMaterial(Color.BLACK, 0.05f, 0.5f);
+//        greedInstance.materials.get(0).set(dissolve);
 		
 		cache.add(greedInstance);
 		genModels(data);
@@ -290,6 +290,7 @@ public class MapWorld extends World {
 			inst.materials.get(0).set(new BlendingAttribute(1));
 			inst.materials.get(0).set(new DissolveMaterial());
 			
+			
 			//inst.nodes.get(0).parts.get(0).meshPart.mesh.getVertexAttribute(0);
 			
 			pos.add(Constants.cellHalf, 0, Constants.cellHalf);
@@ -304,7 +305,7 @@ public class MapWorld extends World {
 		pos.add(Constants.cellHalf, 0, Constants.cellHalf);
 		var temp = new Vector3();
 		for(var inst : instances)
-			if(inst != cursor && inst != MapEditorGame.screen.controller.selectedInstance && inst.transform.getTranslation(temp).equals(pos))
+			if(inst != cursor && inst != MapEditorGame.screen.controller.getSelectedInstance() && inst.transform.getTranslation(temp).equals(pos))
 				return inst;
 		return null;
 	}

@@ -22,7 +22,7 @@ import static org.lwjgl.glfw.GLFW.*;
 public class Console extends Container {
 
 	private int inputIndex = 0;
-	public List<String> inputs = new ArrayList<>();
+	public List<String> inputHistory = new ArrayList<>();
 	public List<String> messages = new ArrayList<>();
 	public ImString input = new ImString(300);
 	
@@ -30,14 +30,18 @@ public class Console extends Container {
 	
 	public Console() {
 		this.title = "Console";
-		this.position = new int[] { 300, 50 };
-		this.size = new int[] { 800, 200 };
 		this.windowFlags |= ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse;
 		
 		for(char i = 'a'; i <= 'z'; i++) {
 			messages.add("" + i);
 		}
-		inputs.add("");
+		inputHistory.add("");
+	}
+	
+	@Override
+	protected void applyDefaults() {
+		this.position = new int[] { 10, 30 };
+		this.size = new int[] { 150, 200 };
 	}
 
 	@Override
@@ -71,8 +75,8 @@ public class Console extends Container {
 				if(ImGui.inputText("", input, ImGuiInputTextFlags.EnterReturnsTrue | ImGuiInputTextFlags.AllowTabInput | ImGuiInputTextFlags.CtrlEnterForNewLine)) {
 					var text = input.get();
 					add(text);
-					inputs.add(text);
-					inputIndex = inputs.size() - 1;
+					inputHistory.add(text);
+					inputIndex = inputHistory.size() - 1;
 					input.set("");
 					ImGui.setKeyboardFocusHere();
 					LapisCommands.process(text);
@@ -95,15 +99,15 @@ public class Console extends Container {
 				Log.info("up");
 				inputIndex--;
 				if(inputIndex <= 0) inputIndex = 0;
-				input.set(inputs.get(inputIndex));
+				input.set(inputHistory.get(inputIndex));
 			}
 			if(ImGui.isKeyPressed(GLFW_KEY_DOWN) && ImGui.isItemActive()) {
 				Log.info("down");
 				inputIndex++;
-				if(inputIndex >= inputs.size()) {
-					 inputIndex = inputs.size();
+				if(inputIndex >= inputHistory.size()) {
+					 inputIndex = inputHistory.size();
 				} else {
-					input.set(inputs.get(inputIndex));
+					input.set(inputHistory.get(inputIndex));
 				}
 			}
 		}

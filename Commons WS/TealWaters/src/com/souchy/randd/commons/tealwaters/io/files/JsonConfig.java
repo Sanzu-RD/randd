@@ -120,6 +120,8 @@ public class JsonConfig {
 		//var file = new File(rememberPath + name(this.getClass()));
 		//Log.info("save " + this.rememberPath);
 		try {
+			if(rememberPath == null) 
+				rememberPath = Environment.fromRoot("" + name(this.getClass()));
 			Files.writeString(rememberPath/*file.toPath()*/, content);
 		} catch (IOException e) {
 			//e.printStackTrace();

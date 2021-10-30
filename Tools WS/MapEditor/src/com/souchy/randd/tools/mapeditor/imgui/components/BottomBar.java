@@ -7,6 +7,7 @@ import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 import com.souchy.randd.tools.mapeditor.main.MapWorld;
 
 import imgui.ImGui;
+import imgui.ImVec2;
 import imgui.flag.ImGuiCond;
 import imgui.flag.ImGuiWindowFlags;
 
@@ -19,18 +20,15 @@ public class BottomBar extends Container {
 		this.title = "Bottom Bar";
 		this.windowCond = ImGuiCond.Always;
 		this.windowFlags = ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoMove; 
-		size[0] = Gdx.graphics.getWidth();
-		size[1] = 30;
-		position[0] = 0;
-		position[1] = Gdx.graphics.getHeight() - size[1];
+		applyDefaults();
 	}
 	
 	@Override
 	public void renderContent(float delta) {
-		size[0] = Gdx.graphics.getWidth();
-		size[1] = 30;
-		position[0] = 0;
-		position[1] = Gdx.graphics.getHeight() - size[1];
+//		size[0] = Gdx.graphics.getWidth();
+//		size[1] = 30;
+//		position[0] = 0;
+//		position[1] = Gdx.graphics.getHeight() - size[1];
 		
     	if(MapEditorGame.currentFile.get() == null) {
     		ImGui.text("file: " + "(New map)");
@@ -56,6 +54,19 @@ public class BottomBar extends Container {
 		ImGui.sameLine();
 		// ImGui.separator();
 	}
+	
+	@Override
+	protected void applyDefaults() {
+		size[0] = Gdx.graphics.getWidth();
+		size[1] = 30;
+		position[0] = 0;
+		position[1] = Gdx.graphics.getHeight() - size[1];
+	}
 
+	@Override
+	public void resizeScreen(int screenW, int screenH) {
+		super.resizeScreen(screenW, screenH);
+		applyDefaults();
+	}
 	
 }
