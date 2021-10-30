@@ -40,8 +40,10 @@ public class TopBar implements ImGuiComponent {
     				open();
     			}
     			if(ImGui.menuItem("Save")) {
-					if(MapEditorGame.currentFile.get() == null) saveAs();
-					else MapEditorGame.properties.save();
+					if(MapEditorGame.currentFile.get() == null) 
+						saveAs();
+					else 
+						MapEditorGame.properties.save();
     			}
     			if(ImGui.menuItem("Save as")) {
     				saveAs();
