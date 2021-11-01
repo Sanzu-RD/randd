@@ -18,7 +18,7 @@ import com.souchy.randd.ebishoal.commons.lapis.util.KeyCombination.KeyCombinatio
  */
 public class Controls3d extends CameraInputController {
 	
-	protected boolean activateBaseCamControl = false;
+	public boolean activateBaseCamControl = false;
 	protected float translationSpeed = 10;
 	protected float rotationSpeed = 60;
 	protected Vector3 translation = Vector3.Zero.cpy();

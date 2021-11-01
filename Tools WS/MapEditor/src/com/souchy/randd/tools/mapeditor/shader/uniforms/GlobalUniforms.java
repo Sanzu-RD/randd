@@ -1,25 +1,39 @@
-package com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms;
+package com.souchy.randd.tools.mapeditor.shader.uniforms;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.graphics.g3d.shaders.BaseShader;
 import com.badlogic.gdx.graphics.g3d.shaders.BaseShader.Uniform;
+import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Inputs;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Setters;
+import com.souchy.randd.tools.mapeditor.shader.Shader2;
+import com.souchy.randd.tools.mapeditor.shader.Shader2Config;
 
+/**
+ * 
+ * 
+ * @author Blank
+ * @date 1 nov. 2021
+ */
+@SuppressWarnings("unused")
 public class GlobalUniforms implements UniformsModule {
-	// Global uniforms
-	public final int u_projTrans; // camera.projection
-	public final int u_viewTrans; // camera.view
-	public final int u_projViewTrans; // camera.combined
-	public final int u_cameraPosition;
-	public final int u_cameraDirection;
-	public final int u_cameraUp;
-	public final int u_cameraNearFar;
-	public final int u_time;
+	
+	// Global uniforms addresses
+	private int u_projTrans; // camera.projection
+	private int u_viewTrans; // camera.view
+	private int u_projViewTrans; // camera.combined
+	private int u_cameraPosition;
+	private int u_cameraDirection;
+	private int u_cameraUp;
+	private int u_cameraNearFar;
+	private int u_time;
 	
 	private float time;
 	
-	public GlobalUniforms(BaseShader s) {
+	
+	@Override
+	public void register(BaseShader s, Renderable r, Config config) {
 		// Global uniforms
 		u_projTrans = s.register(Inputs.projTrans, Setters.projTrans);
 		u_viewTrans = s.register(Inputs.viewTrans, Setters.viewTrans);

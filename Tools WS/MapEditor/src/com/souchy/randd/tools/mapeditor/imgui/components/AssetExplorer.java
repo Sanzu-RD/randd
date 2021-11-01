@@ -27,11 +27,6 @@ import imgui.flag.ImGuiWindowFlags;
  */
 public class AssetExplorer extends Container {
 	
-	// getting the names from the objects is too costly (AssetManager foreaches *every* loaded asset to find the corresponding one)
-	//Array<Model> models = new Array<>();
-	//Array<Texture> textures = new Array<>();
-	//Array<String> shaders = new Array<>();
-	
 	protected boolean models = true;
 	protected boolean textures = true;
 	protected boolean shaders = true;
@@ -63,11 +58,9 @@ public class AssetExplorer extends Container {
 				foreach(ShaderProgram.class);
 				ImGui.endTabItem();
 			}
-			
 			ImGui.endTabBar();
 		}
 	}
-	
 	
 	
 	/**
@@ -80,18 +73,8 @@ public class AssetExplorer extends Container {
 			ImGui.tableNextRow();
 			for(var asset : LapisAssets.getAssetNames()) {
 				if(LapisAssets.getType(asset) == c) {
-	//				ImGui.beginGroup();
-	//				{
-	//					thing(c, asset);
-	//				}
-	//				ImGui.endGroup();
-	//				ImGui.sameLine();
-					
-					// asset table
-					// ImGui.tableNextRow();
 					ImGui.tableSetColumnIndex(i++);
 					ImGui.pushID(i);
-					//ImGui.nextColumn();
 					{
 						if(cell(c, asset))
 							result = asset;
@@ -128,6 +111,15 @@ public class AssetExplorer extends Container {
 	
 	
 	
+	
+	
+	
+	/**
+	 * Popup dialog to select an asset (for example set a texture on a TextureAttribute)
+	 * 
+	 * @author Blank
+	 * @date 30 oct. 2021
+	 */
 	public static class AssetDialog extends AssetExplorer {
 		public static AssetDialog modelPicker = new AssetDialog() { { this.textures = false; this.shaders = false; } };
 		public static AssetDialog texturePicker = new AssetDialog() { { this.models = false; this.shaders = false; } };

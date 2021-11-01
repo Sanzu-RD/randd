@@ -1,5 +1,5 @@
 
-void main() {
+//void main() {
 	#if defined(normalFlag)
 		vec3 normal = v_normal;
 	#endif // normalFlag
@@ -94,4 +94,4 @@ void main() {
 	#endif
 	
 	mods();
-}
+//}

@@ -8,6 +8,7 @@ import java.util.function.Function;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.Attributes;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.graphics.g3d.Shader;
 import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
@@ -26,16 +27,23 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shaders.LapisShader;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.ExtendableShader.ShadeProvider;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveBorderColorAttribute;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveIntensityAttribute;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.GlobalUniforms;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.LightingUniforms;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.MaterialUniforms;
-import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.ObjectUniforms;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.NodeUniforms;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.UniformsModule;
 
 public class ExtendableShader extends BaseShader {
+	/**
+	 * 
+	 * 
+	 * @author Blank
+	 * @date 1 nov. 2021
+	 */
 	public static class ShadeProvider extends BaseShaderProvider {
 		private Function<Renderable, Shader> builder;
 		public ShadeProvider(Function<Renderable, Shader> builder) {
@@ -54,6 +62,20 @@ public class ExtendableShader extends BaseShader {
 			return super.getShader(renderable);
 		}
 	}
+	
+	/**
+	 * Example : 
+	 * 
+	 * new ModelBatch(provider = new ShadeProvider(r -> {
+			var conf = new ExtendableShader.ExtendableConfig();
+			conf.add(new DissolveUniforms());
+			conf.compile("base");
+			return new ExtendableShader(r, conf);
+		}));
+	 * 
+	 * @author Blank
+	 * @date 1 nov. 2021
+	 */
 	public static class ExtendableConfig extends Config {
 		List<UniformsModule> modules = new ArrayList<>();
 		public void add(UniformsModule module) {
@@ -79,10 +101,10 @@ public class ExtendableShader extends BaseShader {
 	// -------------- hey modular system
 	public List<UniformsModule> modules = new ArrayList<>();
 	// -------------- technically we dont need those anymore
-	public GlobalUniforms uglobal;
-	public ObjectUniforms uobject;
-	public LightingUniforms ulighting;
-	public MaterialUniforms umaterial;
+//	public GlobalUniforms uglobal;
+//	public NodeUniforms uobject;
+//	public LightingUniforms ulighting;
+//	public MaterialUniforms umaterial;
 	// --------------
 	/** The renderable used to create this shader, invalid after the call to init */
 	private Renderable renderable;
@@ -105,26 +127,27 @@ public class ExtendableShader extends BaseShader {
 		this(renderable, config, new ShaderProgram(prefix + vertexShader, prefix + fragmentShader));
 	}
 	public ExtendableShader(Renderable renderable, Config config, final ShaderProgram shaderProgram) {
-		final Attributes attributes = combineAttributes(renderable);
 		this.config = config;
 		this.program = shaderProgram;
-//		this.lighting = renderable.environment != null;
-//		this.environmentCubemap = attributes.has(CubemapAttribute.EnvironmentMap)
-//			|| (lighting && attributes.has(CubemapAttribute.EnvironmentMap));
-//		this.shadowMap = lighting && renderable.environment.shadowMap != null;
 		this.renderable = renderable;
+		// material/environment attributes mask
+		final Attributes attributes = combineAttributes(renderable);
 		attributesMask = attributes.getMask() | optionalAttributes;
+		// vertex attributes mask
 		vertexMask = renderable.meshPart.mesh.getVertexAttributes().getMaskWithSizePacked();
-
-//		if (!config.ignoreUnimplemented && (implementedFlags & attributesMask) != attributesMask)
-//			throw new GdxRuntimeException("Some attributes not implemented yet (" + attributesMask + ")");
 		
-		if(global()) modules.add(uglobal = new GlobalUniforms(this));
-		if(object()) modules.add(uobject = new ObjectUniforms(this, renderable, config));
-		if(material()) modules.add(umaterial = new MaterialUniforms(this));
-		if(lighting()) modules.add(ulighting = new LightingUniforms(this, renderable, config, attributes));
 		
-		if(config instanceof ExtendableConfig ext) modules.addAll(ext.modules);
+		//if(global()) 
+			modules.add(/* uglobal = */ new GlobalUniforms(this));
+		//if(object()) 
+			modules.add(/* uobject = */ new NodeUniforms(this, renderable, config));
+		//if(material()) 
+			modules.add(/* umaterial = */ new MaterialUniforms(this));
+		//if(lighting()) 
+			modules.add(/* ulighting = */ new LightingUniforms(this, renderable, config, attributes));
+		
+		if(config instanceof ExtendableConfig ext) 
+			modules.addAll(ext.modules);
 
 		for(var module : modules) module.register(this);
 	}
@@ -199,17 +222,6 @@ public class ExtendableShader extends BaseShader {
 		for(var module : modules) module.bind(this, renderable, config, combinedAttributes);
 		super.render(renderable, combinedAttributes);
 	}
-	
-	@Override
-	public void end() {
-		super.end();
-	}
-
-	@Override
-	public void dispose () {
-		program.dispose();
-		super.dispose();
-	}
 
 	@Override
 	public int compareTo(Shader other) {
@@ -220,33 +232,47 @@ public class ExtendableShader extends BaseShader {
 	
 	@Override
 	public boolean canRender(Renderable renderable) {
+		if (renderable.bones != null && renderable.bones.length > config.numBones) return false;
 		final long renderableMask = combineAttributeMasks(renderable);
 		
-		//Log.info("canRender " + renderable);
-		var rhas = (renderableMask & DissolveIntensityAttribute.DissolveIntensityType) > 0;
-		var shas = (attributesMask & DissolveIntensityAttribute.DissolveIntensityType) > 0;
-		if(rhas) {
-			//Log.info("canRender has dissolve intensity " + renderable.hashCode());
-		} else {
-			//Log.info("canRender has not dissolve intensity " + renderable.hashCode());
+		// test check the renderable's mask vs this shader's mask
+		{
+			//Log.info("canRender " + renderable);
+			var rhas = (renderableMask & DissolveIntensityAttribute.DissolveIntensityType) > 0;
+			var shas = (attributesMask & DissolveIntensityAttribute.DissolveIntensityType) > 0;
+			if(rhas) {
+				//Log.info("canRender has dissolve intensity " + renderable.hashCode());
+			} else {
+				//Log.info("canRender has not dissolve intensity " + renderable.hashCode());
+			}
+			if(shas) {
+				//Log.info("shader has dissolve intensity " + hashCode());
+			} else {
+				//Log.info("shader has not dissolve intensity " + hashCode());
+			}
+			if(rhas && shas) {
+				//Log.info("both have dissolve intensity " + renderable.hashCode());
+			} else 
+			if (rhas && !shas) {
+				//Log.info("only renderable has dissolve intensity" + hashCode() + ", " + this.modules.stream().anyMatch(m -> m instanceof DissolveUniforms));
+			}
 		}
-		if(shas) {
-			//Log.info("shader has dissolve intensity " + hashCode());
-		} else {
-			//Log.info("shader has not dissolve intensity " + hashCode());
-		}
-		if(rhas && shas) {
-			//Log.info("both have dissolve intensity " + renderable.hashCode());
-		} else 
-		if (rhas && !shas) {
-			//Log.info("only renderable has dissolve intensity" + hashCode() + ", " + this.modules.stream().anyMatch(m -> m instanceof DissolveUniforms));
-		}
-		
 		
 		return (attributesMask == (renderableMask | optionalAttributes))
 			&& (vertexMask == renderable.meshPart.mesh.getVertexAttributes().getMaskWithSizePacked()) 
 			&& (renderable.environment != null) == lighting();
 	}
+
+//	@Override
+//	public boolean canRender (final Renderable renderable) {
+//		if (renderable.bones != null && renderable.bones.length > config.numBones) return false;
+//		final long renderableMask = combineAttributeMasks(renderable);
+//		return (attributesMask == (renderableMask | optionalAttributes))
+//			&& (vertexMask == renderable.meshPart.mesh.getVertexAttributes().getMaskWithSizePacked()) 
+//			&& (renderable.environment != null) == lighting;
+//	}
+
+	
 	private final static Attributes tmpAttributes = new Attributes();
 	// TODO: Perhaps move responsibility for combining attributes to RenderableProvider?
 	private static final Attributes combineAttributes (final Renderable renderable) {

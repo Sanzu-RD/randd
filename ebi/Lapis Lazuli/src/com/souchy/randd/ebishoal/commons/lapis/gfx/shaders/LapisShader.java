@@ -37,7 +37,8 @@ public class LapisShader {
 		
 		// then add all modules
 		for (var module : modules) {
-			str += Gdx.files.internal("res/shaders/" + module).readString();
+			if(!module.isBlank())
+				str += Gdx.files.internal("res/shaders/" + module).readString();
 		}
 		
 		// then add the rest of the chosen shader

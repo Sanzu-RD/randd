@@ -1,100 +1,70 @@
-package com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms;
+package com.souchy.randd.tools.mapeditor.shaderimpl;
 
-import java.util.Random;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
-import com.badlogic.gdx.graphics.g3d.Attribute;
 import com.badlogic.gdx.graphics.g3d.Attributes;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute;
-import com.badlogic.gdx.graphics.g3d.attributes.IntAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.shaders.BaseShader;
-import com.badlogic.gdx.graphics.g3d.shaders.BaseShader.LocalSetter;
-import com.badlogic.gdx.graphics.g3d.shaders.BaseShader.Setter;
 import com.badlogic.gdx.graphics.g3d.shaders.BaseShader.Uniform;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config;
-import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Inputs;
-import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Setters;
-import com.badlogic.gdx.graphics.g3d.utils.TextureDescriptor;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Vector3;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
+import com.souchy.randd.tools.mapeditor.shader.Shader2;
+import com.souchy.randd.tools.mapeditor.shader.Shader2Config;
+import com.souchy.randd.tools.mapeditor.shader.ShaderPart;
+import com.souchy.randd.tools.mapeditor.shader.uniforms.UniformsModule;
 
 public class DissolveUniforms implements UniformsModule {
 
-	// ------------------- 
+	// ------------------- Uniform addresses
 	
-	// Data
-//	protected TextureDescriptor<Texture> dissolveTexture;
-//	public float dissolveIntensity = 0.5f;
-//	public float dissolveBorderWidth = 0.05f;
-//	public Color dissolveBorderColor = Color.BLUE;
-	
-	// ------------------- Addresses
-	
-	// Dissolve uniforms
-	public int u_dissolveTexture;
+	private int u_dissolveTexture;
 	//public final int u_diffuseColor;
-	public int u_dissolveUVTransform;
-
+	private int u_dissolveUVTransform;
 	/** ex : 0.5 = half dissolved */
-	public int u_dissolveIntensity;
-	/** width of the border around the dissolved area */
-	public int u_dissolveBorderWidth;
+	private int u_dissolveIntensity;
 	/** color of the border */
-	public int u_dissolveBorderColor;
-
-	// -------------------
-	
-//	public String shaderFragment;
-//	public String shaderVertex;
+	private int u_dissolveBorderColor;
+	/** width of the border around the dissolved area */
+	private int u_dissolveBorderWidth;
 	
 	
-	public DissolveUniforms() {
-		
-		
-//		dissolveTexture = new TextureDescriptor<Texture>();
-//		dissolveTexture.minFilter = dissolveTexture.magFilter = Texture.TextureFilter.MipMapLinearNearest; //.MipMapLinearLinear;
-//		dissolveTexture.uWrap = dissolveTexture.vWrap = Texture.TextureWrap.Repeat; 
-//		dissolveTexture.texture = texture;
-		
-//		shaderFragment = Gdx.files.internal("res/shaders/components/dissolve.f.glsl").readString(); 
-//		shaderVertex = Gdx.files.internal("res/shaders/components/dissolve.v.glsl").readString(); 
-		//LapisAssets.get("res/shaders/dissolve.frag.glsl"); 
-		//var shader = LapisAssets.get("", ShaderProgram.class);
-		//shader.getVertexShaderSource();
-	}
-
 	@Override
-	public void register(BaseShader s) {
+	public String prefixFlags(Renderable r, Config c) {
+		String prefix = "";
+		if(r.material.has(DissolveIntensityAttribute.DissolveIntensityType)) {
+			prefix += "#define dissolveFlag\n";
+		}
+		return prefix;
+	}
+	
+	@Override
+	public String vertex() {
+		return "res/shaders/components/dissolve.v.glsl";
+	}
+	
+	@Override
+	public String fragment() {
+		return "res/shaders/components/dissolve.f.glsl";
+	}
+	
+	
+	@Override
+	public void register(BaseShader s, Renderable r, Config config) {
 		u_dissolveTexture = s.register(new Uniform("u_dissolveTexture", DissolveTextureAttribute.DissolveTextureType));
 		u_dissolveUVTransform = s.register(new Uniform("u_dissolveUVTransform", DissolveTextureAttribute.DissolveTextureType));
-		u_dissolveIntensity = s.register(new Uniform("u_dissolveIntensity"));
-		u_dissolveBorderWidth = s.register(new Uniform("u_dissolveBorderWidth"));
-		u_dissolveBorderColor = s.register(new Uniform("u_dissolveBorderColor"));
+		u_dissolveIntensity = s.register(new Uniform("u_dissolveIntensity", DissolveIntensityAttribute.DissolveIntensityType));
+		u_dissolveBorderColor = s.register(new Uniform("u_dissolveBorderColor", DissolveBorderColorAttribute.DissolveBorderColorType));
+		u_dissolveBorderWidth = s.register(new Uniform("u_dissolveBorderWidth", DissolveBorderWidthAttribute.DissolveBorderWidthType));
 	}
-	
-	
 	
 	@Override 
 	public void bind(BaseShader s, Renderable renderable, Config config, final Attributes attributes) {
-		//s.set(u_dissolveTexture, dissolveTexture);
-		//s.set(u_dissolveIntensity, dissolveIntensity);
-		//s.set(u_dissolveBorderWidth, dissolveBorderWidth);
-		//s.set(u_dissolveBorderColor, dissolveBorderColor);
-		
 		if(attributes.has(DissolveTextureAttribute.DissolveTextureType)) {
 			var attr = (TextureAttribute) attributes.get(DissolveTextureAttribute.DissolveTextureType);
 //			attr.scaleV = 0.5f;
@@ -119,24 +89,17 @@ public class DissolveUniforms implements UniformsModule {
 			s.set(u_dissolveBorderWidth, attr.value);
 			//Log.info("Set dissolve width " + attr.value);
 		}
-		//Log.info("bind dissolve : %s, %s, %s, %s", dissolveTexture != null, dissolveIntensity, dissolveBorderWidth, dissolveBorderColor);
-		//Log.info("bind dissolve : %s, %s, %s, %s", u_dissolveTexture, u_dissolveIntensity, u_dissolveBorderWidth, u_dissolveBorderColor);
-		//Log.info("bind dissolve : %s, %s, %s", DissolveIntensityAttribute.DissolveIntensityType, DissolveBorderWidthAttribute.DissolveBorderWidthType, DissolveBorderColorAttribute.DissolveBorderColorType);
 	}
 
 	
-	@Override
-	public String vertex() {
-		return "res/components/dissolve.v.glsl";
-	}
 	
-	@Override
-	public String fragment() {
-		return "res/components/dissolve.f.glsl";
-	}
-
-
 	
+	/**
+	 * Dissolve material to easily add/remove all Attributes needed for the dissolve effect
+	 * 
+	 * @author Blank
+	 * @date 1 nov. 2021
+	 */
 	public static class DissolveMaterial extends Material {
 		public DissolveTextureAttribute texture;
 		public DissolveIntensityAttribute intensity;
@@ -155,6 +118,12 @@ public class DissolveUniforms implements UniformsModule {
 			this.borderColor = new DissolveBorderColorAttribute(borderColor);
 			this.borderWidth = new DissolveBorderWidthAttribute(borderWidth);
 			this.set(this.texture, this.intensity, this.borderColor, this.borderWidth);
+		}
+		public static void removeFrom(Attributes attributes) {
+			attributes.remove(DissolveTextureAttribute.DissolveTextureType);
+			attributes.remove(DissolveIntensityAttribute.DissolveIntensityType);
+			attributes.remove(DissolveBorderColorAttribute.DissolveBorderColorType);
+			attributes.remove(DissolveBorderWidthAttribute.DissolveBorderWidthType);
 		}
 	}
 
@@ -187,6 +156,9 @@ public class DissolveUniforms implements UniformsModule {
 			super(DissolveTextureType, value);
 		}
 	}
+	/**
+	 * Intensity
+	 */
 	public static class DissolveIntensityAttribute extends FloatAttribute {
 		public static final String DissolveIntensityAlias = "a_DissolveIntensity";
 		public static final long DissolveIntensityType = register(DissolveIntensityAlias);
@@ -194,6 +166,9 @@ public class DissolveUniforms implements UniformsModule {
 			super(DissolveIntensityType, value);
 		}
 	}
+	/**
+	 * Border Color
+	 */
 	public static class DissolveBorderColorAttribute extends ColorAttribute {
 		public static final String DissolveBorderColorAlias = "a_DissolveBorderColor";
 		public static final long DissolveBorderColorType = register(DissolveBorderColorAlias);
@@ -204,6 +179,9 @@ public class DissolveUniforms implements UniformsModule {
 			super(DissolveBorderColorType, value);
 		}
 	}
+	/**
+	 * Border width
+	 */
 	public static class DissolveBorderWidthAttribute extends FloatAttribute {
 		public static final String DissolveBorderWidthAlias = "a_DissolveBorderWidth";
 		public static final long DissolveBorderWidthType = register(DissolveBorderWidthAlias);

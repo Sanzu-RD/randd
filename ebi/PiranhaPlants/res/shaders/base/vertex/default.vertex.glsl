@@ -1,7 +1,7 @@
 
 
 void main() {
-	
+	// --------------------------------------------------------------- main
 	#ifdef diffuseTextureFlag
 		v_diffuseUV = u_diffuseUVTransform.xy + a_texCoord0 * u_diffuseUVTransform.zw;
 	#endif //diffuseTextureFlag
@@ -185,4 +185,6 @@ void main() {
 			}
 		//#endif //diffuseTextureFlag
 	#endif // dissolveFlag
+	
+	// --------------------------------------------------------------- main
 }

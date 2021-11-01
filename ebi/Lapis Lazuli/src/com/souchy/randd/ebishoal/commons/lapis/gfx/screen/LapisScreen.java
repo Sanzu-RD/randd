@@ -176,7 +176,7 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	
 	public InputProcessor createInputProcessor() {
 		var multi = new InputMultiplexer();
-		multi.addProcessor(getView().getStage());
+		if(getView() != null) multi.addProcessor(getView().getStage());
 		multi.addProcessor(new CameraInputController(getCamera()));
 		return multi;
 	}

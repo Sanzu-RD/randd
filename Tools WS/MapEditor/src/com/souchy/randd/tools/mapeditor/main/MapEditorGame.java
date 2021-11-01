@@ -26,6 +26,11 @@ import com.souchy.randd.tools.mapeditor.configs.EditorProperties;
 import com.souchy.randd.tools.mapeditor.controls.Commands;
 import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorScreen;
 
+import net.mgsx.gltf.loaders.glb.GLBAssetLoader;
+import net.mgsx.gltf.loaders.gltf.GLTFAssetLoader;
+import net.mgsx.gltf.scene3d.scene.Scene;
+import net.mgsx.gltf.scene3d.scene.SceneAsset;
+
 public class MapEditorGame extends LapisGame {
 	
 	public static MapEditorGame game;
@@ -49,6 +54,7 @@ public class MapEditorGame extends LapisGame {
 		LapisAssets.blocking = false;
 		properties = new EditorProperties();
 		properties.load();
+		
 		
 		Commands.initCommands();
 		

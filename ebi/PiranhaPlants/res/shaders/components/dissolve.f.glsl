@@ -1,27 +1,7 @@
 
-/*
-	attribute vec3 a_position;
-	uniform mat4 u_projViewTrans;
-	
-	#if defined(colorFlag)
-	varying vec4 v_color;
-	attribute vec4 a_color;
-	#endif // colorFlag
-	
-	#ifdef textureFlag
-	attribute vec2 a_texCoord0;
-	#endif // textureFlag
-	
-	
-	#ifdef diffuseTextureFlag
-	uniform sampler2D u_diffuseTexture;
-	uniform vec4 u_diffuseUVTransform;
-	varying vec2 v_diffuseUV;
-	#endif
-*/
-
-
+// --------------------------------------------------------------- define
 #ifdef dissolveFlag
+
 uniform float u_dissolveIntensity;
 uniform float u_dissolveBorderWidth;
 uniform vec4 u_dissolveBorderColor;
@@ -33,6 +13,12 @@ varying vec2 v_dissolveUV; // will come from the vertex shader, will be like a_t
 //varying MED vec2 v_diffuseUV; // already have the other uv vec2, idk what MED is 
 //uniform vec4 u_diffuseColor; // dont need this
 
+#endif
+// --------------------------------------------------------------- define
+
+
+// --------------------------------------------------------------- library
+#ifdef dissolveFlag
 
 // get noise from the noise texture
 float dissolve_noise(){
@@ -115,6 +101,14 @@ vec4 dissolve(vec4 glcolor) {
 	return glcolor;
 }
 
-
 #endif
+// --------------------------------------------------------------- library
+
+
+
+// --------------------------------------------------------------- main
+#ifdef dissolveFlag
+	gl_FragColor = dissolve(gl_FragColor);
+#endif // dissolveFlag
+// --------------------------------------------------------------- main
 

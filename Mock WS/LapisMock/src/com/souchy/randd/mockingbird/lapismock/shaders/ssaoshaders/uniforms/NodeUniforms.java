@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Config;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Inputs;
 import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader.Setters;
 
-public class ObjectUniforms implements UniformsModule {
+public class NodeUniforms implements UniformsModule {
 	
 	// Object uniforms
 	public final int u_worldTrans; // renderable.worldTransform
@@ -15,7 +15,7 @@ public class ObjectUniforms implements UniformsModule {
 	public final int u_normalMatrix; // (renderable.worldTransform).inv().transpose()
 	public final int u_bones;
 	
-	public ObjectUniforms(BaseShader s, Renderable renderable, Config config) {
+	public NodeUniforms(BaseShader s, Renderable renderable, Config config) {
 		// Object uniforms
 		u_worldTrans = s.register(Inputs.worldTrans, Setters.worldTrans);
 		u_viewWorldTrans = s.register(Inputs.viewWorldTrans, Setters.viewWorldTrans);

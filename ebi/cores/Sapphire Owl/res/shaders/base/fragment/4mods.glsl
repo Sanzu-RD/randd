@@ -116,6 +116,24 @@ void shadowMapRender(){
 
 
 
+float bandLight(float m, float x, float t0, float t1, bool continuous){
+	//float s0 = step(t0.z, mp.z); // prend tous les t0 < x
+	//float s1 = step(mp.z, t1.z); // prend tous les t1 > x
+	
+	float bias = 0.000001f;
+	if(x > bias && x < m - bias){
+		if(x >= t0 && x <= t1){
+			return 1.0f;
+		}  
+		if(continuous && t1 > m && x <= mod(t1, m)){
+			return 1.0f;
+		}
+	}
+	return 0.0f;
+	
+}
+
+
 void mods(){
 	
 	// checkers shader
@@ -144,7 +162,7 @@ void mods(){
 	}
 	#endif
 	
-	
+	/*
 	#ifdef dissolveFlag
 		//gl_FragColor = vec4(0,1,0,1);
 		//#ifdef diffuseTextureFlag
@@ -152,5 +170,64 @@ void mods(){
 		//	gl_FragColor = vec4(1,0,0,1);
 		//#endif //diffuseTextureFlag
 	#endif // dissolveFlag
+	*/
+	
+	
+	
+	if(v_pos.z > 1){
+		float m = 1.0;
+		float sped = 0.2f;
+		float bias = 0.000000f;
+		float width = 0.3f;
+		
+		vec3 t = vec3(u_time) * sped;
+		vec3 t0 = mod(t, m);   		
+		vec3 t1 = t0 + width;		
+		
+		vec3 mp = mod(v_pos + bias, m);
+		
+		
+		float b = 0;
+		//b += bandLight(1, mp.x, t0.x, t1.x, true);
+		//b += bandLight(1, mp.y, t0.y, t1.y, true);
+		b += bandLight(m, mp.z, t0.z, t1.z, true);
+		
+		vec3 nm = normalize(mp);
+		float l = length(mp.xz);
+		float ln = length(nm.xy);
+		float v = (mp.x + mp.y) / 2; // (mp.x + mp.y - 1);
+		
+		//b += bandLight(m, v, t0.z, t1.z, true);
+		//b += bandLight(m, mp.y, t0.z, t1.z, true);
+		if(b > 0){
+			gl_FragColor *= vec4(0.3,0.3,0.8,1);
+		}
+		
+		float si = 1;
+		float w = 0.5;
+		float start = 0.8;
+		float k = 	abs((mp.x + mp.y) * v_normal.z) 
+					+ (v_normal.y * -mp.x) 
+					+ (v_normal.x * (1-mp.y))
+					+ (v_normal.x * (1-mp.x))
+		;
+		
+		float w0 = start * si;
+		float w1 = w0 + (w * si);
+		
+		if(k >= w0 && k <= w1) {
+		//	gl_FragColor = vec4(0, 1, 0, 1);
+		}
+		
+	}
+	
+	
+	
 	
 }
+
+
+
+
+
+
