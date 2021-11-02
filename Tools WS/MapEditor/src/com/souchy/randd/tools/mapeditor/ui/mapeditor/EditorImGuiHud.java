@@ -86,7 +86,6 @@ public class EditorImGuiHud extends ImGuiHud {
 	
 	@Override
 	public void dispose() {
-		//Log.info("ImGui dispose");
 		for(var c : components)
 			c.dispose();
 		super.dispose();
