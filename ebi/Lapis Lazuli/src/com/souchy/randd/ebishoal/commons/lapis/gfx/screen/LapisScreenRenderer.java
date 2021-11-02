@@ -80,14 +80,10 @@ interface LapisScreenRenderer extends Screen {
 		getFBO().begin();
 		{
 			// clear the screen with a transparent background for the fbo
-			clearScreen(0, 0, 0, 0);
-			
-			cleanSpriteBatch.begin();
-			{
-				if(RenderOptions.renderBackground) 
-					drawBackground(cleanSpriteBatch);
-			}
-			cleanSpriteBatch.end();
+			clearScreenFbo();
+
+			if(RenderOptions.renderBackground) 
+				drawBackground(cleanSpriteBatch);
 			
 			// world
 			renderWorldContainer();
@@ -114,7 +110,7 @@ interface LapisScreenRenderer extends Screen {
 		spriteBatch.begin();
 		{
 			// clear the screen with the getBackgroundColor()
-			clearScreen();
+			clearScreenFboSpriteBatch();
 			// start with the background
 //			if(RenderOptions.renderBackground) drawBackground(spriteBatch);
 			// draw the world texture
@@ -128,6 +124,22 @@ interface LapisScreenRenderer extends Screen {
 		
 		// render UI
 		if(RenderOptions.renderUI) renderView(delta);
+	}
+	
+	/**
+	 * Clear the screen with a transparent background for the fbo. <code>clearScreen(0, 0, 0, 0);</code> <br>
+	 * There's some weirdness around those two depending on the background used (no background vs image vs video)
+	 */
+	public default void clearScreenFbo() {
+//		clearScreen(0, 0, 0, 0);
+		clearScreen();
+	}
+	/**
+	 * clear the screen with the getBackgroundColor(). <code>clearScreen();</code> <br>
+	 * There's some weirdness around those two depending on the background used (no background vs image vs video)
+	 */
+	public default void clearScreenFboSpriteBatch() {
+//		clearScreen();
 	}
 	
 	public default void renderEffekseer(float delta) {

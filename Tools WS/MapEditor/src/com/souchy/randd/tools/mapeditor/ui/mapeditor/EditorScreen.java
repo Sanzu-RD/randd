@@ -1,5 +1,8 @@
 package com.souchy.randd.tools.mapeditor.ui.mapeditor;
 
+import java.io.IOException;
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
@@ -10,6 +13,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
@@ -28,7 +32,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.video.VideoPlayer;
+import com.badlogic.gdx.video.VideoPlayerCreator;
+import com.badlogic.gdx.video.VideoPlayerDesktop;
+import com.badlogic.gdx.video.VideoPlayerInitException;
 import com.kotcrab.vis.ui.VisUI;
 import com.souchy.jeffekseer.EffectManager;
 import com.souchy.randd.commons.tealwaters.logging.Log;
@@ -53,6 +63,7 @@ import com.souchy.randd.tools.mapeditor.main.MapWorld;
 import com.souchy.randd.tools.mapeditor.shader.Shader2;
 import com.souchy.randd.tools.mapeditor.shader.Shader2Config;
 import com.souchy.randd.tools.mapeditor.shader.Shader2Provider;
+import com.souchy.randd.tools.mapeditor.video.VidPlayer;
 
 import net.mgsx.gltf.loaders.glb.GLBAssetLoader;
 import net.mgsx.gltf.loaders.gltf.GLTFAssetLoader;
@@ -86,6 +97,8 @@ public class EditorScreen extends LapisScreen {
 	public EditorImGuiHud imgui;
 	
 	
+	public VideoPlayer player;
+	
 	@Override
 	public void init() {
 		super.init();
@@ -97,8 +110,57 @@ public class EditorScreen extends LapisScreen {
 		
 		imgui = new EditorImGuiHud();
 		imgui.create();
+		
+		var playerviewport =  new FitViewport(1, 1); // new ExtendViewport(1920, 1080);
+		player =  new VidPlayer(playerviewport); //VideoPlayerCreator.createVideoPlayer(getViewport()); //new VideoPlayerDesktop(getViewport());
+		final String video= "res/videos/blue_plate.webm"; 
+		try {
+			player.play(Gdx.files.internal(video));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		player.setOnCompletionListener(new VideoPlayer.CompletionListener() {
+			@Override
+			public void onCompletionListener (FileHandle file) {
+				//Gdx.app.log("VideoTest", file.name() + " fully played.");
+				try {
+					player.stop();
+					player.play(Gdx.files.internal(video));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		player.setOnVideoSizeListener(new VideoPlayer.VideoSizeListener() {
+			@Override
+			public void onVideoSize (float width, float height) {
+				//Gdx.app.log("VideoTest", "The video has a size of " + width + "x" + height + ".");
+			}
+		});
 	}
-	
+
+	@Override
+	public void drawBackground(SpriteBatch batch) {
+//		super.drawBackground(batch);
+		try {
+			player.render();
+		} catch (Exception e) {
+			//Log.error("", e);
+		}
+	}
+	@Override
+	public void clearScreenFbo() {
+//		clearScreen(0, 0, 0, 0);
+		clearScreen();
+	}
+	@Override
+	public void clearScreenFboSpriteBatch() {
+//		clearScreen();
+	}
+	@Override
+	public Color getBackgroundColor() {
+		return Color.BLACK;
+	}
 
 	@Override
 	protected void act(float delta) {
@@ -115,19 +177,27 @@ public class EditorScreen extends LapisScreen {
 			var attr = inst.materials.get(0).get(DissolveIntensityAttribute.DissolveIntensityType);
 			if(attr != null){
 				DissolveIntensityAttribute intensity = (DissolveIntensityAttribute) attr;
-				intensity.value = (float) Math.sin(time * -1f) + 0.5f; //time * 2f / period;
+				intensity.value = (float) Math.sin(time * 2f) * 0.35f + 0.45f; //time * 2f / period;
+				//intensity.value = (float) (time * -1f % 1) + 0.5f; //time * 2f / period;
 
 				//var col = (DissolveBorderColorAttribute) inst.materials.get(0).get(DissolveBorderColorAttribute.DissolveBorderColorType);
 				//col.color.set(Color.CYAN);
 
 				//var width = (DissolveBorderWidthAttribute) inst.materials.get(0).get(DissolveBorderWidthAttribute.DissolveBorderWidthType);
 				//width.value = 0.03f;
-			}
-			var attrdissTex = inst.materials.get(0).get(DissolveTextureAttribute.DissolveTextureType);
-			if(attrdissTex != null) {
-				DissolveTextureAttribute tex = (DissolveTextureAttribute) attrdissTex;
-				tex.offsetU = time * 2;
-				tex.offsetV = time * 2;
+				
+				var attrdissTex = inst.materials.get(0).get(DissolveTextureAttribute.DissolveTextureType);
+				if(attrdissTex != null) {
+					DissolveTextureAttribute tex = (DissolveTextureAttribute) attrdissTex;
+					// move the texture while it's completely white or completely blend to add randomness to each cycle
+					if(intensity.value >= 0.90f || intensity.value <= 0.11f) {
+						tex.offsetU += 0.005f;
+						tex.offsetV += 0.005f;
+						Log.info("asd");
+						//tex.offsetU = time * 2.0f;
+						//tex.offsetV = time * 2.0f;
+					}
+				}
 			}
 		}
 		
@@ -146,10 +216,6 @@ public class EditorScreen extends LapisScreen {
 
 	}
 
-	@Override
-	public Color getBackgroundColor() {
-		return Color.FIREBRICK;
-	}
 	
 	@Override
 	public ModelBatch createWorldBatch() {
@@ -191,6 +257,7 @@ public class EditorScreen extends LapisScreen {
 	public void resize(int width, int height) {
 		super.resize(width, height);
 		imgui.resizeScreen(width, height);
+		player.resize(width, height);
 	}
 	
 	@Override
@@ -254,5 +321,6 @@ public class EditorScreen extends LapisScreen {
 		super.dispose();
 		imgui.dispose();
 	}
+	
 
 }

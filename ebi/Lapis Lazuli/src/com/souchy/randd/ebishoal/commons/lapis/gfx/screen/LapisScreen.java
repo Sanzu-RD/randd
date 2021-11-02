@@ -203,10 +203,14 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	 * Draw a background texture if wanted.
 	 */
 	public void drawBackground(SpriteBatch batch) {
-//		if(background != null && getViewport() != null) getSpriteBatch().draw(background, getViewport().getScreenX(), getViewport().getScreenY());
-//		else 
-		if(background != null) batch.draw(background, 0, 0);
-		//else getSpriteBatch().draw(fboRegion, getViewport().getScreenX(), getViewport().getScreenY());
+		batch.begin();
+		{
+	//		if(background != null && getViewport() != null) getSpriteBatch().draw(background, getViewport().getScreenX(), getViewport().getScreenY());
+	//		else 
+			if(background != null) batch.draw(background, 0, 0);
+			//else getSpriteBatch().draw(fboRegion, getViewport().getScreenX(), getViewport().getScreenY());
+		}
+		batch.end();
 	}
 	
 	/*

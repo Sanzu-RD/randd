@@ -211,7 +211,7 @@ public class MapWorld extends World {
                 		inst.materials.get(0).set(blend);
                 		inst.materials.get(0).set(reflection);
                 		inst.materials.get(0).set(shine); 
-                		inst.materials.get(0).set(dissolve);
+                		//inst.materials.get(0).set(dissolve);
                 		
                 		inst.transform
     					.translate(

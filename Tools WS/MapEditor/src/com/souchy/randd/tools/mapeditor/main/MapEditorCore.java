@@ -52,7 +52,11 @@ public class MapEditorCore { //extends LapisCore {
 		//// If you remove the above line and set Vsync to false, you can get unlimited FPS, which can be
 		//// useful for testing performance, but can also be very stressful to some hardware.
 		//// You may also need to configure GPU drivers to fully disable Vsync; this can cause screen tearing.
+		if(conf.gfx.width == 0) conf.gfx.width = 1600; 
+		if(conf.gfx.height == 0) conf.gfx.height = 1600;
 		config.setWindowedMode(conf.gfx.width, conf.gfx.height); // 1600, 900); // Liftoff.WIDTH, Liftoff.HEIGHT);
+		if(conf.gfx.x == -32000) conf.gfx.x = -1; 
+		if(conf.gfx.y == -32000) conf.gfx.y = -1;
 		config.setWindowPosition(conf.gfx.x, conf.gfx.y);
 		//configuration.setWindowIcon("libgdx128.png", "libgdx64.png", "libgdx32.png", "libgdx16.png");
 		config.setWindowIcon("res/textures/91757405.jpg");

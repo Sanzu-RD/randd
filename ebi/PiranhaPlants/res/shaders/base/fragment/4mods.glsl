@@ -173,7 +173,7 @@ void mods(){
 	*/
 	
 	
-	
+	/*
 	if(v_pos.z > 1){
 		float m = 1.0;
 		float sped = 0.2f;
@@ -220,6 +220,7 @@ void mods(){
 		}
 		
 	}
+	*/
 	
 	
 	
