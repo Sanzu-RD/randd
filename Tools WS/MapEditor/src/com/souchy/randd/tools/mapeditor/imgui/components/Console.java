@@ -32,9 +32,9 @@ public class Console extends Container {
 		this.title = "Console";
 		this.windowFlags |= ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse;
 		
-		for(char i = 'a'; i <= 'z'; i++) {
-			messages.add("" + i);
-		}
+		//for(char i = 'a'; i <= 'z'; i++) {
+		//	messages.add("" + i);
+		//}
 		inputHistory.add("");
 	}
 	

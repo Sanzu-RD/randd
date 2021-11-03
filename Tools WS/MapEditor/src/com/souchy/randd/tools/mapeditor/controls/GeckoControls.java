@@ -120,6 +120,7 @@ public class GeckoControls extends Controls3d {
 		});
 		keys.putCombo(new KeyCombination(Keys.R), () -> Commands.resetShaders());
 		keys.putCombo(new KeyCombination(Keys.R, Keys.CONTROL_LEFT), Actions::resetConf);
+		keys.putCombo(new KeyCombination(Keys.R, Keys.SHIFT_LEFT), Actions::reloadAssets);
 	}
 
 	private boolean imguiLayer() {
@@ -293,8 +294,7 @@ public class GeckoControls extends Controls3d {
 		else
 			MapEditorGame.screen.imgui.settings.props.mats = null;
 		
-
-		MapEditorGame.screen.imgui.properties.setInst(selectedInstance);
+		MapEditorGame.screen.imgui.properties.setObj(selectedInstance);
 	}
 
 	public Model getSelectedModel() {

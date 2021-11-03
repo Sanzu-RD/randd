@@ -69,9 +69,6 @@ public class MapEditorGame extends LapisGame {
 		//mapCache = new MapCache(); //"data/maps/", FileType.Internal);
 		//System.out.println("on create :" + mapCache.getRoot());
 		
-		LapisAssets.loadModels(Gdx.files.internal("res/models/"));
-		LapisAssets.loadTextures(Gdx.files.internal("res/textures/"));
-		
 		screen = new EditorScreen();
 		screen.init();
 		//screen.create();
@@ -79,6 +76,8 @@ public class MapEditorGame extends LapisGame {
 		currentFile.set(Gdx.files.internal(properties.lastMap.get())); //"res/maps/goulta7b.map")); //"data/maps/goulta7.map"));
 		screen.world.gen();
 		screen.resetCamera();
+
+		LapisAssets.loadModels(Gdx.files.internal("res/models/"));
 	}
 	
 	@Override

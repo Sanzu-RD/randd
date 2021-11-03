@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.FlushablePool;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.tools.mapeditor.imgui.FontAwesomeIcons;
+import com.souchy.randd.tools.mapeditor.imgui.IGStyle;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiComponent.Container;
 import com.souchy.randd.tools.mapeditor.main.EditorEntities;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
@@ -40,7 +41,7 @@ public class ObjectsTree extends Container { // implements ImGuiComponent
 	public void renderContent(float delta) {
 		int i = 0;
 		
-		ImGui.textColored(EditorImGuiHud.colorAccent, "Cache");
+		ImGui.textColored(IGStyle.colorAccent, "Cache");
 		MapWorld.world.cache.getRenderables(renderables, renderablesPool);
 		for (var inst : renderables) {
 			//if(ImGui.treeNode((i++) + " " + inst.meshPart.id)) {
@@ -53,7 +54,7 @@ public class ObjectsTree extends Container { // implements ImGuiComponent
 			ImGui.popStyleColor();
 		}
 		renderables.clear();
-		ImGui.textColored(EditorImGuiHud.colorAccent, "Instances");
+		ImGui.textColored(IGStyle.colorAccent, "Instances");
 		for (var inst : EditorEntities.getInstances()) {
 			/*
 			if(ImGui.treeNode((i++) + " " + inst.nodes.get(0).id)) { // inst.model.meshParts.get(0).id
@@ -64,7 +65,7 @@ public class ObjectsTree extends Container { // implements ImGuiComponent
 			*/
 			ImGui.pushStyleColor(ImGuiCol.Button, 0, 0, 0, 0);
 			if(ImGui.button(FontAwesomeIcons.Cube + " "+ (i++) + " " + inst.nodes.get(0).id)) {
-				MapEditorGame.screen.imgui.properties.setInst(inst);
+				MapEditorGame.screen.imgui.properties.setObj(inst);
 			}
 			ImGui.popStyleColor();
 		}

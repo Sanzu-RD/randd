@@ -12,7 +12,9 @@ import com.badlogic.gdx.utils.Array;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms;
+import com.souchy.randd.tools.mapeditor.imgui.IGStyle;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiComponent;
+import com.souchy.randd.tools.mapeditor.imgui.ImGuiUtil;
 import com.souchy.randd.tools.mapeditor.imgui.components.AssetExplorer.AssetDialog;
 import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorImGuiHud;
 
@@ -49,9 +51,9 @@ public class MaterialProperties implements ImGuiComponent {
 		
 		int matid = 0;
 		for(var mat : mats) {
-			String matName = "Material # " + (matid++);
+			String matName = "#" + (matid++) + " " + mat.id; //"Material # " + (matid++);
 			
-			ImGui.textColored(EditorImGuiHud.colorAccent, matName);
+			ImGui.textColored(IGStyle.colorAccent, matName);
 			
 			renderAddAttribute(mat, matName);
 			
@@ -157,7 +159,7 @@ public class MaterialProperties implements ImGuiComponent {
 		// current texture
 		ImGui.image(a.textureDescription.texture.getTextureObjectHandle(), 75, 75);
 		// texture transforms
-		ImFloat imv = Properties.poolFloat.obtain();
+		ImFloat imv = ImGuiUtil.poolFloat.obtain();
 		imv.set(a.offsetU);
 		if(ImGui.sliderScalar("U", ImGuiDataType.Float, imv, -1, 100)) {
 			a.offsetU = imv.get();
@@ -174,7 +176,7 @@ public class MaterialProperties implements ImGuiComponent {
 		if(ImGui.sliderScalar("H", ImGuiDataType.Float, imv, -1, 100)) {
 			a.scaleV = imv.get();
 		}
-		Properties.poolFloat.free(imv);
+		ImGuiUtil.poolFloat.free(imv);
 	}
 	
 	public void renderColor(ColorAttribute a) {
@@ -185,7 +187,7 @@ public class MaterialProperties implements ImGuiComponent {
 	}
 	
 	public void renderFloat(FloatAttribute a) {
-		ImFloat imv = Properties.poolFloat.obtain();
+		ImFloat imv = ImGuiUtil.poolFloat.obtain();
 		imv.set(a.value);
 //		ImGuiSliderFlags.Logarithmic
 		if(ImGui.sliderScalar("##" + Attribute.getAttributeAlias(a.type), ImGuiDataType.Float, imv, -1, 50)) {
@@ -196,16 +198,16 @@ public class MaterialProperties implements ImGuiComponent {
 //		}
 		// sliderfloat, dragfloat
 			
-		Properties.poolFloat.free(imv);
+		ImGuiUtil.poolFloat.free(imv);
 	}
 	
 	public void renderInt(IntAttribute a) {
-		ImInt imv = Properties.poolInt.obtain();
+		ImInt imv = ImGuiUtil.poolInt.obtain();
 		imv.set(a.value);
 		if(ImGui.sliderScalar("##" + Attribute.getAttributeAlias(a.type), ImGuiDataType.S32, imv, -10, 100)) {
 			a.value = imv.get();
 		}
-		Properties.poolInt.free(imv);
+		ImGuiUtil.poolInt.free(imv);
 	}
 	
 	public void renderBlend(BlendingAttribute a) {
@@ -221,7 +223,7 @@ public class MaterialProperties implements ImGuiComponent {
 //		ImGui.text("fnc " + a.sourceFunction + "->" + a.destFunction);
 //		ImGui.sameLine();
 		
-		var imv = Properties.poolFloat.obtain();
+		var imv = ImGuiUtil.poolFloat.obtain();
 		imv.set(a.opacity);
 		ImGui.text("Alpha"); ImGui.sameLine();
 		//ImGui.pushItemWidth(75);

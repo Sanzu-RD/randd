@@ -31,18 +31,25 @@ public class EditorEntities extends Family<Entity> {
 		this.foreach(e -> {
 			// animation
 			var anime = e.get(AnimationController.class);
-			anime.update(delta);
+			if(anime != null) anime.update(delta);
 			// model
 			var inst = e.get(ModelInstance.class);
-			move(inst);
+			if(inst != null) move(inst);
+			// particle effects
 		});
 	}
 	
+	/**
+	 * should be in Family when we change it to Family<T extends Entity>
+	 */
+	public <R> List<R> map(Class<R> c) {
+		return this.map(e -> e.get(c), e -> e.has(c));
+	}
 	public static List<ModelInstance> getInstances(){
-		return thiz.map(e -> e.get(ModelInstance.class));
+		return thiz.map(ModelInstance.class);
 	}
 	public static List<AnimationController> getAnimes(){
-		return thiz.map(e -> e.get(AnimationController.class));
+		return thiz.map(AnimationController.class);
 	}
 	
 	public static AnimationController getAnime(ModelInstance i) {

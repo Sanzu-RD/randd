@@ -26,8 +26,6 @@ import imgui.flag.ImGuiKey;
 
 public class EditorImGuiHud extends ImGuiHud {
 	
-	public static int colorAccent = Color.CYAN.toIntBits();
-	
 	public TopBar top;
 	public BottomBar bottom;
 	public ObjectsTree tree;

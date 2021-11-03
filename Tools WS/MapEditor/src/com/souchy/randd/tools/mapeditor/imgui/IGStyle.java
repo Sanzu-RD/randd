@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 
 import imgui.ImFontConfig;
@@ -16,7 +17,8 @@ import imgui.flag.ImGuiConfigFlags;
 import imgui.internal.ImGui;
 
 public class IGStyle {
-	
+
+	public static int colorAccent = Color.CYAN.toIntBits();
 	
 	public static void style() {
 		var style = ImGui.getStyle();

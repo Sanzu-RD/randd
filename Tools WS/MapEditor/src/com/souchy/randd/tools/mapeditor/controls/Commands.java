@@ -105,15 +105,11 @@ public class Commands {
 			MapEditorGame.screen.imgui.console.messages.add((String) o[1]);
 			Log.info("chat x");
 		});
-		LapisCommands.add("reloadAssetModels", Commands::reloadAssetModels);
-		LapisCommands.add("reloadAssetTextures", Commands::reloadAssetTextures);
-		LapisCommands.add("reloadAssetData", Commands::reloadAssetData);
-		LapisCommands.add("rram", Commands::reloadAssetModels);
-		LapisCommands.add("rrat", Commands::reloadAssetTextures);
-		LapisCommands.add("rrad", Commands::reloadAssetData);
+		LapisCommands.add("ra", o -> Actions.reloadAssets());
+		LapisCommands.add("ram", o -> Actions.reloadAssetModels());
+		LapisCommands.add("rat", o -> Actions.reloadAssetTextures());
+		LapisCommands.add("rad", Actions::reloadAssetData);
 		LapisCommands.add("load", Commands::load);
-		LapisCommands.add("diss", Commands::dissolve);
-		LapisCommands.add("d", Commands::dissolve);
 		LapisCommands.add("r", Commands::resetShaders);
 		LapisCommands.add("rs", o -> Actions.resetConf());
 	}
@@ -129,26 +125,6 @@ public class Commands {
 		LapisAssets.loadAuto(handle);
 	}
 
-	public static void reloadAssetModels(Object... args) {
-		LapisAssets.loadModels(Gdx.files.internal("res/models/"));
-	}
-	public static void reloadAssetTextures(Object... args) {
-		LapisAssets.loadTextures(Gdx.files.internal("res/textures/"));
-	}
-	
-	public static void reloadAssetData(Object... args) {
-		AssetData.loadResources();
-	}
-
-	public static void dissolve(Object... args) {
-		DissolveMaterial diss = new DissolveMaterial(Color.CYAN, 0.05f, 0.5f);
-		for(var i : EditorEntities.getInstances()) {
-			i.materials.get(0).set(diss);
-			i.userData = i.nodes.get(0).id;
-			//i.materials.get(0).set(diss.intensity);
-			//Log.info("material dissovle intensity type " + i.materials.get(0).get(DissolveIntensityAttribute.DissolveIntensityType));
-		}
-	}
 	
 	public static void resetShaders(Object... args) {
 		MapEditorGame.screen.provider.reset();

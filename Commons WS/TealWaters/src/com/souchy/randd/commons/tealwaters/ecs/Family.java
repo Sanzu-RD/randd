@@ -227,5 +227,16 @@ public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.
 		foreach(t -> l.add(formatter.apply(t)));
 		return l;
 	}
+	/**
+	 * Map with a filter
+	 */
+	public <R> List<R> map(Function<T, R> formatter, Predicate<T> filter) {
+		var l = new ArrayList<R>();
+		foreach(t -> {
+			if(filter.test(t)) l.add(formatter.apply(t));
+		});
+		return l;
+	}
+
 	
 }
