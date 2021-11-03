@@ -219,7 +219,7 @@ public abstract class Family<T> extends com.souchy.randd.commons.tealwaters.ecs.
 	}
 	
 	/**
-	 * Map elements to another format
+	 * Map elements to another format in a new list
 	 * @return A new list of all elements in the wanted format
 	 */
 	public <R> List<R> map(Function<T, R> formatter) {

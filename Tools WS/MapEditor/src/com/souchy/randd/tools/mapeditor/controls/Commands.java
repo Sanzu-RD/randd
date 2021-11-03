@@ -12,6 +12,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveIntensityAttribute;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveMaterial;
+import com.souchy.randd.tools.mapeditor.main.EditorEntities;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 import com.souchy.randd.tools.mapeditor.main.MapWorld;
 import com.souchy.randd.tools.mapeditor.actions.Actions;
@@ -124,10 +125,8 @@ public class Commands {
 	public static void load(Object... args) {
 		String filepath = (String) args[1];
 		var handle = Gdx.files.internal(filepath);
-		
-		LapisAssets.loadModels(handle);
-		LapisAssets.loadTextures(handle);
-		LapisAssets.loadMusics(handle);
+
+		LapisAssets.loadAuto(handle);
 	}
 
 	public static void reloadAssetModels(Object... args) {
@@ -143,7 +142,7 @@ public class Commands {
 
 	public static void dissolve(Object... args) {
 		DissolveMaterial diss = new DissolveMaterial(Color.CYAN, 0.05f, 0.5f);
-		for(var i : MapWorld.world.instances) {
+		for(var i : EditorEntities.getInstances()) {
 			i.materials.get(0).set(diss);
 			i.userData = i.nodes.get(0).id;
 			//i.materials.get(0).set(diss.intensity);

@@ -33,6 +33,7 @@ import com.souchy.randd.ebishoal.commons.lapis.util.KeyCombination;
 import com.souchy.randd.ebishoal.commons.lapis.util.KeyCombination.KeyCombinationListener;
 import com.souchy.randd.jade.Constants;
 import com.souchy.randd.tools.mapeditor.imgui.components.Console;
+import com.souchy.randd.tools.mapeditor.main.EditorEntities;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 import com.souchy.randd.tools.mapeditor.main.MapWorld;
 import com.souchy.randd.tools.mapeditor.actions.Actions;
@@ -60,7 +61,8 @@ public class GeckoControls extends Controls3d {
 		super.initCombos();
 		Log.info("Controls 3d initCombos " + confFull);
 		keys.putCombo(confFull.cancel, () -> { 
-			MapWorld.world.instances.remove(getSelectedInstance());
+			//MapWorld.world.instances.remove(getSelectedInstance());
+			EditorEntities.removeAdaptor(getSelectedInstance());
 			this.setSelectedInstance(null);
 			this.setSelectedModel(null);
 		});
@@ -76,6 +78,8 @@ public class GeckoControls extends Controls3d {
 			var pos = getCursorWorldPos();
 			pos.z = this.cursorZ;
 			MapWorld.world.removeInstanceAt(pos);
+			//var inst = MapWorld.world.getAt(pos);
+			//EditorEntities.removeAdaptor(inst);
 		});
 		keys.putCombo(new KeyCombination(Keys.NUM_1), () -> {
 			// add instance at positionl
@@ -90,6 +94,7 @@ public class GeckoControls extends Controls3d {
 			var pos = getCursorWorldPos();
 			pos.z = this.cursorZ;
 			MapWorld.world.addInstance(modelPath, pos);
+			
 		});
 		keys.putCombo(new KeyCombination(Keys.CONTROL_LEFT, Keys.NUM_2), () -> {
 			// add instance at position
@@ -267,7 +272,8 @@ public class GeckoControls extends Controls3d {
 		var inst = new ModelInstance(getSelectedModel());
 		worldpos.add(Constants.cellHalf, 0, Constants.cellHalf + this.cursorZ - this.floorHeight);
 		inst.transform.setTranslation(worldpos.x, worldpos.y, worldpos.z);
-		MapWorld.world.instances.add(inst);
+		//MapWorld.world.instances.add(inst);
+		EditorEntities.addAdaptor(inst);
 	}
 	
 	
@@ -286,6 +292,9 @@ public class GeckoControls extends Controls3d {
 			MapEditorGame.screen.imgui.settings.props.mats = selectedInstance.materials;
 		else
 			MapEditorGame.screen.imgui.settings.props.mats = null;
+		
+
+		MapEditorGame.screen.imgui.properties.setInst(selectedInstance);
 	}
 
 	public Model getSelectedModel() {
@@ -297,14 +306,16 @@ public class GeckoControls extends Controls3d {
 	}
 
 	public static void selectBrushModel(Model model) {
+		//Log.info("select brush " + model);
 		// remove the previous instance
 		if(MapEditorGame.screen.controller.getSelectedInstance() != null)
-			MapWorld.world.instances.remove(MapEditorGame.screen.controller.getSelectedInstance());
+			//MapWorld.world.instances.remove(MapEditorGame.screen.controller.getSelectedInstance());
+			EditorEntities.removeAdaptor(MapEditorGame.screen.controller.getSelectedInstance());
 		// create new instance
 		ModelInstance instance = new ModelInstance(model);
 		MapEditorGame.screen.controller.setSelectedInstance(instance);
 		MapEditorGame.screen.controller.setSelectedModel(model);
-		MapWorld.world.instances.add(instance);
+		EditorEntities.addAdaptor(instance);
 		MapEditorGame.screen.controller.updateCursor();
 	}
 	

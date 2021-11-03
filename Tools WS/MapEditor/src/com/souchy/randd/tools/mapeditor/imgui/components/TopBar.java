@@ -2,6 +2,7 @@ package com.souchy.randd.tools.mapeditor.imgui.components;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -12,7 +13,9 @@ import com.kotcrab.vis.ui.widget.file.FileChooser.Mode;
 import com.kotcrab.vis.ui.widget.file.FileChooser.SelectionMode;
 import com.souchy.randd.commons.mapio.MapData;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiComponent;
+import com.souchy.randd.tools.mapeditor.main.EditorEntities;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 import com.souchy.randd.tools.mapeditor.main.MapWorld;
 
@@ -20,6 +23,8 @@ import imgui.ImGui;
 
 public class TopBar implements ImGuiComponent {
 
+	public String lastFolder = "res/"; // à mettre dans config
+	
 	public TopBar() {
 		FileChooser.setDefaultPrefsName("com.souchy.randd.tools.mapeditor.filechooser");
 	}
@@ -30,23 +35,35 @@ public class TopBar implements ImGuiComponent {
     		
     		if(ImGui.beginMenu("File")) {
     			if(ImGui.menuItem("New")) {
-    				MapWorld.world.instances.clear();
-    				MapWorld.world.cache.begin();
-    				MapWorld.world.cache.end();
+    				//MapWorld.world.instances.clear();
+    				EditorEntities.clears();
     				MapEditorGame.currentFile.set(null);
     				MapEditorGame.currentMap.set(new MapData());
     			}
     			if(ImGui.menuItem("Open")) {
-    				open();
+    				open("res/maps", ".map", files -> {
+    					MapEditorGame.currentFile.set(files.get(0));
+    					MapEditorGame.screen.world.gen(); //MapEditorGame.loadMap();
+    				});
     			}
     			if(ImGui.menuItem("Save")) {
-					if(MapEditorGame.currentFile.get() == null) 
-						saveAs();
-					else 
-						MapEditorGame.properties.save();
+					if(MapEditorGame.currentFile.get() == null) {
+						saveAs("data/maps/", files -> MapEditorGame.currentFile.set(files.get(0)));
+						//MapEditorGame.mapCache.set(MapEditorGame.currentFile.get().file().getPath(), MapEditorGame.currentMap.get());
+					} else {
+						//MapEditorGame.properties.save();
+					}
     			}
     			if(ImGui.menuItem("Save as")) {
-    				saveAs();
+    				saveAs("data/maps/", files -> MapEditorGame.currentFile.set(files.get(0)));
+    			}
+    			ImGui.separator();
+    			if(ImGui.menuItem("Load Assets")) {
+    				open(lastFolder, "", (files) -> {
+    					for(var f : files) {
+    						LapisAssets.loadAuto(f);
+    					}
+    				});
     			}
     			ImGui.endMenu();
     		}
@@ -55,8 +72,11 @@ public class TopBar implements ImGuiComponent {
     			if(ImGui.menuItem("Tree view")) {
     				MapEditorGame.screen.imgui.tree.show();
     			}
-    			if(ImGui.menuItem("Explorer view")) {
+    			if(ImGui.menuItem("Assets view")) {
     				MapEditorGame.screen.imgui.explorer.show();
+    			}
+    			if(ImGui.menuItem("Properties view")) {
+    				MapEditorGame.screen.imgui.properties.show();
     			}
     			if(ImGui.menuItem("Console view")) {
     				MapEditorGame.screen.imgui.console.show();
@@ -73,43 +93,40 @@ public class TopBar implements ImGuiComponent {
 	
 	
 
-	private void open() {
+	private void open(String folder, String extension, Consumer<Array<FileHandle>> onSelect) {
 		FileChooser fileChooser = new FileChooser(Mode.OPEN);
 		fileChooser.setSelectionMode(SelectionMode.FILES);
-		fileChooser.setDirectory(Gdx.files.internal("res/maps").file()); // data/maps/
+		fileChooser.setMultiSelectionEnabled(true);
+		fileChooser.setDirectory(Gdx.files.internal(folder).file()); // data/maps/
 		fileChooser.setFileFilter(new FileFilter() {
 			@Override
 			public boolean accept(File file) {
-				return file.isDirectory() || file.getName().endsWith(".map");
+				return file.isDirectory() || file.getName().endsWith(extension);
 			}
 		});
 		fileChooser.setListener(new FileChooserAdapter() {
 			@Override
 			public void selected(Array<FileHandle> files) {
 				super.selected(files);
-				/*System.out.print("files : ");
-				files.forEach(f -> System.out.print(f.name() + ", "));
-				System.out.println("");*/
-				
-				MapEditorGame.currentFile.set(files.get(0));
-				MapEditorGame.screen.world.gen(); //MapEditorGame.loadMap();
+				lastFolder = files.get(0).parent().path();
+				//System.out.print("files : ");
+				//files.forEach(f -> System.out.print(f.name() + ", "));
+				//System.out.println("");
+				onSelect.accept(files);
 			}
 		});
 		MapEditorGame.screen.hud.getStage().addActor(fileChooser.fadeIn());
 	}
-	private void saveAs() {
+	private void saveAs(String folder, Consumer<Array<FileHandle>> onSelect) {
 		FileChooser fileChooser = new FileChooser(Mode.SAVE);
 		fileChooser.setSelectionMode(SelectionMode.FILES);
-		fileChooser.setDirectory(Gdx.files.internal("data/maps/").file());
+		fileChooser.setDirectory(Gdx.files.internal(folder).file());
 		fileChooser.setListener(new FileChooserAdapter() {
 			@Override
 			public void selected (Array<FileHandle> files) {
 				//textField.setText(file.get(0).file().getAbsolutePath());
 				//System.out.println("Files : " + String.join(", ", Arrays.asList(files.items).stream().map(f -> f.name()).collect(Collectors.toList())));
-
-				MapEditorGame.currentFile.set(files.get(0));
-				//MapEditorGame.mapCache.set(MapEditorGame.currentFile.get().file().getPath(), MapEditorGame.currentMap.get());
-				//fileChooser.remove();
+				onSelect.accept(files);
 			}
 		});
 		MapEditorGame.screen.hud.getStage().addActor(fileChooser.fadeIn());

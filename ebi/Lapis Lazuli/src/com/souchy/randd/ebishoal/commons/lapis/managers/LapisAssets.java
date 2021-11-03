@@ -55,6 +55,12 @@ public class LapisAssets {
 	public static String rootDir = "";
 	public static boolean blocking = true;
 	
+	//private static final Array<String> extensionsTexture = new Array<>(new String[] { ".png", ".jpg", ".jpeg", ".bmp"  });
+	//private static final Array<String> extensionsModel = new Array<>(new String[] { ".g3dj", ".gltf", ".glb" });
+	//private static final Array<String> extensionsI18NBundle = new Array<>(new String[] { ".properties" });
+	//private static final Array<String> extensionsMusic = new Array<>(new String[] { ".mp3" });
+	//private static final Array<String> extensionsSound = new Array<>(new String[] { ".mp3" });
+	
 	
 	static {
 		textureParams.genMipMaps = true;
@@ -355,6 +361,15 @@ public class LapisAssets {
 		}
 		loader.finishLoading();
 		return loader.<T>get(filePath);
+	}
+
+	public static void loadAuto(FileHandle handle) {
+		//for(var e : extensionsTexture) {
+		//	if(f.ens)
+		//}
+		LapisAssets.loadModels(handle);
+		LapisAssets.loadTextures(handle);
+		LapisAssets.loadSounds(handle);
 	}
 	
 }

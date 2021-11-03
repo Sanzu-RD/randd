@@ -24,14 +24,19 @@ public class ImGuiHud {
 			throw new IllegalStateException("Unable to initialize GLFW");
 		}
 		ImGui.createContext();
-		final ImGuiIO io = ImGui.getIO();
-		io.setIniFilename(null);
-		//ImGuiTools.setupFonts(io);
+		
+		init();
 
 		windowHandle = ((Lwjgl3Graphics) Gdx.graphics).getWindow().getWindowHandle();
 
 		imGuiGlfw.init(windowHandle, true);
 		imGuiGl3.init(glslVersion);
+	}
+	
+	public void init() {
+		final ImGuiIO io = ImGui.getIO();
+		io.setIniFilename(null);
+		//ImGuiTools.setupFonts(io);
 	}
 
 	

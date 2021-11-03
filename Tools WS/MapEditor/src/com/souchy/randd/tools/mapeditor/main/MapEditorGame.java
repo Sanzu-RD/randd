@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.commons.mapio.MapData;
 import com.souchy.randd.commons.tealwaters.commons.Bean;
+import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.tools.mapeditor.configs.EditorProperties;
@@ -33,6 +34,8 @@ import net.mgsx.gltf.scene3d.scene.SceneAsset;
 
 public class MapEditorGame extends LapisGame {
 	
+	public static Engine engine;
+	public static EditorEntities entities;
 	public static MapEditorGame game;
 	
 	public static Bean<FileHandle> currentFile = new Bean<FileHandle>();
@@ -55,6 +58,9 @@ public class MapEditorGame extends LapisGame {
 		properties = new EditorProperties();
 		properties.load();
 		
+		engine = new Engine();
+		entities = new EditorEntities(engine);
+		
 		
 		Commands.initCommands();
 		
@@ -62,6 +68,9 @@ public class MapEditorGame extends LapisGame {
 		skin = VisUI.getSkin(); // Skin(); // new Skin(Gdx.files.internal("ui/common/uiskin.json"));
 		//mapCache = new MapCache(); //"data/maps/", FileType.Internal);
 		//System.out.println("on create :" + mapCache.getRoot());
+		
+		LapisAssets.loadModels(Gdx.files.internal("res/models/"));
+		LapisAssets.loadTextures(Gdx.files.internal("res/textures/"));
 		
 		screen = new EditorScreen();
 		screen.init();
@@ -72,6 +81,11 @@ public class MapEditorGame extends LapisGame {
 		screen.resetCamera();
 	}
 	
+	@Override
+	public void render() {
+		entities.update(Gdx.graphics.getDeltaTime());
+		super.render();
+	}
 	
 	@Override
 	public Screen getStartScreen() {

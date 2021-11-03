@@ -88,7 +88,7 @@ public class EditorScreen extends LapisScreen {
 	ShaderProgram shaderp;
 
 	// light cycle
-	private float time = 0; // current time
+	public float time = 0; // current time
 	private float period = 30; // period time in seconds
 	private double radius = 2; // circle radius
 	
@@ -111,39 +111,44 @@ public class EditorScreen extends LapisScreen {
 		imgui = new EditorImGuiHud();
 		imgui.create();
 		
-		var playerviewport =  new FitViewport(1, 1); // new ExtendViewport(1920, 1080);
-		player =  new VidPlayer(playerviewport); //VideoPlayerCreator.createVideoPlayer(getViewport()); //new VideoPlayerDesktop(getViewport());
-		final String video= "res/videos/blue_plate.webm"; 
-		try {
-			player.play(Gdx.files.internal(video));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		player.setOnCompletionListener(new VideoPlayer.CompletionListener() {
-			@Override
-			public void onCompletionListener (FileHandle file) {
-				//Gdx.app.log("VideoTest", file.name() + " fully played.");
-				try {
-					player.stop();
-					player.play(Gdx.files.internal(video));
-				} catch (IOException e) {
-					e.printStackTrace();
+		if(false) {
+			var playerviewport =  new FitViewport(1, 1); // new ExtendViewport(1920, 1080);
+			player =  new VidPlayer(playerviewport); //VideoPlayerCreator.createVideoPlayer(getViewport()); //new VideoPlayerDesktop(getViewport());
+			final String video= "res/videos/blue_plate.webm"; 
+			try {
+				player.play(Gdx.files.internal(video));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			player.setOnCompletionListener(new VideoPlayer.CompletionListener() {
+				@Override
+				public void onCompletionListener (FileHandle file) {
+					//Gdx.app.log("VideoTest", file.name() + " fully played.");
+					try {
+						player.stop();
+						//player = new VidPlayer(playerviewport); 
+						player.play(Gdx.files.internal(video));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		});
-		player.setOnVideoSizeListener(new VideoPlayer.VideoSizeListener() {
-			@Override
-			public void onVideoSize (float width, float height) {
-				//Gdx.app.log("VideoTest", "The video has a size of " + width + "x" + height + ".");
-			}
-		});
+			});
+			player.setOnVideoSizeListener(new VideoPlayer.VideoSizeListener() {
+				@Override
+				public void onVideoSize (float width, float height) {
+					//Gdx.app.log("VideoTest", "The video has a size of " + width + "x" + height + ".");
+				}
+			});
+			//player.dispose();
+			//player = null;
+		}
 	}
 
 	@Override
 	public void drawBackground(SpriteBatch batch) {
 //		super.drawBackground(batch);
 		try {
-			player.render();
+			if(player != null) player.render();
 		} catch (Exception e) {
 			//Log.error("", e);
 		}
@@ -172,33 +177,6 @@ public class EditorScreen extends LapisScreen {
 			getShadowLight().direction.x = (float) (Math.sin(radian) / radius);
 			getShadowLight().direction.y = (float) (Math.cos(radian) / radius);
 			//getShadowLight().direction.z = -0.5f;
-		}
-		for(var inst : MapWorld.world.instances) {
-			var attr = inst.materials.get(0).get(DissolveIntensityAttribute.DissolveIntensityType);
-			if(attr != null){
-				DissolveIntensityAttribute intensity = (DissolveIntensityAttribute) attr;
-				intensity.value = (float) Math.sin(time * 2f) * 0.35f + 0.45f; //time * 2f / period;
-				//intensity.value = (float) (time * -1f % 1) + 0.5f; //time * 2f / period;
-
-				//var col = (DissolveBorderColorAttribute) inst.materials.get(0).get(DissolveBorderColorAttribute.DissolveBorderColorType);
-				//col.color.set(Color.CYAN);
-
-				//var width = (DissolveBorderWidthAttribute) inst.materials.get(0).get(DissolveBorderWidthAttribute.DissolveBorderWidthType);
-				//width.value = 0.03f;
-				
-				var attrdissTex = inst.materials.get(0).get(DissolveTextureAttribute.DissolveTextureType);
-				if(attrdissTex != null) {
-					DissolveTextureAttribute tex = (DissolveTextureAttribute) attrdissTex;
-					// move the texture while it's completely white or completely blend to add randomness to each cycle
-					if(intensity.value >= 0.90f || intensity.value <= 0.11f) {
-						tex.offsetU += 0.005f;
-						tex.offsetV += 0.005f;
-						Log.info("asd");
-						//tex.offsetU = time * 2.0f;
-						//tex.offsetV = time * 2.0f;
-					}
-				}
-			}
 		}
 		
 		// controller
@@ -244,8 +222,8 @@ public class EditorScreen extends LapisScreen {
 	
 	@Override
 	public void renderView(float delta) {
-		super.renderView(delta);
 		imgui.render(delta);
+		super.renderView(delta);
 	}
 	
 	@Override
@@ -257,7 +235,7 @@ public class EditorScreen extends LapisScreen {
 	public void resize(int width, int height) {
 		super.resize(width, height);
 		imgui.resizeScreen(width, height);
-		player.resize(width, height);
+		if(player != null) player.resize(width, height);
 	}
 	
 	@Override
@@ -320,6 +298,7 @@ public class EditorScreen extends LapisScreen {
 	public void dispose() {
 		super.dispose();
 		imgui.dispose();
+		if(player != null) player.dispose();
 	}
 	
 

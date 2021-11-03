@@ -14,6 +14,7 @@ import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiComponent;
 import com.souchy.randd.tools.mapeditor.imgui.components.AssetExplorer.AssetDialog;
+import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorImGuiHud;
 
 import imgui.ImGui;
 import imgui.flag.ImGuiColorEditFlags;
@@ -40,29 +41,6 @@ public class MaterialProperties implements ImGuiComponent {
 	public void render(float delta) {
 		if(mats == null) return;
 		
-//		if(ImGui.combo("new attribute", new ImInt(), "Blending\0Diffuse\0Emissive\0Ambient\0Specular\0Reflection\0Fog")) {
-//			//ImGui.beginCombo("", "preview");
-//		}
-		
-//		if(ImGui.beginMenu("AddAttribute")) {
-//			if(ImGui.menuItem("Blending")) {
-//			}
-//			ImGui.separator();
-//			if(ImGui.menuItem("Diffuse")) {
-//			}
-//			if(ImGui.menuItem("Specular")) {
-//			}
-//			if(ImGui.menuItem("Emissive")) {
-//			}
-//			if(ImGui.menuItem("Reflection")) {
-//			}
-//			if(ImGui.menuItem("Ambient")) {
-//			}
-//			if(ImGui.menuItem("Fog")) {
-//			}
-//			ImGui.endMenu();
-//		}
-		
 		if(ImGui.button("New Material")) {
 			mats.add(new Material("Material # " + this.mats.size));
 		}
@@ -73,21 +51,15 @@ public class MaterialProperties implements ImGuiComponent {
 		for(var mat : mats) {
 			String matName = "Material # " + (matid++);
 			
+			ImGui.textColored(EditorImGuiHud.colorAccent, matName);
 			
-//			if(ImGui.beginChild("##" +matName + "-2")) {
-				ImGui.textColored(0, 0.6f, 0.6f, 1, matName);
-				
-				renderAddAttribute(mat, matName);
-				
-				int height = 0;
-				if(matid == mats.size - 1) height = -1;
-				renderMaterial(mat, matName, height);
-				
-				if(matid < mats.size)
-					ImGui.separator();
-//			}
-//			ImGui.endChild();
+			renderAddAttribute(mat, matName);
 			
+			int height = 0;
+			if(matid == mats.size - 1) height = -1;
+			renderMaterial(mat, matName, height);
+			
+			if(matid < mats.size) ImGui.separator();
 		}
 	}
 	
@@ -122,40 +94,18 @@ public class MaterialProperties implements ImGuiComponent {
 	}
 	
 	public void renderMaterial(Material mat, String matName, int height) {
-		boolean ended = false;
 		int columns = 2;
 		
 		ImGui.beginGroup();
 //		if(ImGui.beginChild("##" +matName, -1, height, true, ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse | ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize)) { // ImGui.beginChild("##" +matName)) { 
-		if(ImGui.beginTable(matName, columns, ImGuiTableFlags.SizingStretchProp | ImGuiTableFlags.Resizable)) { //, ImGuiTableFlags.BordersInnerV)) {
-//			ImGui.columns(2, "mycolumns " + matName);
-//			var dsa = ImGui.tableGetColumnFlags(0);
-//			Log.info("dsa " + dsa);
-//			ImGui.tableSetupColumn("", ImGuiTableColumnFlags.WidthFixed);
-//			ImGui.tableSetupColumn("", ImGuiTableColumnFlags.WidthFixed);
-			
-//			if(setColW) {
-//				ImGui.setColumnWidth(0, 180);
-//				setColW = false;
-//			}
-			//ImGui.setColumnWidth(1, 1000);
-			//Log.info("mat col 1 width " + ImGui.getColumnWidth(1));
-//			ImGui.beginTable(matName, columns);
-			//ImGui.tableSetupColumn("Name", ImGuiTableColumnFlags.None, 0.2f, 0);
-			//ImGui.tableSetupColumn("Value", ImGuiTableColumnFlags.None, 0.8f, 1);
-//			ImGui.columns(2);
-//			ImGui.setColumnWidth(0, 80);
+		if(ImGui.beginTable(matName, columns, ImGuiTableFlags.SizingStretchProp)) { // | ImGuiTableFlags.Resizable)) { //, ImGuiTableFlags.BordersInnerV)) {
 			int attrid = 0;
 			for (Attribute a : mat) {
 				attrid++;
 				String name = Attribute.getAttributeAlias(a.type);
-				 ImGui.tableNextRow();
-				
-//				ImGui.tableSetColumnIndex(clm++);
-//				ImGui.text("" + a.getClass().getSimpleName());
+				ImGui.tableNextRow();
 				
 				ImGui.tableNextColumn(); 
-				//ImGui.nextColumn();
 				if(ImGui.button("x##" + matName + name)) {
 					mat.remove(a.type);
 					continue;
@@ -164,22 +114,16 @@ public class MaterialProperties implements ImGuiComponent {
 				ImGui.text("" + name);
 				
 				ImGui.tableNextColumn(); 
-//				ImGui.nextColumn();
 
 				ImGui.pushItemWidth(-5);
 				renderAttribute(a);
-
 				ImGui.popItemWidth();
-//				ImGui.nextColumn();
 				
 				if(attrid < mat.size())
 					ImGui.separator();
 			}
 			ImGui.endTable();
-//			ImGui.endChild();
-//			ended = true;
 		}
-//		if(!ended) ImGui.endChild();
 		ImGui.endGroup();
 	}
 	
@@ -235,11 +179,8 @@ public class MaterialProperties implements ImGuiComponent {
 	
 	public void renderColor(ColorAttribute a) {
 		var col = new float[] { a.color.r, a.color.g, a.color.b, a.color.a }; 
-		if(ImGui.colorEdit4("##" + Attribute.getAttributeAlias(a.type), col, ImGuiColorEditFlags.AlphaBar)) { //, ImGuiColorEditFlags.PickerHueWheel)) {
-				//ImGui.colorPicker4("##" + Attribute.getAttributeAlias(a.type), col)) { //, ImGuiColorEditFlags.PickerHueWheel)) { 
-			//ImGui.colorEdit4("##" + Attribute.getAttributeAlias(a.type), col, ImGuiColorEditFlags.PickerHueWheel)) {
+		if(ImGui.colorEdit4("##" + Attribute.getAttributeAlias(a.type), col, ImGuiColorEditFlags.AlphaBar)) {
 			a.color.set(col[0], col[1], col[2], col[3]);
-			
 		}
 	}
 	

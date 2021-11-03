@@ -58,13 +58,15 @@ public class MapWorld extends World {
 		var scale = loaded ? 1f / 24f : 1f;
 		if(cursor == null || loaded) {
 			if(cursor != null) {
-				instances.remove(cursor);
+				//instances.remove(cursor);
+				EditorEntities.removeAdaptor(cursor);
 			}
 			// Cursor
 			cursor = new ModelInstance(cursorModel);
 			cursor.materials.get(0).set(ColorAttribute.createDiffuse(Color.TEAL));
 			cursor.transform.setToTranslation(0, 0, 0).scale(scale, scale, scale).rotate(Vector3.X, 90);
-			this.instances.add(cursor);
+			//this.instances.add(cursor);
+			EditorEntities.addAdaptor(cursor);
 		}
 
 	}
@@ -91,7 +93,8 @@ public class MapWorld extends World {
 		
 		tree.transform.translate(new Vector3(3, 7, 0)); //.scl(MapEditorGame.cellSize));
 		tree.transform.rotateRad(Vector3.X, (float) (Math.PI/2));
-		instances.add(tree);
+		//instances.add(tree);
+		EditorEntities.addAdaptor(tree);
 	}
 	/*
 	public static void loadMap() {
@@ -282,7 +285,6 @@ public class MapWorld extends World {
 		
 		//model = new ModelBuilder().createCylinder(0.5f, 1, 1, 16, new DissolveMaterial(), Usage.Position | Usage.Normal | Usage.TextureCoordinates | Usage.ColorPacked);
 		
-		
 		if(model != LapisAssets.defaultModel){
 			var inst = new ModelInstance(model);
 
@@ -290,12 +292,12 @@ public class MapWorld extends World {
 			inst.materials.get(0).set(new BlendingAttribute(1));
 			inst.materials.get(0).set(new DissolveMaterial());
 			
-			
 			//inst.nodes.get(0).parts.get(0).meshPart.mesh.getVertexAttribute(0);
 			
 			pos.add(Constants.cellHalf, 0, Constants.cellHalf);
 			inst.transform.translate(pos);
-			MapWorld.world.instances.add(inst);
+			//MapWorld.world.instances.add(inst);
+			EditorEntities.addAdaptor(inst);
 		} else 
 		if(!LapisAssets.contains(modelPath, Model.class)) {
 			LapisAssets.loadModels(Gdx.files.internal(modelPath));
@@ -304,14 +306,15 @@ public class MapWorld extends World {
 	public ModelInstance getAt(Vector3 pos) {
 		pos.add(Constants.cellHalf, 0, Constants.cellHalf);
 		var temp = new Vector3();
-		for(var inst : instances)
+		for(var inst : EditorEntities.getInstances())
 			if(inst != cursor && inst != MapEditorGame.screen.controller.getSelectedInstance() && inst.transform.getTranslation(temp).equals(pos))
 				return inst;
 		return null;
 	}
 	
 	public void removeInstanceAt(Vector3 pos) {
-		instances.remove(getAt(pos));
+		//instances.remove(getAt(pos));
+		EditorEntities.removeAdaptor(getAt(pos));
 		//pos.add(Constants.cellHalf, 0, Constants.cellHalf);
 		//var temp = new Vector3();
 		//instances.removeIf(inst -> inst != cursor && inst.transform.getTranslation(temp).equals(pos));

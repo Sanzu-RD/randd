@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.tools.mapeditor.configs.EditorConf.HudConfig.ComponentConfig;
@@ -14,20 +15,24 @@ import com.souchy.randd.tools.mapeditor.imgui.components.AssetExplorer;
 import com.souchy.randd.tools.mapeditor.imgui.components.BottomBar;
 import com.souchy.randd.tools.mapeditor.imgui.components.Console;
 import com.souchy.randd.tools.mapeditor.imgui.components.ObjectsTree;
+import com.souchy.randd.tools.mapeditor.imgui.components.Properties;
 import com.souchy.randd.tools.mapeditor.imgui.components.Settings;
 import com.souchy.randd.tools.mapeditor.imgui.components.TopBar;
 import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 
 import imgui.ImGui;
+import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiKey;
 
 public class EditorImGuiHud extends ImGuiHud {
 	
+	public static int colorAccent = Color.CYAN.toIntBits();
 	
 	public TopBar top;
 	public BottomBar bottom;
 	public ObjectsTree tree;
 	public AssetExplorer explorer;
+	public Properties properties;
 	public Console console;
 	public Settings settings;
 	
@@ -35,6 +40,12 @@ public class EditorImGuiHud extends ImGuiHud {
 	 * Thread-safe list of components to draw in the loop.
 	 */
 	public List<ImGuiComponent> components = new CopyOnWriteArrayList<>();
+	
+	@Override
+	public void init() {
+		//super.init();
+		IGStyle.initImGui();
+	}
 	
 	@Override
 	public void create() {
@@ -56,6 +67,7 @@ public class EditorImGuiHud extends ImGuiHud {
 		components.add(top = new TopBar());
 		components.add(tree = new ObjectsTree());
 		components.add(explorer = new AssetExplorer());
+		components.add(properties = new Properties());
 		components.add(console = new Console());
 		components.add(settings = new Settings());
 		//removeContainer(console);

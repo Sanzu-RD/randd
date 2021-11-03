@@ -74,7 +74,7 @@ public abstract class LapisScreen implements LapisScreenCreator, LapisScreenRend
 	// ----------------------------------------
 	private LineDrawing lining;
 	private Texture background;
-
+	
 	// ----------------------------------------
 	// EFFEKSEER PARTICLE EFFECTS -------------
 	// ----------------------------------------
