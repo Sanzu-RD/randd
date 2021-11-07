@@ -25,6 +25,8 @@ import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.tools.mapeditor.configs.EditorProperties;
 import com.souchy.randd.tools.mapeditor.controls.Commands;
+import com.souchy.randd.tools.mapeditor.entities.DissolveAction;
+import com.souchy.randd.tools.mapeditor.entities.EditorEntities;
 import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorScreen;
 
 import net.mgsx.gltf.loaders.glb.GLBAssetLoader;
@@ -60,7 +62,7 @@ public class MapEditorGame extends LapisGame {
 		
 		engine = new Engine();
 		entities = new EditorEntities(engine);
-		
+		entities.actions.add(new DissolveAction());
 		
 		Commands.initCommands();
 		
@@ -76,8 +78,8 @@ public class MapEditorGame extends LapisGame {
 		currentFile.set(Gdx.files.internal(properties.lastMap.get())); //"res/maps/goulta7b.map")); //"data/maps/goulta7.map"));
 		screen.world.gen();
 		screen.resetCamera();
-
-		LapisAssets.loadModels(Gdx.files.internal("res/models/"));
+		
+		//LapisAssets.loadModels(Gdx.files.internal("res/models/"));
 	}
 	
 	@Override

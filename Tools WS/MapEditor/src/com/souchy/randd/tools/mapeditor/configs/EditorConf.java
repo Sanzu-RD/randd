@@ -10,9 +10,13 @@ public class EditorConf extends JsonConfig {
 	/** this will disable save on exit for the current session and will be set to false when the application starts again */
 	public boolean reset = true;
 	
+	public String lastFolder = "res/";
+	
 	public GraphicsConf gfx = new GraphicsConf();
 	public HudConfig hud = new HudConfig();
 	// public ShortcutConf shortcuts 
+	
+	
 	
 	public static class GraphicsConf {
 		public boolean vsync = false;

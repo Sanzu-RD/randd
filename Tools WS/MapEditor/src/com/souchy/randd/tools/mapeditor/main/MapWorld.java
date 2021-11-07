@@ -26,6 +26,7 @@ import com.souchy.randd.ebishoal.commons.lapis.world.World;
 import com.souchy.randd.jade.Constants;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveMaterial;
+import com.souchy.randd.tools.mapeditor.entities.EditorEntities;
 
 public class MapWorld extends World {
 

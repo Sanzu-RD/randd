@@ -1,0 +1,55 @@
+
+{
+	"material":{
+		"id": "",
+		"mask": 0,
+		"attributes": []
+	}
+	
+	"model": {
+		"materials": [],
+		"nodes": [],
+		"animations": [],
+		"meshes": [],
+		"meshParts": [],
+		"disposables": [],
+	
+		"animationController": {}
+		"shaderVertex": "",
+		"shaderFragment": "",
+	},
+	
+	"instance": {
+		"defaultShareKeyFrames": true,
+		"materials": [],
+		"nodes": [],
+		"animations": [],
+		"model": {},
+		"transform": [][],
+		"userData": {}
+	},
+	
+	"renderable": {
+		"worldTransform": [][],
+		"meshPart": {},
+		"material": {},
+		"environment": {},
+		"bones": [ [][] ],
+		"shader": {},
+		"userData": {}
+	}
+	
+	
+	"shader": {
+		"attributesMask": 0, // material and environment attributes
+		"vertexMask": 0, // vertex attributes
+		"config": {},
+	}
+	
+	
+	// ajouter shader à material
+
+
+}
+
+

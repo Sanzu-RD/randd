@@ -1,11 +1,14 @@
 package com.souchy.randd.tools.mapeditor.imgui;
 
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Pool;
+import com.souchy.randd.jade.Constants;
 
 import imgui.ImGui;
 import imgui.flag.ImGuiDataType;
+import imgui.flag.ImGuiTableFlags;
 import imgui.type.ImFloat;
 import imgui.type.ImInt;
 
@@ -124,5 +127,44 @@ public class ImGuiUtil {
 		poolFloat.free(imvW);
 	}
 	
+	
+	/**
+	 * 
+	 * @param transform
+	 * @param tempPos
+	 * @param tempScl
+	 * @param tempRot
+	 */
+	public static void renderTransform(Matrix4 transform, Vector3 tempPos, Vector3 tempScl, Vector3 tempRot) {
+		float cellhalf = Constants.cellHalf;
+		
+		transform.getTranslation(tempPos);
+		transform.getScale(tempScl);
+		//transform.getRotation(tempRot);
+		//var q = transform.getRotation(new Quaternion());
+		//tempRot.x = q.getAngleAround(Vector3.X);
+		//tempRot.y = q.getAngleAround(Vector3.Y);
+		//tempRot.z = q.getAngleAround(Vector3.Z);
+		
+		if(ImGui.beginTable("##transform table", 2, ImGuiTableFlags.SizingStretchProp)) { //, ImGuiTableFlags.SizingStretchProp)) {
+			ImGui.tableNextRow();
+			ImGuiUtil.renderVector3("Translation", tempPos, -19 - cellhalf, 19 + cellhalf);
+			ImGui.tableNextRow();
+			//renderQuaternion("Rotation", tempRot, -1, 1);
+			ImGuiUtil.renderVector3("Rotation", tempRot, 5, -180f, 180f);
+			ImGui.tableNextRow();
+			ImGuiUtil.renderVector3("Scale", tempScl, -19 - cellhalf, 19 + cellhalf);
+			ImGui.endTable();
+		}
+		
+		transform //.idt()
+		.setToTranslation(tempPos)
+		.scl(tempScl)
+		.rotate(Vector3.X, tempRot.x)
+		.rotate(Vector3.Y, tempRot.y)
+		.rotate(Vector3.Z, tempRot.z)
+		;
+		
+	}
 	
 }

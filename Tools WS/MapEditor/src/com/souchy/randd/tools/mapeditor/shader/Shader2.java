@@ -35,6 +35,8 @@ public class Shader2 extends BaseShader {
 		var prefix = ShaderUtils.createPrefix(renderable, config);
 		var shaderProgram = new ShaderProgram(prefix + config.vertexShader, prefix + config.fragmentShader);
 		
+		
+		
 		this.config = config;
 		this.program = shaderProgram;
 		this.renderable = renderable;
@@ -86,11 +88,14 @@ public class Shader2 extends BaseShader {
 	@Override
 	public boolean canRender (final Renderable renderable) {
 		if (renderable.bones != null && renderable.bones.length > config.numBones) return false;
-		final long renderableMask = ShaderUtils.combineAttributeMasks(renderable);
+		final long renderableMask = ShaderUtils.combineAttributeMasks(renderable) | optionalAttributes;
+		final long renderableVertMask = renderable.meshPart.mesh.getVertexAttributes().getMaskWithSizePacked();
 		
 		boolean canRender = true;
-		canRender &= (attributesMask == (renderableMask | optionalAttributes));
-		canRender &= (vertexMask == renderable.meshPart.mesh.getVertexAttributes().getMaskWithSizePacked());
+		canRender &= (attributesMask == renderableMask);
+		canRender &= (vertexMask == renderableVertMask);
+		//canRender &= ((attributesMask & renderableMask) == renderableMask);
+		//canRender &= ((vertexMask & renderableVertMask) == renderableVertMask);
 		//&& (renderable.environment != null) == lighting // put this in LightingUniforms.canRender()
 		for(var m : config.modules)
 			canRender &= m.canRender(renderable);

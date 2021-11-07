@@ -33,10 +33,10 @@ import com.souchy.randd.ebishoal.commons.lapis.util.KeyCombination;
 import com.souchy.randd.ebishoal.commons.lapis.util.KeyCombination.KeyCombinationListener;
 import com.souchy.randd.jade.Constants;
 import com.souchy.randd.tools.mapeditor.imgui.components.Console;
-import com.souchy.randd.tools.mapeditor.main.EditorEntities;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 import com.souchy.randd.tools.mapeditor.main.MapWorld;
 import com.souchy.randd.tools.mapeditor.actions.Actions;
+import com.souchy.randd.tools.mapeditor.entities.EditorEntities;
 
 import imgui.ImGui;
 

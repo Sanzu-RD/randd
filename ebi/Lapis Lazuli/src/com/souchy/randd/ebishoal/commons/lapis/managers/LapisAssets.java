@@ -87,9 +87,13 @@ public class LapisAssets {
 	
 	private static boolean finishedLoading = false;
 	public static boolean update() {
-		//assets.update(); 
-		if(finishedLoading) return false;
-		finishedLoading = assets.update(); //assets.isFinished();
+		try {
+			//assets.update(); 
+			if(finishedLoading) return false;
+			finishedLoading = assets.update(); //assets.isFinished();
+		} catch(Exception e) {
+			Log.error("", e);
+		}
 		return finishedLoading;
 	}
 	

@@ -1,6 +1,8 @@
 package com.souchy.randd.tools.mapeditor.imgui.components;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.g3d.Attribute;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
@@ -19,6 +21,7 @@ import com.souchy.randd.tools.mapeditor.imgui.components.AssetExplorer.AssetDial
 import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorImGuiHud;
 
 import imgui.ImGui;
+import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiColorEditFlags;
 import imgui.flag.ImGuiDataType;
 import imgui.flag.ImGuiInputTextFlags;
@@ -28,6 +31,7 @@ import imgui.flag.ImGuiTableColumnFlags;
 import imgui.flag.ImGuiTableFlags;
 import imgui.flag.ImGuiTableRowFlags;
 import imgui.flag.ImGuiWindowFlags;
+import imgui.type.ImBoolean;
 import imgui.type.ImFloat;
 import imgui.type.ImInt;
 
@@ -35,6 +39,8 @@ public class MaterialProperties implements ImGuiComponent {
 	
 	public Array<Material> mats;
 	private boolean setColW = true;
+	
+	private ImBoolean repeatTexture = new ImBoolean();
 	
 	public MaterialProperties() {
 	}
@@ -52,24 +58,29 @@ public class MaterialProperties implements ImGuiComponent {
 		int matid = 0;
 		for(var mat : mats) {
 			String matName = "#" + (matid++) + " " + mat.id; //"Material # " + (matid++);
+
+			if(ImGui.treeNode(matName)) {
+				// button add attribute
+				renderAddAttribute(mat, matName);
+				
+				int height = 0;
+				if(matid == mats.size - 1) height = -1;
+				// material table
+				renderMaterial(mat, matName, height);
+				
+				ImGui.treePop();
+			}
 			
-			ImGui.textColored(IGStyle.colorAccent, matName);
-			
-			renderAddAttribute(mat, matName);
-			
-			int height = 0;
-			if(matid == mats.size - 1) height = -1;
-			renderMaterial(mat, matName, height);
-			
-			if(matid < mats.size) ImGui.separator();
 		}
 	}
 	
 	public void renderAddAttribute(Material mat, String matName) {
 		if(ImGui.button("Add Attribute##"+matName)) {
 		}
-
+		ImGui.pushStyleColor(ImGuiCol.Border, Color.WHITE.toIntBits());
+		ImGui.pushItemWidth(250);
 		if(ImGui.beginPopupContextItem("AddAttributeBtnPopup"+matName, ImGuiPopupFlags.MouseButtonLeft)) {
+			ImGui.text("Color");
 			if(ImGui.button("Blending")) {
 				mat.set(new BlendingAttribute(1));
 				ImGui.closeCurrentPopup();
@@ -87,12 +98,21 @@ public class MaterialProperties implements ImGuiComponent {
 				ImGui.closeCurrentPopup();
 			}
 			ImGui.separator();
+			ImGui.text("Texture");
+			if(ImGui.button("Diffuse")) {
+				TextureAttribute.createDiffuse(LapisAssets.defaultTexture);
+				ImGui.closeCurrentPopup();
+			}
+			ImGui.separator();
+			ImGui.text("Custom");
 			if(ImGui.button("Dissolve")) {
 				mat.set(new DissolveUniforms.DissolveMaterial());
 				ImGui.closeCurrentPopup();
 			}
 			ImGui.endPopup();
 		}
+		ImGui.popItemWidth();
+		ImGui.popStyleColor();
 	}
 	
 	public void renderMaterial(Material mat, String matName, int height) {
@@ -151,10 +171,21 @@ public class MaterialProperties implements ImGuiComponent {
 			}
 		});
 		
+		ImGui.beginGroup();
 		// button to select a new texture
 		if(ImGui.button("Set")) {
 			AssetDialog.texturePicker.show();
 		}
+		if(ImGui.checkbox("Repeat", repeatTexture)) {
+			if(repeatTexture.get()) {
+				a.textureDescription.uWrap = TextureWrap.Repeat;
+				a.textureDescription.vWrap = TextureWrap.Repeat;
+			} else {
+				a.textureDescription.uWrap = TextureWrap.ClampToEdge;
+				a.textureDescription.vWrap = TextureWrap.ClampToEdge;
+			}
+		}
+		ImGui.endGroup();
 		ImGui.sameLine();
 		// current texture
 		ImGui.image(a.textureDescription.texture.getTextureObjectHandle(), 75, 75);

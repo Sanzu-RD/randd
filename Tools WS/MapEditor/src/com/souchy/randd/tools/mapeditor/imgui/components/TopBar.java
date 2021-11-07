@@ -14,8 +14,9 @@ import com.kotcrab.vis.ui.widget.file.FileChooser.SelectionMode;
 import com.souchy.randd.commons.mapio.MapData;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
+import com.souchy.randd.tools.mapeditor.entities.EditorEntities;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiComponent;
-import com.souchy.randd.tools.mapeditor.main.EditorEntities;
+import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 import com.souchy.randd.tools.mapeditor.main.MapWorld;
 
@@ -23,7 +24,6 @@ import imgui.ImGui;
 
 public class TopBar implements ImGuiComponent {
 
-	public String lastFolder = "res/"; // à mettre dans config
 	
 	public TopBar() {
 		FileChooser.setDefaultPrefsName("com.souchy.randd.tools.mapeditor.filechooser");
@@ -48,21 +48,26 @@ public class TopBar implements ImGuiComponent {
     			}
     			if(ImGui.menuItem("Save")) {
 					if(MapEditorGame.currentFile.get() == null) {
-						saveAs("data/maps/", files -> MapEditorGame.currentFile.set(files.get(0)));
+						saveAs("res/maps/", files -> MapEditorGame.currentFile.set(files.get(0)));
 						//MapEditorGame.mapCache.set(MapEditorGame.currentFile.get().file().getPath(), MapEditorGame.currentMap.get());
 					} else {
 						//MapEditorGame.properties.save();
 					}
     			}
     			if(ImGui.menuItem("Save as")) {
-    				saveAs("data/maps/", files -> MapEditorGame.currentFile.set(files.get(0)));
+    				saveAs("res/maps/", files -> MapEditorGame.currentFile.set(files.get(0)));
     			}
     			ImGui.separator();
     			if(ImGui.menuItem("Load Assets")) {
-    				open(lastFolder, "", (files) -> {
+    				open(MapEditorCore.conf.lastFolder, "", (files) -> {
     					for(var f : files) {
     						LapisAssets.loadAuto(f);
     					}
+    				});
+    			}
+    			if(ImGui.menuItem("Clear Assets")) {
+    				Gdx.app.postRunnable(() -> {
+    					LapisAssets.hack().clear();
     				});
     			}
     			ImGui.endMenu();
@@ -108,7 +113,7 @@ public class TopBar implements ImGuiComponent {
 			@Override
 			public void selected(Array<FileHandle> files) {
 				super.selected(files);
-				lastFolder = files.get(0).parent().path();
+				MapEditorCore.conf.lastFolder = files.get(0).parent().path();
 				//System.out.print("files : ");
 				//files.forEach(f -> System.out.print(f.name() + ", "));
 				//System.out.println("");

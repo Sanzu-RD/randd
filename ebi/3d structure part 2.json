@@ -1,0 +1,47 @@
+
+{
+
+	"mesh":{
+		"vertices": {},
+		"indices": {},
+		"autobind": true,
+		"isVertexArray": false,
+		"instances": {},
+		"isInstanced": false
+	},
+	"meshpart":{
+		"id": "", // string,
+		"primitiveType": 0, // int, GL_TRIANGLES
+		"offset": 0, // offset in the indices array
+		"size": 0, // total number of vertices, or the number of indices when the mesh is indexed
+		"mesh": {}, // mesh reference
+		"center": { x, y, z }, // vector3
+		"halfExtends": {}, // vector3
+		"radius": -1, // radius relative to the {center} of the bounding sphere of the shape, or -1 if not calculated yet
+		"bounds": {}
+	},
+	"node":{
+		"id": "", // string
+		"inheritTransform": true, // boolean
+		"isAnimated": false, // boolean
+		"translation": { x, y, z }, // vector3
+		"rotation": { qx, qy, qz, qw }, // quaternion
+		"scale": { x, y, z }, // vector3
+		"localTransform": [][], // matrix4
+		"globalTransform": [][], // matrix4
+		"parts": [], // nodeparts
+		"parent": {} // node
+		"children": [] // nodes
+	},
+	"nodepart": {
+		"material": "", // material reference
+		"meshPart": {}, // meshpart
+		"invBoneBindTransforms": [][], // arraymap<node, matrix4>
+		"bones": [ [][] ], // matrix4[]
+		"enabled": true // bolean
+	}
+
+
+
+
+}

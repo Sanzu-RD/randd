@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.FlushablePool;
 import com.souchy.randd.commons.tealwaters.logging.Log;
+import com.souchy.randd.tools.mapeditor.entities.EditorEntities;
 import com.souchy.randd.tools.mapeditor.imgui.FontAwesomeIcons;
 import com.souchy.randd.tools.mapeditor.imgui.IGStyle;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiComponent.Container;
-import com.souchy.randd.tools.mapeditor.main.EditorEntities;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 import com.souchy.randd.tools.mapeditor.main.MapWorld;
 import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorImGuiHud;
@@ -44,9 +44,6 @@ public class ObjectsTree extends Container { // implements ImGuiComponent
 		ImGui.textColored(IGStyle.colorAccent, "Cache");
 		MapWorld.world.cache.getRenderables(renderables, renderablesPool);
 		for (var inst : renderables) {
-			//if(ImGui.treeNode((i++) + " " + inst.meshPart.id)) {
-			//	ImGui.treePop();
-			//}
 			ImGui.pushStyleColor(ImGuiCol.Button, 0, 0, 0, 0);
 			if(ImGui.button(FontAwesomeIcons.Cubes + " "+ (i++) + " " + inst.meshPart.id)) {
 				//MapEditorGame.screen.imgui.properties.setInst(inst);
@@ -54,15 +51,9 @@ public class ObjectsTree extends Container { // implements ImGuiComponent
 			ImGui.popStyleColor();
 		}
 		renderables.clear();
+		i = 0;
 		ImGui.textColored(IGStyle.colorAccent, "Instances");
 		for (var inst : EditorEntities.getInstances()) {
-			/*
-			if(ImGui.treeNode((i++) + " " + inst.nodes.get(0).id)) { // inst.model.meshParts.get(0).id
-				Log.info("open node " + inst.nodes.get(0).id);
-				//MapEditorGame.screen.imgui.properties.setInst(inst);
-				ImGui.treePop();
-			}
-			*/
 			ImGui.pushStyleColor(ImGuiCol.Button, 0, 0, 0, 0);
 			if(ImGui.button(FontAwesomeIcons.Cube + " "+ (i++) + " " + inst.nodes.get(0).id)) {
 				MapEditorGame.screen.imgui.properties.setObj(inst);
