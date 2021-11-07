@@ -1,10 +1,14 @@
 package com.souchy.randd.commons.diamond.effects.damage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.souchy.randd.commons.diamond.common.Aoe;
 import com.souchy.randd.commons.diamond.common.AoeBuilders;
+import com.souchy.randd.commons.diamond.effects.EffectType;
+import com.souchy.randd.commons.diamond.effects.ValueMultiplier;
 import com.souchy.randd.commons.diamond.effects.resources.ResourceGainLoss;
 import com.souchy.randd.commons.diamond.models.Cell;
 import com.souchy.randd.commons.diamond.models.Creature;
@@ -26,21 +30,37 @@ import io.netty.buffer.ByteBuf;
  * Then it can be modified by the target's modifier & reactor handlers to mitigate damage with another resource
  * 
  * 
- * dmg = (baseflat + casterflat) * (1 + baseinc * casterinc) * (1 + basemore * castermore)
+ * dmg = ((baseflat + casterbaseflat) * (1 + baseinc * casterinc) + (baseincflat + castincflat)) * (1 + basemore * castermore)
+ * 
+ * en général un sort a juste baseflat, puis on peut avoir des états pour augmenter la base ou autre et les stats du perso pour inc/incflat/more en général
+ * 
  * 
  * 
  * Json representation of Damage effect : { _t: damage, aoe:{}, targetconditions:{}, formula:["dark":{base:60, inc:20}] }
  * Json representation of Displacement effect : { _t: pushfromcaster, aoe:{}, targetconditions:{}, value:4 } //  (vector=target-caster)
  * Json representation of Displacement effect : { _t: pushfromaoecenter, aoe:{}, targetconditions:{}, value:4 } // (vector=target-aoe) résulte en une direction différente
  * 
+ * 
+ *	// exemple string : { Damage : {80 (water)}, {80 (fire)}, {per 3 ap removed} }
+ * 
  * @author Blank
  * @date 19 janv. 2020
  */
 public class Damage extends Effect {
+	
+	{
+		this.modelid = EffectType.Damage.id;
+	}
+	
+	
 	/**
 	 * Base ratios
 	 */
 	public Map<Element, IntStat> formula = new HashMap<>();
+	/**
+	 * Value multipliers, usually only 1, maybe 2
+	 */
+	public List<ValueMultiplier> multipliers = new ArrayList<>();
 	
 	
 	// 
@@ -203,6 +223,11 @@ public class Damage extends Effect {
 			f1.inc 	 	+= globalAffinity.inc + affinity.inc; // *=
 			f1.incflat  += globalAffinity.incflat + affinity.incflat;
 			f1.more 	+= globalAffinity.more + affinity.more; // *=
+			
+			// TODO ValueMultiplier will be hard to implement. Need to save values inside the spell cast instance ? 
+			//for(var m : multipliers) {
+			//	f1.more *= m.value;
+			//}
 			// save the source dmg for later
 			this.sourceDmg.put(ele, f1);
 			
