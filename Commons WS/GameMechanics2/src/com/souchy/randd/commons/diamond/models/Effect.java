@@ -27,6 +27,7 @@ import io.netty.buffer.ByteBuf;
  */
 public abstract class Effect /* extends Entity */ implements BBSerializer, BBDeserializer {
 
+	private static int idcounter = 0;
 	public int id;
 	public int modelid; // ? not sure
 	
@@ -51,6 +52,7 @@ public abstract class Effect /* extends Entity */ implements BBSerializer, BBDes
 	 */
 	public Effect(/* Fight f, */ Aoe aoe, TargetTypeStat targetConditions) {
 //		super(f);
+		id = idcounter++;
 		this.aoe = aoe;
 		this.targetConditions = targetConditions;
 	}
