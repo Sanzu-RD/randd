@@ -1,0 +1,95 @@
+
+
+
+effects (source, targetcell, aoe) : 
+
+
+	damage : ele value
+	
+	move :
+		dash : length value
+		dashto : 
+		
+
+
+
+
+damage = ((base) * inc + flat) * more -> for each element and multiplier
+
+
+damage json : {
+	"formula": {
+		"water": {
+			"baseflat": 80,
+			"inc": 0,
+			"incflat": 0,
+			"more": 0,
+			"fight": 0,
+		},
+	},
+	"multiplier": {
+		"type": "PerXRemoved",
+		"x": "Mana",
+		"value": 1,
+	}
+}
+
+
+
+ValueMultiplier
+	// Based on a resource or attribute or other values
+	// exemple string : { Damage : {80 (water)}, {80 (fire)}, {per 3 ap removed} }
+	
+	// no multiplier
+	None
+
+	// ressource-only multipliers
+	PerMaxX
+	PerCurrentX    // exemple x dommage par pa actuel et le cout est 1pa par pa actuel
+	PerMissingX 
+	PerPercentMaxX			// exemple 1 dommage par 30% des pv manquant
+	PerPercentCurrentX 
+	PerPercentMissingX
+	PerPercentX 
+	
+	// more
+	PerXAdded
+	PerXRemoved
+	PerXUsed 		// exemple utilisé 3 pm, proc poison x damage par pm
+	
+	
+	// affinity-only multipliers
+	PerX
+	
+	
+	// context-only
+	PerXTargetHit
+	
+	
+	
+Context scope :
+	Fight,
+	Round,
+	Turn,
+	Action (spell,movement),
+	Effect
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

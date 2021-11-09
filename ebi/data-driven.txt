@@ -4,66 +4,72 @@ Code complex effects, not complex data.
 
 
 
-damage = ((base) * inc + flat) * more -> for each element and multiplier
+spell json : {
+	spellstats: {}
 
-
-damage json : {
-	"formula": {
-		"water": {
-			"baseflat": 80,
-			"inc": 0,
-			"incflat": 0,
-			"more": 0,
-			"fight": 0,
-		},
-	},
-	"multiplier": {
-		"type": "PerXRemoved",
-		"x": "Mana",
-		"value": 1,
-	}
-	
-	
 }
 
+status json : {
+	creaturestats: {},
+	spellstats: [ {} ],
+	type: (reactor/modifier/interrupter)
+	triggers: [ onDamageReceived, ]
 
+}
 
-effects (source, targetcell, aoe) : 
-
-
-	damage : ele value
 	
-	move :
-		dash : length value
-		dashto : 
+effect Aoe / target type :
+{
+	[ // use arrays to add aoes together ?
+		circle(2).move(target.x, 0)
+		circle(2).move(-target.x, 0)
+		circle(2).move(target.x, target.y)
+		circle(2).move(-target.x, -target.y)
+	],
+	[
 		
+	]
+}
 
+spell cast :
+{
+	{ // node 1
+		"if": { // instruction condition
+			[ { "conditions" } ],
+			{ // node 11
+				{ // instruction effect
+					"effectid": 1,
+					"formula": { "water": { 80, 0, 0, 0 } }
+				}
+			},
+			{ // node 12
+				"if": { // instruction conditions
+					[ { "conditions" } ],
+					{ // node 121
+						{ // instruction effect
+							"effectid": 1,
+							"formula": { "fire": { 1, 0, 0, 0 } }
+							"multiplier": {
+								type: "PerPercentMaxX",
+								resType: "life",
+								value: 20
+							}
+						}
+					}
+				}
+				
+			}
+		}
+		{ // instruction effect
+			"effectid": 2,
+			"summonCreatureModelId": 1,
+			"multiplier": {
+				type: "PerPercentMaxX",
+				resType: "life",
+				value: 20
+			}
+		}
+	}
 
-	
+}
 
-
-
-
-ValueMultiplier
-	// Based on a resource or attribute or other values
-	// exemple string : { Damage : {80 (water)}, {80 (fire)}, {per 3 ap removed} }
-	
-	// no multiplier
-	None
-
-	// ressource-only multipliers
-	PerMaxX
-	PerCurrentX
-	
-	// context-only
-	PerCreaturesHit
-	
-	
-	// more
-	PerXAdded
-	PerXRemoved
-	
-	
-	
-	
-	

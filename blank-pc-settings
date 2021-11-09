@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<eclipse-userlibraries version="2">
+    <library name="DB" systemlibrary="false">
+        <archive path="C:/Robyn/Git/res/libs other/jedis-2.9.0.jar" source="C:/Robyn/Git/res/libs src/jedis-2.9.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/mongodb-driver-sync-3.10.1.jar" source="C:/Robyn/Git/res/libs src/mongodb-driver-sync-3.10.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/bson-3.10.1.jar" source="C:/Robyn/Git/res/libs src/bson-3.10.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/mongodb-driver-core-3.10.1.jar" source="C:/Robyn/Git/res/libs src/mongodb-driver-core-3.10.1-sources.jar"/>
+    </library>
+    <library name="Google" systemlibrary="false">
+        <archive path="C:/Robyn/Git/res/libs other/guava-26.0-jre.jar" source="C:/Robyn/Git/res/libs src/guava-18.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/guice-4.2.0-no_aop.jar" source="C:/Robyn/Git/res/libs src/guice-4.2.zip"/>
+        <archive path="C:/Robyn/Git/res/libs other/reflections-0.9.11.jar" source="C:/Robyn/Git/res/libs src/reflections-0.9.11-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/javassist.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gson-2.8.6.jar" source="C:/Robyn/Git/res/libs other/gson-2.8.6-sources.jar"/>
+    </library>
+    <library name="imgui" systemlibrary="false">
+        <archive nativelibpaths="C:/Robyn/Git/res/libs other/imgui-java" path="C:/Robyn/Git/res/libs other/imgui-java/imgui-binding-1.84.1.3.jar" source="C:/Robyn/Git/res/libs other/imgui-java/imgui-binding-1.84.1.3-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/imgui-java/imgui-lwjgl3-1.84.1.3.jar" source="C:/Robyn/Git/res/libs other/imgui-java/imgui-lwjgl3-1.84.1.3-sources.jar"/>
+    </library>
+    <library name="JavaFX" systemlibrary="false">
+        <archive path="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.base.jar" source="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/src.zip"/>
+        <archive path="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.controls.jar" source="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/src.zip"/>
+        <archive path="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.fxml.jar" source="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/src.zip"/>
+        <archive path="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.graphics.jar" source="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/src.zip"/>
+        <archive path="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.media.jar" source="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/src.zip"/>
+        <archive path="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.swing.jar" source="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/src.zip"/>
+        <archive path="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx.web.jar" source="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/src.zip"/>
+        <archive path="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/javafx-swt.jar" source="C:/Robyn/Git/res/libs other/javafx-sdk-11.0.2/lib/src.zip"/>
+    </library>
+    <library name="Jersey" systemlibrary="false">
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/api/jakarta.ws.rs-api-2.1.5.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/api/jakarta.ws.rs-api-2.1.5-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.annotation-api-1.3.4.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.annotation-api-1.3.4-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/aopalliance-repackaged-2.5.0.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/aopalliance-repackaged-2.5.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/hk2-api-2.5.0.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/hk2-api-2.5.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/hk2-locator-2.5.0.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/hk2-locator-2.5.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/hk2-utils-2.5.0.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/hk2-utils-2.5.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.activation-api-1.2.1.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.activation-api-1.2.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.inject-2.5.0.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.inject-2.5.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.json.bind-api-1.0.1.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.json.bind-api-1.0.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.json-1.1.5.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.json-1.1.5-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.json-api-1.1.5.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.json-api-1.1.5-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.persistence-api-2.2.2.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.persistence-api-2.2.2-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.servlet-api-4.0.2.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.servlet-api-4.0.2-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.xml.bind-api-2.3.2.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/jakarta.xml.bind-api-2.3.2-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/javassist-3.22.0-GA.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/javassist-3.22.0-GA-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/org.osgi.core-4.2.0.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/org.osgi.core-4.2.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/osgi-resource-locator-1.0.1.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/osgi-resource-locator-1.0.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/validation-api-2.0.1.Final.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/validation-api-2.0.1.Final-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/yasson-1.0.3.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/ext/yasson-1.0.3-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-client.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-client-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-common.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-common-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-container-servlet.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-container-servlet-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-container-servlet-core.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-container-servlet-core-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-hk2.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-hk2-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-media-jaxb.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-media-jaxb-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-media-json-binding.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-media-json-binding-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-media-sse.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-media-sse-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-server.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/lib/jersey-server-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-netty-connector-2.28.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-netty-connector-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-container-netty-http-2.28.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-container-netty-http-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-mvc-2.28.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-mvc-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-mvc-freemarker-2.28.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-mvc-freemarker-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/netty-all-4.1.19.Final.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/netty-all-4.1.19.Final-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/freemarker-2.3.28.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/freemarker-2.3.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-grizzly-1.19.4.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-grizzly-1.19.4-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-grizzly-connector-2.28.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-grizzly-connector-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-container-grizzly2-http-2.28.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/jersey-container-grizzly2-http-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/grizzly-http-2.4.4.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/grizzly-http-2.4.4-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/grizzly-http-server-2.4.4.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/grizzly-http-server-2.4.4-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/grizzly-http-servlet-2.4.4.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/grizzly-http-servlet-2.4.4-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/grizzly-framework-2.4.4.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/grizzly-framework-2.4.4-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/grizzly-websockets-2.4.4.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/grizzly-websockets-2.4.4-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/connection-pool-2.4.4.jar" source="C:/Robyn/Git/res/libs other/jaxrs-ri-2.28/connection-pool-2.4.4-sources.jar"/>
+    </library>
+    <library name="LibGdx1.10" systemlibrary="false">
+        <archive path="C:/Robyn/Git/res/libs other/gdx 1.10/gdx-1.10.0.jar" source="C:/Robyn/Git/res/libs other/gdx 1.10/gdx-1.10.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gdx 1.10/gdx-backend-lwjgl-1.10.0.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gdx 1.10/gdx-backend-lwjgl3-1.10.0.jar" source="C:/Robyn/Git/res/libs other/gdx 1.10/gdx-backend-lwjgl3-1.10.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gdx 1.10/gdx-platform-1.10.0.jar"/>
+        <archive path="C:/Robyn/Git/libgdx/EffekseerForMultiLanguages/examples/Jeffekseer/jeffekseer.jar" source="C:/Robyn/Git/libgdx/EffekseerForMultiLanguages/examples/Jeffekseer/src"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/vis-ui-1.5.0.jar" source="C:/Robyn/Git/res/libs gdx/vis-ui-1.5.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gdx 1.10/gdx-freetype-1.10.0.jar" source="C:/Robyn/Git/res/libs other/gdx 1.10/gdx-freetype-1.10.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gdx 1.10/gdx-freetype-platform-1.10.0.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gdx 1.10/gdx-platform-1.10.0-natives-desktop.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gdx 1.10/gdx-platform-1.10.0-natives-x86_64.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gdx 1.10/gdx-freetype-platform-1.10.0-natives-desktop.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gdx 1.10/gdx-freetype-platform-1.10.0-natives-x86_64.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gdx 1.10/jlayer-1.0.1-gdx.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gdx-video-1.0.0-anonl.jar" source="C:/Robyn/Git/res/libs other/gdx-video-1.0.0-anonl-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gdx-video-desktop-1.0.0-anonl.jar" source="C:/Robyn/Git/res/libs other/gdx-video-desktop-1.0.0-anonl-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/gdx-video-desktop-natives-1.0.0-anonl.jar"/>
+    </library>
+    <library name="LibGDX2" systemlibrary="false">
+        <archive nativelibpaths="C:/Robyn/Git/res/libs gdx/natives" path="C:/Robyn/Git/res/libs gdx 2/gdx.jar" source="C:/Robyn/Git/res/libs gdx 2/sources/gdx-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx 2/gdx-natives.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx 2/gdx-backend-lwjgl-natives.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx 2/gdx-backend-lwjgl.jar" source="C:/Robyn/Git/res/libs gdx 2/sources/gdx-backend-lwjgl-sources.jar"/>
+        <archive nativelibpaths="C:/Robyn/Git/res/libs gdx 2/extensions/gdx-freetype/x86_64" path="C:/Robyn/Git/res/libs gdx 2/extensions/gdx-freetype/gdx-freetype.jar" source="C:/Robyn/Git/res/libs gdx 2/extensions/gdx-freetype/sources/gdx-freetype-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx 2/extensions/gdx-freetype/gdx-freetype-natives.jar"/>
+        <archive nativelibpaths="C:/Robyn/Git/libgdx/EffekseerForMultiLanguages/examples/Jeffekseer" path="C:/Robyn/Git/libgdx/EffekseerForMultiLanguages/examples/Jeffekseer/jeffekseer.jar" source="C:/Robyn/Git/libgdx/EffekseerForMultiLanguages/examples/Jeffekseer/src"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/vis-ui-1.4.2.jar" source="C:/Robyn/Git/res/libs gdx/vis-ui-1.4.2-sources.jar"/>
+        <archive path="C:/Robyn/Git/libgdx/EffekseerForMultiLanguages/examples/libGdxSample/core/libs/Effekseer.jar"/>
+    </library>
+    <library name="LibGDX3" systemlibrary="false">
+        <archive nativelibpaths="C:/Robyn/Git/res/libs gdx/natives" path="C:/Robyn/Git/res/libs gdx 2/gdx.jar" source="C:/Robyn/Git/res/libs gdx 2/sources/gdx-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx 2/gdx-natives.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx 2/gdx-backend-lwjgl-natives.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/vis-ui-1.3.0.jar" source="C:/Robyn/Git/res/libs src/vis-ui-1.3.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx 2/gdx-backend-lwjgl3.jar" source="C:/Robyn/Git/res/libs gdx 2/sources/gdx-backend-lwjgl3-sources.jar"/>
+    </library>
+    <library name="LML" systemlibrary="false">
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-autumn-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/src/gdx-autumn-1.9.1.9.6-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-autumn-android-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-autumn-android-1.9.1.9.6.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-autumn-fcs-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-autumn-fcs-1.9.1.9.6.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-autumn-gwt-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-autumn-gwt-1.9.1.9.6.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-autumn-jtransc-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-autumn-jtransc-1.9.1.9.6.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-autumn-mvc-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-autumn-mvc-1.9.1.9.6.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-kiwi-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-kiwi-1.9.1.9.6.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-lml-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/src/gdx-lml-1.9.1.9.6-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-lml-vis-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/src/gdx-lml-vis-1.9.1.9.6-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-lu-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-lu-1.9.1.9.6.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-uedi-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-uedi-1.9.1.9.6.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-websocket-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-websocket-1.9.1.9.6.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-websocket-common-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-websocket-common-1.9.1.9.6.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-websocket-gwt-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-websocket-gwt-1.9.1.9.6.jar"/>
+        <archive path="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-websocket-serialization-1.9.1.9.6.jar" source="C:/Robyn/Git/res/libs gdx/lml 1.9.1.9.6/lib/gdx-websocket-serialization-1.9.1.9.6.jar"/>
+    </library>
+    <library name="lwjgl3" systemlibrary="false">
+        <archive path="C:/Robyn/Git/res/libs other/lwjgl 3.2.3/lwjgl.jar" source="C:/Robyn/Git/res/libs other/lwjgl 3.2.3/lwjgl-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/lwjgl 3.2.3/lwjgl-glfw.jar" source="C:/Robyn/Git/res/libs other/lwjgl 3.2.3/lwjgl-glfw-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/lwjgl 3.2.3/lwjgl-glfw-natives-windows.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/lwjgl 3.2.3/lwjgl-natives-windows.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/lwjgl 3.2.3/lwjgl-opengl.jar" source="C:/Robyn/Git/res/libs other/lwjgl 3.2.3/lwjgl-opengl-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/lwjgl 3.2.3/lwjgl-opengl-natives-windows.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/lwjgl 3.2.3/lwjgl-openal.jar" source="C:/Robyn/Git/res/libs other/lwjgl 3.2.3/lwjgl-openal-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/lwjgl 3.2.3/lwjgl-openal-natives-windows.jar"/>
+    </library>
+    <library name="Netty" systemlibrary="false">
+        <archive path="C:/Robyn/Git/res/libs other/net/netty-all-4.1.19.Final.jar" source="C:/Robyn/Git/res/libs other/net/netty-all-4.1.19.Final-sources.jar"/>
+        <archive path="C:/Robyn/GitPiranha/r and d/annotationprocessor.jar"/>
+    </library>
+    <library name="NettyJersey old" systemlibrary="false">
+        <archive path="C:/Robyn/Git/res/libs other/net/jersey/jersey-client-2.25.1.jar" source="C:/Robyn/Git/res/libs other/net/jersey/jersey-client-2.25.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/jersey/jersey-common-2.25.1.jar" source="C:/Robyn/Git/res/libs other/net/jersey/jersey-common-2.25.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/jersey/jersey-container-netty-http-2.25.1.jar" source="C:/Robyn/Git/res/libs other/net/jersey/jersey-container-netty-http-2.25.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/jersey/jersey-container-servlet-core-2.25.1.jar" source="C:/Robyn/Git/res/libs other/net/jersey/jersey-container-servlet-core-2.25.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/jersey/jersey-entity-filtering-2.25.1.jar" source="C:/Robyn/Git/res/libs other/net/jersey/jersey-entity-filtering-2.25.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/jersey/jersey-guava-2.25.1.jar" source="C:/Robyn/Git/res/libs other/net/jersey/jersey-guava-2.25.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/jersey/jersey-media-jaxb-2.25.1.jar" source="C:/Robyn/Git/res/libs other/net/jersey/jersey-media-jaxb-2.25.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/jersey/jersey-media-moxy-2.25.1.jar" source="C:/Robyn/Git/res/libs other/net/jersey/jersey-media-moxy-2.25.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/jersey/jersey-netty-connector-2.25.1.jar" source="C:/Robyn/Git/res/libs other/net/jersey/jersey-netty-connector-2.25.1-sources.jar"/>
+        <archive javadoc="jar:file:/C:/Robyn/Git/res/libs%20other/net/jersey/jersey-server-2.25.1-javadoc.jar!/" path="C:/Robyn/Git/res/libs other/net/jersey/jersey-server-2.25.1.jar" source="C:/Robyn/Git/res/libs other/net/jersey/jersey-server-2.25.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/hk2/aopalliance-repackaged-2.5.0-b32.jar" source="C:/Robyn/Git/res/libs other/net/hk2/aopalliance-repackaged-2.5.0-b32-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/hk2/hk2-api-2.5.0-b32.jar" source="C:/Robyn/Git/res/libs other/net/hk2/hk2-api-2.5.0-b32-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/hk2/hk2-locator-2.5.0-b32.jar" source="C:/Robyn/Git/res/libs other/net/hk2/hk2-locator-2.5.0-b32-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/hk2/hk2-utils-2.5.0-b32.jar" source="C:/Robyn/Git/res/libs other/net/hk2/hk2-utils-2.5.0-b32-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/hk2/javax.inject-2.5.0-b32.jar" source="C:/Robyn/Git/res/libs other/net/hk2/javax.inject-2.5.0-b32-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/hk2/osgi-resource-locator-1.0.1.jar" source="C:/Robyn/Git/res/libs other/net/hk2/osgi-resource-locator-1.0.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/javax/javax.annotation-api-1.2.jar" source="C:/Robyn/Git/res/libs other/net/javax/javax.annotation-api-1.2-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/javax/javax.json-1.0.4.jar" source="C:/Robyn/Git/res/libs other/net/javax/javax.json-1.0.4-sources.jar"/>
+        <archive javadoc="jar:file:/C:/Robyn/Git/res/libs%20other/net/javax/javax.ws.rs-api-2.0.1-javadoc.jar!/" path="C:/Robyn/Git/res/libs other/net/javax/javax.ws.rs-api-2.0.1.jar" source="C:/Robyn/Git/res/libs other/net/javax/javax.ws.rs-api-2.0.1-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/javax/validation-api-1.1.0.Final.jar" source="C:/Robyn/Git/res/libs other/net/javax/validation-api-1.1.0.Final-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/javaassist/javassist-3.20.0-GA.jar" source="C:/Robyn/Git/res/libs other/net/javaassist/javassist-3.20.0-GA-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/eclipse/org.eclipse.persistence.asm-2.6.0.jar" source="C:/Robyn/Git/res/libs other/net/eclipse/org.eclipse.persistence.asm-2.6.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/eclipse/org.eclipse.persistence.core-2.6.0.jar" source="C:/Robyn/Git/res/libs other/net/eclipse/org.eclipse.persistence.core-2.6.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/eclipse/org.eclipse.persistence.moxy-2.6.0.jar" source="C:/Robyn/Git/res/libs other/net/eclipse/org.eclipse.persistence.moxy-2.6.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/netty-all-4.1.19.Final.jar" source="C:/Robyn/Git/res/libs other/net/netty-all-4.1.19.Final-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/jaxb-api-2.4.0-b180830.0359.jar" source="C:/Robyn/Git/res/libs other/net/jaxb-api-2.4.0-b180830.0359-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/javax.activation-1.2.0.jar" source="C:/Robyn/Git/res/libs other/net/javax.activation-1.2.0-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/jersey-mvc-freemarker-2.28.jar" source="C:/Robyn/Git/res/libs other/net/jersey-mvc-freemarker-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/jersey-mvc-2.28.jar" source="C:/Robyn/Git/res/libs other/net/jersey-mvc-2.28-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/net/javax.servlet-api-4.0.1.jar"/>
+    </library>
+    <library name="RabbitMQ" systemlibrary="false">
+        <archive path="C:/Robyn/Git/res/libs other/amqp-client-5.1.2.jar" source="C:/Robyn/Git/res/libs src/amqp-client-5.1.2-sources.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/slf4j-jdk14-1.6.4.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/slf4j-api-1.7.12.jar"/>
+    </library>
+    <library name="Tigase.Client" systemlibrary="false">
+        <archive javadoc="file:/G:/Downloads/jaxmpp-dist-3.3.0-b735/docs/javadoc/" path="C:/Robyn/Git/res/libs other/tigase/jaxmpp-dist-3.3.0-b735/jaxmpp-all-singlejar.jar"/>
+    </library>
+    <library name="Tigase.Server" systemlibrary="false">
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/activation.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/alpn-api.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/bcpkix-jdk15on.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/bcprov-jdk15on.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/bctls-jdk15on.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/derby.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/derbytools.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/groovy.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/groovy-json.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/groovy-jsr223.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/groovy-templates.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/groovy-xml.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/hamcrest-core.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/http2-common.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/http2-hpack.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/http2-server.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/javax.mail.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/javax.servlet-api.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jaxmpp-core.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jaxmpp-j2se.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jdmkrt.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jetty-alpn-java-server.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jetty-alpn-server.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jetty-http.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jetty-io.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jetty-security.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jetty-server.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jetty-servlet.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jetty-util.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jmdns.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jstun.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jtds.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/jul-to-slf4j.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/licence-lib.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/logback-classic.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/logback-core.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/mongo-java-driver.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/mysql-connector-java.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/org.apache.felix.bundlerepository.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/org.apache.felix.configadmin.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/org.apache.felix.main.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/org.apache.felix.shell.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/org.apache.felix.shell.remote.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/org.osgi.core.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/postgresql.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/slf4j-api.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/smtp.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-acs.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-acs-muc.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-acs-pubsub.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-acs-workgroup.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-auditlog.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-database-migrator.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-extras-base.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-extras-bcstarttls.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-extras-mailer.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-extras-mailsender.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-extras-mdns.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-http-api.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-http-api-jetty.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-message-archiving.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-mongodb.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-muc.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-pubsub.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-push.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-server.jar" source="G:/Downloads/tigase-server-tigase-server-8.1.0/tigase-server-tigase-server-8.1.0/src"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-server-dist.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-socks5.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-spam.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-stats-collector-library.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-stats-collector-provider.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-stun.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-unified-archive.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-utils.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-workgroupqueues-component.jar"/>
+        <archive path="C:/Robyn/Git/res/libs other/tigase/tigase-server-8.1.0-b10857/tigase-xmltools.jar"/>
+    </library>
+</eclipse-userlibraries>
