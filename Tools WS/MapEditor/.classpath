@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="com/souchy/randd/tools/mapeditor/ui/components/EditorLayoutPanel.java|com/souchy/randd/tools/mapeditor/ui/components/LayoutPanel.java" kind="src" path="src"/>
+	<classpathentry kind="src" path="texgraph"/>
 	<classpathentry kind="src" output="res" path="plants"/>
 	<classpathentry kind="src" path="data"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
