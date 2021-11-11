@@ -86,7 +86,6 @@
 			
 			
 			
-			
 			<!-- copy files to release folder -->
 			<sequential>
 				<!-- Delete libs -->
@@ -146,7 +145,7 @@
 				</copy>
 			</sequential>
 		</parallel>
-
 		
 	</target>
+	
 </project>
