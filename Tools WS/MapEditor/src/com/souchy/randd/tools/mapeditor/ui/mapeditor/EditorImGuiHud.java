@@ -23,6 +23,7 @@ import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiKey;
+import texgraph.ui.Graph;
 
 public class EditorImGuiHud extends ImGuiHud {
 	
@@ -31,6 +32,7 @@ public class EditorImGuiHud extends ImGuiHud {
 	public ObjectsTree tree;
 	public AssetExplorer explorer;
 	public Properties properties;
+	public Graph graph;
 	public Console console;
 	public Settings settings;
 	
@@ -66,6 +68,7 @@ public class EditorImGuiHud extends ImGuiHud {
 		components.add(tree = new ObjectsTree());
 		components.add(explorer = new AssetExplorer());
 		components.add(properties = new Properties());
+		components.add(graph = new Graph());
 		components.add(console = new Console());
 		components.add(settings = new Settings());
 		//removeContainer(console);

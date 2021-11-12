@@ -83,6 +83,9 @@ public class TopBar implements ImGuiComponent {
     			if(ImGui.menuItem("Properties view")) {
     				MapEditorGame.screen.imgui.properties.show();
     			}
+    			if(ImGui.menuItem("Node Graph view")) {
+    				MapEditorGame.screen.imgui.graph.show();
+    			}
     			if(ImGui.menuItem("Console view")) {
     				MapEditorGame.screen.imgui.console.show();
     			}

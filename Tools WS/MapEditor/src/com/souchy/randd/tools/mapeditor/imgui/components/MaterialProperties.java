@@ -17,7 +17,6 @@ import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.Disso
 import com.souchy.randd.tools.mapeditor.imgui.IGStyle;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiComponent;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiUtil;
-import com.souchy.randd.tools.mapeditor.imgui.components.AssetExplorer.AssetDialog;
 import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorImGuiHud;
 
 import imgui.ImGui;
@@ -153,7 +152,7 @@ public class MaterialProperties implements ImGuiComponent {
 		if(a instanceof ColorAttribute c)
 			renderColor(c);
 		if(a instanceof TextureAttribute c)
-			renderTexture(c);
+			ImGuiUtil.renderTexture(c, repeatTexture);
 		if(a instanceof FloatAttribute c)
 			renderFloat(c);
 		if(a instanceof IntAttribute c)
@@ -162,53 +161,6 @@ public class MaterialProperties implements ImGuiComponent {
 			renderBlend(c);
 	}
 
-	public void renderTexture(TextureAttribute a) {
-		// texture popup
-		AssetDialog.texturePicker.prepare(() -> {
-			String asset = AssetDialog.texturePicker.pick();
-			if(asset != null) {
-				a.textureDescription.texture = LapisAssets.get(asset, Texture.class);
-			}
-		});
-		
-		ImGui.beginGroup();
-		// button to select a new texture
-		if(ImGui.button("Set")) {
-			AssetDialog.texturePicker.show();
-		}
-		if(ImGui.checkbox("Repeat", repeatTexture)) {
-			if(repeatTexture.get()) {
-				a.textureDescription.uWrap = TextureWrap.Repeat;
-				a.textureDescription.vWrap = TextureWrap.Repeat;
-			} else {
-				a.textureDescription.uWrap = TextureWrap.ClampToEdge;
-				a.textureDescription.vWrap = TextureWrap.ClampToEdge;
-			}
-		}
-		ImGui.endGroup();
-		ImGui.sameLine();
-		// current texture
-		ImGui.image(a.textureDescription.texture.getTextureObjectHandle(), 75, 75);
-		// texture transforms
-		ImFloat imv = ImGuiUtil.poolFloat.obtain();
-		imv.set(a.offsetU);
-		if(ImGui.sliderScalar("U", ImGuiDataType.Float, imv, -1, 100)) {
-			a.offsetU = imv.get();
-		}
-		imv.set(a.offsetV);
-		if(ImGui.sliderScalar("V", ImGuiDataType.Float, imv, -1, 100)) {
-			a.offsetV = imv.get();
-		}
-		imv.set(a.scaleU);
-		if(ImGui.sliderScalar("W", ImGuiDataType.Float, imv, -1, 100)) {
-			a.scaleU = imv.get();
-		}
-		imv.set(a.scaleV);
-		if(ImGui.sliderScalar("H", ImGuiDataType.Float, imv, -1, 100)) {
-			a.scaleV = imv.get();
-		}
-		ImGuiUtil.poolFloat.free(imv);
-	}
 	
 	public void renderColor(ColorAttribute a) {
 		var col = new float[] { a.color.r, a.color.g, a.color.b, a.color.a }; 
@@ -220,15 +172,9 @@ public class MaterialProperties implements ImGuiComponent {
 	public void renderFloat(FloatAttribute a) {
 		ImFloat imv = ImGuiUtil.poolFloat.obtain();
 		imv.set(a.value);
-//		ImGuiSliderFlags.Logarithmic
-		if(ImGui.sliderScalar("##" + Attribute.getAttributeAlias(a.type), ImGuiDataType.Float, imv, -1, 50)) {
+		if(ImGui.dragScalar("##" + Attribute.getAttributeAlias(a.type), ImGuiDataType.Float, imv, -1, 50)) {
 			a.value = imv.get();
 		}
-//		if(ImGui.inputFloat("##" + Attribute.getAttributeAlias(a.type), imv, 0.5f, 1f, "%.4g")) { //, ImGuiInputTextFlags.EnterReturnsTrue)) {
-//			a.value = imv.get();
-//		}
-		// sliderfloat, dragfloat
-			
 		ImGuiUtil.poolFloat.free(imv);
 	}
 	

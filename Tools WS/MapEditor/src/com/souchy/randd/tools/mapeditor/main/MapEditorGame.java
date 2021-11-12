@@ -80,6 +80,7 @@ public class MapEditorGame extends LapisGame {
 		screen.resetCamera();
 		
 		//LapisAssets.loadModels(Gdx.files.internal("res/models/"));
+		LapisAssets.loadTextures(Gdx.files.internal("res/textures/fx/"));
 	}
 	
 	@Override

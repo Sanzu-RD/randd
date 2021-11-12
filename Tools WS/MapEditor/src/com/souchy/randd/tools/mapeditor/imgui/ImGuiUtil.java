@@ -1,14 +1,26 @@
 package com.souchy.randd.tools.mapeditor.imgui;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureWrap;
+import com.badlogic.gdx.graphics.g3d.Attribute;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.IntAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Pool;
+import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.jade.Constants;
+import com.souchy.randd.tools.mapeditor.imgui.components.AssetDialog;
 
 import imgui.ImGui;
+import imgui.flag.ImGuiColorEditFlags;
 import imgui.flag.ImGuiDataType;
 import imgui.flag.ImGuiTableFlags;
+import imgui.type.ImBoolean;
 import imgui.type.ImFloat;
 import imgui.type.ImInt;
 
@@ -31,7 +43,60 @@ public class ImGuiUtil {
 		};
 	
 	}
+
 	
+	public static boolean renderTexture(TextureAttribute a, ImBoolean repeatTexture) {
+		ImBoolean changed = new ImBoolean(false);
+		// texture popup
+		AssetDialog.texturePicker.prepare(() -> {
+			String asset = AssetDialog.texturePicker.pick();
+			if(asset != null) {
+				a.textureDescription.texture = LapisAssets.get(asset, Texture.class);
+				changed.set(true);
+			}
+		});
+		
+		ImGui.beginGroup();
+		// button to select a new texture
+		if(ImGui.button("Set")) {
+			AssetDialog.texturePicker.show();
+		}
+		if(ImGui.checkbox("Repeat", repeatTexture)) {
+			if(repeatTexture.get()) {
+				a.textureDescription.uWrap = TextureWrap.Repeat;
+				a.textureDescription.vWrap = TextureWrap.Repeat;
+			} else {
+				a.textureDescription.uWrap = TextureWrap.ClampToEdge;
+				a.textureDescription.vWrap = TextureWrap.ClampToEdge;
+			}
+		}
+		ImGui.endGroup();
+		ImGui.sameLine();
+		// current texture
+		ImGui.image(a.textureDescription.texture.getTextureObjectHandle(), 75, 75);
+		// texture transforms
+		ImFloat imv = ImGuiUtil.poolFloat.obtain();
+		imv.set(a.offsetU);
+		if(ImGui.sliderScalar("U", ImGuiDataType.Float, imv, -1, 100)) {
+			a.offsetU = imv.get();
+		}
+		imv.set(a.offsetV);
+		if(ImGui.sliderScalar("V", ImGuiDataType.Float, imv, -1, 100)) {
+			a.offsetV = imv.get();
+		}
+		imv.set(a.scaleU);
+		if(ImGui.sliderScalar("W", ImGuiDataType.Float, imv, -1, 100)) {
+			a.scaleU = imv.get();
+		}
+		imv.set(a.scaleV);
+		if(ImGui.sliderScalar("H", ImGuiDataType.Float, imv, -1, 100)) {
+			a.scaleV = imv.get();
+		}
+		ImGuiUtil.poolFloat.free(imv);
+		
+		return changed.get();
+	}
+
 	
 	public static void renderVector3(String name, Vector3 vc, float min, float max) {
 		renderVector3(name, vc, 0.5f, min, max);
