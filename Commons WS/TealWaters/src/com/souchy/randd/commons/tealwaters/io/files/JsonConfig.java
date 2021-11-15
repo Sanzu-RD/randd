@@ -47,6 +47,9 @@ public class JsonConfig {
 	private static <T extends JsonConfig> String name(Class<T> c) {
 		return c.getSimpleName().toLowerCase().replace("config", "").replace("conf", "") + extension;
 	}
+	private static String name(Object o) {
+		return o.getClass().getSimpleName().toLowerCase().replace("config", "").replace("conf", "") + extension;
+	}
 	
 	private static <T extends JsonConfig> T read(Class<T> c, Path path) {
 		try {
@@ -115,18 +118,21 @@ public class JsonConfig {
 		}
 	}
 	
-	public void save() {
-		var content = gson.toJson(this);
-		//var file = new File(rememberPath + name(this.getClass()));
-		//Log.info("save " + this.rememberPath);
+	public static void save(Object o, Path path) {
 		try {
-			if(rememberPath == null) 
-				rememberPath = Environment.fromRoot("" + name(this.getClass()));
-			Files.writeString(rememberPath/*file.toPath()*/, content);
+			var content = gson.toJson(o);
+			if(path == null) 
+				path = Environment.fromRoot(name(o));
+			Files.writeString(path, content);
 		} catch (IOException e) {
-			//e.printStackTrace();
 			Log.error("JsonConfig cannot save : ", e);
 		}
+	}
+	
+	public void save() {
+		if(rememberPath == null) 
+			rememberPath = Environment.fromRoot(name(this.getClass()));
+		save(this, rememberPath);
 	}
 	
 }

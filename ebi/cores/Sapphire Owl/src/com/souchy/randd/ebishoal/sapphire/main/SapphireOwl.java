@@ -35,8 +35,6 @@ public class SapphireOwl extends EbiShoalCore {
 	
 	
 	public static void main(String[] args) throws Exception {
-		LapisCore.arguments(args);
-
 		FXLoader.read = (s) -> {
 	        var handle = Gdx.files.internal(s);
 	        byte[] byt = handle.readBytes();

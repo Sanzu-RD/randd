@@ -3,6 +3,7 @@ package com.souchy.randd.tools.mapeditor.configs;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 
 public class EditorConf extends JsonConfig {
@@ -10,7 +11,7 @@ public class EditorConf extends JsonConfig {
 	/** this will disable save on exit for the current session and will be set to false when the application starts again */
 	public boolean reset = true;
 	
-	public String lastFolder = "res/";
+	public String lastFolder = "res/"; //Environment.res.toAbsolutePath().toString();
 	
 	public GraphicsConf gfx = new GraphicsConf();
 	public HudConfig hud = new HudConfig();

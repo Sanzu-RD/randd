@@ -4,6 +4,8 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.souchy.randd.commons.tealwaters.logging.Log;
+
 /**
  * External environment
  * 
@@ -21,8 +23,13 @@ public class Environment {
 	 */
 	public static Path logs = Paths.get(root.toAbsolutePath() + "/logs/");
 	
+	public static Path res = fromRoot("res/");
+	
 	public static Path fromRoot(String path) {
 		return Paths.get(root + "/" + path);
+	}
+	public static Path fromRes(String path) {
+		return Paths.get(res + "/" + path);
 	}
 	
 	/**
@@ -37,5 +44,6 @@ public class Environment {
 	public static boolean exists(String path) {
 		return getFile(path).exists();
 	}
+	
 	
 }

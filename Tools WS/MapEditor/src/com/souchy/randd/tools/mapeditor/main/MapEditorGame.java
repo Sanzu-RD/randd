@@ -56,6 +56,9 @@ public class MapEditorGame extends LapisGame {
 	
 	@Override
 	public void init() {
+		// crazy we have to call this here and not in MapEditorCore, 
+		// otherwise Gdx initializes as Lwjgl instead of Lwjgl3 because of lapis imports dependencies
+		LapisCore.arguments(MapEditorCore.args);
 		LapisAssets.blocking = false;
 		properties = new EditorProperties();
 		properties.load();

@@ -1,7 +1,11 @@
 package com.souchy.randd.ebishoal.commons.lapis.main;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 //import com.souchy.randd.ebishoal.commons.EbiShoalCore;
 
@@ -30,6 +34,7 @@ public abstract class LapisCore { // extends EbiShoalCore {
 	 */
 	public LapisCore(String[] args) throws Exception {
 		//super(args);
+		LapisCore.arguments(args);
 		init();
 	}
 	
@@ -83,6 +88,23 @@ public abstract class LapisCore { // extends EbiShoalCore {
 		//if(args.length > 0) Environment.root = Paths.get(args[0]); // first arg = root folder
 		if(args.length > 1) isEclipse = args[1].contentEquals("eclipse"); // second arg = isEclipse
 		if(args.length > 1) Log.verbose(args[1] + ", isEclipse=" + isEclipse);
+
+		if(LapisCore.isEclipse) LapisCore.searchEnvironmentRes();
+	}
+
+	public static void searchEnvironmentRes() {
+		String up = "";
+		Path p = Environment.root;
+		for(int u = 0; u < 10; u++) {
+			p = p.toAbsolutePath().getParent();
+			var name = p.getFileName().toString();
+			if(name.equals("r and d")) {
+				break;
+			}
+			up += "../";
+		}
+		Log.verbose("Path to res :::: " + up + "ebi/PiranhaPlants/res/");
+		Environment.res = Paths.get(up + "ebi/PiranhaPlants/res/");
 	}
 	
 	/* 

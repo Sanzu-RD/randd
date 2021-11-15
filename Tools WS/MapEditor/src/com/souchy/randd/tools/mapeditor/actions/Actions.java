@@ -10,9 +10,8 @@ public class Actions {
 
 	
 	public static void resetConf() {
-		MapEditorCore.conf = new EditorConf();
+		MapEditorCore.conf = new EditorConf(); 
 		MapEditorCore.conf.save();
-		// this wont work because imgui components we save the config on exit ?
 	}
 
 	public static void reloadAssets() {
