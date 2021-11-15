@@ -1,5 +1,15 @@
 package com.souchy.randd.tools.mapeditor.imgui.components;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.util.Collection;
+import java.util.List;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
@@ -11,13 +21,31 @@ import com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.IntAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonValue;
+import com.badlogic.gdx.utils.JsonWriter.OutputType;
+import com.google.gson.FieldNamingStrategy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapter;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import com.souchy.randd.commons.tealwaters.commons.Environment;
+import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
+import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers;
+import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers.InstantAdapter;
+import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers.ZonedDateTimeAdapter;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
-import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms;
 import com.souchy.randd.tools.mapeditor.imgui.IGStyle;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiComponent;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiUtil;
 import com.souchy.randd.tools.mapeditor.imgui.components.AssetExplorer.AssetDialog;
+import com.souchy.randd.tools.mapeditor.io.MaterialJson;
+import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
+import com.souchy.randd.tools.mapeditor.shaderimpl.DissolveUniforms.DissolveMaterial;
 import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorImGuiHud;
 
 import imgui.ImGui;
@@ -42,6 +70,50 @@ public class MaterialProperties implements ImGuiComponent {
 	
 	private ImBoolean repeatTexture = new ImBoolean();
 	
+	
+	public static final Gson gson = new GsonBuilder()
+			.setPrettyPrinting()
+			.registerTypeHierarchyAdapter(Instant.class, new InstantAdapter())
+			.registerTypeHierarchyAdapter(ZonedDateTime.class, new ZonedDateTimeAdapter())
+			.setExclusionStrategies(JsonHelpers.exclusionStrategy)
+			.create();
+	
+	public static class ClassTypeAdapter extends TypeAdapter<Class<?>> {
+		// The type adapter does not hold state, so it can be easily made singleton (+
+			// making the constructor private)
+		private static final TypeAdapter<Class<?>> instance = new ClassTypeAdapter()
+				// This is a convenient method that can do trivial null-checks in
+				// write(...)/read(...) itself
+				.nullSafe();
+		
+		private ClassTypeAdapter() {
+		}
+		
+		static TypeAdapter<Class<?>> get() {
+			return instance;
+		}
+		
+		@Override
+		public void write(final JsonWriter out, final Class<?> value) throws IOException {
+			// value is never a null here
+			out.value(value.getName());
+		}
+		
+		@Override
+		public Class<?> read(final JsonReader in) throws IOException {
+			try {
+				// This will never be a null since nullSafe() is used above
+				final String className = in.nextString();
+				return Class.forName(className);
+			} catch (final ClassNotFoundException ex) {
+				// No need to duplicate the message generated in ClassNotFoundException
+				throw new JsonParseException(ex);
+			}
+		}
+		
+	}
+	
+	
 	public MaterialProperties() {
 	}
 
@@ -60,6 +132,55 @@ public class MaterialProperties implements ImGuiComponent {
 			String matName = "#" + (matid++) + " " + mat.id; //"Material # " + (matid++);
 
 			if(ImGui.treeNode(matName)) {
+				AssetDialog.materialPicker.prepare(() -> {
+					String asset = AssetDialog.materialPicker.pick();
+					if(asset != null) {
+						var newmat = LapisAssets.get(asset, Material.class);
+						mat.set(newmat.copy());
+					}
+				});
+				if(ImGui.button("Set")) {
+					AssetDialog.materialPicker.show();
+				}
+				ImGui.sameLine();
+				if(ImGui.button("Export")) {
+					//JsonConfig.save(mat, Paths.get("data/shaders/"+mat.id));
+					//if(true) return;
+					try {
+						Json js = MaterialJson.js;
+						String json = js.prettyPrint(mat);
+						MapEditorGame.screen.hud.saveAs(Environment.fromRes("materials/"), ".mat", (files) -> {
+							if(files.size == 0) return;
+							files.get(0).writeString(json, false);
+						});
+						
+					} catch (Exception e) {
+						Log.info("", e);
+					}
+				}
+				ImGui.sameLine();
+				if(ImGui.button("Import")) {
+					try {
+						Json js = MaterialJson.js;
+						MapEditorGame.screen.hud.open(Environment.fromRes("materials/"), ".mat", (files) -> {
+							if(files.size == 0) return;
+							String json = files.get(0).readString();
+							Material mm = js.fromJson(Material.class, json); //Files.readString());
+							mat.set(mm);
+						});
+					} catch (Exception e) {
+						Log.info("", e);
+					}
+				}
+				ImGui.sameLine();
+				if(ImGui.button("Empty")) {
+					mat.clear();
+				}
+				ImGui.sameLine();
+				if(ImGui.button("Delete")) {
+					mats.removeValue(mat, true);
+				}
+				
 				// button add attribute
 				renderAddAttribute(mat, matName);
 				
@@ -106,7 +227,7 @@ public class MaterialProperties implements ImGuiComponent {
 			ImGui.separator();
 			ImGui.text("Custom");
 			if(ImGui.button("Dissolve")) {
-				mat.set(new DissolveUniforms.DissolveMaterial());
+				mat.set(new DissolveMaterial());
 				ImGui.closeCurrentPopup();
 			}
 			ImGui.endPopup();
@@ -125,24 +246,29 @@ public class MaterialProperties implements ImGuiComponent {
 			for (Attribute a : mat) {
 				attrid++;
 				String name = Attribute.getAttributeAlias(a.type);
-				ImGui.tableNextRow();
-				
-				ImGui.tableNextColumn(); 
-				if(ImGui.button("x##" + matName + name)) {
-					mat.remove(a.type);
-					continue;
+				try {
+					ImGui.tableNextRow();
+					
+					ImGui.tableNextColumn(); 
+					if(ImGui.button("x##" + matName + name)) {
+						mat.remove(a.type);
+						continue;
+					}
+					ImGui.sameLine();
+					ImGui.text("" + name);
+					
+					ImGui.tableNextColumn(); 
+	
+					ImGui.pushItemWidth(-5);
+					renderAttribute(a);
+					ImGui.popItemWidth();
+					
+					if(attrid < mat.size())
+						ImGui.separator();
+				} catch(Exception e) {
+					ImGui.textColored(Color.RED.toIntBits(), "" + attrid + " " + name);
+//					Log.error("", e);
 				}
-				ImGui.sameLine();
-				ImGui.text("" + name);
-				
-				ImGui.tableNextColumn(); 
-
-				ImGui.pushItemWidth(-5);
-				renderAttribute(a);
-				ImGui.popItemWidth();
-				
-				if(attrid < mat.size())
-					ImGui.separator();
 			}
 			ImGui.endTable();
 		}
@@ -192,19 +318,23 @@ public class MaterialProperties implements ImGuiComponent {
 		// texture transforms
 		ImFloat imv = ImGuiUtil.poolFloat.obtain();
 		imv.set(a.offsetU);
-		if(ImGui.sliderScalar("U", ImGuiDataType.Float, imv, -1, 100)) {
+		ImGui.text("U"); ImGui.sameLine();
+		if(ImGui.dragScalar("##U", ImGuiDataType.Float, imv, 0, 1)) {
 			a.offsetU = imv.get();
 		}
 		imv.set(a.offsetV);
-		if(ImGui.sliderScalar("V", ImGuiDataType.Float, imv, -1, 100)) {
+		ImGui.text("V"); ImGui.sameLine();
+		if(ImGui.dragScalar("##V", ImGuiDataType.Float, imv, 0, 1)) {
 			a.offsetV = imv.get();
 		}
 		imv.set(a.scaleU);
-		if(ImGui.sliderScalar("W", ImGuiDataType.Float, imv, -1, 100)) {
+		ImGui.text("W"); ImGui.sameLine();
+		if(ImGui.dragScalar("##W", ImGuiDataType.Float, imv, 0, 20)) {
 			a.scaleU = imv.get();
 		}
 		imv.set(a.scaleV);
-		if(ImGui.sliderScalar("H", ImGuiDataType.Float, imv, -1, 100)) {
+		ImGui.text("H"); ImGui.sameLine();
+		if(ImGui.dragScalar("##H", ImGuiDataType.Float, imv, 0, 20)) {
 			a.scaleV = imv.get();
 		}
 		ImGuiUtil.poolFloat.free(imv);
@@ -221,7 +351,7 @@ public class MaterialProperties implements ImGuiComponent {
 		ImFloat imv = ImGuiUtil.poolFloat.obtain();
 		imv.set(a.value);
 //		ImGuiSliderFlags.Logarithmic
-		if(ImGui.sliderScalar("##" + Attribute.getAttributeAlias(a.type), ImGuiDataType.Float, imv, -1, 50)) {
+		if(ImGui.dragScalar("##" + Attribute.getAttributeAlias(a.type), ImGuiDataType.Float, imv, -1, 50)) {
 			a.value = imv.get();
 		}
 //		if(ImGui.inputFloat("##" + Attribute.getAttributeAlias(a.type), imv, 0.5f, 1f, "%.4g")) { //, ImGuiInputTextFlags.EnterReturnsTrue)) {
@@ -235,7 +365,7 @@ public class MaterialProperties implements ImGuiComponent {
 	public void renderInt(IntAttribute a) {
 		ImInt imv = ImGuiUtil.poolInt.obtain();
 		imv.set(a.value);
-		if(ImGui.sliderScalar("##" + Attribute.getAttributeAlias(a.type), ImGuiDataType.S32, imv, -10, 100)) {
+		if(ImGui.dragScalar("##" + Attribute.getAttributeAlias(a.type), ImGuiDataType.S32, imv, -10, 100)) {
 			a.value = imv.get();
 		}
 		ImGuiUtil.poolInt.free(imv);

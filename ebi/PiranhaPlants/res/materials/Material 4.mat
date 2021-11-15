@@ -1,0 +1,53 @@
+{
+"mask": 262159,
+"attributes": [
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute",
+		"type": 1,
+		"typeBit": 0,
+		"color": {
+			"r": 0.8,
+			"g": 0.8,
+			"b": 0.8,
+			"a": 1
+		}
+	},
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute",
+		"type": 2,
+		"typeBit": 1,
+		"color": {
+			"r": 0.8,
+			"g": 0.8,
+			"b": 0.8,
+			"a": 1
+		}
+	},
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute",
+		"type": 4,
+		"typeBit": 2,
+		"color": {
+			"r": 0.050876,
+			"g": 0.050876,
+			"b": 0.050876,
+			"a": 1
+		}
+	},
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute",
+		"type": 8,
+		"typeBit": 3,
+		"color": {
+			"a": 1
+		}
+	},
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute",
+		"type": 262144,
+		"typeBit": 18,
+		"value": 36
+	}
+],
+"id": "Material"
+}

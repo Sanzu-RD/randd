@@ -310,7 +310,19 @@ public class LapisAssets {
 		*/
 		if(blocking) assets.finishLoading();
 	}
-	
+
+	public static void loadMaterials(FileHandle... handles) {
+		for(var handle : handles) {
+			recurseFiles(handle, 
+				f -> f.name().endsWith(".mat"), 
+				f -> {
+					if(assets.contains(f.path())) assets.unload(f.path());
+					assets.load(f.path(), Material.class);
+				}
+			);
+		}
+		if(blocking) assets.finishLoading();
+	}
 	
 
 	private static void recurseDirectories(FileHandle dir, Predicate<FileHandle> filter, Consumer<FileHandle> action) {
@@ -374,6 +386,7 @@ public class LapisAssets {
 		LapisAssets.loadModels(handle);
 		LapisAssets.loadTextures(handle);
 		LapisAssets.loadSounds(handle);
+		LapisAssets.loadMaterials(handle);
 	}
 	
 }

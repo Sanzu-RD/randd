@@ -18,25 +18,39 @@ import com.souchy.randd.tools.mapeditor.shader.uniforms.UniformsModule;
  */
 public class Shader2Config extends Config {
 	
+	public static Shader2Config defaultConfig() {
+		var conf = new Shader2Config();
+		conf.add(new GlobalUniforms());
+		conf.add(new NodeUniforms());
+		conf.add(new MaterialUniforms());
+		conf.add(new LightingUniforms());
+		return conf;
+	}
+	
 	List<UniformsModule> modules = new ArrayList<>();
 	
 	public void add(UniformsModule module) {
 		modules.add(module);
 	}
 	
-	public void compile(String shaderName) {
-		var modulesVerts = modules.stream().map(m -> m.vertex()).toArray(String[]::new); //.toArray(new String[0]);
-		var modulesFrags = modules.stream().map(m -> m.fragment()).toArray(String[]::new);
-		this.vertexShader = LapisShader.getVertexShader(shaderName, modulesVerts);
-		this.fragmentShader = LapisShader.getFragmentShader(shaderName, modulesFrags);
-		
-	}
+	// dont use this anymore
+//	public void compile(String shaderName) {
+//		var modulesVerts = modules.stream().map(m -> m.vertex()).toArray(String[]::new); //.toArray(new String[0]);
+//		var modulesFrags = modules.stream().map(m -> m.fragment()).toArray(String[]::new);
+//		this.vertexShader = LapisShader.getVertexShader(shaderName, modulesVerts);
+//		this.fragmentShader = LapisShader.getFragmentShader(shaderName, modulesFrags);
+//	}
 	
+	// use this now with ShaderParts
 	public void compile() {
-		String path = "res/shaders/base/";
-		
-		var vertex = new ShaderPart().load(path + "vertex/");
-		var fragment = new ShaderPart().load(path + "fragment/");
+		compile("res/shaders/base/");
+	}
+	/**
+	 * @param baseShaderPath the base shader to which all the modules will be added
+	 */
+	public void compile(String baseShaderPath) {
+		var vertex = new ShaderPart().load(baseShaderPath + "vertex/");
+		var fragment = new ShaderPart().load(baseShaderPath + "fragment/");
 		
 		for(var module : modules) {
 			vertex.children.add(new ShaderPart().load(module.vertex())); //module.shader());
@@ -47,13 +61,5 @@ public class Shader2Config extends Config {
 	}
 	
 	
-	public static Shader2Config defaultConfig() {
-		var conf = new Shader2Config();
-		conf.add(new GlobalUniforms());
-		conf.add(new NodeUniforms());
-		conf.add(new MaterialUniforms());
-		conf.add(new LightingUniforms());
-		return conf;
-	}
 	
 }

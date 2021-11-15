@@ -35,8 +35,6 @@ public class Shader2 extends BaseShader {
 		var prefix = ShaderUtils.createPrefix(renderable, config);
 		var shaderProgram = new ShaderProgram(prefix + config.vertexShader, prefix + config.fragmentShader);
 		
-		
-		
 		this.config = config;
 		this.program = shaderProgram;
 		this.renderable = renderable;

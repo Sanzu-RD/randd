@@ -1,0 +1,114 @@
+{
+"mask": 15990927,
+"attributes": [
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute",
+		"type": 1,
+		"typeBit": 0,
+		"color": {
+			"r": 0.8,
+			"b": 0.8,
+			"a": 1
+		}
+	},
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute",
+		"type": 2,
+		"typeBit": 1,
+		"color": {
+			"r": 0.10980392,
+			"g": 0.89411765,
+			"b": 1,
+			"a": 1
+		}
+	},
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute",
+		"type": 4,
+		"typeBit": 2,
+		"color": {
+			"r": 0.050980393,
+			"g": 0.050980393,
+			"b": 0.81960785,
+			"a": 1
+		}
+	},
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute",
+		"type": 8,
+		"typeBit": 3,
+		"color": {
+			"g": 0.49803922,
+			"a": 1
+		}
+	},
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute",
+		"opacity": 0.542
+	},
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute",
+		"type": 262144,
+		"typeBit": 18,
+		"value": 0.5
+	},
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute",
+		"type": 1048576,
+		"typeBit": 20,
+		"value": 0.025
+	},
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute",
+		"type": 2097152,
+		"typeBit": 21,
+		"color": {
+			"r": 1,
+			"a": 1
+		}
+	},
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute",
+		"type": 4194304,
+		"typeBit": 22,
+		"value": 0.29406518
+	},
+	{
+		"class": "com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute",
+		"type": 8388608,
+		"typeBit": 23,
+		"textureDescription": {
+			"texture": {
+				"class": "com.badlogic.gdx.graphics.Texture",
+				"glTarget": 3553,
+				"glHandle": 7,
+				"minFilter": "MipMapLinearLinear",
+				"magFilter": "MipMapLinearLinear",
+				"uWrap": "Repeat",
+				"vWrap": "Repeat",
+				"anisotropicFilterLevel": 8,
+				"data": {
+					"class": "com.badlogic.gdx.graphics.glutils.FileTextureData",
+					"file": {
+						"class": "com.badlogic.gdx.backends.lwjgl3.Lwjgl3FileHandle",
+						"path": "res\\textures\\fx\\Distortion01.png",
+						"type": "Internal"
+					},
+					"width": 512,
+					"height": 512,
+					"format": "RGBA8888",
+					"pixmap": null,
+					"useMipMaps": true,
+					"isPrepared": false
+				}
+			}
+		},
+		"offsetU": 18.454906,
+		"offsetV": 18.454906,
+		"scaleU": 1,
+		"scaleV": 1,
+		"uvIndex": 0
+	}
+],
+"id": "Material"
+}

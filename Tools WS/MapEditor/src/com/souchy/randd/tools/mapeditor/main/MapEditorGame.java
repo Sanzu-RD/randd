@@ -21,12 +21,14 @@ import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.commons.mapio.MapData;
 import com.souchy.randd.commons.tealwaters.commons.Bean;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
+import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.tools.mapeditor.configs.EditorProperties;
 import com.souchy.randd.tools.mapeditor.controls.Commands;
 import com.souchy.randd.tools.mapeditor.entities.DissolveAction;
 import com.souchy.randd.tools.mapeditor.entities.EditorEntities;
+import com.souchy.randd.tools.mapeditor.io.MaterialJson.MaterialLoader;
 import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorScreen;
 
 import net.mgsx.gltf.loaders.glb.GLBAssetLoader;
@@ -59,6 +61,8 @@ public class MapEditorGame extends LapisGame {
 		// crazy we have to call this here and not in MapEditorCore, 
 		// otherwise Gdx initializes as Lwjgl instead of Lwjgl3 because of lapis imports dependencies
 		LapisCore.arguments(MapEditorCore.args);
+		
+		LapisAssets.hack().setLoader(Material.class, new MaterialLoader(LapisAssets.hack().getFileHandleResolver()));
 		LapisAssets.blocking = false;
 		properties = new EditorProperties();
 		properties.load();
@@ -81,8 +85,9 @@ public class MapEditorGame extends LapisGame {
 		currentFile.set(Gdx.files.internal(properties.lastMap.get())); //"res/maps/goulta7b.map")); //"data/maps/goulta7.map"));
 		screen.world.gen();
 		screen.resetCamera();
-		
+
 		//LapisAssets.loadModels(Gdx.files.internal("res/models/"));
+		LapisAssets.loadMaterials(Gdx.files.internal("res/materials/"));
 	}
 	
 	@Override
