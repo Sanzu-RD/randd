@@ -76,7 +76,7 @@ public class MockScreen1 implements Screen {
 		cache.add(instances);
 		cache.end();
 
-	    renderContext = new RenderContext(new DefaultTextureBinder(DefaultTextureBinder.WEIGHTED, 1));
+	    renderContext = new RenderContext(new DefaultTextureBinder(DefaultTextureBinder.LRU, 1));
 		shader = new TestShader();
 		shader.init();
 	}

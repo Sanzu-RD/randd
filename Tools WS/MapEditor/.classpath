@@ -11,7 +11,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/LapisMock"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/MapIO"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
@@ -22,11 +21,10 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LML"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/imgui"/>
+	<classpathentry kind="lib" path="C:/Robyn/Git/res/libs other/slf4j-api-1.7.12.jar"/>
+	<classpathentry kind="lib" path="C:/Robyn/Git/res/libs other/slf4j-jdk14-1.6.4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGdx1.10"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/lwjgl3"/>
 	<classpathentry kind="lib" path="C:/Robyn/Git/res/libs other/gltf-1.0.0.jar" sourcepath="C:/Robyn/Git/res/libs other/gltf-1.0.0-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Robyn/Git/res/libs other/slf4j-api-1.7.12.jar"/>
-	<classpathentry kind="lib" path="C:/Robyn/Git/res/libs other/slf4j-jdk14-1.6.4.jar"/>
-	<classpathentry kind="lib" path="C:/Robyn/Git/libgdx/libgdx/gdx/gdx-jnigen-loader-2.2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

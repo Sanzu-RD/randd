@@ -29,8 +29,7 @@ import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shaders.LapisShader;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.ExtendableShader.ShadeProvider;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms;
-import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveBorderColorAttribute;
-import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveIntensityAttribute;
+import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveAttributes;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.GlobalUniforms;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.LightingUniforms;
 import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.MaterialUniforms;
@@ -238,8 +237,8 @@ public class ExtendableShader extends BaseShader {
 		// test check the renderable's mask vs this shader's mask
 		{
 			//Log.info("canRender " + renderable);
-			var rhas = (renderableMask & DissolveIntensityAttribute.DissolveIntensityType) > 0;
-			var shas = (attributesMask & DissolveIntensityAttribute.DissolveIntensityType) > 0;
+			var rhas = (renderableMask & DissolveAttributes.DissolveIntensityType) > 0;
+			var shas = (attributesMask & DissolveAttributes.DissolveIntensityType) > 0;
 			if(rhas) {
 				//Log.info("canRender has dissolve intensity " + renderable.hashCode());
 			} else {
@@ -291,7 +290,7 @@ public class ExtendableShader extends BaseShader {
 	
 	private static final String createPrefix(Renderable r, Config c) {
 		String str = "";
-		if(r.material.has(DissolveIntensityAttribute.DissolveIntensityType)) {
+		if(r.material.has(DissolveAttributes.DissolveIntensityType)) {
 			str += "#define dissolveFlag\n";
 			Log.warning("Define dissolve flag prefix ! ");
 		}

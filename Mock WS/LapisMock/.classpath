@@ -3,16 +3,6 @@
 	<classpathentry excluding="com/souchy/randd/mockingbird/lapismock/lwjgl1/DirShadowLight.java|com/souchy/randd/mockingbird/lapismock/lwjgl1/ShadowMap.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="data"/>
 	<classpathentry kind="src" output="res" path="assets"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-16">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LML"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RabbitMQ"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGDX2"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Sapphire Owl"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/AnnotationProcessor"/>
@@ -24,5 +14,15 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/MapIO"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-16">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LML"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RabbitMQ"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Netty"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Google"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGdx1.10"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

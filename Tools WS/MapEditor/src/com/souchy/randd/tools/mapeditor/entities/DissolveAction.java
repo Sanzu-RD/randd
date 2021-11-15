@@ -1,10 +1,11 @@
 package com.souchy.randd.tools.mapeditor.entities;
 
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.attributes.FloatAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.souchy.randd.commons.tealwaters.logging.Log;
-import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveIntensityAttribute;
-import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveTextureAttribute;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
+import com.souchy.randd.tools.mapeditor.shaderimpl.DissolveUniforms.DissolveAttributes;
 
 public class DissolveAction implements SystemAction<ModelInstance> {
 	
@@ -16,9 +17,9 @@ public class DissolveAction implements SystemAction<ModelInstance> {
 	public void process(float delta, ModelInstance inst) { //ModelInstance inst) {
 		try {
 			for(var mat : inst.materials) {
-				var attr = mat.get(DissolveIntensityAttribute.DissolveIntensityType);
+				var attr = mat.get(DissolveAttributes.DissolveIntensityType);
 				if(attr != null){
-					DissolveIntensityAttribute intensity = (DissolveIntensityAttribute) attr;
+					FloatAttribute intensity = (FloatAttribute) attr;
 					intensity.value = (float) Math.sin(MapEditorGame.screen.time * 2f) * 0.35f + 0.45f; //time * 2f / period;
 					//intensity.value = (float) (time * -1f % 1) + 0.5f; //time * 2f / period;
 					
@@ -28,9 +29,9 @@ public class DissolveAction implements SystemAction<ModelInstance> {
 					//var width = (DissolveBorderWidthAttribute) inst.materials.get(0).get(DissolveBorderWidthAttribute.DissolveBorderWidthType);
 					//width.value = 0.03f;
 					
-					var attrdissTex = mat.get(DissolveTextureAttribute.DissolveTextureType);
+					var attrdissTex = mat.get(DissolveAttributes.DissolveTextureType);
 					if(attrdissTex != null) {
-						DissolveTextureAttribute tex = (DissolveTextureAttribute) attrdissTex;
+						TextureAttribute tex = (TextureAttribute) attrdissTex;
 						// move the texture while it's completely white or completely blend to add randomness to each cycle
 						if(intensity.value >= 0.90f || intensity.value <= 0.11f) {
 							tex.offsetU += 0.005f;
