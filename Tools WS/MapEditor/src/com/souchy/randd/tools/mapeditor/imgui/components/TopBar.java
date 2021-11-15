@@ -91,6 +91,7 @@ public class TopBar implements ImGuiComponent {
     			}
     			ImGui.endMenu();
     		}
+    		renderModelBuilderMenu();
     		
     		ImGui.endMainMenuBar();
     	}
@@ -132,9 +133,21 @@ public class TopBar implements ImGuiComponent {
 				//textField.setText(file.get(0).file().getAbsolutePath());
 				//System.out.println("Files : " + String.join(", ", Arrays.asList(files.items).stream().map(f -> f.name()).collect(Collectors.toList())));
 				onSelect.accept(files);
+	private void renderModelBuilderMenu() {
+		if(ImGui.beginMenu("ModelBuilder")) {
+			if(ImGui.menuItem("Plane")) {
+				MapWorld.createPlane();
+			}
+			if(ImGui.menuItem("Cube")) {
+				MapWorld.createBox();
+			}
+			if(ImGui.menuItem("Capsule")) {
+				MapWorld.createCapsule();
 			}
 		});
 		MapEditorGame.screen.hud.getStage().addActor(fileChooser.fadeIn());
+			ImGui.endMenu();
+		}
 	}
 	
 	

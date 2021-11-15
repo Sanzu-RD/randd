@@ -8,12 +8,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Mesh;
+import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.model.MeshPart;
+import com.badlogic.gdx.graphics.g3d.model.Node;
+import com.badlogic.gdx.graphics.g3d.model.NodePart;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
@@ -24,16 +29,28 @@ import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.ebishoal.commons.lapis.world.Meshing;
 import com.souchy.randd.ebishoal.commons.lapis.world.World;
 import com.souchy.randd.jade.Constants;
-import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms;
-import com.souchy.randd.mockingbird.lapismock.shaders.ssaoshaders.uniforms.DissolveUniforms.DissolveMaterial;
 import com.souchy.randd.tools.mapeditor.entities.EditorEntities;
+import com.souchy.randd.tools.mapeditor.shaderimpl.DissolveUniforms;
+import com.souchy.randd.tools.mapeditor.shaderimpl.DissolveUniforms.DissolveMaterial;
 
 public class MapWorld extends World {
 
 	public static MapWorld world;
 	private static final int cellSize = (int) Constants.cellWidth;
+	private static final ModelBuilder builder = new ModelBuilder();
+	private static Model modelBox;
+	private static Model modelCapsule;
+	private static Model modelPlane;
 	
-
+	static {
+		var mat = new Material(ColorAttribute.createDiffuse(Color.WHITE));
+		int usage = Usage.Position | Usage.Normal | Usage.ColorUnpacked | Usage.TextureCoordinates;
+		modelBox = builder.createBox(1, 1, 1, mat, usage);
+		modelCapsule = builder.createCapsule(0.5f, 1f, 16, mat, usage);
+		modelPlane = quad("Plane", mat);
+	}
+	
+	
 	private boolean loaded;
 	public ModelInstance cursor;
 	/**
@@ -321,5 +338,50 @@ public class MapWorld extends World {
 		//instances.removeIf(inst -> inst != cursor && inst.transform.getTranslation(temp).equals(pos));
 	}
 
+	
+	public static ModelInstance createBox() {
+		ModelInstance inst = new ModelInstance(modelBox);
+		EditorEntities.addAdaptor(inst);
+		return inst;
+	}
+	public static ModelInstance createPlane() {
+		ModelInstance inst = new ModelInstance(modelPlane);
+		EditorEntities.addAdaptor(inst);
+		return inst;
+	}
+	public static ModelInstance createCapsule() {
+		ModelInstance inst = new ModelInstance(modelCapsule);
+		EditorEntities.addAdaptor(inst);
+		return inst;
+	}
+	
+
+	private static Model quad(String name, Material mat) {
+		Model root = new Model();
+		int renderType = GL20.GL_TRIANGLES;
+
+		var vertices = new float[] {
+				0, 0, 0, 	0, 0, 1, 	0, 0,
+				1, 0, 0, 	0, 0, 1, 	1, 0,
+				1, 1, 0, 	0, 0, 1, 	1, 1,
+				0, 1, 0, 	0, 0, 1, 	0, 1
+		};
+    	var indices = new short[] {0,   1,   2,       2,   3,   0};
+    	
+		Mesh mesh = new Mesh(true, vertices.length, indices.length, VertexAttribute.Position(), VertexAttribute.Normal(), VertexAttribute.TexCoords(0));
+		mesh.setVertices(vertices);
+		mesh.setIndices(indices);
+		
+		MeshPart meshPart = new MeshPart(name + "_meshpart", mesh, 0, indices.length, renderType);
+		Node node = new Node();
+		node.id = name + "_node";
+		node.parts.add(new NodePart(meshPart, mat));
+		
+		root.meshes.add(mesh);
+		root.meshParts.add(meshPart);
+		root.nodes.add(node);
+		return root;
+	}
+	
 	
 }
