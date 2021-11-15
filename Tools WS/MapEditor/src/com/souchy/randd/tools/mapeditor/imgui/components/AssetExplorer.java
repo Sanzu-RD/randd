@@ -30,10 +30,20 @@ import imgui.flag.ImGuiWindowFlags;
  */
 public class AssetExplorer extends Container {
 	
-	protected boolean models = true;
-	protected boolean textures = true;
-	protected boolean shaders = true;
-	protected boolean dialog = false;
+	private static enum AssetExplorerFilter {
+		All,
+		models,
+		textures,
+		materials,
+		shaders;
+	}
+
+//	protected boolean dialog = false;
+//	protected boolean models = true;
+//	protected boolean textures = true;
+//	protected boolean shaders = true;
+//	protected boolean materials = true;
+	
 	
 	public AssetExplorer() {
 		super();
@@ -149,10 +159,14 @@ public class AssetExplorer extends Container {
 	 * @date 30 oct. 2021
 	 */
 	public static class AssetDialog extends AssetExplorer {
-		public static AssetDialog modelPicker = new AssetDialog() { { this.textures = false; this.shaders = false; } };
-		public static AssetDialog texturePicker = new AssetDialog() { { this.models = false; this.shaders = false; } };
-		public static AssetDialog shaderPicker = new AssetDialog() { { this.textures = false; this.models = false; } };
-		public AssetDialog() { }
+		public static AssetDialog modelPicker = new AssetDialog(AssetExplorerFilter.models);
+		public static AssetDialog texturePicker = new AssetDialog(AssetExplorerFilter.textures);
+		public static AssetDialog materialPicker = new AssetDialog(AssetExplorerFilter.materials);
+		public static AssetDialog shaderPicker = new AssetDialog(AssetExplorerFilter.shaders);
+		private final AssetExplorerFilter filter;
+		public AssetDialog(AssetExplorerFilter filter) { 
+			this.filter = filter;
+		}
 		@Override
 		protected void applyDefaults() {
 			this.size = new int[] { 600, 300 };
@@ -161,9 +175,10 @@ public class AssetExplorer extends Container {
 		}
 		@Override
 		public void renderContent(float delta) {
-			if(models) foreach(Model.class);
-			if(textures) foreach(Texture.class);
-			if(shaders) foreach(ShaderProgram.class);
+			if(filter == AssetExplorerFilter.models) foreach(Model.class);
+			if(filter == AssetExplorerFilter.textures) foreach(Texture.class);
+			if(filter == AssetExplorerFilter.materials) foreach(Material.class);
+			if(filter == AssetExplorerFilter.shaders) foreach(ShaderProgram.class);
 		}
 		@Override
 		protected void click(Class c, String asset) {
@@ -172,24 +187,27 @@ public class AssetExplorer extends Container {
 		
 		public String pick() {
 			String picked = null;
-			if(models) {
+			if(filter == AssetExplorerFilter.models) {
 				picked = foreach(Model.class);
 			}
-			if(textures) {
+			if(filter == AssetExplorerFilter.models) {
 				picked = foreach(Texture.class);
 			}
-			if(shaders) {
+			if(filter == AssetExplorerFilter.materials) {
+				picked = foreach(Material.class);
+			}
+			if(filter == AssetExplorerFilter.models) {
 				picked = foreach(ShaderProgram.class);
 			}
 			return picked;
 		}
 		@Override
 		public void show() {
-			AssetDialog.texturePicker.makeWindow();
-			ImGui.openPopup("AssetDialog");
+			this.makeWindow();
+			ImGui.openPopup("AssetDialog##"+this.hashCode());
 		}
 		public void prepare(Lambda l) {
-			if(ImGui.beginPopup("AssetDialog", AssetDialog.texturePicker.windowFlags)) {
+			if(ImGui.beginPopup("AssetDialog##"+this.hashCode(), this.windowFlags)) {
 				l.call(); // called every frame when the popup is opened and rendering
 				ImGui.endPopup();
 			}
