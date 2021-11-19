@@ -54,6 +54,8 @@ public class EditorEntities extends Family<Entity> {
 			
 			// particle effects
 			
+			e.update(delta);
+			
 			for(var action : actions)
 				action.update(delta, e);
 		});
@@ -86,17 +88,20 @@ public class EditorEntities extends Family<Entity> {
 		thiz.clear();
 	}
 	
-	public static void addAdaptor(ModelInstance inst) {
+	public static Entity addAdaptor(ModelInstance inst) {
 		var e = new Entity(MapEditorGame.engine);
 		e.add(inst);
 		e.add(new AnimationController(inst));
 		MapWorld.world.instances.add(inst);
+		return e;
 	}
 	
-	public static void removeAdaptor(ModelInstance inst) {
+	public static Entity removeAdaptor(ModelInstance inst) {
+		if(inst == null) return null;
 		var ent = thiz.first(e -> e.get(ModelInstance.class) == inst);
 		thiz.remove(ent);
 		MapWorld.world.instances.remove(inst);
+		return ent;
 	}
 	
 	

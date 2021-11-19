@@ -110,6 +110,8 @@ public class Commands {
 		LapisCommands.add("load", Commands::load);
 		LapisCommands.add("r", Commands::resetShaders);
 		LapisCommands.add("rs", o -> Actions.resetConf());
+		LapisCommands.add("world", o -> Actions.clearWorld());
+		LapisCommands.add("li", o -> Actions.testLightningNodes());
 	}
 	
 	

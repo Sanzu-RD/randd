@@ -38,16 +38,18 @@ public class MapWorld extends World {
 	public static MapWorld world;
 	private static final int cellSize = (int) Constants.cellWidth;
 	private static final ModelBuilder builder = new ModelBuilder();
+	private static final Material matWhite = new Material(ColorAttribute.createDiffuse(Color.WHITE));
 	private static Model modelBox;
 	private static Model modelCapsule;
 	private static Model modelPlane;
+	private static Model modelSphere;
 	
 	static {
-		var mat = new Material(ColorAttribute.createDiffuse(Color.WHITE));
 		int usage = Usage.Position | Usage.Normal | Usage.ColorUnpacked | Usage.TextureCoordinates;
-		modelBox = builder.createBox(1, 1, 1, mat, usage);
-		modelCapsule = builder.createCapsule(0.5f, 1f, 16, mat, usage);
-		modelPlane = quad("Plane", mat);
+		modelBox = builder.createBox(1, 1, 1, matWhite, usage);
+		modelCapsule = builder.createCapsule(0.5f, 1f, 16, matWhite, usage);
+		modelPlane = quad("Plane", matWhite);
+		modelSphere = builder.createSphere(1, 1, 1, 16, 16, matWhite, usage, 0, 360, 0, 360);
 	}
 	
 	
@@ -354,7 +356,18 @@ public class MapWorld extends World {
 		EditorEntities.addAdaptor(inst);
 		return inst;
 	}
+	public static ModelInstance createSphere() {
+		ModelInstance inst = new ModelInstance(modelSphere);
+		EditorEntities.addAdaptor(inst);
+		return inst;
+	}
 	
+	public static ModelInstance createLine(Vector3 from, Vector3 to, float width) {
+		var m = quad("line", matWhite, from, from.cpy().add(width), to.cpy().add(width), to);
+		var inst = new ModelInstance(m);
+		EditorEntities.addAdaptor(inst);
+		return inst;
+	}
 
 	private static Model quad(String name, Material mat) {
 		Model root = new Model();
@@ -382,6 +395,36 @@ public class MapWorld extends World {
 		root.nodes.add(node);
 		return root;
 	}
+	private static Model quad(String name, Material mat, Vector3 a, Vector3 b, Vector3 c, Vector3 d) {
+		Model root = new Model();
+		int renderType = GL20.GL_LINE_STRIP;
+		
+		var vertices = new float[] {
+				a.x, a.y, a.z, 	0, 0, 1, 	0, 0,
+				b.x, b.y, b.z, 	0, 0, 1, 	1, 0,
+				c.x, c.y, c.z, 	0, 0, 1, 	1, 1,
+				d.x, d.y, d.z, 	0, 0, 1, 	0, 1
+		};
+		
+    	var indices = new short[] {0,   1,   2,       2,   3,   0};
+    	
+		Mesh mesh = new Mesh(true, vertices.length, indices.length, VertexAttribute.Position(), VertexAttribute.Normal(), VertexAttribute.TexCoords(0));
+		mesh.setVertices(vertices);
+		mesh.setIndices(indices);
+		
+		MeshPart meshPart = new MeshPart(name + "_meshpart", mesh, 0, indices.length, renderType);
+		Node node = new Node();
+		node.id = name + "_node";
+		node.parts.add(new NodePart(meshPart, mat));
+		
+		root.meshes.add(mesh);
+		root.meshParts.add(meshPart);
+		root.nodes.add(node);
+		return root;
+	}
 	
+	public static void meshLightning() {
+		
+	}
 	
 }

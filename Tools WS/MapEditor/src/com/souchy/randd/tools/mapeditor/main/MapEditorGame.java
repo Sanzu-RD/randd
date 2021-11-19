@@ -21,6 +21,8 @@ import com.kotcrab.vis.ui.VisUI;
 import com.souchy.randd.commons.mapio.MapData;
 import com.souchy.randd.commons.tealwaters.commons.Bean;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
+import com.souchy.randd.ebi.ammolite.util.LightningDistort;
+import com.souchy.randd.ebi.ammolite.util.LightningDistort.LightningNode;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
@@ -88,6 +90,7 @@ public class MapEditorGame extends LapisGame {
 
 		//LapisAssets.loadModels(Gdx.files.internal("res/models/"));
 		LapisAssets.loadMaterials(Gdx.files.internal("res/materials/"));
+		
 	}
 	
 	@Override
