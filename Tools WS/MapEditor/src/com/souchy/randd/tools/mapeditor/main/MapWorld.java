@@ -362,10 +362,10 @@ public class MapWorld extends World {
 		return inst;
 	}
 	
-	public static ModelInstance createLine(Vector3 from, Vector3 to, float width) {
+	public static ModelInstance createLine(boolean entity, Vector3 from, Vector3 to, float width) {
 		var m = quad("line", matWhite, from, from.cpy().add(width), to.cpy().add(width), to);
 		var inst = new ModelInstance(m);
-		EditorEntities.addAdaptor(inst);
+		if(entity) EditorEntities.addAdaptor(inst);
 		return inst;
 	}
 

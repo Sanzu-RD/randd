@@ -29,7 +29,7 @@ public class EditorConf extends JsonConfig {
 		public int height = 900;
 	}
 	
-	public class HudConfig extends JsonConfig {
+	public static class HudConfig extends JsonConfig {
 		/** String - full class name with package */
 		public Map<String, ComponentConfig> components = new HashMap<>();
 		public static class ComponentConfig {

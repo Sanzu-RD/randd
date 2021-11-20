@@ -45,9 +45,10 @@ public class LightningDistort {
 			super(engine);
 		}
 		
-		public int timeToLive = 3;
-		public float spawnTime = 3;
+		public float timeToLive = 3;
+		public float spawnTime = 1;
 		public float maxInstances = 3;
+		public int instancesPerSpawn = 2;
 		
 		public List<LightningNode> nodes = new ArrayList<>();
 		
@@ -62,6 +63,7 @@ public class LightningDistort {
 //				if(nodes.size() > 2)
 //					nodes.remove(nodes.size() - 1);
 //			}
+
 			
 			var iter = nodes.iterator();
 			while(iter.hasNext()) {
@@ -70,18 +72,24 @@ public class LightningDistort {
 				if(n.time >= timeToLive) {
 					iter.remove();
 //					Gdx.app.postRunnable(() -> {
-//						n.dispose();
+						n.dispose();
 //					});
 				}
 			}
-			
-			if(nodes.size() < maxInstances && spawnTimer >= spawnTime) { //spawnTimer % spawnTime > nodes.size()) {
-				var n = new LightningNode(0, 0, 10).end();
-				n.subdivide(3);
-				nodes.add(n);
-				Gdx.app.postRunnable(() -> {
-					LightningNode.recurse(n, LightningNode.createModel);
-				});
+			maxInstances = 10;
+			instancesPerSpawn = 1;
+			timeToLive = 0.8f;
+			spawnTime = 0.1f;
+			if(spawnTimer >= spawnTime) {
+				for(int i = 0; i < instancesPerSpawn; i++) {
+					if(nodes.size() < maxInstances) { //spawnTimer % spawnTime > nodes.size()) {
+						
+						var n = new LightningNode(new Random().nextFloat(-5, 5), new Random().nextFloat(-5, 5), 10).end();
+						n.subdivide(new Random().nextInt(2, 5));
+						nodes.add(n);
+						LightningNode.recurse(n, LightningNode.createModel);
+					}
+				}
 				spawnTimer -= spawnTime;
 			}
 			
@@ -90,9 +98,14 @@ public class LightningDistort {
 	
 	
 	public static class LightningNode {
+		// properties
 		public float time;
+		// width
+		// amplitude 
 		// this node's position
 		public Vector3 pos = new Vector3();
+		
+		
 		// next node on the main branch 
 		public LightningNode n2;
 		// next node in the fork
@@ -135,7 +148,7 @@ public class LightningDistort {
 			
 			boolean fork = rnd.nextBoolean();
 			float amplitude = rnd.nextFloat(1);
-			amplitude = rnd.nextFloat(-3, 3);
+			amplitude = rnd.nextFloat(-2, 2);
 			
 			var cross = perpendicular();
 			cross.scl(amplitude);
