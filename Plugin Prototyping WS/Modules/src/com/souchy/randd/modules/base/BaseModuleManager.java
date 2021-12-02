@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ import com.souchy.randd.modules.api.ModuleInformation;
 import com.souchy.randd.modules.api.ModuleInformationSupplier;
 import com.souchy.randd.modules.api.ModuleInstantiator;
 
-public class BaseModuleManager<M extends Module, I extends ModuleInformation> implements ModuleManager<M, I> {
+public class BaseModuleManager<M extends Module<BaseModuleInformation>, I extends BaseModuleInformation> implements ModuleManager<M, I> {
 	
 	
 	/**
@@ -139,6 +140,12 @@ public class BaseModuleManager<M extends Module, I extends ModuleInformation> im
 	@Override
 	public Map<String, M> getModules() {
 		return modules;
+	}
+
+	@Override
+	public ExecutorService getExecutors() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
