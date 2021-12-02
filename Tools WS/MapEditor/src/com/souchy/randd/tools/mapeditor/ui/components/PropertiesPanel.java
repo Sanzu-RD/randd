@@ -23,6 +23,7 @@ import com.kotcrab.vis.ui.widget.VisTextField;
 import com.souchy.randd.commons.tealwaters.properties.Property;
 import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
+import com.souchy.randd.tools.mapeditor.ui.Component;
 
 public class PropertiesPanel extends VisSplitPane  implements Component {
 	

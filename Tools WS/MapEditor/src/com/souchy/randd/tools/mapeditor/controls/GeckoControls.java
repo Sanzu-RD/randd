@@ -32,11 +32,13 @@ import com.souchy.randd.ebishoal.commons.lapis.util.ControlsConfig;
 import com.souchy.randd.ebishoal.commons.lapis.util.KeyCombination;
 import com.souchy.randd.ebishoal.commons.lapis.util.KeyCombination.KeyCombinationListener;
 import com.souchy.randd.jade.Constants;
-import com.souchy.randd.tools.mapeditor.imgui.components.Console;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 import com.souchy.randd.tools.mapeditor.main.MapWorld;
 import com.souchy.randd.tools.mapeditor.actions.Actions;
+import com.souchy.randd.tools.mapeditor.configs.EditorControlsConf;
 import com.souchy.randd.tools.mapeditor.entities.EditorEntities;
+import com.souchy.randd.tools.mapeditor.imgui.EditorImGuiHud;
+import com.souchy.randd.tools.mapeditor.imgui.windows.Console;
 
 import imgui.ImGui;
 
@@ -46,7 +48,7 @@ public class GeckoControls extends Controls3d {
 
 	private Model selectedModel = null;
 	private ModelInstance selectedInstance = null;
-	public ControlsConfig confFull;
+	public EditorControlsConf confFull;
 
 	public GeckoControls(Camera camera) {
 		super(camera, MapEditorGame.screen.getViewport());
@@ -55,16 +57,28 @@ public class GeckoControls extends Controls3d {
 	
 	@Override
 	public void initCombos() {
-		this.confFull = JsonConfig.readExternal(ControlsConfig.class, "./modules/");
+		this.confFull = JsonConfig.readExternal(EditorControlsConf.class, "./modules/");
 		this.conf = confFull.controls3d;
 		
 		super.initCombos();
 		Log.info("Controls 3d initCombos " + confFull);
+//		keys.putCombo(confFull.delete, () -> { 
+//			Log.info("lk;iaujnsdfkljnds");
+//			EditorEntities.removeAdaptor(getSelectedInstance());
+//			MapEditorGame.screen.imgui.properties.setObj(null);
+//			setSelectedInstance(null);
+//			setSelectedModel(null);
+//		});
 		keys.putCombo(confFull.cancel, () -> { 
-			//MapWorld.world.instances.remove(getSelectedInstance());
-			EditorEntities.removeAdaptor(getSelectedInstance());
-			this.setSelectedInstance(null);
-			this.setSelectedModel(null);
+			Log.info("l;kmnasdlkjfnsa");
+			if(getSelectedInstance() == null) {
+				MapEditorGame.screen.imgui.settings.toggleShow();
+			} else {
+				//MapWorld.world.instances.remove(getSelectedInstance());
+				EditorEntities.removeAdaptor(getSelectedInstance());
+				this.setSelectedInstance(null);
+				this.setSelectedModel(null);
+			}
 		});
 		keys.putCombo(confFull.musicToggle, () -> { });
 		keys.putCombo(confFull.controls3d.camReset, () -> {
@@ -73,11 +87,20 @@ public class GeckoControls extends Controls3d {
 			updateCursor();
 		});
 		keys.putCombo(confFull.controls3d.camTopView, MapEditorGame.screen::topView);
-		keys.putCombo(new KeyCombination(Keys.FORWARD_DEL), () -> {
+		keys.putCombo(confFull.delete, () -> {  //new KeyCombination(Keys.FORWARD_DEL), () -> {
 			// delete instance at position
 			var pos = getCursorWorldPos();
 			pos.z = this.cursorZ;
-			MapWorld.world.removeInstanceAt(pos);
+			var inst = MapWorld.world.getAt(pos);
+			//MapWorld.world.removeInstanceAt(pos);
+
+			EditorEntities.removeAdaptor(inst);
+			if(inst == getSelectedInstance()) {
+				setSelectedInstance(null);
+			} 
+			if(MapEditorGame.screen.imgui.properties.target == inst) {
+				MapEditorGame.screen.imgui.properties.setObj(null);
+			}
 			//var inst = MapWorld.world.getAt(pos);
 			//EditorEntities.removeAdaptor(inst);
 		});
@@ -155,10 +178,10 @@ public class GeckoControls extends Controls3d {
 	public boolean touchDragged(int x, int y, int pointer) {
 		if(imguiLayer()) return true;
 		
-		Rectangle space = MapEditorGame.screen.hud.getDrawingSpace();
-		if(space.contains(x, y) == false) {
-			return true; // pas dans la zone
-		}
+//		Rectangle space = MapEditorGame.screen.hud.getDrawingSpace();
+//		if(space.contains(x, y) == false) {
+//			return true; // pas dans la zone
+//		}
 
 		boolean drag = true;
 
@@ -284,15 +307,16 @@ public class GeckoControls extends Controls3d {
 		return selectedInstance;
 	}
 	public void setSelectedInstance(ModelInstance selectedInstance) {
+		Log.info("helo");
 		this.selectedInstance = selectedInstance;
 		//if(selectedInstance != null) // dont remove the properties when unselecting/placing an object i think
-			setProperties(selectedInstance); 
+		setProperties(selectedInstance); 
 	}
 	public void setProperties(ModelInstance selectedInstance) {
-		if(selectedInstance != null)
-			MapEditorGame.screen.imgui.settings.props.mats = selectedInstance.materials;
-		else
-			MapEditorGame.screen.imgui.settings.props.mats = null;
+//		if(selectedInstance != null)
+//			MapEditorGame.screen.imgui.settings.props.mats = selectedInstance.materials;
+//		else
+//			MapEditorGame.screen.imgui.settings.props.mats = null;
 		
 		MapEditorGame.screen.imgui.properties.setObj(selectedInstance);
 	}

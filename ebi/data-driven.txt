@@ -33,16 +33,16 @@ effect Aoe / target type :
 
 spell cast :
 {
-	{ // node 1
+	"node1": { // node 1
 		"if": { // instruction condition
-			[ { "conditions" } ],
-			{ // node 11
+			"conditions": [ { "conditions" } ],
+			"node11": { // node 11
 				{ // instruction effect
 					"effectid": 1,
 					"formula": { "water": { 80, 0, 0, 0 } }
 				}
 			},
-			{ // node 12
+			"node12": { // node 12
 				"if": { // instruction conditions
 					[ { "conditions" } ],
 					{ // node 121

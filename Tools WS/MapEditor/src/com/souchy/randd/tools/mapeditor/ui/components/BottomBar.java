@@ -10,6 +10,7 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
+import com.souchy.randd.tools.mapeditor.ui.Component;
 
 public class BottomBar extends VisTable implements Component {
 

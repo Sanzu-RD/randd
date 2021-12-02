@@ -18,20 +18,21 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.kotcrab.vis.ui.VisUI;
+import com.souchy.randd.commons.diamond.ext.AssetData;
+import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.mapio.MapData;
 import com.souchy.randd.commons.tealwaters.commons.Bean;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
+import com.souchy.randd.data.s1.main.Elements;
 import com.souchy.randd.ebi.ammolite.util.LightningDistort;
 import com.souchy.randd.ebi.ammolite.util.LightningDistort.LightningNode;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisCore;
 import com.souchy.randd.ebishoal.commons.lapis.main.LapisGame;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
-import com.souchy.randd.tools.mapeditor.configs.EditorProperties;
 import com.souchy.randd.tools.mapeditor.controls.Commands;
 import com.souchy.randd.tools.mapeditor.entities.DissolveAction;
 import com.souchy.randd.tools.mapeditor.entities.EditorEntities;
 import com.souchy.randd.tools.mapeditor.io.MaterialJson.MaterialLoader;
-import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorScreen;
 
 import net.mgsx.gltf.loaders.glb.GLBAssetLoader;
 import net.mgsx.gltf.loaders.gltf.GLTFAssetLoader;
@@ -52,7 +53,7 @@ public class MapEditorGame extends LapisGame {
 	public static Skin skin;
 	//public static float cellSize = 5;
 	
-	public static EditorProperties properties;
+//	public static EditorProperties properties;
 
 	public MapEditorGame() {
 		game = this;
@@ -66,8 +67,9 @@ public class MapEditorGame extends LapisGame {
 		
 		LapisAssets.hack().setLoader(Material.class, new MaterialLoader(LapisAssets.hack().getFileHandleResolver()));
 		LapisAssets.blocking = false;
-		properties = new EditorProperties();
-		properties.load();
+		
+//		properties = new EditorProperties();
+//		properties.load();
 		
 		engine = new Engine();
 		entities = new EditorEntities(engine);
@@ -84,10 +86,21 @@ public class MapEditorGame extends LapisGame {
 		screen.init();
 		//screen.create();
 		
-		currentFile.set(Gdx.files.internal(properties.lastMap.get())); //"res/maps/goulta7b.map")); //"data/maps/goulta7.map"));
+//		currentFile.set(Gdx.files.internal(properties.lastMap.get())); //"res/maps/goulta7b.map")); //"data/maps/goulta7.map"));
+		currentFile.set(Gdx.files.internal(MapEditorCore.conf.lastMap));
 		screen.world.gen();
 		screen.resetCamera();
 
+		// ----
+
+		// init elements
+		Elements.values();
+		// models configurations (creatures, spells, statuses)
+		AssetData.loadResources();
+		// init creatures & spells models
+		DiamondModels.instantiate("com.souchy.randd.data.s1");
+		LapisAssets.loadI18NBundles(Gdx.files.internal("res/i18n/"));
+		
 		//LapisAssets.loadModels(Gdx.files.internal("res/models/"));
 		LapisAssets.loadMaterials(Gdx.files.internal("res/materials/"));
 		
@@ -107,7 +120,7 @@ public class MapEditorGame extends LapisGame {
 	@Override
 	public void dispose() {
 		super.dispose();
-		properties.save(); // save on exit
+//		properties.save(); // save on exit
 		if(!MapEditorCore.conf.reset) {
 			MapEditorCore.conf.gfx.width = Gdx.graphics.getWidth();
 			MapEditorCore.conf.gfx.height = Gdx.graphics.getHeight();

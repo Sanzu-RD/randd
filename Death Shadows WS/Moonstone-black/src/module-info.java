@@ -16,4 +16,5 @@ module com.souchy.randd.moonstone.Black {
 	requires com.souchy.randd.moonstone.Commons;
 	requires netty.all;
 	requires org.mongodb.bson;
+	requires MapIO;
 }

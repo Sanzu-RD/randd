@@ -50,18 +50,21 @@ public class InstanceProperties implements ImGuiComponent {
 
 	public void setInst(ModelInstance inst) {
 		this.inst = inst;
+		Log.info("instance props.setInst " + inst);
 		if(inst != null) {
 			mats.mats = inst.materials;
 			autoTable = new AutoTable(this.inst);
 		}
 		else {
 			mats.mats = null;
+			
 		}
 	}
 	
 	@Override
 	public void render(float delta) {
 		if(inst == null) return;
+		//Log.info("inst " + inst);
 		ImGui.textColored(IGStyle.colorAccent, "ModelInstance");
 		//
 		if(ImGui.button("Delete")) {

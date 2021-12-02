@@ -19,32 +19,51 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import io.netty.buffer.ByteBuf;
 
 public class CreatureStats implements BBSerializer, BBDeserializer {
+
+	public static class ResourceMap extends HashMap<String, IntStat> {
+		private static final long serialVersionUID = -4703716554211161452L;
+		public IntStat get(Resource k) {
+			return super.get(k.name());
+		}
+		public IntStat put(Resource key, IntStat value) {
+			return super.put(key.name(), value);
+		}
+	}
+	public static class ElementMap extends HashMap<String, IntStat> {
+		private static final long serialVersionUID = -7665062264352159684L;
+		public IntStat get(Element k) {
+			return super.get(k.name());
+		}
+		public IntStat put(Element key, IntStat value) {
+			return super.put(key.name(), value);
+		}
+	}
 	
 	/** 
 	 * resources 
 	 */
-	public Map<Resource, IntStat> resources;
-	public Map<Resource, IntStat> resourcesmax;
+	public ResourceMap resources;
+	public ResourceMap resourcesmax;
 	/** 
 	 * shields for each resources 
 	 */
-	public Map<Resource, IntStat> shield;
+	public ResourceMap shield;
 	/** 
 	 * how spells scale 
 	 * sourcedmg = (baseflat + casterflat) * (1 + baseinc * casterinc / 100) * (1 + basemore * castermore / 100)
 	 */
-	public Map<Element, IntStat> affinity;
+	public ElementMap affinity;
 	/** 
 	 * scales against damage 
 	 * finaldmg = sourcedmg * (1 + (casterPenMore-targetResMore) / 100) * (1 + (casterPenInc-targetResInc) / 100 ) + (casterPenFlat-targetResFlat)
 	 */
-	public Map<Element, IntStat> resistance; 
+	public ElementMap resistance; 
 	
 	/** 
 	 * penetration counters resists 
 	 * finaldmg = sourcedmg * (1 + (casterPenMore-targetResMore) / 100) * (1 + (casterPenInc-targetResInc) / 100 ) + (casterPenFlat-targetResFlat)
 	 */
-	public Map<Element, IntStat> penetration; 
+	public ElementMap penetration; 
 	
 	/** 
 	 * this adds and multiplies to healing spells casts 
@@ -110,11 +129,12 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 			compounderBool = null;
 		}
 		
-		resources = new HashMap<>();
-		shield = new HashMap<>();
-		affinity = new HashMap<>();
-		resistance = new HashMap<>();
-		penetration = new HashMap<>();
+		resources = new ResourceMap();
+		resourcesmax = new ResourceMap();
+		shield = new ResourceMap();
+		affinity = new ElementMap();
+		resistance = new ElementMap();
+		penetration = new ElementMap();
 		
 		healingAffinity = new IntStat(0, getCompounder(s -> s.healingAffinity));
 		healingRes = new IntStat(0, getCompounder(s -> s.healingRes));
@@ -127,6 +147,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		
 		for(var r : Resource.values()) {
 			resources.put(r, new IntStat(0, getCompounder(s -> s.resources.get(r))));
+			resourcesmax.put(r, new IntStat(0, getCompounder(s -> s.resourcesmax.get(r))));
 			shield.put(r, new IntStat(0, getCompounder(s -> s.shield.get(r))));
 		}
 		for(var ele : Element.values) {
@@ -155,6 +176,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		
 		for (var r : Resource.values()) {
 			s.resources.put(r, resources.get(r).copy());
+			s.resourcesmax.put(r, resourcesmax.get(r).copy());
 			s.shield.put(r, shield.get(r).copy());
 		}
 		
@@ -179,7 +201,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		return resources.get(res).value();
 	}
 	public int getMax(Resource res) {
-		return resources.get(res).max();
+		return resourcesmax.get(res).value();
 	}
 	public int getMissing(Resource res) {
 		return (int) resources.get(res).fight;
@@ -220,6 +242,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 	public void remove(CreatureStats s) {
 		for (var r : Resource.values()) {
 			resources.get(r).remove(resources.get(r));
+			resourcesmax.get(r).remove(resourcesmax.get(r));
 			shield.get(r).remove(shield.get(r));
 		}
 		
@@ -249,6 +272,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		
 		for (var r : Resource.values()) {
 			resources.get(r).serialize(out);
+			resourcesmax.get(r).serialize(out);
 			shield.get(r).serialize(out);
 		}
 		for (var r : Element.values) {
@@ -278,6 +302,7 @@ public class CreatureStats implements BBSerializer, BBDeserializer {
 		
 		for (var r : Resource.values()) {
 			resources.get(r).deserialize(in);
+			resourcesmax.get(r).deserialize(in);
 			shield.get(r).deserialize(in);
 		}
 		

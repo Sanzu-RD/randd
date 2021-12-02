@@ -12,6 +12,7 @@ public class EditorConf extends JsonConfig {
 	public boolean reset = true;
 	
 	public String lastFolder = "res/"; //Environment.res.toAbsolutePath().toString();
+	public String lastMap = "res/maps/goulta7b.map";
 	
 	public GraphicsConf gfx = new GraphicsConf();
 	public HudConfig hud = new HudConfig();

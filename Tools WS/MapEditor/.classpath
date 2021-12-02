@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="com/souchy/randd/tools/mapeditor/ui/components/EditorLayoutPanel.java|com/souchy/randd/tools/mapeditor/ui/components/LayoutPanel.java" kind="src" path="src"/>
+	<classpathentry excluding="com/souchy/randd/tools/mapeditor/ui/components/EditorLayoutPanel.java|com/souchy/randd/tools/mapeditor/ui/components/LayoutPanel.java|com/souchy/randd/tools/mapeditor/configs/EditorProperties.java|com/souchy/randd/tools/mapeditor/ui/shadereditor/|com/souchy/randd/tools/mapeditor/ui/components/|com/souchy/randd/tools/mapeditor/ui/mapeditor/" kind="src" path="src"/>
 	<classpathentry kind="src" output="res" path="plants"/>
 	<classpathentry kind="src" path="data"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/MapIO"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/PiranhaPlants"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Ammolite FX"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -31,5 +21,16 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/LibGdx1.10"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/lwjgl3"/>
 	<classpathentry kind="lib" path="C:/Robyn/Git/res/libs other/gltf-1.0.0.jar" sourcepath="C:/Robyn/Git/res/libs other/gltf-1.0.0-sources.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Ammolite FX"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DeathEbi-commons"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EbiShoalCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PiranhaPlants"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Waters"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Lapis Lazuli"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jade Models"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/DiamondMechanics"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MapIO"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/S1.Commons"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

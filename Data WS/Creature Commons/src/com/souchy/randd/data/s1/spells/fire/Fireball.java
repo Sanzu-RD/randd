@@ -23,6 +23,18 @@ import com.souchy.randd.data.s1.status.Burning;
 
 import io.netty.buffer.ByteBuf;
 
+
+/**
+ * 
+ * Stats = {} easy json
+ * Effects = [{}] easy json
+ * 
+ * Apply process : {
+ * 		
+ * }
+ * 
+ * @author Blank
+ */
 public class Fireball extends Spell {
 
 	public static final int modelid = Elements.fire.makeid(1, 1);

@@ -6,7 +6,6 @@ import com.souchy.randd.jade.Constants;
 
 public enum Elements implements Element, StatProperty {
 	
-
 	normal,
 	
 	fire,

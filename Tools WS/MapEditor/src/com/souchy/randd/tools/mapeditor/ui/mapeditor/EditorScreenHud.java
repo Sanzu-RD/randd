@@ -26,8 +26,8 @@ import com.souchy.randd.ebishoal.commons.lapis.gfx.screen.LapisHud;
 import com.souchy.randd.ebishoal.commons.lapis.gfx.shaders.LapisShader;
 import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
+import com.souchy.randd.tools.mapeditor.ui.Component;
 import com.souchy.randd.tools.mapeditor.ui.components.BottomBar;
-import com.souchy.randd.tools.mapeditor.ui.components.Component;
 import com.souchy.randd.tools.mapeditor.ui.components.PropertiesPanel;
 import com.souchy.randd.tools.mapeditor.ui.components.TopBar;
 

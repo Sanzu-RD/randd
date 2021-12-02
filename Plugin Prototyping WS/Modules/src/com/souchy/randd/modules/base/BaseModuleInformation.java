@@ -20,7 +20,7 @@ public class BaseModuleInformation implements ModuleInformation { //, PropertyCo
 		ModuleMainClass; // Package+nom de la class module main
 	}
 	
-	private final File file;
+	private File file;
 	private final Properties props;
 	
 	public BaseModuleInformation(File f, Properties props) {
@@ -63,7 +63,12 @@ public class BaseModuleInformation implements ModuleInformation { //, PropertyCo
 		return list;
 		//return props.values().stream().map(v -> (String) v).collect(Collectors.toList()); //.elements();
 	}
-	
+
+	@Override
+	public void setJarFile(File f) {
+		this.file = f;
+	}
+
 
 	/*@Override
 	public Properties getProperties() {

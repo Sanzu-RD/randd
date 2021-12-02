@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
-import com.souchy.randd.commons.diamond.common.generic.IndexedList;
+
 import com.souchy.randd.commons.diamond.statusevents.EventPipeline;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnEndEvent;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
@@ -19,6 +19,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 import com.souchy.randd.commons.tealwaters.commons.ActionPipeline;
 import com.souchy.randd.commons.tealwaters.commons.Identifiable;
+import com.souchy.randd.commons.tealwaters.commons.IndexedList;
 import com.souchy.randd.commons.tealwaters.ecs.Engine;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.jade.matchmaking.Team;

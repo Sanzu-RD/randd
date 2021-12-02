@@ -39,14 +39,14 @@ import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers.InstantAdapter;
 import com.souchy.randd.commons.tealwaters.io.files.JsonHelpers.ZonedDateTimeAdapter;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
+import com.souchy.randd.tools.mapeditor.imgui.EditorImGuiHud;
 import com.souchy.randd.tools.mapeditor.imgui.IGStyle;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiComponent;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiUtil;
-import com.souchy.randd.tools.mapeditor.imgui.components.AssetExplorer.AssetDialog;
+import com.souchy.randd.tools.mapeditor.imgui.windows.AssetExplorer.AssetDialog;
 import com.souchy.randd.tools.mapeditor.io.MaterialJson;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 import com.souchy.randd.tools.mapeditor.shaderimpl.DissolveUniforms.DissolveMaterial;
-import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorImGuiHud;
 
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;

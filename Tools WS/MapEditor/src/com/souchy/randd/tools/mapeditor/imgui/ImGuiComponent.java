@@ -6,7 +6,6 @@ import com.souchy.randd.commons.tealwaters.commons.Lambda;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.tools.mapeditor.configs.EditorConf.HudConfig.ComponentConfig;
 import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
-import com.souchy.randd.tools.mapeditor.ui.mapeditor.EditorImGuiHud;
 
 import imgui.ImGui;
 import imgui.ImVec2;
@@ -97,6 +96,12 @@ public interface ImGuiComponent {
 		}
 		public void close() {
 			close.accept(this);
+		}
+		public void toggleShow() {
+			if(this.showContainer.get())
+				close();
+			else
+				show();
 		}
 		public void resize(ImVec2 last, ImVec2 next) {
 			last.set(next);

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="Teal Waters">
+	<property environment="env"/>
+	<property name="gitspace" value="../../"/>
+	<property name="Amethyst.location" value="../../ebi/cores/Amethyst"/>
+	<property name="Ammolite FX.location" value="../../ebi/Ammolite FX"/>
+	<property name="BlueBeryl.location" value="../../ebi/BlueBeryl"/>
+	<property name="Coral-commons.location" value="../Coral-commons"/>
+	<property name="Coraline.location" value="../../ebi/Coraline"/>
+	<property name="DeathEbi-commons.location" value="../DeathEbi-commons"/>
+	<property name="DiamondMechanics.location" value="../GameMechanics2"/>
+	<property name="EbiShoalCore.location" value="../../ebi/EbiCore"/>
+	<property name="Gecko3.location" value="../../../../eclipse-workspaces/SmallFish/Gecko3"/>
+	<property name="Jade Models.location" value="../Jade Models"/>
+	<property name="Lapis Lazuli.location" value="../../ebi/Lapis Lazuli"/>
+	<property name="LapisMock.location" value="../../Mock WS/LapisMock"/>
+	<property name="MapEditor.location" value="../../Tools WS/MapEditor"/>
+	<property name="MapIO.location" value="../MapIO"/>
+	<property name="Mockingbird.location" value="../../Mock WS/Mockingbird"/>
+	<property name="Moonstone-commons.location" value="../Moonstone-commons"/>
+	<property name="Moonstone-white.location" value="../../ebi/Moonstone-white"/>
+	<property name="NoDepMock.location" value="../../Mock WS/NoDepMock"/>
+	<property name="Opal-commons.location" value="../Opal-commons"/>
+	<property name="Opaline.location" value="../../ebi/Opaline"/>
+	<property name="Pearl-commons.location" value="../PearlMessaging"/>
+	<property name="S1.Commons.location" value="../../Data WS/Creature Commons"/>
+	<property name="Sapphire Owl.location" value="../../ebi/cores/Sapphire Owl"/>
+	<property name="ShaderEditor.location" value="../../../../eclipse-workspaces/SmallFish/ShaderEditor"/>
+	<property name="SmoothRivers.location" value="../../Death Shadows WS/SmoothRivers"/>
+	<property name="Teal Net.location" value="../Teal Net"/>
+	<property name="UIEditor.location" value="../../Tools WS/UIEditor"/>
+	<property name="ECLIPSE_HOME" value="../../../../../Users/Blank/eclipse/java-2021-06/eclipse/"/>
+	<property name="debuglevel" value="source,lines,vars"/>
+	<property name="target" value="16"/>
+	<property name="source" value="16"/>
+
+
+	<path id="build.classpath">
+		<fileset dir="${dir.lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	<!-- convert classpath to a flat list/string for use in manifest task -->
+	<pathconvert property="mf.classpath" pathsep=" ">
+		<path refid="build.classpath" />
+		<mapper>
+			<chainedmapper>
+				<flattenmapper />
+				<globmapper from="*.jar" to="lib/*.jar" />
+			</chainedmapper>
+		</mapper>
+	</pathconvert>
+	
+	<target name="build">
+		<jar destfile="./tealwaters.jar">
+			<manifest>
+				<!-- <attribute name="Main-Class" value="com.souchy.randd.ebishoal.sapphire.main.SapphireOwl" /> -->
+				<attribute name="Class-Path" value=". ${mf.classpath}" />
+			</manifest>
+			<fileset dir="./bin/main">
+				<include name="com/**"/>
+			</fileset>
+			<fileset dir="./src/">
+				<include name="com/**"/>
+			</fileset>
+		</jar>
+	</target>
+	
+</project>

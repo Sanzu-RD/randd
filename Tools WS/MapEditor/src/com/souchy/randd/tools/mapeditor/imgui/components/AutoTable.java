@@ -144,8 +144,9 @@ public class AutoTable implements ImGuiComponent {
 	}
 	
 	public void render(float delta) {
-		if(ImGui.beginTable(o.getClass().getSimpleName(), 3, ImGuiTableFlags.ScrollY)) {
-
+		ImGui.text(" -------- " + o.getClass().getSimpleName() + " -------- ");
+		if(ImGui.beginTable(o.getClass().getSimpleName(), 3)) { //, ImGuiTableFlags.ScrollY)) {
+			
 			renderField(root);
 			
 			ImGui.endTable();
@@ -193,35 +194,35 @@ public class AutoTable implements ImGuiComponent {
 	
 	private void renderString(Fiel f, int flags) { 
 		var imv = (ImString) f.imv;
-		if(ImGui.inputText("", imv, flags)) {
+		if(ImGui.inputText("##" + f.name, imv, flags)) {
 			f.setter.accept(imv.get());
 		}
 	}
 	
 	private void renderBoolean(Fiel f, int flags) {
 		var imv = (ImBoolean) f.imv;
-		if(ImGui.checkbox("", imv)) {
+		if(ImGui.checkbox("##" + f.name, imv)) {
 			f.setter.accept(imv.get());
 		}
 	}
 	
 	private void renderInt(Fiel f, int flags) {
 		var imv = (ImInt) f.imv;
-		if(ImGui.inputInt("", imv, flags)) {
+		if(ImGui.inputInt("##" + f.name, imv, flags)) {
 			f.setter.accept(imv.get());
 		}
 	}
 	
 	private void renderFloat(Fiel f, int flags) {
 		var imv = (ImFloat) f.imv;
-		if(ImGui.inputFloat("", imv, flags)) {
+		if(ImGui.inputFloat("##" + f.name, imv, flags)) {
 			f.setter.accept(imv.get());
 		}
 	}
 	
 	private void renderDouble(Fiel f, int flags) {
 		var imv = (ImDouble) f.imv;
-		if(ImGui.inputDouble("", imv, flags)) {
+		if(ImGui.inputDouble("##" + f.name, imv, flags)) {
 			f.setter.accept(imv.get());
 		}
 	}
