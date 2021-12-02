@@ -12,5 +12,6 @@ module com.souchy.randd.commons.TealWaters {
 	requires transitive com.google.gson;
 	requires transitive reflections;
 	requires transitive com.google.common;
+	requires org.mongodb.bson;
 	
 }

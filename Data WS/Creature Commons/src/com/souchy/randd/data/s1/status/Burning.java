@@ -8,6 +8,7 @@ import com.souchy.randd.commons.diamond.effects.status.ModifyStatusEffect;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.models.stats.maps.ElementMap;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 import com.souchy.randd.commons.diamond.statusevents.other.TurnStartEvent;
@@ -24,7 +25,7 @@ public class Burning extends Status implements OnTurnStartHandler {
 
 	public Burning(Fight f, int source, int target) {
 		super(f, source, target);
-		var formula = new HashMap<Element, IntStat>();
+		var formula = new ElementMap();
 		formula.put(Elements.fire, new IntStat(10, 0, 0, 0));
 		dmg = new Damage(AoeBuilders.single.get(), TargetType.full.asStat(), formula);
 		this.effects.add(dmg);

@@ -1,6 +1,5 @@
 package com.souchy.randd.commons.diamond.models.stats;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -8,6 +7,8 @@ import java.util.function.Function;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.stats.base.BoolStat;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.models.stats.maps.ElementMap;
+import com.souchy.randd.commons.diamond.models.stats.maps.ResourceMap;
 import com.souchy.randd.commons.diamond.models.stats.special.HeightStat;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.filters.Height;
@@ -20,25 +21,6 @@ import io.netty.buffer.ByteBuf;
 
 public class CreatureStats implements BBSerializer, BBDeserializer {
 
-	public static class ResourceMap extends HashMap<String, IntStat> {
-		private static final long serialVersionUID = -4703716554211161452L;
-		public IntStat get(Resource k) {
-			return super.get(k.name());
-		}
-		public IntStat put(Resource key, IntStat value) {
-			return super.put(key.name(), value);
-		}
-	}
-	public static class ElementMap extends HashMap<String, IntStat> {
-		private static final long serialVersionUID = -7665062264352159684L;
-		public IntStat get(Element k) {
-			return super.get(k.name());
-		}
-		public IntStat put(Element key, IntStat value) {
-			return super.put(key.name(), value);
-		}
-	}
-	
 	/** 
 	 * resources 
 	 */

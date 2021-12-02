@@ -7,6 +7,7 @@ import com.souchy.randd.commons.diamond.effects.damage.Damage;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Status;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.models.stats.maps.ElementMap;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 import com.souchy.randd.commons.diamond.statusevents.Handler.Reactor;
@@ -20,8 +21,8 @@ public class HeavyStep extends Status implements Reactor, OnEnterCellHandler {
 	
 	public HeavyStep(Fight f, int sourceEntityId, int targetEntityId) {
 		super(f, sourceEntityId, targetEntityId);
-		
-		var formula = new HashMap<Element, IntStat>();
+
+		var formula = new ElementMap();
 		formula.put(Elements.earth, new IntStat(15));
 		e1 = new Damage(AoeBuilders.circle.apply(1), TargetType.enemies.asStat(), formula);
 	}

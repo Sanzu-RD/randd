@@ -13,6 +13,7 @@ import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Spell;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.models.stats.maps.ElementMap;
 import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
@@ -33,7 +34,7 @@ public class Frostdash extends Spell {
 		
 		//this.stats.target.setBase(TargetType.needsLineOfSight, false); // everything already false by default
 
-		var formula = new HashMap<Element, IntStat>();
+		var formula = new ElementMap();
 		formula.put(Elements.water, new IntStat(50, 0, 10, 0));
 		e1 = new Damage(AoeBuilders.circle.apply(2), TargetType.full.asStat(), formula); // damage aoe circle of 2
 		

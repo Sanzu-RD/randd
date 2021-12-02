@@ -15,7 +15,7 @@ public abstract class CreatureModel {  //extends Entity {
 	/**
 	 * 2 dec 2021, added this for mongodb
 	 */
-	public final int modelid = id();
+	public final int id = id();
 	
 	/** 
 	 * model id

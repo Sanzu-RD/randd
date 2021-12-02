@@ -5,6 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.bson.BsonReader;
+import org.bson.BsonWriter;
+import org.bson.codecs.Codec;
+import org.bson.codecs.DecoderContext;
+import org.bson.codecs.EncoderContext;
+
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.mongodb.client.model.Filters;
@@ -16,6 +22,9 @@ import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.CreatureModel;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Spell;
+import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.statics.Element;
+import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.jade.Constants;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 import com.souchy.randd.commons.diamond.statusevents.Handler.Reactor;
@@ -37,6 +46,8 @@ import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserInact
 import com.souchy.randd.deathshadow.core.smoothrivers.SelfIdentify;
 import com.souchy.randd.deathshadow.core.smoothrivers.SmoothRivers;
 import com.souchy.randd.deathshadows.iolite.emerald.Emerald;
+import com.souchy.randd.deathshadows.iolite.emerald.codecs.MapCodec;
+import com.souchy.randd.deathshadows.iolite.emerald.codecs.MapCodecProvider;
 import com.souchy.randd.jade.meta.User;
 import com.souchy.randd.jade.meta.UserLevel;
 import com.souchy.randd.moonstone.commons.packets.c2s.FightAction;
@@ -60,9 +71,11 @@ public class BlackMoonstone extends DeathShadowCore implements Reactor, OnTurnSt
 	 * One server can handle multiple fights
 	 */
 	public Map<Integer, Fight> fights;
-	
+
 	
 	public static void main(String[] args) throws Exception {
+		Emerald.customCodecs.add(new Element.ElementCodec());
+		Emerald.customCodecs.add(new Resource.ResourceCodec());
 		new BlackMoonstone(args);
 	}
 	
@@ -93,9 +106,9 @@ public class BlackMoonstone extends DeathShadowCore implements Reactor, OnTurnSt
 				fight.startTurnTimer();
 				fights.put(fight.id, fight);
 			}
-			Emerald.collection(CreatureModel.class).deleteOne(Filters.eq("id", 9));
+			Emerald.collection(CreatureModel.class).deleteOne(Filters.eq("_id", 9));
 			Emerald.collection(CreatureModel.class).insertOne(new Aurelia());
-			Emerald.collection(Spell.class).deleteOne(Filters.eq("id", 9));
+			Emerald.collection(Spell.class).deleteOne(Filters.eq("_id", 9));
 			Emerald.collection(Spell.class).insertOne(new Fireball(fights.get(0)));
 		}
 

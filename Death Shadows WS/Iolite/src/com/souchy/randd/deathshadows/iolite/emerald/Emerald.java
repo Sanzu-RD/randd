@@ -3,7 +3,9 @@ package com.souchy.randd.deathshadows.iolite.emerald;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.bson.BsonReader;
@@ -11,8 +13,10 @@ import org.bson.BsonWriter;
 import org.bson.codecs.Codec;
 import org.bson.codecs.DecoderContext;
 import org.bson.codecs.EncoderContext;
+import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.pojo.PojoCodecProvider;
+import org.bson.codecs.pojo.PropertyCodecProvider;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -23,6 +27,7 @@ import com.souchy.randd.commons.tealwaters.commons.Namespace.MongoNamespace;
 import com.souchy.randd.commons.tealwaters.io.files.JsonConfig;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.commons.tealwaters.logging.Logging;
+import com.souchy.randd.deathshadows.iolite.emerald.codecs.MapCodecProvider;
 import com.souchy.randd.jade.matchmaking.Lobby;
 import com.souchy.randd.jade.matchmaking.QueueeBlind;
 import com.souchy.randd.jade.matchmaking.QueueeDraft;
@@ -39,6 +44,7 @@ import com.souchy.randd.jade.meta.User;
  */
 public final class Emerald {
 
+	
 
 	//private
 	static MongoClient client;
@@ -48,6 +54,13 @@ public final class Emerald {
 //	static {
 //		init();
 //	}
+	public static List<Codec<?>> customCodecs = new ArrayList<>();
+	public static List<CodecProvider> customCodecProviders = new ArrayList<>();
+	static {
+		//customCodecs.add(new MapCodec());
+		//customCodecProviders.add(new MapCodecProvider());
+		customCodecs.add(new ZonedDateTimeCodec());
+	}
 	
 	public static void init() {
 		var conf = JsonConfig.read(EmeraldConf.class);
@@ -67,9 +80,13 @@ public final class Emerald {
 		if(user != null && !user.trim().isEmpty()) credentials = user + ":" + pass + "@";
 		var registry = CodecRegistries.fromRegistries(
 				MongoClientSettings.getDefaultCodecRegistry(),
-				CodecRegistries.fromCodecs(new ZonedDateTimeCodec()),
-				CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build())
+				CodecRegistries.fromCodecs(customCodecs.toArray(new Codec[0])),
+				//CodecRegistries.fromProviders(customCodecProviders.toArray(new CodecProvider[0])),
+				CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true)
+						.register(new MapCodecProvider()) // customCodecProviders.toArray(new PropertyCodecProvider[0]))
+						.build())
 		);
+		
 		var connectStr = "mongodb://" + credentials + ip + ":" + port;
 		Log.info("emerald init: " + connectStr);
 		

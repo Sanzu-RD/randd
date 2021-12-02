@@ -15,6 +15,7 @@ import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.Effect;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.models.stats.maps.ElementMap;
 import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
@@ -56,7 +57,7 @@ public class Damage extends Effect {
 	/**
 	 * Base ratios
 	 */
-	public Map<Element, IntStat> formula = new HashMap<>();
+	public ElementMap formula = new ElementMap();
 	/**
 	 * Value multipliers, usually only 1, maybe 2
 	 */
@@ -67,12 +68,12 @@ public class Damage extends Effect {
 	/**
 	 * Step 1 Pre-calculated source dmg (pre-mitigation)
 	 */
-	public Map<Element, IntStat> sourceDmg = new HashMap<>();
+	public ElementMap sourceDmg = new ElementMap();
 
 	/**
 	 * Step 2 Pre-calculated target dmg (post-mitigation)
 	 */
-	public Map<Element, IntStat> targetDmg = new HashMap<>();
+	public ElementMap targetDmg = new ElementMap();
 	
 
 	/**
@@ -104,7 +105,7 @@ public class Damage extends Effect {
 	 * @param targetConditions - what kind of targets should be affected
 	 * @param formula - base ratios for elemental dmg
 	 */
-	public Damage(Aoe areaOfEffect, TargetTypeStat targetConditions, Map<Element, IntStat> formula) {
+	public Damage(Aoe areaOfEffect, TargetTypeStat targetConditions, ElementMap formula) {
 		super(areaOfEffect, targetConditions);
 		this.formula = formula;
 	}

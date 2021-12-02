@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
+import org.bson.codecs.pojo.annotations.BsonIgnore;
+
 import com.souchy.randd.commons.diamond.common.generic.BoolTable;
 import com.souchy.randd.commons.diamond.common.generic.Vector2;
 import com.souchy.randd.commons.diamond.models.Cell;
@@ -21,6 +23,7 @@ public class Aoe implements BBSerializer, BBDeserializer {
 	public Vector2 source;
 	
 	/** 2d boolean table showing what cells around the source are part of the aoe */
+	@BsonIgnore
 	public BoolTable table;
 	
 	public Aoe(int w, int h) {

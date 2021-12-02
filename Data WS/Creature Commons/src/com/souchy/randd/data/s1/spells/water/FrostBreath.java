@@ -20,6 +20,7 @@ import com.souchy.randd.commons.diamond.models.stats.CreatureStats;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.models.stats.base.ObjectStat;
+import com.souchy.randd.commons.diamond.models.stats.maps.ElementMap;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
@@ -49,8 +50,8 @@ public class FrostBreath extends Spell {
 		
 		var aoe = AoeBuilders.cone.apply(2);
 		this.stats.addAoe(aoe);
-		
-		var formula = new HashMap<Element, IntStat>();
+
+		var formula = new ElementMap();
 		formula.put(Elements.water, new IntStat(7, 0, 10, 0));
 		e1 = new Damage(aoe, TargetType.full.asStat(), formula);
 		

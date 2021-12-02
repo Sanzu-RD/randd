@@ -2,6 +2,8 @@ package com.souchy.randd.commons.tealwaters.ecs;
 
 import java.util.HashMap;
 
+import org.bson.codecs.pojo.annotations.BsonIgnore;
+
 import com.google.common.eventbus.EventBus;
 
 /**
@@ -26,7 +28,9 @@ public class Entity {
 	/**
 	 * for inbound event propagation like proccing VFX when the entity receives an event
 	 */
+	@BsonIgnore
 	protected EventBus componentBus = new EventBus();
+	@BsonIgnore
 	public final HashMap<Class<?>, Object> components = new HashMap<>();
 	
 	public Entity(Engine engine) {

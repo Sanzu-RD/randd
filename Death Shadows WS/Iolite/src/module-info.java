@@ -1,5 +1,6 @@
 module com.souchy.randd.deathshadows.iolite {
 	exports com.souchy.randd.deathshadows.iolite.emerald;
+	exports com.souchy.randd.deathshadows.iolite.emerald.codecs;
 	exports com.souchy.randd.deathshadows.iolite.ruby;
 	exports com.souchy.randd.deathshadows.iolite;
 	

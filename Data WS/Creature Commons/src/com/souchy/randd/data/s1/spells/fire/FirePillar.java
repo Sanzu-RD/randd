@@ -11,6 +11,7 @@ import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Spell;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.models.stats.maps.ElementMap;
 import com.souchy.randd.commons.diamond.statics.CreatureType;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
@@ -26,7 +27,7 @@ public class FirePillar extends Spell {
 	
 	public FirePillar(Fight f) {
 		super(f);
-		var formula = new HashMap<Element, IntStat>();
+		var formula = new ElementMap();
 		formula.put(Elements.fire, new IntStat(50, 0, 10, 0));
 		e1 = new Damage(AoeBuilders.single.get(), TargetType.full.asStat(), formula);
 		this.effects.add(e1);
