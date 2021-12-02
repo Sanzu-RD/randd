@@ -82,7 +82,8 @@ public final class Emerald {
 				MongoClientSettings.getDefaultCodecRegistry(),
 				CodecRegistries.fromCodecs(customCodecs.toArray(new Codec[0])),
 				//CodecRegistries.fromProviders(customCodecProviders.toArray(new CodecProvider[0])),
-				CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true)
+				CodecRegistries.fromProviders(PojoCodecProvider.builder()
+						.automatic(true)
 						.register(new MapCodecProvider()) // customCodecProviders.toArray(new PropertyCodecProvider[0]))
 						.build())
 		);

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bson.codecs.pojo.annotations.BsonIgnore;
+
 import com.google.common.collect.ImmutableList;
 import com.souchy.randd.commons.diamond.common.Aoe;
 import com.souchy.randd.commons.diamond.common.AoeBuilders;
@@ -75,7 +77,7 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	*/
 	private static int idCounter = 0;
 	
-	
+
 	public int id;
 	/**
 	 * 2 dec 2021 added this for mongodb
@@ -86,11 +88,11 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	public int modelidWithoutSeason() {
 		return modelid() % (int) Math.pow(10, (int) Math.log10(modelid())) % (int) Math.pow(10, (int) Math.log10(modelid()));
 	}
-	
+
 	public final ImmutableList<CreatureType> taggedCreatureTypes;
 	public final ImmutableList<Class<CreatureModel>> taggedCreatures;
 	public final ImmutableList<Element> taggedElements;
-	
+
 	public SpellStats stats;
 	public List<Effect> effects = new ArrayList<>();
 	
@@ -135,7 +137,7 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	public void cast(Creature caster, Cell target) {
 		// Applique les couts en premier?
 		var costs = new HashMap<Resource, Integer>();
-		this.stats.costs.forEach((r, i) -> costs.put(r, i.value()));
+		this.stats.costs.forEach((r, i) -> costs.put(Resource.valueOf(r), i.value()));
 		ResourceGainLoss.use(caster, costs);
 		
 		// Créé une copie du spell pour pouvoir le modifier dans l'eventpipeline

@@ -10,7 +10,7 @@ public abstract class SpellModel {
 	public final int id = id();
 	public abstract int id();
 	
-	public SpellStats stats;
+	public SpellStats stats = new SpellStats();
 	public List<Effect> effects = new ArrayList<>();
 	
 

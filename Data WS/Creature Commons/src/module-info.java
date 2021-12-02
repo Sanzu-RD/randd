@@ -27,4 +27,5 @@ module CreatureCommons {
 	requires com.souchy.randd.commons.TealNet;
 	requires com.souchy.randd.commons.TealWaters;
 	requires netty.all;
+	requires org.mongodb.bson;
 }

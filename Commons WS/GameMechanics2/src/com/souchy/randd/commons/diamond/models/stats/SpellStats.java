@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.bson.codecs.pojo.annotations.BsonIgnore;
+
 import com.souchy.randd.commons.diamond.common.Aoe;
 import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.common.AoeBuilders.AoeBuilder;
 import com.souchy.randd.commons.diamond.models.stats.base.BoolStat;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.models.stats.base.ObjectStat;
+import com.souchy.randd.commons.diamond.models.stats.maps.ResourceMap;
 import com.souchy.randd.commons.diamond.models.stats.special.TargetTypeStat;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
 import com.souchy.randd.commons.net.netty.bytebuf.BBDeserializer;
@@ -21,7 +25,7 @@ import io.netty.buffer.ByteBuf;
 public class SpellStats implements BBSerializer, BBDeserializer { //extends Entyty {
 	
 	// cast costs ======================================================
-	public Map<Resource, IntStat> costs = new HashMap<>();
+	public ResourceMap costs = new ResourceMap();
 
 	// cell targetting conditions, inclu lineofsight ===================
 	public TargetTypeStat target = new TargetTypeStat();
@@ -32,9 +36,11 @@ public class SpellStats implements BBSerializer, BBDeserializer { //extends Enty
 	/** Range maximale. 1 par défaut */
 	public IntStat maxRangeRadius = new IntStat(1);
 	/** Pattern de range maximale. null par défaut. */
+	@BsonIgnore
 	public ObjectStat<AoeBuilder> minRangePattern = new ObjectStat<AoeBuilder>(null);
 	/** Pattern de range maximale. Cercle par défaut. <br>
 	 * Example : stats.maxRangePattern.base = (t) -> AoeBuilders.cross.apply(t); */
+	@BsonIgnore
 	public ObjectStat<AoeBuilder> maxRangePattern = new ObjectStat<AoeBuilder>(r -> AoeBuilders.circle.apply(r));
 	
 	// cast cooldowns ==================================================
@@ -96,7 +102,7 @@ public class SpellStats implements BBSerializer, BBDeserializer { //extends Enty
 		// costs
 		out.writeInt(costs.size());
 		costs.forEach((r, i) -> {
-			out.writeInt(r.ordinal());
+			out.writeInt(Resource.valueOf(r).ordinal());
 			i.serialize(out);
 		});
 		

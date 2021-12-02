@@ -15,16 +15,21 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.mongodb.client.model.Filters;
 import com.souchy.randd.commons.diamond.common.Action;
+import com.souchy.randd.commons.diamond.common.AoeBuilders;
 import com.souchy.randd.commons.diamond.common.Action.EndTurnAction;
 import com.souchy.randd.commons.diamond.common.Action.SpellAction;
+import com.souchy.randd.commons.diamond.effects.damage.Damage;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.CreatureModel;
 import com.souchy.randd.commons.diamond.models.Fight;
 import com.souchy.randd.commons.diamond.models.Spell;
+import com.souchy.randd.commons.diamond.models.SpellModel;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
+import com.souchy.randd.commons.diamond.models.stats.maps.ElementMap;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
+import com.souchy.randd.commons.diamond.statics.stats.properties.spells.TargetType;
 import com.souchy.randd.jade.Constants;
 import com.souchy.randd.commons.diamond.statusevents.Handler;
 import com.souchy.randd.commons.diamond.statusevents.Handler.Reactor;
@@ -38,7 +43,10 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBMessage;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.creatures.Aurelia;
 import com.souchy.randd.data.s1.main.Elements;
+import com.souchy.randd.data.s1.spells.earth.EarthWall;
 import com.souchy.randd.data.s1.spells.fire.Fireball;
+import com.souchy.randd.data.s1.spells.secondary.dark.SummonSkeleton;
+import com.souchy.randd.data.s1.spells.water.Waterfall;
 import com.souchy.randd.deathshadow.core.DeathShadowCore;
 import com.souchy.randd.deathshadow.core.DeathShadowTCP;
 import com.souchy.randd.deathshadow.core.handlers.AuthenticationFilter.UserActiveEvent;
@@ -108,8 +116,21 @@ public class BlackMoonstone extends DeathShadowCore implements Reactor, OnTurnSt
 			}
 			Emerald.collection(CreatureModel.class).deleteOne(Filters.eq("_id", 9));
 			Emerald.collection(CreatureModel.class).insertOne(new Aurelia());
-			Emerald.collection(Spell.class).deleteOne(Filters.eq("_id", 9));
-			Emerald.collection(Spell.class).insertOne(new Fireball(fights.get(0)));
+			Emerald.collection(SpellModel.class).deleteOne(Filters.eq("_id", 9));
+			Emerald.collection(SpellModel.class).insertOne(new SpellModel() {
+				{
+					var formula = new ElementMap();
+					formula.put(Elements.fire, new IntStat(50, 0, 10, 0));
+					var e1 = new Damage(AoeBuilders.single.get(), TargetType.full.asStat(), formula);
+					this.effects.add(e1);
+					
+					this.stats.cooldown.baseflat = 2;
+				}
+				@Override
+				public int id() {
+					return 9;
+				}
+			});
 		}
 
 		// register node on pearl
