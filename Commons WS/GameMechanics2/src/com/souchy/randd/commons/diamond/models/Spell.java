@@ -77,6 +77,10 @@ public abstract class Spell extends Entity implements BBSerializer, BBDeserializ
 	
 	
 	public int id;
+	/**
+	 * 2 dec 2021 added this for mongodb
+	 */
+	public final int modelid = modelid();
 	public abstract int modelid();
 	
 	public int modelidWithoutSeason() {

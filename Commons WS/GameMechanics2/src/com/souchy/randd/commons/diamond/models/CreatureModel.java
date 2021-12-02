@@ -12,6 +12,11 @@ import com.souchy.randd.commons.diamond.models.stats.CreatureStats;
  */
 public abstract class CreatureModel {  //extends Entity {
 
+	/**
+	 * 2 dec 2021, added this for mongodb
+	 */
+	public final int modelid = id();
+	
 	/** 
 	 * model id
 	 */

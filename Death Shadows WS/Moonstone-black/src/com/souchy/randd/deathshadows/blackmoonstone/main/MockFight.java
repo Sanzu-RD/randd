@@ -5,7 +5,6 @@ import java.io.File;
 import org.bson.types.ObjectId;
 
 import com.souchy.randd.commons.diamond.common.BoardGenerator;
-import com.souchy.randd.commons.diamond.ext.MapData;
 import com.souchy.randd.commons.diamond.main.DiamondModels;
 import com.souchy.randd.commons.diamond.models.Creature;
 import com.souchy.randd.commons.diamond.models.CreatureModel;
@@ -14,6 +13,7 @@ import com.souchy.randd.commons.diamond.models.components.Position;
 import com.souchy.randd.commons.diamond.models.stats.base.IntStat;
 import com.souchy.randd.commons.diamond.statics.Element;
 import com.souchy.randd.commons.diamond.statics.stats.properties.Resource;
+import com.souchy.randd.commons.mapio.MapData;
 import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.commons.tealwaters.logging.Log;
 import com.souchy.randd.data.s1.main.Elements;
