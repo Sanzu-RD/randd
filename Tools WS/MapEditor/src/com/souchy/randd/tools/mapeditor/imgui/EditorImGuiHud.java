@@ -16,6 +16,9 @@ import com.souchy.randd.tools.mapeditor.imgui.windows.ObjectsTree;
 import com.souchy.randd.tools.mapeditor.imgui.windows.Properties;
 import com.souchy.randd.tools.mapeditor.imgui.windows.Settings;
 import com.souchy.randd.tools.mapeditor.imgui.windows.TopBar;
+import com.souchy.randd.tools.mapeditor.imgui.windowsgame.CreatureEditor;
+import com.souchy.randd.tools.mapeditor.imgui.windowsgame.SpellEditor;
+import com.souchy.randd.tools.mapeditor.imgui.windowsgame.StatusEditor;
 import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 
 import imgui.ImGui;
@@ -65,7 +68,12 @@ public class EditorImGuiHud extends ImGuiHud {
 		components.add(explorer = new AssetExplorer());
 		components.add(properties = new Properties());
 		components.add(console = new Console());
-		components.add(settings = new Settings());
+		components.add(settings = new Settings()); settings.close();
+		
+		components.add(CreatureEditor.get()); CreatureEditor.get().close();
+		components.add(SpellEditor.get()); 
+		components.add(StatusEditor.get()); StatusEditor.get().close();
+		
 		//removeContainer(console);
 	}
 	

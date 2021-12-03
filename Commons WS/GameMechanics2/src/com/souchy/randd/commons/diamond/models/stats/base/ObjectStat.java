@@ -9,6 +9,7 @@ public class ObjectStat<T extends BBSerializer /* & BBDeserializer */> implement
 	public T base;
 	public T setter;
 	
+	public ObjectStat() {}
 	public ObjectStat(T t) {
 		this.base = t;
 	}

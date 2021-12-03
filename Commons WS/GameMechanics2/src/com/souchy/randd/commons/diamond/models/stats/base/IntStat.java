@@ -29,6 +29,8 @@ public class IntStat implements BBSerializer, BBDeserializer  {
 	public IntStat setter;
 	
 	
+	public IntStat() {
+	}
 	
 	public IntStat(double base) {
 		this.baseflat = base;

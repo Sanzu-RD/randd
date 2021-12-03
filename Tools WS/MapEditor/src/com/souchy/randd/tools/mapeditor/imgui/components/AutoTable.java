@@ -17,6 +17,7 @@ import com.souchy.randd.tools.mapeditor.imgui.ImGuiComponent;
 import imgui.ImGui;
 import imgui.flag.ImGuiInputTextFlags;
 import imgui.flag.ImGuiTableFlags;
+import imgui.flag.ImGuiTreeNodeFlags;
 import imgui.type.ImBoolean;
 import imgui.type.ImDouble;
 import imgui.type.ImFloat;
@@ -116,7 +117,7 @@ public class AutoTable implements ImGuiComponent {
 						fc.imv = new ImDouble(fc.getter.get() == null ? 0 : (double) fc.getter.get());
 					}
 					if(fc.type == String.class) {
-						fc.imv = new ImString(fc.getter.get() == null ? "" : (String) fc.getter.get());
+						fc.imv = new ImString(fc.getter.get() == null ? "" : (String) fc.getter.get(), 50);
 					}
 					if(fc.type == Boolean.class) {
 						fc.imv = new ImBoolean(fc.getter.get() == null ? false : (Boolean) fc.getter.get());
@@ -145,84 +146,94 @@ public class AutoTable implements ImGuiComponent {
 	
 	public void render(float delta) {
 		ImGui.text(" -------- " + o.getClass().getSimpleName() + " -------- ");
-		if(ImGui.beginTable(o.getClass().getSimpleName(), 3)) { //, ImGuiTableFlags.ScrollY)) {
-			
-			renderField(root);
-			
-			ImGui.endTable();
-		}
+//		if(ImGui.beginTable(o.getClass().getSimpleName() + "##AutoTable " + o.hashCode(), 3)) { //, ImGuiTableFlags.ScrollY)) {
+//			
+//			renderField(root);
+//			
+//			ImGui.endTable();
+//		}
+		
+		renderField(root);
 	}
 	
 	private void renderField(Fiel f) {
-		ImGui.tableNextRow();
 		try {
-			if(f.type != null && isPrimitive(f.type)) {
-				
-				ImGui.tableSetColumnIndex(0);
-				ImGui.text(f.name);
-				
-				ImGui.tableSetColumnIndex(1);
-				{
-					int flags = f.editable ? ImGuiInputTextFlags.None : ImGuiInputTextFlags.ReadOnly;
-					if(f.type == String.class) {
-						renderString(f, flags);
-					} else if(f.type == Boolean.class) {
-						renderBoolean(f, flags);
-					} else {
-						flags |= ImGuiInputTextFlags.CharsDecimal;
-						if(f.type == Integer.class) {
-							renderInt(f, flags);
-						} else if(f.type == Float.class) {
-							renderFloat(f, flags);
-						} else if(f.type == Double.class) {
-							renderDouble(f, flags);
+
+			if (f.type != null && isPrimitive(f.type)) {
+				//if (ImGui.beginTable("##" + f.name + f.hashCode(), 2)) {
+					//ImGui.tableNextRow();
+					//ImGui.tableSetColumnIndex(0);
+					ImGui.text(f.name);
+					ImGui.sameLine();
+					//ImGui.tableSetColumnIndex(1);
+					{
+						int flags = f.editable ? ImGuiInputTextFlags.None : ImGuiInputTextFlags.ReadOnly;
+						if (f.type == String.class) {
+							renderString(f, flags);
+						} else if (f.type == Boolean.class) {
+							renderBoolean(f, flags);
+						} else {
+							flags |= ImGuiInputTextFlags.CharsDecimal;
+							if (f.type == Integer.class) {
+								renderInt(f, flags);
+							} else if (f.type == Float.class) {
+								renderFloat(f, flags);
+							} else if (f.type == Double.class) {
+								renderDouble(f, flags);
+							}
 						}
 					}
-				}
-				return;
+				//	ImGui.endTable();
+					return;
+				//}
 			} else {
-				ImGui.text("container <");
-			}
-			
-			for (var c : f.children) {
-				if(c != null) renderField((Fiel) c);
+				if (ImGui.treeNodeEx(f.name + "##" + f.hashCode())) { // , ImGuiTreeNodeFlags.DefaultOpen)) {
+					for (var c : f.children) {
+						if (c != null)
+							renderField((Fiel) c);
+					}
+					ImGui.treePop();
+				}
+				// ImGui.text("container <");
+				// Log.info("" + f.name);
 			}
 		} catch (Exception e) {
 			Log.info("AutoTable can't render a field");
 		}
+
 	}
 	
 	private void renderString(Fiel f, int flags) { 
 		var imv = (ImString) f.imv;
-		if(ImGui.inputText("##" + f.name, imv, flags)) {
+		if(ImGui.inputText("##" + f.name + f.hashCode(), imv, flags)) {
 			f.setter.accept(imv.get());
 		}
 	}
 	
 	private void renderBoolean(Fiel f, int flags) {
 		var imv = (ImBoolean) f.imv;
-		if(ImGui.checkbox("##" + f.name, imv)) {
+		if(ImGui.checkbox("##" + f.name + f.hashCode(), imv)) {
 			f.setter.accept(imv.get());
 		}
 	}
 	
 	private void renderInt(Fiel f, int flags) {
 		var imv = (ImInt) f.imv;
-		if(ImGui.inputInt("##" + f.name, imv, flags)) {
+		if(ImGui.inputInt("##" + f.name + f.hashCode(), imv, flags)) {
 			f.setter.accept(imv.get());
 		}
 	}
 	
 	private void renderFloat(Fiel f, int flags) {
 		var imv = (ImFloat) f.imv;
-		if(ImGui.inputFloat("##" + f.name, imv, flags)) {
+		if(ImGui.inputFloat("##" + f.name + f.hashCode(), imv, flags)) {
 			f.setter.accept(imv.get());
 		}
 	}
 	
 	private void renderDouble(Fiel f, int flags) {
 		var imv = (ImDouble) f.imv;
-		if(ImGui.inputDouble("##" + f.name, imv, flags)) {
+		if(ImGui.inputDouble("##" + f.name + f.hashCode(), imv, flags)) {
 			f.setter.accept(imv.get());
 		}
 	}

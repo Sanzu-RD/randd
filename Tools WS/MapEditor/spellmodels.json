@@ -1,0 +1,85 @@
+{
+"models": [
+	{
+		"id": 0,
+		"placeholderName": "null",
+		"stats": {
+			"costs": {},
+			"target": {
+				"base": 255,
+				"fight": 255
+			},
+			"minRangeRadius": {
+				"baseflat": 0,
+				"inc": 0,
+				"incflat": 0,
+				"more": 0,
+				"fight": 0,
+				"setter": null,
+				"compounder": null
+			},
+			"maxRangeRadius": {
+				"baseflat": 1,
+				"inc": 0,
+				"incflat": 0,
+				"more": 0,
+				"fight": 0,
+				"setter": null,
+				"compounder": null
+			},
+			"minRangePattern": {
+				"base": null,
+				"setter": null
+			},
+			"maxRangePattern": {
+				"base": {
+					"class": "com.souchy.randd.commons.diamond.models.stats.SpellStats$$Lambda$189/0x0000000800ddfa08"
+				},
+				"setter": null
+			},
+			"cooldown": {
+				"baseflat": 0,
+				"inc": 0,
+				"incflat": 0,
+				"more": 0,
+				"fight": 0,
+				"setter": null,
+				"compounder": null
+			},
+			"castPerTurn": {
+				"baseflat": 0,
+				"inc": 0,
+				"incflat": 0,
+				"more": 0,
+				"fight": 0,
+				"setter": null,
+				"compounder": null
+			},
+			"castPerTarget": {
+				"baseflat": 0,
+				"inc": 0,
+				"incflat": 0,
+				"more": 0,
+				"fight": 0,
+				"setter": null,
+				"compounder": null
+			},
+			"canRotate": null,
+			"aoes": []
+		},
+		"effects": [],
+		"nodeIdCounter": 1,
+		"castNode": {
+			"id": 0,
+			"name": null,
+			"parent": null,
+			"e": null,
+			"condition": null,
+			"nodes": [],
+			"memory": {
+				"class": "java.util.HashMap"
+			}
+		}
+	}
+]
+}

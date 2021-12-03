@@ -8,10 +8,13 @@ import java.util.Map;
 import com.souchy.randd.commons.diamond.models.stats.SpellStats;
 import com.souchy.randd.commons.reddiamond.enums.ContextScope;
 
-public abstract class SpellModel {
+public class SpellModel {
 	
-	public final int id = id();
-	public abstract int id();
+	public /*final*/ int id = id();
+	public int id() {
+		return 0;
+	}
+	public String placeholderName = "null";
 	
 	public SpellStats stats = new SpellStats();
 	public List<Effect> effects = new ArrayList<>();
@@ -19,6 +22,13 @@ public abstract class SpellModel {
 
 	public int nodeIdCounter = 0;
 	public SpellNode castNode = new SpellNode(nodeIdCounter++);
+	
+	public SpellModel() {
+		
+	}
+	public SpellModel(int id) {
+		this.id = id;
+	}
 	
 	
 	/**

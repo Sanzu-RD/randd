@@ -14,6 +14,9 @@ import com.souchy.randd.commons.tealwaters.commons.Environment;
 import com.souchy.randd.ebishoal.commons.lapis.managers.LapisAssets;
 import com.souchy.randd.tools.mapeditor.entities.EditorEntities;
 import com.souchy.randd.tools.mapeditor.imgui.ImGuiComponent;
+import com.souchy.randd.tools.mapeditor.imgui.windowsgame.CreatureEditor;
+import com.souchy.randd.tools.mapeditor.imgui.windowsgame.SpellEditor;
+import com.souchy.randd.tools.mapeditor.imgui.windowsgame.StatusEditor;
 import com.souchy.randd.tools.mapeditor.main.MapEditorCore;
 import com.souchy.randd.tools.mapeditor.main.MapEditorGame;
 import com.souchy.randd.tools.mapeditor.main.MapWorld;
@@ -98,6 +101,16 @@ public class TopBar implements ImGuiComponent {
 			}
 			if(ImGui.menuItem("Settings")) {
 				MapEditorGame.screen.imgui.settings.show();
+			}
+			ImGui.separator();
+			if(ImGui.menuItem("Creature Editor")) {
+				CreatureEditor.get().show();
+			}
+			if(ImGui.menuItem("Spell Editor")) {
+				SpellEditor.get().show();
+			}
+			if(ImGui.menuItem("Status Editor")) {
+				StatusEditor.get().show();
 			}
 			ImGui.separator();
 			if(ImGui.menuItem("Resolution 1600x900")) {
