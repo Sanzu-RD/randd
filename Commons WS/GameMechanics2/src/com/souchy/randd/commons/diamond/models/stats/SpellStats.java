@@ -22,8 +22,7 @@ import com.souchy.randd.commons.net.netty.bytebuf.BBSerializer;
 
 import io.netty.buffer.ByteBuf;
 
-public class 
- implements BBSerializer, BBDeserializer { //extends Entyty {
+public class SpellStats implements BBSerializer, BBDeserializer { //extends Entyty {
 	
 	// cast costs ======================================================
 	public ResourceMap costs = new ResourceMap();
