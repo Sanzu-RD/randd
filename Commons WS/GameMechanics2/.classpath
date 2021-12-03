@@ -27,6 +27,11 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/RedDiamond">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/Teal Net">
 		<attributes>
 			<attribute name="module" value="true"/>

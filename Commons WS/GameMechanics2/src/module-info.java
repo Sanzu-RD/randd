@@ -47,4 +47,5 @@ module GameMechanics2 {
 	requires java.base;
 	requires MapIO;
 	requires org.mongodb.bson;
+	requires RedDiamond;
 }
